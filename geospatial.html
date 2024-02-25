@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 29 GEOSPATIAL | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 29 GEOSPATIAL | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 29 GEOSPATIAL | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="time-trends.html"/>
+<link rel="next" href="network-vis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geospatial" class="section level1 hasAnchor" number="29">
+<h1><span class="header-section-number">Chapter 29</span> GEOSPATIAL<a href="geospatial.html#geospatial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>地圖是一種用來展示地理空間信息的視覺化工具，可以幫助我們更好地了解和分析地理現象。常見的地圖種類通常可以分為兩類：區域圖和點位圖。</p>
+<ol style="list-style-type: decimal">
+<li>區域圖（Choropleth Map）是通過將地理區域劃分為幾個區域，然後用不同的顏色、陰影或圖案等方式來表示這些區域的某種屬性或數量。這種地圖通常用於展示國家、省份、城市等區域的人口、經濟、地形、氣候等相關數據。區域圖能夠直觀地展示地理現象在不同區域之間的差異和變化，並有助於我們進行比較和分析。</li>
+<li>點位圖（Dot Density Map）則是通過在地圖上用點或符號來表示某種地理空間現象的分布或密度。例如，可以用紅點表示城市、綠點表示森林、藍點表示湖泊等等。這種地圖通常用於展示地理現象在空間上的分布和密度，並能夠直觀地展示相對密度和稀疏程度。</li>
+</ol>
+<p><strong>區域圖的數據形式：</strong>有兩種基本數據模型：向量（Vector）和網格（Raster）。</p>
+<ul>
+<li>向量數據模型使用點、線、多邊形等基本要素來描述地理空間現象。例如，可以用一個線段來表示一條河流，用一個多邊形來表示一個國家或城市的邊界等。向量數據模型具有比較強的邏輯性和表達能力，特別適合描述較簡單的地理現象。</li>
+<li>網格數據模型則是將地理空間區域劃分為一個個大小相等的格子，每個格子都有一個固定的數值，用來表示這個區域的某種屬性，例如溫度、濕度、高程等等。網格數據模型適合描述分布比較連續和具有變化的地理現象。</li>
+</ul>
+<p>通常繪製地理資訊地圖的時候，會需要因應你要繪製的地域去下載地圖空間數據檔案（例如.shape或geojson檔等）。如台灣的就可以去<a href="https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1">社會經濟資料服務平台 (moi.gov.tw)</a>下載。但也有一些套件內部就包含這些地理空間數據，例如下一節的例子rworldmap套件本身就有世界地圖。或者可以嘗試ggmap或rgooglemap等第三方服務（參考簡介：<a href="https://mpmendespt.github.io/Map-visualization.html">Map Visualization in R · Data Science and R</a>）</p>
+<div id="world-map" class="section level2 hasAnchor" number="29.1">
+<h2><span class="header-section-number">29.1</span> World Map<a href="geospatial.html#world-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="geospatial.html#cb757-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb757-2"><a href="geospatial.html#cb757-2" tabindex="-1"></a><span class="fu">library</span>(rworldmap) <span class="co"># for drawing rworldmap</span></span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="geospatial.html#cb758-1" tabindex="-1"></a>rawdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb758-2"><a href="geospatial.html#cb758-2" tabindex="-1"></a>mapdata <span class="ot">&lt;-</span> rawdata[,<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span></code></pre></div>
+<div id="bind-data-to-map-data" class="section level3 hasAnchor" number="29.1.1">
+<h3><span class="header-section-number">29.1.1</span> Bind data to map data<a href="geospatial.html#bind-data-to-map-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這段程式碼是在將自己的數據<strong><code>mapdata</code></strong>與<strong><code>rworldmap</code></strong>世界地圖數據進行結合。</p>
+<p>首先，使用 <strong><code>joinCountryData2Map()</code></strong> 函數，將自己的數據和世界地圖數據按照國家的 ISO3 代碼進行連接，生成一張新的地圖。其中， <strong><code>mapdata</code></strong> 是指世界地圖數據， <strong><code>joinCode</code></strong> 參數指定連接時使用的 ISO3 代碼（亦即你預先知道你自己的資料中有ISO3國家代碼）。 <strong><code>nameJoinColumn</code></strong> 參數則用於指定自己數據中與國家對應的欄位名稱為<strong><code>iso3</code></strong>。</p>
+<p>還有其他的<strong><code>joinCode</code></strong>如「“ISO2”,“ISO3”,“FIPS”,“NAME”, “UN” = numeric codes」等可參見該套件的說明<a href="https://www.rdocumentation.org/packages/rworldmap/versions/1.3-6">rworldmap package - RDocumentation</a>。</p>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="geospatial.html#cb759-1" tabindex="-1"></a><span class="co"># join your data with the world map data</span></span>
+<span id="cb759-2"><a href="geospatial.html#cb759-2" tabindex="-1"></a>myMap <span class="ot">&lt;-</span> <span class="fu">joinCountryData2Map</span>(mapdata, <span class="at">joinCode =</span> <span class="st">&quot;ISO3&quot;</span>, <span class="at">nameJoinColumn =</span> <span class="st">&quot;iso3&quot;</span>)</span></code></pre></div>
+<pre class="output"><code>## 196 codes from your data successfully matched countries in the map
+## 1 codes from your data failed to match with a country code in the map
+## 47 codes from the map weren&#39;t represented in your data</code></pre>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="geospatial.html#cb761-1" tabindex="-1"></a>myMap<span class="sc">$</span>matleave_13</span></code></pre></div>
+<pre class="output"><code>##   [1]  2  2  5  2  2  5 NA NA  3  5  5  2  4  3  3  3  5  2  5  5  3  2  3  3  2
+##  [26]  2  3  4  3  4  3  3  3  3  3  3  3  5 NA  3  5  5  3  5  2  3  2  2  2  3
+##  [51]  5  2  5  2 NA  4  3  4  3  2  3  4  2  2  4 NA  2  2  2  5  2  5  2  2  4
+##  [76]  4  2  4  3  4  2  2  5  3  2  3  2  5 NA  2  2  2  2  3  2  2  5  4  5  3
+## [101]  5  3  2  4  3  2  5  5  2  3  2  2  2 NA  3  2  2  3  4  2  3  2  2  3  2
+## [126]  2  1  5 NA  2  4  2  2  5  5  2 NA  2  2  2  3  2  2  2  3  5  1  5  5  5
+## [151]  2  3  3  3  2  5  3  2  3  2  3 NA  2  2  5  2  1  5  4  4  2 NA  2  3  3
+## [176]  3 NA NA NA  3 NA NA  2  2 NA NA  2  2  3  2 NA NA  2 NA  1 NA NA  2 NA NA
+## [201] NA NA NA NA NA NA  2  2  2  3 NA NA  3  2  1  3 NA NA  2 NA  1  1 NA  1 NA
+## [226]  3 NA NA  5 NA  2 NA  3 NA  1  5  2 NA NA NA  2  2 NA</code></pre>
+</div>
+<div id="drawing-map" class="section level3 hasAnchor" number="29.1.2">
+<h3><span class="header-section-number">29.1.2</span> Drawing Map<a href="geospatial.html#drawing-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><code>mapCountryData()</code></strong> 函數用於將數據繪製在地圖上。其中， <strong><code>myMap</code></strong> 是已經連接過的世界地圖數據和自己的數據，包含了各國的地理空間信息和相關的數據資訊。 <strong><code>nameColumnToPlot</code></strong> 指定要顯示在地圖上的數據欄位為<strong><code>matleave_13</code></strong>，也就是 2013 年的產假長度。 <strong><code>catMethod</code></strong> 參數是決定視覺化時的數據分類是類別或連續，<strong><code>categorical</code></strong>表示將數據分成幾個等級來展示在地圖上。</p>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="geospatial.html#cb763-1" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
+<span id="cb763-2"><a href="geospatial.html#cb763-2" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
+<span id="cb763-3"><a href="geospatial.html#cb763-3" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb763-4"><a href="geospatial.html#cb763-4" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="V21_Geospatial_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="drawing-map-by-specific-colors" class="section level3 hasAnchor" number="29.1.3">
+<h3><span class="header-section-number">29.1.3</span> Drawing map by specific colors<a href="geospatial.html#drawing-map-by-specific-colors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="geospatial.html#cb764-1" tabindex="-1"></a><span class="co"># self-defined colors</span></span>
+<span id="cb764-2"><a href="geospatial.html#cb764-2" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#FF8000&quot;</span>, <span class="st">&quot;#A9D0F5&quot;</span>, <span class="st">&quot;#58ACFA&quot;</span>, <span class="st">&quot;#0080FF&quot;</span>, <span class="st">&quot;#084B8A&quot;</span>)</span>
+<span id="cb764-3"><a href="geospatial.html#cb764-3" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
+<span id="cb764-4"><a href="geospatial.html#cb764-4" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
+<span id="cb764-5"><a href="geospatial.html#cb764-5" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb764-6"><a href="geospatial.html#cb764-6" tabindex="-1"></a>               , <span class="at">colourPalette =</span> colors</span>
+<span id="cb764-7"><a href="geospatial.html#cb764-7" tabindex="-1"></a>               , <span class="at">addLegend=</span><span class="st">&quot;FALSE&quot;</span></span>
+<span id="cb764-8"><a href="geospatial.html#cb764-8" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="V21_Geospatial_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="practice.-drawing-map-for-every-years" class="section level3 hasAnchor practice" number="29.1.4">
+<h3><span class="header-section-number">29.1.4</span> Practice. Drawing map for every years<a href="geospatial.html#practice.-drawing-map-for-every-years" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>繪製自1995至2013年每年的地圖並觀察其上的變化。</li>
+<li>繪製的時候請嘗試使用<code>par()</code>來把每年的地圖繪製在同一張圖上，怎麼做？</li>
+<li>你能觀察出變化來嗎？可否透過顏色的調整來凸顯變化？你的策略是什麼？</li>
+</ol>
+</div>
+
+</div>
+<div id="read-spatial-data-from-segis" class="section level2 hasAnchor" number="29.2">
+<h2><span class="header-section-number">29.2</span> Read Spatial Data from SEGIS<a href="geospatial.html#read-spatial-data-from-segis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>要繪製地理地圖會要先下載地圖檔，可以查詢「<a href="https://data.gov.tw/dataset/7442">直轄市、縣市界線(TWD97經緯度)</a>」和<a href="https://data.gov.tw/dataset/7441">鄉鎮市區界線(TWD97經緯度) | 政府資料開放平臺 (data.gov.tw)</a>。</li>
+<li>接下來是取得要繪製在地圖上的資料。前面的rworldmap是已知地圖檔和資料檔中都有每個國家的ISO3代碼，所以可以用ISO3代碼來連結地圖檔和資料檔。如果是臺灣的資料，可能就要用縣市名稱來做連結。或者，某些圖資本身就有經緯度，甚至它並非區域圖，而是有經緯度的點位圖。這類的圖資檔案可以到<a href="https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1">社會經濟資料服務平台 (moi.gov.tw)</a>查找並下載。</li>
+</ul>
+<p>通常地理圖資檔有兩種格式：一種是geojson，一種是shapefile。</p>
+<ul>
+<li>shapefile 是一種老舊的地理圖資檔案格式，通常由 shp, shx, dbf, prj 等檔案組成。其中，shp 檔案包含了地理空間範圍和形狀的點與邊（邊通常是由點依序所構成，不會特別把邊標出來），shx 檔案是其索引文件，dbf 檔案則儲存了相關的屬性資訊，例如幾何特徵的名稱或變數，prj 檔案則是儲存了投影信息。shapefile 格式的優點是廣泛的應用性和支援程式豐富，可以在許多地理信息系統（GIS）和軟件中使用，是許多組織和機構最常用的地理圖資格式之一。</li>
+<li>geojson 則是一種基於 JSON 格式的地理圖資檔案格式，內容包含了地理空間範圍和屬性。geojson 的優點是格式簡單、容易理解和易於編輯，支援性也比較好。由於 geojson 使用的是文本格式，因此可以直接在許多文本編輯器中編輯和查看，也可以輕易地轉換成其他格式的地理圖資檔案。</li>
+</ul>
+<p>這邊我們所要用的套件是<strong><code>sf</code></strong>，<strong><code>sf</code></strong> 是一個在 R 環境下進行地理圖資處理和分析的套件，他不僅支援多種檔案格式，包括 shapefile、GeoJSON、KML 等，並且可以直接將這些檔案轉換為 R 中的空間資料框架，方便進行進一步的處理和分析。更方便的特色是在於，它可以用tidyverse的風格來寫作，方便對地理圖資和其他數據進行整合和分析，甚至在使用<strong><code>View()</code></strong>的時候，把圖資當成一個變項。</p>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="geospatial.html#cb765-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<div id="the-case-population-and-density-of-taipei" class="section level3 hasAnchor" number="29.2.1">
+<h3><span class="header-section-number">29.2.1</span> The case: Population and Density of Taipei<a href="geospatial.html#the-case-population-and-density-of-taipei" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這個資料下載自<a href="https://segis.moi.gov.tw/STAT/Web/Portal/STAT_PortalHome.aspx">社會經濟資料服務平台 (moi.gov.tw)</a>的<img src="https://segis.moi.gov.tw/STAT/Resources/Project/Images/Platform/subProduct.png" title="子產品" /><a href="https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1#" title="111年9月行政區人口統計_鄉鎮市區_臺北市">111年9月行政區人口統計_鄉鎮市區_臺北市</a>，實際上內部的資料包含368個鄉鎮的依性別分人口數、家戶數等。</p>
+<p>資料變項包含每個區的家戶數（<strong><code>H_CNT</code></strong>）、總人口數（<strong><code>P_CNT</code></strong>）、男性人口數（<strong><code>M_CNT</code></strong>）、女性人口數（<strong><code>F_CNT</code></strong>）。等一下要計算每平方公里的家戶數或人口數時，你會疑惑為何沒有面積資料。</p>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="geospatial.html#cb766-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
+<span id="cb766-2"><a href="geospatial.html#cb766-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
+<span id="cb766-3"><a href="geospatial.html#cb766-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb766-4"><a href="geospatial.html#cb766-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb766-5"><a href="geospatial.html#cb766-5" tabindex="-1"></a>  <span class="co"># mutate(across(where(is.double), ~if_else(is.na(.),as.double(0),.))) %&gt;%</span></span>
+<span id="cb766-6"><a href="geospatial.html#cb766-6" tabindex="-1"></a>  <span class="co"># st_set_crs(3826) %&gt;% st_transform(4326) %&gt;% </span></span>
+<span id="cb766-7"><a href="geospatial.html#cb766-7" tabindex="-1"></a>  <span class="co"># filter(COUNTY == &quot;臺北市&quot;)</span></span>
+<span id="cb766-8"><a href="geospatial.html#cb766-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
+<span id="cb766-9"><a href="geospatial.html#cb766-9" tabindex="-1"></a></span>
+<span id="cb766-10"><a href="geospatial.html#cb766-10" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre class="output"><code>## Simple feature collection with 6 features and 9 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 300874.7 ymin: 2766756 xmax: 309745.8 ymax: 2776127
+## CRS:           NA
+##    TOWN_ID   TOWN COUNTY_ID COUNTY  H_CNT  P_CNT  M_CNT  F_CNT INFO_TIME
+## 1 63000010 松山區     63000 臺北市  78977 187552  87625  99927   111Y09M
+## 2 63000020 信義區     63000 臺北市  87407 201951  95884 106067   111Y09M
+## 3 63000030 大安區     63000 臺北市 117243 280332 130596 149736   111Y09M
+## 4 63000040 中山區     63000 臺北市  98825 210156  97114 113042   111Y09M
+## 5 63000050 中正區     63000 臺北市  64491 146628  69663  76965   111Y09M
+## 6 63000060 大同區     63000 臺北市  51988 118065  57003  61062   111Y09M
+##                         geometry
+## 1 MULTIPOLYGON (((307703.1 27...
+## 2 MULTIPOLYGON (((307788.7 27...
+## 3 MULTIPOLYGON (((304591.5 27...
+## 4 MULTIPOLYGON (((305699 2776...
+## 5 MULTIPOLYGON (((302203.6 27...
+## 6 MULTIPOLYGON (((302217.9 27...</code></pre>
+<p>試著畫畫看。你會發現它的座標系是一個我們看不懂的數字，而不是想像中的經緯度。</p>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="geospatial.html#cb768-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb768-2"><a href="geospatial.html#cb768-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb768-3"><a href="geospatial.html#cb768-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="projection-投影的概念" class="section level3 hasAnchor" number="29.2.2">
+<h3><span class="header-section-number">29.2.2</span> Projection 投影的概念<a href="geospatial.html#projection-投影的概念" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>投影是指將地球表面的三維空間坐標轉換為二維平面坐標的過程，這是因為在實際應用中需要將地球表面的訊息表示在平面上，方便分析和可視化。然而，由於地球是一個球體，不同的投影方式會導致在不同位置和距離上的形狀、面積和方向出現差異，因此在使用地理空間數據進行分析和視覺化時需要注意投影的選擇和轉換。</p>
+<p>除了投影之外，每個地理區域還有適合的參考橢球體和大地基準面。橢球體是指地球表面的形狀，大地基準面則是指地球表面的平均高程面。這些概念的選擇取決於具體的地理區域和應用場景，並且可能會對數據分析結果產生影響。基準點（Datum）則是用來定義地球表面上的某個點，從而將地球表面的形狀和大小轉換為平面坐標系中的數值。基準點分為區域性的（local）和全球的（global）。區域性的基準點通常是針對某個特定的地理區域進行定義，而全球的基準點則是針對整個地球進行定義。全球最常用的基準點是<strong>WGS84</strong>，它以地球質心為中心；而台灣常用的區域性基準點是<strong>TWD97</strong>，舊版則是用<strong>TWD67</strong>。基準點的選擇也可能會對數據分析結果產生影響。</p>
+<ul>
+<li>投影法有對應的代號稱為 EPSG（歐洲石油探勘組織），他們制定了空間參考識別系統（SRID）。可以記兩個重要的:
+<ul>
+<li><strong>WGS84 = 4326</strong></li>
+<li><strong>TWD97 = 3826</strong></li>
+</ul></li>
+<li>參考：<a href="https://gis.stackexchange.com/questions/48949/epsg-3857-or-4326-for-googlemaps-openstreetmap-and-leaflet" class="uri">https://gis.stackexchange.com/questions/48949/epsg-3857-or-4326-for-googlemaps-openstreetmap-and-leaflet</a>
+<ul>
+<li><p>Google Earth採用WGS84坐標系統的地理坐標系統。(EPSG：4326)</p>
+<p>Google Maps採用以WGS84為基礎的投影坐標系統。(EPSG 3857)</p>
+<p>Open Street Map數據庫中的數據以WGS84坐標系統的十進制度為單位進行儲存。(EPSG：4326)</p>
+<p>Open Street Map瓦片和WMS服務採用以WGS84為基礎的投影坐標系統。(EPSG 3857)</p>
+<p><a href="https://epsg.io/3825"><strong>https://epsg.io/3825</strong></a> 是台灣的坐標系統（3826、3827等也是，你可以打開看看）</p></li>
+</ul></li>
+<li>用得到投影的情境
+<ul>
+<li>研究區域，想轉換座標（changing projections）：修改 EPSG code 或是改掉 <code>proj4string</code> 的內容</li>
+<li>原始資料缺投影方法：加上 EPSG code 或是加上 <code>proj4string</code> 的內容</li>
+</ul></li>
+<li>如果需要進行投影轉換，可以使用 R 中的相關函數和方法。例如，
+<ul>
+<li>使用 <strong><code>st_crs()</code></strong> 函數可以取得地理空間數據的投影系統；</li>
+<li>使用 <strong><code>st_transform()</code></strong> 函數可以進行地理空間數據的投影變換；</li>
+<li>使用 <strong><code>st_set_crs()</code></strong> 函數可以設定地理空間數據的投影系統等等。</li>
+</ul></li>
+</ul>
+<p>就下載的這個資料來說，他並沒有設定他的投影座標。</p>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="geospatial.html#cb769-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
+<pre class="output"><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="geospatial.html#cb771-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
+<pre class="output"><code>## Coordinate Reference System: NA</code></pre>
+<p>我們會希望在讀取資料的時候，設定他的投影座標。例如以下的例子是設定為TWD96（3826）然後轉換為全球座標WGS84（4326）。</p>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="geospatial.html#cb773-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
+<span id="cb773-2"><a href="geospatial.html#cb773-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
+<span id="cb773-3"><a href="geospatial.html#cb773-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb773-4"><a href="geospatial.html#cb773-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb773-5"><a href="geospatial.html#cb773-5" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb773-6"><a href="geospatial.html#cb773-6" tabindex="-1"></a>  <span class="co"># st_transform(4326) %&gt;%</span></span>
+<span id="cb773-7"><a href="geospatial.html#cb773-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
+<span id="cb773-8"><a href="geospatial.html#cb773-8" tabindex="-1"></a></span>
+<span id="cb773-9"><a href="geospatial.html#cb773-9" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;+proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs&quot;</code></pre>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="geospatial.html#cb775-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
+<pre class="output"><code>## Coordinate Reference System:
+##   User input: EPSG:3826 
+##   wkt:
+## PROJCRS[&quot;TWD97 / TM2 zone 121&quot;,
+##     BASEGEOGCRS[&quot;TWD97&quot;,
+##         DATUM[&quot;Taiwan Datum 1997&quot;,
+##             ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+##                 LENGTHUNIT[&quot;metre&quot;,1]]],
+##         PRIMEM[&quot;Greenwich&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         ID[&quot;EPSG&quot;,3824]],
+##     CONVERSION[&quot;Taiwan 2-degree TM zone 121&quot;,
+##         METHOD[&quot;Transverse Mercator&quot;,
+##             ID[&quot;EPSG&quot;,9807]],
+##         PARAMETER[&quot;Latitude of natural origin&quot;,0,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8801]],
+##         PARAMETER[&quot;Longitude of natural origin&quot;,121,
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+##             ID[&quot;EPSG&quot;,8802]],
+##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9999,
+##             SCALEUNIT[&quot;unity&quot;,1],
+##             ID[&quot;EPSG&quot;,8805]],
+##         PARAMETER[&quot;False easting&quot;,250000,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8806]],
+##         PARAMETER[&quot;False northing&quot;,0,
+##             LENGTHUNIT[&quot;metre&quot;,1],
+##             ID[&quot;EPSG&quot;,8807]]],
+##     CS[Cartesian,2],
+##         AXIS[&quot;easting (X)&quot;,east,
+##             ORDER[1],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##         AXIS[&quot;northing (Y)&quot;,north,
+##             ORDER[2],
+##             LENGTHUNIT[&quot;metre&quot;,1]],
+##     USAGE[
+##         SCOPE[&quot;Engineering survey, topographic mapping.&quot;],
+##         AREA[&quot;Taiwan, Republic of China - between 120°E and 122°E, onshore and offshore - Taiwan Island.&quot;],
+##         BBOX[20.41,119.99,26.72,122.06]],
+##     ID[&quot;EPSG&quot;,3826]]</code></pre>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="geospatial.html#cb777-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb777-2"><a href="geospatial.html#cb777-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb777-3"><a href="geospatial.html#cb777-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="geospatial.html#cb778-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb778-2"><a href="geospatial.html#cb778-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> P_CNT) <span class="sc">+</span> </span>
+<span id="cb778-3"><a href="geospatial.html#cb778-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb778-4"><a href="geospatial.html#cb778-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>面積資料可以用<strong><code>st_area()</code></strong>這個函式求得。<strong><code>st_area()</code></strong> 是 R 中一個與地理空間數據相關的函數，用於計算地理多邊形的面積。具體而言，st_area() 函數接受一個 Spatial* 或是 sf 的資料物件，可以計算其包含的每個多邊形的面積，並以相應的單位返回結果。其中 <strong><code>as.double(st_area(.))/1000000</code></strong> 的作用是將地理多邊形的面積從平方公尺轉換為平方公里。因為面積的單位是平方公尺，而人口密度的常用單位是人口數/平方公里，因此需要進行單位換算，將面積轉換為平方公里。</p>
+<p><strong><code>st_area()</code></strong> 函數的計算方式基於多邊形的投影，因此在使用該函數時需要注意地理空間數據的投影選擇和轉換。通常情況下，<strong><code>st_area()</code></strong> 函數可以自動識別多邊形的投影系統，並返回相應的面積值。如果需要在不同的投影系統間進行面積的轉換，則需要使用 <strong><code>st_transform()</code></strong> 函數進行投影變換。</p>
+<p>需要注意的是，由於地球是一個球體，因此在計算面積時需要考慮到地球的曲率效應。<strong><code>st_area()</code></strong> 函數默認使用的是橢球面積計算公式（ellipsoidal area formula），可以更準確地計算地理多邊形的面積。如果需要更精確的面積計算結果，也可以使用球面面積計算公式（spherical area formula）或是進行局部的面積校正。</p>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="geospatial.html#cb779-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb779-2"><a href="geospatial.html#cb779-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_density =</span> P_CNT<span class="sc">/</span>(<span class="fu">as.double</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">1000000</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb779-3"><a href="geospatial.html#cb779-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> p_density) <span class="sc">+</span> </span>
+<span id="cb779-4"><a href="geospatial.html#cb779-4" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb779-5"><a href="geospatial.html#cb779-5" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="town-level-taipei-income" class="section level2 hasAnchor" number="29.3">
+<h2><span class="header-section-number">29.3</span> Town-level: Taipei income<a href="geospatial.html#town-level-taipei-income" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>有時候我們所希望繪製的資料並非來自SEGIS這類有圖資的平台（例如下面所用的台北各區每人平均所得），那我們就會需要先取得另一份圖資資料（例如下例的鄉鎮市區界圖資），再透過一些索引（Index）來結合這兩方的資料。而下面這個例子，還為了要將鄉鎮市區名稱打在各區的中央，結合了另一份資料，一共結合了三方的資料。</p>
+<div id="reading-income-data" class="section level3 hasAnchor" number="29.3.1">
+<h3><span class="header-section-number">29.3.1</span> Reading income data<a href="geospatial.html#reading-income-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="geospatial.html#cb780-1" tabindex="-1"></a>taipei_income <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/台北各區每人所得.xlsx&#39;</span>) </span>
+<span id="cb780-2"><a href="geospatial.html#cb780-2" tabindex="-1"></a>taipei_income <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre class="output"><code>## # A tibble: 6 × 2
+##   district  income
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 松山區   1012678
+## 2 信義區    909336
+## 3 大安區   1038921
+## 4 中山區    861415
+## 5 中正區   1022438
+## 6 大同區    814439</code></pre>
+</div>
+<div id="read-taipei-zip-code" class="section level3 hasAnchor" number="29.3.2">
+<h3><span class="header-section-number">29.3.2</span> Read Taipei zip code<a href="geospatial.html#read-taipei-zip-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>等一下我打算把每區的名稱打在各區上，但是我沒有各區的名稱應該打在哪裡的經緯度，恰好Zip Code這份資料裡面有台北市各區的經緯度中心，因此先把它讀進來合併用。</p>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="geospatial.html#cb782-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb782-2"><a href="geospatial.html#cb782-2" tabindex="-1"></a></span>
+<span id="cb782-3"><a href="geospatial.html#cb782-3" tabindex="-1"></a>twzipcode_json <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/twzipcode.json&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb782-4"><a href="geospatial.html#cb782-4" tabindex="-1"></a>taipei_zipcode <span class="ot">&lt;-</span> twzipcode_json <span class="sc">%&gt;%</span> </span>
+<span id="cb782-5"><a href="geospatial.html#cb782-5" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;台北市&quot;</span>)</span>
+<span id="cb782-6"><a href="geospatial.html#cb782-6" tabindex="-1"></a></span>
+<span id="cb782-7"><a href="geospatial.html#cb782-7" tabindex="-1"></a>taipei_zipcode <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre class="output"><code>##   zip_code district   city     lat     lng
+## 1      100   中正區 台北市 25.0324 121.520
+## 2      103   大同區 台北市 25.0634 121.513
+## 3      104   中山區 台北市 25.0697 121.538
+## 4      105   松山區 台北市 25.0600 121.558
+## 5      106   大安區 台北市 25.0268 121.543
+## 6      108   萬華區 台北市 25.0286 121.498</code></pre>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="geospatial.html#cb784-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
+<span id="cb784-2"><a href="geospatial.html#cb784-2" tabindex="-1"></a><span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/TOWN_MOI_1100415.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb784-3"><a href="geospatial.html#cb784-3" tabindex="-1"></a>    <span class="fu">filter</span>(COUNTYNAME <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb784-4"><a href="geospatial.html#cb784-4" tabindex="-1"></a>    <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
+<span id="cb784-5"><a href="geospatial.html#cb784-5" tabindex="-1"></a>    <span class="co"># rmapshaper::ms_simplify(keep=0.05) %&gt;%</span></span>
+<span id="cb784-6"><a href="geospatial.html#cb784-6" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_income, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb784-7"><a href="geospatial.html#cb784-7" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_zipcode, <span class="at">by=</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb784-8"><a href="geospatial.html#cb784-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> income) <span class="sc">+</span> </span>
+<span id="cb784-9"><a href="geospatial.html#cb784-9" tabindex="-1"></a>    <span class="fu">geom_sf</span>() <span class="sc">+</span> </span>
+<span id="cb784-10"><a href="geospatial.html#cb784-10" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#FF8888&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000AA&quot;</span>, </span>
+<span id="cb784-11"><a href="geospatial.html#cb784-11" tabindex="-1"></a>                         <span class="at">midpoint =</span> <span class="fu">median</span>(taipei_income<span class="sc">$</span>income)) <span class="sc">+</span></span>
+<span id="cb784-12"><a href="geospatial.html#cb784-12" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat, <span class="at">label =</span> TOWNNAME), <span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">2.5</span>)</span></code></pre></div>
+<pre class="output"><code>## Reading layer `TOWN_MOI_1100415&#39; from data source 
+##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/TOWN_MOI_1100415.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 368 features and 7 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
+## Geodetic CRS:  TWD97</code></pre>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="twmap" class="section level2 hasAnchor" number="29.4">
+<h2><span class="header-section-number">29.4</span> Voting map - County level<a href="geospatial.html#twmap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>本練習將以2016年總統選舉為例，比較朱立倫、宋楚瑜、蔡英文在不同縣市的得票率，並繪製為地圖。該地圖比較有趣的是，因為台灣的地圖實際上是由很多點連成的，在這麼大的規模如果把全部的點全部繪製上去，會繪製非常久，而讀者也不盡然能夠看清楚這個差別，所以可以降低點的數量。</p>
+<div id="loading-county-level-president-voting-rate" class="section level3 hasAnchor" number="29.4.1">
+<h3><span class="header-section-number">29.4.1</span> Loading county-level president voting rate<a href="geospatial.html#loading-county-level-president-voting-rate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="geospatial.html#cb786-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb786-2"><a href="geospatial.html#cb786-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
+<span id="cb786-3"><a href="geospatial.html#cb786-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
+<span id="cb786-4"><a href="geospatial.html#cb786-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
+<span id="cb786-5"><a href="geospatial.html#cb786-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
+<span id="cb786-6"><a href="geospatial.html#cb786-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
+</div>
+<div id="sf-to-load-county-level-shp" class="section level3 hasAnchor" number="29.4.2">
+<h3><span class="header-section-number">29.4.2</span> sf to load county level shp<a href="geospatial.html#sf-to-load-county-level-shp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://fidanalytics.co.uk/blog/simplifying-polygons-r" class="uri">https://fidanalytics.co.uk/blog/simplifying-polygons-r</a></p>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="geospatial.html#cb787-1" tabindex="-1"></a>county_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>)</span></code></pre></div>
+<pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
+##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 22 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
+## Geodetic CRS:  TWD97</code></pre>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="geospatial.html#cb789-1" tabindex="-1"></a><span class="co"># plot(county_sf) # Taking very long time</span></span></code></pre></div>
+</div>
+<div id="simplfying-map-polygon" class="section level3 hasAnchor" number="29.4.3">
+<h3><span class="header-section-number">29.4.3</span> Simplfying map polygon<a href="geospatial.html#simplfying-map-polygon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="geospatial.html#cb790-1" tabindex="-1"></a>county_ms_simp <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb790-2"><a href="geospatial.html#cb790-2" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(county_sf,  keep=0.001) </span></span>
+<span id="cb790-3"><a href="geospatial.html#cb790-3" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">100</span>)</span></code></pre></div>
+<pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
+##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 22 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
+## Geodetic CRS:  TWD97</code></pre>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="geospatial.html#cb792-1" tabindex="-1"></a><span class="fu">plot</span>(county_ms_simp)</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="geospatial.html#cb793-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
+<span id="cb793-2"><a href="geospatial.html#cb793-2" tabindex="-1"></a>plot_chu <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb793-3"><a href="geospatial.html#cb793-3" tabindex="-1"></a>  <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
+<span id="cb793-4"><a href="geospatial.html#cb793-4" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb793-5"><a href="geospatial.html#cb793-5" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(keep=0.01) %&gt;%</span></span>
+<span id="cb793-6"><a href="geospatial.html#cb793-6" tabindex="-1"></a>  <span class="fu">right_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
+<pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
+##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 22 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
+## Geodetic CRS:  TWD97</code></pre>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="geospatial.html#cb795-1" tabindex="-1"></a>plot_chu <span class="sc">%&gt;%</span></span>
+<span id="cb795-2"><a href="geospatial.html#cb795-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> chu_ratio)) <span class="sc">+</span> </span>
+<span id="cb795-3"><a href="geospatial.html#cb795-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb795-4"><a href="geospatial.html#cb795-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#FFFFFF&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000FF&quot;</span>)</span></code></pre></div>
+<p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="practice.-drawing-taiwan-county-scale-map-from-segis-data" class="section level3 hasAnchor practice" number="29.4.4">
+<h3><span class="header-section-number">29.4.4</span> Practice. Drawing Taiwan county-scale map from SEGIS data<a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這個練習希望你從SEGIS下載一個縣市層級的資料，並測試以下函式的結果：</p>
+<ol style="list-style-type: decimal">
+<li>運用<code>st_transform()</code>和<code>st_set_crs()</code>等函式測試用3826或4326座標系有何不同？
+<ol style="list-style-type: decimal">
+<li>在用<code>st_area()</code>計算面積時會不會有何不同？</li>
+<li>在視覺化的時候可否看出來有何不同？請寫程式測試看看。</li>
+</ol></li>
+<li><code>st_simplify()</code>這個函式可以降低點的數量，但運用<code>st_simplify(dTolerance = 100)</code>，<code>dTolerance</code>的設定是如何影響點的數量？<code>100</code>所指的是什麼？公尺嗎？</li>
+<li>用<code>st_bbox()</code>可以得知上下界為何，請試用這個函式看看？</li>
+<li>如何運用<code>st_crop()</code>切出台灣本島（不包含澎湖、金門、馬祖）得地圖？</li>
+</ol>
+</div>
+
+</div>
+<div id="mapping-data-with-grid" class="section level2 hasAnchor" number="29.5">
+<h2><span class="header-section-number">29.5</span> Mapping data with grid<a href="geospatial.html#mapping-data-with-grid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="geospatial.html#cb796-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<div id="loading-taiwan-map" class="section level3 hasAnchor" number="29.5.1">
+<h3><span class="header-section-number">29.5.1</span> Loading Taiwan map<a href="geospatial.html#loading-taiwan-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="geospatial.html#cb797-1" tabindex="-1"></a>TW.island <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb797-2"><a href="geospatial.html#cb797-2" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb797-3"><a href="geospatial.html#cb797-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span></code></pre></div>
+<pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
+##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 22 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
+## Geodetic CRS:  TWD97</code></pre>
+</div>
+<div id="building-grid" class="section level3 hasAnchor" number="29.5.2">
+<h3><span class="header-section-number">29.5.2</span> Building grid<a href="geospatial.html#building-grid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="geospatial.html#cb799-1" tabindex="-1"></a><span class="co"># Defining grid size</span></span>
+<span id="cb799-2"><a href="geospatial.html#cb799-2" tabindex="-1"></a>grid.extent <span class="ot">&lt;-</span> </span>
+<span id="cb799-3"><a href="geospatial.html#cb799-3" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmin, Ymax)</span></span>
+<span id="cb799-4"><a href="geospatial.html#cb799-4" tabindex="-1"></a>           <span class="dv">610000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmax, Ymax)</span></span>
+<span id="cb799-5"><a href="geospatial.html#cb799-5" tabindex="-1"></a>           <span class="dv">610000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmax, Ymin)</span></span>
+<span id="cb799-6"><a href="geospatial.html#cb799-6" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmin, Ymin)</span></span>
+<span id="cb799-7"><a href="geospatial.html#cb799-7" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>),  <span class="co"># (Xmin, Ymax) </span></span>
+<span id="cb799-8"><a href="geospatial.html#cb799-8" tabindex="-1"></a>         <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb799-9"><a href="geospatial.html#cb799-9" tabindex="-1"></a>  <span class="fu">list</span>() <span class="sc">%&gt;%</span> <span class="co"># convert to list for st_polygon()</span></span>
+<span id="cb799-10"><a href="geospatial.html#cb799-10" tabindex="-1"></a>  <span class="fu">st_polygon</span>() <span class="sc">%&gt;%</span> <span class="co"># generate polygon</span></span>
+<span id="cb799-11"><a href="geospatial.html#cb799-11" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">3826</span>) <span class="co"># convert format and crs</span></span>
+<span id="cb799-12"><a href="geospatial.html#cb799-12" tabindex="-1"></a><span class="co"># plot(grid.extent)</span></span>
+<span id="cb799-13"><a href="geospatial.html#cb799-13" tabindex="-1"></a></span>
+<span id="cb799-14"><a href="geospatial.html#cb799-14" tabindex="-1"></a></span>
+<span id="cb799-15"><a href="geospatial.html#cb799-15" tabindex="-1"></a><span class="co"># Generating grid</span></span>
+<span id="cb799-16"><a href="geospatial.html#cb799-16" tabindex="-1"></a>Grid.sys <span class="ot">&lt;-</span> </span>
+<span id="cb799-17"><a href="geospatial.html#cb799-17" tabindex="-1"></a>  <span class="fu">st_make_grid</span>(grid.extent,</span>
+<span id="cb799-18"><a href="geospatial.html#cb799-18" tabindex="-1"></a>               <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">132</span>, <span class="dv">100</span>),   <span class="co"># Resolution of grids</span></span>
+<span id="cb799-19"><a href="geospatial.html#cb799-19" tabindex="-1"></a>               <span class="at">crs =</span> <span class="dv">3826</span>,  <span class="co"># crs: TWD97 121</span></span>
+<span id="cb799-20"><a href="geospatial.html#cb799-20" tabindex="-1"></a>               <span class="at">what =</span> <span class="st">&#39;polygons&#39;</span>) <span class="sc">%&gt;%</span>   <span class="co"># output format: polygon</span></span>
+<span id="cb799-21"><a href="geospatial.html#cb799-21" tabindex="-1"></a>  <span class="fu">st_sf</span>(<span class="st">&#39;geometry&#39;</span> <span class="ot">=</span> ., <span class="fu">data.frame</span>(<span class="st">&#39;ID&#39;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(.))) <span class="co"># convert to sf with id</span></span>
+<span id="cb799-22"><a href="geospatial.html#cb799-22" tabindex="-1"></a>  <span class="co"># st_transform(3826) # assigning crs again ? </span></span>
+<span id="cb799-23"><a href="geospatial.html#cb799-23" tabindex="-1"></a><span class="fu">plot</span>(Grid.sys)</span></code></pre></div>
+<p><img src="V23_map_grid_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="geospatial.html#cb800-1" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span> </span>
+<span id="cb800-2"><a href="geospatial.html#cb800-2" tabindex="-1"></a>  Grid.sys[<span class="fu">subset</span>(TW.island),]</span>
+<span id="cb800-3"><a href="geospatial.html#cb800-3" tabindex="-1"></a><span class="fu">plot</span>(Grid.TW)</span></code></pre></div>
+<p><img src="V23_map_grid_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="loading-data-1" class="section level3 hasAnchor" number="29.5.3">
+<h3><span class="header-section-number">29.5.3</span> loading data<a href="geospatial.html#loading-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="geospatial.html#cb801-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb801-2"><a href="geospatial.html#cb801-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
+<span id="cb801-3"><a href="geospatial.html#cb801-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
+<span id="cb801-4"><a href="geospatial.html#cb801-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
+<span id="cb801-5"><a href="geospatial.html#cb801-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
+<span id="cb801-6"><a href="geospatial.html#cb801-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
+</div>
+<div id="merging-data" class="section level3 hasAnchor" number="29.5.4">
+<h3><span class="header-section-number">29.5.4</span> Merging data<a href="geospatial.html#merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="geospatial.html#cb802-1" tabindex="-1"></a>tw_info <span class="ot">&lt;-</span> TW.island <span class="sc">%&gt;%</span> </span>
+<span id="cb802-2"><a href="geospatial.html#cb802-2" tabindex="-1"></a>    <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb802-3"><a href="geospatial.html#cb802-3" tabindex="-1"></a>    <span class="fu">left_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="geospatial.html#cb803-1" tabindex="-1"></a><span class="co"># TW_info &lt;- sf::st_intersects(Grid.TW, TW.island)  # creat a data.frame of IDs in IBA for 1km grid</span></span>
+<span id="cb803-2"><a href="geospatial.html#cb803-2" tabindex="-1"></a>grid_id <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">st_intersects</span>(Grid.TW, TW.island), <span class="cf">function</span>(z) <span class="cf">if</span> (<span class="fu">length</span>(z)<span class="sc">==</span><span class="dv">0</span>) <span class="cn">NA_integer_</span> <span class="cf">else</span> z[<span class="dv">1</span>])</span>
+<span id="cb803-3"><a href="geospatial.html#cb803-3" tabindex="-1"></a></span>
+<span id="cb803-4"><a href="geospatial.html#cb803-4" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span>  Grid.TW <span class="sc">%&gt;%</span></span>
+<span id="cb803-5"><a href="geospatial.html#cb803-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grid_id =</span> grid_id) <span class="sc">%&gt;%</span></span>
+<span id="cb803-6"><a href="geospatial.html#cb803-6" tabindex="-1"></a>  <span class="fu">left_join</span>(tw_info, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;grid_id&quot;</span><span class="ot">=</span><span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="geospatial.html#cb804-1" tabindex="-1"></a>Grid.TW <span class="sc">%&gt;%</span></span>
+<span id="cb804-2"><a href="geospatial.html#cb804-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> tsai_ratio)) <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb804-3"><a href="geospatial.html#cb804-3" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="at">high=</span><span class="st">&quot;#2EFF71&quot;</span>, <span class="at">low=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb804-4"><a href="geospatial.html#cb804-4" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div>
+<p><img src="V23_map_grid_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="time-trends.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="network-vis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/V21_Geospatial.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

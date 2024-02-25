@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 22 ggplot | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 22 ggplot | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 22 ggplot | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visualization-1.html"/>
+<link rel="next" href="coordinate.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot" class="section level1 hasAnchor" number="22">
+<h1><span class="header-section-number">Chapter 22</span> ggplot<a href="ggplot.html#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>本節著重在介紹<code>ggplot</code>的基本概念與設定。</p>
+<p><strong>訣竅：</strong>可在一開始便透過<code>knitr::opts_chunk$set(echo = TRUE, fig.width = 2, fig.asp = 0.4)</code>來一次設定所有圖片。<code>fig.width = 8</code>與<code>fig.height = 6</code> 是以英吋（inches）為單位，或用<code>fig.dim = c(8, 6)</code>一次設定長寬<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。<code>echo = TRUE</code>是設定knit出輸出格式（如html）時，也要包含程式碼。如果<code>echo = FALSE</code>的話，就只會輸出文字和圖形。</p>
+<div id="繪圖基礎折線圖" class="section level2 hasAnchor" number="22.1">
+<h2><span class="header-section-number">22.1</span> 繪圖基礎：折線圖<a href="ggplot.html#繪圖基礎折線圖" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="繪圖三要素" class="section level3 hasAnchor" number="22.1.1">
+<h3><span class="header-section-number">22.1.1</span> 繪圖三要素<a href="ggplot.html#繪圖三要素" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用ggplot來繪製圖形有三個基本函式<code>ggplot()</code> + <code>aes()</code> + <code>geom_圖表類型</code>。</p>
+<ol style="list-style-type: decimal">
+<li><strong>指定要進行繪圖<code>ggplot()</code></strong>：用<code>%&gt;%</code>將資料（dataframe）pipe給<code>ggplot()</code>後，底下各增添的繪圖選項都用<code>+</code>的符號，類似不斷修正繪圖結果的意思。</li>
+<li><strong>指定X／Y軸與群組因子<code>aes()</code></strong>：指定圖表的X/Y軸分別是什麼變數，有些圖表只需要單一個變數（例如Density-chart和Histogram），有些需要X/Y兩個變數（例如Scatter-chart）什麼的變數要做視覺化，Boxplot甚至可以直接指定最大、最小、Q1、Q3和Median等多個變數。</li>
+<li><strong>指定要繪製的圖表類型</strong>。例如Line-chart為<code>geom_line()</code>、Scatter-chart為<code>geom_point()</code>、Bar-chart為<code>geom_col()</code>或<code>geom_bar()</code>。查閱<a href="https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf">ggplot cheat sheet</a>可以快速翻閱有哪些圖表類型（如截圖）。</li>
+</ol>
+<div class="float">
+<img src="images/paste-E7629FF5.png" alt="ggplot-cheat-sheet" />
+<div class="figcaption">ggplot-cheat-sheet</div>
+</div>
+<div id="ggplot-會秀出預備要繪製的繪圖區" class="section level4 hasAnchor" number="22.1.1.1">
+<h4><span class="header-section-number">22.1.1.1</span> <code>ggplot()</code> 會秀出預備要繪製的繪圖區<a href="ggplot.html#ggplot-會秀出預備要繪製的繪圖區" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="ggplot.html#cb672-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">b=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb672-2"><a href="ggplot.html#cb672-2" tabindex="-1"></a>    <span class="fu">ggplot</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="指定xy軸與群組因子aesaes會在繪圖區上繪製x與y軸" class="section level4 hasAnchor" number="22.1.1.2">
+<h4><span class="header-section-number">22.1.1.2</span> <strong>指定X／Y軸與群組因子<code>aes()</code></strong>：<code>aes()</code>會在繪圖區上繪製X與Y軸<a href="ggplot.html#指定xy軸與群組因子aesaes會在繪圖區上繪製x與y軸" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="ggplot.html#cb673-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">b=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb673-2"><a href="ggplot.html#cb673-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb673-3"><a href="ggplot.html#cb673-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>a, <span class="at">y=</span>b)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="指定要繪製的圖表類型" class="section level4 hasAnchor" number="22.1.1.3">
+<h4><span class="header-section-number">22.1.1.3</span> <strong>指定要繪製的圖表類型</strong>。<a href="ggplot.html#指定要繪製的圖表類型" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>例如折線圖為為<code>geom_line()</code>、X/Y散佈圖為<code>geom_point()</code>、長條圖我多會使用<code>geom_col()</code>。</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="ggplot.html#cb674-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">b=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb674-2"><a href="ggplot.html#cb674-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb674-3"><a href="ggplot.html#cb674-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>a, <span class="at">y=</span>b) <span class="sc">+</span> </span>
+<span id="cb674-4"><a href="ggplot.html#cb674-4" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>亦可同時繪製兩種類型的圖表於同一張圖上。例如以下同時繪製了<code>geom_line()</code>與<code>geom_plot()</code>。</p>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="ggplot.html#cb675-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">b=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb675-2"><a href="ggplot.html#cb675-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb675-3"><a href="ggplot.html#cb675-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>a, <span class="at">y=</span>b) <span class="sc">+</span> </span>
+<span id="cb675-4"><a href="ggplot.html#cb675-4" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb675-5"><a href="ggplot.html#cb675-5" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="nyt-inequality" class="section level2 hasAnchor" number="22.2">
+<h2><span class="header-section-number">22.2</span> NYT: Inequality<a href="ggplot.html#nyt-inequality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://www.nytimes.com/2021/05/11/learning/lesson-plans/teach-about-inequality-with-these-28-new-york-times-graphs.html">Teach About Inequality With These 28 New York Times Graphs - The New York Times (nytimes.com)</a></p>
+<p>ggplot是以變數為基礎的視覺化套件，也就是說，當準備好dataframe後，就可以在ggplot中指定要用哪些變數來繪圖。也因此，務必把dataframe整理為tidy型態，也就是長表格（long-form）的型態。整理完資料後，我會習慣地用<code>names(plot)</code>或<code>glimpse(plot)</code>來看一下該資料所有的變項，好可以在下一階段的繪圖做參考。</p>
+<div id="visualizing" class="section level3 hasAnchor" number="22.2.1">
+<h3><span class="header-section-number">22.2.1</span> Visualizing<a href="ggplot.html#visualizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="ggplot.html#cb676-1" tabindex="-1"></a>NW <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/interactive_bulletin_charts_agecl_median.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb676-2"><a href="ggplot.html#cb676-2" tabindex="-1"></a>    <span class="fu">select</span>(Category, year, Net_Worth)  <span class="sc">%&gt;%</span></span>
+<span id="cb676-3"><a href="ggplot.html#cb676-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Category) <span class="sc">%&gt;%</span></span>
+<span id="cb676-4"><a href="ggplot.html#cb676-4" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb676-5"><a href="ggplot.html#cb676-5" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<pre><code>## Rows: 66 Columns: 37
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (1): Category
+## dbl (36): year, Before_Tax_Income, Net_Worth, Assets, Financial_Assets, Tran...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="ggplot.html#cb678-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>## Rows: 66
+## Columns: 3
+## $ Category  &lt;chr&gt; &quot;Less than 35&quot;, &quot;35-44&quot;, &quot;45-54&quot;, &quot;55-64&quot;, &quot;65-74&quot;, &quot;75 or o…
+## $ year      &lt;dbl&gt; 1989, 1989, 1989, 1989, 1989, 1989, 1992, 1992, 1992, 1992, …
+## $ Net_Worth &lt;dbl&gt; 16.17019, 112.47530, 195.11630, 195.25554, 154.34277, 144.29…</code></pre>
+<p>這是預期視覺化的結果。</p>
+<p><img src="images/paste-B46B3CD7.png" /></p>
+<p>先將<code>year</code>和<code>Net_worth</code>分別繪製在X與Y軸上，並用<code>geom_line()</code>繪製為折現圖。結果圖表中呈現鋸齒狀的折線，看似有問題，但其實是合理的。因為<code>year</code>是一個離散變數，而我們希望每個年齡層一條線的話，那就要照年齡層來分組。也因此，每一年都有有每個年齡層的資料，當我們把「年」作為X軸時，自然同一年就會有數筆不同年齡層的資料，因此才會是鋸齒狀的。</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="ggplot.html#cb680-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span></span>
+<span id="cb680-2"><a href="ggplot.html#cb680-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb680-3"><a href="ggplot.html#cb680-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>Net_Worth) <span class="sc">+</span> </span>
+<span id="cb680-4"><a href="ggplot.html#cb680-4" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>不同的圖表類型是可以疊加在同一張圖上的</strong>。我們也可以把<code>geom_point()</code> 另一種圖表型態加入，也是可以的，兩者的X與Y不相衝突。<code>geom_line()</code>、<code>geom_point()</code>、<code>geom_text()</code>三者會經常伴隨出現。</p>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="ggplot.html#cb681-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span></span>
+<span id="cb681-2"><a href="ggplot.html#cb681-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb681-3"><a href="ggplot.html#cb681-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>Net_Worth) <span class="sc">+</span> </span>
+<span id="cb681-4"><a href="ggplot.html#cb681-4" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb681-5"><a href="ggplot.html#cb681-5" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="grouping" class="section level3 hasAnchor" number="22.2.2">
+<h3><span class="header-section-number">22.2.2</span> Grouping<a href="ggplot.html#grouping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>上圖是我們把多個年齡層的逐年資料畫在同一條折線上，所以會呈現鋸齒狀折現的狀況。但這些年齡層並非在同一條線上呀？因此，我們要根據<code>Category</code>這個變數來做分組。</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="ggplot.html#cb682-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span></span>
+<span id="cb682-2"><a href="ggplot.html#cb682-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb682-3"><a href="ggplot.html#cb682-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>Net_Worth, <span class="at">group=</span>Category) <span class="sc">+</span> </span>
+<span id="cb682-4"><a href="ggplot.html#cb682-4" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb682-5"><a href="ggplot.html#cb682-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>如希望不同線條上不一樣的色彩，應指定<code>color=Category</code>。</p>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="ggplot.html#cb683-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb683-2"><a href="ggplot.html#cb683-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb683-3"><a href="ggplot.html#cb683-3" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+<dl>
+<dt>用color、fill或group來做分組？</dt>
+<dd>
+<p><code>geom_line()</code>的色彩是在<strong>線</strong>，而不是在<strong>面</strong>上。如果色彩是在點（如<code>geom_point()</code>）或線（<code>geom_line()</code>）上，就是用<code>color</code>來指定顏色。</p>
+<p>但如果是如類似下面的例子，用<code>geom_area()</code>來視覺化的話，因為顏色填的是<strong>面</strong>，所以要用<code>fill=Category</code>。以下範例甚至同時指定<code>color=Category, fill=Category</code>。但折線圖如果要用<code>geom_area()</code>來視覺化的話，最好要上顏色的不要超過二個，不然就會像底下這個例子一樣，即使設定<code>alpha=0.2</code>的半透明，仍然會看不懂哪些顏色疊在一起。</p>
+<p><code>geom_area()</code>預設應該是累積分佈圖（也就是不同的群組會在Y軸方向疊加），如果希望觀察兩個分布的差別，而不是希望看見整體趨勢的話，那要增加<code>position="dodge"</code>的參數，並把<code>alpha</code>（半透明）設定為1以下的數值。</p>
+</dd>
+</dl>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="ggplot.html#cb684-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb684-2"><a href="ggplot.html#cb684-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category, <span class="at">fill=</span>Category) <span class="sc">+</span> </span>
+<span id="cb684-3"><a href="ggplot.html#cb684-3" tabindex="-1"></a>    <span class="fu">geom_area</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="adjusting-chart" class="section level2 hasAnchor" number="22.3">
+<h2><span class="header-section-number">22.3</span> Adjusting Chart<a href="ggplot.html#adjusting-chart" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="點線型態" class="section level3 hasAnchor" number="22.3.1">
+<h3><span class="header-section-number">22.3.1</span> 點線型態<a href="ggplot.html#點線型態" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>下面的例子同時用了<code>geom_line()</code>和<code>geom_point()</code>，且分別設定了線寬（<code>size=1</code>）、點的大小(<code>size=2</code>)，折線型態（<code>linetype="dashed"</code>）、半透明程度（<code>alpha</code>）。</p>
+<p><a href="http://www.sthda.com/english/wiki/ggplot2-line-types-how-to-change-line-types-of-a-graph-in-r-software">ggplot2 line types : How to change line types of a graph in R software? - Easy Guides - Wiki - STHDA</a></p>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="ggplot.html#cb685-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb685-2"><a href="ggplot.html#cb685-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb685-3"><a href="ggplot.html#cb685-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb685-4"><a href="ggplot.html#cb685-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="line-types" class="section level3 hasAnchor" number="22.3.2">
+<h3><span class="header-section-number">22.3.2</span> Line Types<a href="ggplot.html#line-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>See more from ggthemes <a href="https://github.com/BTJ01/ggthemes/tree/master/inst/examples" class="uri">https://github.com/BTJ01/ggthemes/tree/master/inst/examples</a></p>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="ggplot.html#cb687-1" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb687-2"><a href="ggplot.html#cb687-2" tabindex="-1"></a>rescale01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb687-3"><a href="ggplot.html#cb687-3" tabindex="-1"></a>    (x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> <span class="fu">diff</span>(<span class="fu">range</span>(x))</span>
+<span id="cb687-4"><a href="ggplot.html#cb687-4" tabindex="-1"></a>  }</span>
+<span id="cb687-5"><a href="ggplot.html#cb687-5" tabindex="-1"></a></span>
+<span id="cb687-6"><a href="ggplot.html#cb687-6" tabindex="-1"></a><span class="fu">gather</span>(economics, variable, value, <span class="sc">-</span>date) <span class="sc">%&gt;%</span></span>
+<span id="cb687-7"><a href="ggplot.html#cb687-7" tabindex="-1"></a>    <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb687-8"><a href="ggplot.html#cb687-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">rescale01</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb687-9"><a href="ggplot.html#cb687-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> value, <span class="at">linetype =</span> variable)) <span class="sc">+</span></span>
+<span id="cb687-10"><a href="ggplot.html#cb687-10" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb687-11"><a href="ggplot.html#cb687-11" tabindex="-1"></a>    <span class="fu">scale_linetype_stata</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="標題標籤與圖說" class="section level3 hasAnchor" number="22.3.3">
+<h3><span class="header-section-number">22.3.3</span> 標題、標籤與圖說<a href="ggplot.html#標題標籤與圖說" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Titles, labels, and legend <strong>設定標題與X／Y軸標題（法一）</strong>：以下設定了圖表的圖表標題、和X軸與Y軸的軸標題（<code>xlab</code>與<code>ylab</code>）。</p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="ggplot.html#cb688-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb688-2"><a href="ggplot.html#cb688-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb688-3"><a href="ggplot.html#cb688-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb688-4"><a href="ggplot.html#cb688-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb688-5"><a href="ggplot.html#cb688-5" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb688-6"><a href="ggplot.html#cb688-6" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Net Worth&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb688-7"><a href="ggplot.html#cb688-7" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Net Worth by year grouped by age groups&quot;</span>)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>設定標題與X／Y軸標題（法二）</strong>：這是一次設定圖表標題（<code>title</code>）、次標題（<code>suttitle</code>）、X軸與Y軸標題的方法。</p>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="ggplot.html#cb689-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb689-2"><a href="ggplot.html#cb689-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb689-3"><a href="ggplot.html#cb689-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span>  </span>
+<span id="cb689-4"><a href="ggplot.html#cb689-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb689-5"><a href="ggplot.html#cb689-5" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Net Worth by year grouped by age groups&quot;</span>,</span>
+<span id="cb689-6"><a href="ggplot.html#cb689-6" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="st">&quot;Source from: ...&quot;</span>,</span>
+<span id="cb689-7"><a href="ggplot.html#cb689-7" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb689-8"><a href="ggplot.html#cb689-8" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Net Worth&quot;</span>)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>調整X軸與Y軸標題位置的</strong>：必須要透過<code>theme()</code>來設定<code>axis.title.x = element_text(hjust=1)</code>。</p>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="ggplot.html#cb690-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb690-2"><a href="ggplot.html#cb690-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb690-3"><a href="ggplot.html#cb690-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb690-4"><a href="ggplot.html#cb690-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb690-5"><a href="ggplot.html#cb690-5" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Net Worth by year grouped by age groups&quot;</span>,</span>
+<span id="cb690-6"><a href="ggplot.html#cb690-6" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb690-7"><a href="ggplot.html#cb690-7" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Net Worth&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb690-8"><a href="ggplot.html#cb690-8" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>),</span>
+<span id="cb690-9"><a href="ggplot.html#cb690-9" tabindex="-1"></a>          <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>去除X／Y軸標題（不佳）</strong>：直接將空字串Assign給<code>title</code>、<code>x</code>、與<code>y</code>即可。</p>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="ggplot.html#cb691-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb691-2"><a href="ggplot.html#cb691-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb691-3"><a href="ggplot.html#cb691-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb691-4"><a href="ggplot.html#cb691-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb691-5"><a href="ggplot.html#cb691-5" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>去除X／Y軸標題（較佳）</strong>：透過設定<code>theme()</code>來調整。可發現透過這種設定方法，原本標題和X／Y軸標題的邊界空間就會被釋放出來。</p>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="ggplot.html#cb692-1" tabindex="-1"></a><span class="co"># No extra space for xlab, ylab and title</span></span>
+<span id="cb692-2"><a href="ggplot.html#cb692-2" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb692-3"><a href="ggplot.html#cb692-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb692-4"><a href="ggplot.html#cb692-4" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
+<span id="cb692-5"><a href="ggplot.html#cb692-5" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb692-6"><a href="ggplot.html#cb692-6" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb692-7"><a href="ggplot.html#cb692-7" tabindex="-1"></a>          <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb692-8"><a href="ggplot.html#cb692-8" tabindex="-1"></a>          <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="字體樣式" class="section level3 hasAnchor" number="22.3.4">
+<h3><span class="header-section-number">22.3.4</span> 字體樣式<a href="ggplot.html#字體樣式" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>調整字型會建議都從<code>theme()</code>來做調整，所有圖面上看得到的字都有相對應的變數可以調整字型。例如以下的例子中，把標題的字型大小調整為14粗體、X與Y軸的字型則調整了向右對齊、10粗斜體、顏色為dimgrey。</p>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="ggplot.html#cb693-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb693-2"><a href="ggplot.html#cb693-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb693-3"><a href="ggplot.html#cb693-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb693-4"><a href="ggplot.html#cb693-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb693-5"><a href="ggplot.html#cb693-5" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Net Worth by year grouped by age groups&quot;</span>,</span>
+<span id="cb693-6"><a href="ggplot.html#cb693-6" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb693-7"><a href="ggplot.html#cb693-7" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Net Worth&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb693-8"><a href="ggplot.html#cb693-8" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb693-9"><a href="ggplot.html#cb693-9" tabindex="-1"></a>          <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size=</span><span class="dv">10</span>,</span>
+<span id="cb693-10"><a href="ggplot.html#cb693-10" tabindex="-1"></a>                                      <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, </span>
+<span id="cb693-11"><a href="ggplot.html#cb693-11" tabindex="-1"></a>                                      <span class="at">face=</span><span class="st">&quot;bold.italic&quot;</span>),</span>
+<span id="cb693-12"><a href="ggplot.html#cb693-12" tabindex="-1"></a>          <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size=</span><span class="dv">10</span>,</span>
+<span id="cb693-13"><a href="ggplot.html#cb693-13" tabindex="-1"></a>                                      <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, </span>
+<span id="cb693-14"><a href="ggplot.html#cb693-14" tabindex="-1"></a>                                      <span class="at">face=</span><span class="st">&quot;bold.italic&quot;</span>)</span>
+<span id="cb693-15"><a href="ggplot.html#cb693-15" tabindex="-1"></a>          )</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="圖表主題色調" class="section level3 hasAnchor" number="22.3.5">
+<h3><span class="header-section-number">22.3.5</span> 圖表主題色調<a href="ggplot.html#圖表主題色調" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ggplot也有其圖表主題色調。之前範例的灰色圖表背景就是預設的主題，ggplot中還有好幾個預設圖表主題可以選，例如<code>theme_minimal()</code>或<code>theme_tw()</code>等等。</p>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/reference/theme.html">Modify components of a theme — theme • ggplot2 (tidyverse.org)</a></li>
+<li><a href="https://github.com/bbc/bbplot/blob/master/R/bbc_style.R">bbplot/bbc_style.R at master · bbc/bbplot (github.com)</a></li>
+</ul>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="ggplot.html#cb694-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb694-2"><a href="ggplot.html#cb694-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb694-3"><a href="ggplot.html#cb694-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb694-4"><a href="ggplot.html#cb694-4" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="預設主題" class="section level3 hasAnchor" number="22.3.6">
+<h3><span class="header-section-number">22.3.6</span> 預設主題<a href="ggplot.html#預設主題" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>如果希望所有的圖表都有一致的顏色和排版的調性，可以在一開始編輯Rmd的時候就設計好一套<code>theme()</code>並指給一個變數（例如以下的<code>th</code>）。</p>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="ggplot.html#cb695-1" tabindex="-1"></a>th <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb695-2"><a href="ggplot.html#cb695-2" tabindex="-1"></a>          <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size=</span><span class="dv">10</span>,</span>
+<span id="cb695-3"><a href="ggplot.html#cb695-3" tabindex="-1"></a>                                      <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, </span>
+<span id="cb695-4"><a href="ggplot.html#cb695-4" tabindex="-1"></a>                                      <span class="at">face=</span><span class="st">&quot;bold.italic&quot;</span>),</span>
+<span id="cb695-5"><a href="ggplot.html#cb695-5" tabindex="-1"></a>          <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size=</span><span class="dv">10</span>,</span>
+<span id="cb695-6"><a href="ggplot.html#cb695-6" tabindex="-1"></a>                                      <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, </span>
+<span id="cb695-7"><a href="ggplot.html#cb695-7" tabindex="-1"></a>                                      <span class="at">face=</span><span class="st">&quot;bold.italic&quot;</span>)</span>
+<span id="cb695-8"><a href="ggplot.html#cb695-8" tabindex="-1"></a>          )</span>
+<span id="cb695-9"><a href="ggplot.html#cb695-9" tabindex="-1"></a></span>
+<span id="cb695-10"><a href="ggplot.html#cb695-10" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb695-11"><a href="ggplot.html#cb695-11" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color=</span>Category) <span class="sc">+</span> </span>
+<span id="cb695-12"><a href="ggplot.html#cb695-12" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb695-13"><a href="ggplot.html#cb695-13" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>, <span class="at">color=</span><span class="st">&quot;dimgrey&quot;</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb695-14"><a href="ggplot.html#cb695-14" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb695-15"><a href="ggplot.html#cb695-15" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Net Worth by year grouped by age groups&quot;</span>,</span>
+<span id="cb695-16"><a href="ggplot.html#cb695-16" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb695-17"><a href="ggplot.html#cb695-17" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Net Worth&quot;</span>) <span class="sc">+</span> th</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="顯示中文字體" class="section level3 hasAnchor" number="22.3.7">
+<h3><span class="header-section-number">22.3.7</span> 顯示中文字體<a href="ggplot.html#顯示中文字體" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Python和R這些程式語言的預設視覺化套件都沒辦法顯示中文，所以如果要顯示中文的話，就要指定圖表標題、X、Y軸標籤、圖說和各個部件的字型。因為我在Mac上繪圖，所以我將字型指定為<strong>Heiti TC Light</strong>。如果想知道自己的電腦上有什麼可以用，可以到電腦的字體簿上查找中文字體名稱，或者上網google「ggplot 中文字型選擇」。</p>
+<p><img src="images/paste-A259BC75.png" /></p>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="ggplot.html#cb696-1" tabindex="-1"></a>county <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/tw_population_opendata110N010.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb696-2"><a href="ggplot.html#cb696-2" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span>(<span class="dv">370</span><span class="sc">:</span><span class="dv">375</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb696-3"><a href="ggplot.html#cb696-3" tabindex="-1"></a>    <span class="fu">type_convert</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb696-4"><a href="ggplot.html#cb696-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">str_sub</span>(site_id, <span class="dv">1</span>, <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb696-5"><a href="ggplot.html#cb696-5" tabindex="-1"></a>    <span class="fu">group_by</span>(county) <span class="sc">%&gt;%</span></span>
+<span id="cb696-6"><a href="ggplot.html#cb696-6" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb696-7"><a href="ggplot.html#cb696-7" tabindex="-1"></a>        <span class="at">area =</span> <span class="fu">sum</span>(area), </span>
+<span id="cb696-8"><a href="ggplot.html#cb696-8" tabindex="-1"></a>        <span class="at">people_total =</span> <span class="fu">sum</span>(people_total)</span>
+<span id="cb696-9"><a href="ggplot.html#cb696-9" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb696-10"><a href="ggplot.html#cb696-10" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<pre><code>## Rows: 375 Columns: 5
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): statistic_yyy, site_id, people_total, area, population_density
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   statistic_yyy = col_double(),
+##   site_id = col_character(),
+##   people_total = col_double(),
+##   area = col_double(),
+##   population_density = col_double()
+## )</code></pre>
+<p>下面這是一個長條圖的範例（barplot，不是histogram）。Barplot可以直接指定X軸為縣市（county）和Y軸為總人口數（people_total），但是要用<code>geom_col()</code>而非<code>geom_bar()</code>。除此之外，Bar的顏色有「面」的特徵，所以若要自訂整條bar的顏色，要用<code>fill</code>而非<code>color</code>，<code>color</code>只會是每條Bar的外框。</p>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="ggplot.html#cb698-1" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb698-2"><a href="ggplot.html#cb698-2" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(people_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb698-3"><a href="ggplot.html#cb698-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total) <span class="sc">%&gt;%</span></span>
+<span id="cb698-4"><a href="ggplot.html#cb698-4" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;lightgrey&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb698-5"><a href="ggplot.html#cb698-5" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb698-6"><a href="ggplot.html#cb698-6" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/barplot-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>舉例來說，中文字型可以是標楷體（BiauKai）、宋體（Songti TC）、黑體（Heiti TC Light）、蘋方（PingFang TC）、Noto（Noto Sans CJK TC）</p>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="ggplot.html#cb699-1" tabindex="-1"></a>th <span class="ot">&lt;-</span> </span>
+<span id="cb699-2"><a href="ggplot.html#cb699-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb699-3"><a href="ggplot.html#cb699-3" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>), </span>
+<span id="cb699-4"><a href="ggplot.html#cb699-4" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;PingFang TC&quot;</span>),</span>
+<span id="cb699-5"><a href="ggplot.html#cb699-5" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb699-6"><a href="ggplot.html#cb699-6" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb699-7"><a href="ggplot.html#cb699-7" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
+<span id="cb699-8"><a href="ggplot.html#cb699-8" tabindex="-1"></a>        )</span>
+<span id="cb699-9"><a href="ggplot.html#cb699-9" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb699-10"><a href="ggplot.html#cb699-10" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total) <span class="sc">%&gt;%</span></span>
+<span id="cb699-11"><a href="ggplot.html#cb699-11" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb699-12"><a href="ggplot.html#cb699-12" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> th <span class="sc">+</span> </span>
+<span id="cb699-13"><a href="ggplot.html#cb699-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>))</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="xy軸方向" class="section level3 hasAnchor" number="22.3.8">
+<h3><span class="header-section-number">22.3.8</span> X/Y軸方向<a href="ggplot.html#xy軸方向" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>調整圖表方向</p>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="ggplot.html#cb700-1" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb700-2"><a href="ggplot.html#cb700-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total) <span class="sc">%&gt;%</span></span>
+<span id="cb700-3"><a href="ggplot.html#cb700-3" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb700-4"><a href="ggplot.html#cb700-4" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb700-5"><a href="ggplot.html#cb700-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> th <span class="sc">+</span> </span>
+<span id="cb700-6"><a href="ggplot.html#cb700-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>))</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/coord_flip()-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>通常<code>coord_flip()</code>後往往會希望這些bar會是由上而下排序好的，但用<code>arrange(desc(people_total)</code>是無法解決問題的，因為Y軸原本會是照Y軸的刻度排列，而不是Y軸的數值。所以，要被排序的應該是Y軸的「文字」也就是那些縣市。因此，我們需要將該縣市轉為factor（1~n），並且讓這些縣市被安排的factor數值照<code>people_total</code>排列，因此要用<code>mutate(county = reorder(county, people_total))</code>。<code>reorder()</code>是一個將文字轉factor的函式，但在此特別指定照<code>people_total</code>的編排。</p>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="ggplot.html#cb701-1" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb701-2"><a href="ggplot.html#cb701-2" tabindex="-1"></a>  <span class="co"># arrange(desc(people_total) %&gt;%</span></span>
+<span id="cb701-3"><a href="ggplot.html#cb701-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">reorder</span>(county, people_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb701-4"><a href="ggplot.html#cb701-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total) <span class="sc">%&gt;%</span></span>
+<span id="cb701-5"><a href="ggplot.html#cb701-5" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb701-6"><a href="ggplot.html#cb701-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb701-7"><a href="ggplot.html#cb701-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> th</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/coord_flip-with-reorder-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="highlighting-storytelling" class="section level2 hasAnchor" number="22.4">
+<h2><span class="header-section-number">22.4</span> Highlighting &amp; Storytelling<a href="ggplot.html#highlighting-storytelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>「說故事」才是整則資料新聞的核心，在運用圖表來輔助敘事時，應搭配說理說服的內容來突顯（highlight）圖面上的特徵，而不是留待讀者自己觀察。以下有三種highlight圖表部分資料的方法。第一個方法是在繪圖時用<code>+ scale_color_manual()</code>或<code>+ scale_fill_manual()</code>指定顏色給不同群組；方法二是利用<code>gghighlight</code>這個套件來指定要上色的群組，而且<code>gghighlight</code>可以和<code>fill</code>與<code>color</code>相互搭配，仍然可以用<code>scale_fill_manual</code>和<code>scale_color_manual</code>來指定顏色。但會有個狀況是，如果原本沒群組那怎麼辦？就自己用<code>mutate()</code>打造群組就好。方法各有利弊與使用時機。</p>
+<div id="依群組指定顏色" class="section level3 hasAnchor" number="22.4.1">
+<h3><span class="header-section-number">22.4.1</span> 依群組指定顏色<a href="ggplot.html#依群組指定顏色" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>scale_color_manual()</code> 與<code>scale_fill_manual()</code></p>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="ggplot.html#cb702-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span> </span>
+<span id="cb702-2"><a href="ggplot.html#cb702-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color =</span> Category) <span class="sc">+</span> </span>
+<span id="cb702-3"><a href="ggplot.html#cb702-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb702-4"><a href="ggplot.html#cb702-4" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
+<span id="cb702-5"><a href="ggplot.html#cb702-5" tabindex="-1"></a>        <span class="at">limits=</span><span class="fu">c</span>(<span class="st">&quot;65-74&quot;</span>, <span class="st">&quot;35-44&quot;</span>),   <span class="co"># original chart group</span></span>
+<span id="cb702-6"><a href="ggplot.html#cb702-6" tabindex="-1"></a>        <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;skyblue&quot;</span>),  <span class="co"># map to color</span></span>
+<span id="cb702-7"><a href="ggplot.html#cb702-7" tabindex="-1"></a>        <span class="at">name=</span><span class="st">&quot;Age group&quot;</span>,             <span class="co"># legend title</span></span>
+<span id="cb702-8"><a href="ggplot.html#cb702-8" tabindex="-1"></a>        <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;65-74&quot;</span>, <span class="st">&quot;35-44&quot;</span>),   <span class="co"># original legend group labels</span></span>
+<span id="cb702-9"><a href="ggplot.html#cb702-9" tabindex="-1"></a>        <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;elder(65-74)&quot;</span>,<span class="st">&quot;younger(35-44)&quot;</span>), <span class="co"># map to new labels</span></span>
+<span id="cb702-10"><a href="ggplot.html#cb702-10" tabindex="-1"></a>        <span class="at">na.value =</span> <span class="st">&quot;lightgrey&quot;</span> <span class="co"># color for other groups</span></span>
+<span id="cb702-11"><a href="ggplot.html#cb702-11" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb702-12"><a href="ggplot.html#cb702-12" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="使用gghighlight套件" class="section level3 hasAnchor" number="22.4.2">
+<h3><span class="header-section-number">22.4.2</span> 使用gghighlight套件<a href="ggplot.html#使用gghighlight套件" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="ggplot.html#cb703-1" tabindex="-1"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb703-2"><a href="ggplot.html#cb703-2" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb703-3"><a href="ggplot.html#cb703-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color =</span> Category) <span class="sc">+</span> </span>
+<span id="cb703-4"><a href="ggplot.html#cb703-4" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb703-5"><a href="ggplot.html#cb703-5" tabindex="-1"></a>    <span class="fu">gghighlight</span>(Category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;65-74&quot;</span>, <span class="st">&quot;35-44&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb703-6"><a href="ggplot.html#cb703-6" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb703-7"><a href="ggplot.html#cb703-7" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb703-8"><a href="ggplot.html#cb703-8" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;whitesmoke&quot;</span>,</span>
+<span id="cb703-9"><a href="ggplot.html#cb703-9" tabindex="-1"></a>                                <span class="at">colour =</span> <span class="st">&quot;whitesmoke&quot;</span>,</span>
+<span id="cb703-10"><a href="ggplot.html#cb703-10" tabindex="-1"></a>                                <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;solid&quot;</span>))</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-25-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>使用<code>gghighlight</code>仍能自己使用<code>scale_color_manual()</code>來指定顏色</p>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="ggplot.html#cb704-1" tabindex="-1"></a>NW <span class="sc">%&gt;%</span>    </span>
+<span id="cb704-2"><a href="ggplot.html#cb704-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, Net_Worth, <span class="at">color =</span> Category) <span class="sc">+</span> </span>
+<span id="cb704-3"><a href="ggplot.html#cb704-3" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb704-4"><a href="ggplot.html#cb704-4" tabindex="-1"></a>    <span class="fu">gghighlight</span>(Category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;65-74&quot;</span>, <span class="st">&quot;35-44&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb704-5"><a href="ggplot.html#cb704-5" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
+<span id="cb704-6"><a href="ggplot.html#cb704-6" tabindex="-1"></a>        <span class="at">limits=</span><span class="fu">c</span>(<span class="st">&quot;65-74&quot;</span>, <span class="st">&quot;35-44&quot;</span>),   <span class="co"># original chart group</span></span>
+<span id="cb704-7"><a href="ggplot.html#cb704-7" tabindex="-1"></a>        <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)) <span class="sc">+</span>   <span class="co"># map to color</span></span>
+<span id="cb704-8"><a href="ggplot.html#cb704-8" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Tried to calculate with group_by(), but the calculation failed.
+## Falling back to ungrouped filter operation...</code></pre>
+<pre><code>## label_key: Category</code></pre>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-26-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="為視覺化建立群組" class="section level3 hasAnchor" number="22.4.3">
+<h3><span class="header-section-number">22.4.3</span> 為視覺化建立群組<a href="ggplot.html#為視覺化建立群組" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這個方法是在原本的資料並沒有可以作為color或fill的因子，所以自行創建一個要突顯的群組。</p>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="ggplot.html#cb707-1" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb707-2"><a href="ggplot.html#cb707-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">if_else</span>(county <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;新竹縣&quot;</span>, <span class="st">&quot;新竹市&quot;</span>), <span class="st">&quot;highlight&quot;</span>, <span class="st">&quot;other&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb707-3"><a href="ggplot.html#cb707-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">reorder</span>(county, people_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb707-4"><a href="ggplot.html#cb707-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total, <span class="at">fill=</span>group) <span class="sc">%&gt;%</span></span>
+<span id="cb707-5"><a href="ggplot.html#cb707-5" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb707-6"><a href="ggplot.html#cb707-6" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;highlight&quot;</span><span class="ot">=</span><span class="st">&quot;Khaki&quot;</span>, <span class="st">&quot;other&quot;</span><span class="ot">=</span><span class="st">&quot;lightgrey&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb707-7"><a href="ggplot.html#cb707-7" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb707-8"><a href="ggplot.html#cb707-8" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb707-9"><a href="ggplot.html#cb707-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> th</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/income-by-town-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>但事實上也可以用<code>gghighlight</code>直接達成</p>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="ggplot.html#cb708-1" tabindex="-1"></a>county <span class="sc">%&gt;%</span></span>
+<span id="cb708-2"><a href="ggplot.html#cb708-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">reorder</span>(county, people_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb708-3"><a href="ggplot.html#cb708-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(county, people_total) <span class="sc">%&gt;%</span></span>
+<span id="cb708-4"><a href="ggplot.html#cb708-4" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">fill=</span><span class="st">&quot;deeppink&quot;</span>) <span class="sc">+</span></span>
+<span id="cb708-5"><a href="ggplot.html#cb708-5" tabindex="-1"></a>    <span class="fu">gghighlight</span>(county <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;新竹縣&quot;</span>, <span class="st">&quot;新竹市&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb708-6"><a href="ggplot.html#cb708-6" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb708-7"><a href="ggplot.html#cb708-7" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb708-8"><a href="ggplot.html#cb708-8" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> th</span></code></pre></div>
+<p><img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-27-1.png" width="576" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>參考資料：<a href="https://bookdown.org/yihui/rmarkdown-cookbook/figure-size.html">5.4 Control the size of plots/images | R Markdown Cookbook (bookdown.org)</a><a href="ggplot.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visualization-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="coordinate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/V01_Learning_ggplot.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

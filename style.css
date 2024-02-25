@@ -1,0 +1,84 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre, p{
+  word-break: normal;
+  word-wrap: normal;
+  line-height: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+pre.sourceCode{
+  background-color:AliceBlue !important;
+}
+
+pre.output{
+  background-color:#666 !important;
+  color:Gainsboro !important;
+  border-radius: 5px !important;
+}
+
+.notes{
+  border: 1px solid red !important;
+  padding: 13px !important;
+  background-color:MistyRose !important;
+  border-radius: 5px !important;
+  margin-bottom: 16px !important;
+  line-height: normal !important;
+}
+
+table td, table th{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  color: dimgrey;
+}
+
+div.book-summary  a{
+  padding: 3px 5px!important;
+  font-weight:normal !important;
+  color:dimgrey !important;
+}
+
+
+li.part span{
+  padding: 3px 5px!important;
+}
+
+li.part b{
+  color:dimgrey !important;
+}
+
+ul.summary  > li.chapter > a{
+  font-weight:bold;
+  color:crimson !important;
+}
+
+.practice{
+  background-color: MintCream;
+  ouline: 1px solid OliveDrab;
+  border-radius: 10px;
+}
+
+.debug{
+  background-color: LavenderBlush;
+  color:FireBrick;
+  ouline: 1px solid FireBrick;
+  border-radius: 10px;
+}
+
+.notes{
+  background-color:Azure;
+  ouline: 1px solid Royalblue;
+  border-radius: 10px;
+}
+
+.part{
+  color:black;
+}
+

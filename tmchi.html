@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Text processing in Chinese | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Text processing in Chinese | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Text processing in Chinese | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="re.html"/>
+<link rel="next" href="crawler-overview.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tmchi" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Text processing in Chinese<a href="tmchi.html#tmchi" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ol style="list-style-type: decimal">
+<li>tidyverse內涵繪圖和操作資料所需要的ggplot2和dplyr</li>
+<li>stringr雖然隨著tidyverse被安裝了，但不會隨著tidyverse被載入，要另外載入。</li>
+<li>在中文斷詞的時候要用到tidytext和jiebaR。</li>
+<li>處理時間時要用到lubridate。</li>
+</ol>
+<div id="preprocessing" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Preprocessing<a href="tmchi.html#preprocessing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="assigning-unique-id-to-each-doc" class="section level3 hasAnchor" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Assigning unique id to each doc<a href="tmchi.html#assigning-unique-id-to-each-doc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>為了便於後續建立Document-Term-Matrix，這時候若Document自身沒有編號的話，就得把整個Document內容當成該篇文章的id，但也有（極小）可能有兩篇Document內容相同，那就會被視為同一篇文章或發生錯誤。所以必須要編id。</li>
+<li><code>row_number()</code>產生每列的編號，所以這邊就直接把每列的編號視為每篇文章的id，可以保持該id的唯一性。當你在進行文本探勘或資料分析時，為每篇文章分配一個唯一的ID是非常重要的。唯一的ID確保每篇文章都有獨一無二的標識符號。這對於跟踪和識別特定文章非常重要，特別是當你處理大量的文本資料時。在進行資料合併時，唯一的ID可用於將不同來源的資料準確地匹配和合併在一起。這是非常實用的，尤其當你需要整合來自多個來源的文本資料時，例如合併多個資料集或者在不同時間點上進行的數據採集。</li>
+</ul>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="tmchi.html#cb557-1" tabindex="-1"></a>news.df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/typhoon.rds&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb557-2"><a href="tmchi.html#cb557-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb557-3"><a href="tmchi.html#cb557-3" tabindex="-1"></a>  <span class="fu">drop_na</span>(title)</span></code></pre></div>
+</div>
+</div>
+<div id="tokenization" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Tokenization<a href="tmchi.html#tokenization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="initializer-tokenizer" class="section level3 hasAnchor" number="14.2.1">
+<h3><span class="header-section-number">14.2.1</span> Initializer tokenizer<a href="tmchi.html#initializer-tokenizer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong><code>cutter &lt;- worker()</code></strong>這行程式碼使用<strong><code>worker()</code></strong>函式來初始化jieba分詞器，將其指派給名為<strong><code>cutter</code></strong>的變數。jieba是一個常用的中文分詞套件，用於將漢字序列分割成詞彙。初始化分詞器後，可以使用它來對中文文本進行分詞操作。</li>
+<li>斷詞的時候不見能把我們要的字詞斷出來，比方說你可能希望台北市不會被斷開，偏偏被斷成台北+市。最簡單的辦法就是把他窮舉舉完。<strong><code>new_user_word(cutter, segment_not)</code></strong>這行程式碼使用<strong><code>new_user_word()</code></strong>函式將<code>segment_not</code>這個vector中的詞彙加入使用者自定義詞典。這樣做的目的是防止該詞彙被分詞器切分成不同的部分。使用者可以根據需要將自定義詞彙加入詞典，以確保這些詞彙在分詞過程中被正確處理。</li>
+<li>載入中文停用詞：<strong><code>stopWords &lt;- readRDS("data/stopWords.rds")</code></strong> 這行程式碼載入中文停用詞（stop words）的資料，並將其讀取到名為<strong><code>stopWords</code></strong>的變數中。停用詞是在文本分析中被視為無意義或不重要的詞彙，例如連接詞、介詞、助詞等。載入停用詞列表後，可以在文本處理過程中使用它來過濾掉這些不需要的詞彙，以提高分析的效果。常見的中文停用詞包含
+<ol style="list-style-type: decimal">
+<li>助詞：的、了、着、地、得、之等。</li>
+<li>連詞：和、與、或、及、還、而等。</li>
+<li>代詞：我、你、他、她、它、們、這、那等。</li>
+<li>冠詞：一、個、些、這、那等。</li>
+<li>介詞：在、從、到、以、為、因、應、對等。</li>
+<li>虛詞：的、地、得、過、過去等。</li>
+<li>數詞：一、二、三、十、百、千、萬等。</li>
+<li>副詞：很、非常、太、真、已經、還、就等。</li>
+<li>連接詞：而、並、所以、因此、然而、只是等。</li>
+<li>感嘆詞：嗯、哦、啊、呀、吧、喔等。</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="tmchi.html#cb558-1" tabindex="-1"></a><span class="co"># segment_not to avoid to be segmented by jeiba cutter</span></span>
+<span id="cb558-2"><a href="tmchi.html#cb558-2" tabindex="-1"></a>segment_not <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;第卅六條&quot;</span>, <span class="st">&quot;第卅八條&quot;</span>, <span class="st">&quot;蘇南成&quot;</span>, <span class="st">&quot;災前&quot;</span>, <span class="st">&quot;災後&quot;</span>, <span class="st">&quot;莫拉克&quot;</span>, <span class="st">&quot;颱風&quot;</span>, <span class="st">&quot;應變中心&quot;</span>, <span class="st">&quot;停班停課&quot;</span>, <span class="st">&quot;停課&quot;</span>, <span class="st">&quot;停班&quot;</span>, <span class="st">&quot;停駛&quot;</span>, <span class="st">&quot;路樹&quot;</span>, <span class="st">&quot;里長&quot;</span>, <span class="st">&quot;賀伯&quot;</span>, <span class="st">&quot;採收&quot;</span>, <span class="st">&quot;菜價&quot;</span>, <span class="st">&quot;蘇迪&quot;</span>, <span class="st">&quot;受災戶&quot;</span>, <span class="st">&quot;颱風警報&quot;</span>, <span class="st">&quot;韋恩&quot;</span>, <span class="st">&quot;台東縣&quot;</span>, <span class="st">&quot;馬總統&quot;</span>, <span class="st">&quot;豪大雨&quot;</span>, <span class="st">&quot;梅姬&quot;</span>, <span class="st">&quot;台東&quot;</span>, <span class="st">&quot;台北市政府&quot;</span>, <span class="st">&quot;工務段&quot;</span>, <span class="st">&quot;漂流木&quot;</span>, <span class="st">&quot;陳菊&quot;</span>, <span class="st">&quot;台南縣&quot;</span>, <span class="st">&quot;卡玫基&quot;</span>, <span class="st">&quot;魚塭&quot;</span>, <span class="st">&quot;救助金&quot;</span>, <span class="st">&quot;陳情&quot;</span>, <span class="st">&quot;全省&quot;</span>, <span class="st">&quot;強颱&quot;</span>, <span class="st">&quot;中颱&quot;</span>, <span class="st">&quot;輕颱&quot;</span>, <span class="st">&quot;小林村&quot;</span>, <span class="st">&quot;野溪&quot;</span>, <span class="st">&quot;蚵民&quot;</span>, <span class="st">&quot;農委會&quot;</span>, <span class="st">&quot;來襲&quot;</span>, <span class="st">&quot;中油公司&quot;</span>, <span class="st">&quot;蔣總統經國&quot;</span>, <span class="st">&quot;颱風天&quot;</span>, <span class="st">&quot;土石流&quot;</span>, <span class="st">&quot;蘇迪勒&quot;</span>, <span class="st">&quot;水利署&quot;</span>, <span class="st">&quot;陳說&quot;</span>, <span class="st">&quot;颱風假&quot;</span>, <span class="st">&quot;颱風地區&quot;</span>, <span class="st">&quot;台灣&quot;</span>, <span class="st">&quot;臺灣&quot;</span>, <span class="st">&quot;柯羅莎&quot;</span>, <span class="st">&quot;八八風災&quot;</span>, <span class="st">&quot;紓困&quot;</span>,<span class="st">&quot;傅崑萁&quot;</span>, <span class="st">&quot;傅崐萁&quot;</span>,<span class="st">&quot;台中&quot;</span>, <span class="st">&quot;文旦柚&quot;</span>, <span class="st">&quot;鄉鎮市公所&quot;</span>, <span class="st">&quot;鄉鎮市&quot;</span>, <span class="st">&quot;房屋稅&quot;</span>, <span class="st">&quot;高雄&quot;</span>, <span class="st">&quot;未達&quot;</span>, <span class="st">&quot;台灣省&quot;</span>, <span class="st">&quot;台北市&quot;</span>)</span>
+<span id="cb558-3"><a href="tmchi.html#cb558-3" tabindex="-1"></a></span>
+<span id="cb558-4"><a href="tmchi.html#cb558-4" tabindex="-1"></a><span class="co"># Initialize jieba cutter</span></span>
+<span id="cb558-5"><a href="tmchi.html#cb558-5" tabindex="-1"></a>cutter <span class="ot">&lt;-</span> <span class="fu">worker</span>()</span>
+<span id="cb558-6"><a href="tmchi.html#cb558-6" tabindex="-1"></a></span>
+<span id="cb558-7"><a href="tmchi.html#cb558-7" tabindex="-1"></a><span class="co"># Add segment_not into user defined dictionary to avoid being cutted</span></span>
+<span id="cb558-8"><a href="tmchi.html#cb558-8" tabindex="-1"></a><span class="fu">new_user_word</span>(cutter, segment_not)</span></code></pre></div>
+<pre class="output"><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="tmchi.html#cb560-1" tabindex="-1"></a><span class="co"># loading Chinese stop words</span></span>
+<span id="cb560-2"><a href="tmchi.html#cb560-2" tabindex="-1"></a>stopWords <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/stopWords.rds&quot;</span>)</span>
+<span id="cb560-3"><a href="tmchi.html#cb560-3" tabindex="-1"></a></span>
+<span id="cb560-4"><a href="tmchi.html#cb560-4" tabindex="-1"></a><span class="co"># load(&quot;../segment_not.R&quot;)</span></span></code></pre></div>
+</div>
+<div id="tokenization-1" class="section level3 hasAnchor" number="14.2.2">
+<h3><span class="header-section-number">14.2.2</span> Tokenization<a href="tmchi.html#tokenization-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tokenization（分詞）在文本探勘的過程中是將文本轉換為更小單位的步驟。它將連續的文本序列（例如句子或段落）分割成一系列被稱為「詞彙」或「tokens」的個別單位。在文本探勘中，進行分詞的目的是將文本轉換為可以進一步處理和分析的基本單位。每個詞彙代表著文本中的一個有意義的單詞、詞組或符號，例如一個英文單詞、一個漢字、一個數字等等。這些詞彙可以作為後續分析的基礎，用於進行文本處理、特徵提取、語義分析、情感分析等各種任務。</p>
+<p>分詞的過程可以包括以下步驟：</p>
+<ol style="list-style-type: decimal">
+<li><p>斷句：如果文本是一個段落或一個文檔，首先需要將其分成句子。這可以使用標點符號（如句號、問號、驚嘆號等）作為分隔符號來實現。</p></li>
+<li><p>分詞：將每個句子進一步分成詞彙或tokens。具體的分詞方法取決於文本的語言和特定的工具或套件。對於中文，常用的分詞工具包括jieba、SnowNLP等；而對於英文，常用的分詞方法是基於空格或標點符號進行切分。</p></li>
+<li><p>去除停用詞：在分詞過程中，通常會過濾掉停用詞，這些詞彙被認為對文本分析沒有太大的意義。停用詞可以是常用的連接詞、介詞、助詞、冠詞等。</p></li>
+<li><p>正規化：進行詞彙的正規化，例如將詞彙轉換成小寫，移除標點符號，處理詞彙的變體形式（如單數、複數、時態等）。</p></li>
+<li><p>建立詞彙表：將所有詞彙收集到一個詞彙表或詞彙索引中，該詞彙表可以用於後續的文本處理和分析。</p></li>
+</ol>
+<p>例如一個句子「<code>今天天氣真好，我打算去公園散步。</code>」可以被斷成「<code>今天 天氣 真好 ， 我 打算 去 公園 散步 。</code>」</p>
+<p>實際上中文斷詞相當不容易，常見的問題包括：</p>
+<ol style="list-style-type: decimal">
+<li><p>歧義詞彙：中文中存在許多具有歧義性的詞彙，例如「打開」可以是「開啟」的意思，也可以是「打碎」的意思。在分詞時，選擇正確的分詞方式對於確定詞彙的真正含義非常重要。</p></li>
+<li><p>新詞辨識：中文是一個活躍的語言，新詞彙的產生非常頻繁。在分詞過程中，如果遇到未在詞典中出現的新詞彙，可能會無法正確切分，導致語義的失真或信息的丟失。</p></li>
+<li><p>縮略詞和缺詞：中文中常使用縮略詞，例如「國際象棋」可以縮寫為「國象」。在分詞時，需要考慮這些縮略詞的存在，並確保正確切分。另外，有些中文詞彙存在缺詞現象，例如「下雨了」可以簡化為「下雨」，需要根據上下文來識別和處理這些情況。</p></li>
+<li><p>斷詞歧異：「台北市／長」或「台北／市長」</p></li>
+<li><p>外文詞彙和混合語言：中文文本中常包含外文詞彙或混合語言的情況。在分詞時，需要考慮如何處理這些詞彙，例如是否將其當作一個整體進行切分，或者保留其原有的形式。</p></li>
+<li><p>未知詞彙和低頻詞彙：分詞工具常基於詞典來進行切分，因此對於一些罕見或專有名詞、專術詞彙可能無法進行正確的切分。這些未知詞彙和低頻詞彙的處理需要特殊的處理策略，例如使用統計方法或自定義詞彙表。</p></li>
+</ol>
+<p>在<code>segment(x, cutter)</code>後會產生一個多詞的向量。亦即每一格就是一個向量，你可以把它印出來看看。可以用<code>unnest()</code>將<strong><code>word</code></strong>列中的字詞向量展開，使每個單詞成為一列。這樣可以將每個單詞視為一個觀察值，方便後續的處理。</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="tmchi.html#cb561-1" tabindex="-1"></a><span class="co"># news.df$time %&gt;% summary</span></span>
+<span id="cb561-2"><a href="tmchi.html#cb561-2" tabindex="-1"></a></span>
+<span id="cb561-3"><a href="tmchi.html#cb561-3" tabindex="-1"></a>tokenized.df <span class="ot">&lt;-</span> news.df <span class="sc">%&gt;%</span> </span>
+<span id="cb561-4"><a href="tmchi.html#cb561-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">3069</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb561-5"><a href="tmchi.html#cb561-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timestamp=</span><span class="fu">ymd</span>(time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb561-6"><a href="tmchi.html#cb561-6" tabindex="-1"></a>    <span class="co"># filter(timestamp &gt; as.Date(&quot;2009-01-01&quot;)) %&gt;%</span></span>
+<span id="cb561-7"><a href="tmchi.html#cb561-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>time) <span class="sc">%&gt;%</span></span>
+<span id="cb561-8"><a href="tmchi.html#cb561-8" tabindex="-1"></a>  <span class="fu">select</span>(title, text, cat, timestamp, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb561-9"><a href="tmchi.html#cb561-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> purrr<span class="sc">::</span><span class="fu">map</span>(text, <span class="cf">function</span>(x)<span class="fu">segment</span>(x, cutter)))</span>
+<span id="cb561-10"><a href="tmchi.html#cb561-10" tabindex="-1"></a></span>
+<span id="cb561-11"><a href="tmchi.html#cb561-11" tabindex="-1"></a>tokenized.df <span class="sc">%&gt;%</span> <span class="fu">select</span>(title, word) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre class="output"><code>## # A tibble: 6 × 2
+##   title                                                                   word  
+##   &lt;chr&gt;                                                                   &lt;list&gt;
+## 1 &quot;昨天上班的人沒加班費也不補假\n依法 員工無權利要求•體恤 雇主可酌情嘉惠&quot; &lt;chr&gt; 
+## 2 &quot;走過桑梓千田\n東台水保之旅&quot;                                            &lt;chr&gt; 
+## 3 &quot;走過桑梓千田\n東台水保之旅&quot;                                            &lt;chr&gt; 
+## 4 &quot;總統祝福大家新春如意\n期勉迎接挑戰贏得勝利&quot;                            &lt;chr&gt; 
+## 5 &quot;總統至為關切颱風災害\n電囑儘速展開救災重建&quot;                            &lt;chr&gt; 
+## 6 &quot;總統關懷澎湖災情 俞揆冒雨巡視災區\n指示搶修道路•優先供應水電 復建資金… &lt;chr&gt;</code></pre>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="tmchi.html#cb563-1" tabindex="-1"></a><span class="co"># unnest() to spread character into a new word variable</span></span>
+<span id="cb563-2"><a href="tmchi.html#cb563-2" tabindex="-1"></a><span class="co"># filter out stop words</span></span>
+<span id="cb563-3"><a href="tmchi.html#cb563-3" tabindex="-1"></a><span class="co"># filter out alphabetical and numeric characters</span></span>
+<span id="cb563-4"><a href="tmchi.html#cb563-4" tabindex="-1"></a></span>
+<span id="cb563-5"><a href="tmchi.html#cb563-5" tabindex="-1"></a>unnested.df <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb563-6"><a href="tmchi.html#cb563-6" tabindex="-1"></a>    <span class="fu">select</span>(doc_id, text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb563-7"><a href="tmchi.html#cb563-7" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb563-8"><a href="tmchi.html#cb563-8" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb563-9"><a href="tmchi.html#cb563-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>))</span>
+<span id="cb563-10"><a href="tmchi.html#cb563-10" tabindex="-1"></a></span>
+<span id="cb563-11"><a href="tmchi.html#cb563-11" tabindex="-1"></a>unnested.df <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<pre class="output"><code>## # A tibble: 6 × 3
+##   doc_id text                                                              word 
+##    &lt;int&gt; &lt;chr&gt;                                                             &lt;chr&gt;
+## 1      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 昨天 
+## 2      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 颱風…
+## 3      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 北部 
+## 4      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 地區 
+## 5      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 機關 
+## 6      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 學校</code></pre>
+</div>
+</div>
+<div id="exploring-wording-features" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Exploring wording features<a href="tmchi.html#exploring-wording-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="word-frequency-distribution" class="section level3 hasAnchor" number="14.3.1">
+<h3><span class="header-section-number">14.3.1</span> Word frequency distribution<a href="tmchi.html#word-frequency-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這兩個函式是用於對X軸和Y軸進行對數轉換。對數轉換可以將原始數據的數值範圍較大的部分進行壓縮，使其在視覺化時更易於比較和理解。對數尺度的使用有助於呈現數據的相對變化和細節，尤其是當數據範圍跨度較大時。</p>
+<p>對X軸和Y軸進行對數轉換的目的是為了更好地觀察數據的分佈特徵，尤其是在存在長尾分佈（power-law distribution）或Zipf’s law的情況下。</p>
+<ol style="list-style-type: decimal">
+<li><p>長尾分佈（Power-law distribution）： 在長尾分佈中，少數的頻繁發生事件和大量的不太頻繁發生事件形成了一個長尾（即數量較小但頻率較高的事件非常稀有）。對於長尾分佈的數據，採取對數轉換可以將較大的數值範圍縮小，使得長尾部分的細節更容易被觀察和比較。這樣做可以更好地呈現數據的細微變化和分佈的特性。</p></li>
+<li><p>Zipf’s law： Zipf’s law是一種描述詞彙頻率與詞彙排名之間關係的統計定律。根據Zipf’s law，詞彙的頻率與其在排序中的排名成反比。當觀察和分析詞彙頻率時，對X軸和Y軸進行對數轉換有助於更好地呈現Zipf’s law的特性。對數尺度轉換使我們能夠更清楚地觀察到詞彙頻率的排名和分佈情況。</p></li>
+</ol>
+<p>在power-law distribution的情況下，如果對X軸和Y軸進行對數轉換，我們通常會看到以下情形：</p>
+<ol style="list-style-type: decimal">
+<li><p>直線關係：在對數尺度下，如果數據符合power-law distribution，我們會看到一條近似線性的直線關係。這表示在對數尺度下，數據點的分佈大致呈現線性趨勢，表示一種指數衰減或增長的規律。</p></li>
+<li><p>長尾尾部：power-law distribution的特點是長尾尾部的存在，即少數極端值或稀有事件的出現頻率相對較高。在對數尺度下，我們能夠更清楚地看到這些極端值或稀有事件在數據分佈中的位置，因為它們在對數尺度下會呈現較為明顯的特徵。</p></li>
+<li><p>分佈斜率：對數尺度下的power-law distribution，通常可以通過斜率來描述分佈的特性。斜率表示每個X單位變化對應的Y單位變化，或者說在對數尺度下，表示對數Y值相對於對數X值的變化率。如果數據點遵循power-law distribution，斜率會呈現相對恆定的特性。</p></li>
+</ol>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="tmchi.html#cb565-1" tabindex="-1"></a>word.count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb565-2"><a href="tmchi.html#cb565-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb565-3"><a href="tmchi.html#cb565-3" tabindex="-1"></a>    <span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb565-4"><a href="tmchi.html#cb565-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb565-5"><a href="tmchi.html#cb565-5" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb565-6"><a href="tmchi.html#cb565-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb565-7"><a href="tmchi.html#cb565-7" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb565-8"><a href="tmchi.html#cb565-8" tabindex="-1"></a></span>
+<span id="cb565-9"><a href="tmchi.html#cb565-9" tabindex="-1"></a></span>
+<span id="cb565-10"><a href="tmchi.html#cb565-10" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
+<span id="cb565-11"><a href="tmchi.html#cb565-11" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb565-12"><a href="tmchi.html#cb565-12" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
+<span id="cb565-13"><a href="tmchi.html#cb565-13" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="tmchi.html#cb566-1" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
+<span id="cb566-2"><a href="tmchi.html#cb566-2" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb566-3"><a href="tmchi.html#cb566-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
+<span id="cb566-4"><a href="tmchi.html#cb566-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)  <span class="sc">+</span> </span>
+<span id="cb566-5"><a href="tmchi.html#cb566-5" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb566-6"><a href="tmchi.html#cb566-6" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+</div>
+<div id="keyness-by-logratio" class="section level3 hasAnchor" number="14.3.2">
+<h3><span class="header-section-number">14.3.2</span> Keyness by logratio<a href="tmchi.html#keyness-by-logratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>早、近期用字差異</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="tmchi.html#cb567-1" tabindex="-1"></a>cat_word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb567-2"><a href="tmchi.html#cb567-2" tabindex="-1"></a>  <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb567-3"><a href="tmchi.html#cb567-3" tabindex="-1"></a>  <span class="fu">count</span>(cat, word) <span class="sc">%&gt;%</span></span>
+<span id="cb567-4"><a href="tmchi.html#cb567-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb567-5"><a href="tmchi.html#cb567-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb567-6"><a href="tmchi.html#cb567-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb567-7"><a href="tmchi.html#cb567-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word)<span class="sc">&gt;</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="tmchi.html#cb568-1" tabindex="-1"></a>early_lat_ratio <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb568-2"><a href="tmchi.html#cb568-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb568-3"><a href="tmchi.html#cb568-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cat, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb568-4"><a href="tmchi.html#cb568-4" tabindex="-1"></a>    <span class="co"># spread(cat, n, fill = 0) %&gt;%</span></span>
+<span id="cb568-5"><a href="tmchi.html#cb568-5" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb568-6"><a href="tmchi.html#cb568-6" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="fu">funs</span>((. <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">sum</span>(. <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb568-7"><a href="tmchi.html#cb568-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">logratio =</span> <span class="fu">log2</span>(early <span class="sc">/</span> lat)) <span class="sc">%&gt;%</span></span>
+<span id="cb568-8"><a href="tmchi.html#cb568-8" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(logratio))</span></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="tmchi.html#cb569-1" tabindex="-1"></a>early_lat_ratio <span class="sc">%&gt;%</span></span>
+<span id="cb569-2"><a href="tmchi.html#cb569-2" tabindex="-1"></a>    <span class="fu">group_by</span>(logratio <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb569-3"><a href="tmchi.html#cb569-3" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">20</span>, <span class="fu">abs</span>(logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb569-4"><a href="tmchi.html#cb569-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb569-5"><a href="tmchi.html#cb569-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb569-6"><a href="tmchi.html#cb569-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, logratio, <span class="at">fill =</span> logratio <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb569-7"><a href="tmchi.html#cb569-7" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb569-8"><a href="tmchi.html#cb569-8" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb569-9"><a href="tmchi.html#cb569-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;early / recent log ratio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb569-10"><a href="tmchi.html#cb569-10" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;early&quot;</span>, <span class="st">&quot;recent&quot;</span>),</span>
+<span id="cb569-11"><a href="tmchi.html#cb569-11" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;lightblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb569-12"><a href="tmchi.html#cb569-12" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="keyness-by-scatter" class="section level3 hasAnchor" number="14.3.3">
+<h3><span class="header-section-number">14.3.3</span> Keyness by scatter<a href="tmchi.html#keyness-by-scatter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="tmchi.html#cb570-1" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb570-2"><a href="tmchi.html#cb570-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb570-3"><a href="tmchi.html#cb570-3" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
+<span id="cb570-4"><a href="tmchi.html#cb570-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb570-5"><a href="tmchi.html#cb570-5" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb570-6"><a href="tmchi.html#cb570-6" tabindex="-1"></a>    <span class="fu">spread</span>(cat, proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb570-7"><a href="tmchi.html#cb570-7" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb570-8"><a href="tmchi.html#cb570-8" tabindex="-1"></a></span>
+<span id="cb570-9"><a href="tmchi.html#cb570-9" tabindex="-1"></a><span class="co"># datatable(frequency)</span></span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="tmchi.html#cb571-1" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb571-2"><a href="tmchi.html#cb571-2" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span></span>
+<span id="cb571-3"><a href="tmchi.html#cb571-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> early, <span class="at">y =</span> lat, <span class="at">color =</span> <span class="fu">abs</span>(early <span class="sc">-</span> lat))) <span class="sc">+</span> </span>
+<span id="cb571-4"><a href="tmchi.html#cb571-4" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb571-5"><a href="tmchi.html#cb571-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb571-6"><a href="tmchi.html#cb571-6" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> word), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb571-7"><a href="tmchi.html#cb571-7" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb571-8"><a href="tmchi.html#cb571-8" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb571-9"><a href="tmchi.html#cb571-9" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb571-10"><a href="tmchi.html#cb571-10" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="dv">1</span>)</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+<div id="tf-idf" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> TF-IDF<a href="tmchi.html#tf-idf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>TF-IDF (Term Frequency-Inverse Document Frequency) 是一種用於衡量一個詞彙在文本集合中重要性的統計方法。它結合了詞頻 (Term Frequency, TF) 和逆文檔頻率 (Inverse Document Frequency, IDF) 兩個指標。</p>
+<ul>
+<li><p>詞頻 (Term Frequency, TF)：衡量一個詞彙在單篇文檔中出現的頻率。詞頻可以通過計算詞彙在文檔中出現的次數，或者使用歸一化的詞頻計算公式來得到。</p></li>
+<li><p>逆文檔頻率 (Inverse Document Frequency, IDF)：衡量一個詞彙在整個文本集合中的普遍重要性。逆文檔頻率通過計算詞彙在文本集合中出現的文檔數量的倒數，並取對數來得到。這樣做的目的是對常見詞彙的重要性進行降低，並提高罕見詞彙的重要性。</p></li>
+</ul>
+<p>TF-IDF 的計算公式如下：TF-IDF = TF * IDF</p>
+<p>其中，TF表示詞頻，IDF表示逆文檔頻率。</p>
+<p>TF-IDF 的應用主要有兩個方面：</p>
+<ol style="list-style-type: decimal">
+<li><p>文本檢索 (Information Retrieval)：在文本檢索中，使用TF-IDF來計算詞彙對於給定查詢的相關性。詞彙的TF-IDF值越高，表示該詞彙在文檔中的重要性越高，並且與查詢的相關性越大。</p></li>
+<li><p>文本特徵表示 (Text Feature Representation)：在文本分析和機器學習中，使用TF-IDF來表示文本的特徵向量。將文本轉換為TF-IDF向量表示可以捕捉詞彙在文本中的重要性，並且有助於機器學習模型更好地理解和區分不同的文本。</p></li>
+</ol>
+<div id="term-frequency" class="section level3 hasAnchor" number="14.4.1">
+<h3><span class="header-section-number">14.4.1</span> Term-frequency<a href="tmchi.html#term-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="tmchi.html#cb572-1" tabindex="-1"></a>word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb572-2"><a href="tmchi.html#cb572-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb572-3"><a href="tmchi.html#cb572-3" tabindex="-1"></a>    <span class="fu">count</span>(cat, word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb572-4"><a href="tmchi.html#cb572-4" tabindex="-1"></a>    <span class="co"># mutate(total_words=sum(n)) %&gt;%</span></span>
+<span id="cb572-5"><a href="tmchi.html#cb572-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>(), <span class="at">tf=</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<ul>
+<li>如果是跑histrogram因為不是常態分佈而是power-law分佈，通常會看不出什麼來</li>
+</ul>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="tmchi.html#cb573-1" tabindex="-1"></a><span class="fu">ggplot</span>(word.tf, <span class="fu">aes</span>(tf, <span class="at">fill=</span>cat)) <span class="sc">+</span> </span>
+<span id="cb573-2"><a href="tmchi.html#cb573-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
+<span id="cb573-3"><a href="tmchi.html#cb573-3" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="cn">NA</span>, <span class="fl">0.0009</span>) <span class="sc">+</span> </span>
+<span id="cb573-4"><a href="tmchi.html#cb573-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb573-5"><a href="tmchi.html#cb573-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb573-6"><a href="tmchi.html#cb573-6" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">scales=</span><span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ul>
+<li>加上rank後可以看出最高rank到最後的差異，中段差不多，但是，相較於晚近的文章，早期文章用過很少次的字比較多，但用過很多次的字比較少。（是否可推論用字越來越貧乏？）</li>
+</ul>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="tmchi.html#cb574-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb574-2"><a href="tmchi.html#cb574-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color=</span>cat)) <span class="sc">+</span> </span>
+<span id="cb574-3"><a href="tmchi.html#cb574-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.1</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb574-4"><a href="tmchi.html#cb574-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb574-5"><a href="tmchi.html#cb574-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="tmchi.html#cb575-1" tabindex="-1"></a>rank_subset <span class="ot">&lt;-</span> word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb575-2"><a href="tmchi.html#cb575-2" tabindex="-1"></a>    <span class="fu">filter</span>(rank <span class="sc">&lt;</span> <span class="dv">500</span>,</span>
+<span id="cb575-3"><a href="tmchi.html#cb575-3" tabindex="-1"></a>           rank <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb575-4"><a href="tmchi.html#cb575-4" tabindex="-1"></a></span>
+<span id="cb575-5"><a href="tmchi.html#cb575-5" tabindex="-1"></a>lm_result <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(tf) <span class="sc">~</span> <span class="fu">log10</span>(rank), <span class="at">data =</span> rank_subset)</span>
+<span id="cb575-6"><a href="tmchi.html#cb575-6" tabindex="-1"></a>lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre class="output"><code>## [1] -1.739581</code></pre>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="tmchi.html#cb577-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span> </span>
+<span id="cb577-2"><a href="tmchi.html#cb577-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color =</span> cat)) <span class="sc">+</span> </span>
+<span id="cb577-3"><a href="tmchi.html#cb577-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]], </span>
+<span id="cb577-4"><a href="tmchi.html#cb577-4" tabindex="-1"></a>              <span class="at">slope =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">2</span>]], </span>
+<span id="cb577-5"><a href="tmchi.html#cb577-5" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray50&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb577-6"><a href="tmchi.html#cb577-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb577-7"><a href="tmchi.html#cb577-7" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb577-8"><a href="tmchi.html#cb577-8" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="tf-idf-to-filter-significant-words" class="section level3 hasAnchor" number="14.4.2">
+<h3><span class="header-section-number">14.4.2</span> TF-IDF to filter significant words<a href="tmchi.html#tf-idf-to-filter-significant-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TF-IDF計算結果可以將原本的詞頻（TF）分布從一個長尾分佈轉變為一個呈現鐘形曲線的分佈。這種轉變使得我們能夠去除尾部，即刪除TF-IDF值很低的詞彙，從而重新優化我們要處理的詞彙集合。這樣的處理方式有兩個主要目的。</p>
+<p>首先，透過刪除TF-IDF值很低的詞彙，我們可以去除那些在文本中出現頻率較低且普遍性較高的詞彙，這些詞彙對於區分不同文本的能力相對較低，因此可以忽略不計。</p>
+<p>其次，我們可以僅保留大於平均值加上一個或兩個標準差的TF-IDF值較高的詞彙，這些詞彙可以作為有效辨識文章的關鍵字。這是因為這些詞彙在文本中出現的頻率較高，同時其與該文本的關聯性也相對較強。</p>
+<p>透過這樣的過濾和選擇，我們可以得到一個更精簡且具有代表性的詞彙集合，這些詞彙能夠更好地描述和區分不同的文章。因此，使用TF-IDF計算結果進行這樣的處理，可以在文本分析和信息檢索等領域中提供更有價值的結果。</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tmchi.html#cb578-1" tabindex="-1"></a>news_count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb578-2"><a href="tmchi.html#cb578-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb578-3"><a href="tmchi.html#cb578-3" tabindex="-1"></a>    <span class="fu">count</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
+<span id="cb578-4"><a href="tmchi.html#cb578-4" tabindex="-1"></a>    <span class="fu">bind_tf_idf</span>(word, doc_id, n) <span class="sc">%&gt;%</span></span>
+<span id="cb578-5"><a href="tmchi.html#cb578-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb578-6"><a href="tmchi.html#cb578-6" tabindex="-1"></a></span>
+<span id="cb578-7"><a href="tmchi.html#cb578-7" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span></span>
+<span id="cb578-8"><a href="tmchi.html#cb578-8" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(tf_idf)) <span class="sc">+</span></span>
+<span id="cb578-9"><a href="tmchi.html#cb578-9" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb578-10"><a href="tmchi.html#cb578-10" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>()</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="tmchi.html#cb579-1" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span> </span>
+<span id="cb579-2"><a href="tmchi.html#cb579-2" tabindex="-1"></a>    <span class="fu">left_join</span>(news.df, <span class="at">by=</span><span class="st">&quot;doc_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb579-3"><a href="tmchi.html#cb579-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb579-4"><a href="tmchi.html#cb579-4" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
+<span id="cb579-5"><a href="tmchi.html#cb579-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf)) <span class="sc">%&gt;%</span></span>
+<span id="cb579-6"><a href="tmchi.html#cb579-6" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">30</span>, tf_idf) <span class="sc">%&gt;%</span></span>
+<span id="cb579-7"><a href="tmchi.html#cb579-7" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb579-8"><a href="tmchi.html#cb579-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, tf_idf)) <span class="sc">%&gt;%</span></span>
+<span id="cb579-9"><a href="tmchi.html#cb579-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, tf_idf, <span class="at">fill =</span> cat)) <span class="sc">+</span></span>
+<span id="cb579-10"><a href="tmchi.html#cb579-10" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb579-11"><a href="tmchi.html#cb579-11" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;tf-idf&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-12"><a href="tmchi.html#cb579-12" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb579-13"><a href="tmchi.html#cb579-13" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb579-14"><a href="tmchi.html#cb579-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="practice.-understanding-tf-idf" class="section level3 hasAnchor practice" number="14.4.3">
+<h3><span class="header-section-number">14.4.3</span> Practice. Understanding TF-IDF<a href="tmchi.html#practice.-understanding-tf-idf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>TF-IDF也並非沒缺點，首先是會受到詞頻影響：TF-IDF主要依賴於詞頻作為計算的一部分，詞頻較高的詞彙往往具有較高的權重。這可能會導致在辨識關鍵字時，偏向於選擇出現頻率高的常見詞彙作為關鍵字，而忽略了一些在文本中出現頻率較低但具有重要性的詞彙。其次是長文本帶來的影響，在長文本中，由於詞彙的多樣性和詞彙數量的增加，TF-IDF計算可能導致高度稀疏的向量表示。這可能導致計算效率降低，並且在後續的處理和分析中增加了計算和存儲的負擔。</p>
+<p>請就我們給的上述資料，選幾篇文章來觀察TF-IDF所抽出來的關鍵字，有哪一些真的是關鍵字？有哪一些不是呢？從TF和TF-IDF的數值來看，明明不是關鍵詞，但TF-IDF卻很高的誤判原因為何呢？</p>
+</div>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="re.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="crawler-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/R35_tm_typhoon.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

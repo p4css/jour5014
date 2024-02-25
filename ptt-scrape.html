@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 19 Scraping PTT | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 19 Scraping PTT | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 19 Scraping PTT | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="html-parser.html"/>
+<link rel="next" href="lebron.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ptt-scrape" class="section level1 hasAnchor" number="19">
+<h1><span class="header-section-number">Chapter 19</span> Scraping PTT<a href="ptt-scrape.html#ptt-scrape" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>在爬取HTML之前，你要先知道的是，資料如何被放在巢套元素的HTML檔案中，而Attribute（尤其是<code>id</code>和<code>class</code>和<code>&lt;a&gt;</code>的<code>href</code>）又如何提供線索給CSS Selector或XPath來選取我們所要的元素，最後要知道XPath和CSS Selector的用途是用來選取你所需要的HTML中的資料。</p>
+<p>以下以ptt boy-girl版為例，展示如何以爬蟲擷取網頁上的資料，並整理成DataFrame。PTT的網頁分為兩種主要類型，</p>
+<ul>
+<li><p>其一稱為鏈結頁或索引頁，為文章的超鏈結，例如<a href="https://www.ptt.cc/bbs/Boy-Girl/index.html%EF%BC%89%E3%80%82">https://www.ptt.cc/bbs/Boy-Girl/index.html</a>。</p></li>
+<li><p>其二為每一篇文章的內容頁<a href="https://www.ptt.cc/bbs/Boy-Girl/M.1523994970.A.71C.html。">https://www.ptt.cc/bbs/Boy-Girl/M.1523994970.A.71C.html。</a></p></li>
+</ul>
+<p>對於這種網頁，要設計兩階段的爬蟲，第一階段是把所有所需鏈結撈回來，第二階段是根據撈回來的鏈結去打撈文章，並把裡面的內文整理出來。對於第一階段而言，概念大概如下面的示意圖，其實爬取HTML的概念都差不多是這樣，但以下示意圖說明了用XPath或CSS Selector「分別」選取出整個頁面中的標題、超鏈結、時間、和作者，然後用<code>data.frame()</code>組合成一個<code>DataFrame</code>；Page 2也如此炮製，然後把Page 2的<code>DataFrame</code>用<code>bind_rows()</code>附加在Page 1的<code>DataFrame</code>後面。</p>
+<p><img src="images/R44_scrape_ptt_insertimage_2.png" /></p>
+<div id="ptt_load_pkgs" class="section level2 hasAnchor" number="19.1">
+<h2><span class="header-section-number">19.1</span> Step 1. 載入所需套件<a href="ptt-scrape.html#ptt_load_pkgs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在這個例子中，不僅要用<code>httr</code>來取得網頁頁面，還要用<code>rvest</code>套件（其實是呼叫<code>xml2</code>）來剖析網頁。網頁內容並不像json一樣可以直接轉為<code>DataFrame</code>或<code>list</code>。網頁內容可以是資料、視覺化元素、也可以是架構元素，相對於json而言複雜也冗贅許多。因此需要一個套件能夠剖析HTML標籤例如<code>xml2</code>，而<code>rvest</code>內則應用了<code>xml2</code>套件的內容來剖析網頁，另外，我會用<code>bind_rows()</code>將過程中所抓取的資料進行合併。</p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="ptt-scrape.html#cb639-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb639-2"><a href="ptt-scrape.html#cb639-2" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb639-3"><a href="ptt-scrape.html#cb639-3" tabindex="-1"></a><span class="fu">library</span>(httr)</span></code></pre></div>
+</div>
+<div id="ptt_parsehtml" class="section level2 hasAnchor" number="19.2">
+<h2><span class="header-section-number">19.2</span> Step 2. 取回並剖析HTML檔案<a href="ptt-scrape.html#ptt_parsehtml" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在從HTML檔案中打撈出我們所要的資料有三個重要的<code>rvest</code>函式（步驟），分別為：</p>
+<ol style="list-style-type: decimal">
+<li><p><strong><code>read_html()</code></strong>依照網址將網頁取回並轉為xml_document。</p></li>
+<li><p><strong><code>html_nodes()</code></strong> 用CSS Selector或XPath選擇所需的資料節點，另外html_node()是只取滿足條件的第一個節點。</p></li>
+<li><p><strong><code>html_text()</code></strong>或html_attr()或html_table()、html_tags()取出所要抓的節點的目標資料，可能是一個表格、一個標籤內容、或者是一個屬性值。</p></li>
+</ol>
+<div id="ptt_read_html" class="section level3 hasAnchor" number="19.2.1">
+<h3><span class="header-section-number">19.2.1</span> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong><a href="ptt-scrape.html#ptt_read_html" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><code>read_html()</code>內部包含了<code>GET()</code>與<code>content()</code>等的實作，其主要的功能是將取回來的回應（response）轉為<code>xml_document</code>。若以<code>class(doc)</code>觀察其型態，會是<code>xml_document xml_node</code>。</p></li>
+<li><p>使用<code>browseURL(url)</code>可以用瀏覽器打開該網址並瀏覽。</p></li>
+</ul>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="ptt-scrape.html#cb640-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb640-2"><a href="ptt-scrape.html#cb640-2" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb640-3"><a href="ptt-scrape.html#cb640-3" tabindex="-1"></a><span class="fu">class</span>(doc)</span>
+<span id="cb640-4"><a href="ptt-scrape.html#cb640-4" tabindex="-1"></a><span class="do">## [1] &quot;xml_document&quot; &quot;xml_node&quot;   </span></span>
+<span id="cb640-5"><a href="ptt-scrape.html#cb640-5" tabindex="-1"></a><span class="fu">browseURL</span>(url)</span></code></pre></div>
+</div>
+<div id="ptt_html_nodes" class="section level3 hasAnchor" number="19.2.2">
+<h3><span class="header-section-number">19.2.2</span> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong><a href="ptt-scrape.html#ptt_html_nodes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>html的檔案還包含了相當多其他視覺、互動、排版的標籤，因此通常只有少部分是資料，且存在層層的html元素中。因此，獲取到該網頁並轉為xml_document後，便要用<code>html_nodes()</code>或<code>html_node()</code>根據所給的CSS Selector或XPath來選擇所要取出的節點中的資料。要獲取該元素的CSS Selector可以利用Chrome DevTool或者是Firefox。用法是對著該網頁空白處按右鍵選擇檢查（insepect）。</p>
+<p>以下用CSS Selector抽取：</p>
+<ul>
+<li><p><code>#</code>指的是<code>id</code>、.指的是<code>class</code>。</p></li>
+<li><p><code>#main-container</code>意思是，某個<code>id</code>為<code>main-container</code>的元素。</p></li>
+<li><p><code>.title</code>指的是某個<code>class</code>為<code>title</code>的元素。</p></li>
+<li><p><code>div.title</code>指的是<code>class</code>為<code>title</code>的<code>div</code>（排版元素）。</p></li>
+<li><p><code>Div.r-list-container.action-bar-margin.bbs-screen</code>指的是同時具有<code>r-list-container</code>、<code>action-bar-margin</code>、<code>bbs-scree</code>三個<code>class</code>的<code>div</code>元素。</p></li>
+</ul>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="ptt-scrape.html#cb641-1" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container &gt; div.r-list-container.action-bar-margin.bbs-screen &gt; div &gt; div.title &gt; a&quot;</span></span>
+<span id="cb641-2"><a href="ptt-scrape.html#cb641-2" tabindex="-1"></a></span>
+<span id="cb641-3"><a href="ptt-scrape.html#cb641-3" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
+<span id="cb641-4"><a href="ptt-scrape.html#cb641-4" tabindex="-1"></a><span class="fu">class</span>(node.a) <span class="co"># &quot;xml_nodeset&quot;</span></span>
+<span id="cb641-5"><a href="ptt-scrape.html#cb641-5" tabindex="-1"></a><span class="fu">length</span>(node.a)</span></code></pre></div>
+<p>用XPath抽取：</p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="ptt-scrape.html#cb642-1" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-container&quot;]/div[2]//div/div[3]/a&#39;</span></span>
+<span id="cb642-2"><a href="ptt-scrape.html#cb642-2" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> path)</span>
+<span id="cb642-3"><a href="ptt-scrape.html#cb642-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span></code></pre></div>
+</div>
+<div id="ptt_xpath_css" class="section level3 hasAnchor" number="19.2.3">
+<h3><span class="header-section-number">19.2.3</span> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong><a href="ptt-scrape.html#ptt_xpath_css" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>用CSS Selector和XPath抽取有一些經驗法則，以PTT為案例來說的話，原本複製得來的CSS Selector和XPath分別為</p>
+<ul>
+<li><p>CSS Selector：<code>#main-container &gt; div.r-list-container.action-bar-margin.bbs-screen &gt; div:nth-child(3) &gt; div.title &gt; a</code></p></li>
+<li><p>XPath：<code>//*[@id="main-container"]/div[2]/div[3]/div[2]/a</code></p></li>
+</ul>
+<div class="float">
+<img src="images/R44_scrape_ptt_insertimage_5.png" alt="PTT貼文目錄頁面的HTML結構。" />
+<div class="figcaption">PTT貼文目錄頁面的HTML結構。</div>
+</div>
+<p>到html之間，有一個<code>id</code>為<code>#main-container</code>的<code>div</code>。所以從<code>div#main-container</code>開始取即可。通常確定有<code>id</code>後，我就會開始找重複項，這邊的重複項是class為r-ent的div，找到重複項後，我就會去找重複項後面到我要的資料的路徑，而我們要的<code>&lt;a&gt;</code>就在<code>class</code>為<code>title</code>的<code>div</code>中。所以一個簡化的路徑是<code>div#main-container div.r-ent div.title a</code>。</p>
+<p>但在這邊，既然有<code>id</code>，就不在乎是什麼元素會有<code>id</code>，所以可以只寫<code>#main-container</code>，而也只有資料在的<code>div</code>才有<code>.r-ent</code>的<code>class</code>，所以也不用強調前面的<code>div</code>，至於<code>.title</code>前面一定是搭<code>div</code>的<code>元素</code>，所以我可以簡化到寫為<code>#main-container .r-ent .title a</code>。甚至，由於<code>.r-ent</code>一定在<code>#main-container</code>裡面，所以連前面的<code>id</code>我都可以省略掉。</p>
+<p>如果用XPath來寫的話，照上面的邏輯應該要寫成<code>//*[@id="main-container"]//div[@class="r-ent"]/div[@class="title"]/a</code>。注意到第二個div前有兩個斜線<code>//</code>，原因是<code>#main-container</code>和<code>.r-ent</code>之間還有一層<code>div</code>，兩個斜線代表前後兩者間還有其他層，如果沒有兩個斜線而只有一個斜線的話，那就是代表<code>#main-container</code>下面一層馬上就要是<code>.r-ent</code>，若你把它改成單斜線的話，就會發現取不到資料。</p>
+<p>以政府招標為範例來解釋</p>
+<ol style="list-style-type: decimal">
+<li><p>最終要抓的資料節點為何？主要為<code>&lt;a href="..."&gt;</code>的<code>href</code>屬性值和<code>&lt;a&gt;</code>底下<code>&lt;div&gt;</code>中的內容。</p></li>
+<li><p>觀察資料在哪個節點「逐筆」出現?這邊是<code>&lt;tr&gt;</code>（table row），<code>&lt;td&gt;</code>則是資料欄位</p></li>
+<li><p>利用<code>id</code>和<code>class</code>來辨識：遇到有id就從id開始取就好，例如<code>#searchResult</code>。</p></li>
+<li><p>中間的節點多可以忽略：例如這個CSS selector可省略寫為<code>#searchResult tr a</code></p></li>
+</ol>
+<div class="float">
+<img src="images/R44_scrape_ptt_insertimage_6.png" width="549" alt="政府招標網站的HTML結構" />
+<div class="figcaption">政府招標網站的HTML結構</div>
+</div>
+</div>
+<div id="ptt_html_text" class="section level3 hasAnchor" number="19.2.4">
+<h3><span class="header-section-number">19.2.4</span> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong><a href="ptt-scrape.html#ptt_html_text" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>我們所要的資料為<code>&lt;a href="/bbs/Boy-Girl/M.1523983903.A.71E.html"&gt;[心情] 看到自己喜歡女生跟別的男生走很近好難過&lt;/a&gt;</code>中的超鏈結和標題文字。</p>
+<ul>
+<li><p><code>html_text()</code>: 在<code>&lt;a&gt;</code>與<code>&lt;/a&gt;</code>之間的[心情] 看到自己喜歡女生跟別的男生走很近好難過稱為<code>&lt;a&gt;</code>的元素內容，要用<code>html_text(node.a)</code>來抽取。</p></li>
+<li><p><code>html_attr()</code>: 在<code>&lt;a&gt;</code>內的<code>href="/bbs/Boy-Girl/M.1523983903.A.71E.html"</code>稱為<code>&lt;a&gt;</code>的屬性，該屬性名稱為<code>href</code>(Hyper Reference的意思)，屬性值為<code>/bbs/Boy-Girl/M.1523983903.A.71E.html</code>。要用<code>html_attr(node.a, "href")</code>來抽取（相當於指定某個元素的<code>href</code>屬性的內容）。</p></li>
+<li><p>取出元素節點的內容，相當於取出<code>&lt;a&gt;&lt;/a&gt;</code>間所夾的內容。</p></li>
+</ul>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="ptt-scrape.html#cb643-1" tabindex="-1"></a>texts <span class="ot">&lt;-</span> <span class="fu">html_text</span>(node.a)</span>
+<span id="cb643-2"><a href="ptt-scrape.html#cb643-2" tabindex="-1"></a><span class="fu">length</span>(texts)</span></code></pre></div>
+<p>取出元素節點某個屬性的值，這邊是取出<code>href</code>這個屬性的值，也就是超鏈結。</p>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="ptt-scrape.html#cb644-1" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
+<span id="cb644-2"><a href="ptt-scrape.html#cb644-2" tabindex="-1"></a><span class="fu">class</span>(links) </span>
+<span id="cb644-3"><a href="ptt-scrape.html#cb644-3" tabindex="-1"></a><span class="co"># character</span></span>
+<span id="cb644-4"><a href="ptt-scrape.html#cb644-4" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
+<span id="cb644-5"><a href="ptt-scrape.html#cb644-5" tabindex="-1"></a><span class="co"># &quot;/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
+<p>但這些超鏈結只有後半段，點開一篇文章觀察其網址，發現我們所抓到的網址少了前面那一段，因此用<code>paste0()</code>黏上前綴的網址前段，便可得到完整網址，可用<code>browseURL(links[1])</code>觀察。</p>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="ptt-scrape.html#cb645-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb645-2"><a href="ptt-scrape.html#cb645-2" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links)</span>
+<span id="cb645-3"><a href="ptt-scrape.html#cb645-3" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
+<span id="cb645-4"><a href="ptt-scrape.html#cb645-4" tabindex="-1"></a><span class="co"># [1] &quot;https://www.ptt.cc/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
+<p>重組上列程式碼如下：</p>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="ptt-scrape.html#cb646-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb646-2"><a href="ptt-scrape.html#cb646-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb646-3"><a href="ptt-scrape.html#cb646-3" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb646-4"><a href="ptt-scrape.html#cb646-4" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
+<span id="cb646-5"><a href="ptt-scrape.html#cb646-5" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span></code></pre></div>
+<p>題外話，因為<code>rvest</code>與<code>httr</code>均支援tidyverse的程式寫作，因此可改為以下pipeline的形式。但我不見得會這麼寫，比如說<code>&lt;a&gt;</code>這個元素我可能不僅會取出其超鏈結，還打算取出標題文字，為了避免重複操作，我不見得會用tidyverse來寫。</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="ptt-scrape.html#cb647-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb647-2"><a href="ptt-scrape.html#cb647-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb647-3"><a href="ptt-scrape.html#cb647-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span> read_html <span class="sc">%&gt;%</span> </span>
+<span id="cb647-4"><a href="ptt-scrape.html#cb647-4" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;#main-container div.r-ent div.title a&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb647-5"><a href="ptt-scrape.html#cb647-5" tabindex="-1"></a>    <span class="fu">html_attr</span>(<span class="st">&quot;href&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb647-6"><a href="ptt-scrape.html#cb647-6" tabindex="-1"></a>    <span class="fu">paste0</span>(pre, .)</span></code></pre></div>
+</div>
+</div>
+<div id="ptt_for" class="section level2 hasAnchor" number="19.3">
+<h2><span class="header-section-number">19.3</span> Step 3. 用for迴圈打撈多頁的連結<a href="ptt-scrape.html#ptt_for" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>我們可以觀察到PTT該版的鏈結頁的網址規則如下</p>
+<ul>
+<li><p>最新頁：<a href="https://www.ptt.cc/bbs/Boy-Girl/index.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index.html</a></p></li>
+<li><p>倒數第二頁：<a href="https://www.ptt.cc/bbs/Boy-Girl/index3902.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index3902.html</a></p></li>
+<li><p>倒數第三頁：<a href="https://www.ptt.cc/bbs/Boy-Girl/index3901.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index3901.html</a></p></li>
+<li><p>倒數第四頁：<a href="https://www.ptt.cc/bbs/Boy-Girl/index3900.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index3900.html</a></p></li>
+<li><p>最新一頁因此可類推出為<a href="https://www.ptt.cc/bbs/Boy-Girl/index3903.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index3903.html</a></p></li>
+</ul>
+<p>因此，我打算寫一個for迴圈，讓他幫我（先）抓最後10頁，那就是3894到3903頁。並且，把頁數當成網址的參數，用<code>sprintf()</code>或<code>paste0()</code>組合出網址，以下分別提供兩種版本。你可以把它印出來且點選看看是否是你所要的網頁。</p>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="ptt-scrape.html#cb648-1" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb648-2"><a href="ptt-scrape.html#cb648-2" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb648-3"><a href="ptt-scrape.html#cb648-3" tabindex="-1"></a>    <span class="co"># url &lt;- paste0(&quot;https://www.ptt.cc/bbs/Boy-Girl/index&quot;, p, &quot;.html&quot;)</span></span>
+<span id="cb648-4"><a href="ptt-scrape.html#cb648-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>接下來，我要用一個<code>all_links</code>變數來存放所有的網址，並且把每一個頁面抓到的網址們都用<code>vector</code>的<code>concatenation</code>，也就是<code>c()</code>黏在一起 <code>all_links &lt;- c(all_links, links)</code>。</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="ptt-scrape.html#cb649-1" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb649-2"><a href="ptt-scrape.html#cb649-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb649-3"><a href="ptt-scrape.html#cb649-3" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb649-4"><a href="ptt-scrape.html#cb649-4" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
+<span id="cb649-5"><a href="ptt-scrape.html#cb649-5" tabindex="-1"></a>}</span></code></pre></div>
+<p>最後，我就將上述抓到網址的方法填入這個for迴圈中，並把抓到的網址存為links，就會隨著每回合的for迴圈逐漸把抓到的網址整理在一起。</p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="ptt-scrape.html#cb650-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb650-2"><a href="ptt-scrape.html#cb650-2" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb650-3"><a href="ptt-scrape.html#cb650-3" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb650-4"><a href="ptt-scrape.html#cb650-4" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb650-5"><a href="ptt-scrape.html#cb650-5" tabindex="-1"></a>    <span class="fu">print</span>(url)</span>
+<span id="cb650-6"><a href="ptt-scrape.html#cb650-6" tabindex="-1"></a>    doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url) <span class="co"># Get and parse the url</span></span>
+<span id="cb650-7"><a href="ptt-scrape.html#cb650-7" tabindex="-1"></a>    css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
+<span id="cb650-8"><a href="ptt-scrape.html#cb650-8" tabindex="-1"></a>    node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
+<span id="cb650-9"><a href="ptt-scrape.html#cb650-9" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
+<span id="cb650-10"><a href="ptt-scrape.html#cb650-10" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links) <span class="co"># Recover links</span></span>
+<span id="cb650-11"><a href="ptt-scrape.html#cb650-11" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
+<span id="cb650-12"><a href="ptt-scrape.html#cb650-12" tabindex="-1"></a>}</span>
+<span id="cb650-13"><a href="ptt-scrape.html#cb650-13" tabindex="-1"></a><span class="fu">length</span>(all_links)</span></code></pre></div>
+</div>
+<div id="ptt_scrape_post" class="section level2 hasAnchor" number="19.4">
+<h2><span class="header-section-number">19.4</span> Step 4. 根據連結取回所有貼文<a href="ptt-scrape.html#ptt_scrape_post" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>前面是針對每一個頁面的網址取回該頁面中所有的貼文鏈結，所以我現在all_links中是所有的貼文鏈結。我可以仿照前面的做法，就每一個貼文鏈結，取回貼文內容，貼文內容可能包含作者、時間、標題、版別、內文等資料欄位</p>
+<p>不失一般性地，用第一篇貼文的鏈結來做資料抓取實驗，之後再抓第二篇、第三篇即可。</p>
+<p>首先，對於這每篇文章，我要爬取作者（author）、標題（title）、時間（time）、看板（board）和內容（content）五個欄位，包含原本文章的連結url一共六個欄位。</p>
+<p>從以下的圖發現，每篇文章的內容放置在div#main-content中，之後一連跟著四個div.article-metaline，裡面分別有作者、看板、標題與時間，但從class名稱看不出來哪個，但我們要的值會是在span.article-meta-value中。所以我的規劃是，一次把所有的.article-meta-value給抓回來，然後再去分別指定哪個是作者、看板、標題或時間。所以我用</p>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="ptt-scrape.html#cb651-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
+<span id="cb651-2"><a href="ptt-scrape.html#cb651-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb651-3"><a href="ptt-scrape.html#cb651-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
+<span id="cb651-4"><a href="ptt-scrape.html#cb651-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span></code></pre></div>
+<div class="float">
+<img src="images/R44_scrape_ptt_insertimage_7.png" alt="PTT貼文的HTML結構" />
+<div class="figcaption">PTT貼文的HTML結構</div>
+</div>
+<p>另外，從上面的文字中可發現，主文的部分被包含在div#main-content中，但在上述的作者、標題等後面，若這時候我們用CSS Selector搭配html_node()和html_text()把div#main-content的內容都給取出來，會連上述的作者、標題等都一起取出來。最好的方法是用XPath的text()來只取出文字的部分，而不取出有tag的部分。</p>
+<p>而且這樣取出來會是每個paragraph都是一個character vector中的值，所以要把他們合併成一篇文章，此時要用paste()指令，paste()指令可以指定把一個character vector給串接成一個string，輸入的變數是一個character vector，然後設定參數collapse = ““，代表串接起這些character時中間不要有空白。</p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="ptt-scrape.html#cb652-1" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb652-2"><a href="ptt-scrape.html#cb652-2" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb652-3"><a href="ptt-scrape.html#cb652-3" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p>最後，我們知道metadata變數的第一個是作者、第二個是標題、第三個是時間、便依序指派給個別的變數後，組成DataFrame如下，這樣所組成的DataFrame是為只有一筆資料的DataFrame，但有五個變項。</p>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="ptt-scrape.html#cb653-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
+<span id="cb653-2"><a href="ptt-scrape.html#cb653-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb653-3"><a href="ptt-scrape.html#cb653-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
+<span id="cb653-4"><a href="ptt-scrape.html#cb653-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb653-5"><a href="ptt-scrape.html#cb653-5" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb653-6"><a href="ptt-scrape.html#cb653-6" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb653-7"><a href="ptt-scrape.html#cb653-7" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb653-8"><a href="ptt-scrape.html#cb653-8" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb653-9"><a href="ptt-scrape.html#cb653-9" tabindex="-1"></a>                      <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb653-10"><a href="ptt-scrape.html#cb653-10" tabindex="-1"></a>                      <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb653-11"><a href="ptt-scrape.html#cb653-11" tabindex="-1"></a>                      <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb653-12"><a href="ptt-scrape.html#cb653-12" tabindex="-1"></a>                      <span class="at">url =</span> link</span>
+<span id="cb653-13"><a href="ptt-scrape.html#cb653-13" tabindex="-1"></a>                     )</span></code></pre></div>
+<p>這樣我們取得的第一篇文章存放在post.df中，之後，我稍微修改一下上述的程式，就可以用for迴圈抓取第2至n篇文章，每一篇都存在名為temp.df的DataFrame中，然後用<code>bind_rows()</code>依序和<code>post.df</code>銜接在一起，除了黃色的部分是新增的之外，都跟前面的程式幾乎一模一樣。</p>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="ptt-scrape.html#cb654-1" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>]){</span>
+<span id="cb654-2"><a href="ptt-scrape.html#cb654-2" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb654-3"><a href="ptt-scrape.html#cb654-3" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb654-4"><a href="ptt-scrape.html#cb654-4" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb654-5"><a href="ptt-scrape.html#cb654-5" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb654-6"><a href="ptt-scrape.html#cb654-6" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb654-7"><a href="ptt-scrape.html#cb654-7" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb654-8"><a href="ptt-scrape.html#cb654-8" tabindex="-1"></a>    </span>
+<span id="cb654-9"><a href="ptt-scrape.html#cb654-9" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb654-10"><a href="ptt-scrape.html#cb654-10" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb654-11"><a href="ptt-scrape.html#cb654-11" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb654-12"><a href="ptt-scrape.html#cb654-12" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb654-13"><a href="ptt-scrape.html#cb654-13" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
+<span id="cb654-14"><a href="ptt-scrape.html#cb654-14" tabindex="-1"></a>                          )</span>
+<span id="cb654-15"><a href="ptt-scrape.html#cb654-15" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
+<span id="cb654-16"><a href="ptt-scrape.html#cb654-16" tabindex="-1"></a>}</span></code></pre></div>
+<div class="float">
+<img src="images/R44_scrape_ptt_insertimage_8.png" alt="打撈回來的HTTP資料" />
+<div class="figcaption">打撈回來的HTTP資料</div>
+</div>
+</div>
+<div id="ptt_method2" class="section level2 hasAnchor" number="19.5">
+<h2><span class="header-section-number">19.5</span> 補充(1) 較好的寫法<a href="ptt-scrape.html#ptt_method2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>一個比較好的寫法是，不用先讀第一篇文章，而是用<code>data.frame()</code>初始化一個空的DataFrame，之後可以利用<code>bind_rows()</code>可自動增添缺少的變數的特性，自然就會補上所需要的變數。因此，只要改寫黃色的部分。</p>
+<p>但這樣的寫法仍會有一個缺點，也就是當文章數越來越多時會越跑越慢。原因是，假設現在你已經抓了9999篇文章，你這次的for迴圈要抓第10000篇，然後用<code>bind_rows()</code>合併第10000篇，此時，<code>post.df</code>已經有9999篇非常肥大，等號右邊的<code>bind_rows()</code>跑完後會變成10000篇，此時又要把原本很肥大的post.df覆蓋掉，所以會非常費時。</p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="ptt-scrape.html#cb655-1" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb655-2"><a href="ptt-scrape.html#cb655-2" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]){</span>
+<span id="cb655-3"><a href="ptt-scrape.html#cb655-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb655-4"><a href="ptt-scrape.html#cb655-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb655-5"><a href="ptt-scrape.html#cb655-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb655-6"><a href="ptt-scrape.html#cb655-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb655-7"><a href="ptt-scrape.html#cb655-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb655-8"><a href="ptt-scrape.html#cb655-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb655-9"><a href="ptt-scrape.html#cb655-9" tabindex="-1"></a>    </span>
+<span id="cb655-10"><a href="ptt-scrape.html#cb655-10" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb655-11"><a href="ptt-scrape.html#cb655-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb655-12"><a href="ptt-scrape.html#cb655-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb655-13"><a href="ptt-scrape.html#cb655-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb655-14"><a href="ptt-scrape.html#cb655-14" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
+<span id="cb655-15"><a href="ptt-scrape.html#cb655-15" tabindex="-1"></a>                          )</span>
+<span id="cb655-16"><a href="ptt-scrape.html#cb655-16" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
+<span id="cb655-17"><a href="ptt-scrape.html#cb655-17" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="ptt_best" class="section level2 hasAnchor" number="19.6">
+<h2><span class="header-section-number">19.6</span> 補充(2) 最佳的寫法<a href="ptt-scrape.html#ptt_best" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>採用<code>list</code>先將每一個<code>DataFrame</code>存放起來，然後跑完所有的for迴圈後才用<code>bind_rows()</code>將所有資料合併為<code>DataFrame</code>。此時，<code>p</code>指的是第幾個連結，而前例的<code>link</code>就相當於下方的<code>all_link[p]</code>。</p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="ptt-scrape.html#cb656-1" tabindex="-1"></a>post.list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb656-2"><a href="ptt-scrape.html#cb656-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_links)){</span>
+<span id="cb656-3"><a href="ptt-scrape.html#cb656-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(all_links[p])</span>
+<span id="cb656-4"><a href="ptt-scrape.html#cb656-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb656-5"><a href="ptt-scrape.html#cb656-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb656-6"><a href="ptt-scrape.html#cb656-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb656-7"><a href="ptt-scrape.html#cb656-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb656-8"><a href="ptt-scrape.html#cb656-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb656-9"><a href="ptt-scrape.html#cb656-9" tabindex="-1"></a>    </span>
+<span id="cb656-10"><a href="ptt-scrape.html#cb656-10" tabindex="-1"></a>    post.list[[p]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb656-11"><a href="ptt-scrape.html#cb656-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb656-12"><a href="ptt-scrape.html#cb656-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb656-13"><a href="ptt-scrape.html#cb656-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb656-14"><a href="ptt-scrape.html#cb656-14" tabindex="-1"></a>                          <span class="at">url =</span> all_links[p]</span>
+<span id="cb656-15"><a href="ptt-scrape.html#cb656-15" tabindex="-1"></a>                          )</span>
+<span id="cb656-16"><a href="ptt-scrape.html#cb656-16" tabindex="-1"></a>}</span>
+<span id="cb656-17"><a href="ptt-scrape.html#cb656-17" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.list)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="html-parser.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lebron.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/R44_scrape_ptt.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

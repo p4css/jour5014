@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Dataframe | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Dataframe | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Dataframe | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-basic.html"/>
+<link rel="next" href="crosstab.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dataframe" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Dataframe<a href="dataframe.html#dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="基本操作" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> 基本操作<a href="dataframe.html#基本操作" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="產生新的dataframe" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> 產生新的Dataframe<a href="dataframe.html#產生新的dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="複製資料至vector" class="section level4 hasAnchor" number="4.1.1.1">
+<h4><span class="header-section-number">4.1.1.1</span> 複製資料至vector<a href="dataframe.html#複製資料至vector" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>直接複製Wikipedia上的台北市某五區人口資料</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="dataframe.html#cb171-1" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">158228</span>, <span class="dv">126687</span>, <span class="dv">228075</span>, <span class="dv">204903</span>, <span class="dv">308383</span>, <span class="dv">187920</span>)</span>
+<span id="cb171-2"><a href="dataframe.html#cb171-2" tabindex="-1"></a>town <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;中正&quot;</span>, <span class="st">&quot;大同&quot;</span>, <span class="st">&quot;中山&quot;</span>, <span class="st">&quot;松山&quot;</span>, <span class="st">&quot;大安&quot;</span>, <span class="st">&quot;萬華&quot;</span>)</span>
+<span id="cb171-3"><a href="dataframe.html#cb171-3" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">7.6071</span>, <span class="fl">5.6815</span>, <span class="fl">13.6821</span>, <span class="fl">9.2878</span>, <span class="fl">11.3614</span>, <span class="fl">8.8522</span>)</span></code></pre></div>
+</div>
+<div id="合併等長vector為dataframe" class="section level4 hasAnchor" number="4.1.1.2">
+<h4><span class="header-section-number">4.1.1.2</span> 合併等長vector為dataframe<a href="dataframe.html#合併等長vector為dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="dataframe.html#cb172-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(town, population, area)</span>
+<span id="cb172-2"><a href="dataframe.html#cb172-2" tabindex="-1"></a>df<span class="sc">$</span>density <span class="ot">=</span> df<span class="sc">$</span>population <span class="sc">/</span> df<span class="sc">$</span>area</span>
+<span id="cb172-3"><a href="dataframe.html#cb172-3" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="output"><code>## &#39;data.frame&#39;:    6 obs. of  4 variables:
+##  $ town      : chr  &quot;中正&quot; &quot;大同&quot; &quot;中山&quot; &quot;松山&quot; ...
+##  $ population: num  158228 126687 228075 204903 308383 ...
+##  $ area      : num  7.61 5.68 13.68 9.29 11.36 ...
+##  $ density   : num  20800 22298 16670 22062 27143 ...</code></pre>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="dataframe.html#cb174-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="output"><code>##      town             population          area           density     
+##  Length:6           Min.   :126687   Min.   : 5.681   Min.   :16670  
+##  Class :character   1st Qu.:165651   1st Qu.: 7.918   1st Qu.:20907  
+##  Mode  :character   Median :196412   Median : 9.070   Median :21645  
+##                     Mean   :202366   Mean   : 9.412   Mean   :21700  
+##                     3rd Qu.:222282   3rd Qu.:10.843   3rd Qu.:22239  
+##                     Max.   :308383   Max.   :13.682   Max.   :27143</code></pre>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="dataframe.html#cb176-1" tabindex="-1"></a><span class="co"># View(df)</span></span></code></pre></div>
+</div>
+<div id="存放台灣貿易各國進出口量" class="section level4 hasAnchor" number="4.1.1.3">
+<h4><span class="header-section-number">4.1.1.3</span> 存放台灣貿易各國進出口量<a href="dataframe.html#存放台灣貿易各國進出口量" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>運用台灣出口進口資料 <a href="https://cus93.trade.gov.tw/FSC3040F/FSC3040F">台灣出口進口貿易資料查詢</a></li>
+</ul>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="dataframe.html#cb177-1" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CN&quot;</span>, <span class="st">&quot;US&quot;</span>, <span class="st">&quot;JP&quot;</span>, <span class="st">&quot;HK&quot;</span>, <span class="st">&quot;KR&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;DE&quot;</span>, <span class="st">&quot;MY&quot;</span>, <span class="st">&quot;VN&quot;</span>, <span class="st">&quot;PH&quot;</span>, <span class="st">&quot;TH&quot;</span>, <span class="st">&quot;AU&quot;</span>, <span class="st">&quot;NL&quot;</span>, <span class="st">&quot;SA&quot;</span>, <span class="st">&quot;ID&quot;</span>, <span class="st">&quot;GB&quot;</span>, <span class="st">&quot;IN&quot;</span>, <span class="st">&quot;FR&quot;</span>, <span class="st">&quot;IT&quot;</span>, <span class="st">&quot;AE&quot;</span>)</span>
+<span id="cb177-2"><a href="dataframe.html#cb177-2" tabindex="-1"></a></span>
+<span id="cb177-3"><a href="dataframe.html#cb177-3" tabindex="-1"></a>import <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">26.142</span>, <span class="fl">12.008</span>, <span class="fl">7.032</span>, <span class="fl">13.646</span>, <span class="fl">4.589</span>, <span class="fl">5.768</span>, <span class="fl">2.131</span>, <span class="fl">2.802</span>, <span class="fl">3.428</span>, <span class="fl">3.019</span>, <span class="fl">1.976</span>, <span class="fl">1.118</span>, <span class="fl">1.624</span>, <span class="fl">0.449</span>, <span class="fl">0.983</span>, <span class="fl">1.302</span>, <span class="fl">1.027</span>, <span class="fl">0.553</span>, <span class="fl">0.670</span>, <span class="fl">0.455</span>)</span>
+<span id="cb177-4"><a href="dataframe.html#cb177-4" tabindex="-1"></a></span>
+<span id="cb177-5"><a href="dataframe.html#cb177-5" tabindex="-1"></a>export <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">22.987</span>, <span class="fl">12.204</span>, <span class="fl">11.837</span>, <span class="fl">7.739</span>, <span class="fl">5.381</span>, <span class="fl">4.610</span>, <span class="fl">2.866</span>, <span class="fl">2.784</span>, <span class="fl">2.414</span>, <span class="fl">2.092</span>, <span class="fl">1.839</span>, <span class="fl">1.788</span>, <span class="fl">1.665</span>, <span class="fl">1.409</span>, <span class="fl">1.391</span>, <span class="fl">1.075</span>, <span class="fl">0.974</span>, <span class="fl">0.899</span>, <span class="fl">0.800</span>, <span class="fl">0.728</span>)</span></code></pre></div>
+</div>
+<div id="合併vector為data.frame" class="section level4 hasAnchor" number="4.1.1.4">
+<h4><span class="header-section-number">4.1.1.4</span> 合併vector為data.frame<a href="dataframe.html#合併vector為data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>這時候我們若以<code>str(df)</code>觀察該<code>df</code>的結構會發現，文字型態的資料被轉為<code>Factors</code>，這是我們所不樂見的。過去統計通常會把文字型態當成類別變數，於是用<code>Factors</code>作為資料型態，但資料科學中經常要處理大量的文字資料，此時，我們可以把<code>read.csv</code>的一個參數<code>stringsAsFactors</code>設為<code>FALSE</code>，意味著預設不要將文字的資料轉為Factor而是直接以文字變項來處理。* <code>stringsAsFactors = FALSE</code>也是<code>read.csv()</code>的參數（parameter、argument）。因為一般讀檔會預設把文字讀為類別變項也就是Factor，但資料分析經常要處理文字資料而不是類別變項，所以會希望預設不要把文字讀取為類別變項，因此要設定<code>stringsAsFactors = FALSE</code>。</p></li>
+<li><p>為了避免每次都要打這串參數，可以把它設定為全域參數，可以在程式一開始時便加上<code>options(stringsAsFactors = FASLE)</code>，意味著底下所有的函式如果有<code>stringsAsFactors</code>這個參數，一律自動設為<code>FALSE</code>。</p></li>
+</ul>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="dataframe.html#cb178-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export)</span>
+<span id="cb178-2"><a href="dataframe.html#cb178-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
+##  $ country: chr  &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; ...
+##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
+##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="dataframe.html#cb180-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb180-2"><a href="dataframe.html#cb180-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
+##  $ country: chr  &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; ...
+##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
+##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
+<ul>
+<li>甚至也可以建立一個新的、空的<code>data.frame</code>。</li>
+<li><code>df.test</code>就R的用法就是一個變數，並不是<code>df</code>和<code>test</code>各自是一個變數。</li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="dataframe.html#cb182-1" tabindex="-1"></a>df.test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span></code></pre></div>
+</div>
+</div>
+<div id="觀察dataframe" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> 觀察dataframe<a href="dataframe.html#觀察dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>View(df)</code> 用RStudio所提供的GUI直接觀看變數</li>
+<li><code>head(df)</code> 取前面六筆資料（也就是六列的資料來概觀該資料）</li>
+<li><code>class(df)</code></li>
+<li><code>str(df)</code></li>
+<li><code>summary(df)</code></li>
+</ul>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="dataframe.html#cb183-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
+<span id="cb183-2"><a href="dataframe.html#cb183-2" tabindex="-1"></a><span class="fu">head</span>(df)    <span class="co"># get first part of the data.frame</span></span></code></pre></div>
+<pre class="output"><code>##   country import export
+## 1      CN 26.142 22.987
+## 2      US 12.008 12.204
+## 3      JP  7.032 11.837
+## 4      HK 13.646  7.739
+## 5      KR  4.589  5.381
+## 6      SG  5.768  4.610</code></pre>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="dataframe.html#cb185-1" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="dataframe.html#cb187-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
+##  $ country: chr  &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; ...
+##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
+##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="dataframe.html#cb189-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="output"><code>##    country              import           export      
+##  Length:20          Min.   : 0.449   Min.   : 0.728  
+##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
+##  Mode  :character   Median : 2.054   Median : 1.966  
+##                     Mean   : 4.536   Mean   : 4.374  
+##                     3rd Qu.: 4.884   3rd Qu.: 4.803  
+##                     Max.   :26.142   Max.   :22.987</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="dataframe.html#cb191-1" tabindex="-1"></a><span class="co"># look up help</span></span>
+<span id="cb191-2"><a href="dataframe.html#cb191-2" tabindex="-1"></a><span class="fu">help</span>(summary)</span>
+<span id="cb191-3"><a href="dataframe.html#cb191-3" tabindex="-1"></a>?summary</span></code></pre></div>
+<div id="觀察資料維度" class="section level4 hasAnchor" number="4.1.2.1">
+<h4><span class="header-section-number">4.1.2.1</span> 觀察資料維度<a href="dataframe.html#觀察資料維度" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="dataframe.html#cb192-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 20  3</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="dataframe.html#cb194-1" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="dataframe.html#cb196-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 20</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="dataframe.html#cb198-1" tabindex="-1"></a><span class="fu">length</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 3</code></pre>
+</div>
+</div>
+<div id="操作dataframe" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> 操作dataframe<a href="dataframe.html#操作dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="取出一個變項" class="section level4 hasAnchor" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> 取出一個變項<a href="dataframe.html#取出一個變項" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><code>names(df)</code> 列出變數名稱</li>
+<li><code>df$發生.現.地點</code> 顯示該變數內容</li>
+<li><code>df$發生時段</code> 顯示該變數內容</li>
+<li><code>length(df$發生時段)</code> 顯示該變數的長度（相當於有幾個）</li>
+</ul>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="dataframe.html#cb200-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;country&quot; &quot;import&quot;  &quot;export&quot;</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="dataframe.html#cb202-1" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>發生.現.地點)</span></code></pre></div>
+<pre class="output"><code>## NULL</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="dataframe.html#cb204-1" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>發生時段)</span></code></pre></div>
+<pre class="output"><code>## NULL</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="dataframe.html#cb206-1" tabindex="-1"></a><span class="fu">length</span>(df<span class="sc">$</span>發生時段)</span></code></pre></div>
+<pre class="output"><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="dataframe.html#cb208-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<pre class="output"><code>##    country              import           export      
+##  Length:20          Min.   : 0.449   Min.   : 0.728  
+##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
+##  Mode  :character   Median : 2.054   Median : 1.966  
+##                     Mean   : 4.536   Mean   : 4.374  
+##                     3rd Qu.: 4.884   3rd Qu.: 4.803  
+##                     Max.   :26.142   Max.   :22.987</code></pre>
+</div>
+<div id="mutate透過運算產生新變數" class="section level4 hasAnchor" number="4.1.3.2">
+<h4><span class="header-section-number">4.1.3.2</span> (mutate)透過運算產生新變數<a href="dataframe.html#mutate透過運算產生新變數" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>這裡容易犯錯的是，要記得跟程式講說你要加總或四則運算的是哪個df的variable。</li>
+<li>從下面的這個操作中，該data.frame會產生一個新的變數<code>sub</code>，這就相當於Excel中的某一行減去某一行，然後把資料放在新的一行。</li>
+</ul>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="dataframe.html#cb210-1" tabindex="-1"></a>df<span class="sc">$</span>sub <span class="ot">&lt;-</span> df<span class="sc">$</span>import <span class="sc">-</span> df<span class="sc">$</span>export</span></code></pre></div>
+</div>
+<div id="filter篩選資料選取變數" class="section level4 hasAnchor" number="4.1.3.3">
+<h4><span class="header-section-number">4.1.3.3</span> (filter)篩選資料、選取變數<a href="dataframe.html#filter篩選資料選取變數" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>注意，要告訴程式<code>import</code>和<code>export</code>是哪個<code>data.frame</code>的。</p></li>
+<li><p><code>df[,]</code>為存取<code>df</code>中某個區段的數值或某個數值的方法。因此<code>df[1, 1]</code>會取出第一行第一列，也就是第一筆資料的第一個vector。<code>df[2, 3]</code>則會取出第二筆資料的第三個variable。</p></li>
+<li><p>下面的例子<code>nrow(df)</code>為1894，有1894筆資料，所以自然df<span class="math inline">\(import與df\)</span>export的長度都是1894。因此，比較這兩個變數的大小會得到一個長度為1894的boolean (logical) variable。因此把這個長度為1894、充滿TRUE和FALSE的logical vector丟進df的row之處，因為取自df，大小判斷式結果的長度自然和原本的df的列數相同。因此當這個TRUE/FALSE被丟在df的列之處，便會篩選出<code>import</code>大於<code>p.xport</code>的數值。</p></li>
+<li><p>原本的df有五個variable，而上述的操作是篩選資料，所以被篩選的是列，因此行的數量、名稱都不會變。因此，我篩選完後，直接存取這個被篩選過的data.frame的country variable，自然是可以的。</p></li>
+</ul>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="dataframe.html#cb211-1" tabindex="-1"></a>df</span></code></pre></div>
+<pre class="output"><code>##    country import export    sub
+## 1       CN 26.142 22.987  3.155
+## 2       US 12.008 12.204 -0.196
+## 3       JP  7.032 11.837 -4.805
+## 4       HK 13.646  7.739  5.907
+## 5       KR  4.589  5.381 -0.792
+## 6       SG  5.768  4.610  1.158
+## 7       DE  2.131  2.866 -0.735
+## 8       MY  2.802  2.784  0.018
+## 9       VN  3.428  2.414  1.014
+## 10      PH  3.019  2.092  0.927
+## 11      TH  1.976  1.839  0.137
+## 12      AU  1.118  1.788 -0.670
+## 13      NL  1.624  1.665 -0.041
+## 14      SA  0.449  1.409 -0.960
+## 15      ID  0.983  1.391 -0.408
+## 16      GB  1.302  1.075  0.227
+## 17      IN  1.027  0.974  0.053
+## 18      FR  0.553  0.899 -0.346
+## 19      IT  0.670  0.800 -0.130
+## 20      AE  0.455  0.728 -0.273</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="dataframe.html#cb213-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;country&quot; &quot;import&quot;  &quot;export&quot;  &quot;sub&quot;</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="dataframe.html#cb215-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 20</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="dataframe.html#cb217-1" tabindex="-1"></a><span class="co"># filter row data by column value</span></span>
+<span id="cb217-2"><a href="dataframe.html#cb217-2" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]</span></code></pre></div>
+<pre class="output"><code>##    country import export   sub
+## 1       CN 26.142 22.987 3.155
+## 4       HK 13.646  7.739 5.907
+## 6       SG  5.768  4.610 1.158
+## 8       MY  2.802  2.784 0.018
+## 9       VN  3.428  2.414 1.014
+## 10      PH  3.019  2.092 0.927
+## 11      TH  1.976  1.839 0.137
+## 16      GB  1.302  1.075 0.227
+## 17      IN  1.027  0.974 0.053</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="dataframe.html#cb219-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]<span class="sc">$</span>country</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;CN&quot; &quot;HK&quot; &quot;SG&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;GB&quot; &quot;IN&quot;</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="dataframe.html#cb221-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>]</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;CN&quot; &quot;HK&quot; &quot;SG&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;GB&quot; &quot;IN&quot;</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="dataframe.html#cb223-1" tabindex="-1"></a><span class="co"># 1 row == a data.frame with only one data entry</span></span>
+<span id="cb223-2"><a href="dataframe.html#cb223-2" tabindex="-1"></a><span class="fu">class</span>(df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>])</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="dataframe.html#cb225-1" tabindex="-1"></a><span class="fu">class</span>(df[,<span class="dv">1</span>]) <span class="co"># character vector</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="dataframe.html#cb227-1" tabindex="-1"></a><span class="fu">class</span>(df[<span class="dv">1</span>,]) <span class="co"># data.frame</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="dataframe.html#cb229-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(df[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])) <span class="co"># filter the 1st row and select all columns except 1</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="arrange-按某個變數排序" class="section level4 hasAnchor" number="4.1.3.4">
+<h4><span class="header-section-number">4.1.3.4</span> (arrange) 按某個變數排序<a href="dataframe.html#arrange-按某個變數排序" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><code>df.sorted &lt;- df[order(df$import),]</code>會使得整個df照<code>import</code>的大小排序重新做排列。因為<code>order(df$import)</code>會把資料照指定順序排列後的位置傳回來，所以把他丟給<code>df</code>的列的位置，便會使得<code>df</code>的資料照指定的順序排列。
+預設是由小到大，加上<code>decreasing = T</code>這個參數後變成由大而小。</li>
+</ul>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="dataframe.html#cb231-1" tabindex="-1"></a><span class="co"># sort rows by df$import column</span></span>
+<span id="cb231-2"><a href="dataframe.html#cb231-2" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import),]</span>
+<span id="cb231-3"><a href="dataframe.html#cb231-3" tabindex="-1"></a><span class="co"># View(df.sorted)</span></span>
+<span id="cb231-4"><a href="dataframe.html#cb231-4" tabindex="-1"></a></span>
+<span id="cb231-5"><a href="dataframe.html#cb231-5" tabindex="-1"></a><span class="co"># sort rows in decreasing order</span></span>
+<span id="cb231-6"><a href="dataframe.html#cb231-6" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import, <span class="at">decreasing =</span> T),]</span>
+<span id="cb231-7"><a href="dataframe.html#cb231-7" tabindex="-1"></a></span>
+<span id="cb231-8"><a href="dataframe.html#cb231-8" tabindex="-1"></a><span class="co"># add - to column in order() can sort in decreasing order</span></span>
+<span id="cb231-9"><a href="dataframe.html#cb231-9" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>import),]</span>
+<span id="cb231-10"><a href="dataframe.html#cb231-10" tabindex="-1"></a></span>
+<span id="cb231-11"><a href="dataframe.html#cb231-11" tabindex="-1"></a><span class="fu">head</span>(df.sorted)</span></code></pre></div>
+<pre class="output"><code>##   country import export    sub
+## 1      CN 26.142 22.987  3.155
+## 4      HK 13.646  7.739  5.907
+## 2      US 12.008 12.204 -0.196
+## 3      JP  7.032 11.837 -4.805
+## 6      SG  5.768  4.610  1.158
+## 5      KR  4.589  5.381 -0.792</code></pre>
+</div>
+</div>
+</div>
+<div id="簡易繪圖" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> 簡易繪圖<a href="dataframe.html#簡易繪圖" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><code>graphics::plot()</code>為會預載入R的繪圖套件，如果希望繪圖的同時加上回歸線和資料點標籤的話，必須要三行一起執行。</li>
+</ul>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="dataframe.html#cb233-1" tabindex="-1"></a><span class="co"># plot(df) # raise error, 1st column is a character vector</span></span>
+<span id="cb233-2"><a href="dataframe.html#cb233-2" tabindex="-1"></a><span class="fu">plot</span>(df[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<p><img src="R04_dataframe_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="dataframe.html#cb234-1" tabindex="-1"></a><span class="fu">plot</span>(df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb234-2"><a href="dataframe.html#cb234-2" tabindex="-1"></a><span class="fu">text</span>(import, export, <span class="at">labels=</span>country, <span class="at">cex=</span> <span class="fl">0.5</span>, <span class="at">pos=</span><span class="dv">3</span>)</span>
+<span id="cb234-3"><a href="dataframe.html#cb234-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="R04_dataframe_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="dataframe.html#cb235-1" tabindex="-1"></a>?plot</span></code></pre></div>
+<pre class="output"><code>## Help on topic &#39;plot&#39; was found in the following packages:
+## 
+##   Package               Library
+##   graphics              /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+##   base                  /Library/Frameworks/R.framework/Resources/library
+## 
+## 
+## Using the first match ...</code></pre>
+</div>
+<div id="基本操作使用dplyr" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> 基本操作：使用dplyr<a href="dataframe.html#基本操作使用dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="dataframe.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb237-2"><a href="dataframe.html#cb237-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb237-3"><a href="dataframe.html#cb237-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">sub =</span> import <span class="sc">-</span> export)</span>
+<span id="cb237-4"><a href="dataframe.html#cb237-4" tabindex="-1"></a><span class="fu">filter</span>(df, import <span class="sc">&gt;</span> export)</span></code></pre></div>
+<pre class="output"><code>##   country import export   sub
+## 1      CN 26.142 22.987 3.155
+## 2      HK 13.646  7.739 5.907
+## 3      SG  5.768  4.610 1.158
+## 4      MY  2.802  2.784 0.018
+## 5      VN  3.428  2.414 1.014
+## 6      PH  3.019  2.092 0.927
+## 7      TH  1.976  1.839 0.137
+## 8      GB  1.302  1.075 0.227
+## 9      IN  1.027  0.974 0.053</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="dataframe.html#cb239-1" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<pre class="output"><code>##    country export
+## 1       CN 22.987
+## 2       US 12.204
+## 3       JP 11.837
+## 4       HK  7.739
+## 5       KR  5.381
+## 6       SG  4.610
+## 7       DE  2.866
+## 8       MY  2.784
+## 9       VN  2.414
+## 10      PH  2.092
+## 11      TH  1.839
+## 12      AU  1.788
+## 13      NL  1.665
+## 14      SA  1.409
+## 15      ID  1.391
+## 16      GB  1.075
+## 17      IN  0.974
+## 18      FR  0.899
+## 19      IT  0.800
+## 20      AE  0.728</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="dataframe.html#cb241-1" tabindex="-1"></a><span class="fu">message</span>(df<span class="sc">$</span>country)</span>
+<span id="cb241-2"><a href="dataframe.html#cb241-2" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>country)</span></code></pre></div>
+<pre class="output"><code>##  [1] &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; &quot;KR&quot; &quot;SG&quot; &quot;DE&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;AU&quot; &quot;NL&quot; &quot;SA&quot; &quot;ID&quot;
+## [16] &quot;GB&quot; &quot;IN&quot; &quot;FR&quot; &quot;IT&quot; &quot;AE&quot;</code></pre>
+</div>
+<div id="tibble-data_frame-data.frame" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> tibble, data_frame, data.frame<a href="dataframe.html#tibble-data_frame-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>警告： "data_frame()" was deprecated in tibble 1.1.0. Please use "tibble()" instead.</code></p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="dataframe.html#cb243-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb243-2"><a href="dataframe.html#cb243-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="dataframe.html#cb245-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb245-2"><a href="dataframe.html#cb245-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="dataframe.html#cb247-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb247-2"><a href="dataframe.html#cb247-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+</div>
+<div id="database---sqlite" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Database - SQLite<a href="dataframe.html#database---sqlite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+<div id="maternity" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Paid Maternity Leave<a href="dataframe.html#maternity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>本案例將使用R重新製作華盛頓郵報2016年8月13日的一篇報導，該報導探討了美國婦女產假支薪情況。案例中將應用data.frame和基本的繪圖與資料摘要方法。</p>
+<p>原始新聞來源：<a href="https://www.washingtonpost.com/news/worldviews/wp/2016/08/13/the-world-is-getting-better-at-paid-maternity-leave-the-u-s-is-not/">The world is getting better at paid maternity leave. The U.S. is not. - The Washington Post</a>。該篇報導提及，美國因為目前的政策不保障帶薪產假，許多女性感到必須在工作和照顧家庭之間做出選擇，這種性別不平等破壞了她們在工作機會上的平等機會。同時，世界各地的婦女待遇正在逐漸改善。至少190個國家對嬰兒的母親規定了某種形式的帶薪假期，產假待遇在56個國家有所提高。專家表示，現在美國城市和州正通過不同形式的帶薪家庭假法案，這顯示美國雇主正在展示有競爭力的福利不會影響員工表現。特別是科技公司，如Twitter、Facebook和Google等，處於提供員工帶薪產假福利的前沿，美國可能有望追趕其他國家。</p>
+<p><img src="https://www.washingtonpost.com/blogs/worldviews/files/2016/08/matleave-map.jpg" /></p>
+<p>本案例主要呈現核心的視覺化概念，可以在<a href="base2dplyr.html#maternity_dplyr">Review Paid Maternity by dplyr</a>找到更詳盡的案例說明與解析。</p>
+<div id="reading-.xlsx-by-readxl-package" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Reading .xlsx by readxl package<a href="dataframe.html#reading-.xlsx-by-readxl-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>readxl</code>也包含在<code>tidyverse</code>的套件集中，所以應該已經在前次安裝過，不用特別安裝。</li>
+<li>但<code>readxl</code>不會隨著<code>tidyverse</code>套件被載入R的執行環境，所以如果要用<code>readxl()</code>來讀取excel檔的話，需要用<code>library(readxl)</code>將其載入。</li>
+</ul>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="dataframe.html#cb249-1" tabindex="-1"></a><span class="co"># Import readxl package</span></span>
+<span id="cb249-2"><a href="dataframe.html#cb249-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
+<p>這段程式碼使用<code>read_excel()</code>函式從<code>data</code>資料夾中的<code>WORLD-MACHE_Gender_6.8.15.xls</code>檔案中的<code>Sheet1</code>工作表讀取資料。其中<code>col_names=T</code>為該函式的參數，表示第一列為欄位名稱。讀取後的資料會被Assign給變數<code>df</code>。</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="dataframe.html#cb250-1" tabindex="-1"></a><span class="co"># Use read_excel() to convert excel sheet to data.frame</span></span>
+<span id="cb250-2"><a href="dataframe.html#cb250-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span></code></pre></div>
+</div>
+<div id="previewing-data-by-view-class-dim-str-summary-and-names" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="dataframe.html#cb251-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
+<span id="cb251-2"><a href="dataframe.html#cb251-2" tabindex="-1"></a><span class="fu">class</span>(df)       <span class="co"># [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="dataframe.html#cb253-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] 197 156</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="dataframe.html#cb255-1" tabindex="-1"></a><span class="co"># Show names of variables (vectors, columns) by names()</span></span>
+<span id="cb255-2"><a href="dataframe.html#cb255-2" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<pre class="output"><code>##   [1] &quot;country&quot;           &quot;iso2&quot;              &quot;iso3&quot;             
+##   [4] &quot;region&quot;            &quot;wb_econ&quot;           &quot;matleave_95&quot;      
+##   [7] &quot;matleave_96&quot;       &quot;matleave_97&quot;       &quot;matleave_98&quot;      
+##  [10] &quot;matleave_99&quot;       &quot;matleave_00&quot;       &quot;matleave_01&quot;      
+##  [13] &quot;matleave_02&quot;       &quot;matleave_03&quot;       &quot;matleave_04&quot;      
+##  [16] &quot;matleave_05&quot;       &quot;matleave_06&quot;       &quot;matleave_07&quot;      
+##  [19] &quot;matleave_08&quot;       &quot;matleave_09&quot;       &quot;matleave_10&quot;      
+##  [22] &quot;matleave_11&quot;       &quot;matleave_12&quot;       &quot;matleave_13&quot;      
+##  [25] &quot;matleave_wrr_95&quot;   &quot;matleave_wrr_96&quot;   &quot;matleave_wrr_97&quot;  
+##  [28] &quot;matleave_wrr_98&quot;   &quot;matleave_wrr_99&quot;   &quot;matleave_wrr_00&quot;  
+##  [31] &quot;matleave_wrr_01&quot;   &quot;matleave_wrr_02&quot;   &quot;matleave_wrr_03&quot;  
+##  [34] &quot;matleave_wrr_04&quot;   &quot;matleave_wrr_05&quot;   &quot;matleave_wrr_06&quot;  
+##  [37] &quot;matleave_wrr_07&quot;   &quot;matleave_wrr_08&quot;   &quot;matleave_wrr_09&quot;  
+##  [40] &quot;matleave_wrr_10&quot;   &quot;matleave_wrr_11&quot;   &quot;matleave_wrr_12&quot;  
+##  [43] &quot;matleave_wrr_13&quot;   &quot;bf_dur_95&quot;         &quot;bf_dur_96&quot;        
+##  [46] &quot;bf_dur_97&quot;         &quot;bf_dur_98&quot;         &quot;bf_dur_99&quot;        
+##  [49] &quot;bf_dur_00&quot;         &quot;bf_dur_01&quot;         &quot;bf_dur_02&quot;        
+##  [52] &quot;bf_dur_03&quot;         &quot;bf_dur_04&quot;         &quot;bf_dur_05&quot;        
+##  [55] &quot;bf_dur_06&quot;         &quot;bf_dur_07&quot;         &quot;bf_dur_08&quot;        
+##  [58] &quot;bf_dur_09&quot;         &quot;bf_dur_10&quot;         &quot;bf_dur_11&quot;        
+##  [61] &quot;bf_dur_12&quot;         &quot;bf_dur_13&quot;         &quot;mat_bfeed_6mon_95&quot;
+##  [64] &quot;mat_bfeed_6mon_96&quot; &quot;mat_bfeed_6mon_97&quot; &quot;mat_bfeed_6mon_98&quot;
+##  [67] &quot;mat_bfeed_6mon_99&quot; &quot;mat_bfeed_6mon_00&quot; &quot;mat_bfeed_6mon_01&quot;
+##  [70] &quot;mat_bfeed_6mon_02&quot; &quot;mat_bfeed_6mon_03&quot; &quot;mat_bfeed_6mon_04&quot;
+##  [73] &quot;mat_bfeed_6mon_05&quot; &quot;mat_bfeed_6mon_06&quot; &quot;mat_bfeed_6mon_07&quot;
+##  [76] &quot;mat_bfeed_6mon_08&quot; &quot;mat_bfeed_6mon_09&quot; &quot;mat_bfeed_6mon_10&quot;
+##  [79] &quot;mat_bfeed_6mon_11&quot; &quot;mat_bfeed_6mon_12&quot; &quot;mat_bfeed_6mon_13&quot;
+##  [82] &quot;minage_fem_leg_95&quot; &quot;minage_fem_leg_96&quot; &quot;minage_fem_leg_97&quot;
+##  [85] &quot;minage_fem_leg_98&quot; &quot;minage_fem_leg_99&quot; &quot;minage_fem_leg_00&quot;
+##  [88] &quot;minage_fem_leg_01&quot; &quot;minage_fem_leg_02&quot; &quot;minage_fem_leg_03&quot;
+##  [91] &quot;minage_fem_leg_04&quot; &quot;minage_fem_leg_05&quot; &quot;minage_fem_leg_06&quot;
+##  [94] &quot;minage_fem_leg_07&quot; &quot;minage_fem_leg_08&quot; &quot;minage_fem_leg_09&quot;
+##  [97] &quot;minage_fem_leg_10&quot; &quot;minage_fem_leg_11&quot; &quot;minage_fem_leg_12&quot;
+## [100] &quot;legal_diff_leg_95&quot; &quot;legal_diff_leg_96&quot; &quot;legal_diff_leg_97&quot;
+## [103] &quot;legal_diff_leg_98&quot; &quot;legal_diff_leg_99&quot; &quot;legal_diff_leg_00&quot;
+## [106] &quot;legal_diff_leg_01&quot; &quot;legal_diff_leg_02&quot; &quot;legal_diff_leg_03&quot;
+## [109] &quot;legal_diff_leg_04&quot; &quot;legal_diff_leg_05&quot; &quot;legal_diff_leg_06&quot;
+## [112] &quot;legal_diff_leg_07&quot; &quot;legal_diff_leg_08&quot; &quot;legal_diff_leg_09&quot;
+## [115] &quot;legal_diff_leg_10&quot; &quot;legal_diff_leg_11&quot; &quot;legal_diff_leg_12&quot;
+## [118] &quot;minage_fem_pc_95&quot;  &quot;minage_fem_pc_96&quot;  &quot;minage_fem_pc_97&quot; 
+## [121] &quot;minage_fem_pc_98&quot;  &quot;minage_fem_pc_99&quot;  &quot;minage_fem_pc_00&quot; 
+## [124] &quot;minage_fem_pc_01&quot;  &quot;minage_fem_pc_02&quot;  &quot;minage_fem_pc_03&quot; 
+## [127] &quot;minage_fem_pc_04&quot;  &quot;minage_fem_pc_05&quot;  &quot;minage_fem_pc_06&quot; 
+## [130] &quot;minage_fem_pc_07&quot;  &quot;minage_fem_pc_08&quot;  &quot;minage_fem_pc_09&quot; 
+## [133] &quot;minage_fem_pc_10&quot;  &quot;minage_fem_pc_11&quot;  &quot;minage_fem_pc_12&quot; 
+## [136] &quot;legal_diff_pc_95&quot;  &quot;legal_diff_pc_96&quot;  &quot;legal_diff_pc_97&quot; 
+## [139] &quot;legal_diff_pc_98&quot;  &quot;legal_diff_pc_99&quot;  &quot;legal_diff_pc_00&quot; 
+## [142] &quot;legal_diff_pc_01&quot;  &quot;legal_diff_pc_02&quot;  &quot;legal_diff_pc_03&quot; 
+## [145] &quot;legal_diff_pc_04&quot;  &quot;legal_diff_pc_05&quot;  &quot;legal_diff_pc_06&quot; 
+## [148] &quot;legal_diff_pc_07&quot;  &quot;legal_diff_pc_08&quot;  &quot;legal_diff_pc_09&quot; 
+## [151] &quot;legal_diff_pc_10&quot;  &quot;legal_diff_pc_11&quot;  &quot;legal_diff_pc_12&quot; 
+## [154] &quot;minwage_ppp_2013&quot;  &quot;mw_overtime&quot;       &quot;oecd&quot;</code></pre>
+</div>
+<div id="select-variables" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Select variables<a href="dataframe.html#select-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>由於所需要的資料為第三欄的變數<code>iso3</code>（為國家代碼）和第六至24欄的<code>matleave95</code>~<code>matleave13</code>共29年的資料，所以需要在<code>df[ , ]</code>中選出這幾欄。只要把所要取的欄以vector的型態放在<code>df[row,col]</code>之<code>col</code>的位置，便可以選出所要的欄。</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="dataframe.html#cb257-1" tabindex="-1"></a><span class="co"># Select the 3rd and 6th to 24th columns</span></span>
+<span id="cb257-2"><a href="dataframe.html#cb257-2" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb257-3"><a href="dataframe.html#cb257-3" tabindex="-1"></a></span>
+<span id="cb257-4"><a href="dataframe.html#cb257-4" tabindex="-1"></a><span class="co"># Use class(), dim(), and str() to inspect the data</span></span>
+<span id="cb257-5"><a href="dataframe.html#cb257-5" tabindex="-1"></a><span class="fu">class</span>(matleave)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="dataframe.html#cb259-1" tabindex="-1"></a><span class="fu">dim</span>(matleave)</span></code></pre></div>
+<pre class="output"><code>## [1] 197  20</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="dataframe.html#cb261-1" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
+<pre class="output"><code>## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
+##  $ iso3       : chr [1:197] &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;AND&quot; ...
+##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_96: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_97: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_98: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_99: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_00: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_01: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_02: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_03: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_04: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_05: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_06: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_07: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_08: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_09: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_10: num [1:197] 2 5 3 3 2 2 2 5 NA 5 ...
+##  $ matleave_11: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_12: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...</code></pre>
+</div>
+<div id="check-replace-nas" class="section level3 hasAnchor" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> Check &amp; Replace NAs<a href="dataframe.html#check-replace-nas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>NA: Not Available</code></li>
+<li><code>v[is.na(v)]</code> will select all NA cells</li>
+<li>以0取代NA的資料格。避免繪圖產生錯誤</li>
+<li><code>sum(is.na(matleave))</code>的目的是檢測還有沒有NA值。如果有的話<code>is.na()</code>就會是<code>TRUE</code>，那麼加總後，如果不是0，那就代表還有NA。</li>
+</ul>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="dataframe.html#cb263-1" tabindex="-1"></a><span class="co"># is.na() to indicate each element is NA or NOT(TRUE/FALSE)</span></span>
+<span id="cb263-2"><a href="dataframe.html#cb263-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">is.na</span>(matleave), <span class="at">n=</span><span class="dv">20</span>)</span></code></pre></div>
+<pre class="output"><code>##        iso3 matleave_95 matleave_96 matleave_97 matleave_98 matleave_99
+##  [1,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [2,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [3,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [4,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [5,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [6,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [7,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [8,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [9,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [10,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [11,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [12,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [13,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [14,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [15,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [16,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [17,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [18,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [19,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [20,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##       matleave_00 matleave_01 matleave_02 matleave_03 matleave_04 matleave_05
+##  [1,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [2,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [3,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [4,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [5,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [6,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [7,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [8,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [9,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [10,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [11,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [12,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [13,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [14,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [15,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [16,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [17,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [18,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [19,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [20,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##       matleave_06 matleave_07 matleave_08 matleave_09 matleave_10 matleave_11
+##  [1,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [2,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [3,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [4,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [5,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [6,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [7,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [8,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+##  [9,]       FALSE       FALSE       FALSE       FALSE        TRUE       FALSE
+## [10,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [11,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [12,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [13,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [14,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [15,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [16,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [17,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [18,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [19,]       FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+## [20,]       FALSE        TRUE        TRUE       FALSE       FALSE       FALSE
+##       matleave_12 matleave_13
+##  [1,]       FALSE       FALSE
+##  [2,]       FALSE       FALSE
+##  [3,]       FALSE       FALSE
+##  [4,]       FALSE       FALSE
+##  [5,]       FALSE       FALSE
+##  [6,]       FALSE       FALSE
+##  [7,]       FALSE       FALSE
+##  [8,]       FALSE       FALSE
+##  [9,]       FALSE       FALSE
+## [10,]       FALSE       FALSE
+## [11,]       FALSE       FALSE
+## [12,]       FALSE       FALSE
+## [13,]       FALSE       FALSE
+## [14,]       FALSE       FALSE
+## [15,]       FALSE       FALSE
+## [16,]       FALSE       FALSE
+## [17,]       FALSE       FALSE
+## [18,]       FALSE       FALSE
+## [19,]       FALSE       FALSE
+## [20,]       FALSE       FALSE</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="dataframe.html#cb265-1" tabindex="-1"></a><span class="co"># Assign 0 to those NA data</span></span>
+<span id="cb265-2"><a href="dataframe.html#cb265-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb265-3"><a href="dataframe.html#cb265-3" tabindex="-1"></a></span>
+<span id="cb265-4"><a href="dataframe.html#cb265-4" tabindex="-1"></a><span class="co"># anyNA() to check if there are still NA cells.</span></span>
+<span id="cb265-5"><a href="dataframe.html#cb265-5" tabindex="-1"></a><span class="fu">anyNA</span>(matleave)</span></code></pre></div>
+<pre class="output"><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="dataframe.html#cb267-1" tabindex="-1"></a><span class="co"># sum(is.na()) to count the number of NA</span></span>
+<span id="cb267-2"><a href="dataframe.html#cb267-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(matleave))</span></code></pre></div>
+<pre class="output"><code>## [1] 0</code></pre>
+</div>
+<div id="filtering-data" class="section level3 hasAnchor" number="4.6.5">
+<h3><span class="header-section-number">4.6.5</span> Filtering data<a href="dataframe.html#filtering-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="filtered-by-the-last-year-value" class="section level4 hasAnchor" number="4.6.5.1">
+<h4><span class="header-section-number">4.6.5.1</span> Filtered by the last year value<a href="dataframe.html#filtered-by-the-last-year-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>matleave[matleave$'matleave_13'==5, ]</code>中的第一個<code>matleave</code>表示要篩選的資料集，中括號中的<code>matleave$'matleave_13'==5</code>是篩選條件，表示<code>matleave</code>資料集中的<code>matleave_13</code>變數的值等於<code>5</code>。中括號中的逗號後方未有欄為名稱表示保留所有欄位的資料，僅篩選出符合條件的列，並將篩選結果賦值給變數<code>m5</code>。</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="dataframe.html#cb269-1" tabindex="-1"></a><span class="co"># Use logical comparison to see if the last year equals to 5</span></span>
+<span id="cb269-2"><a href="dataframe.html#cb269-2" tabindex="-1"></a><span class="co"># Assign matching data to var m5</span></span>
+<span id="cb269-3"><a href="dataframe.html#cb269-3" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span><span class="sc">==</span><span class="dv">5</span>, ]</span>
+<span id="cb269-4"><a href="dataframe.html#cb269-4" tabindex="-1"></a></span>
+<span id="cb269-5"><a href="dataframe.html#cb269-5" tabindex="-1"></a><span class="co"># nrow() to count matching data</span></span>
+<span id="cb269-6"><a href="dataframe.html#cb269-6" tabindex="-1"></a><span class="fu">nrow</span>(m5)</span></code></pre></div>
+<pre class="output"><code>## [1] 34</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="dataframe.html#cb271-1" tabindex="-1"></a><span class="co"># Is it possible to use length() to check the data length?</span></span>
+<span id="cb271-2"><a href="dataframe.html#cb271-2" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;</span></span>
+<span id="cb271-3"><a href="dataframe.html#cb271-3" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;==5</span></span>
+<span id="cb271-4"><a href="dataframe.html#cb271-4" tabindex="-1"></a><span class="co"># length(matleave$&#39;matleave_13&#39;==5)</span></span></code></pre></div>
+</div>
+<div id="filtered-data-by-the-first-year-value" class="section level4 hasAnchor" number="4.6.5.2">
+<h4><span class="header-section-number">4.6.5.2</span> Filtered data by the first year value<a href="dataframe.html#filtered-data-by-the-first-year-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="dataframe.html#cb272-1" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is 5, and assign to var m55</span></span>
+<span id="cb272-2"><a href="dataframe.html#cb272-2" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">==</span><span class="dv">5</span>,]</span>
+<span id="cb272-3"><a href="dataframe.html#cb272-3" tabindex="-1"></a></span>
+<span id="cb272-4"><a href="dataframe.html#cb272-4" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is not 5, and assign to var m05</span></span>
+<span id="cb272-5"><a href="dataframe.html#cb272-5" tabindex="-1"></a>m05<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">!=</span><span class="dv">5</span>,]</span></code></pre></div>
+</div>
+</div>
+<div id="plotting" class="section level3 hasAnchor" number="4.6.6">
+<h3><span class="header-section-number">4.6.6</span> Plotting<a href="dataframe.html#plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Plotting the second rows and all columns except 1st column</li>
+<li><strong>Question</strong> 為何要<code>unlist()</code>？請試著執行<code>barplot(matleave[2, -1])</code>這個沒有<code>unlist()</code>的版本，看看會有什麼錯誤訊息。資料結構有何差異呢？</li>
+<li>嘗試用<code>class()</code>或<code>str()</code>嘗試觀察沒有<code>unlist()</code>版本的資料，看看資料型態和有<code>unlist()</code>的會有何不同？</li>
+</ul>
+<div id="plotting-one-line" class="section level4 hasAnchor" number="4.6.6.1">
+<h4><span class="header-section-number">4.6.6.1</span> Plotting one line<a href="dataframe.html#plotting-one-line" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="dataframe.html#cb273-1" tabindex="-1"></a><span class="co"># barplot() the second row of m55</span></span>
+<span id="cb273-2"><a href="dataframe.html#cb273-2" tabindex="-1"></a><span class="co"># barplot(m55[2, ])       # raise error</span></span>
+<span id="cb273-3"><a href="dataframe.html#cb273-3" tabindex="-1"></a></span>
+<span id="cb273-4"><a href="dataframe.html#cb273-4" tabindex="-1"></a><span class="co"># barplot() the second row when neglecting the first column</span></span>
+<span id="cb273-5"><a href="dataframe.html#cb273-5" tabindex="-1"></a><span class="co"># barplot(m55[2, -1])     # raise error</span></span>
+<span id="cb273-6"><a href="dataframe.html#cb273-6" tabindex="-1"></a></span>
+<span id="cb273-7"><a href="dataframe.html#cb273-7" tabindex="-1"></a><span class="co"># Take a look at the data type of matleave[2, ]</span></span>
+<span id="cb273-8"><a href="dataframe.html#cb273-8" tabindex="-1"></a><span class="fu">class</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="dataframe.html#cb275-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="dataframe.html#cb277-1" tabindex="-1"></a><span class="co"># unlist() to convert a single row data.frame to a vector for barplot()</span></span>
+<span id="cb277-2"><a href="dataframe.html#cb277-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>Testing</li>
+</ul>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="dataframe.html#cb278-1" tabindex="-1"></a><span class="co"># View(matleave[1]) # select the 1st variable</span></span>
+<span id="cb278-2"><a href="dataframe.html#cb278-2" tabindex="-1"></a><span class="co"># View(matleave[ ,1]) # select the 1st column</span></span>
+<span id="cb278-3"><a href="dataframe.html#cb278-3" tabindex="-1"></a><span class="co"># View(matleave[1, ]) # select the 1st row</span></span>
+<span id="cb278-4"><a href="dataframe.html#cb278-4" tabindex="-1"></a></span>
+<span id="cb278-5"><a href="dataframe.html#cb278-5" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>])       <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="dataframe.html#cb280-1" tabindex="-1"></a><span class="fu">class</span>(m55[ ,<span class="dv">1</span>]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="dataframe.html#cb282-1" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>, ]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="dataframe.html#cb284-1" tabindex="-1"></a><span class="fu">class</span>(m55<span class="sc">$</span>iso3) <span class="co"># character (vector)</span></span></code></pre></div>
+<pre class="output"><code>## [1] &quot;character&quot;</code></pre>
+</div>
+<div id="more-arguments-args" class="section level4 hasAnchor" number="4.6.6.2">
+<h4><span class="header-section-number">4.6.6.2</span> More arguments (args)<a href="dataframe.html#more-arguments-args" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>這行程式碼使用R中的barplot函數繪製一個長條圖，其中的參數說明如下：</p>
+<ol style="list-style-type: decimal">
+<li><p><code>unlist(m55[2, -1])</code>: 將<code>m55</code>資料集的第<code>2</code>行（不包括第1欄）轉換為一個向量，並作為長條圖的高度（即每個長條的高度）。</p></li>
+<li><p><code>ylim=c(0, 5)</code>: 設置y軸的範圍為0到5，即長條圖的最大高度為5。</p></li>
+<li><p><code>space=0</code>: 設置相鄰兩個長條之間的距離為0，即長條緊密相連。</p></li>
+<li><p><code>border=NA</code>: 設置長條的邊框為透明，即不顯示邊框。</p></li>
+<li><p><code>xaxt="n"</code>: 不顯示x軸的標籤。</p></li>
+<li><p><code>yaxt="n"</code>: 不顯示y軸的標籤。</p></li>
+</ol>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="dataframe.html#cb286-1" tabindex="-1"></a><span class="co"># barplot() the unlisted second row (neglecting the first col)</span></span>
+<span id="cb286-2"><a href="dataframe.html#cb286-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="dataframe.html#cb287-1" tabindex="-1"></a><span class="co"># use ?barplot to know more argument of the function.</span></span>
+<span id="cb287-2"><a href="dataframe.html#cb287-2" tabindex="-1"></a>?barplot</span>
+<span id="cb287-3"><a href="dataframe.html#cb287-3" tabindex="-1"></a></span>
+<span id="cb287-4"><a href="dataframe.html#cb287-4" tabindex="-1"></a><span class="co"># Add arguments ylim, space, border, and axat/yaxt one by one to barplot()</span></span>
+<span id="cb287-5"><a href="dataframe.html#cb287-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="dataframe.html#cb288-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="dataframe.html#cb289-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="dataframe.html#cb290-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
+</div>
+<div id="plotting-multiple-lines" class="section level4 hasAnchor" number="4.6.6.3">
+<h4><span class="header-section-number">4.6.6.3</span> Plotting multiple lines<a href="dataframe.html#plotting-multiple-lines" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>底下可以看見每一行非常相似且一致的特徵，僅有<code>matleave</code>內的索引由1被列出至6。因此，最好的方法是用迴圈（for-loop）的方式將相同的程式碼，從1~6之間做六次。</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="dataframe.html#cb291-1" tabindex="-1"></a><span class="co"># plot the first row</span></span>
+<span id="cb291-2"><a href="dataframe.html#cb291-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb291-3"><a href="dataframe.html#cb291-3" tabindex="-1"></a></span>
+<span id="cb291-4"><a href="dataframe.html#cb291-4" tabindex="-1"></a><span class="co"># plot the second to 6th rows</span></span>
+<span id="cb291-5"><a href="dataframe.html#cb291-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="dataframe.html#cb292-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-2"><a href="dataframe.html#cb292-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-3"><a href="dataframe.html#cb292-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-4"><a href="dataframe.html#cb292-4" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+</div>
+<div id="for-loop-to-plot-multiple-lines" class="section level4 hasAnchor" number="4.6.6.4">
+<h4><span class="header-section-number">4.6.6.4</span> for-loop to plot multiple lines<a href="dataframe.html#for-loop-to-plot-multiple-lines" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>這段R語言程式碼使用for-loop來重複執行一個指定的程式區塊，將<code>m55</code>資料集的前六行資料分別繪製成長條圖。在這段程式碼中，變數<code>i</code>控制了for-loop的迭代次數，它從1到6依次取值，然後依次執行所指定的程式區塊。</p>
+<p>一般的for-loop的結構如下：<code>for (variable in sequence) {# code block to be executed}</code>。其中，變數<code>variable</code>是用來控制for-loop的迭代次數的，它會從序列<code>sequence</code>中逐一取出元素，並將其賦值給變數<code>variable</code>，然後執行大括號<code>{...}</code>中所指定的程式區塊。</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="dataframe.html#cb293-1" tabindex="-1"></a><span class="co"># use for loop and use i as index to barplot multiple subgraphs</span></span>
+<span id="cb293-2"><a href="dataframe.html#cb293-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb293-3"><a href="dataframe.html#cb293-3" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb293-4"><a href="dataframe.html#cb293-4" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+</div>
+<div id="subplots" class="section level4 hasAnchor" number="4.6.6.5">
+<h4><span class="header-section-number">4.6.6.5</span> Subplots<a href="dataframe.html#subplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>在R語言中，<code>par</code>（parameter的縮寫）是一個用於設置繪圖參數的函數，通過它可以控制繪圖的外觀、尺寸、排列等各方面，以便更好地展示數據和分析結果。par函數可以用來設置以下參數：</p>
+<ol style="list-style-type: decimal">
+<li><p><code>mfrow</code>：設置畫布的分割，即將畫布分為多少行和多少列。</p></li>
+<li><p><code>mai</code>：設置畫布的邊緣大小，包括上下左右四個邊緣的大小。</p></li>
+<li><p><code>cex</code>：設置字體大小的縮放比例。</p></li>
+<li><p><code>col</code>：設置線條、點和字體的顏色。</p></li>
+<li><p><code>pch</code>：設置散點圖中點的形狀。</p></li>
+<li><p><code>lty</code>：設置線條的類型。</p></li>
+</ol>
+<p>在這段程式碼中，<code>par</code>函數被用來設置畫布的分割和邊緣大小，具體來說，<code>par(mfrow=c(3,2), mai= c(0.2, 0.2, 0.2, 0.2))</code>表示將畫布分為3行2列的子圖，並設置邊緣大小為0.2，包括上下左右四個邊緣。這樣可以方便地在同一張畫布上顯示多個圖形，並控制它們之間的排列和間距。</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="dataframe.html#cb294-1" tabindex="-1"></a><span class="co"># use ?par to get more plotting parameters</span></span>
+<span id="cb294-2"><a href="dataframe.html#cb294-2" tabindex="-1"></a>?par</span>
+<span id="cb294-3"><a href="dataframe.html#cb294-3" tabindex="-1"></a></span>
+<span id="cb294-4"><a href="dataframe.html#cb294-4" tabindex="-1"></a><span class="co"># use par() to set-up the layout of subgraphs</span></span>
+<span id="cb294-5"><a href="dataframe.html#cb294-5" tabindex="-1"></a><span class="co"># use the parameter main=c(0.2, 0.2, 0.2, 0.2) to thrink the padding of figures.</span></span>
+<span id="cb294-6"><a href="dataframe.html#cb294-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb294-7"><a href="dataframe.html#cb294-7" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb294-8"><a href="dataframe.html#cb294-8" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb294-9"><a href="dataframe.html#cb294-9" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="dataframe.html#cb295-1" tabindex="-1"></a><span class="co"># plot more rows to see what happens</span></span>
+<span id="cb295-2"><a href="dataframe.html#cb295-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb295-3"><a href="dataframe.html#cb295-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb295-4"><a href="dataframe.html#cb295-4" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb295-5"><a href="dataframe.html#cb295-5" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/pml-plot-test-1.png" width="672" /></p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="dataframe.html#cb296-1" tabindex="-1"></a><span class="co"># plot all subplots in a figure</span></span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/pml-plot-test-2.png" width="672" /></p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="dataframe.html#cb297-1" tabindex="-1"></a><span class="co"># nrow() to check number of row of m55.</span></span>
+<span id="cb297-2"><a href="dataframe.html#cb297-2" tabindex="-1"></a><span class="fu">nrow</span>(m55)</span></code></pre></div>
+<pre class="output"><code>## [1] 18</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="dataframe.html#cb299-1" tabindex="-1"></a><span class="co"># use par() to set-up plotting parameters.</span></span>
+<span id="cb299-2"><a href="dataframe.html#cb299-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb299-3"><a href="dataframe.html#cb299-3" tabindex="-1"></a></span>
+<span id="cb299-4"><a href="dataframe.html#cb299-4" tabindex="-1"></a><span class="co"># use for-loop to plot all graph as subgraph</span></span>
+<span id="cb299-5"><a href="dataframe.html#cb299-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
+<span id="cb299-6"><a href="dataframe.html#cb299-6" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb299-7"><a href="dataframe.html#cb299-7" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/plot-m55-1.png" width="672" /></p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="dataframe.html#cb300-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb300-2"><a href="dataframe.html#cb300-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
+<span id="cb300-3"><a href="dataframe.html#cb300-3" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb300-4"><a href="dataframe.html#cb300-4" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb300-5"><a href="dataframe.html#cb300-5" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/plot-caption-1.png" width="672" /></p>
+</div>
+</div>
+<div id="practice.-plotting-more" class="section level3 hasAnchor" number="4.6.7">
+<h3><span class="header-section-number">4.6.7</span> Practice. Plotting more<a href="dataframe.html#practice.-plotting-more" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="dataframe.html#cb301-1" tabindex="-1"></a><span class="co"># plotting matleave_95 != 5 but matleve_13 == 5</span></span>
+<span id="cb301-2"><a href="dataframe.html#cb301-2" tabindex="-1"></a></span>
+<span id="cb301-3"><a href="dataframe.html#cb301-3" tabindex="-1"></a><span class="co"># plotting for matleave_13 == 4</span></span></code></pre></div>
+</div>
+<div id="practice.-selecting-and-filtering-by-dplyr-i" class="section level3 hasAnchor" number="4.6.8">
+<h3><span class="header-section-number">4.6.8</span> Practice. Selecting and filtering by dplyr I<a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="dataframe.html#cb302-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb302-2"><a href="dataframe.html#cb302-2" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="dataframe.html#cb302-3" tabindex="-1"></a><span class="co"># select columns by index</span></span>
+<span id="cb302-4"><a href="dataframe.html#cb302-4" tabindex="-1"></a><span class="co"># matleave &lt;- df[ , c(3, 6:24)]</span></span>
+<span id="cb302-5"><a href="dataframe.html#cb302-5" tabindex="-1"></a></span>
+<span id="cb302-6"><a href="dataframe.html#cb302-6" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
+<span id="cb302-7"><a href="dataframe.html#cb302-7" tabindex="-1"></a><span class="co"># matleave[is.na(matleave)] &lt;- 0</span></span>
+<span id="cb302-8"><a href="dataframe.html#cb302-8" tabindex="-1"></a></span>
+<span id="cb302-9"><a href="dataframe.html#cb302-9" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb302-10"><a href="dataframe.html#cb302-10" tabindex="-1"></a><span class="co"># m5 &lt;- matleave[matleave$&#39;matleave_13&#39; == 5, ]</span></span>
+<span id="cb302-11"><a href="dataframe.html#cb302-11" tabindex="-1"></a></span>
+<span id="cb302-12"><a href="dataframe.html#cb302-12" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb302-13"><a href="dataframe.html#cb302-13" tabindex="-1"></a><span class="co"># m55&lt;- m5[m5$&#39;matleave_95&#39; == 5,]</span></span>
+<span id="cb302-14"><a href="dataframe.html#cb302-14" tabindex="-1"></a></span>
+<span id="cb302-15"><a href="dataframe.html#cb302-15" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb302-16"><a href="dataframe.html#cb302-16" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb302-17"><a href="dataframe.html#cb302-17" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
+<span id="cb302-18"><a href="dataframe.html#cb302-18" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
+<span id="cb302-19"><a href="dataframe.html#cb302-19" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb302-20"><a href="dataframe.html#cb302-20" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb302-21"><a href="dataframe.html#cb302-21" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="more-clean-version" class="section level3 hasAnchor" number="4.6.9">
+<h3><span class="header-section-number">4.6.9</span> (More) Clean version<a href="dataframe.html#more-clean-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="dataframe.html#cb303-1" tabindex="-1"></a><span class="co"># readxl::read_excel() to import the xls file</span></span>
+<span id="cb303-2"><a href="dataframe.html#cb303-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb303-3"><a href="dataframe.html#cb303-3" tabindex="-1"></a></span>
+<span id="cb303-4"><a href="dataframe.html#cb303-4" tabindex="-1"></a><span class="co"># select iso3, and matleave columns by index</span></span>
+<span id="cb303-5"><a href="dataframe.html#cb303-5" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb303-6"><a href="dataframe.html#cb303-6" tabindex="-1"></a></span>
+<span id="cb303-7"><a href="dataframe.html#cb303-7" tabindex="-1"></a><span class="co"># str() to inspect the data structure of </span></span>
+<span id="cb303-8"><a href="dataframe.html#cb303-8" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
+<pre class="output"><code>## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
+##  $ iso3       : chr [1:197] &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;AND&quot; ...
+##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_96: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_97: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_98: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_99: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_00: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_01: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_02: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_03: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_04: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_05: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_06: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_07: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_08: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_09: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_10: num [1:197] 2 5 3 3 2 2 2 5 NA 5 ...
+##  $ matleave_11: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_12: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...</code></pre>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="dataframe.html#cb305-1" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
+<span id="cb305-2"><a href="dataframe.html#cb305-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb305-3"><a href="dataframe.html#cb305-3" tabindex="-1"></a></span>
+<span id="cb305-4"><a href="dataframe.html#cb305-4" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb305-5"><a href="dataframe.html#cb305-5" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span> <span class="sc">==</span> <span class="dv">5</span>, ]</span>
+<span id="cb305-6"><a href="dataframe.html#cb305-6" tabindex="-1"></a></span>
+<span id="cb305-7"><a href="dataframe.html#cb305-7" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb305-8"><a href="dataframe.html#cb305-8" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span> <span class="sc">==</span> <span class="dv">5</span>,]</span>
+<span id="cb305-9"><a href="dataframe.html#cb305-9" tabindex="-1"></a></span>
+<span id="cb305-10"><a href="dataframe.html#cb305-10" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb305-11"><a href="dataframe.html#cb305-11" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb305-12"><a href="dataframe.html#cb305-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
+<span id="cb305-13"><a href="dataframe.html#cb305-13" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
+<span id="cb305-14"><a href="dataframe.html#cb305-14" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb305-15"><a href="dataframe.html#cb305-15" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb305-16"><a href="dataframe.html#cb305-16" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="more-the-fittest-version-to-compute-staysame" class="section level3 hasAnchor" number="4.6.10">
+<h3><span class="header-section-number">4.6.10</span> (More) The fittest version to compute staySame<a href="dataframe.html#more-the-fittest-version-to-compute-staysame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="dataframe.html#cb306-1" tabindex="-1"></a><span class="co"># staySame version</span></span>
+<span id="cb306-2"><a href="dataframe.html#cb306-2" tabindex="-1"></a><span class="co"># staySame &lt;- apply(m5[,2:20], 1, function(x) length(unique(x[!is.na(x)]))) </span></span>
+<span id="cb306-3"><a href="dataframe.html#cb306-3" tabindex="-1"></a><span class="co"># m55 &lt;- m5[staySame, ]</span></span>
+<span id="cb306-4"><a href="dataframe.html#cb306-4" tabindex="-1"></a><span class="co"># m50 &lt;- m5[!staySame, ]</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-basic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="crosstab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/R04_dataframe.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

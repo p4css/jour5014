@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Trump’s tweets | R for Data Journalism</title>
+  <meta name="description" content="For my Class teaching how to make data news reports" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Trump’s tweets | R for Data Journalism" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="For my Class teaching how to make data news reports" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Trump’s tweets | R for Data Journalism" />
+  
+  <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
+  
+
+<meta name="author" content="HSIEH, JI-LUNG" />
+
+
+<meta name="date" content="2024-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tm.html"/>
+<link rel="next" href="re.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Journalism</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+</ul></li>
+<li class="part"><span><b>I R BASIC</b></span></li>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basic.html"><a href="r-basic.html"><i class="fa fa-check"></i><b>3</b> R Basic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basic.html"><a href="r-basic.html#r-syntax"><i class="fa fa-check"></i><b>3.1</b> R Syntax</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basic.html"><a href="r-basic.html#assignment"><i class="fa fa-check"></i><b>3.1.1</b> Assignment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basic.html"><a href="r-basic.html#comments-註解"><i class="fa fa-check"></i><b>3.1.2</b> Comments 註解</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basic.html"><a href="r-basic.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basic.html"><a href="r-basic.html#creating-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basic.html"><a href="r-basic.html#viewing"><i class="fa fa-check"></i><b>3.2.2</b> Viewing</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-filtering"><i class="fa fa-check"></i><b>3.2.3</b> Subsetting, filtering</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basic.html"><a href="r-basic.html#deleting"><i class="fa fa-check"></i><b>3.2.4</b> Deleting</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basic.html"><a href="r-basic.html#concatenating"><i class="fa fa-check"></i><b>3.2.5</b> Concatenating</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basic.html"><a href="r-basic.html#calculating-with-vectors"><i class="fa fa-check"></i><b>3.3</b> Calculating with vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basic.html"><a href="r-basic.html#arithmetic-operations"><i class="fa fa-check"></i><b>3.3.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basic.html"><a href="r-basic.html#logic-comparisons"><i class="fa fa-check"></i><b>3.3.2</b> Logic comparisons</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basic.html"><a href="r-basic.html#subsetting-by-logic-comparisons"><i class="fa fa-check"></i><b>3.3.3</b> Subsetting by logic comparisons</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basic.html"><a href="r-basic.html#sorting-and-ordering"><i class="fa fa-check"></i><b>3.3.4</b> Sorting and ordering</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basic.html"><a href="r-basic.html#built-in-math-functions"><i class="fa fa-check"></i><b>3.3.5</b> Built-in math functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basic.html"><a href="r-basic.html#data-types"><i class="fa fa-check"></i><b>3.4</b> Data types</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="r-basic.html"><a href="r-basic.html#checking-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Checking data type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-basic.html"><a href="r-basic.html#converting-data-type"><i class="fa fa-check"></i><b>3.4.2</b> Converting data type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dataframe.html"><a href="dataframe.html#產生新的dataframe"><i class="fa fa-check"></i><b>4.1.1</b> 產生新的Dataframe</a></li>
+<li class="chapter" data-level="4.1.2" data-path="dataframe.html"><a href="dataframe.html#觀察dataframe"><i class="fa fa-check"></i><b>4.1.2</b> 觀察dataframe</a></li>
+<li class="chapter" data-level="4.1.3" data-path="dataframe.html"><a href="dataframe.html#操作dataframe"><i class="fa fa-check"></i><b>4.1.3</b> 操作dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#基本操作使用dplyr"><i class="fa fa-check"></i><b>4.3</b> 基本操作：使用dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.4</b> tibble, data_frame, data.frame</a></li>
+<li class="chapter" data-level="4.5" data-path="dataframe.html"><a href="dataframe.html#database---sqlite"><i class="fa fa-check"></i><b>4.5</b> Database - SQLite</a></li>
+<li class="chapter" data-level="4.6" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.6</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.6.1</b> Reading .xlsx by readxl package</a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.6.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.6.3</b> Select variables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.6.4</b> Check &amp; Replace NAs</a></li>
+<li class="chapter" data-level="4.6.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.6.5</b> Filtering data</a></li>
+<li class="chapter" data-level="4.6.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.6.6</b> Plotting</a></li>
+<li class="chapter" data-level="4.6.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.6.7</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.6.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.6.8</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.6.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.6.9</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.6.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.6.10</b> (More) The fittest version to compute staySame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="crosstab.html"><a href="crosstab.html#tptheft"><i class="fa fa-check"></i><b>5.1</b> Taipei Residential Burglary</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_read_file"><i class="fa fa-check"></i><b>5.1.1</b> 讀取檔案</a></li>
+<li class="chapter" data-level="5.1.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_mutate_new_var"><i class="fa fa-check"></i><b>5.1.2</b> 萃取所需新變項</a></li>
+<li class="chapter" data-level="5.1.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_counting"><i class="fa fa-check"></i><b>5.1.3</b> 使用<code>table()</code>計數</a></li>
+<li class="chapter" data-level="5.1.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_filtering"><i class="fa fa-check"></i><b>5.1.4</b> 依變數值篩選資料</a></li>
+<li class="chapter" data-level="5.1.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_table"><i class="fa fa-check"></i><b>5.1.5</b> 做雙變數樞紐分析：<code>table()</code></a></li>
+<li class="chapter" data-level="5.1.6" data-path="crosstab.html"><a href="crosstab.html#tptheft_plot"><i class="fa fa-check"></i><b>5.1.6</b> 繪圖</a></li>
+<li class="chapter" data-level="5.1.7" data-path="crosstab.html"><a href="crosstab.html#practices"><i class="fa fa-check"></i><b>5.1.7</b> Practices</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_read_file"><i class="fa fa-check"></i><b>5.2</b> Read online files</a></li>
+<li class="chapter" data-level="5.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_counting"><i class="fa fa-check"></i><b>5.3</b> Counting Review</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="crosstab.html"><a href="crosstab.html#tapply"><i class="fa fa-check"></i><b>5.3.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="5.3.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_tapply"><i class="fa fa-check"></i><b>5.3.2</b> <code>tapply()</code> two variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="crosstab.html"><a href="crosstab.html#tptheft_review_count"><i class="fa fa-check"></i><b>5.3.3</b> <code>dplyr::count()</code> two variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_table"><i class="fa fa-check"></i><b>5.4</b> Pivoting long-wide tables</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_wider"><i class="fa fa-check"></i><b>5.4.1</b> long-to-wide</a></li>
+<li class="chapter" data-level="5.4.2" data-path="crosstab.html"><a href="crosstab.html#tptheft_pivot_longer"><i class="fa fa-check"></i><b>5.4.2</b> Wide-to-long</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="crosstab.html"><a href="crosstab.html#tptheft_residual"><i class="fa fa-check"></i><b>5.5</b> Residuals analysis</a></li>
+</ul></li>
+<li class="part"><span><b>II DATA MANIPULATION</b></span></li>
+<li class="chapter" data-level="6" data-path="base2dplyr.html"><a href="base2dplyr.html"><i class="fa fa-check"></i><b>6</b> From base R to dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="base2dplyr.html"><a href="base2dplyr.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a></li>
+<li class="chapter" data-level="6.2" data-path="base2dplyr.html"><a href="base2dplyr.html#tptheft_dplyr"><i class="fa fa-check"></i><b>6.2</b> Taipie Theft Count (base to dplyr)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
+<li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
+<li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
+<li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
+<li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="na.html"><a href="na.html#cleaning-gov-annual-budget"><i class="fa fa-check"></i><b>10.1</b> Cleaning Gov Annual Budget</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="na.html"><a href="na.html#basic-cleaning"><i class="fa fa-check"></i><b>10.1.1</b> Basic Cleaning</a></li>
+<li class="chapter" data-level="10.1.2" data-path="na.html"><a href="na.html#processing-na"><i class="fa fa-check"></i><b>10.1.2</b> Processing NA</a></li>
+<li class="chapter" data-level="10.1.3" data-path="na.html"><a href="na.html#complete-code"><i class="fa fa-check"></i><b>10.1.3</b> Complete Code</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="na.html"><a href="na.html#cleaning-covid-vaccinating-data"><i class="fa fa-check"></i><b>10.2</b> Cleaning Covid Vaccinating data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="na.html"><a href="na.html#觀察並評估資料概況"><i class="fa fa-check"></i><b>10.2.1</b> 觀察並評估資料概況</a></li>
+<li class="chapter" data-level="10.2.2" data-path="na.html"><a href="na.html#按月對齊資料"><i class="fa fa-check"></i><b>10.2.2</b> 按月對齊資料</a></li>
+<li class="chapter" data-level="10.2.3" data-path="na.html"><a href="na.html#處理遺漏資料的月份"><i class="fa fa-check"></i><b>10.2.3</b> 處理遺漏資料的月份</a></li>
+<li class="chapter" data-level="10.2.4" data-path="na.html"><a href="na.html#完整程式碼"><i class="fa fa-check"></i><b>10.2.4</b> 完整程式碼</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TEXT PROCESSING</b></span></li>
+<li class="chapter" data-level="11" data-path="tm.html"><a href="tm.html"><i class="fa fa-check"></i><b>11</b> Text Processing</a></li>
+<li class="chapter" data-level="12" data-path="trump.html"><a href="trump.html"><i class="fa fa-check"></i><b>12</b> Trump’s tweets</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="trump.html"><a href="trump.html#loading-data"><i class="fa fa-check"></i><b>12.1</b> Loading data</a></li>
+<li class="chapter" data-level="12.2" data-path="trump.html"><a href="trump.html#cleaning-data"><i class="fa fa-check"></i><b>12.2</b> Cleaning data</a></li>
+<li class="chapter" data-level="12.3" data-path="trump.html"><a href="trump.html#visual-exploring"><i class="fa fa-check"></i><b>12.3</b> Visual Exploring</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="trump.html"><a href="trump.html#productivity-by-time"><i class="fa fa-check"></i><b>12.3.1</b> Productivity by time</a></li>
+<li class="chapter" data-level="12.3.2" data-path="trump.html"><a href="trump.html#tweeting-with-figures"><i class="fa fa-check"></i><b>12.3.2</b> Tweeting with figures</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="trump.html"><a href="trump.html#keyness"><i class="fa fa-check"></i><b>12.4</b> Keyness</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="trump.html"><a href="trump.html#log-likelihood-ratio"><i class="fa fa-check"></i><b>12.4.1</b> Log-likelihood ratio</a></li>
+<li class="chapter" data-level="12.4.2" data-path="trump.html"><a href="trump.html#plotting-keyness"><i class="fa fa-check"></i><b>12.4.2</b> Plotting keyness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="re.html"><a href="re.html"><i class="fa fa-check"></i><b>13</b> Regular expression</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="re.html"><a href="re.html#re-applications-on-string-operations"><i class="fa fa-check"></i><b>13.1</b> <strong>RE applications on string operations</strong></a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="re.html"><a href="re.html#extracting"><i class="fa fa-check"></i><b>13.1.1</b> Extracting</a></li>
+<li class="chapter" data-level="13.1.2" data-path="re.html"><a href="re.html#detecting-with-non-greedy"><i class="fa fa-check"></i><b>13.1.2</b> Detecting with non-greedy</a></li>
+<li class="chapter" data-level="13.1.3" data-path="re.html"><a href="re.html#detecting-multiple-patterns"><i class="fa fa-check"></i><b>13.1.3</b> Detecting multiple patterns</a></li>
+<li class="chapter" data-level="13.1.4" data-path="re.html"><a href="re.html#extracting-nearby-words"><i class="fa fa-check"></i><b>13.1.4</b> Extracting nearby words</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="re.html"><a href="re.html#re-case-studies"><i class="fa fa-check"></i><b>13.2</b> RE Case studies</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="re.html"><a href="re.html#getting-the-last-page-of-ptt-hatepolitics"><i class="fa fa-check"></i><b>13.2.1</b> Getting the last page of PTT HatePolitics</a></li>
+<li class="chapter" data-level="13.2.2" data-path="re.html"><a href="re.html#practice.-ask-chatgpt"><i class="fa fa-check"></i><b>13.2.2</b> Practice. Ask CHATGPT</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="re.html"><a href="re.html#useful-cases"><i class="fa fa-check"></i><b>13.3</b> Useful cases</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="re.html"><a href="re.html#matching-url"><i class="fa fa-check"></i><b>13.3.1</b> Matching URL</a></li>
+<li class="chapter" data-level="13.3.2" data-path="re.html"><a href="re.html#removing-all-html-tags-but-keeping-comment-content"><i class="fa fa-check"></i><b>13.3.2</b> Removing all html tags but keeping comment content</a></li>
+<li class="chapter" data-level="13.3.3" data-path="re.html"><a href="re.html#removing-space"><i class="fa fa-check"></i><b>13.3.3</b> Removing space</a></li>
+<li class="chapter" data-level="13.3.4" data-path="re.html"><a href="re.html#testing"><i class="fa fa-check"></i><b>13.3.4</b> Testing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tmchi.html"><a href="tmchi.html"><i class="fa fa-check"></i><b>14</b> Text processing in Chinese</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tmchi.html"><a href="tmchi.html#preprocessing"><i class="fa fa-check"></i><b>14.1</b> Preprocessing</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="tmchi.html"><a href="tmchi.html#assigning-unique-id-to-each-doc"><i class="fa fa-check"></i><b>14.1.1</b> Assigning unique id to each doc</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="tmchi.html"><a href="tmchi.html#tokenization"><i class="fa fa-check"></i><b>14.2</b> Tokenization</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tmchi.html"><a href="tmchi.html#initializer-tokenizer"><i class="fa fa-check"></i><b>14.2.1</b> Initializer tokenizer</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tmchi.html"><a href="tmchi.html#tokenization-1"><i class="fa fa-check"></i><b>14.2.2</b> Tokenization</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tmchi.html"><a href="tmchi.html#exploring-wording-features"><i class="fa fa-check"></i><b>14.3</b> Exploring wording features</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tmchi.html"><a href="tmchi.html#word-frequency-distribution"><i class="fa fa-check"></i><b>14.3.1</b> Word frequency distribution</a></li>
+<li class="chapter" data-level="14.3.2" data-path="tmchi.html"><a href="tmchi.html#keyness-by-logratio"><i class="fa fa-check"></i><b>14.3.2</b> Keyness by logratio</a></li>
+<li class="chapter" data-level="14.3.3" data-path="tmchi.html"><a href="tmchi.html#keyness-by-scatter"><i class="fa fa-check"></i><b>14.3.3</b> Keyness by scatter</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tmchi.html"><a href="tmchi.html#tf-idf"><i class="fa fa-check"></i><b>14.4</b> TF-IDF</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="tmchi.html"><a href="tmchi.html#term-frequency"><i class="fa fa-check"></i><b>14.4.1</b> Term-frequency</a></li>
+<li class="chapter" data-level="14.4.2" data-path="tmchi.html"><a href="tmchi.html#tf-idf-to-filter-significant-words"><i class="fa fa-check"></i><b>14.4.2</b> TF-IDF to filter significant words</a></li>
+<li class="chapter" data-level="14.4.3" data-path="tmchi.html"><a href="tmchi.html#practice.-understanding-tf-idf"><i class="fa fa-check"></i><b>14.4.3</b> Practice. Understanding TF-IDF</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV CRAWLER</b></span></li>
+<li class="chapter" data-level="15" data-path="crawler-overview.html"><a href="crawler-overview.html"><i class="fa fa-check"></i><b>15</b> Introduction to Web Scraping</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="crawler-overview.html"><a href="crawler-overview.html#webapi"><i class="fa fa-check"></i><b>15.1</b> Using Web API</a></li>
+<li class="chapter" data-level="15.2" data-path="crawler-overview.html"><a href="crawler-overview.html#craw_scraping"><i class="fa fa-check"></i><b>15.2</b> Webpage Scraping</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="scraping-104.html"><a href="scraping-104.html#complete-code-1"><i class="fa fa-check"></i><b>16.1</b> Complete Code</a></li>
+<li class="chapter" data-level="16.2" data-path="scraping-104.html"><a href="scraping-104.html#step-by-step"><i class="fa fa-check"></i><b>16.2</b> Step-by-Step</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-pages"><i class="fa fa-check"></i><b>16.2.1</b> Get the first pages</a></li>
+<li class="chapter" data-level="16.2.2" data-path="scraping-104.html"><a href="scraping-104.html#get-the-first-page-by-modifying-url"><i class="fa fa-check"></i><b>16.2.2</b> Get the first page by modifying url</a></li>
+<li class="chapter" data-level="16.2.3" data-path="scraping-104.html"><a href="scraping-104.html#combine-two-data-with-the-same-variables"><i class="fa fa-check"></i><b>16.2.3</b> Combine two data with the same variables</a></li>
+<li class="chapter" data-level="16.2.4" data-path="scraping-104.html"><a href="scraping-104.html#drop-out-hierarchical-variables"><i class="fa fa-check"></i><b>16.2.4</b> Drop out hierarchical variables</a></li>
+<li class="chapter" data-level="16.2.5" data-path="scraping-104.html"><a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way"><i class="fa fa-check"></i><b>16.2.5</b> Dropping hierarchical variables by dplyr way</a></li>
+<li class="chapter" data-level="16.2.6" data-path="scraping-104.html"><a href="scraping-104.html#finding-out-the-last-page-number"><i class="fa fa-check"></i><b>16.2.6</b> Finding out the last page number</a></li>
+<li class="chapter" data-level="16.2.7" data-path="scraping-104.html"><a href="scraping-104.html#using-for-loop-to-get-all-pages"><i class="fa fa-check"></i><b>16.2.7</b> Using for-loop to get all pages</a></li>
+<li class="chapter" data-level="16.2.8" data-path="scraping-104.html"><a href="scraping-104.html#combine-all-data.frame"><i class="fa fa-check"></i><b>16.2.8</b> combine all data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="read_json.html"><a href="read_json.html"><i class="fa fa-check"></i><b>17</b> Read JSON</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="read_json.html"><a href="read_json.html#reading-json"><i class="fa fa-check"></i><b>17.1</b> Reading JSON</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="read_json.html"><a href="read_json.html#json-as-a-string"><i class="fa fa-check"></i><b>17.1.1</b> JSON as a string</a></li>
+<li class="chapter" data-level="17.1.2" data-path="read_json.html"><a href="read_json.html#json-as-a-local-file"><i class="fa fa-check"></i><b>17.1.2</b> JSON as a local file</a></li>
+<li class="chapter" data-level="17.1.3" data-path="read_json.html"><a href="read_json.html#json-as-a-web-file"><i class="fa fa-check"></i><b>17.1.3</b> JSON as a web file</a></li>
+<li class="chapter" data-level="17.1.4" data-path="read_json.html"><a href="read_json.html#practice.-convert-ubike-json-to-data.frame"><i class="fa fa-check"></i><b>17.1.4</b> Practice. Convert ubike json to data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="read_json.html"><a href="read_json.html#case-1-air-quality-well-formatted"><i class="fa fa-check"></i><b>17.2</b> Case 1: Air-Quality (well-formatted )</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="read_json.html"><a href="read_json.html#using-knitrkable-for-better-printing"><i class="fa fa-check"></i><b>17.2.1</b> Using knitr::kable() for better printing</a></li>
+<li class="chapter" data-level="17.2.2" data-path="read_json.html"><a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects"><i class="fa fa-check"></i><b>17.2.2</b> Step-by-step: Parse JSON format string to R objects</a></li>
+<li class="chapter" data-level="17.2.3" data-path="read_json.html"><a href="read_json.html#combining-all"><i class="fa fa-check"></i><b>17.2.3</b> Combining all</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="read_json.html"><a href="read_json.html#practices-traversing-json-data"><i class="fa fa-check"></i><b>17.3</b> <strong>Practices: traversing json data</strong></a></li>
+<li class="chapter" data-level="17.4" data-path="read_json.html"><a href="read_json.html#case-2-cnyes-news-well-formatted"><i class="fa fa-check"></i><b>17.4</b> Case 2: cnyes news (well-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="read_json.html"><a href="read_json.html#option-取回資料並寫在硬碟"><i class="fa fa-check"></i><b>17.4.1</b> (option) 取回資料並寫在硬碟</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="read_json.html"><a href="read_json.html#case-3-footrumor-ill-formatted"><i class="fa fa-check"></i><b>17.5</b> Case 3: footRumor (ill-formatted)</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="read_json.html"><a href="read_json.html#處理非典型的json檔"><i class="fa fa-check"></i><b>17.5.1</b> 處理非典型的JSON檔</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="read_json.html"><a href="read_json.html#reviewing-json"><i class="fa fa-check"></i><b>17.6</b> Reviewing JSON</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="read_json.html"><a href="read_json.html#type-i-well-formatted-json-uvi-aqi-hospital_revisits"><i class="fa fa-check"></i><b>17.6.1</b> Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits</a></li>
+<li class="chapter" data-level="17.6.2" data-path="read_json.html"><a href="read_json.html#type-ii-hierarchical-json-rent591-facebook-graph-api-google-map"><i class="fa fa-check"></i><b>17.6.2</b> Type II: hierarchical JSON: rent591, facebook graph api, google map</a></li>
+<li class="chapter" data-level="17.6.3" data-path="read_json.html"><a href="read_json.html#type-iii-ill-formatted-json-food_rumors-ubike"><i class="fa fa-check"></i><b>17.6.3</b> Type III: Ill-formatted JSON: food_rumors, ubike</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="read_json.html"><a href="read_json.html#section"><i class="fa fa-check"></i><b>17.7</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="html-parser.html"><a href="html-parser.html"><i class="fa fa-check"></i><b>18</b> HTML Parser</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="html-parser.html"><a href="html-parser.html#html"><i class="fa fa-check"></i><b>18.1</b> HTML</a></li>
+<li class="chapter" data-level="18.2" data-path="html-parser.html"><a href="html-parser.html#detecting-element-path"><i class="fa fa-check"></i><b>18.2</b> Detecting Element Path</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="html-parser.html"><a href="html-parser.html#xpath"><i class="fa fa-check"></i><b>18.2.1</b> XPath</a></li>
+<li class="chapter" data-level="18.2.2" data-path="html-parser.html"><a href="html-parser.html#css-selector"><i class="fa fa-check"></i><b>18.2.2</b> CSS Selector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ptt-scrape.html"><a href="ptt-scrape.html"><i class="fa fa-check"></i><b>19</b> Scraping PTT</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_load_pkgs"><i class="fa fa-check"></i><b>19.1</b> Step 1. 載入所需套件</a></li>
+<li class="chapter" data-level="19.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_parsehtml"><i class="fa fa-check"></i><b>19.2</b> Step 2. 取回並剖析HTML檔案</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_read_html"><i class="fa fa-check"></i><b>19.2.1</b> <strong>Step 2-1. <code>read_html()</code> 將網頁取回並轉為xml_document</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_nodes"><i class="fa fa-check"></i><b>19.2.2</b> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong></a></li>
+<li class="chapter" data-level="19.2.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_xpath_css"><i class="fa fa-check"></i><b>19.2.3</b> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong></a></li>
+<li class="chapter" data-level="19.2.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_html_text"><i class="fa fa-check"></i><b>19.2.4</b> <strong>Step 2-3 <code>html_text()</code>或<code>html_attr()</code>轉出所要的資料</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_for"><i class="fa fa-check"></i><b>19.3</b> Step 3. 用for迴圈打撈多頁的連結</a></li>
+<li class="chapter" data-level="19.4" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_scrape_post"><i class="fa fa-check"></i><b>19.4</b> Step 4. 根據連結取回所有貼文</a></li>
+<li class="chapter" data-level="19.5" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_method2"><i class="fa fa-check"></i><b>19.5</b> 補充(1) 較好的寫法</a></li>
+<li class="chapter" data-level="19.6" data-path="ptt-scrape.html"><a href="ptt-scrape.html#ptt_best"><i class="fa fa-check"></i><b>19.6</b> 補充(2) 最佳的寫法</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="lebron.html"><a href="lebron.html"><i class="fa fa-check"></i><b>20</b> NYT: LeBron James Achievement</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="lebron.html"><a href="lebron.html#get-top250-players"><i class="fa fa-check"></i><b>20.1</b> Get top250 players</a></li>
+<li class="chapter" data-level="20.2" data-path="lebron.html"><a href="lebron.html#scraping-live-scores"><i class="fa fa-check"></i><b>20.2</b> Scraping live scores</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="lebron.html"><a href="lebron.html#testing-scrape-one"><i class="fa fa-check"></i><b>20.2.1</b> Testing: Scrape one</a></li>
+<li class="chapter" data-level="20.2.2" data-path="lebron.html"><a href="lebron.html#scrape-life-time-scores-of-all-top-250-players"><i class="fa fa-check"></i><b>20.2.2</b> Scrape life time scores of all top-250 players</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="lebron.html"><a href="lebron.html#cleaning-data-1"><i class="fa fa-check"></i><b>20.3</b> Cleaning data</a></li>
+<li class="chapter" data-level="20.4" data-path="lebron.html"><a href="lebron.html#visualization"><i class="fa fa-check"></i><b>20.4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="20.4.1" data-path="lebron.html"><a href="lebron.html#line-age-x-cumpts"><i class="fa fa-check"></i><b>20.4.1</b> Line: Age x cumPTS</a></li>
+<li class="chapter" data-level="20.4.2" data-path="lebron.html"><a href="lebron.html#line-year-x-cumpts"><i class="fa fa-check"></i><b>20.4.2</b> Line: year x cumPTS</a></li>
+<li class="chapter" data-level="20.4.3" data-path="lebron.html"><a href="lebron.html#line-age-x-per_by_year"><i class="fa fa-check"></i><b>20.4.3</b> Line: Age x PER_by_year</a></li>
+<li class="chapter" data-level="20.4.4" data-path="lebron.html"><a href="lebron.html#comparing-lebron-james-and-jabbar"><i class="fa fa-check"></i><b>20.4.4</b> Comparing LeBron James and Jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="lebron.html"><a href="lebron.html#scraping-and-cleaning"><i class="fa fa-check"></i><b>20.5</b> Scraping and cleaning</a>
+<ul>
+<li class="chapter" data-level="20.5.1" data-path="lebron.html"><a href="lebron.html#vis-ljames-and-jabbar"><i class="fa fa-check"></i><b>20.5.1</b> VIS LJames and jabbar</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="lebron.html"><a href="lebron.html#more-scraping-all-players"><i class="fa fa-check"></i><b>20.6</b> (More) Scraping all players</a>
+<ul>
+<li class="chapter" data-level="20.6.1" data-path="lebron.html"><a href="lebron.html#testing-1"><i class="fa fa-check"></i><b>20.6.1</b> Testing</a></li>
+<li class="chapter" data-level="20.6.2" data-path="lebron.html"><a href="lebron.html#scrape-from-a-z-except-xno-x"><i class="fa fa-check"></i><b>20.6.2</b> Scrape from a-z except x(no x)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V VISUALIZATION</b></span></li>
+<li class="chapter" data-level="21" data-path="visualization-1.html"><a href="visualization-1.html"><i class="fa fa-check"></i><b>21</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="visualization-1.html"><a href="visualization-1.html#ggplot2"><i class="fa fa-check"></i><b>21.1</b> ggplot2</a></li>
+<li class="chapter" data-level="21.2" data-path="visualization-1.html"><a href="visualization-1.html#vis-packages"><i class="fa fa-check"></i><b>21.2</b> VIS packages</a></li>
+<li class="chapter" data-level="21.3" data-path="visualization-1.html"><a href="visualization-1.html#case-gallery"><i class="fa fa-check"></i><b>21.3</b> Case Gallery</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="visualization-1.html"><a href="visualization-1.html#wp-paid-maternity-leave-產假支薪-barplot"><i class="fa fa-check"></i><b>21.3.1</b> WP: Paid Maternity Leave (產假支薪): barplot</a></li>
+<li class="chapter" data-level="21.3.2" data-path="visualization-1.html"><a href="visualization-1.html#nyt-population-changes-over-more-than-20000-years-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.2</b> NYT: Population Changes Over More Than 20,000 Years: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.3" data-path="visualization-1.html"><a href="visualization-1.html#nyt-lebron-james-achievement-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.3</b> NYT: LeBron James’ Achievement: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.4" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-village-population-distribution-coordinate-lineplot"><i class="fa fa-check"></i><b>21.3.4</b> Taiwan Village Population Distribution: Coordinate, lineplot</a></li>
+<li class="chapter" data-level="21.3.5" data-path="visualization-1.html"><a href="visualization-1.html#nyt-net-worth-by-age-group-coordinate-barplot"><i class="fa fa-check"></i><b>21.3.5</b> NYT: Net Worth by Age Group: Coordinate, barplot</a></li>
+<li class="chapter" data-level="21.3.6" data-path="visualization-1.html"><a href="visualization-1.html#nyt-optimistic-of-different-generation-association-scatter"><i class="fa fa-check"></i><b>21.3.6</b> NYT: Optimistic of different generation: Association, scatter</a></li>
+<li class="chapter" data-level="21.3.7" data-path="visualization-1.html"><a href="visualization-1.html#vaccinating-proportion-by-countries-amount-heatmap"><i class="fa fa-check"></i><b>21.3.7</b> Vaccinating Proportion by countries: Amount, heatmap</a></li>
+<li class="chapter" data-level="21.3.8" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-salary-distribution-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.8</b> Taiwan salary distribution: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.9" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-income-distribution-by-each-town-distribution-boxmap"><i class="fa fa-check"></i><b>21.3.9</b> Taiwan income distribution by each town: Distribution, boxmap</a></li>
+<li class="chapter" data-level="21.3.10" data-path="visualization-1.html"><a href="visualization-1.html#nyt-carbon-by-countries-proportion-treemap"><i class="fa fa-check"></i><b>21.3.10</b> NYT: Carbon by countries: Proportion, Treemap</a></li>
+<li class="chapter" data-level="21.3.11" data-path="visualization-1.html"><a href="visualization-1.html#taiwan-annual-expenditure-proportion-treemap"><i class="fa fa-check"></i><b>21.3.11</b> Taiwan Annual Expenditure: Proportion, Treemap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="ggplot.html"><a href="ggplot.html#依群組指定顏色"><i class="fa fa-check"></i><b>22.4.1</b> 依群組指定顏色</a></li>
+<li class="chapter" data-level="22.4.2" data-path="ggplot.html"><a href="ggplot.html#使用gghighlight套件"><i class="fa fa-check"></i><b>22.4.2</b> 使用gghighlight套件</a></li>
+<li class="chapter" data-level="22.4.3" data-path="ggplot.html"><a href="ggplot.html#為視覺化建立群組"><i class="fa fa-check"></i><b>22.4.3</b> 為視覺化建立群組</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="coordinate.html"><a href="coordinate.html"><i class="fa fa-check"></i><b>23</b> Coordinate</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="coordinate.html"><a href="coordinate.html#population_growth"><i class="fa fa-check"></i><b>23.1</b> NYT: Population Growth</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="coordinate.html"><a href="coordinate.html#parsing-table-from-pdf"><i class="fa fa-check"></i><b>23.1.1</b> Parsing table from pdf</a></li>
+<li class="chapter" data-level="23.1.2" data-path="coordinate.html"><a href="coordinate.html#x-and-y-with-log-scale"><i class="fa fa-check"></i><b>23.1.2</b> X and Y with log-scale</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="coordinate.html"><a href="coordinate.html#vilpopulation"><i class="fa fa-check"></i><b>23.2</b> Order as axis</a></li>
+<li class="chapter" data-level="23.3" data-path="coordinate.html"><a href="coordinate.html#log-scale"><i class="fa fa-check"></i><b>23.3</b> Log-scale</a></li>
+<li class="chapter" data-level="23.4" data-path="coordinate.html"><a href="coordinate.html#section-1"><i class="fa fa-check"></i><b>23.4</b> </a></li>
+<li class="chapter" data-level="23.5" data-path="coordinate.html"><a href="coordinate.html#square-root-scale"><i class="fa fa-check"></i><b>23.5</b> Square-root scale</a></li>
+<li class="chapter" data-level="23.6" data-path="coordinate.html"><a href="coordinate.html#increasing-percentage-as-y"><i class="fa fa-check"></i><b>23.6</b> Increasing percentage as Y</a>
+<ul>
+<li class="chapter" data-level="23.6.1" data-path="coordinate.html"><a href="coordinate.html#networth"><i class="fa fa-check"></i><b>23.6.1</b> NYT: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="23.6.2" data-path="coordinate.html"><a href="coordinate.html#read-and-sort-data"><i class="fa fa-check"></i><b>23.6.2</b> Read and sort data</a></li>
+</ul></li>
+<li class="chapter" data-level="23.7" data-path="coordinate.html"><a href="coordinate.html#xy-aspect-ratio"><i class="fa fa-check"></i><b>23.7</b> X/Y aspect ratio</a>
+<ul>
+<li class="chapter" data-level="23.7.1" data-path="coordinate.html"><a href="coordinate.html#optimistic"><i class="fa fa-check"></i><b>23.7.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="amount.html"><a href="amount.html"><i class="fa fa-check"></i><b>24</b> AMOUNT</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="amount.html"><a href="amount.html#bar-chart"><i class="fa fa-check"></i><b>24.1</b> Bar chart</a></li>
+<li class="chapter" data-level="24.2" data-path="amount.html"><a href="amount.html#vaccinating"><i class="fa fa-check"></i><b>24.2</b> Heatmap: Vaccination</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="amount.html"><a href="amount.html#the-case-vaccinating-coverage-by-month"><i class="fa fa-check"></i><b>24.2.1</b> The case: Vaccinating coverage by month</a></li>
+<li class="chapter" data-level="24.2.2" data-path="amount.html"><a href="amount.html#data-cleaning"><i class="fa fa-check"></i><b>24.2.2</b> Data cleaning</a></li>
+<li class="chapter" data-level="24.2.3" data-path="amount.html"><a href="amount.html#visualization-2"><i class="fa fa-check"></i><b>24.2.3</b> Visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html"><i class="fa fa-check"></i><b>25</b> DISTRIBUTION: Histogram &amp; Density</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-plot"><i class="fa fa-check"></i><b>25.1</b> Density plot</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-with-different-bandwidth"><i class="fa fa-check"></i><b>25.1.1</b> Density with different bandwidth</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram"><i class="fa fa-check"></i><b>25.2</b> Histogram</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#histogram-with-different-number-of-bins"><i class="fa fa-check"></i><b>25.2.1</b> Histogram with different number of bins</a></li>
+<li class="chapter" data-level="25.2.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#density-vs-histogram"><i class="fa fa-check"></i><b>25.2.2</b> Density vs histogram</a></li>
+<li class="chapter" data-level="25.2.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#positions-of-bar-chart"><i class="fa fa-check"></i><b>25.2.3</b> Positions of bar chart</a></li>
+<li class="chapter" data-level="25.2.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#display-two-groups-histogram-by-facet_wrap"><i class="fa fa-check"></i><b>25.2.4</b> Display two groups histogram by facet_wrap()</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#pyramid"><i class="fa fa-check"></i><b>25.3</b> Pyramid Plot</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#modify-geom_col-to-pyramid-plot"><i class="fa fa-check"></i><b>25.3.1</b> Modify geom_col() to pyramid plot</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#box-plot-muitiple-distrubution"><i class="fa fa-check"></i><b>25.4</b> Box plot: Muitiple Distrubution</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twsalary"><i class="fa fa-check"></i><b>25.4.1</b> TW-Salary (boxplot)</a></li>
+<li class="chapter" data-level="25.4.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#twincome"><i class="fa fa-check"></i><b>25.4.2</b> TW-Income (boxplot)</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-plot"><i class="fa fa-check"></i><b>25.5</b> Likert plot</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#stacked-or-dodged-bar"><i class="fa fa-check"></i><b>25.5.1</b> Stacked or dodged bar</a></li>
+<li class="chapter" data-level="25.5.2" data-path="distribution-histogram-density.html"><a href="distribution-histogram-density.html#likert-graph"><i class="fa fa-check"></i><b>25.5.2</b> Likert Graph</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="proportion.html"><a href="proportion.html"><i class="fa fa-check"></i><b>26</b> PROPORTION</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="proportion.html"><a href="proportion.html#pie-chart"><i class="fa fa-check"></i><b>26.1</b> Pie Chart</a></li>
+<li class="chapter" data-level="26.2" data-path="proportion.html"><a href="proportion.html#dodged-bar-chart"><i class="fa fa-check"></i><b>26.2</b> Dodged Bar Chart</a></li>
+<li class="chapter" data-level="26.3" data-path="proportion.html"><a href="proportion.html#treemap-nested-proportion"><i class="fa fa-check"></i><b>26.3</b> Treemap: Nested Proportion</a>
+<ul>
+<li class="chapter" data-level="26.3.1" data-path="proportion.html"><a href="proportion.html#carbon"><i class="fa fa-check"></i><b>26.3.1</b> NYT: Carbon by countries</a></li>
+<li class="chapter" data-level="26.3.2" data-path="proportion.html"><a href="proportion.html#twbudget"><i class="fa fa-check"></i><b>26.3.2</b> TW: Taiwan Annual Expenditure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="association.html"><a href="association.html"><i class="fa fa-check"></i><b>27</b> ASSOCIATION</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="association.html"><a href="association.html#等比例座標軸"><i class="fa fa-check"></i><b>27.1</b> 等比例座標軸</a>
+<ul>
+<li class="chapter" data-level="27.1.1" data-path="association.html"><a href="association.html#unicef-optimistic-wgoith"><i class="fa fa-check"></i><b>27.1.1</b> UNICEF-Optimistic (WGOITH)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="time-trends.html"><a href="time-trends.html"><i class="fa fa-check"></i><b>28</b> TIME &amp; TRENDS</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="time-trends.html"><a href="time-trends.html#highlighting-unemployed-population"><i class="fa fa-check"></i><b>28.1</b> Highlighting: Unemployed Population</a>
+<ul>
+<li class="chapter" data-level="28.1.1" data-path="time-trends.html"><a href="time-trends.html#the-econimics-data"><i class="fa fa-check"></i><b>28.1.1</b> The econimics data</a></li>
+<li class="chapter" data-level="28.1.2" data-path="time-trends.html"><a href="time-trends.html#setting-marking-area"><i class="fa fa-check"></i><b>28.1.2</b> Setting marking area</a></li>
+</ul></li>
+<li class="chapter" data-level="28.2" data-path="time-trends.html"><a href="time-trends.html#smoothing-unemployed"><i class="fa fa-check"></i><b>28.2</b> Smoothing: Unemployed</a>
+<ul>
+<li class="chapter" data-level="28.2.1" data-path="time-trends.html"><a href="time-trends.html#polls_2008"><i class="fa fa-check"></i><b>28.2.1</b> Polls_2008</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="geospatial.html"><a href="geospatial.html"><i class="fa fa-check"></i><b>29</b> GEOSPATIAL</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="geospatial.html"><a href="geospatial.html#world-map"><i class="fa fa-check"></i><b>29.1</b> World Map</a>
+<ul>
+<li class="chapter" data-level="29.1.1" data-path="geospatial.html"><a href="geospatial.html#bind-data-to-map-data"><i class="fa fa-check"></i><b>29.1.1</b> Bind data to map data</a></li>
+<li class="chapter" data-level="29.1.2" data-path="geospatial.html"><a href="geospatial.html#drawing-map"><i class="fa fa-check"></i><b>29.1.2</b> Drawing Map</a></li>
+<li class="chapter" data-level="29.1.3" data-path="geospatial.html"><a href="geospatial.html#drawing-map-by-specific-colors"><i class="fa fa-check"></i><b>29.1.3</b> Drawing map by specific colors</a></li>
+<li class="chapter" data-level="29.1.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-map-for-every-years"><i class="fa fa-check"></i><b>29.1.4</b> Practice. Drawing map for every years</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="geospatial.html"><a href="geospatial.html#read-spatial-data-from-segis"><i class="fa fa-check"></i><b>29.2</b> Read Spatial Data from SEGIS</a>
+<ul>
+<li class="chapter" data-level="29.2.1" data-path="geospatial.html"><a href="geospatial.html#the-case-population-and-density-of-taipei"><i class="fa fa-check"></i><b>29.2.1</b> The case: Population and Density of Taipei</a></li>
+<li class="chapter" data-level="29.2.2" data-path="geospatial.html"><a href="geospatial.html#projection-投影的概念"><i class="fa fa-check"></i><b>29.2.2</b> Projection 投影的概念</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="geospatial.html"><a href="geospatial.html#town-level-taipei-income"><i class="fa fa-check"></i><b>29.3</b> Town-level: Taipei income</a>
+<ul>
+<li class="chapter" data-level="29.3.1" data-path="geospatial.html"><a href="geospatial.html#reading-income-data"><i class="fa fa-check"></i><b>29.3.1</b> Reading income data</a></li>
+<li class="chapter" data-level="29.3.2" data-path="geospatial.html"><a href="geospatial.html#read-taipei-zip-code"><i class="fa fa-check"></i><b>29.3.2</b> Read Taipei zip code</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="geospatial.html"><a href="geospatial.html#twmap"><i class="fa fa-check"></i><b>29.4</b> Voting map - County level</a>
+<ul>
+<li class="chapter" data-level="29.4.1" data-path="geospatial.html"><a href="geospatial.html#loading-county-level-president-voting-rate"><i class="fa fa-check"></i><b>29.4.1</b> Loading county-level president voting rate</a></li>
+<li class="chapter" data-level="29.4.2" data-path="geospatial.html"><a href="geospatial.html#sf-to-load-county-level-shp"><i class="fa fa-check"></i><b>29.4.2</b> sf to load county level shp</a></li>
+<li class="chapter" data-level="29.4.3" data-path="geospatial.html"><a href="geospatial.html#simplfying-map-polygon"><i class="fa fa-check"></i><b>29.4.3</b> Simplfying map polygon</a></li>
+<li class="chapter" data-level="29.4.4" data-path="geospatial.html"><a href="geospatial.html#practice.-drawing-taiwan-county-scale-map-from-segis-data"><i class="fa fa-check"></i><b>29.4.4</b> Practice. Drawing Taiwan county-scale map from SEGIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="geospatial.html"><a href="geospatial.html#mapping-data-with-grid"><i class="fa fa-check"></i><b>29.5</b> Mapping data with grid</a>
+<ul>
+<li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
+<li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
+<ul>
+<li class="chapter" data-level="30.1" data-path="network-vis.html"><a href="network-vis.html#generating-networks"><i class="fa fa-check"></i><b>30.1</b> Generating networks</a>
+<ul>
+<li class="chapter" data-level="30.1.1" data-path="network-vis.html"><a href="network-vis.html#random-network"><i class="fa fa-check"></i><b>30.1.1</b> Random network</a></li>
+<li class="chapter" data-level="30.1.2" data-path="network-vis.html"><a href="network-vis.html#random-network-1"><i class="fa fa-check"></i><b>30.1.2</b> Random network</a></li>
+</ul></li>
+<li class="chapter" data-level="30.2" data-path="network-vis.html"><a href="network-vis.html#retrieve-top3-components"><i class="fa fa-check"></i><b>30.2</b> Retrieve Top3 Components</a>
+<ul>
+<li class="chapter" data-level="30.2.1" data-path="network-vis.html"><a href="network-vis.html#visualize-again"><i class="fa fa-check"></i><b>30.2.1</b> Visualize again</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="network-vis.html"><a href="network-vis.html#motif-visualization-and-analysis"><i class="fa fa-check"></i><b>30.3</b> Motif visualization and analysis</a>
+<ul>
+<li class="chapter" data-level="30.3.1" data-path="network-vis.html"><a href="network-vis.html#motif-type"><i class="fa fa-check"></i><b>30.3.1</b> Motif type</a></li>
+<li class="chapter" data-level="30.3.2" data-path="network-vis.html"><a href="network-vis.html#motif-analysis"><i class="fa fa-check"></i><b>30.3.2</b> Motif analysis</a></li>
+<li class="chapter" data-level="30.3.3" data-path="network-vis.html"><a href="network-vis.html#generate-motives"><i class="fa fa-check"></i><b>30.3.3</b> Generate motives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="interactivity.html"><a href="interactivity.html"><i class="fa fa-check"></i><b>31</b> Interactivity</a>
+<ul>
+<li class="chapter" data-level="31.1" data-path="interactivity.html"><a href="interactivity.html#ggplotly"><i class="fa fa-check"></i><b>31.1</b> ggplotly</a>
+<ul>
+<li class="chapter" data-level="31.1.1" data-path="interactivity.html"><a href="interactivity.html#line-chart"><i class="fa fa-check"></i><b>31.1.1</b> LINE CHART</a></li>
+<li class="chapter" data-level="31.1.2" data-path="interactivity.html"><a href="interactivity.html#scatter"><i class="fa fa-check"></i><b>31.1.2</b> SCATTER</a></li>
+<li class="chapter" data-level="31.1.3" data-path="interactivity.html"><a href="interactivity.html#barplot"><i class="fa fa-check"></i><b>31.1.3</b> Barplot</a></li>
+<li class="chapter" data-level="31.1.4" data-path="interactivity.html"><a href="interactivity.html#boxplot"><i class="fa fa-check"></i><b>31.1.4</b> Boxplot</a></li>
+<li class="chapter" data-level="31.1.5" data-path="interactivity.html"><a href="interactivity.html#treemap-global-carbon"><i class="fa fa-check"></i><b>31.1.5</b> Treemap (Global Carbon)</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="interactivity.html"><a href="interactivity.html#產製圖表動畫"><i class="fa fa-check"></i><b>31.2</b> 產製圖表動畫</a>
+<ul>
+<li class="chapter" data-level="31.2.1" data-path="interactivity.html"><a href="interactivity.html#地圖下載與轉換投影方法"><i class="fa fa-check"></i><b>31.2.1</b> 地圖下載與轉換投影方法</a></li>
+<li class="chapter" data-level="31.2.2" data-path="interactivity.html"><a href="interactivity.html#靜態繪圖測試"><i class="fa fa-check"></i><b>31.2.2</b> 靜態繪圖測試</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI CASE STUDIES</b></span></li>
+<li class="chapter" data-level="32" data-path="wgoitg.html"><a href="wgoitg.html"><i class="fa fa-check"></i><b>32</b> WGOITG of NyTimes</a></li>
+<li class="chapter" data-level="33" data-path="inequality-net-worth-by-age-group.html"><a href="inequality-net-worth-by-age-group.html"><i class="fa fa-check"></i><b>33</b> Inequality: Net Worth by Age Group</a></li>
+<li class="chapter" data-level="34" data-path="optimism-survey-by-countries.html"><a href="optimism-survey-by-countries.html"><i class="fa fa-check"></i><b>34</b> Optimism Survey by Countries</a></li>
+<li class="chapter" data-level="35" data-path="taiwan.html"><a href="taiwan.html"><i class="fa fa-check"></i><b>35</b> Case Studies (Taiwan)</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="taiwan.html"><a href="taiwan.html#tw-aqi-visual-studies"><i class="fa fa-check"></i><b>35.1</b> TW AQI Visual Studies</a>
+<ul>
+<li class="chapter" data-level="35.1.1" data-path="taiwan.html"><a href="taiwan.html#eda-load-data-from-github"><i class="fa fa-check"></i><b>35.1.1</b> eda-load-data-from-github</a></li>
+<li class="chapter" data-level="35.1.2" data-path="taiwan.html"><a href="taiwan.html#trending-central-tendency"><i class="fa fa-check"></i><b>35.1.2</b> Trending: Central tendency</a></li>
+<li class="chapter" data-level="35.1.3" data-path="taiwan.html"><a href="taiwan.html#trending-extreme-value"><i class="fa fa-check"></i><b>35.1.3</b> Trending: Extreme value</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="36" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>36</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="36.1" data-path="appendix.html"><a href="appendix.html#dataset"><i class="fa fa-check"></i><b>36.1</b> Dataset</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Journalism</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="trump" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Trump’s tweets<a href="trump.html#trump" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>本範例取材自David Robinson的blog文章「<a href="http://varianceexplained.org/r/trump-tweets/" title="Text analysis of Trump&#39;s tweets confirms he writes only the (angrier) Android half">Text analysis of Trump’s tweets confirms he writes only the (angrier) Android half</a>」。David Robinson是「<a href="https://www.tidytextmining.com/">Text Mining with R</a>」的共同作者， 可參考該書籍上的範例「<a href="https://www.tidytextmining.com/twitter.html">7 Case study: comparing Twitter archives | Text Mining with R (tidytextmining.com)</a>」。</p>
+<p>這篇文章探討了美國前總統川普（Donald Trump）的推特帳號。有一個假設聲稱，當川普在推特上祝福奧運會選手好運時，他使用的是 iPhone ；當他侮辱競爭對手時，他通常是用 Android 來發推。文章作者想要透過數據分析來探討這個假設的真實性。</p>
+<p>作者使用了文字探勘和情感分析等技術，從川普的推特內容入手，分析了不同時間和使用不同手機所發的推文。結果顯示，Android 和 iPhone 所發的推文顯然是由不同的人所發，他們在使用標籤、連結和轉推的方式上也不同。此外，Android 的推文更加憤怒和負面，而 iPhone 的推文則傾向於發佈善意的公告和圖片。整體而言，這些分析讓我們能夠區分出競選團隊所發佈的推文（iPhone）和川普自己所發佈的推文（Android）。</p>
+<p>這個教學案例涵蓋了使用 R 語言進行社群輿論資料（tweets）的探索性分析的各種技術和工具。除了使用常見的資料處理套件 dplyr 和視覺化套件 ggplot 外，還使用了文字處理套件 stringr 和時間處理套件 lubridate，以及關鍵字分析技術 keyness。</p>
+<p>透過這個教學案例，學習者可以掌握如何：</p>
+<ul>
+<li><p>使用 dplyr 和 ggplot 進行資料處理和視覺化。</p></li>
+<li><p>使用 stringr 和 extract() 進行文字處理，例如從文本中提取關鍵字。</p></li>
+<li><p>使用 lubridate 進行時間處理，例如轉換時間格式和提取時間戳記。</p></li>
+<li><p>學習關鍵字分析技術 keyness，以找出在不同文本之間對彼此相對突出的關鍵字。</p></li>
+</ul>
+<p>這段程式碼是用來設計 ggplot2 的主題風格。作者首先定義了一個名為 <code>th</code> 的自訂主題，基於 ggplot2 的 <code>theme_minimal()</code> 主題，並設置了不同元素的字型、大小和樣式等屬性。接著，作者定義了一個名為 <code>new_style()</code> 的函數，用於更精細的主題風格設置，包括圖表標題、圖例、軸標籤和刻度標籤等。透過這些設置，可以讓 ggplot2 圖表更具有視覺吸引力，並強調重要的圖形元素，使圖表更加清晰易懂。這兩種方式都可以用來定義主題</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="trump.html#cb460-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb460-2"><a href="trump.html#cb460-2" tabindex="-1"></a><span class="co"># library(lubridate) # has been included in tidyverse</span></span>
+<span id="cb460-3"><a href="trump.html#cb460-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb460-4"><a href="trump.html#cb460-4" tabindex="-1"></a></span>
+<span id="cb460-5"><a href="trump.html#cb460-5" tabindex="-1"></a><span class="co"># Self-designed theme</span></span>
+<span id="cb460-6"><a href="trump.html#cb460-6" tabindex="-1"></a>th <span class="ot">&lt;-</span>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb460-7"><a href="trump.html#cb460-7" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">24</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb460-8"><a href="trump.html#cb460-8" tabindex="-1"></a>          <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">18</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb460-9"><a href="trump.html#cb460-9" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">18</span>),</span>
+<span id="cb460-10"><a href="trump.html#cb460-10" tabindex="-1"></a>          <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>, <span class="at">size=</span><span class="dv">18</span>, <span class="at">face=</span><span class="st">&quot;italic&quot;</span>),</span>
+<span id="cb460-11"><a href="trump.html#cb460-11" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">18</span>)</span>
+<span id="cb460-12"><a href="trump.html#cb460-12" tabindex="-1"></a>          )</span>
+<span id="cb460-13"><a href="trump.html#cb460-13" tabindex="-1"></a></span>
+<span id="cb460-14"><a href="trump.html#cb460-14" tabindex="-1"></a><span class="co"># more settings</span></span>
+<span id="cb460-15"><a href="trump.html#cb460-15" tabindex="-1"></a>new_style <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb460-16"><a href="trump.html#cb460-16" tabindex="-1"></a>  font <span class="ot">&lt;-</span> <span class="st">&quot;Helvetica&quot;</span></span>
+<span id="cb460-17"><a href="trump.html#cb460-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb460-18"><a href="trump.html#cb460-18" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family=</span>font, <span class="at">size=</span><span class="dv">28</span>, <span class="at">face=</span><span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb460-19"><a href="trump.html#cb460-19" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">family=</span>font, <span class="at">size=</span><span class="dv">22</span>, </span>
+<span id="cb460-20"><a href="trump.html#cb460-20" tabindex="-1"></a>                                   <span class="at">margin=</span><span class="fu">margin</span>(<span class="dv">9</span>,<span class="dv">0</span>,<span class="dv">9</span>,<span class="dv">0</span>)),</span>
+<span id="cb460-21"><a href="trump.html#cb460-21" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-22"><a href="trump.html#cb460-22" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb460-23"><a href="trump.html#cb460-23" tabindex="-1"></a>      <span class="at">legend.text.align =</span> <span class="dv">0</span>,</span>
+<span id="cb460-24"><a href="trump.html#cb460-24" tabindex="-1"></a>      <span class="at">legend.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-25"><a href="trump.html#cb460-25" tabindex="-1"></a>      <span class="co"># legend.title = element_blank(),</span></span>
+<span id="cb460-26"><a href="trump.html#cb460-26" tabindex="-1"></a>      <span class="at">legend.key =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-27"><a href="trump.html#cb460-27" tabindex="-1"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family=</span>font, <span class="at">size=</span><span class="dv">18</span>, <span class="at">color=</span><span class="st">&quot;#222222&quot;</span>),</span>
+<span id="cb460-28"><a href="trump.html#cb460-28" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family=</span>font, <span class="at">size=</span><span class="dv">18</span>, <span class="at">color=</span><span class="st">&quot;#222222&quot;</span>),</span>
+<span id="cb460-29"><a href="trump.html#cb460-29" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">margin=</span><span class="fu">margin</span>(<span class="dv">5</span>, <span class="at">b =</span> <span class="dv">10</span>)),</span>
+<span id="cb460-30"><a href="trump.html#cb460-30" tabindex="-1"></a>      <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-31"><a href="trump.html#cb460-31" tabindex="-1"></a>      <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-32"><a href="trump.html#cb460-32" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-33"><a href="trump.html#cb460-33" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color=</span><span class="st">&quot;#cbcbcb&quot;</span>),</span>
+<span id="cb460-34"><a href="trump.html#cb460-34" tabindex="-1"></a>      <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-35"><a href="trump.html#cb460-35" tabindex="-1"></a>      <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb460-36"><a href="trump.html#cb460-36" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill=</span><span class="st">&quot;white&quot;</span>),</span>
+<span id="cb460-37"><a href="trump.html#cb460-37" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size  =</span> <span class="dv">22</span>,  <span class="at">hjust =</span> <span class="dv">0</span>)</span>
+<span id="cb460-38"><a href="trump.html#cb460-38" tabindex="-1"></a>      )</span>
+<span id="cb460-39"><a href="trump.html#cb460-39" tabindex="-1"></a>  }</span></code></pre></div>
+<div id="loading-data" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Loading data<a href="trump.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="trump.html#cb461-1" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">&quot;http://varianceexplained.org/files/trump_tweets_df.rda&quot;</span>))</span>
+<span id="cb461-2"><a href="trump.html#cb461-2" tabindex="-1"></a><span class="fu">dim</span>(trump_tweets_df)</span></code></pre></div>
+<pre class="output"><code>## [1] 1512   16</code></pre>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="trump.html#cb463-1" tabindex="-1"></a><span class="fu">names</span>(trump_tweets_df)</span></code></pre></div>
+<pre class="output"><code>##  [1] &quot;text&quot;          &quot;favorited&quot;     &quot;favoriteCount&quot; &quot;replyToSN&quot;    
+##  [5] &quot;created&quot;       &quot;truncated&quot;     &quot;replyToSID&quot;    &quot;id&quot;           
+##  [9] &quot;replyToUID&quot;    &quot;statusSource&quot;  &quot;screenName&quot;    &quot;retweetCount&quot; 
+## [13] &quot;isRetweet&quot;     &quot;retweeted&quot;     &quot;longitude&quot;     &quot;latitude&quot;</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="trump.html#cb465-1" tabindex="-1"></a>trump_tweets_df <span class="sc">%&gt;%</span></span>
+<span id="cb465-2"><a href="trump.html#cb465-2" tabindex="-1"></a>    <span class="fu">select</span>(id, text, created, favoriteCount,  retweetCount, statusSource) <span class="sc">%&gt;%</span></span>
+<span id="cb465-3"><a href="trump.html#cb465-3" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre class="output"><code>## # A tibble: 10 × 6
+##    id          text  created             favoriteCount retweetCount statusSource
+##    &lt;chr&gt;       &lt;chr&gt; &lt;dttm&gt;                      &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;       
+##  1 7626698825… &quot;My … 2016-08-08 15:20:44          9214         3107 &quot;&lt;a href=\&quot;…
+##  2 7626415954… &quot;Joi… 2016-08-08 13:28:20          6981         2390 &quot;&lt;a href=\&quot;…
+##  3 7624396589… &quot;#IC… 2016-08-08 00:05:54         15724         6691 &quot;&lt;a href=\&quot;…
+##  4 7624253718… &quot;Mic… 2016-08-07 23:09:08         19837         6402 &quot;&lt;a href=\&quot;…
+##  5 7624008698… &quot;The… 2016-08-07 21:31:46         34051        11717 &quot;&lt;a href=\&quot;…
+##  6 7622845333… &quot;I s… 2016-08-07 13:49:29         29831         9892 &quot;&lt;a href=\&quot;…
+##  7 7621109187… &quot;Tha… 2016-08-07 02:19:37         19223         5784 &quot;&lt;a href=\&quot;…
+##  8 7621069044… &quot;.@L… 2016-08-07 02:03:39         19543         7930 &quot;&lt;a href=\&quot;…
+##  9 7621044117… &quot;I a… 2016-08-07 01:53:45         75488        24663 &quot;&lt;a href=\&quot;…
+## 10 7620164261… &quot;#Cr… 2016-08-06 20:04:08         23661         7903 &quot;&lt;a href=\&quot;…</code></pre>
+</div>
+<div id="cleaning-data" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Cleaning data<a href="trump.html#cleaning-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>這段程式碼的目的是從一個叫做<strong><code>trump_tweets_df</code></strong>的data.frame中，選擇幾個欄位並且進行過濾和轉換，最後將結果存儲在一個名為<strong><code>tweets</code></strong>的新data.frame中。</p>
+<p><strong><code>extract()</code></strong>函數用於從<strong><code>statusSource</code></strong>欄位中提取出一個新欄位<strong><code>source</code></strong>，該欄位包含了<strong><code>statusSource</code></strong>中的<strong><code>Twitter for iPhone</code></strong>和<strong><code>Twitter for Android</code></strong>這兩種可能的字串。這裡使用了一個正則表達式<strong><code>Twitter for (.*?)&lt;</code></strong>，該表達式表示提取出以<strong><code>Twitter for</code></strong>開頭，且在<strong><code>&lt;</code></strong>符號之前的任意字元序列，並將結果存儲在名為<strong><code>source</code></strong>的新欄位中。</p>
+<p>最後，<strong><code>filter()</code></strong>函數用於過濾出<strong><code>source</code></strong>欄位中值為<strong><code>iPhone</code></strong>或<strong><code>Android</code></strong>的記錄，並將過濾結果存儲在<strong><code>tweets</code></strong>資料框中。</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="trump.html#cb467-1" tabindex="-1"></a><span class="co"># tidyr::extract()</span></span>
+<span id="cb467-2"><a href="trump.html#cb467-2" tabindex="-1"></a><span class="co"># stringr::str_replace</span></span>
+<span id="cb467-3"><a href="trump.html#cb467-3" tabindex="-1"></a></span>
+<span id="cb467-4"><a href="trump.html#cb467-4" tabindex="-1"></a>trump_tweets_df<span class="sc">$</span>statusSource[<span class="dv">1</span>]</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;&lt;a href=\&quot;http://twitter.com/download/android\&quot; rel=\&quot;nofollow\&quot;&gt;Twitter for Android&lt;/a&gt;&quot;</code></pre>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="trump.html#cb469-1" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> trump_tweets_df <span class="sc">%&gt;%</span></span>
+<span id="cb469-2"><a href="trump.html#cb469-2" tabindex="-1"></a>    <span class="fu">select</span>(id, statusSource, text, created) <span class="sc">%&gt;%</span></span>
+<span id="cb469-3"><a href="trump.html#cb469-3" tabindex="-1"></a>    <span class="co"># mutate(source = str_replace(statusSource, </span></span>
+<span id="cb469-4"><a href="trump.html#cb469-4" tabindex="-1"></a>    <span class="co">#                             &quot;.*Twitter for (.*?)&lt;.*&quot;, &quot;\\1&quot;)) %&gt;%</span></span>
+<span id="cb469-5"><a href="trump.html#cb469-5" tabindex="-1"></a>    <span class="co"># mutate(source = str_extract(statusSource, &#39;Twitter for (.*?)&lt;&#39;)) %&gt;% View</span></span>
+<span id="cb469-6"><a href="trump.html#cb469-6" tabindex="-1"></a>    <span class="fu">extract</span>(statusSource, <span class="st">&quot;source&quot;</span>, <span class="st">&quot;Twitter for (.*?)&lt;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb469-7"><a href="trump.html#cb469-7" tabindex="-1"></a>    <span class="fu">filter</span>(source <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;iPhone&quot;</span>, <span class="st">&quot;Android&quot;</span>))</span>
+<span id="cb469-8"><a href="trump.html#cb469-8" tabindex="-1"></a></span>
+<span id="cb469-9"><a href="trump.html#cb469-9" tabindex="-1"></a><span class="co"># Using stringr::str_replace() to mutate a new source variable, replacing tidyr::</span></span>
+<span id="cb469-10"><a href="trump.html#cb469-10" tabindex="-1"></a></span>
+<span id="cb469-11"><a href="trump.html#cb469-11" tabindex="-1"></a><span class="co"># str(tweets)</span></span></code></pre></div>
+<div class="practice">
+<p><strong>Practice</strong>. 有時候我們會希望避免用太多種套件來寫程式，例如上面的<code>extract()</code>便屬於<code>tidyr</code>的函式。事實上我們可以用<code>stringr::str_replace()</code>來達到這個目的。嘗試寫寫看？或者嘗試問ChatGPT看看？</p>
+<p><strong>Prompt.</strong> 我如果希望用<code>stringr::str_replace</code>來達到<code>extract(statusSource, "source", "Twitter for (.*?)&lt;") %&gt;%</code>的功能，我該怎麼寫？</p>
+<p><code>mutate(source = stringr::str_replace(statusSource, ".*Twitter for (.*?)&lt;.*", "\\1")) %&gt;%</code></p>
+</div>
+</div>
+<div id="visual-exploring" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Visual Exploring<a href="trump.html#visual-exploring" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="productivity-by-time" class="section level3 hasAnchor" number="12.3.1">
+<h3><span class="header-section-number">12.3.1</span> Productivity by time<a href="trump.html#productivity-by-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>hour = hour(with_tz(created, "EST"))</code>這段程式碼使用了<strong><code>with_tz()</code></strong>函數將<strong><code>created</code></strong>欄位的時區轉換為<strong><code>"EST"</code></strong>所對應的時區，然後使用<strong><code>hour()</code></strong>函數提取出該日期時間對應的小時數，並將結果存儲在<strong><code>hour</code></strong>變數中。該程式碼會將例如<strong><code>"2023-04-12 12:30:00"</code></strong>轉換為美國東部標準時間對應的小時數，即<code>12</code>（因為12點30分所在的小時是12點）。他所取出的並非某日的12時，他就只是取出是12時。</p>
+<p><strong><code>toplot1</code>和<code>toplot2</code>的差異在於對<code>source</code>欄位的分組處理不同</strong>。具體來說，<strong><code>toplot1</code></strong>中沒有對<strong><code>source</code></strong>欄位進行分組，而是在後面使用<strong><code>mutate()</code></strong>函數將計數結果中的<strong><code>n</code></strong>列和<strong><code>sum(n)</code></strong>相除，得到了百分比列<strong><code>percent</code></strong>。這導致計算的是整個資料集中的<strong><code>hour</code></strong>和<strong><code>source</code></strong>的計數和百分比。相反，<strong><code>toplot2</code></strong>中使用了<strong><code>group_by()</code></strong>函數將<strong><code>source</code></strong>欄位進行分組處理，並在後面使用<strong><code>mutate()</code></strong>函數和<strong><code>ungroup()</code></strong>函數計算了每個<strong><code>source</code></strong>和<strong><code>hour</code></strong>的計數和百分比，即分別計算了<strong><code>iPhone</code></strong>和<strong><code>Android</code></strong>的計數和百分比。因此，<strong><code>toplot1</code></strong>和<strong><code>toplot2</code></strong>的計算結果是不同的，前者的計算結果中包含了整個資料集的計數和百分比，而後者的計算結果則分別對<strong><code>iPhone</code></strong>和<strong><code>Android</code></strong>進行了計數和百分比的計算。</p>
+<p>程式碼使用了<strong><code>ggplot()</code></strong>函數創建了一個<strong><code>ggplot2</code></strong>物件，並使用<strong><code>aes()</code></strong>函數設置了<strong><code>hour</code></strong>和<strong><code>percent</code></strong>欄位作為X軸和Y軸的變數，並且設置<strong><code>color = source</code></strong>表示以<strong><code>source</code></strong>欄位的值作為不同群組（<code>iPhone</code> vs. <code>Android</code>）折線的顏色。接著，程式碼使用<strong><code>geom_line()</code></strong>函數添加折線到圖中，設置了折線的粗細為1。使用<strong><code>scale_color_manual()</code></strong>函數設置了圖例的名稱為<strong><code>Phone System</code></strong>，標籤依照分組指定為為<strong><code>Android</code></strong>和<strong><code>iPhone</code></strong>，顏色分別為<strong><code>royalblue</code></strong>和<strong><code>gold</code></strong>，並使用<strong><code>scale_y_continuous()</code></strong>函數設置了Y軸刻度標籤的格式為百分比形式，即0%到100%之間的數值。注意：<code>percent_format()</code>並非ggplot2既有的函式，要另外安裝並匯入<code>library(scales)</code>。</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="trump.html#cb470-1" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># for percent_format()</span></span>
+<span id="cb470-2"><a href="trump.html#cb470-2" tabindex="-1"></a><span class="co"># lubridate::hour()</span></span>
+<span id="cb470-3"><a href="trump.html#cb470-3" tabindex="-1"></a><span class="co"># lubridate::with_tz()</span></span>
+<span id="cb470-4"><a href="trump.html#cb470-4" tabindex="-1"></a><span class="co"># scales::percent_format()</span></span>
+<span id="cb470-5"><a href="trump.html#cb470-5" tabindex="-1"></a></span>
+<span id="cb470-6"><a href="trump.html#cb470-6" tabindex="-1"></a>toplot1 <span class="ot">&lt;-</span> tweets <span class="sc">%&gt;%</span></span>
+<span id="cb470-7"><a href="trump.html#cb470-7" tabindex="-1"></a>    <span class="fu">count</span>(source, <span class="at">hour =</span> <span class="fu">hour</span>(<span class="fu">with_tz</span>(created, <span class="st">&quot;EST&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb470-8"><a href="trump.html#cb470-8" tabindex="-1"></a>    <span class="co"># group_by(source) %&gt;%</span></span>
+<span id="cb470-9"><a href="trump.html#cb470-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">percent =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb470-10"><a href="trump.html#cb470-10" tabindex="-1"></a>    <span class="co"># ungroup() %&gt;%</span></span>
+<span id="cb470-11"><a href="trump.html#cb470-11" tabindex="-1"></a>    </span>
+<span id="cb470-12"><a href="trump.html#cb470-12" tabindex="-1"></a>toplot2 <span class="ot">&lt;-</span> tweets <span class="sc">%&gt;%</span></span>
+<span id="cb470-13"><a href="trump.html#cb470-13" tabindex="-1"></a>    <span class="fu">count</span>(source, <span class="at">hour =</span> <span class="fu">hour</span>(<span class="fu">with_tz</span>(created, <span class="st">&quot;EST&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb470-14"><a href="trump.html#cb470-14" tabindex="-1"></a>    <span class="fu">group_by</span>(source) <span class="sc">%&gt;%</span></span>
+<span id="cb470-15"><a href="trump.html#cb470-15" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">percent =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb470-16"><a href="trump.html#cb470-16" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb470-17"><a href="trump.html#cb470-17" tabindex="-1"></a></span>
+<span id="cb470-18"><a href="trump.html#cb470-18" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> toplot1 <span class="sc">%&gt;%</span></span>
+<span id="cb470-19"><a href="trump.html#cb470-19" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb470-20"><a href="trump.html#cb470-20" tabindex="-1"></a>    <span class="fu">aes</span>(hour, percent, <span class="at">color =</span> source) <span class="sc">+</span></span>
+<span id="cb470-21"><a href="trump.html#cb470-21" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb470-22"><a href="trump.html#cb470-22" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;Phone System&quot;</span>, </span>
+<span id="cb470-23"><a href="trump.html#cb470-23" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Android&quot;</span>, <span class="st">&quot;iPhone&quot;</span>),</span>
+<span id="cb470-24"><a href="trump.html#cb470-24" tabindex="-1"></a>                       <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;royalblue&quot;</span>, <span class="st">&quot;gold&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb470-25"><a href="trump.html#cb470-25" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb470-26"><a href="trump.html#cb470-26" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hour of day (EST)&quot;</span>,</span>
+<span id="cb470-27"><a href="trump.html#cb470-27" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;% of tweets&quot;</span>,</span>
+<span id="cb470-28"><a href="trump.html#cb470-28" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb470-29"><a href="trump.html#cb470-29" tabindex="-1"></a></span>
+<span id="cb470-30"><a href="trump.html#cb470-30" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> toplot2 <span class="sc">%&gt;%</span></span>
+<span id="cb470-31"><a href="trump.html#cb470-31" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb470-32"><a href="trump.html#cb470-32" tabindex="-1"></a>    <span class="fu">aes</span>(hour, percent, <span class="at">color =</span> source) <span class="sc">+</span></span>
+<span id="cb470-33"><a href="trump.html#cb470-33" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb470-34"><a href="trump.html#cb470-34" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;Phone System&quot;</span>, </span>
+<span id="cb470-35"><a href="trump.html#cb470-35" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Android&quot;</span>, <span class="st">&quot;iPhone&quot;</span>),</span>
+<span id="cb470-36"><a href="trump.html#cb470-36" tabindex="-1"></a>                       <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;royalblue&quot;</span>, <span class="st">&quot;gold&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb470-37"><a href="trump.html#cb470-37" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb470-38"><a href="trump.html#cb470-38" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hour of day (EST)&quot;</span>,</span>
+<span id="cb470-39"><a href="trump.html#cb470-39" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;% of tweets&quot;</span>,</span>
+<span id="cb470-40"><a href="trump.html#cb470-40" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb470-41"><a href="trump.html#cb470-41" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(</span>
+<span id="cb470-42"><a href="trump.html#cb470-42" tabindex="-1"></a>  p1, <span class="cn">NULL</span>, p2,</span>
+<span id="cb470-43"><a href="trump.html#cb470-43" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;(a) Normalized by all&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;(b) Normalized in group&quot;</span>),</span>
+<span id="cb470-44"><a href="trump.html#cb470-44" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="dv">1</span>)</span>
+<span id="cb470-45"><a href="trump.html#cb470-45" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="R32_trump_tweet_dplyr_files/figure-html/tweets-by-hour-1.png" width="672" /></p>
+</div>
+<div id="tweeting-with-figures" class="section level3 hasAnchor" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Tweeting with figures<a href="trump.html#tweeting-with-figures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>首先，<strong><code>filter()</code></strong>函數用於從<strong><code>tweets</code></strong>資料框中過濾出不以<strong><code>"</code></strong>字符開頭的推文，即過濾掉引號開頭的推文。這裡使用了<strong><code>!str_detect(text, '^"')</code></strong>表示將<strong><code>text</code></strong>欄位中以<strong><code>"</code></strong>字符開頭的推文過濾掉，即保留那些不以引號開頭的推文。<strong><code>'^"'</code></strong>是一個正規表示式（Regular Expression），<strong><code>'^'</code></strong>符號代表字串的開頭。</p>
+<p>接著，<strong><code>mutate()</code></strong>函數用於在<strong><code>tweets</code></strong>資料框中添加一個新欄位<strong><code>picture</code></strong>，該欄位根據推文中是否包含<strong><code>t.co</code></strong>字串來判斷推文中是否包含圖片或者連結。具體來說，這裡使用了<strong><code>if_else()</code></strong>函數，如果<strong><code>text</code></strong>欄位中包含<strong><code>t.co</code></strong>字串，則將<strong><code>picture</code></strong>欄位設置為<strong><code>"Picture/link"</code></strong>，否則設置為<strong><code>"No picture/link"</code></strong>。</p>
+<p>最後，使用<strong><code>count()</code></strong>函數計算<strong><code>tweets</code></strong>資料框中每個<strong><code>source</code></strong>和<strong><code>picture</code></strong>的記錄數，並將結果存儲在<strong><code>toplot</code></strong>資料框中。最終的結果是一個展示<strong><code>tweets</code></strong>資料框中<strong><code>source</code></strong>和<strong><code>picture</code></strong>的記錄數的資料框，其中<strong><code>picture</code></strong>欄位表示推文中是否包含圖片或連結。</p>
+<p><strong><code>p1</code></strong>和<strong><code>p2</code></strong>的主要區別在於barplot的呈現方式不同。具體來說：</p>
+<ul>
+<li><p><strong><code>p1</code></strong>中使用了<strong><code>position="stack"</code></strong>的參數，表示將不同分組的bar疊加在一起，以展示每個<strong><code>source</code></strong>的總推文數量，並且bar的寬度設置為0.5（使用<code>width</code>參數），使得bar之間有一定的間隔。這種方式可以方便地比較不同<strong><code>source</code></strong>的總推文數量，並且可以看到每個<strong><code>source</code></strong>中有多少推文包含圖片或連結。</p></li>
+<li><p><strong><code>p2</code></strong>中使用了<strong><code>position="dodge"</code></strong>的參數，表示將不同分組的bar並排放置，以便比較不同<strong><code>source</code></strong>中包含或不包含圖片或連結的推文數量。這種方式可以顯示出每個<strong><code>source</code></strong>中有多少推文包含或不包含圖片或連結，並且可以清楚地比較不同<strong><code>source</code></strong>之間的差異。</p></li>
+</ul>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="trump.html#cb471-1" tabindex="-1"></a>toplot <span class="ot">&lt;-</span> tweets <span class="sc">%&gt;%</span></span>
+<span id="cb471-2"><a href="trump.html#cb471-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb471-3"><a href="trump.html#cb471-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">picture =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(text, <span class="st">&quot;t.co&quot;</span>),</span>
+<span id="cb471-4"><a href="trump.html#cb471-4" tabindex="-1"></a>                             <span class="st">&quot;Picture/link&quot;</span>, <span class="st">&quot;No picture/link&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb471-5"><a href="trump.html#cb471-5" tabindex="-1"></a>    <span class="fu">count</span>(source, picture)</span>
+<span id="cb471-6"><a href="trump.html#cb471-6" tabindex="-1"></a></span>
+<span id="cb471-7"><a href="trump.html#cb471-7" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> toplot <span class="sc">%&gt;%</span></span>
+<span id="cb471-8"><a href="trump.html#cb471-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb471-9"><a href="trump.html#cb471-9" tabindex="-1"></a>    <span class="fu">aes</span>(source, n, <span class="at">fill =</span> picture) <span class="sc">+</span> </span>
+<span id="cb471-10"><a href="trump.html#cb471-10" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;stack&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb471-11"><a href="trump.html#cb471-11" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;With Picture/link?&quot;</span>, </span>
+<span id="cb471-12"><a href="trump.html#cb471-12" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>),</span>
+<span id="cb471-13"><a href="trump.html#cb471-13" tabindex="-1"></a>                      <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;royalblue&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb471-14"><a href="trump.html#cb471-14" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of tweets&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb471-15"><a href="trump.html#cb471-15" tabindex="-1"></a></span>
+<span id="cb471-16"><a href="trump.html#cb471-16" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> toplot <span class="sc">%&gt;%</span></span>
+<span id="cb471-17"><a href="trump.html#cb471-17" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb471-18"><a href="trump.html#cb471-18" tabindex="-1"></a>    <span class="fu">aes</span>(source, n, <span class="at">fill =</span> picture) <span class="sc">+</span> </span>
+<span id="cb471-19"><a href="trump.html#cb471-19" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb471-20"><a href="trump.html#cb471-20" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;With Picture/link?&quot;</span>, </span>
+<span id="cb471-21"><a href="trump.html#cb471-21" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>),</span>
+<span id="cb471-22"><a href="trump.html#cb471-22" tabindex="-1"></a>                      <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gold&quot;</span>, <span class="st">&quot;royalblue&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb471-23"><a href="trump.html#cb471-23" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of tweets&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb471-24"><a href="trump.html#cb471-24" tabindex="-1"></a></span>
+<span id="cb471-25"><a href="trump.html#cb471-25" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(</span>
+<span id="cb471-26"><a href="trump.html#cb471-26" tabindex="-1"></a>  p1, <span class="cn">NULL</span>, p2,</span>
+<span id="cb471-27"><a href="trump.html#cb471-27" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;(a) Stacked&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;(b) Dodged&quot;</span>), <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="dv">1</span>)</span>
+<span id="cb471-28"><a href="trump.html#cb471-28" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="R32_trump_tweet_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="keyness" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">12.4</span> Keyness<a href="trump.html#keyness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Keyness是一種文本分析方法，用於比較兩個文本集合中某些詞彙的使用頻率（例如我們要比較用<code>iPhone</code>和<code>Android</code>兩支手機所發表的內容是否有文字上的差異），以評估這些詞彙在不同文本集合中的重要性或關鍵程度。Keyness分析通常用於比較兩個文本集合，其中一個是目標文本集合，另一個是參照文本集合，並且通常會將這些文本集合中的單詞或詞彙按照出現頻率排序。</p>
+<ol style="list-style-type: decimal">
+<li><p>使用<strong><code>filter()</code></strong>函數過濾出不以<strong><code>"</code></strong>字符開頭的推文，即過濾掉引號開頭的推文，將結果存儲在<strong><code>tweets</code></strong>資料框中。</p></li>
+<li><p>使用<strong><code>mutate()</code></strong>函數將推文中的URL和<strong><code>&amp;amp;</code></strong>字符替換為空白字符，即將推文中的網址和HTML實體轉換為正常的字符，方便後續的文本處理。</p></li>
+<li><p>使用<strong><code>mutate()</code></strong>函數將<strong><code>tweets</code></strong>資料框中的<strong><code>text</code></strong>欄位拆分為單詞序列，存儲在<strong><code>word</code></strong>欄位中。這裡使用了<strong><code>str_split()</code></strong>函數將每個推文按照空格進行拆分，得到一個由單詞序列組成的列表，然後將這個列表存儲在<strong><code>word</code></strong>欄位中。</p></li>
+<li><p>使用<strong><code>select()</code></strong>函數選擇需要的欄位，包括<strong><code>tweets</code></strong>資料框中的<strong><code>id</code></strong>、<strong><code>text</code></strong>和<strong><code>word</code></strong>欄位，以及<strong><code>tweets</code></strong>資料框中的所有其他欄位。</p></li>
+<li><p>使用<strong><code>unnest()</code></strong>函數將<strong><code>word</code></strong>欄位中的單詞序列展開成一個單詞資料框，每個單詞對應一行記錄。</p></li>
+<li><p>使用<strong><code>filter()</code></strong>函數過濾掉停用詞和非英文字符，其中<strong>停用詞（stop words）</strong>列表存儲在<strong><code>stop_words</code></strong>資料框中，通過<strong><code>!word %in% stop_words$word</code></strong>條件過濾掉停用詞，並且通過<strong><code>str_detect(word, "[a-z]")</code></strong>條件過濾掉不包含英文字母的單詞。最終，將結果存儲在<strong><code>tweets</code></strong>資料框中。</p></li>
+</ol>
+<div class="notes">
+<p><strong>停用詞（stop words）</strong>指的是在文本中出現頻率非常高，但對於文本的內容和意義貢獻不大的詞彙。這些詞彙通常是一些常見的介詞、連詞、代詞、冠詞、助動詞等，例如”the”、“and”、“a”、“in”等。在文本分析中，停用詞通常被過濾掉，以便更好地捕捉文本中的主題和意義。在中文文本分析中，常見的停用詞包括一些虛詞、代詞、介詞、助詞等，例如”的”、“是”、“在”、“和”、“了”、“一”等。這些詞在中文文本中出現的頻率非常高，但對於文本的內容和意義貢獻不大，因此在文本分析中通常被過濾掉。</p>
+<p>停用詞的列表通常是由人為構建的，根據具體的文本分析任務和文本的特徵來決定。在自然語言處理中，通常會使用預先定義好的停用詞列表，例如英文中的NLTK（Natural Language Toolkit）庫中就包含了一個預先定義好的停用詞列表。</p>
+<p>在進行文本分析時，過濾掉停用詞可以幫助減少文本資料的雜訊和冗余訊息，提高分析的準確性和效率。但是，在某些特定的文本分析任務中，停用詞可能具有一定的重要性，例如情感分析中的否定詞（如”not”）可能對情感分析的結果產生重要的影響，因此需要特殊處理。如果進行的是網絡舆情分析，那麼一些特定的網絡用語和表情符號可能也需要被加入停用詞列表中，以避免對分析結果產生干擾。</p>
+</div>
+<div class="notes">
+<p><strong><code>unnest_tokens()</code></strong>和<strong><code>mutate()</code></strong>函數都可以用於將文本data.frame中的文本數據進行分詞處理，但它們的實現方式有所不同。<strong><code>mutate()</code></strong>函數使用<strong><code>str_split()</code></strong>函數將每個文本按照指定的分隔符（如上述程式碼即以空白<code>" "</code>做為分隔符號）進行拆分，得到一個由單詞序列組成的list。這樣做的缺點是無法同時將文本中的標點符號、空格、停用詞等過濾掉，因此在進行文本分析時需要額外進行過濾處理。</p>
+<p><strong><code>unnest_tokens()</code></strong>函數則使用更靈活的正則表達式（regex）來指定單詞的分割方式，可以將文本中的單詞、標點符號、空格等都分割開來，並且可以通過指定特定的正則表達式來過濾停用詞、非英文字符等。<strong><code>unnest_tokens()</code></strong>函數還可以將分割後的單詞list展開成一個單詞data.frame，每個單詞對應一行記錄，這樣更容易進行後續的文本分析和可視化。在<strong><code>unnest_tokens(word, text, token = "regex", pattern = "[^A-Za-z\\d#@']") %&gt;%</code></strong>中，<strong><code>word</code></strong>表示新建的單詞欄位的名稱，<strong><code>text</code></strong>表示原始文本欄位的名稱，<strong><code>token</code></strong>表示使用的分割方式，這裡指定為正則表達式；<strong><code>pattern</code></strong>則是指定的正則表達式，其中<strong><code>[^A-Za-z\\d#@']</code></strong>表示匹配不屬於字母、數字、@、#、’的任意字符，即過濾掉非英文字符和一些標點符號。</p>
+</div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="trump.html#cb472-1" tabindex="-1"></a><span class="fu">library</span>(tidytext)   <span class="co"># unnest_tokens()</span></span>
+<span id="cb472-2"><a href="trump.html#cb472-2" tabindex="-1"></a><span class="fu">library</span>(stringr)    <span class="co"># str_detect(), str_replace_all()</span></span>
+<span id="cb472-3"><a href="trump.html#cb472-3" tabindex="-1"></a></span>
+<span id="cb472-4"><a href="trump.html#cb472-4" tabindex="-1"></a><span class="co"># View(test)</span></span>
+<span id="cb472-5"><a href="trump.html#cb472-5" tabindex="-1"></a></span>
+<span id="cb472-6"><a href="trump.html#cb472-6" tabindex="-1"></a>stop_words<span class="sc">$</span>word</span></code></pre></div>
+<pre class="output"><code>##    [1] &quot;a&quot;             &quot;a&#39;s&quot;           &quot;able&quot;          &quot;about&quot;        
+##    [5] &quot;above&quot;         &quot;according&quot;     &quot;accordingly&quot;   &quot;across&quot;       
+##    [9] &quot;actually&quot;      &quot;after&quot;         &quot;afterwards&quot;    &quot;again&quot;        
+##   [13] &quot;against&quot;       &quot;ain&#39;t&quot;         &quot;all&quot;           &quot;allow&quot;        
+##   [17] &quot;allows&quot;        &quot;almost&quot;        &quot;alone&quot;         &quot;along&quot;        
+##   [21] &quot;already&quot;       &quot;also&quot;          &quot;although&quot;      &quot;always&quot;       
+##   [25] &quot;am&quot;            &quot;among&quot;         &quot;amongst&quot;       &quot;an&quot;           
+##   [29] &quot;and&quot;           &quot;another&quot;       &quot;any&quot;           &quot;anybody&quot;      
+##   [33] &quot;anyhow&quot;        &quot;anyone&quot;        &quot;anything&quot;      &quot;anyway&quot;       
+##   [37] &quot;anyways&quot;       &quot;anywhere&quot;      &quot;apart&quot;         &quot;appear&quot;       
+##   [41] &quot;appreciate&quot;    &quot;appropriate&quot;   &quot;are&quot;           &quot;aren&#39;t&quot;       
+##   [45] &quot;around&quot;        &quot;as&quot;            &quot;aside&quot;         &quot;ask&quot;          
+##   [49] &quot;asking&quot;        &quot;associated&quot;    &quot;at&quot;            &quot;available&quot;    
+##   [53] &quot;away&quot;          &quot;awfully&quot;       &quot;b&quot;             &quot;be&quot;           
+##   [57] &quot;became&quot;        &quot;because&quot;       &quot;become&quot;        &quot;becomes&quot;      
+##   [61] &quot;becoming&quot;      &quot;been&quot;          &quot;before&quot;        &quot;beforehand&quot;   
+##   [65] &quot;behind&quot;        &quot;being&quot;         &quot;believe&quot;       &quot;below&quot;        
+##   [69] &quot;beside&quot;        &quot;besides&quot;       &quot;best&quot;          &quot;better&quot;       
+##   [73] &quot;between&quot;       &quot;beyond&quot;        &quot;both&quot;          &quot;brief&quot;        
+##   [77] &quot;but&quot;           &quot;by&quot;            &quot;c&quot;             &quot;c&#39;mon&quot;        
+##   [81] &quot;c&#39;s&quot;           &quot;came&quot;          &quot;can&quot;           &quot;can&#39;t&quot;        
+##   [85] &quot;cannot&quot;        &quot;cant&quot;          &quot;cause&quot;         &quot;causes&quot;       
+##   [89] &quot;certain&quot;       &quot;certainly&quot;     &quot;changes&quot;       &quot;clearly&quot;      
+##   [93] &quot;co&quot;            &quot;com&quot;           &quot;come&quot;          &quot;comes&quot;        
+##   [97] &quot;concerning&quot;    &quot;consequently&quot;  &quot;consider&quot;      &quot;considering&quot;  
+##  [101] &quot;contain&quot;       &quot;containing&quot;    &quot;contains&quot;      &quot;corresponding&quot;
+##  [105] &quot;could&quot;         &quot;couldn&#39;t&quot;      &quot;course&quot;        &quot;currently&quot;    
+##  [109] &quot;d&quot;             &quot;definitely&quot;    &quot;described&quot;     &quot;despite&quot;      
+##  [113] &quot;did&quot;           &quot;didn&#39;t&quot;        &quot;different&quot;     &quot;do&quot;           
+##  [117] &quot;does&quot;          &quot;doesn&#39;t&quot;       &quot;doing&quot;         &quot;don&#39;t&quot;        
+##  [121] &quot;done&quot;          &quot;down&quot;          &quot;downwards&quot;     &quot;during&quot;       
+##  [125] &quot;e&quot;             &quot;each&quot;          &quot;edu&quot;           &quot;eg&quot;           
+##  [129] &quot;eight&quot;         &quot;either&quot;        &quot;else&quot;          &quot;elsewhere&quot;    
+##  [133] &quot;enough&quot;        &quot;entirely&quot;      &quot;especially&quot;    &quot;et&quot;           
+##  [137] &quot;etc&quot;           &quot;even&quot;          &quot;ever&quot;          &quot;every&quot;        
+##  [141] &quot;everybody&quot;     &quot;everyone&quot;      &quot;everything&quot;    &quot;everywhere&quot;   
+##  [145] &quot;ex&quot;            &quot;exactly&quot;       &quot;example&quot;       &quot;except&quot;       
+##  [149] &quot;f&quot;             &quot;far&quot;           &quot;few&quot;           &quot;fifth&quot;        
+##  [153] &quot;first&quot;         &quot;five&quot;          &quot;followed&quot;      &quot;following&quot;    
+##  [157] &quot;follows&quot;       &quot;for&quot;           &quot;former&quot;        &quot;formerly&quot;     
+##  [161] &quot;forth&quot;         &quot;four&quot;          &quot;from&quot;          &quot;further&quot;      
+##  [165] &quot;furthermore&quot;   &quot;g&quot;             &quot;get&quot;           &quot;gets&quot;         
+##  [169] &quot;getting&quot;       &quot;given&quot;         &quot;gives&quot;         &quot;go&quot;           
+##  [173] &quot;goes&quot;          &quot;going&quot;         &quot;gone&quot;          &quot;got&quot;          
+##  [177] &quot;gotten&quot;        &quot;greetings&quot;     &quot;h&quot;             &quot;had&quot;          
+##  [181] &quot;hadn&#39;t&quot;        &quot;happens&quot;       &quot;hardly&quot;        &quot;has&quot;          
+##  [185] &quot;hasn&#39;t&quot;        &quot;have&quot;          &quot;haven&#39;t&quot;       &quot;having&quot;       
+##  [189] &quot;he&quot;            &quot;he&#39;s&quot;          &quot;hello&quot;         &quot;help&quot;         
+##  [193] &quot;hence&quot;         &quot;her&quot;           &quot;here&quot;          &quot;here&#39;s&quot;       
+##  [197] &quot;hereafter&quot;     &quot;hereby&quot;        &quot;herein&quot;        &quot;hereupon&quot;     
+##  [201] &quot;hers&quot;          &quot;herself&quot;       &quot;hi&quot;            &quot;him&quot;          
+##  [205] &quot;himself&quot;       &quot;his&quot;           &quot;hither&quot;        &quot;hopefully&quot;    
+##  [209] &quot;how&quot;           &quot;howbeit&quot;       &quot;however&quot;       &quot;i&quot;            
+##  [213] &quot;i&#39;d&quot;           &quot;i&#39;ll&quot;          &quot;i&#39;m&quot;           &quot;i&#39;ve&quot;         
+##  [217] &quot;ie&quot;            &quot;if&quot;            &quot;ignored&quot;       &quot;immediate&quot;    
+##  [221] &quot;in&quot;            &quot;inasmuch&quot;      &quot;inc&quot;           &quot;indeed&quot;       
+##  [225] &quot;indicate&quot;      &quot;indicated&quot;     &quot;indicates&quot;     &quot;inner&quot;        
+##  [229] &quot;insofar&quot;       &quot;instead&quot;       &quot;into&quot;          &quot;inward&quot;       
+##  [233] &quot;is&quot;            &quot;isn&#39;t&quot;         &quot;it&quot;            &quot;it&#39;d&quot;         
+##  [237] &quot;it&#39;ll&quot;         &quot;it&#39;s&quot;          &quot;its&quot;           &quot;itself&quot;       
+##  [241] &quot;j&quot;             &quot;just&quot;          &quot;k&quot;             &quot;keep&quot;         
+##  [245] &quot;keeps&quot;         &quot;kept&quot;          &quot;know&quot;          &quot;knows&quot;        
+##  [249] &quot;known&quot;         &quot;l&quot;             &quot;last&quot;          &quot;lately&quot;       
+##  [253] &quot;later&quot;         &quot;latter&quot;        &quot;latterly&quot;      &quot;least&quot;        
+##  [257] &quot;less&quot;          &quot;lest&quot;          &quot;let&quot;           &quot;let&#39;s&quot;        
+##  [261] &quot;like&quot;          &quot;liked&quot;         &quot;likely&quot;        &quot;little&quot;       
+##  [265] &quot;look&quot;          &quot;looking&quot;       &quot;looks&quot;         &quot;ltd&quot;          
+##  [269] &quot;m&quot;             &quot;mainly&quot;        &quot;many&quot;          &quot;may&quot;          
+##  [273] &quot;maybe&quot;         &quot;me&quot;            &quot;mean&quot;          &quot;meanwhile&quot;    
+##  [277] &quot;merely&quot;        &quot;might&quot;         &quot;more&quot;          &quot;moreover&quot;     
+##  [281] &quot;most&quot;          &quot;mostly&quot;        &quot;much&quot;          &quot;must&quot;         
+##  [285] &quot;my&quot;            &quot;myself&quot;        &quot;n&quot;             &quot;name&quot;         
+##  [289] &quot;namely&quot;        &quot;nd&quot;            &quot;near&quot;          &quot;nearly&quot;       
+##  [293] &quot;necessary&quot;     &quot;need&quot;          &quot;needs&quot;         &quot;neither&quot;      
+##  [297] &quot;never&quot;         &quot;nevertheless&quot;  &quot;new&quot;           &quot;next&quot;         
+##  [301] &quot;nine&quot;          &quot;no&quot;            &quot;nobody&quot;        &quot;non&quot;          
+##  [305] &quot;none&quot;          &quot;noone&quot;         &quot;nor&quot;           &quot;normally&quot;     
+##  [309] &quot;not&quot;           &quot;nothing&quot;       &quot;novel&quot;         &quot;now&quot;          
+##  [313] &quot;nowhere&quot;       &quot;o&quot;             &quot;obviously&quot;     &quot;of&quot;           
+##  [317] &quot;off&quot;           &quot;often&quot;         &quot;oh&quot;            &quot;ok&quot;           
+##  [321] &quot;okay&quot;          &quot;old&quot;           &quot;on&quot;            &quot;once&quot;         
+##  [325] &quot;one&quot;           &quot;ones&quot;          &quot;only&quot;          &quot;onto&quot;         
+##  [329] &quot;or&quot;            &quot;other&quot;         &quot;others&quot;        &quot;otherwise&quot;    
+##  [333] &quot;ought&quot;         &quot;our&quot;           &quot;ours&quot;          &quot;ourselves&quot;    
+##  [337] &quot;out&quot;           &quot;outside&quot;       &quot;over&quot;          &quot;overall&quot;      
+##  [341] &quot;own&quot;           &quot;p&quot;             &quot;particular&quot;    &quot;particularly&quot; 
+##  [345] &quot;per&quot;           &quot;perhaps&quot;       &quot;placed&quot;        &quot;please&quot;       
+##  [349] &quot;plus&quot;          &quot;possible&quot;      &quot;presumably&quot;    &quot;probably&quot;     
+##  [353] &quot;provides&quot;      &quot;q&quot;             &quot;que&quot;           &quot;quite&quot;        
+##  [357] &quot;qv&quot;            &quot;r&quot;             &quot;rather&quot;        &quot;rd&quot;           
+##  [361] &quot;re&quot;            &quot;really&quot;        &quot;reasonably&quot;    &quot;regarding&quot;    
+##  [365] &quot;regardless&quot;    &quot;regards&quot;       &quot;relatively&quot;    &quot;respectively&quot; 
+##  [369] &quot;right&quot;         &quot;s&quot;             &quot;said&quot;          &quot;same&quot;         
+##  [373] &quot;saw&quot;           &quot;say&quot;           &quot;saying&quot;        &quot;says&quot;         
+##  [377] &quot;second&quot;        &quot;secondly&quot;      &quot;see&quot;           &quot;seeing&quot;       
+##  [381] &quot;seem&quot;          &quot;seemed&quot;        &quot;seeming&quot;       &quot;seems&quot;        
+##  [385] &quot;seen&quot;          &quot;self&quot;          &quot;selves&quot;        &quot;sensible&quot;     
+##  [389] &quot;sent&quot;          &quot;serious&quot;       &quot;seriously&quot;     &quot;seven&quot;        
+##  [393] &quot;several&quot;       &quot;shall&quot;         &quot;she&quot;           &quot;should&quot;       
+##  [397] &quot;shouldn&#39;t&quot;     &quot;since&quot;         &quot;six&quot;           &quot;so&quot;           
+##  [401] &quot;some&quot;          &quot;somebody&quot;      &quot;somehow&quot;       &quot;someone&quot;      
+##  [405] &quot;something&quot;     &quot;sometime&quot;      &quot;sometimes&quot;     &quot;somewhat&quot;     
+##  [409] &quot;somewhere&quot;     &quot;soon&quot;          &quot;sorry&quot;         &quot;specified&quot;    
+##  [413] &quot;specify&quot;       &quot;specifying&quot;    &quot;still&quot;         &quot;sub&quot;          
+##  [417] &quot;such&quot;          &quot;sup&quot;           &quot;sure&quot;          &quot;t&quot;            
+##  [421] &quot;t&#39;s&quot;           &quot;take&quot;          &quot;taken&quot;         &quot;tell&quot;         
+##  [425] &quot;tends&quot;         &quot;th&quot;            &quot;than&quot;          &quot;thank&quot;        
+##  [429] &quot;thanks&quot;        &quot;thanx&quot;         &quot;that&quot;          &quot;that&#39;s&quot;       
+##  [433] &quot;thats&quot;         &quot;the&quot;           &quot;their&quot;         &quot;theirs&quot;       
+##  [437] &quot;them&quot;          &quot;themselves&quot;    &quot;then&quot;          &quot;thence&quot;       
+##  [441] &quot;there&quot;         &quot;there&#39;s&quot;       &quot;thereafter&quot;    &quot;thereby&quot;      
+##  [445] &quot;therefore&quot;     &quot;therein&quot;       &quot;theres&quot;        &quot;thereupon&quot;    
+##  [449] &quot;these&quot;         &quot;they&quot;          &quot;they&#39;d&quot;        &quot;they&#39;ll&quot;      
+##  [453] &quot;they&#39;re&quot;       &quot;they&#39;ve&quot;       &quot;think&quot;         &quot;third&quot;        
+##  [457] &quot;this&quot;          &quot;thorough&quot;      &quot;thoroughly&quot;    &quot;those&quot;        
+##  [461] &quot;though&quot;        &quot;three&quot;         &quot;through&quot;       &quot;throughout&quot;   
+##  [465] &quot;thru&quot;          &quot;thus&quot;          &quot;to&quot;            &quot;together&quot;     
+##  [469] &quot;too&quot;           &quot;took&quot;          &quot;toward&quot;        &quot;towards&quot;      
+##  [473] &quot;tried&quot;         &quot;tries&quot;         &quot;truly&quot;         &quot;try&quot;          
+##  [477] &quot;trying&quot;        &quot;twice&quot;         &quot;two&quot;           &quot;u&quot;            
+##  [481] &quot;un&quot;            &quot;under&quot;         &quot;unfortunately&quot; &quot;unless&quot;       
+##  [485] &quot;unlikely&quot;      &quot;until&quot;         &quot;unto&quot;          &quot;up&quot;           
+##  [489] &quot;upon&quot;          &quot;us&quot;            &quot;use&quot;           &quot;used&quot;         
+##  [493] &quot;useful&quot;        &quot;uses&quot;          &quot;using&quot;         &quot;usually&quot;      
+##  [497] &quot;uucp&quot;          &quot;v&quot;             &quot;value&quot;         &quot;various&quot;      
+##  [501] &quot;very&quot;          &quot;via&quot;           &quot;viz&quot;           &quot;vs&quot;           
+##  [505] &quot;w&quot;             &quot;want&quot;          &quot;wants&quot;         &quot;was&quot;          
+##  [509] &quot;wasn&#39;t&quot;        &quot;way&quot;           &quot;we&quot;            &quot;we&#39;d&quot;         
+##  [513] &quot;we&#39;ll&quot;         &quot;we&#39;re&quot;         &quot;we&#39;ve&quot;         &quot;welcome&quot;      
+##  [517] &quot;well&quot;          &quot;went&quot;          &quot;were&quot;          &quot;weren&#39;t&quot;      
+##  [521] &quot;what&quot;          &quot;what&#39;s&quot;        &quot;whatever&quot;      &quot;when&quot;         
+##  [525] &quot;whence&quot;        &quot;whenever&quot;      &quot;where&quot;         &quot;where&#39;s&quot;      
+##  [529] &quot;whereafter&quot;    &quot;whereas&quot;       &quot;whereby&quot;       &quot;wherein&quot;      
+##  [533] &quot;whereupon&quot;     &quot;wherever&quot;      &quot;whether&quot;       &quot;which&quot;        
+##  [537] &quot;while&quot;         &quot;whither&quot;       &quot;who&quot;           &quot;who&#39;s&quot;        
+##  [541] &quot;whoever&quot;       &quot;whole&quot;         &quot;whom&quot;          &quot;whose&quot;        
+##  [545] &quot;why&quot;           &quot;will&quot;          &quot;willing&quot;       &quot;wish&quot;         
+##  [549] &quot;with&quot;          &quot;within&quot;        &quot;without&quot;       &quot;won&#39;t&quot;        
+##  [553] &quot;wonder&quot;        &quot;would&quot;         &quot;would&quot;         &quot;wouldn&#39;t&quot;     
+##  [557] &quot;x&quot;             &quot;y&quot;             &quot;yes&quot;           &quot;yet&quot;          
+##  [561] &quot;you&quot;           &quot;you&#39;d&quot;         &quot;you&#39;ll&quot;        &quot;you&#39;re&quot;       
+##  [565] &quot;you&#39;ve&quot;        &quot;your&quot;          &quot;yours&quot;         &quot;yourself&quot;     
+##  [569] &quot;yourselves&quot;    &quot;z&quot;             &quot;zero&quot;          &quot;i&quot;            
+##  [573] &quot;me&quot;            &quot;my&quot;            &quot;myself&quot;        &quot;we&quot;           
+##  [577] &quot;our&quot;           &quot;ours&quot;          &quot;ourselves&quot;     &quot;you&quot;          
+##  [581] &quot;your&quot;          &quot;yours&quot;         &quot;yourself&quot;      &quot;yourselves&quot;   
+##  [585] &quot;he&quot;            &quot;him&quot;           &quot;his&quot;           &quot;himself&quot;      
+##  [589] &quot;she&quot;           &quot;her&quot;           &quot;hers&quot;          &quot;herself&quot;      
+##  [593] &quot;it&quot;            &quot;its&quot;           &quot;itself&quot;        &quot;they&quot;         
+##  [597] &quot;them&quot;          &quot;their&quot;         &quot;theirs&quot;        &quot;themselves&quot;   
+##  [601] &quot;what&quot;          &quot;which&quot;         &quot;who&quot;           &quot;whom&quot;         
+##  [605] &quot;this&quot;          &quot;that&quot;          &quot;these&quot;         &quot;those&quot;        
+##  [609] &quot;am&quot;            &quot;is&quot;            &quot;are&quot;           &quot;was&quot;          
+##  [613] &quot;were&quot;          &quot;be&quot;            &quot;been&quot;          &quot;being&quot;        
+##  [617] &quot;have&quot;          &quot;has&quot;           &quot;had&quot;           &quot;having&quot;       
+##  [621] &quot;do&quot;            &quot;does&quot;          &quot;did&quot;           &quot;doing&quot;        
+##  [625] &quot;would&quot;         &quot;should&quot;        &quot;could&quot;         &quot;ought&quot;        
+##  [629] &quot;i&#39;m&quot;           &quot;you&#39;re&quot;        &quot;he&#39;s&quot;          &quot;she&#39;s&quot;        
+##  [633] &quot;it&#39;s&quot;          &quot;we&#39;re&quot;         &quot;they&#39;re&quot;       &quot;i&#39;ve&quot;         
+##  [637] &quot;you&#39;ve&quot;        &quot;we&#39;ve&quot;         &quot;they&#39;ve&quot;       &quot;i&#39;d&quot;          
+##  [641] &quot;you&#39;d&quot;         &quot;he&#39;d&quot;          &quot;she&#39;d&quot;         &quot;we&#39;d&quot;         
+##  [645] &quot;they&#39;d&quot;        &quot;i&#39;ll&quot;          &quot;you&#39;ll&quot;        &quot;he&#39;ll&quot;        
+##  [649] &quot;she&#39;ll&quot;        &quot;we&#39;ll&quot;         &quot;they&#39;ll&quot;       &quot;isn&#39;t&quot;        
+##  [653] &quot;aren&#39;t&quot;        &quot;wasn&#39;t&quot;        &quot;weren&#39;t&quot;       &quot;hasn&#39;t&quot;       
+##  [657] &quot;haven&#39;t&quot;       &quot;hadn&#39;t&quot;        &quot;doesn&#39;t&quot;       &quot;don&#39;t&quot;        
+##  [661] &quot;didn&#39;t&quot;        &quot;won&#39;t&quot;         &quot;wouldn&#39;t&quot;      &quot;shan&#39;t&quot;       
+##  [665] &quot;shouldn&#39;t&quot;     &quot;can&#39;t&quot;         &quot;cannot&quot;        &quot;couldn&#39;t&quot;     
+##  [669] &quot;mustn&#39;t&quot;       &quot;let&#39;s&quot;         &quot;that&#39;s&quot;        &quot;who&#39;s&quot;        
+##  [673] &quot;what&#39;s&quot;        &quot;here&#39;s&quot;        &quot;there&#39;s&quot;       &quot;when&#39;s&quot;       
+##  [677] &quot;where&#39;s&quot;       &quot;why&#39;s&quot;         &quot;how&#39;s&quot;         &quot;a&quot;            
+##  [681] &quot;an&quot;            &quot;the&quot;           &quot;and&quot;           &quot;but&quot;          
+##  [685] &quot;if&quot;            &quot;or&quot;            &quot;because&quot;       &quot;as&quot;           
+##  [689] &quot;until&quot;         &quot;while&quot;         &quot;of&quot;            &quot;at&quot;           
+##  [693] &quot;by&quot;            &quot;for&quot;           &quot;with&quot;          &quot;about&quot;        
+##  [697] &quot;against&quot;       &quot;between&quot;       &quot;into&quot;          &quot;through&quot;      
+##  [701] &quot;during&quot;        &quot;before&quot;        &quot;after&quot;         &quot;above&quot;        
+##  [705] &quot;below&quot;         &quot;to&quot;            &quot;from&quot;          &quot;up&quot;           
+##  [709] &quot;down&quot;          &quot;in&quot;            &quot;out&quot;           &quot;on&quot;           
+##  [713] &quot;off&quot;           &quot;over&quot;          &quot;under&quot;         &quot;again&quot;        
+##  [717] &quot;further&quot;       &quot;then&quot;          &quot;once&quot;          &quot;here&quot;         
+##  [721] &quot;there&quot;         &quot;when&quot;          &quot;where&quot;         &quot;why&quot;          
+##  [725] &quot;how&quot;           &quot;all&quot;           &quot;any&quot;           &quot;both&quot;         
+##  [729] &quot;each&quot;          &quot;few&quot;           &quot;more&quot;          &quot;most&quot;         
+##  [733] &quot;other&quot;         &quot;some&quot;          &quot;such&quot;          &quot;no&quot;           
+##  [737] &quot;nor&quot;           &quot;not&quot;           &quot;only&quot;          &quot;own&quot;          
+##  [741] &quot;same&quot;          &quot;so&quot;            &quot;than&quot;          &quot;too&quot;          
+##  [745] &quot;very&quot;          &quot;a&quot;             &quot;about&quot;         &quot;above&quot;        
+##  [749] &quot;across&quot;        &quot;after&quot;         &quot;again&quot;         &quot;against&quot;      
+##  [753] &quot;all&quot;           &quot;almost&quot;        &quot;alone&quot;         &quot;along&quot;        
+##  [757] &quot;already&quot;       &quot;also&quot;          &quot;although&quot;      &quot;always&quot;       
+##  [761] &quot;among&quot;         &quot;an&quot;            &quot;and&quot;           &quot;another&quot;      
+##  [765] &quot;any&quot;           &quot;anybody&quot;       &quot;anyone&quot;        &quot;anything&quot;     
+##  [769] &quot;anywhere&quot;      &quot;are&quot;           &quot;area&quot;          &quot;areas&quot;        
+##  [773] &quot;around&quot;        &quot;as&quot;            &quot;ask&quot;           &quot;asked&quot;        
+##  [777] &quot;asking&quot;        &quot;asks&quot;          &quot;at&quot;            &quot;away&quot;         
+##  [781] &quot;back&quot;          &quot;backed&quot;        &quot;backing&quot;       &quot;backs&quot;        
+##  [785] &quot;be&quot;            &quot;became&quot;        &quot;because&quot;       &quot;become&quot;       
+##  [789] &quot;becomes&quot;       &quot;been&quot;          &quot;before&quot;        &quot;began&quot;        
+##  [793] &quot;behind&quot;        &quot;being&quot;         &quot;beings&quot;        &quot;best&quot;         
+##  [797] &quot;better&quot;        &quot;between&quot;       &quot;big&quot;           &quot;both&quot;         
+##  [801] &quot;but&quot;           &quot;by&quot;            &quot;came&quot;          &quot;can&quot;          
+##  [805] &quot;cannot&quot;        &quot;case&quot;          &quot;cases&quot;         &quot;certain&quot;      
+##  [809] &quot;certainly&quot;     &quot;clear&quot;         &quot;clearly&quot;       &quot;come&quot;         
+##  [813] &quot;could&quot;         &quot;did&quot;           &quot;differ&quot;        &quot;different&quot;    
+##  [817] &quot;differently&quot;   &quot;do&quot;            &quot;does&quot;          &quot;done&quot;         
+##  [821] &quot;down&quot;          &quot;down&quot;          &quot;downed&quot;        &quot;downing&quot;      
+##  [825] &quot;downs&quot;         &quot;during&quot;        &quot;each&quot;          &quot;early&quot;        
+##  [829] &quot;either&quot;        &quot;end&quot;           &quot;ended&quot;         &quot;ending&quot;       
+##  [833] &quot;ends&quot;          &quot;enough&quot;        &quot;even&quot;          &quot;evenly&quot;       
+##  [837] &quot;ever&quot;          &quot;every&quot;         &quot;everybody&quot;     &quot;everyone&quot;     
+##  [841] &quot;everything&quot;    &quot;everywhere&quot;    &quot;face&quot;          &quot;faces&quot;        
+##  [845] &quot;fact&quot;          &quot;facts&quot;         &quot;far&quot;           &quot;felt&quot;         
+##  [849] &quot;few&quot;           &quot;find&quot;          &quot;finds&quot;         &quot;first&quot;        
+##  [853] &quot;for&quot;           &quot;four&quot;          &quot;from&quot;          &quot;full&quot;         
+##  [857] &quot;fully&quot;         &quot;further&quot;       &quot;furthered&quot;     &quot;furthering&quot;   
+##  [861] &quot;furthers&quot;      &quot;gave&quot;          &quot;general&quot;       &quot;generally&quot;    
+##  [865] &quot;get&quot;           &quot;gets&quot;          &quot;give&quot;          &quot;given&quot;        
+##  [869] &quot;gives&quot;         &quot;go&quot;            &quot;going&quot;         &quot;good&quot;         
+##  [873] &quot;goods&quot;         &quot;got&quot;           &quot;great&quot;         &quot;greater&quot;      
+##  [877] &quot;greatest&quot;      &quot;group&quot;         &quot;grouped&quot;       &quot;grouping&quot;     
+##  [881] &quot;groups&quot;        &quot;had&quot;           &quot;has&quot;           &quot;have&quot;         
+##  [885] &quot;having&quot;        &quot;he&quot;            &quot;her&quot;           &quot;here&quot;         
+##  [889] &quot;herself&quot;       &quot;high&quot;          &quot;high&quot;          &quot;high&quot;         
+##  [893] &quot;higher&quot;        &quot;highest&quot;       &quot;him&quot;           &quot;himself&quot;      
+##  [897] &quot;his&quot;           &quot;how&quot;           &quot;however&quot;       &quot;i&quot;            
+##  [901] &quot;if&quot;            &quot;important&quot;     &quot;in&quot;            &quot;interest&quot;     
+##  [905] &quot;interested&quot;    &quot;interesting&quot;   &quot;interests&quot;     &quot;into&quot;         
+##  [909] &quot;is&quot;            &quot;it&quot;            &quot;its&quot;           &quot;itself&quot;       
+##  [913] &quot;just&quot;          &quot;keep&quot;          &quot;keeps&quot;         &quot;kind&quot;         
+##  [917] &quot;knew&quot;          &quot;know&quot;          &quot;known&quot;         &quot;knows&quot;        
+##  [921] &quot;large&quot;         &quot;largely&quot;       &quot;last&quot;          &quot;later&quot;        
+##  [925] &quot;latest&quot;        &quot;least&quot;         &quot;less&quot;          &quot;let&quot;          
+##  [929] &quot;lets&quot;          &quot;like&quot;          &quot;likely&quot;        &quot;long&quot;         
+##  [933] &quot;longer&quot;        &quot;longest&quot;       &quot;made&quot;          &quot;make&quot;         
+##  [937] &quot;making&quot;        &quot;man&quot;           &quot;many&quot;          &quot;may&quot;          
+##  [941] &quot;me&quot;            &quot;member&quot;        &quot;members&quot;       &quot;men&quot;          
+##  [945] &quot;might&quot;         &quot;more&quot;          &quot;most&quot;          &quot;mostly&quot;       
+##  [949] &quot;mr&quot;            &quot;mrs&quot;           &quot;much&quot;          &quot;must&quot;         
+##  [953] &quot;my&quot;            &quot;myself&quot;        &quot;necessary&quot;     &quot;need&quot;         
+##  [957] &quot;needed&quot;        &quot;needing&quot;       &quot;needs&quot;         &quot;never&quot;        
+##  [961] &quot;new&quot;           &quot;new&quot;           &quot;newer&quot;         &quot;newest&quot;       
+##  [965] &quot;next&quot;          &quot;no&quot;            &quot;nobody&quot;        &quot;non&quot;          
+##  [969] &quot;noone&quot;         &quot;not&quot;           &quot;nothing&quot;       &quot;now&quot;          
+##  [973] &quot;nowhere&quot;       &quot;number&quot;        &quot;numbers&quot;       &quot;of&quot;           
+##  [977] &quot;off&quot;           &quot;often&quot;         &quot;old&quot;           &quot;older&quot;        
+##  [981] &quot;oldest&quot;        &quot;on&quot;            &quot;once&quot;          &quot;one&quot;          
+##  [985] &quot;only&quot;          &quot;open&quot;          &quot;opened&quot;        &quot;opening&quot;      
+##  [989] &quot;opens&quot;         &quot;or&quot;            &quot;order&quot;         &quot;ordered&quot;      
+##  [993] &quot;ordering&quot;      &quot;orders&quot;        &quot;other&quot;         &quot;others&quot;       
+##  [997] &quot;our&quot;           &quot;out&quot;           &quot;over&quot;          &quot;part&quot;         
+## [1001] &quot;parted&quot;        &quot;parting&quot;       &quot;parts&quot;         &quot;per&quot;          
+## [1005] &quot;perhaps&quot;       &quot;place&quot;         &quot;places&quot;        &quot;point&quot;        
+## [1009] &quot;pointed&quot;       &quot;pointing&quot;      &quot;points&quot;        &quot;possible&quot;     
+## [1013] &quot;present&quot;       &quot;presented&quot;     &quot;presenting&quot;    &quot;presents&quot;     
+## [1017] &quot;problem&quot;       &quot;problems&quot;      &quot;put&quot;           &quot;puts&quot;         
+## [1021] &quot;quite&quot;         &quot;rather&quot;        &quot;really&quot;        &quot;right&quot;        
+## [1025] &quot;right&quot;         &quot;room&quot;          &quot;rooms&quot;         &quot;said&quot;         
+## [1029] &quot;same&quot;          &quot;saw&quot;           &quot;say&quot;           &quot;says&quot;         
+## [1033] &quot;second&quot;        &quot;seconds&quot;       &quot;see&quot;           &quot;seem&quot;         
+## [1037] &quot;seemed&quot;        &quot;seeming&quot;       &quot;seems&quot;         &quot;sees&quot;         
+## [1041] &quot;several&quot;       &quot;shall&quot;         &quot;she&quot;           &quot;should&quot;       
+## [1045] &quot;show&quot;          &quot;showed&quot;        &quot;showing&quot;       &quot;shows&quot;        
+## [1049] &quot;side&quot;          &quot;sides&quot;         &quot;since&quot;         &quot;small&quot;        
+## [1053] &quot;smaller&quot;       &quot;smallest&quot;      &quot;some&quot;          &quot;somebody&quot;     
+## [1057] &quot;someone&quot;       &quot;something&quot;     &quot;somewhere&quot;     &quot;state&quot;        
+## [1061] &quot;states&quot;        &quot;still&quot;         &quot;still&quot;         &quot;such&quot;         
+## [1065] &quot;sure&quot;          &quot;take&quot;          &quot;taken&quot;         &quot;than&quot;         
+## [1069] &quot;that&quot;          &quot;the&quot;           &quot;their&quot;         &quot;them&quot;         
+## [1073] &quot;then&quot;          &quot;there&quot;         &quot;therefore&quot;     &quot;these&quot;        
+## [1077] &quot;they&quot;          &quot;thing&quot;         &quot;things&quot;        &quot;think&quot;        
+## [1081] &quot;thinks&quot;        &quot;this&quot;          &quot;those&quot;         &quot;though&quot;       
+## [1085] &quot;thought&quot;       &quot;thoughts&quot;      &quot;three&quot;         &quot;through&quot;      
+## [1089] &quot;thus&quot;          &quot;to&quot;            &quot;today&quot;         &quot;together&quot;     
+## [1093] &quot;too&quot;           &quot;took&quot;          &quot;toward&quot;        &quot;turn&quot;         
+## [1097] &quot;turned&quot;        &quot;turning&quot;       &quot;turns&quot;         &quot;two&quot;          
+## [1101] &quot;under&quot;         &quot;until&quot;         &quot;up&quot;            &quot;upon&quot;         
+## [1105] &quot;us&quot;            &quot;use&quot;           &quot;used&quot;          &quot;uses&quot;         
+## [1109] &quot;very&quot;          &quot;want&quot;          &quot;wanted&quot;        &quot;wanting&quot;      
+## [1113] &quot;wants&quot;         &quot;was&quot;           &quot;way&quot;           &quot;ways&quot;         
+## [1117] &quot;we&quot;            &quot;well&quot;          &quot;wells&quot;         &quot;went&quot;         
+## [1121] &quot;were&quot;          &quot;what&quot;          &quot;when&quot;          &quot;where&quot;        
+## [1125] &quot;whether&quot;       &quot;which&quot;         &quot;while&quot;         &quot;who&quot;          
+## [1129] &quot;whole&quot;         &quot;whose&quot;         &quot;why&quot;           &quot;will&quot;         
+## [1133] &quot;with&quot;          &quot;within&quot;        &quot;without&quot;       &quot;work&quot;         
+## [1137] &quot;worked&quot;        &quot;working&quot;       &quot;works&quot;         &quot;would&quot;        
+## [1141] &quot;year&quot;          &quot;years&quot;         &quot;yet&quot;           &quot;you&quot;          
+## [1145] &quot;young&quot;         &quot;younger&quot;       &quot;youngest&quot;      &quot;your&quot;         
+## [1149] &quot;yours&quot;</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="trump.html#cb474-1" tabindex="-1"></a>tweet_words <span class="ot">&lt;-</span> tweets <span class="sc">%&gt;%</span></span>
+<span id="cb474-2"><a href="trump.html#cb474-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="st">&#39;^&quot;&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb474-3"><a href="trump.html#cb474-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_replace_all</span>(text, <span class="st">&quot;https://t.co/[A-Za-z</span><span class="sc">\\</span><span class="st">d]+|&amp;amp;&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb474-4"><a href="trump.html#cb474-4" tabindex="-1"></a>    <span class="co"># unnest_tokens(word, text) %&gt;%</span></span>
+<span id="cb474-5"><a href="trump.html#cb474-5" tabindex="-1"></a>    <span class="co"># unnest_tokens(word, text, token = &quot;regex&quot;, pattern = &quot;[^A-Za-z\\d#@&#39;]&quot;) %&gt;%</span></span>
+<span id="cb474-6"><a href="trump.html#cb474-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">str_split</span>(text, <span class="st">&quot; &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb474-7"><a href="trump.html#cb474-7" tabindex="-1"></a>    <span class="fu">select</span>(id, text, word, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb474-8"><a href="trump.html#cb474-8" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb474-9"><a href="trump.html#cb474-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb474-10"><a href="trump.html#cb474-10" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_detect</span>(word, <span class="st">&quot;[a-z]&quot;</span>))</span>
+<span id="cb474-11"><a href="trump.html#cb474-11" tabindex="-1"></a><span class="co"># View(tweet_words)</span></span></code></pre></div>
+<p>這段程式碼用於分析文本數據中出現頻率最高的單詞（word），並使用barplot進行視覺化呈現。具體來說，這段程式碼實現了以下幾個步驟：</p>
+<ol style="list-style-type: decimal">
+<li><p>使用<strong><code>count()</code></strong>函數對data.frame中的單詞<code>word</code>進行計數，得到每個單詞出現的次數，並按照次數降序排列。</p></li>
+<li><p>使用<strong><code>head()</code></strong>函數選擇出現次數最高的前20個單詞，並用<strong><code>mutate()</code></strong>函數將這20個單詞按照出現次數重新排序（注意<code>reorder()</code>的寫法）。</p></li>
+<li><p><strong><code>geom_col()</code></strong>函數用於繪製barplot，<strong><code>coord_flip()</code></strong>函數用於將x軸和y軸互換，以便更好地顯示barplot。</p></li>
+</ol>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="trump.html#cb475-1" tabindex="-1"></a>tweet_words <span class="sc">%&gt;%</span></span>
+<span id="cb475-2"><a href="trump.html#cb475-2" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb475-3"><a href="trump.html#cb475-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb475-4"><a href="trump.html#cb475-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb475-5"><a href="trump.html#cb475-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n)) <span class="sc">+</span></span>
+<span id="cb475-6"><a href="trump.html#cb475-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-7"><a href="trump.html#cb475-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Occurrences&quot;</span>) <span class="sc">+</span></span>
+<span id="cb475-8"><a href="trump.html#cb475-8" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb475-9"><a href="trump.html#cb475-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>))</span></code></pre></div>
+<p><img src="R32_trump_tweet_dplyr_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="log-likelihood-ratio" class="section level3 hasAnchor" number="12.4.1">
+<h3><span class="header-section-number">12.4.1</span> Log-likelihood ratio<a href="trump.html#log-likelihood-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>word_by_source</code>的程式碼用於將單詞按照來源（<code>source</code>）進行分類，並統計每個來源中每個單詞出現的次數：</p>
+<ol style="list-style-type: decimal">
+<li><p>使用<strong><code>count()</code></strong>函數對單詞資料框中的單詞按照來源進行計數，並且將計數結果按照單詞和來源兩個變數進行分組。並使用<strong><code>filter()</code></strong>函數過濾掉在所有來源中出現次數少於5次的單詞。</p></li>
+<li><p>使用<strong><code>pivot_wider()</code></strong>函數將分組後的資料框進行重構，將每個來源的單詞出現次數作為新欄（也就是把<code>iPhone</code>和<code>Android</code>展開成為欄位名稱），以便更方便地進行後續分析和可視化。這裡的<strong><code>names_from</code></strong>參數指定重構後的欄位名稱來自原來的<code>source</code>欄位，<strong><code>values_from</code></strong>參數指定要重構的值來自原來的<code>count</code>欄位，<strong><code>values_fill</code></strong>參數指定在重構後的資料框中缺失值的填充值，這裡設置為0。</p></li>
+</ol>
+<p><code>android_iphone_ratios</code>這段程式碼用於計算每個單詞在<code>Android</code>和<code>iPhone</code>兩個來源中的keyness的log likelihood ratio。具體來說，這段程式碼實現了以下幾個步驟：</p>
+<ol style="list-style-type: decimal">
+<li><p>從上一步驟得到的<strong><code>word_by_source</code></strong>資料框中，選擇了<code>Android</code>和<code>iPhone</code>兩個來源的單詞出現次數資訊。</p></li>
+<li><p>對<code>Android</code>和<code>iPhone</code>兩個來源的單詞出現次數進行標準化處理，以便進行後續的keyness計算。具體來說，這裡使用了Laplace平滑處理（add-k smoothing），將每個來源的所有單詞出現次數都增加1，然後再將這些出現次數除以各自來源的總次數加1，得到每個單詞在Android和iPhone兩個來源中的出現概率。</p></li>
+<li><p>對Android和iPhone兩個來源中的每個單詞，分別計算其在Android和iPhone兩個來源中的keyness log ratio。這裡使用了常見的對數比值（log ratio）方法，計算Android來源中單詞出現概率和iPhone來源中單詞出現概率的比值的對數，以此來衡量單詞在Android和iPhone兩個來源中的關鍵性差異。</p></li>
+<li><p>將計算得到的log ratio值按照降序排列，以便進一步進行分析和可視化。</p></li>
+</ol>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="trump.html#cb476-1" tabindex="-1"></a>test <span class="ot">&lt;-</span> tweet_words <span class="sc">%&gt;%</span></span>
+<span id="cb476-2"><a href="trump.html#cb476-2" tabindex="-1"></a>    <span class="fu">count</span>(word, source) <span class="sc">%&gt;%</span></span>
+<span id="cb476-3"><a href="trump.html#cb476-3" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb476-4"><a href="trump.html#cb476-4" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> source, </span>
+<span id="cb476-5"><a href="trump.html#cb476-5" tabindex="-1"></a>                <span class="at">values_from =</span> n, </span>
+<span id="cb476-6"><a href="trump.html#cb476-6" tabindex="-1"></a>                <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb476-7"><a href="trump.html#cb476-7" tabindex="-1"></a><span class="co"># View(test)</span></span>
+<span id="cb476-8"><a href="trump.html#cb476-8" tabindex="-1"></a></span>
+<span id="cb476-9"><a href="trump.html#cb476-9" tabindex="-1"></a>word_by_source <span class="ot">&lt;-</span> tweet_words <span class="sc">%&gt;%</span></span>
+<span id="cb476-10"><a href="trump.html#cb476-10" tabindex="-1"></a>    <span class="fu">count</span>(word, source) <span class="sc">%&gt;%</span></span>
+<span id="cb476-11"><a href="trump.html#cb476-11" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb476-12"><a href="trump.html#cb476-12" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> source, </span>
+<span id="cb476-13"><a href="trump.html#cb476-13" tabindex="-1"></a>                <span class="at">values_from =</span> n, </span>
+<span id="cb476-14"><a href="trump.html#cb476-14" tabindex="-1"></a>                <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb476-15"><a href="trump.html#cb476-15" tabindex="-1"></a>    <span class="co"># spread(source, n, fill = 0) %&gt;%</span></span>
+<span id="cb476-16"><a href="trump.html#cb476-16" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb476-17"><a href="trump.html#cb476-17" tabindex="-1"></a></span>
+<span id="cb476-18"><a href="trump.html#cb476-18" tabindex="-1"></a><span class="fu">sum</span>(word_by_source<span class="sc">$</span>iPhone)</span></code></pre></div>
+<pre class="output"><code>## [1] 1383</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="trump.html#cb478-1" tabindex="-1"></a><span class="fu">sum</span>(word_by_source<span class="sc">$</span>Android)</span></code></pre></div>
+<pre class="output"><code>## [1] 2132</code></pre>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="trump.html#cb480-1" tabindex="-1"></a>android_iphone_ratios <span class="ot">&lt;-</span> word_by_source <span class="sc">%&gt;%</span></span>
+<span id="cb480-2"><a href="trump.html#cb480-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">iPhone =</span> (iPhone<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sum</span>(iPhone<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb480-3"><a href="trump.html#cb480-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Android =</span> (Android<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sum</span>(Android<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb480-4"><a href="trump.html#cb480-4" tabindex="-1"></a>    <span class="co"># mutate_at(.cols = vars(iPhone, Android),</span></span>
+<span id="cb480-5"><a href="trump.html#cb480-5" tabindex="-1"></a>    <span class="co"># .funs = funs((. + 1) / sum(. + 1))) %&gt;%</span></span>
+<span id="cb480-6"><a href="trump.html#cb480-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">logratio =</span> <span class="fu">log2</span>(Android <span class="sc">/</span> iPhone)) <span class="sc">%&gt;%</span></span>
+<span id="cb480-7"><a href="trump.html#cb480-7" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(logratio))</span></code></pre></div>
+<div class="notes">
+<p>這兩行分子分母加1的處理稱為拉普拉斯平滑。<code>mutate(iPhone = (iPhone+1)/sum(iPhone+1)) %&gt;%</code></p>
+<p>拉普拉斯平滑（add-k smoothing）是一種用於處理計數資料中零值問題的技巧，其主要目的是將出現次數為零的類別在計算機率時賦予一個非零的機率值，以避免出現無限大的情況，從而影響後續的計算結果。</p>
+<p>在這段程式碼中，拉普拉斯平滑的目的是對每個單詞在Android和iPhone兩個來源中的出現次數進行標準化處理，以便進行後續的keyness計算。這是因為在標準化的計算中，如果某個來源中出現次數為0的單詞，則計算出來的概率值會為0，而這樣的結果可能會產生一些問題，例如無法取log或分母為零的情形。因此，為了避免這種問題，需要對每個單詞在Android和iPhone兩個來源中的出現次數進行拉普拉斯平滑處理，使得每個單詞在Android和iPhone兩個來源中的出現概率都能夠有一個非零的值，從而進行後續的計算和分析。</p>
+</div>
+</div>
+<div id="plotting-keyness" class="section level3 hasAnchor" number="12.4.2">
+<h3><span class="header-section-number">12.4.2</span> Plotting keyness<a href="trump.html#plotting-keyness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>這段程式碼是用來繪製Android和iPhone兩個來源中關鍵性差異最大的單詞的keyness log ratio的條形圖。在繪製條形圖時，使用了<strong><code>fill = logratio &lt; 0</code></strong>的參數設置，這是一個布林值，當單詞在Android和iPhone兩個來源中的log ratio小於0時，填充的顏色是gold，否則填充的顏色是royalblue。</p>
+<p>這種設計原理的目的是將Android和iPhone兩個來源中關鍵性不同的單詞進行區分，並用不同的填充顏色來表示。當單詞在Android來源中的出現概率高於在iPhone來源中的出現概率時，其log ratio值會為正，此時填充的顏色為royalblue；反之，當單詞在Android來源中的出現概率低於在iPhone來源中的出現概率時，其log ratio值會為負，此時填充的顏色為gold。</p>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="trump.html#cb481-1" tabindex="-1"></a>android_iphone_ratios <span class="sc">%&gt;%</span></span>
+<span id="cb481-2"><a href="trump.html#cb481-2" tabindex="-1"></a>    <span class="fu">group_by</span>(logratio <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb481-3"><a href="trump.html#cb481-3" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">15</span>, <span class="fu">abs</span>(logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb481-4"><a href="trump.html#cb481-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb481-5"><a href="trump.html#cb481-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb481-6"><a href="trump.html#cb481-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, logratio, <span class="at">fill =</span> logratio <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb481-7"><a href="trump.html#cb481-7" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb481-8"><a href="trump.html#cb481-8" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb481-9"><a href="trump.html#cb481-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Android / iPhone log ratio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb481-10"><a href="trump.html#cb481-10" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Android&quot;</span>, <span class="st">&quot;iPhone&quot;</span>),</span>
+<span id="cb481-11"><a href="trump.html#cb481-11" tabindex="-1"></a>                      <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;royalblue&quot;</span>, <span class="st">&quot;gold&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb481-12"><a href="trump.html#cb481-12" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb481-13"><a href="trump.html#cb481-13" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
+<p><img src="R32_trump_tweet_dplyr_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="re.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/R32_trump_tweet_dplyr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["R for Data Journalism.pdf", "R for Data Journalism.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
