@@ -5,27 +5,23 @@
 R base是R語言的基本程式庫和核心功能，提供了許多常用的指令和函數。以下是一些常見的R base指令：
 
 1.  assignment operators（賦值運算符）：\<- 或 = 用來將數值、向量、函數等資料物件賦值給變數。
-
 2.  arithmetic operators（算術運算符）：+、-、\*、/、\^、%/%和%%用於數值運算，如加、減、乘、除、指數、整除和取餘等。
-
 3.  relational operators（關係運算符）：==、!=、\>、\>=、\<和\<=用於比較數值或字符型資料的大小關係，返回邏輯值（TRUE或FALSE）。
-
 4.  logical operators（邏輯運算符）：&、\|和!用於對邏輯值進行運算，如AND、OR和NOT等。
-
 5.  control flow statements（流程控制語句）：if、else、for、while、repeat、break和next用於控制程式的執行流程。
-
 6.  functions（函數）：R base提供了許多內置函數，如sum、mean、var、sd、cor、lm等，用於數值計算、統計分析、線性回歸等常見操作。
-
 7.  data structures（資料結構）：R base提供了多種資料結構，如向量、矩陣、數組、列表、因子等，用於存儲和處理不同類型的資料。
-
 8.  data input/output（資料輸入輸出）：R base提供了多種函數和工具，如read.table、write.table、read.csv、write.csv等，用於讀取和寫入資料。
 
 ## R Syntax
 
+R可以做很複雜的加減乘除，例如直接在程式碼中打上`(1+3)*2.01`，總之，看你算式怎麼寫，他就會算出相對應的數值。但其實我們通常使用R語言是要餵給他資料，然後讓他來做運算。此時，要有一個容器來容納這些數值或資料，這個容器就是變數（Variable）。
+
 ### Assignment
 
--   `<-` 將右邊的算式或數值指派給左邊的變數。右邊如果是numeric，那左邊的變數就是numeric variable；右邊如果是character，左邊的變數就是character variable。
--   在幾乎所有程式語言中，單等號`=`指的是assignment，把右方的算式、值或物件指給左方的變數。而比較兩者相不相等，則用雙等號`==`，例如`1==3-2`。
+-   `<-` 將右邊的算式或數值指（Assign）給左邊的變數。左側都是變數，右側則可能是數字或變數。你可以把他想像為把右側做完了以後，指（Assign）給左側的變數。
+-   Assignment對變數型態（Variable Type）的影響：`<-`右側如果是numeric，那左側的變數就是numeric變數；右側如果是character，左側的變數就是character變數。
+-   在幾乎所有程式語言中，單等號`=`指的是assignment，把右方的算式、值或物件指給左方的變數。而比較兩者相不相等，則用雙等號`==`，例如`1==3-2`。R當初在設計時可能是為了避免混淆，所以把assignment的符號設計為`<-`。
 
 
 ```r
@@ -48,9 +44,11 @@ e <- "abcd"
 
 ## Vector
 
-在R語言中，vector是一種基本的資料類型，它是由相同類型的元素組成的序列，可以存儲數值、文字、邏輯值等不同類型的資料。例如，以下是一個由整數元素組成的vector：`my_vector <- c(1, 2, 3, 4, 5)`。
+但我如果要為所有我要運算的數字都產生一個與之對應的變數，這樣做不完。所以，我們會很常使用其他種序列或者對應的結構來儲存多筆資料。例如`vector`、`list`或`Data.Frame`。
 
--   在程式碼中，只要是文字必用成對的雙引號或單引號包含其中，以區隔「變數」和「數字」。例如如果看到沒有雙引號的「英文字母」必定是變數名稱，或函式名稱。如果看到有雙引號的數字，那也是文字。
+在R語言中，vector是一種基本的資料類型，它是由相同類型的元素組成的序列，可以存儲數值、文字、邏輯值等不同類型的資料。例如，以下是一個由整數元素組成的vector：`my_vector <- c(1, 2, 3, 4, 5)`。而我如果要存取第一個數字，我便可用`my_vector[1]`的方式存取，分別代表my_vector中第一個位置的內容（第二個、第三個依此類推）。
+
+在程式碼中，只要是文字必用成對的雙引號或單引號包含其中，以區隔「變數」和「數字」。例如如果看到沒有雙引號的「英文字母」必定是變數名稱，或函式名稱。如果看到有雙引號的數字，那也是文字。
 
 以下資料來自[各縣市平均每月薪資所得](https://www.ptt.cc/bbs/Gossiping/M.1535459575.A.54D.html)或[各縣市人口數](https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3%E8%A1%8C%E6%94%BF%E5%8D%80%E4%BA%BA%E5%8F%A3%E5%88%97%E8%A1%A8)。
 
@@ -148,6 +146,10 @@ plot(density(x))
 ```
 
 <img src="R03_vector_files/figure-html/unnamed-chunk-5-3.png" width="672" />
+
+### Creating a fake data with ChatGPT
+
+你可以嘗試這麼問ChatGPT以獲得一些測試資料「可否幫我建立一個R語言的測試資料，為台北11個行政區的區名、人口數、地理面積。分別用vector來儲存，最後再把三個vector合併為一個dataframe」，觀察看看會有什麼樣的結果。
 
 ### Viewing
 

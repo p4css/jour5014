@@ -181,10 +181,8 @@ Sys.setlocale(category = "LC_ALL", locale = "cht")
 Sys.setlocale(category = "LC_ALL", locale = "C")
 ```
 
-參考連結：<http://psmethods.postach.io/post/ru-he-geng-gai-rde-yu-she-yu-xi>
-
+-   參考連結：<http://psmethods.postach.io/post/ru-he-geng-gai-rde-yu-she-yu-xi>
 -   參考連結：<https://stat.ethz.ch/R-manual/R-devel/library/base/html/locales.html>
-
 -   The locale describes aspects of the internationalization of a program. Initially most aspects of the locale of R are set to "C" (which is the default for the C language and reflects North-American usage)
 
 ### RMD/R Notebook無法儲存

@@ -3,18 +3,24 @@
 # Dataframe
 
 ## 基本操作
+
 ### 產生新的Dataframe
 
-#### 複製資料至vector
-直接複製Wikipedia上的台北市某五區人口資料
+#### 建立資料並Assign給vector
+
+用以下ChatGPT問句來產生測試資料「我現在正在準備R的教學範例， 請協助我產生台北市所有行政區的資料，包含行政區名、面積、人口數 分別指給town, area, population三個變數」。
+
 
 ```r
-population <- c(158228, 126687, 228075, 204903, 308383, 187920)
-town <- c("中正", "大同", "中山", "松山", "大安", "萬華")
-area <- c(7.6071, 5.6815, 13.6821, 9.2878, 11.3614, 8.8522)
+town = c("松山區", "信義區", "大安區", "中山區", "中正區", "大同區", "萬華區", "文山區", "南港區", "內湖區", "士林區", "北投區")
+
+area = c(9.2878, 11.2077, 11.3614, 13.6821, 7.6071, 5.6815, 8.8522, 31.5090, 21.8424, 31.5787, 62.3682, 56.8216) # 單位：平方公里
+
+population = c(206375, 225561, 309835, 203276, 159608, 132397, 194160, 275207, 122103, 287726, 288324, 255688)  # 2023年的估計值
 ```
 
 #### 合併等長vector為dataframe
+
 
 ```r
 df <- data.frame(town, population, area)
@@ -48,9 +54,9 @@ summary(df)
 # View(df)
 ```
 
-
 #### 存放台灣貿易各國進出口量
-* 運用台灣出口進口資料 [台灣出口進口貿易資料查詢](https://cus93.trade.gov.tw/FSC3040F/FSC3040F)
+
+-   運用[國際貿易署貿易統計系統 (trade.gov.tw)](https://cuswebo.trade.gov.tw/)獲取臺灣進出口貿易資料。
 
 
 ```r
@@ -61,14 +67,24 @@ import <- c(26.142, 12.008, 7.032, 13.646, 4.589, 5.768, 2.131, 2.802, 3.428, 3.
 export <- c(22.987, 12.204, 11.837, 7.739, 5.381, 4.610, 2.866, 2.784, 2.414, 2.092, 1.839, 1.788, 1.665, 1.409, 1.391, 1.075, 0.974, 0.899, 0.800, 0.728)
 ```
 
-
 #### 合併vector為data.frame
 
-* 這時候我們若以`str(df)`觀察該`df`的結構會發現，文字型態的資料被轉為`Factors`，這是我們所不樂見的。過去統計通常會把文字型態當成類別變數，於是用`Factors`作為資料型態，但資料科學中經常要處理大量的文字資料，此時，我們可以把`read.csv`的一個參數`stringsAsFactors`設為`FALSE`，意味著預設不要將文字的資料轉為Factor而是直接以文字變項來處理。* `stringsAsFactors = FALSE`也是`read.csv()`的參數（parameter、argument）。因為一般讀檔會預設把文字讀為類別變項也就是Factor，但資料分析經常要處理文字資料而不是類別變項，所以會希望預設不要把文字讀取為類別變項，因此要設定`stringsAsFactors = FALSE`。
+當我們讀取或創建資料框架時，過去R預設會將字符串類型的變數轉換為因子（Factors），這對於統計分析而言是有益的，因為統計分析經常將文字型態的數據視為類別變數來處理。然而，隨著資料科學領域的快速發展，需要處理大量文字數據的情況日益增多，這時將文字資料預設為因子型態可能不再適合所有情境。因此，現在R的預設的處理方式已經改變，預設將文字型態的變數保持為字符型態（Character），而不是自動將其轉換為因子。這意味著，當我們使用`read.csv`等函數讀取數據時，除非明確指定，否則讀入的字符串不會自動轉換為Factors型態。
 
-* 為了避免每次都要打這串參數，可以把它設定為全域參數，可以在程式一開始時便加上`options(stringsAsFactors = FASLE)`，意味著底下所有的函式如果有`stringsAsFactors`這個參數，一律自動設為`FALSE`。
+如果你在進行統計分析時希望將文字型態的變數作為類別變數（即因子）處理，你需要手動設定`stringsAsFactors`參數為`TRUE`。這可以在讀取數據時（如使用`read.csv`函數）或在數據處理過程中明確進行轉換。例如，當使用`read.csv`讀取CSV文件時，若想將所有的字符串變數自動轉為因子型態，可以這樣做：`df <- read.csv("your_file.csv", stringsAsFactors = TRUE)`。若已經讀取數據且數據框架中的文字型態變數仍為Character型態，而你希望將其轉換為Factors，可以使用`factor`函數進行轉換：`df$your_column <- factor(df$your_column)`。
 
 
+```r
+df <- data.frame(country, import, export, stringsAsFactors = TRUE)
+str(df)
+```
+
+```{.output}
+## 'data.frame':	20 obs. of  3 variables:
+##  $ country: Factor w/ 20 levels "AE","AU","CN",..: 3 19 11 7 12 17 4 13 20 15 ...
+##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
+##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
+```
 
 ```r
 df <- data.frame(country, import, export)
@@ -82,36 +98,26 @@ str(df)
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
 ```
 
-```r
-df <- data.frame(country, import, export, stringsAsFactors = FALSE)
-str(df)
-```
-
-```{.output}
-## 'data.frame':	20 obs. of  3 variables:
-##  $ country: chr  "CN" "US" "JP" "HK" ...
-##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
-##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
-```
-
-
-* 甚至也可以建立一個新的、空的`data.frame`。
-* `df.test`就R的用法就是一個變數，並不是`df`和`test`各自是一個變數。
+其他功能：建立一個新且空的`data.frame`。
 
 
 ```r
 df.test <- data.frame()
 ```
 
-
-
 ### 觀察dataframe
 
-* `View(df)` 用RStudio所提供的GUI直接觀看變數
-* `head(df)` 取前面六筆資料（也就是六列的資料來概觀該資料）
-* `class(df)`
-* `str(df)`
-* `summary(df)`
+當我們處理數據框架（dataframe）時，有幾種常用的方法可以幫助我們更好地了解和觀察數據的結構和內容。
+
+1.  `View(df)`: 使用RStudio提供的圖形使用者介面直接觀看dataframe。這個功能允許你直觀地瀏覽整個數據集，方便地查看不同行（變數）和列（觀測值）。這對於初步瞭解數據的分佈和檢查數據的格式特別有用。
+
+2.  `head(df)`: 這個函數用於取出數據框架的前六筆資料（也就是前六列）。這可以讓我們快速概覽數據集的開頭部分，了解數據的基本結構和內容。如果需要查看更多或更少的列，可以向`head`函數傳遞一個額外的參數，如`head(df, n = 10)`來查看前十列。
+
+3.  `class(df)`: 此函數返回該變數的類型。對於dataframe，它將返回"DataFrame"，表明該對象是一個dataframe。了解對象的類型是重要的基礎步驟，尤其是在R中，不同類型的變項能夠做的操作和應用的函數也不同。
+
+4.  `str(df)`: `str`是結構（structure）的縮寫，這個函數提供了dataframe的詳細結構信息，包括變項的數量、變項名稱、變項數據類型以及每個變項前幾個值。這是一個非常強大的函數，用於深入了解數據集的內部結構，特別是當處理大型數據集時。
+
+5.  `summary(df)`: 此函數提供了數據框架的摘要統計信息，包括數值變數的最小值、最大值、中位數、平均值、第一四分位數和第三四分位數，以及因子變數的水平計數。這對於快速獲取數據集的統計概述非常有用。
 
 
 ```r
@@ -168,9 +174,6 @@ help(summary)
 ?summary
 ```
 
-
-
-
 #### 觀察資料維度
 
 
@@ -207,12 +210,13 @@ length(df)
 ```
 
 ### 操作dataframe
+
 #### 取出一個變項
 
-* `names(df)`  列出變數名稱
-* `df$發生.現.地點` 顯示該變數內容
-* `df$發生時段` 顯示該變數內容
-* `length(df$發生時段)` 顯示該變數的長度（相當於有幾個）
+-   `names(df)` 列出變數名稱
+-   `df$發生.現.地點` 顯示該變數內容
+-   `df$發生時段` 顯示該變數內容
+-   `length(df$發生時段)` 顯示該變數的長度（相當於有幾個）
 
 
 ```r
@@ -224,27 +228,19 @@ names(df)
 ```
 
 ```r
-head(df$發生.現.地點)
+head(df$export)
 ```
 
 ```{.output}
-## NULL
+## [1] 22.987 12.204 11.837  7.739  5.381  4.610
 ```
 
 ```r
-head(df$發生時段)
+length(df$import)
 ```
 
 ```{.output}
-## NULL
-```
-
-```r
-length(df$發生時段)
-```
-
-```{.output}
-## [1] 0
+## [1] 20
 ```
 
 ```r
@@ -261,31 +257,25 @@ summary(df)
 ##                     Max.   :26.142   Max.   :22.987
 ```
 
-
-
-
 #### (mutate)透過運算產生新變數
-* 這裡容易犯錯的是，要記得跟程式講說你要加總或四則運算的是哪個df的variable。
-* 從下面的這個操作中，該data.frame會產生一個新的變數`sub`，這就相當於Excel中的某一行減去某一行，然後把資料放在新的一行。
+
+-   這裡容易犯錯的是，要記得跟程式講說你要加總或四則運算的是哪個df的variable。
+-   從下面的這個操作中，該data.frame會產生一個新的變數`sub`，這就相當於Excel中的某一行減去某一行，然後把資料放在新的一行。
 
 
 ```r
 df$sub <- df$import - df$export
 ```
 
-
-
-
 #### (filter)篩選資料、選取變數
 
-* 注意，要告訴程式`import`和`export`是哪個`data.frame`的。
+-   注意，要告訴程式`import`和`export`是哪個`data.frame`的。
 
-* `df[,]`為存取`df`中某個區段的數值或某個數值的方法。因此`df[1, 1]`會取出第一行第一列，也就是第一筆資料的第一個vector。`df[2, 3]`則會取出第二筆資料的第三個variable。
+-   `df[,]`為存取`df`中某個區段的數值或某個數值的方法。因此`df[1, 1]`會取出第一行第一列，也就是第一筆資料的第一個vector。`df[2, 3]`則會取出第二筆資料的第三個variable。
 
-* 下面的例子`nrow(df)`為1894，有1894筆資料，所以自然df$import與df$export的長度都是1894。因此，比較這兩個變數的大小會得到一個長度為1894的boolean (logical) variable。因此把這個長度為1894、充滿TRUE和FALSE的logical vector丟進df的row之處，因為取自df，大小判斷式結果的長度自然和原本的df的列數相同。因此當這個TRUE/FALSE被丟在df的列之處，便會篩選出`import`大於`p.xport`的數值。
+-   下面的例子`nrow(df)`為1894，有1894筆資料，所以自然df$import與df$export的長度都是1894。因此，比較這兩個變數的大小會得到一個長度為1894的boolean (logical) variable。因此把這個長度為1894、充滿TRUE和FALSE的logical vector丟進df的row之處，因為取自df，大小判斷式結果的長度自然和原本的df的列數相同。因此當這個TRUE/FALSE被丟在df的列之處，便會篩選出`import`大於`p.xport`的數值。
 
-* 原本的df有五個variable，而上述的操作是篩選資料，所以被篩選的是列，因此行的數量、名稱都不會變。因此，我篩選完後，直接存取這個被篩選過的data.frame的country variable，自然是可以的。
-
+-   原本的df有五個variable，而上述的操作是篩選資料，所以被篩選的是列，因此行的數量、名稱都不會變。因此，我篩選完後，直接存取這個被篩選過的data.frame的country variable，自然是可以的。
 
 
 ```r
@@ -399,12 +389,9 @@ class(unlist(df[1, -1])) # filter the 1st row and select all columns except 1
 ## [1] "numeric"
 ```
 
-
-
 #### (arrange) 按某個變數排序
 
-* `df.sorted <- df[order(df$import),]`會使得整個df照`import`的大小排序重新做排列。因為`order(df$import)`會把資料照指定順序排列後的位置傳回來，所以把他丟給`df`的列的位置，便會使得`df`的資料照指定的順序排列。
-預設是由小到大，加上`decreasing = T`這個參數後變成由大而小。
+-   `df.sorted <- df[order(df$import),]`會使得整個df照`import`的大小排序重新做排列。因為`order(df$import)`會把資料照指定順序排列後的位置傳回來，所以把他丟給`df`的列的位置，便會使得`df`的資料照指定的順序排列。 預設是由小到大，加上`decreasing = T`這個參數後變成由大而小。
 
 
 ```r
@@ -431,10 +418,10 @@ head(df.sorted)
 ## 5      KR  4.589  5.381 -0.792
 ```
 
-
 ## 簡易繪圖
 
-* `graphics::plot()`為會預載入R的繪圖套件，如果希望繪圖的同時加上回歸線和資料點標籤的話，必須要三行一起執行。
+-   `graphics::plot()`為會預載入R的繪圖套件，如果希望繪圖的同時加上回歸線和資料點標籤的話，必須要三行一起執行。
+
 
 ```r
 # plot(df) # raise error, 1st column is a character vector
@@ -466,8 +453,10 @@ lines(1:25, 1:25, col='red')
 ## Using the first match ...
 ```
 
+## 延伸學習
 
-## 基本操作：使用dplyr
+### 使用dplyr
+
 
 ```r
 library(dplyr)
@@ -527,8 +516,10 @@ print(df$country)
 ## [16] "GB" "IN" "FR" "IT" "AE"
 ```
 
-## tibble, data_frame, data.frame
+### 比較tibble, data_frame, data.frame
+
 `警告： "data_frame()" was deprecated in tibble 1.1.0. Please use "tibble()" instead.`
+
 
 ```r
 df <- data.frame(a=1:2, b=3:4, c=5:6)
@@ -556,7 +547,3 @@ class(df)
 ```{.output}
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
-## Database - SQLite
-
-
-

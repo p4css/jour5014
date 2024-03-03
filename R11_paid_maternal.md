@@ -12,12 +12,14 @@
 
 ### Reading .xlsx by readxl package
 
--   `readxl`也包含在`tidyverse`的套件集中，所以應該已經在前次安裝過，不用特別安裝。
--   但`readxl`不會隨著`tidyverse`套件被載入R的執行環境，所以如果要用`readxl()`來讀取excel檔的話，需要用`library(readxl)`將其載入。
+在進行產假支薪調查數據的分析與視覺化時，我們從該調查網站上所下載的資料是一個Excel文件。由於R語言本身不直接支援讀取Excel格式的文件，我們必須依靠外部的套件來實現這一功能，如**`readxl`**套件。它是專門設計來讀取**`.xls`**和**`.xlsx`**格式文件的強大工具。**`readxl`**套件是**`tidyverse`**套件集的一部分。**`tidyverse`**是一組旨在數據科學和數據處理領域提供便利的R套件集合，包括了**`ggplot2`**、**`dplyr`**、**`tidyr`**等多個流行的套件。如果你之前已經安裝了**`tidyverse`**，那麼**`readxl`**套件應該也已經安裝在你的系統上，無需進行重複安裝。
+
+然而，即便**`readxl`**已經安裝，它並不會隨著**`tidyverse`**套件集的其他部分自動加載到R的執行環境中。這意味著，在你打算使用**`readxl`**套件來讀取Excel文件之前，需要先手動執行**`library(readxl)`**命令來加載它。
 
 
 ```r
 # Import readxl package
+# install.packages("tidyverse")
 library(readxl)
 ```
 
@@ -164,10 +166,10 @@ str(matleave)
 
 ### Check & Replace NAs
 
--   `NA: Not Available`
--   `v[is.na(v)]` will select all NA cells
--   以0取代NA的資料格。避免繪圖產生錯誤
--   `sum(is.na(matleave))`的目的是檢測還有沒有NA值。如果有的話`is.na()`就會是`TRUE`，那麼加總後，如果不是0，那就代表還有NA。
+-   處理開放資料常常會遇到紀錄遺漏的情形，這些遺漏的值在R語言中通常以**`NA`**（Not Available）來表示。這種情況很常見，特別是當數據來自於廣泛的來源，如網絡調查或公開資料庫時。適當處理這些**`NA`**值對於維持分析的準確性和可靠性至關重要。
+-   為了識別和處理這些**`NA`**值，R提供了一些有用的函數和技巧。例如，**`is.na(v)`**函數可以用來檢測向量**`v`**中的**`NA`**值。如果你想選擇所有的**`NA`**紀錄，可以使用**`v[is.na(v)]`**這樣的語法。這個表達式會傳回所有在向量**`v`**中為**`NA`**的元素，這對於進一步的分析和資料清洗非常有幫助。
+-   在某些情況下，你可能會想要以某個特定值來取代**`NA`**值，以避免在繪圖或進行其他數據分析時產生錯誤。例如，你可以選擇以0來取代所有的**`NA`**值，這可以通過**`v[is.na(v)] <- 0`**來實現。這樣，所有原本為**`NA`**的資料格都會被賦予0值。
+-   此外，**`sum(is.na(v))`**這個表達式可以用來檢測向量**`v`**中還有多少**`NA`**值。這個函數的運作機制是計算所有**`is.na(v)`**為**`TRUE`**的情況，即所有**`NA`**值的總數。如果這個結果不是0，那麼就表示在向量或dataframe中還存在**`NA`**值。這對於確保數據清理工作已經完成，並且數據集準備好進行分析是非常有用的。
 
 
 ```r
@@ -287,7 +289,7 @@ sum(is.na(matleave))
 
 #### Filtered by the last year value
 
-`matleave[matleave$'matleave_13'==5, ]`中的第一個`matleave`表示要篩選的資料集，中括號中的`matleave$'matleave_13'==5`是篩選條件，表示`matleave`資料集中的`matleave_13`變數的值等於`5`。中括號中的逗號後方未有欄為名稱表示保留所有欄位的資料，僅篩選出符合條件的列，並將篩選結果賦值給變數`m5`。
+`matleave[matleave$'matleave_13'==5, ]`中的第一個`matleave`表示要篩選的資料集，中括號中的`matleave$'matleave_13'==5`是篩選條件，表示將篩選`matleave`資料集中的`matleave_13`變數值等於`5`的列；中括號中的逗號後方未有欄位名稱表示將保留所有欄位（變項），僅篩選出符合條件的列，並將篩選後所產生的dataframe指給變數`m5`。
 
 
 ```r
@@ -312,6 +314,8 @@ nrow(m5)
 
 #### Filtered data by the first year value
 
+接下來我們再做一次篩選，從`m5`中篩選出`matleave_95`這個欄位為`5`的資料，並指給`m55`；同時也從`m5`中篩選出`matleave_95`這個欄位不為`5`的資料，並指給`m05`。`m5`、`m55`和`m05`無特殊含義，只是變數名稱而已。
+
 
 ```r
 # filter rows whose 'matleave_95' is 5, and assign to var m55
@@ -323,11 +327,12 @@ m05<- m5[m5$'matleave_95'!=5,]
 
 ### Plotting
 
--   Plotting the second rows and all columns except 1st column
--   **Question** 為何要`unlist()`？請試著執行`barplot(matleave[2, -1])`這個沒有`unlist()`的版本，看看會有什麼錯誤訊息。資料結構有何差異呢？
--   嘗試用`class()`或`str()`嘗試觀察沒有`unlist()`版本的資料，看看資料型態和有`unlist()`的會有何不同？
+-   當我們在R中進行資料視覺化時，理解資料結構對於正確使用圖形化函數是非常重要的。以**`matleave`**資料集為例，如果我們想要繪製其第二列所有行（除了第一行）的條形圖，這裡有一段示範程式碼及相關的概念解釋。
+-   首先，為何要除去第一行？因為第一行為國家名稱。所以我們利用**`class(matleave[2, -1])`**來查看**`matleave`**資料集第二行和除了第一列外所有列的資料類型。這個操作返回的是一個**`data.frame`**的資料類型，因為即使是單一行的選取，R仍然保持了資料的**`data.frame`**結構。
+-   然而，當我們嘗試使用**`barplot()`**函數繪製長條圖時，就不能直接把`data.frame`給`barplot()`進行繪製。。這是因為**`barplot()`**函數期望的輸入是一個`vector`。因此，我們使用**`unlist(matleave[2, -1])`**將單行的**`data.frame`**轉換成`vector`。**`unlist()`**函數的作用是將一個列表（或在這個案例中是**`data.frame`**）中的所有元素合併成一個`vector`，這樣就可以用於**`barplot()`**。
+-   為了進一步理解這種差異，我們可以使用**`class()`**或**`str()`**函數來觀察未經**`unlist()`**處理的資料。這將顯示出資料仍然保留在**`data.frame`**結構中，與**`unlist()`**後轉換為`vector`的結構有顯著的不同。這種轉換對於使用某些特定的繪圖函數，如**`barplot()`**，是必要的，因為它們需要一個`vector`作為輸入來正確地繪製圖形。
 
-#### Plotting one line
+#### Plotting one row (one country)
 
 
 ```r
@@ -360,7 +365,7 @@ barplot(unlist(m55[2, -1]))
 
 <img src="R11_paid_maternal_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
--   Testing
+Testing
 
 
 ```r
@@ -401,18 +406,13 @@ class(m55$iso3)	# character (vector)
 
 #### More arguments (args)
 
-這行程式碼使用R中的barplot函數繪製一個長條圖，其中的參數說明如下：
+接下來我們要微調一下視覺化的結果。這行程式碼使用R中的barplot函數繪製一個長條圖，其中的參數說明如下：
 
 1.  `unlist(m55[2, -1])`: 將`m55`資料集的第`2`行（不包括第1欄）轉換為一個向量，並作為長條圖的高度（即每個長條的高度）。
-
 2.  `ylim=c(0, 5)`: 設置y軸的範圍為0到5，即長條圖的最大高度為5。
-
 3.  `space=0`: 設置相鄰兩個長條之間的距離為0，即長條緊密相連。
-
 4.  `border=NA`: 設置長條的邊框為透明，即不顯示邊框。
-
 5.  `xaxt="n"`: 不顯示x軸的標籤。
-
 6.  `yaxt="n"`: 不顯示y軸的標籤。
 
 
@@ -453,7 +453,7 @@ barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n"
 
 #### Plotting multiple lines
 
-底下可以看見每一行非常相似且一致的特徵，僅有`matleave`內的索引由1被列出至6。因此，最好的方法是用迴圈（for-loop）的方式將相同的程式碼，從1\~6之間做六次。
+我們已經成功繪製了一個國家的資料，接下來我們要繪出所有國家的資料。以`m55`這個篩選後的資料為例，我分別要繪製出第1列至第6列的國家。底下可以看見每一行非常相似且一致的特徵，僅有`matleave`內的索引由1被列出至6。對於這種重複的程式碼，最好的方法是用迴圈（for-loop）的方式將相同的程式碼，從1\~6之間做六次。
 
 
 ```r
@@ -491,19 +491,14 @@ for(i in 1:6){
 
 #### Subplots
 
-在R語言中，`par`（parameter的縮寫）是一個用於設置繪圖參數的函數，通過它可以控制繪圖的外觀、尺寸、排列等各方面，以便更好地展示數據和分析結果。par函數可以用來設置以下參數：
+但這樣一個國家就要畫成一個Plot，如果要將多個國家、也就是多個Plots繪製在同一張圖上的話，R也有支援Subplot的函式與設定。在R語言中，`par`（parameter的縮寫）是一個用於設置繪圖參數的函數，通過它可以控制繪圖的外觀、尺寸、排列等各方面，以便更好地展示數據和分析結果。par函數可以用來設置以下參數：
 
-1.  `mfrow`：設置畫布的分割，即將畫布分為多少行和多少列。
-
-2.  `mai`：設置畫布的邊緣大小，包括上下左右四個邊緣的大小。
-
-3.  `cex`：設置字體大小的縮放比例。
-
-4.  `col`：設置線條、點和字體的顏色。
-
-5.  `pch`：設置散點圖中點的形狀。
-
-6.  `lty`：設置線條的類型。
+-   `mfrow`：設置畫布的分割，即將畫布分為多少行和多少列，例如`mfrow=c(3,2)`代表三列二行。
+-   `mai`：設置畫布的邊緣大小，包括上下左右四個邊緣的大小。
+-   `cex`：設置字體大小的縮放比例。
+-   `col`：設置線條、點和字體的顏色。
+-   `pch`：設置散點圖中點的形狀。
+-   `lty`：設置線條的類型。
 
 在這段程式碼中，`par`函數被用來設置畫布的分割和邊緣大小，具體來說，`par(mfrow=c(3,2), mai= c(0.2, 0.2, 0.2, 0.2))`表示將畫布分為3行2列的子圖，並設置邊緣大小為0.2，包括上下左右四個邊緣。這樣可以方便地在同一張畫布上顯示多個圖形，並控制它們之間的排列和間距。
 
@@ -522,6 +517,8 @@ for(i in 1:6){
 
 <img src="R11_paid_maternal_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
+接下來我們用相同的`for-loop`來繪製10張子圖（十個國家）看看。會發現`mfrow=c(3,2)`可以容納六張子圖，多餘六張子圖時，會繪製至下一張。
+
 
 ```r
 # plot more rows to see what happens
@@ -538,6 +535,8 @@ for(i in 1:10){
 ```
 
 <img src="R11_paid_maternal_files/figure-html/pml-plot-test-2.png" width="672" />
+
+最後，我用`nrow(m55)`來取得`m55`這個`data.frame`共有多少個國家，然後，我讓`for-loop`從`1:nrow(m55)`相當於繪製完所有`m55`中的子圖。注意我已經修改了`mfrow`為`mfrow=c(4, 6)`。
 
 
 ```r
@@ -561,11 +560,13 @@ for (i in 1:nrow(m55)){
 
 <img src="R11_paid_maternal_files/figure-html/plot-m55-1.png" width="672" />
 
+在每個子圖上，我要加上每個國家的國別代碼`iso3`，也就是`m55`的第一行，我用同樣的i來掃過每一列，繪製完`barplot()`後，便用`title()`函式來繪製文字。結果如下。注意我的設定`title(m55[i,1], line = -4, cex.main=3)`。`line`為繪製文字的基線，而`cex.main`是字型大小。
+
 
 ```r
 par(mfrow=c(4,6), mai= c(0.2, 0.2, 0.2, 0.2))
 for (i in 1:nrow(m55)){
-    barplot(unlist(m55[i, -1]), border=NA, space=0,xaxt="n", yaxt="n", ylim = c(0,5))
+  barplot(unlist(m55[i, -1]), border=NA, space=0,xaxt="n", yaxt="n", ylim = c(0,5))
 	title(m55[i,1], line = -4, cex.main=3)
 }
 ```
@@ -574,14 +575,20 @@ for (i in 1:nrow(m55)){
 
 ### Practice. Plotting more
 
+-   請繪製`m05`的資料，也就是`matleave_95!=5`但`matleave_13==5`的資料。
+-   請繪製`m04`的資料，也就是`matleave_95!=4`但`matleave_13==4`的資料。
+-   請繪製`m44`的資料，也就是`matleave_95==4`但`matleave_13==4`的資料。
+
 
 ```r
-# plotting matleave_95 != 5 but matleve_13 == 5
+# plotting matleave_95 != 5 but matleave_13 == 5
 
 # plotting for matleave_13 == 4
 ```
 
 ### Practice. Selecting and filtering by dplyr I
+
+請嘗試問問ChatGPT，如果將以下程式碼改為dplyr的寫法，要怎麼寫。
 
 
 ```r

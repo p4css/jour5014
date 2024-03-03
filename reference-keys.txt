@@ -26,6 +26,7 @@ vector
 creating-vectors
 creating-a-sequence
 creating-sequences-by-distribution
+creating-a-fake-data-with-chatgpt
 viewing
 subsetting-filtering
 deleting
@@ -43,7 +44,7 @@ character-operations
 dataframe
 基本操作
 產生新的dataframe
-複製資料至vector
+建立資料並assign給vector
 合併等長vector為dataframe
 存放台灣貿易各國進出口量
 合併vector為data.frame
@@ -55,9 +56,9 @@ mutate透過運算產生新變數
 filter篩選資料選取變數
 arrange-按某個變數排序
 簡易繪圖
-基本操作使用dplyr
-tibble-data_frame-data.frame
-database---sqlite
+延伸學習
+使用dplyr
+比較tibble-data_frame-data.frame
 maternity
 reading-.xlsx-by-readxl-package
 previewing-data-by-view-class-dim-str-summary-and-names
@@ -67,7 +68,7 @@ filtering-data
 filtered-by-the-last-year-value
 filtered-data-by-the-first-year-value
 plotting
-plotting-one-line
+plotting-one-row-one-country
 more-arguments-args
 plotting-multiple-lines
 for-loop-to-plot-multiple-lines
