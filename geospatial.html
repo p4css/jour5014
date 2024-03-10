@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-03" />
+<meta name="date" content="2024-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -302,9 +302,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -789,21 +790,21 @@ div.csl-indent {
 <p>通常繪製地理資訊地圖的時候，會需要因應你要繪製的地域去下載地圖空間數據檔案（例如.shape或geojson檔等）。如台灣的就可以去<a href="https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1">社會經濟資料服務平台 (moi.gov.tw)</a>下載。但也有一些套件內部就包含這些地理空間數據，例如下一節的例子rworldmap套件本身就有世界地圖。或者可以嘗試ggmap或rgooglemap等第三方服務（參考簡介：<a href="https://mpmendespt.github.io/Map-visualization.html">Map Visualization in R · Data Science and R</a>）</p>
 <div id="world-map" class="section level2 hasAnchor" number="29.1">
 <h2><span class="header-section-number">29.1</span> World Map<a href="geospatial.html#world-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="geospatial.html#cb755-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb755-2"><a href="geospatial.html#cb755-2" tabindex="-1"></a><span class="fu">library</span>(rworldmap) <span class="co"># for drawing rworldmap</span></span></code></pre></div>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="geospatial.html#cb756-1" tabindex="-1"></a>rawdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
-<span id="cb756-2"><a href="geospatial.html#cb756-2" tabindex="-1"></a>mapdata <span class="ot">&lt;-</span> rawdata[,<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="geospatial.html#cb760-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb760-2"><a href="geospatial.html#cb760-2" tabindex="-1"></a><span class="fu">library</span>(rworldmap) <span class="co"># for drawing rworldmap</span></span></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="geospatial.html#cb761-1" tabindex="-1"></a>rawdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb761-2"><a href="geospatial.html#cb761-2" tabindex="-1"></a>mapdata <span class="ot">&lt;-</span> rawdata[,<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span></code></pre></div>
 <div id="bind-data-to-map-data" class="section level3 hasAnchor" number="29.1.1">
 <h3><span class="header-section-number">29.1.1</span> Bind data to map data<a href="geospatial.html#bind-data-to-map-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>這段程式碼是在將自己的數據<strong><code>mapdata</code></strong>與<strong><code>rworldmap</code></strong>世界地圖數據進行結合。</p>
 <p>首先，使用 <strong><code>joinCountryData2Map()</code></strong> 函數，將自己的數據和世界地圖數據按照國家的 ISO3 代碼進行連接，生成一張新的地圖。其中， <strong><code>mapdata</code></strong> 是指世界地圖數據， <strong><code>joinCode</code></strong> 參數指定連接時使用的 ISO3 代碼（亦即你預先知道你自己的資料中有ISO3國家代碼）。 <strong><code>nameJoinColumn</code></strong> 參數則用於指定自己數據中與國家對應的欄位名稱為<strong><code>iso3</code></strong>。</p>
 <p>還有其他的<strong><code>joinCode</code></strong>如「“ISO2”,“ISO3”,“FIPS”,“NAME”, “UN” = numeric codes」等可參見該套件的說明<a href="https://www.rdocumentation.org/packages/rworldmap/versions/1.3-6">rworldmap package - RDocumentation</a>。</p>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="geospatial.html#cb757-1" tabindex="-1"></a><span class="co"># join your data with the world map data</span></span>
-<span id="cb757-2"><a href="geospatial.html#cb757-2" tabindex="-1"></a>myMap <span class="ot">&lt;-</span> <span class="fu">joinCountryData2Map</span>(mapdata, <span class="at">joinCode =</span> <span class="st">&quot;ISO3&quot;</span>, <span class="at">nameJoinColumn =</span> <span class="st">&quot;iso3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="geospatial.html#cb762-1" tabindex="-1"></a><span class="co"># join your data with the world map data</span></span>
+<span id="cb762-2"><a href="geospatial.html#cb762-2" tabindex="-1"></a>myMap <span class="ot">&lt;-</span> <span class="fu">joinCountryData2Map</span>(mapdata, <span class="at">joinCode =</span> <span class="st">&quot;ISO3&quot;</span>, <span class="at">nameJoinColumn =</span> <span class="st">&quot;iso3&quot;</span>)</span></code></pre></div>
 <pre class="output"><code>## 196 codes from your data successfully matched countries in the map
 ## 1 codes from your data failed to match with a country code in the map
 ## 47 codes from the map weren&#39;t represented in your data</code></pre>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="geospatial.html#cb759-1" tabindex="-1"></a>myMap<span class="sc">$</span>matleave_13</span></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="geospatial.html#cb764-1" tabindex="-1"></a>myMap<span class="sc">$</span>matleave_13</span></code></pre></div>
 <pre class="output"><code>##   [1]  2  2  5  2  2  5 NA NA  3  5  5  2  4  3  3  3  5  2  5  5  3  2  3  3  2
 ##  [26]  2  3  4  3  4  3  3  3  3  3  3  3  5 NA  3  5  5  3  5  2  3  2  2  2  3
 ##  [51]  5  2  5  2 NA  4  3  4  3  2  3  4  2  2  4 NA  2  2  2  5  2  5  2  2  4
@@ -818,22 +819,22 @@ div.csl-indent {
 <div id="drawing-map" class="section level3 hasAnchor" number="29.1.2">
 <h3><span class="header-section-number">29.1.2</span> Drawing Map<a href="geospatial.html#drawing-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong><code>mapCountryData()</code></strong> 函數用於將數據繪製在地圖上。其中， <strong><code>myMap</code></strong> 是已經連接過的世界地圖數據和自己的數據，包含了各國的地理空間信息和相關的數據資訊。 <strong><code>nameColumnToPlot</code></strong> 指定要顯示在地圖上的數據欄位為<strong><code>matleave_13</code></strong>，也就是 2013 年的產假長度。 <strong><code>catMethod</code></strong> 參數是決定視覺化時的數據分類是類別或連續，<strong><code>categorical</code></strong>表示將數據分成幾個等級來展示在地圖上。</p>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="geospatial.html#cb761-1" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
-<span id="cb761-2"><a href="geospatial.html#cb761-2" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
-<span id="cb761-3"><a href="geospatial.html#cb761-3" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
-<span id="cb761-4"><a href="geospatial.html#cb761-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="geospatial.html#cb766-1" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
+<span id="cb766-2"><a href="geospatial.html#cb766-2" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
+<span id="cb766-3"><a href="geospatial.html#cb766-3" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb766-4"><a href="geospatial.html#cb766-4" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="V21_Geospatial_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="drawing-map-by-specific-colors" class="section level3 hasAnchor" number="29.1.3">
 <h3><span class="header-section-number">29.1.3</span> Drawing map by specific colors<a href="geospatial.html#drawing-map-by-specific-colors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="geospatial.html#cb762-1" tabindex="-1"></a><span class="co"># self-defined colors</span></span>
-<span id="cb762-2"><a href="geospatial.html#cb762-2" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#FF8000&quot;</span>, <span class="st">&quot;#A9D0F5&quot;</span>, <span class="st">&quot;#58ACFA&quot;</span>, <span class="st">&quot;#0080FF&quot;</span>, <span class="st">&quot;#084B8A&quot;</span>)</span>
-<span id="cb762-3"><a href="geospatial.html#cb762-3" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
-<span id="cb762-4"><a href="geospatial.html#cb762-4" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
-<span id="cb762-5"><a href="geospatial.html#cb762-5" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
-<span id="cb762-6"><a href="geospatial.html#cb762-6" tabindex="-1"></a>               , <span class="at">colourPalette =</span> colors</span>
-<span id="cb762-7"><a href="geospatial.html#cb762-7" tabindex="-1"></a>               , <span class="at">addLegend=</span><span class="st">&quot;FALSE&quot;</span></span>
-<span id="cb762-8"><a href="geospatial.html#cb762-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="geospatial.html#cb767-1" tabindex="-1"></a><span class="co"># self-defined colors</span></span>
+<span id="cb767-2"><a href="geospatial.html#cb767-2" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#FF8000&quot;</span>, <span class="st">&quot;#A9D0F5&quot;</span>, <span class="st">&quot;#58ACFA&quot;</span>, <span class="st">&quot;#0080FF&quot;</span>, <span class="st">&quot;#084B8A&quot;</span>)</span>
+<span id="cb767-3"><a href="geospatial.html#cb767-3" tabindex="-1"></a><span class="fu">mapCountryData</span>(myMap</span>
+<span id="cb767-4"><a href="geospatial.html#cb767-4" tabindex="-1"></a>               , <span class="at">nameColumnToPlot=</span><span class="st">&quot;matleave_13&quot;</span></span>
+<span id="cb767-5"><a href="geospatial.html#cb767-5" tabindex="-1"></a>               , <span class="at">catMethod =</span> <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb767-6"><a href="geospatial.html#cb767-6" tabindex="-1"></a>               , <span class="at">colourPalette =</span> colors</span>
+<span id="cb767-7"><a href="geospatial.html#cb767-7" tabindex="-1"></a>               , <span class="at">addLegend=</span><span class="st">&quot;FALSE&quot;</span></span>
+<span id="cb767-8"><a href="geospatial.html#cb767-8" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="V21_Geospatial_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="practice.-drawing-map-for-every-years" class="section level3 hasAnchor practice" number="29.1.4">
@@ -858,21 +859,21 @@ div.csl-indent {
 <li>geojson 則是一種基於 JSON 格式的地理圖資檔案格式，內容包含了地理空間範圍和屬性。geojson 的優點是格式簡單、容易理解和易於編輯，支援性也比較好。由於 geojson 使用的是文本格式，因此可以直接在許多文本編輯器中編輯和查看，也可以輕易地轉換成其他格式的地理圖資檔案。</li>
 </ul>
 <p>這邊我們所要用的套件是<strong><code>sf</code></strong>，<strong><code>sf</code></strong> 是一個在 R 環境下進行地理圖資處理和分析的套件，他不僅支援多種檔案格式，包括 shapefile、GeoJSON、KML 等，並且可以直接將這些檔案轉換為 R 中的空間資料框架，方便進行進一步的處理和分析。更方便的特色是在於，它可以用tidyverse的風格來寫作，方便對地理圖資和其他數據進行整合和分析，甚至在使用<strong><code>View()</code></strong>的時候，把圖資當成一個變項。</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="geospatial.html#cb763-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="geospatial.html#cb768-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
 <div id="the-case-population-and-density-of-taipei" class="section level3 hasAnchor" number="29.2.1">
 <h3><span class="header-section-number">29.2.1</span> The case: Population and Density of Taipei<a href="geospatial.html#the-case-population-and-density-of-taipei" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>這個資料下載自<a href="https://segis.moi.gov.tw/STAT/Web/Portal/STAT_PortalHome.aspx">社會經濟資料服務平台 (moi.gov.tw)</a>的<img src="https://segis.moi.gov.tw/STAT/Resources/Project/Images/Platform/subProduct.png" title="子產品" /><a href="https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1#" title="111年9月行政區人口統計_鄉鎮市區_臺北市">111年9月行政區人口統計_鄉鎮市區_臺北市</a>，實際上內部的資料包含368個鄉鎮的依性別分人口數、家戶數等。</p>
 <p>資料變項包含每個區的家戶數（<strong><code>H_CNT</code></strong>）、總人口數（<strong><code>P_CNT</code></strong>）、男性人口數（<strong><code>M_CNT</code></strong>）、女性人口數（<strong><code>F_CNT</code></strong>）。等一下要計算每平方公里的家戶數或人口數時，你會疑惑為何沒有面積資料。</p>
-<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="geospatial.html#cb764-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
-<span id="cb764-2"><a href="geospatial.html#cb764-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
-<span id="cb764-3"><a href="geospatial.html#cb764-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb764-4"><a href="geospatial.html#cb764-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb764-5"><a href="geospatial.html#cb764-5" tabindex="-1"></a>  <span class="co"># mutate(across(where(is.double), ~if_else(is.na(.),as.double(0),.))) %&gt;%</span></span>
-<span id="cb764-6"><a href="geospatial.html#cb764-6" tabindex="-1"></a>  <span class="co"># st_set_crs(3826) %&gt;% st_transform(4326) %&gt;% </span></span>
-<span id="cb764-7"><a href="geospatial.html#cb764-7" tabindex="-1"></a>  <span class="co"># filter(COUNTY == &quot;臺北市&quot;)</span></span>
-<span id="cb764-8"><a href="geospatial.html#cb764-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
-<span id="cb764-9"><a href="geospatial.html#cb764-9" tabindex="-1"></a></span>
-<span id="cb764-10"><a href="geospatial.html#cb764-10" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="geospatial.html#cb769-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
+<span id="cb769-2"><a href="geospatial.html#cb769-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
+<span id="cb769-3"><a href="geospatial.html#cb769-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb769-4"><a href="geospatial.html#cb769-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb769-5"><a href="geospatial.html#cb769-5" tabindex="-1"></a>  <span class="co"># mutate(across(where(is.double), ~if_else(is.na(.),as.double(0),.))) %&gt;%</span></span>
+<span id="cb769-6"><a href="geospatial.html#cb769-6" tabindex="-1"></a>  <span class="co"># st_set_crs(3826) %&gt;% st_transform(4326) %&gt;% </span></span>
+<span id="cb769-7"><a href="geospatial.html#cb769-7" tabindex="-1"></a>  <span class="co"># filter(COUNTY == &quot;臺北市&quot;)</span></span>
+<span id="cb769-8"><a href="geospatial.html#cb769-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
+<span id="cb769-9"><a href="geospatial.html#cb769-9" tabindex="-1"></a></span>
+<span id="cb769-10"><a href="geospatial.html#cb769-10" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>## Simple feature collection with 6 features and 9 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -893,9 +894,9 @@ div.csl-indent {
 ## 5 MULTIPOLYGON (((302203.6 27...
 ## 6 MULTIPOLYGON (((302217.9 27...</code></pre>
 <p>試著畫畫看。你會發現它的座標系是一個我們看不懂的數字，而不是想像中的經緯度。</p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="geospatial.html#cb766-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
-<span id="cb766-2"><a href="geospatial.html#cb766-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb766-3"><a href="geospatial.html#cb766-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="geospatial.html#cb771-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb771-2"><a href="geospatial.html#cb771-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb771-3"><a href="geospatial.html#cb771-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="projection-投影的概念" class="section level3 hasAnchor" number="29.2.2">
@@ -929,22 +930,22 @@ div.csl-indent {
 </ul></li>
 </ul>
 <p>就下載的這個資料來說，他並沒有設定他的投影座標。</p>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="geospatial.html#cb767-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="geospatial.html#cb772-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
 <pre class="output"><code>## [1] NA</code></pre>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="geospatial.html#cb769-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="geospatial.html#cb774-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
 <pre class="output"><code>## Coordinate Reference System: NA</code></pre>
 <p>我們會希望在讀取資料的時候，設定他的投影座標。例如以下的例子是設定為TWD96（3826）然後轉換為全球座標WGS84（4326）。</p>
-<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="geospatial.html#cb771-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
-<span id="cb771-2"><a href="geospatial.html#cb771-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
-<span id="cb771-3"><a href="geospatial.html#cb771-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb771-4"><a href="geospatial.html#cb771-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb771-5"><a href="geospatial.html#cb771-5" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb771-6"><a href="geospatial.html#cb771-6" tabindex="-1"></a>  <span class="co"># st_transform(4326) %&gt;%</span></span>
-<span id="cb771-7"><a href="geospatial.html#cb771-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
-<span id="cb771-8"><a href="geospatial.html#cb771-8" tabindex="-1"></a></span>
-<span id="cb771-9"><a href="geospatial.html#cb771-9" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="geospatial.html#cb776-1" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
+<span id="cb776-2"><a href="geospatial.html#cb776-2" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
+<span id="cb776-3"><a href="geospatial.html#cb776-3" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb776-4"><a href="geospatial.html#cb776-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb776-5"><a href="geospatial.html#cb776-5" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb776-6"><a href="geospatial.html#cb776-6" tabindex="-1"></a>  <span class="co"># st_transform(4326) %&gt;%</span></span>
+<span id="cb776-7"><a href="geospatial.html#cb776-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(COUNTY, <span class="st">&quot;臺北市&quot;</span>))</span>
+<span id="cb776-8"><a href="geospatial.html#cb776-8" tabindex="-1"></a></span>
+<span id="cb776-9"><a href="geospatial.html#cb776-9" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)<span class="sc">$</span>proj4string</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;+proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs&quot;</code></pre>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="geospatial.html#cb773-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="geospatial.html#cb778-1" tabindex="-1"></a><span class="fu">st_crs</span>(sf_tpe)</span></code></pre></div>
 <pre class="output"><code>## Coordinate Reference System:
 ##   User input: EPSG:3826 
 ##   wkt:
@@ -986,23 +987,23 @@ div.csl-indent {
 ##         AREA[&quot;Taiwan, Republic of China - between 120°E and 122°E, onshore and offshore - Taiwan Island.&quot;],
 ##         BBOX[20.41,119.99,26.72,122.06]],
 ##     ID[&quot;EPSG&quot;,3826]]</code></pre>
-<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="geospatial.html#cb775-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
-<span id="cb775-2"><a href="geospatial.html#cb775-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb775-3"><a href="geospatial.html#cb775-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="geospatial.html#cb780-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb780-2"><a href="geospatial.html#cb780-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb780-3"><a href="geospatial.html#cb780-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="geospatial.html#cb776-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
-<span id="cb776-2"><a href="geospatial.html#cb776-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> P_CNT) <span class="sc">+</span> </span>
-<span id="cb776-3"><a href="geospatial.html#cb776-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb776-4"><a href="geospatial.html#cb776-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="geospatial.html#cb781-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb781-2"><a href="geospatial.html#cb781-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> P_CNT) <span class="sc">+</span> </span>
+<span id="cb781-3"><a href="geospatial.html#cb781-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb781-4"><a href="geospatial.html#cb781-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>面積資料可以用<strong><code>st_area()</code></strong>這個函式求得。<strong><code>st_area()</code></strong> 是 R 中一個與地理空間數據相關的函數，用於計算地理多邊形的面積。具體而言，st_area() 函數接受一個 Spatial* 或是 sf 的資料物件，可以計算其包含的每個多邊形的面積，並以相應的單位返回結果。其中 <strong><code>as.double(st_area(.))/1000000</code></strong> 的作用是將地理多邊形的面積從平方公尺轉換為平方公里。因為面積的單位是平方公尺，而人口密度的常用單位是人口數/平方公里，因此需要進行單位換算，將面積轉換為平方公里。</p>
 <p><strong><code>st_area()</code></strong> 函數的計算方式基於多邊形的投影，因此在使用該函數時需要注意地理空間數據的投影選擇和轉換。通常情況下，<strong><code>st_area()</code></strong> 函數可以自動識別多邊形的投影系統，並返回相應的面積值。如果需要在不同的投影系統間進行面積的轉換，則需要使用 <strong><code>st_transform()</code></strong> 函數進行投影變換。</p>
 <p>需要注意的是，由於地球是一個球體，因此在計算面積時需要考慮到地球的曲率效應。<strong><code>st_area()</code></strong> 函數默認使用的是橢球面積計算公式（ellipsoidal area formula），可以更準確地計算地理多邊形的面積。如果需要更精確的面積計算結果，也可以使用球面面積計算公式（spherical area formula）或是進行局部的面積校正。</p>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="geospatial.html#cb777-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
-<span id="cb777-2"><a href="geospatial.html#cb777-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_density =</span> P_CNT<span class="sc">/</span>(<span class="fu">as.double</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">1000000</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb777-3"><a href="geospatial.html#cb777-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> p_density) <span class="sc">+</span> </span>
-<span id="cb777-4"><a href="geospatial.html#cb777-4" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb777-5"><a href="geospatial.html#cb777-5" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="geospatial.html#cb782-1" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> </span>
+<span id="cb782-2"><a href="geospatial.html#cb782-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_density =</span> P_CNT<span class="sc">/</span>(<span class="fu">as.double</span>(<span class="fu">st_area</span>(.))<span class="sc">/</span><span class="dv">1000000</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb782-3"><a href="geospatial.html#cb782-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> p_density) <span class="sc">+</span> </span>
+<span id="cb782-4"><a href="geospatial.html#cb782-4" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb782-5"><a href="geospatial.html#cb782-5" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -1011,8 +1012,8 @@ div.csl-indent {
 <p>有時候我們所希望繪製的資料並非來自SEGIS這類有圖資的平台（例如下面所用的台北各區每人平均所得），那我們就會需要先取得另一份圖資資料（例如下例的鄉鎮市區界圖資），再透過一些索引（Index）來結合這兩方的資料。而下面這個例子，還為了要將鄉鎮市區名稱打在各區的中央，結合了另一份資料，一共結合了三方的資料。</p>
 <div id="reading-income-data" class="section level3 hasAnchor" number="29.3.1">
 <h3><span class="header-section-number">29.3.1</span> Reading income data<a href="geospatial.html#reading-income-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="geospatial.html#cb778-1" tabindex="-1"></a>taipei_income <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/台北各區每人所得.xlsx&#39;</span>) </span>
-<span id="cb778-2"><a href="geospatial.html#cb778-2" tabindex="-1"></a>taipei_income <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="geospatial.html#cb783-1" tabindex="-1"></a>taipei_income <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/台北各區每人所得.xlsx&#39;</span>) </span>
+<span id="cb783-2"><a href="geospatial.html#cb783-2" tabindex="-1"></a>taipei_income <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 2
 ##   district  income
 ##   &lt;chr&gt;      &lt;dbl&gt;
@@ -1026,13 +1027,13 @@ div.csl-indent {
 <div id="read-taipei-zip-code" class="section level3 hasAnchor" number="29.3.2">
 <h3><span class="header-section-number">29.3.2</span> Read Taipei zip code<a href="geospatial.html#read-taipei-zip-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>等一下我打算把每區的名稱打在各區上，但是我沒有各區的名稱應該打在哪裡的經緯度，恰好Zip Code這份資料裡面有台北市各區的經緯度中心，因此先把它讀進來合併用。</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="geospatial.html#cb780-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb780-2"><a href="geospatial.html#cb780-2" tabindex="-1"></a></span>
-<span id="cb780-3"><a href="geospatial.html#cb780-3" tabindex="-1"></a>twzipcode_json <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/twzipcode.json&quot;</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb780-4"><a href="geospatial.html#cb780-4" tabindex="-1"></a>taipei_zipcode <span class="ot">&lt;-</span> twzipcode_json <span class="sc">%&gt;%</span> </span>
-<span id="cb780-5"><a href="geospatial.html#cb780-5" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;台北市&quot;</span>)</span>
-<span id="cb780-6"><a href="geospatial.html#cb780-6" tabindex="-1"></a></span>
-<span id="cb780-7"><a href="geospatial.html#cb780-7" tabindex="-1"></a>taipei_zipcode <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="geospatial.html#cb785-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb785-2"><a href="geospatial.html#cb785-2" tabindex="-1"></a></span>
+<span id="cb785-3"><a href="geospatial.html#cb785-3" tabindex="-1"></a>twzipcode_json <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/twzipcode.json&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb785-4"><a href="geospatial.html#cb785-4" tabindex="-1"></a>taipei_zipcode <span class="ot">&lt;-</span> twzipcode_json <span class="sc">%&gt;%</span> </span>
+<span id="cb785-5"><a href="geospatial.html#cb785-5" tabindex="-1"></a>  <span class="fu">filter</span>(city <span class="sc">==</span> <span class="st">&quot;台北市&quot;</span>)</span>
+<span id="cb785-6"><a href="geospatial.html#cb785-6" tabindex="-1"></a></span>
+<span id="cb785-7"><a href="geospatial.html#cb785-7" tabindex="-1"></a>taipei_zipcode <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>##   zip_code district   city     lat     lng
 ## 1      100   中正區 台北市 25.0324 121.520
 ## 2      103   大同區 台北市 25.0634 121.513
@@ -1040,18 +1041,18 @@ div.csl-indent {
 ## 4      105   松山區 台北市 25.0600 121.558
 ## 5      106   大安區 台北市 25.0268 121.543
 ## 6      108   萬華區 台北市 25.0286 121.498</code></pre>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="geospatial.html#cb782-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
-<span id="cb782-2"><a href="geospatial.html#cb782-2" tabindex="-1"></a><span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/TOWN_MOI_1100415.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb782-3"><a href="geospatial.html#cb782-3" tabindex="-1"></a>    <span class="fu">filter</span>(COUNTYNAME <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb782-4"><a href="geospatial.html#cb782-4" tabindex="-1"></a>    <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
-<span id="cb782-5"><a href="geospatial.html#cb782-5" tabindex="-1"></a>    <span class="co"># rmapshaper::ms_simplify(keep=0.05) %&gt;%</span></span>
-<span id="cb782-6"><a href="geospatial.html#cb782-6" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_income, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb782-7"><a href="geospatial.html#cb782-7" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_zipcode, <span class="at">by=</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb782-8"><a href="geospatial.html#cb782-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> income) <span class="sc">+</span> </span>
-<span id="cb782-9"><a href="geospatial.html#cb782-9" tabindex="-1"></a>    <span class="fu">geom_sf</span>() <span class="sc">+</span> </span>
-<span id="cb782-10"><a href="geospatial.html#cb782-10" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#FF8888&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000AA&quot;</span>, </span>
-<span id="cb782-11"><a href="geospatial.html#cb782-11" tabindex="-1"></a>                         <span class="at">midpoint =</span> <span class="fu">median</span>(taipei_income<span class="sc">$</span>income)) <span class="sc">+</span></span>
-<span id="cb782-12"><a href="geospatial.html#cb782-12" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat, <span class="at">label =</span> TOWNNAME), <span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">2.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="geospatial.html#cb787-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
+<span id="cb787-2"><a href="geospatial.html#cb787-2" tabindex="-1"></a><span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/TOWN_MOI_1100415.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb787-3"><a href="geospatial.html#cb787-3" tabindex="-1"></a>    <span class="fu">filter</span>(COUNTYNAME <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb787-4"><a href="geospatial.html#cb787-4" tabindex="-1"></a>    <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
+<span id="cb787-5"><a href="geospatial.html#cb787-5" tabindex="-1"></a>    <span class="co"># rmapshaper::ms_simplify(keep=0.05) %&gt;%</span></span>
+<span id="cb787-6"><a href="geospatial.html#cb787-6" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_income, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb787-7"><a href="geospatial.html#cb787-7" tabindex="-1"></a>    <span class="fu">left_join</span>(taipei_zipcode, <span class="at">by=</span> <span class="fu">c</span>(<span class="st">&quot;TOWNNAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;district&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb787-8"><a href="geospatial.html#cb787-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">fill =</span> income) <span class="sc">+</span> </span>
+<span id="cb787-9"><a href="geospatial.html#cb787-9" tabindex="-1"></a>    <span class="fu">geom_sf</span>() <span class="sc">+</span> </span>
+<span id="cb787-10"><a href="geospatial.html#cb787-10" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#FF8888&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000AA&quot;</span>, </span>
+<span id="cb787-11"><a href="geospatial.html#cb787-11" tabindex="-1"></a>                         <span class="at">midpoint =</span> <span class="fu">median</span>(taipei_income<span class="sc">$</span>income)) <span class="sc">+</span></span>
+<span id="cb787-12"><a href="geospatial.html#cb787-12" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat, <span class="at">label =</span> TOWNNAME), <span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">2.5</span>)</span></code></pre></div>
 <pre class="output"><code>## Reading layer `TOWN_MOI_1100415&#39; from data source 
 ##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/TOWN_MOI_1100415.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -1068,17 +1069,17 @@ div.csl-indent {
 <p>本練習將以2016年總統選舉為例，比較朱立倫、宋楚瑜、蔡英文在不同縣市的得票率，並繪製為地圖。該地圖比較有趣的是，因為台灣的地圖實際上是由很多點連成的，在這麼大的規模如果把全部的點全部繪製上去，會繪製非常久，而讀者也不盡然能夠看清楚這個差別，所以可以降低點的數量。</p>
 <div id="loading-county-level-president-voting-rate" class="section level3 hasAnchor" number="29.4.1">
 <h3><span class="header-section-number">29.4.1</span> Loading county-level president voting rate<a href="geospatial.html#loading-county-level-president-voting-rate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="geospatial.html#cb784-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb784-2"><a href="geospatial.html#cb784-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
-<span id="cb784-3"><a href="geospatial.html#cb784-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
-<span id="cb784-4"><a href="geospatial.html#cb784-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
-<span id="cb784-5"><a href="geospatial.html#cb784-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
-<span id="cb784-6"><a href="geospatial.html#cb784-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="geospatial.html#cb789-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb789-2"><a href="geospatial.html#cb789-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
+<span id="cb789-3"><a href="geospatial.html#cb789-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
+<span id="cb789-4"><a href="geospatial.html#cb789-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
+<span id="cb789-5"><a href="geospatial.html#cb789-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
+<span id="cb789-6"><a href="geospatial.html#cb789-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
 </div>
 <div id="sf-to-load-county-level-shp" class="section level3 hasAnchor" number="29.4.2">
 <h3><span class="header-section-number">29.4.2</span> sf to load county level shp<a href="geospatial.html#sf-to-load-county-level-shp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://fidanalytics.co.uk/blog/simplifying-polygons-r" class="uri">https://fidanalytics.co.uk/blog/simplifying-polygons-r</a></p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="geospatial.html#cb785-1" tabindex="-1"></a>county_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="geospatial.html#cb790-1" tabindex="-1"></a>county_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>)</span></code></pre></div>
 <pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
 ##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -1087,13 +1088,13 @@ div.csl-indent {
 ## Dimension:     XY
 ## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
 ## Geodetic CRS:  TWD97</code></pre>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="geospatial.html#cb787-1" tabindex="-1"></a><span class="co"># plot(county_sf) # Taking very long time</span></span></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="geospatial.html#cb792-1" tabindex="-1"></a><span class="co"># plot(county_sf) # Taking very long time</span></span></code></pre></div>
 </div>
 <div id="simplfying-map-polygon" class="section level3 hasAnchor" number="29.4.3">
 <h3><span class="header-section-number">29.4.3</span> Simplfying map polygon<a href="geospatial.html#simplfying-map-polygon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="geospatial.html#cb788-1" tabindex="-1"></a>county_ms_simp <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb788-2"><a href="geospatial.html#cb788-2" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(county_sf,  keep=0.001) </span></span>
-<span id="cb788-3"><a href="geospatial.html#cb788-3" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="geospatial.html#cb793-1" tabindex="-1"></a>county_ms_simp <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb793-2"><a href="geospatial.html#cb793-2" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(county_sf,  keep=0.001) </span></span>
+<span id="cb793-3"><a href="geospatial.html#cb793-3" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">100</span>)</span></code></pre></div>
 <pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
 ##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -1102,14 +1103,14 @@ div.csl-indent {
 ## Dimension:     XY
 ## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
 ## Geodetic CRS:  TWD97</code></pre>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="geospatial.html#cb790-1" tabindex="-1"></a><span class="fu">plot</span>(county_ms_simp)</span></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="geospatial.html#cb795-1" tabindex="-1"></a><span class="fu">plot</span>(county_ms_simp)</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="geospatial.html#cb791-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
-<span id="cb791-2"><a href="geospatial.html#cb791-2" tabindex="-1"></a>plot_chu <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb791-3"><a href="geospatial.html#cb791-3" tabindex="-1"></a>  <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
-<span id="cb791-4"><a href="geospatial.html#cb791-4" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb791-5"><a href="geospatial.html#cb791-5" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(keep=0.01) %&gt;%</span></span>
-<span id="cb791-6"><a href="geospatial.html#cb791-6" tabindex="-1"></a>  <span class="fu">right_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="geospatial.html#cb796-1" tabindex="-1"></a><span class="co"># install.packages(&quot;rmapshaper&quot;)</span></span>
+<span id="cb796-2"><a href="geospatial.html#cb796-2" tabindex="-1"></a>plot_chu <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb796-3"><a href="geospatial.html#cb796-3" tabindex="-1"></a>  <span class="co"># st_transform(3825) %&gt;% #3857</span></span>
+<span id="cb796-4"><a href="geospatial.html#cb796-4" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb796-5"><a href="geospatial.html#cb796-5" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(keep=0.01) %&gt;%</span></span>
+<span id="cb796-6"><a href="geospatial.html#cb796-6" tabindex="-1"></a>  <span class="fu">right_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
 <pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
 ##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -1118,10 +1119,10 @@ div.csl-indent {
 ## Dimension:     XY
 ## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
 ## Geodetic CRS:  TWD97</code></pre>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="geospatial.html#cb793-1" tabindex="-1"></a>plot_chu <span class="sc">%&gt;%</span></span>
-<span id="cb793-2"><a href="geospatial.html#cb793-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> chu_ratio)) <span class="sc">+</span> </span>
-<span id="cb793-3"><a href="geospatial.html#cb793-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb793-4"><a href="geospatial.html#cb793-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#FFFFFF&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000FF&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="geospatial.html#cb798-1" tabindex="-1"></a>plot_chu <span class="sc">%&gt;%</span></span>
+<span id="cb798-2"><a href="geospatial.html#cb798-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> chu_ratio)) <span class="sc">+</span> </span>
+<span id="cb798-3"><a href="geospatial.html#cb798-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb798-4"><a href="geospatial.html#cb798-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#FFFFFF&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000FF&quot;</span>)</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="practice.-drawing-taiwan-county-scale-map-from-segis-data" class="section level3 hasAnchor practice" number="29.4.4">
@@ -1142,12 +1143,12 @@ div.csl-indent {
 </div>
 <div id="mapping-data-with-grid" class="section level2 hasAnchor" number="29.5">
 <h2><span class="header-section-number">29.5</span> Mapping data with grid<a href="geospatial.html#mapping-data-with-grid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="geospatial.html#cb794-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="geospatial.html#cb799-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
 <div id="loading-taiwan-map" class="section level3 hasAnchor" number="29.5.1">
 <h3><span class="header-section-number">29.5.1</span> Loading Taiwan map<a href="geospatial.html#loading-taiwan-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="geospatial.html#cb795-1" tabindex="-1"></a>TW.island <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb795-2"><a href="geospatial.html#cb795-2" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb795-3"><a href="geospatial.html#cb795-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="geospatial.html#cb800-1" tabindex="-1"></a>TW.island <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/COUNTY_MOI_1090820.shp&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb800-2"><a href="geospatial.html#cb800-2" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb800-3"><a href="geospatial.html#cb800-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span></code></pre></div>
 <pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
 ##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
@@ -1159,59 +1160,59 @@ div.csl-indent {
 </div>
 <div id="building-grid" class="section level3 hasAnchor" number="29.5.2">
 <h3><span class="header-section-number">29.5.2</span> Building grid<a href="geospatial.html#building-grid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="geospatial.html#cb797-1" tabindex="-1"></a><span class="co"># Defining grid size</span></span>
-<span id="cb797-2"><a href="geospatial.html#cb797-2" tabindex="-1"></a>grid.extent <span class="ot">&lt;-</span> </span>
-<span id="cb797-3"><a href="geospatial.html#cb797-3" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmin, Ymax)</span></span>
-<span id="cb797-4"><a href="geospatial.html#cb797-4" tabindex="-1"></a>           <span class="dv">610000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmax, Ymax)</span></span>
-<span id="cb797-5"><a href="geospatial.html#cb797-5" tabindex="-1"></a>           <span class="dv">610000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmax, Ymin)</span></span>
-<span id="cb797-6"><a href="geospatial.html#cb797-6" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmin, Ymin)</span></span>
-<span id="cb797-7"><a href="geospatial.html#cb797-7" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>),  <span class="co"># (Xmin, Ymax) </span></span>
-<span id="cb797-8"><a href="geospatial.html#cb797-8" tabindex="-1"></a>         <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb797-9"><a href="geospatial.html#cb797-9" tabindex="-1"></a>  <span class="fu">list</span>() <span class="sc">%&gt;%</span> <span class="co"># convert to list for st_polygon()</span></span>
-<span id="cb797-10"><a href="geospatial.html#cb797-10" tabindex="-1"></a>  <span class="fu">st_polygon</span>() <span class="sc">%&gt;%</span> <span class="co"># generate polygon</span></span>
-<span id="cb797-11"><a href="geospatial.html#cb797-11" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">3826</span>) <span class="co"># convert format and crs</span></span>
-<span id="cb797-12"><a href="geospatial.html#cb797-12" tabindex="-1"></a><span class="co"># plot(grid.extent)</span></span>
-<span id="cb797-13"><a href="geospatial.html#cb797-13" tabindex="-1"></a></span>
-<span id="cb797-14"><a href="geospatial.html#cb797-14" tabindex="-1"></a></span>
-<span id="cb797-15"><a href="geospatial.html#cb797-15" tabindex="-1"></a><span class="co"># Generating grid</span></span>
-<span id="cb797-16"><a href="geospatial.html#cb797-16" tabindex="-1"></a>Grid.sys <span class="ot">&lt;-</span> </span>
-<span id="cb797-17"><a href="geospatial.html#cb797-17" tabindex="-1"></a>  <span class="fu">st_make_grid</span>(grid.extent,</span>
-<span id="cb797-18"><a href="geospatial.html#cb797-18" tabindex="-1"></a>               <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">132</span>, <span class="dv">100</span>),   <span class="co"># Resolution of grids</span></span>
-<span id="cb797-19"><a href="geospatial.html#cb797-19" tabindex="-1"></a>               <span class="at">crs =</span> <span class="dv">3826</span>,  <span class="co"># crs: TWD97 121</span></span>
-<span id="cb797-20"><a href="geospatial.html#cb797-20" tabindex="-1"></a>               <span class="at">what =</span> <span class="st">&#39;polygons&#39;</span>) <span class="sc">%&gt;%</span>   <span class="co"># output format: polygon</span></span>
-<span id="cb797-21"><a href="geospatial.html#cb797-21" tabindex="-1"></a>  <span class="fu">st_sf</span>(<span class="st">&#39;geometry&#39;</span> <span class="ot">=</span> ., <span class="fu">data.frame</span>(<span class="st">&#39;ID&#39;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(.))) <span class="co"># convert to sf with id</span></span>
-<span id="cb797-22"><a href="geospatial.html#cb797-22" tabindex="-1"></a>  <span class="co"># st_transform(3826) # assigning crs again ? </span></span>
-<span id="cb797-23"><a href="geospatial.html#cb797-23" tabindex="-1"></a><span class="fu">plot</span>(Grid.sys)</span></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="geospatial.html#cb802-1" tabindex="-1"></a><span class="co"># Defining grid size</span></span>
+<span id="cb802-2"><a href="geospatial.html#cb802-2" tabindex="-1"></a>grid.extent <span class="ot">&lt;-</span> </span>
+<span id="cb802-3"><a href="geospatial.html#cb802-3" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmin, Ymax)</span></span>
+<span id="cb802-4"><a href="geospatial.html#cb802-4" tabindex="-1"></a>           <span class="dv">610000</span>,  <span class="dv">2920000</span>,   <span class="co"># (Xmax, Ymax)</span></span>
+<span id="cb802-5"><a href="geospatial.html#cb802-5" tabindex="-1"></a>           <span class="dv">610000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmax, Ymin)</span></span>
+<span id="cb802-6"><a href="geospatial.html#cb802-6" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>, <span class="dv">2420000</span>,    <span class="co"># (Xmin, Ymin)</span></span>
+<span id="cb802-7"><a href="geospatial.html#cb802-7" tabindex="-1"></a>           <span class="sc">-</span><span class="dv">50000</span>,  <span class="dv">2920000</span>),  <span class="co"># (Xmin, Ymax) </span></span>
+<span id="cb802-8"><a href="geospatial.html#cb802-8" tabindex="-1"></a>         <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb802-9"><a href="geospatial.html#cb802-9" tabindex="-1"></a>  <span class="fu">list</span>() <span class="sc">%&gt;%</span> <span class="co"># convert to list for st_polygon()</span></span>
+<span id="cb802-10"><a href="geospatial.html#cb802-10" tabindex="-1"></a>  <span class="fu">st_polygon</span>() <span class="sc">%&gt;%</span> <span class="co"># generate polygon</span></span>
+<span id="cb802-11"><a href="geospatial.html#cb802-11" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">3826</span>) <span class="co"># convert format and crs</span></span>
+<span id="cb802-12"><a href="geospatial.html#cb802-12" tabindex="-1"></a><span class="co"># plot(grid.extent)</span></span>
+<span id="cb802-13"><a href="geospatial.html#cb802-13" tabindex="-1"></a></span>
+<span id="cb802-14"><a href="geospatial.html#cb802-14" tabindex="-1"></a></span>
+<span id="cb802-15"><a href="geospatial.html#cb802-15" tabindex="-1"></a><span class="co"># Generating grid</span></span>
+<span id="cb802-16"><a href="geospatial.html#cb802-16" tabindex="-1"></a>Grid.sys <span class="ot">&lt;-</span> </span>
+<span id="cb802-17"><a href="geospatial.html#cb802-17" tabindex="-1"></a>  <span class="fu">st_make_grid</span>(grid.extent,</span>
+<span id="cb802-18"><a href="geospatial.html#cb802-18" tabindex="-1"></a>               <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">132</span>, <span class="dv">100</span>),   <span class="co"># Resolution of grids</span></span>
+<span id="cb802-19"><a href="geospatial.html#cb802-19" tabindex="-1"></a>               <span class="at">crs =</span> <span class="dv">3826</span>,  <span class="co"># crs: TWD97 121</span></span>
+<span id="cb802-20"><a href="geospatial.html#cb802-20" tabindex="-1"></a>               <span class="at">what =</span> <span class="st">&#39;polygons&#39;</span>) <span class="sc">%&gt;%</span>   <span class="co"># output format: polygon</span></span>
+<span id="cb802-21"><a href="geospatial.html#cb802-21" tabindex="-1"></a>  <span class="fu">st_sf</span>(<span class="st">&#39;geometry&#39;</span> <span class="ot">=</span> ., <span class="fu">data.frame</span>(<span class="st">&#39;ID&#39;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(.))) <span class="co"># convert to sf with id</span></span>
+<span id="cb802-22"><a href="geospatial.html#cb802-22" tabindex="-1"></a>  <span class="co"># st_transform(3826) # assigning crs again ? </span></span>
+<span id="cb802-23"><a href="geospatial.html#cb802-23" tabindex="-1"></a><span class="fu">plot</span>(Grid.sys)</span></code></pre></div>
 <p><img src="V23_map_grid_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="geospatial.html#cb798-1" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span> </span>
-<span id="cb798-2"><a href="geospatial.html#cb798-2" tabindex="-1"></a>  Grid.sys[<span class="fu">subset</span>(TW.island),]</span>
-<span id="cb798-3"><a href="geospatial.html#cb798-3" tabindex="-1"></a><span class="fu">plot</span>(Grid.TW)</span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="geospatial.html#cb803-1" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span> </span>
+<span id="cb803-2"><a href="geospatial.html#cb803-2" tabindex="-1"></a>  Grid.sys[<span class="fu">subset</span>(TW.island),]</span>
+<span id="cb803-3"><a href="geospatial.html#cb803-3" tabindex="-1"></a><span class="fu">plot</span>(Grid.TW)</span></code></pre></div>
 <p><img src="V23_map_grid_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="loading-data-1" class="section level3 hasAnchor" number="29.5.3">
 <h3><span class="header-section-number">29.5.3</span> loading data<a href="geospatial.html#loading-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="geospatial.html#cb799-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb799-2"><a href="geospatial.html#cb799-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
-<span id="cb799-3"><a href="geospatial.html#cb799-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
-<span id="cb799-4"><a href="geospatial.html#cb799-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
-<span id="cb799-5"><a href="geospatial.html#cb799-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
-<span id="cb799-6"><a href="geospatial.html#cb799-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="geospatial.html#cb804-1" tabindex="-1"></a>president_vote <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&#39;data/president.xlsx&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb804-2"><a href="geospatial.html#cb804-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> chu <span class="sc">+</span> tsai <span class="sc">+</span> song) <span class="sc">%&gt;%</span> </span>
+<span id="cb804-3"><a href="geospatial.html#cb804-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chu_ratio =</span> chu <span class="sc">/</span> total,</span>
+<span id="cb804-4"><a href="geospatial.html#cb804-4" tabindex="-1"></a>         <span class="at">tsai_ratio =</span> tsai <span class="sc">/</span> total,</span>
+<span id="cb804-5"><a href="geospatial.html#cb804-5" tabindex="-1"></a>         <span class="at">song_ratio =</span> song <span class="sc">/</span> total,</span>
+<span id="cb804-6"><a href="geospatial.html#cb804-6" tabindex="-1"></a>         <span class="at">tsai_chu_ratio =</span> tsai <span class="sc">/</span> chu)</span></code></pre></div>
 </div>
 <div id="merging-data" class="section level3 hasAnchor" number="29.5.4">
 <h3><span class="header-section-number">29.5.4</span> Merging data<a href="geospatial.html#merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="geospatial.html#cb800-1" tabindex="-1"></a>tw_info <span class="ot">&lt;-</span> TW.island <span class="sc">%&gt;%</span> </span>
-<span id="cb800-2"><a href="geospatial.html#cb800-2" tabindex="-1"></a>    <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb800-3"><a href="geospatial.html#cb800-3" tabindex="-1"></a>    <span class="fu">left_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="geospatial.html#cb801-1" tabindex="-1"></a><span class="co"># TW_info &lt;- sf::st_intersects(Grid.TW, TW.island)  # creat a data.frame of IDs in IBA for 1km grid</span></span>
-<span id="cb801-2"><a href="geospatial.html#cb801-2" tabindex="-1"></a>grid_id <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">st_intersects</span>(Grid.TW, TW.island), <span class="cf">function</span>(z) <span class="cf">if</span> (<span class="fu">length</span>(z)<span class="sc">==</span><span class="dv">0</span>) <span class="cn">NA_integer_</span> <span class="cf">else</span> z[<span class="dv">1</span>])</span>
-<span id="cb801-3"><a href="geospatial.html#cb801-3" tabindex="-1"></a></span>
-<span id="cb801-4"><a href="geospatial.html#cb801-4" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span>  Grid.TW <span class="sc">%&gt;%</span></span>
-<span id="cb801-5"><a href="geospatial.html#cb801-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grid_id =</span> grid_id) <span class="sc">%&gt;%</span></span>
-<span id="cb801-6"><a href="geospatial.html#cb801-6" tabindex="-1"></a>  <span class="fu">left_join</span>(tw_info, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;grid_id&quot;</span><span class="ot">=</span><span class="st">&quot;id&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="geospatial.html#cb802-1" tabindex="-1"></a>Grid.TW <span class="sc">%&gt;%</span></span>
-<span id="cb802-2"><a href="geospatial.html#cb802-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> tsai_ratio)) <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb802-3"><a href="geospatial.html#cb802-3" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="at">high=</span><span class="st">&quot;#2EFF71&quot;</span>, <span class="at">low=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb802-4"><a href="geospatial.html#cb802-4" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="geospatial.html#cb805-1" tabindex="-1"></a>tw_info <span class="ot">&lt;-</span> TW.island <span class="sc">%&gt;%</span> </span>
+<span id="cb805-2"><a href="geospatial.html#cb805-2" tabindex="-1"></a>    <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb805-3"><a href="geospatial.html#cb805-3" tabindex="-1"></a>    <span class="fu">left_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="geospatial.html#cb806-1" tabindex="-1"></a><span class="co"># TW_info &lt;- sf::st_intersects(Grid.TW, TW.island)  # creat a data.frame of IDs in IBA for 1km grid</span></span>
+<span id="cb806-2"><a href="geospatial.html#cb806-2" tabindex="-1"></a>grid_id <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">st_intersects</span>(Grid.TW, TW.island), <span class="cf">function</span>(z) <span class="cf">if</span> (<span class="fu">length</span>(z)<span class="sc">==</span><span class="dv">0</span>) <span class="cn">NA_integer_</span> <span class="cf">else</span> z[<span class="dv">1</span>])</span>
+<span id="cb806-3"><a href="geospatial.html#cb806-3" tabindex="-1"></a></span>
+<span id="cb806-4"><a href="geospatial.html#cb806-4" tabindex="-1"></a>Grid.TW <span class="ot">&lt;-</span>  Grid.TW <span class="sc">%&gt;%</span></span>
+<span id="cb806-5"><a href="geospatial.html#cb806-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grid_id =</span> grid_id) <span class="sc">%&gt;%</span></span>
+<span id="cb806-6"><a href="geospatial.html#cb806-6" tabindex="-1"></a>  <span class="fu">left_join</span>(tw_info, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;grid_id&quot;</span><span class="ot">=</span><span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="geospatial.html#cb807-1" tabindex="-1"></a>Grid.TW <span class="sc">%&gt;%</span></span>
+<span id="cb807-2"><a href="geospatial.html#cb807-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> tsai_ratio)) <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="at">lwd =</span> <span class="fl">0.1</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb807-3"><a href="geospatial.html#cb807-3" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="at">high=</span><span class="st">&quot;#2EFF71&quot;</span>, <span class="at">low=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb807-4"><a href="geospatial.html#cb807-4" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="V23_map_grid_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /></p>
 
 </div>

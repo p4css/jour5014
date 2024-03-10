@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-03" />
+<meta name="date" content="2024-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -302,9 +302,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -787,9 +788,9 @@ div.csl-indent {
 <div id="ptt_load_pkgs" class="section level2 hasAnchor" number="19.1">
 <h2><span class="header-section-number">19.1</span> Step 1. 載入所需套件<a href="ptt-scrape.html#ptt_load_pkgs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在這個例子中，不僅要用<code>httr</code>來取得網頁頁面，還要用<code>rvest</code>套件（其實是呼叫<code>xml2</code>）來剖析網頁。網頁內容並不像json一樣可以直接轉為<code>DataFrame</code>或<code>list</code>。網頁內容可以是資料、視覺化元素、也可以是架構元素，相對於json而言複雜也冗贅許多。因此需要一個套件能夠剖析HTML標籤例如<code>xml2</code>，而<code>rvest</code>內則應用了<code>xml2</code>套件的內容來剖析網頁，另外，我會用<code>bind_rows()</code>將過程中所抓取的資料進行合併。</p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="ptt-scrape.html#cb637-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb637-2"><a href="ptt-scrape.html#cb637-2" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb637-3"><a href="ptt-scrape.html#cb637-3" tabindex="-1"></a><span class="fu">library</span>(httr)</span></code></pre></div>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="ptt-scrape.html#cb642-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb642-2"><a href="ptt-scrape.html#cb642-2" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb642-3"><a href="ptt-scrape.html#cb642-3" tabindex="-1"></a><span class="fu">library</span>(httr)</span></code></pre></div>
 </div>
 <div id="ptt_parsehtml" class="section level2 hasAnchor" number="19.2">
 <h2><span class="header-section-number">19.2</span> Step 2. 取回並剖析HTML檔案<a href="ptt-scrape.html#ptt_parsehtml" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -805,11 +806,11 @@ div.csl-indent {
 <li><p><code>read_html()</code>內部包含了<code>GET()</code>與<code>content()</code>等的實作，其主要的功能是將取回來的回應（response）轉為<code>xml_document</code>。若以<code>class(doc)</code>觀察其型態，會是<code>xml_document xml_node</code>。</p></li>
 <li><p>使用<code>browseURL(url)</code>可以用瀏覽器打開該網址並瀏覽。</p></li>
 </ul>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="ptt-scrape.html#cb638-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
-<span id="cb638-2"><a href="ptt-scrape.html#cb638-2" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
-<span id="cb638-3"><a href="ptt-scrape.html#cb638-3" tabindex="-1"></a><span class="fu">class</span>(doc)</span>
-<span id="cb638-4"><a href="ptt-scrape.html#cb638-4" tabindex="-1"></a><span class="do">## [1] &quot;xml_document&quot; &quot;xml_node&quot;   </span></span>
-<span id="cb638-5"><a href="ptt-scrape.html#cb638-5" tabindex="-1"></a><span class="fu">browseURL</span>(url)</span></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="ptt-scrape.html#cb643-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb643-2"><a href="ptt-scrape.html#cb643-2" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb643-3"><a href="ptt-scrape.html#cb643-3" tabindex="-1"></a><span class="fu">class</span>(doc)</span>
+<span id="cb643-4"><a href="ptt-scrape.html#cb643-4" tabindex="-1"></a><span class="do">## [1] &quot;xml_document&quot; &quot;xml_node&quot;   </span></span>
+<span id="cb643-5"><a href="ptt-scrape.html#cb643-5" tabindex="-1"></a><span class="fu">browseURL</span>(url)</span></code></pre></div>
 </div>
 <div id="ptt_html_nodes" class="section level3 hasAnchor" number="19.2.2">
 <h3><span class="header-section-number">19.2.2</span> <strong>Step 2-2 以<code>html_nodes()</code> 以選擇所需的資料節點</strong><a href="ptt-scrape.html#ptt_html_nodes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -822,15 +823,15 @@ div.csl-indent {
 <li><p><code>div.title</code>指的是<code>class</code>為<code>title</code>的<code>div</code>（排版元素）。</p></li>
 <li><p><code>Div.r-list-container.action-bar-margin.bbs-screen</code>指的是同時具有<code>r-list-container</code>、<code>action-bar-margin</code>、<code>bbs-scree</code>三個<code>class</code>的<code>div</code>元素。</p></li>
 </ul>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="ptt-scrape.html#cb639-1" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container &gt; div.r-list-container.action-bar-margin.bbs-screen &gt; div &gt; div.title &gt; a&quot;</span></span>
-<span id="cb639-2"><a href="ptt-scrape.html#cb639-2" tabindex="-1"></a></span>
-<span id="cb639-3"><a href="ptt-scrape.html#cb639-3" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
-<span id="cb639-4"><a href="ptt-scrape.html#cb639-4" tabindex="-1"></a><span class="fu">class</span>(node.a) <span class="co"># &quot;xml_nodeset&quot;</span></span>
-<span id="cb639-5"><a href="ptt-scrape.html#cb639-5" tabindex="-1"></a><span class="fu">length</span>(node.a)</span></code></pre></div>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="ptt-scrape.html#cb644-1" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container &gt; div.r-list-container.action-bar-margin.bbs-screen &gt; div &gt; div.title &gt; a&quot;</span></span>
+<span id="cb644-2"><a href="ptt-scrape.html#cb644-2" tabindex="-1"></a></span>
+<span id="cb644-3"><a href="ptt-scrape.html#cb644-3" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
+<span id="cb644-4"><a href="ptt-scrape.html#cb644-4" tabindex="-1"></a><span class="fu">class</span>(node.a) <span class="co"># &quot;xml_nodeset&quot;</span></span>
+<span id="cb644-5"><a href="ptt-scrape.html#cb644-5" tabindex="-1"></a><span class="fu">length</span>(node.a)</span></code></pre></div>
 <p>用XPath抽取：</p>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="ptt-scrape.html#cb640-1" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-container&quot;]/div[2]//div/div[3]/a&#39;</span></span>
-<span id="cb640-2"><a href="ptt-scrape.html#cb640-2" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> path)</span>
-<span id="cb640-3"><a href="ptt-scrape.html#cb640-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="ptt-scrape.html#cb645-1" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-container&quot;]/div[2]//div/div[3]/a&#39;</span></span>
+<span id="cb645-2"><a href="ptt-scrape.html#cb645-2" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> path)</span>
+<span id="cb645-3"><a href="ptt-scrape.html#cb645-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span></code></pre></div>
 </div>
 <div id="ptt_xpath_css" class="section level3 hasAnchor" number="19.2.3">
 <h3><span class="header-section-number">19.2.3</span> <strong>Step 2-2 補充說明與XPath、CSS Selector的最佳化</strong><a href="ptt-scrape.html#ptt_xpath_css" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -866,32 +867,32 @@ div.csl-indent {
 <li><p><code>html_attr()</code>: 在<code>&lt;a&gt;</code>內的<code>href="/bbs/Boy-Girl/M.1523983903.A.71E.html"</code>稱為<code>&lt;a&gt;</code>的屬性，該屬性名稱為<code>href</code>(Hyper Reference的意思)，屬性值為<code>/bbs/Boy-Girl/M.1523983903.A.71E.html</code>。要用<code>html_attr(node.a, "href")</code>來抽取（相當於指定某個元素的<code>href</code>屬性的內容）。</p></li>
 <li><p>取出元素節點的內容，相當於取出<code>&lt;a&gt;&lt;/a&gt;</code>間所夾的內容。</p></li>
 </ul>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="ptt-scrape.html#cb641-1" tabindex="-1"></a>texts <span class="ot">&lt;-</span> <span class="fu">html_text</span>(node.a)</span>
-<span id="cb641-2"><a href="ptt-scrape.html#cb641-2" tabindex="-1"></a><span class="fu">length</span>(texts)</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="ptt-scrape.html#cb646-1" tabindex="-1"></a>texts <span class="ot">&lt;-</span> <span class="fu">html_text</span>(node.a)</span>
+<span id="cb646-2"><a href="ptt-scrape.html#cb646-2" tabindex="-1"></a><span class="fu">length</span>(texts)</span></code></pre></div>
 <p>取出元素節點某個屬性的值，這邊是取出<code>href</code>這個屬性的值，也就是超鏈結。</p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="ptt-scrape.html#cb642-1" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
-<span id="cb642-2"><a href="ptt-scrape.html#cb642-2" tabindex="-1"></a><span class="fu">class</span>(links) </span>
-<span id="cb642-3"><a href="ptt-scrape.html#cb642-3" tabindex="-1"></a><span class="co"># character</span></span>
-<span id="cb642-4"><a href="ptt-scrape.html#cb642-4" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
-<span id="cb642-5"><a href="ptt-scrape.html#cb642-5" tabindex="-1"></a><span class="co"># &quot;/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="ptt-scrape.html#cb647-1" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
+<span id="cb647-2"><a href="ptt-scrape.html#cb647-2" tabindex="-1"></a><span class="fu">class</span>(links) </span>
+<span id="cb647-3"><a href="ptt-scrape.html#cb647-3" tabindex="-1"></a><span class="co"># character</span></span>
+<span id="cb647-4"><a href="ptt-scrape.html#cb647-4" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
+<span id="cb647-5"><a href="ptt-scrape.html#cb647-5" tabindex="-1"></a><span class="co"># &quot;/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
 <p>但這些超鏈結只有後半段，點開一篇文章觀察其網址，發現我們所抓到的網址少了前面那一段，因此用<code>paste0()</code>黏上前綴的網址前段，便可得到完整網址，可用<code>browseURL(links[1])</code>觀察。</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="ptt-scrape.html#cb643-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
-<span id="cb643-2"><a href="ptt-scrape.html#cb643-2" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links)</span>
-<span id="cb643-3"><a href="ptt-scrape.html#cb643-3" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
-<span id="cb643-4"><a href="ptt-scrape.html#cb643-4" tabindex="-1"></a><span class="co"># [1] &quot;https://www.ptt.cc/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="ptt-scrape.html#cb648-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb648-2"><a href="ptt-scrape.html#cb648-2" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links)</span>
+<span id="cb648-3"><a href="ptt-scrape.html#cb648-3" tabindex="-1"></a>links[<span class="dv">1</span>]</span>
+<span id="cb648-4"><a href="ptt-scrape.html#cb648-4" tabindex="-1"></a><span class="co"># [1] &quot;https://www.ptt.cc/bbs/Boy-Girl/M.1555188846.A.D5F.html&quot;</span></span></code></pre></div>
 <p>重組上列程式碼如下：</p>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="ptt-scrape.html#cb644-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
-<span id="cb644-2"><a href="ptt-scrape.html#cb644-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
-<span id="cb644-3"><a href="ptt-scrape.html#cb644-3" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
-<span id="cb644-4"><a href="ptt-scrape.html#cb644-4" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
-<span id="cb644-5"><a href="ptt-scrape.html#cb644-5" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="ptt-scrape.html#cb649-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb649-2"><a href="ptt-scrape.html#cb649-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb649-3"><a href="ptt-scrape.html#cb649-3" tabindex="-1"></a>doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb649-4"><a href="ptt-scrape.html#cb649-4" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
+<span id="cb649-5"><a href="ptt-scrape.html#cb649-5" tabindex="-1"></a>node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span></code></pre></div>
 <p>題外話，因為<code>rvest</code>與<code>httr</code>均支援tidyverse的程式寫作，因此可改為以下pipeline的形式。但我不見得會這麼寫，比如說<code>&lt;a&gt;</code>這個元素我可能不僅會取出其超鏈結，還打算取出標題文字，為了避免重複操作，我不見得會用tidyverse來寫。</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="ptt-scrape.html#cb645-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
-<span id="cb645-2"><a href="ptt-scrape.html#cb645-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
-<span id="cb645-3"><a href="ptt-scrape.html#cb645-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span> read_html <span class="sc">%&gt;%</span> </span>
-<span id="cb645-4"><a href="ptt-scrape.html#cb645-4" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;#main-container div.r-ent div.title a&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb645-5"><a href="ptt-scrape.html#cb645-5" tabindex="-1"></a>    <span class="fu">html_attr</span>(<span class="st">&quot;href&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb645-6"><a href="ptt-scrape.html#cb645-6" tabindex="-1"></a>    <span class="fu">paste0</span>(pre, .)</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="ptt-scrape.html#cb650-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb650-2"><a href="ptt-scrape.html#cb650-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index.html&quot;</span></span>
+<span id="cb650-3"><a href="ptt-scrape.html#cb650-3" tabindex="-1"></a>links <span class="ot">&lt;-</span> url <span class="sc">%&gt;%</span> read_html <span class="sc">%&gt;%</span> </span>
+<span id="cb650-4"><a href="ptt-scrape.html#cb650-4" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;#main-container div.r-ent div.title a&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb650-5"><a href="ptt-scrape.html#cb650-5" tabindex="-1"></a>    <span class="fu">html_attr</span>(<span class="st">&quot;href&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb650-6"><a href="ptt-scrape.html#cb650-6" tabindex="-1"></a>    <span class="fu">paste0</span>(pre, .)</span></code></pre></div>
 </div>
 </div>
 <div id="ptt_for" class="section level2 hasAnchor" number="19.3">
@@ -905,30 +906,30 @@ div.csl-indent {
 <li><p>最新一頁因此可類推出為<a href="https://www.ptt.cc/bbs/Boy-Girl/index3903.html" class="uri">https://www.ptt.cc/bbs/Boy-Girl/index3903.html</a></p></li>
 </ul>
 <p>因此，我打算寫一個for迴圈，讓他幫我（先）抓最後10頁，那就是3894到3903頁。並且，把頁數當成網址的參數，用<code>sprintf()</code>或<code>paste0()</code>組合出網址，以下分別提供兩種版本。你可以把它印出來且點選看看是否是你所要的網頁。</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="ptt-scrape.html#cb646-1" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
-<span id="cb646-2"><a href="ptt-scrape.html#cb646-2" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
-<span id="cb646-3"><a href="ptt-scrape.html#cb646-3" tabindex="-1"></a>    <span class="co"># url &lt;- paste0(&quot;https://www.ptt.cc/bbs/Boy-Girl/index&quot;, p, &quot;.html&quot;)</span></span>
-<span id="cb646-4"><a href="ptt-scrape.html#cb646-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="ptt-scrape.html#cb651-1" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb651-2"><a href="ptt-scrape.html#cb651-2" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb651-3"><a href="ptt-scrape.html#cb651-3" tabindex="-1"></a>    <span class="co"># url &lt;- paste0(&quot;https://www.ptt.cc/bbs/Boy-Girl/index&quot;, p, &quot;.html&quot;)</span></span>
+<span id="cb651-4"><a href="ptt-scrape.html#cb651-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>接下來，我要用一個<code>all_links</code>變數來存放所有的網址，並且把每一個頁面抓到的網址們都用<code>vector</code>的<code>concatenation</code>，也就是<code>c()</code>黏在一起 <code>all_links &lt;- c(all_links, links)</code>。</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="ptt-scrape.html#cb647-1" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb647-2"><a href="ptt-scrape.html#cb647-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
-<span id="cb647-3"><a href="ptt-scrape.html#cb647-3" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
-<span id="cb647-4"><a href="ptt-scrape.html#cb647-4" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
-<span id="cb647-5"><a href="ptt-scrape.html#cb647-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="ptt-scrape.html#cb652-1" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb652-2"><a href="ptt-scrape.html#cb652-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb652-3"><a href="ptt-scrape.html#cb652-3" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb652-4"><a href="ptt-scrape.html#cb652-4" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
+<span id="cb652-5"><a href="ptt-scrape.html#cb652-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>最後，我就將上述抓到網址的方法填入這個for迴圈中，並把抓到的網址存為links，就會隨著每回合的for迴圈逐漸把抓到的網址整理在一起。</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="ptt-scrape.html#cb648-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
-<span id="cb648-2"><a href="ptt-scrape.html#cb648-2" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb648-3"><a href="ptt-scrape.html#cb648-3" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
-<span id="cb648-4"><a href="ptt-scrape.html#cb648-4" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
-<span id="cb648-5"><a href="ptt-scrape.html#cb648-5" tabindex="-1"></a>    <span class="fu">print</span>(url)</span>
-<span id="cb648-6"><a href="ptt-scrape.html#cb648-6" tabindex="-1"></a>    doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url) <span class="co"># Get and parse the url</span></span>
-<span id="cb648-7"><a href="ptt-scrape.html#cb648-7" tabindex="-1"></a>    css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
-<span id="cb648-8"><a href="ptt-scrape.html#cb648-8" tabindex="-1"></a>    node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
-<span id="cb648-9"><a href="ptt-scrape.html#cb648-9" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
-<span id="cb648-10"><a href="ptt-scrape.html#cb648-10" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links) <span class="co"># Recover links</span></span>
-<span id="cb648-11"><a href="ptt-scrape.html#cb648-11" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
-<span id="cb648-12"><a href="ptt-scrape.html#cb648-12" tabindex="-1"></a>}</span>
-<span id="cb648-13"><a href="ptt-scrape.html#cb648-13" tabindex="-1"></a><span class="fu">length</span>(all_links)</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="ptt-scrape.html#cb653-1" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="st">&quot;https://www.ptt.cc&quot;</span></span>
+<span id="cb653-2"><a href="ptt-scrape.html#cb653-2" tabindex="-1"></a>all_links <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb653-3"><a href="ptt-scrape.html#cb653-3" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">3894</span><span class="sc">:</span><span class="dv">3903</span>){</span>
+<span id="cb653-4"><a href="ptt-scrape.html#cb653-4" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;https://www.ptt.cc/bbs/Boy-Girl/index%s.html&quot;</span>, p)</span>
+<span id="cb653-5"><a href="ptt-scrape.html#cb653-5" tabindex="-1"></a>    <span class="fu">print</span>(url)</span>
+<span id="cb653-6"><a href="ptt-scrape.html#cb653-6" tabindex="-1"></a>    doc   <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url) <span class="co"># Get and parse the url</span></span>
+<span id="cb653-7"><a href="ptt-scrape.html#cb653-7" tabindex="-1"></a>    css <span class="ot">&lt;-</span> <span class="st">&quot;#main-container div.r-ent div.title a&quot;</span></span>
+<span id="cb653-8"><a href="ptt-scrape.html#cb653-8" tabindex="-1"></a>    node.a <span class="ot">&lt;-</span> <span class="fu">html_nodes</span>(doc, css)</span>
+<span id="cb653-9"><a href="ptt-scrape.html#cb653-9" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">html_attr</span>(node.a, <span class="st">&quot;href&quot;</span>)</span>
+<span id="cb653-10"><a href="ptt-scrape.html#cb653-10" tabindex="-1"></a>    links <span class="ot">&lt;-</span> <span class="fu">paste0</span>(pre, links) <span class="co"># Recover links</span></span>
+<span id="cb653-11"><a href="ptt-scrape.html#cb653-11" tabindex="-1"></a>    all_links <span class="ot">&lt;-</span> <span class="fu">c</span>(all_links, links)</span>
+<span id="cb653-12"><a href="ptt-scrape.html#cb653-12" tabindex="-1"></a>}</span>
+<span id="cb653-13"><a href="ptt-scrape.html#cb653-13" tabindex="-1"></a><span class="fu">length</span>(all_links)</span></code></pre></div>
 </div>
 <div id="ptt_scrape_post" class="section level2 hasAnchor" number="19.4">
 <h2><span class="header-section-number">19.4</span> Step 4. 根據連結取回所有貼文<a href="ptt-scrape.html#ptt_scrape_post" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -936,50 +937,50 @@ div.csl-indent {
 <p>不失一般性地，用第一篇貼文的鏈結來做資料抓取實驗，之後再抓第二篇、第三篇即可。</p>
 <p>首先，對於這每篇文章，我要爬取作者（author）、標題（title）、時間（time）、看板（board）和內容（content）五個欄位，包含原本文章的連結url一共六個欄位。</p>
 <p>從以下的圖發現，每篇文章的內容放置在div#main-content中，之後一連跟著四個div.article-metaline，裡面分別有作者、看板、標題與時間，但從class名稱看不出來哪個，但我們要的值會是在span.article-meta-value中。所以我的規劃是，一次把所有的.article-meta-value給抓回來，然後再去分別指定哪個是作者、看板、標題或時間。所以我用</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="ptt-scrape.html#cb649-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
-<span id="cb649-2"><a href="ptt-scrape.html#cb649-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
-<span id="cb649-3"><a href="ptt-scrape.html#cb649-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
-<span id="cb649-4"><a href="ptt-scrape.html#cb649-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="ptt-scrape.html#cb654-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
+<span id="cb654-2"><a href="ptt-scrape.html#cb654-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb654-3"><a href="ptt-scrape.html#cb654-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
+<span id="cb654-4"><a href="ptt-scrape.html#cb654-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span></code></pre></div>
 <div class="float">
 <img src="images/R44_scrape_ptt_insertimage_7.png" alt="PTT貼文的HTML結構" />
 <div class="figcaption">PTT貼文的HTML結構</div>
 </div>
 <p>另外，從上面的文字中可發現，主文的部分被包含在div#main-content中，但在上述的作者、標題等後面，若這時候我們用CSS Selector搭配html_node()和html_text()把div#main-content的內容都給取出來，會連上述的作者、標題等都一起取出來。最好的方法是用XPath的text()來只取出文字的部分，而不取出有tag的部分。</p>
 <p>而且這樣取出來會是每個paragraph都是一個character vector中的值，所以要把他們合併成一篇文章，此時要用paste()指令，paste()指令可以指定把一個character vector給串接成一個string，輸入的變數是一個character vector，然後設定參數collapse = ““，代表串接起這些character時中間不要有空白。</p>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="ptt-scrape.html#cb650-1" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
-<span id="cb650-2"><a href="ptt-scrape.html#cb650-2" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
-<span id="cb650-3"><a href="ptt-scrape.html#cb650-3" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="ptt-scrape.html#cb655-1" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb655-2"><a href="ptt-scrape.html#cb655-2" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb655-3"><a href="ptt-scrape.html#cb655-3" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p>最後，我們知道metadata變數的第一個是作者、第二個是標題、第三個是時間、便依序指派給個別的變數後，組成DataFrame如下，這樣所組成的DataFrame是為只有一筆資料的DataFrame，但有五個變項。</p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="ptt-scrape.html#cb651-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
-<span id="cb651-2"><a href="ptt-scrape.html#cb651-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
-<span id="cb651-3"><a href="ptt-scrape.html#cb651-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
-<span id="cb651-4"><a href="ptt-scrape.html#cb651-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
-<span id="cb651-5"><a href="ptt-scrape.html#cb651-5" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
-<span id="cb651-6"><a href="ptt-scrape.html#cb651-6" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
-<span id="cb651-7"><a href="ptt-scrape.html#cb651-7" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb651-8"><a href="ptt-scrape.html#cb651-8" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
-<span id="cb651-9"><a href="ptt-scrape.html#cb651-9" tabindex="-1"></a>                      <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
-<span id="cb651-10"><a href="ptt-scrape.html#cb651-10" tabindex="-1"></a>                      <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
-<span id="cb651-11"><a href="ptt-scrape.html#cb651-11" tabindex="-1"></a>                      <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
-<span id="cb651-12"><a href="ptt-scrape.html#cb651-12" tabindex="-1"></a>                      <span class="at">url =</span> link</span>
-<span id="cb651-13"><a href="ptt-scrape.html#cb651-13" tabindex="-1"></a>                     )</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="ptt-scrape.html#cb656-1" tabindex="-1"></a>link <span class="ot">&lt;-</span> all_links[<span class="dv">1</span>]</span>
+<span id="cb656-2"><a href="ptt-scrape.html#cb656-2" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb656-3"><a href="ptt-scrape.html#cb656-3" tabindex="-1"></a>meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content div.article-metaline  span.article-meta-value&quot;</span></span>
+<span id="cb656-4"><a href="ptt-scrape.html#cb656-4" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb656-5"><a href="ptt-scrape.html#cb656-5" tabindex="-1"></a>post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb656-6"><a href="ptt-scrape.html#cb656-6" tabindex="-1"></a>post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb656-7"><a href="ptt-scrape.html#cb656-7" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb656-8"><a href="ptt-scrape.html#cb656-8" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb656-9"><a href="ptt-scrape.html#cb656-9" tabindex="-1"></a>                      <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb656-10"><a href="ptt-scrape.html#cb656-10" tabindex="-1"></a>                      <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb656-11"><a href="ptt-scrape.html#cb656-11" tabindex="-1"></a>                      <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb656-12"><a href="ptt-scrape.html#cb656-12" tabindex="-1"></a>                      <span class="at">url =</span> link</span>
+<span id="cb656-13"><a href="ptt-scrape.html#cb656-13" tabindex="-1"></a>                     )</span></code></pre></div>
 <p>這樣我們取得的第一篇文章存放在post.df中，之後，我稍微修改一下上述的程式，就可以用for迴圈抓取第2至n篇文章，每一篇都存在名為temp.df的DataFrame中，然後用<code>bind_rows()</code>依序和<code>post.df</code>銜接在一起，除了黃色的部分是新增的之外，都跟前面的程式幾乎一模一樣。</p>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="ptt-scrape.html#cb652-1" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>]){</span>
-<span id="cb652-2"><a href="ptt-scrape.html#cb652-2" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
-<span id="cb652-3"><a href="ptt-scrape.html#cb652-3" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
-<span id="cb652-4"><a href="ptt-scrape.html#cb652-4" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
-<span id="cb652-5"><a href="ptt-scrape.html#cb652-5" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
-<span id="cb652-6"><a href="ptt-scrape.html#cb652-6" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
-<span id="cb652-7"><a href="ptt-scrape.html#cb652-7" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb652-8"><a href="ptt-scrape.html#cb652-8" tabindex="-1"></a>    </span>
-<span id="cb652-9"><a href="ptt-scrape.html#cb652-9" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
-<span id="cb652-10"><a href="ptt-scrape.html#cb652-10" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
-<span id="cb652-11"><a href="ptt-scrape.html#cb652-11" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
-<span id="cb652-12"><a href="ptt-scrape.html#cb652-12" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
-<span id="cb652-13"><a href="ptt-scrape.html#cb652-13" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
-<span id="cb652-14"><a href="ptt-scrape.html#cb652-14" tabindex="-1"></a>                          )</span>
-<span id="cb652-15"><a href="ptt-scrape.html#cb652-15" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
-<span id="cb652-16"><a href="ptt-scrape.html#cb652-16" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="ptt-scrape.html#cb657-1" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>]){</span>
+<span id="cb657-2"><a href="ptt-scrape.html#cb657-2" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb657-3"><a href="ptt-scrape.html#cb657-3" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb657-4"><a href="ptt-scrape.html#cb657-4" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb657-5"><a href="ptt-scrape.html#cb657-5" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb657-6"><a href="ptt-scrape.html#cb657-6" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb657-7"><a href="ptt-scrape.html#cb657-7" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb657-8"><a href="ptt-scrape.html#cb657-8" tabindex="-1"></a>    </span>
+<span id="cb657-9"><a href="ptt-scrape.html#cb657-9" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb657-10"><a href="ptt-scrape.html#cb657-10" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb657-11"><a href="ptt-scrape.html#cb657-11" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb657-12"><a href="ptt-scrape.html#cb657-12" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb657-13"><a href="ptt-scrape.html#cb657-13" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
+<span id="cb657-14"><a href="ptt-scrape.html#cb657-14" tabindex="-1"></a>                          )</span>
+<span id="cb657-15"><a href="ptt-scrape.html#cb657-15" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
+<span id="cb657-16"><a href="ptt-scrape.html#cb657-16" tabindex="-1"></a>}</span></code></pre></div>
 <div class="float">
 <img src="images/R44_scrape_ptt_insertimage_8.png" alt="打撈回來的HTTP資料" />
 <div class="figcaption">打撈回來的HTTP資料</div>
@@ -989,44 +990,44 @@ div.csl-indent {
 <h2><span class="header-section-number">19.5</span> 補充(1) 較好的寫法<a href="ptt-scrape.html#ptt_method2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>一個比較好的寫法是，不用先讀第一篇文章，而是用<code>data.frame()</code>初始化一個空的DataFrame，之後可以利用<code>bind_rows()</code>可自動增添缺少的變數的特性，自然就會補上所需要的變數。因此，只要改寫黃色的部分。</p>
 <p>但這樣的寫法仍會有一個缺點，也就是當文章數越來越多時會越跑越慢。原因是，假設現在你已經抓了9999篇文章，你這次的for迴圈要抓第10000篇，然後用<code>bind_rows()</code>合併第10000篇，此時，<code>post.df</code>已經有9999篇非常肥大，等號右邊的<code>bind_rows()</code>跑完後會變成10000篇，此時又要把原本很肥大的post.df覆蓋掉，所以會非常費時。</p>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="ptt-scrape.html#cb653-1" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb653-2"><a href="ptt-scrape.html#cb653-2" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]){</span>
-<span id="cb653-3"><a href="ptt-scrape.html#cb653-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
-<span id="cb653-4"><a href="ptt-scrape.html#cb653-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
-<span id="cb653-5"><a href="ptt-scrape.html#cb653-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
-<span id="cb653-6"><a href="ptt-scrape.html#cb653-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
-<span id="cb653-7"><a href="ptt-scrape.html#cb653-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
-<span id="cb653-8"><a href="ptt-scrape.html#cb653-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb653-9"><a href="ptt-scrape.html#cb653-9" tabindex="-1"></a>    </span>
-<span id="cb653-10"><a href="ptt-scrape.html#cb653-10" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
-<span id="cb653-11"><a href="ptt-scrape.html#cb653-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
-<span id="cb653-12"><a href="ptt-scrape.html#cb653-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
-<span id="cb653-13"><a href="ptt-scrape.html#cb653-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
-<span id="cb653-14"><a href="ptt-scrape.html#cb653-14" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
-<span id="cb653-15"><a href="ptt-scrape.html#cb653-15" tabindex="-1"></a>                          )</span>
-<span id="cb653-16"><a href="ptt-scrape.html#cb653-16" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
-<span id="cb653-17"><a href="ptt-scrape.html#cb653-17" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="ptt-scrape.html#cb658-1" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb658-2"><a href="ptt-scrape.html#cb658-2" tabindex="-1"></a><span class="cf">for</span>(link <span class="cf">in</span> all_links[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]){</span>
+<span id="cb658-3"><a href="ptt-scrape.html#cb658-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(link)</span>
+<span id="cb658-4"><a href="ptt-scrape.html#cb658-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb658-5"><a href="ptt-scrape.html#cb658-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb658-6"><a href="ptt-scrape.html#cb658-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb658-7"><a href="ptt-scrape.html#cb658-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb658-8"><a href="ptt-scrape.html#cb658-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb658-9"><a href="ptt-scrape.html#cb658-9" tabindex="-1"></a>    </span>
+<span id="cb658-10"><a href="ptt-scrape.html#cb658-10" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb658-11"><a href="ptt-scrape.html#cb658-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb658-12"><a href="ptt-scrape.html#cb658-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb658-13"><a href="ptt-scrape.html#cb658-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb658-14"><a href="ptt-scrape.html#cb658-14" tabindex="-1"></a>                          <span class="at">url =</span> link</span>
+<span id="cb658-15"><a href="ptt-scrape.html#cb658-15" tabindex="-1"></a>                          )</span>
+<span id="cb658-16"><a href="ptt-scrape.html#cb658-16" tabindex="-1"></a>    post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.df, temp.df)</span>
+<span id="cb658-17"><a href="ptt-scrape.html#cb658-17" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="ptt_best" class="section level2 hasAnchor" number="19.6">
 <h2><span class="header-section-number">19.6</span> 補充(2) 最佳的寫法<a href="ptt-scrape.html#ptt_best" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>採用<code>list</code>先將每一個<code>DataFrame</code>存放起來，然後跑完所有的for迴圈後才用<code>bind_rows()</code>將所有資料合併為<code>DataFrame</code>。此時，<code>p</code>指的是第幾個連結，而前例的<code>link</code>就相當於下方的<code>all_link[p]</code>。</p>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="ptt-scrape.html#cb654-1" tabindex="-1"></a>post.list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb654-2"><a href="ptt-scrape.html#cb654-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_links)){</span>
-<span id="cb654-3"><a href="ptt-scrape.html#cb654-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(all_links[p])</span>
-<span id="cb654-4"><a href="ptt-scrape.html#cb654-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
-<span id="cb654-5"><a href="ptt-scrape.html#cb654-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
-<span id="cb654-6"><a href="ptt-scrape.html#cb654-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
-<span id="cb654-7"><a href="ptt-scrape.html#cb654-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
-<span id="cb654-8"><a href="ptt-scrape.html#cb654-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb654-9"><a href="ptt-scrape.html#cb654-9" tabindex="-1"></a>    </span>
-<span id="cb654-10"><a href="ptt-scrape.html#cb654-10" tabindex="-1"></a>    post.list[[p]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
-<span id="cb654-11"><a href="ptt-scrape.html#cb654-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
-<span id="cb654-12"><a href="ptt-scrape.html#cb654-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
-<span id="cb654-13"><a href="ptt-scrape.html#cb654-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
-<span id="cb654-14"><a href="ptt-scrape.html#cb654-14" tabindex="-1"></a>                          <span class="at">url =</span> all_links[p]</span>
-<span id="cb654-15"><a href="ptt-scrape.html#cb654-15" tabindex="-1"></a>                          )</span>
-<span id="cb654-16"><a href="ptt-scrape.html#cb654-16" tabindex="-1"></a>}</span>
-<span id="cb654-17"><a href="ptt-scrape.html#cb654-17" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.list)</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="ptt-scrape.html#cb659-1" tabindex="-1"></a>post.list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb659-2"><a href="ptt-scrape.html#cb659-2" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_links)){</span>
+<span id="cb659-3"><a href="ptt-scrape.html#cb659-3" tabindex="-1"></a>    doc <span class="ot">&lt;-</span> <span class="fu">read_html</span>(all_links[p])</span>
+<span id="cb659-4"><a href="ptt-scrape.html#cb659-4" tabindex="-1"></a>    meta.css <span class="ot">&lt;-</span> <span class="st">&quot;#main-content .article-metaline .article-meta-value&quot;</span></span>
+<span id="cb659-5"><a href="ptt-scrape.html#cb659-5" tabindex="-1"></a>    metadata <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, meta.css))</span>
+<span id="cb659-6"><a href="ptt-scrape.html#cb659-6" tabindex="-1"></a>    post.xpath <span class="ot">&lt;-</span> <span class="st">&#39;//*[@id=&quot;main-content&quot;]/text()&#39;</span></span>
+<span id="cb659-7"><a href="ptt-scrape.html#cb659-7" tabindex="-1"></a>    post.paragraph <span class="ot">&lt;-</span> <span class="fu">html_text</span>(<span class="fu">html_nodes</span>(doc, <span class="at">xpath =</span> post.xpath))</span>
+<span id="cb659-8"><a href="ptt-scrape.html#cb659-8" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">paste</span>(post.paragraph, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb659-9"><a href="ptt-scrape.html#cb659-9" tabindex="-1"></a>    </span>
+<span id="cb659-10"><a href="ptt-scrape.html#cb659-10" tabindex="-1"></a>    post.list[[p]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(post, </span>
+<span id="cb659-11"><a href="ptt-scrape.html#cb659-11" tabindex="-1"></a>                          <span class="at">uid =</span> metadata[<span class="dv">1</span>],</span>
+<span id="cb659-12"><a href="ptt-scrape.html#cb659-12" tabindex="-1"></a>                          <span class="at">title =</span> metadata[<span class="dv">2</span>],</span>
+<span id="cb659-13"><a href="ptt-scrape.html#cb659-13" tabindex="-1"></a>                          <span class="at">timestamp =</span> metadata[<span class="dv">3</span>],</span>
+<span id="cb659-14"><a href="ptt-scrape.html#cb659-14" tabindex="-1"></a>                          <span class="at">url =</span> all_links[p]</span>
+<span id="cb659-15"><a href="ptt-scrape.html#cb659-15" tabindex="-1"></a>                          )</span>
+<span id="cb659-16"><a href="ptt-scrape.html#cb659-16" tabindex="-1"></a>}</span>
+<span id="cb659-17"><a href="ptt-scrape.html#cb659-17" tabindex="-1"></a>post.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(post.list)</span></code></pre></div>
 
 </div>
 </div>

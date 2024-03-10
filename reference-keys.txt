@@ -106,12 +106,16 @@ dplyr
 tptheft_dplyr
 reading-data
 cleaning-data-i
+without-pipeline-i
+without-pipeline-ii
+with-pipeline
 cleaning-data-ii
 long-to-wide-form
 setting-time-as-row.name-for-mosaicplot
 clean-version
 maternity_dplyr
 visual-strategies
+code-by-base-r
 code-by-dplyr
 generating-each
 gathering-subplots-by-cowplot

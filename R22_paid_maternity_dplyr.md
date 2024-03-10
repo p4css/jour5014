@@ -12,6 +12,66 @@
 
 ![](https://www.washingtonpost.com/blogs/worldviews/files/2016/08/matleave-map.jpg)
 
+### Code by base R
+
+
+```r
+library(readxl)
+# readxl::read_excel() to import the xls file
+df <- read_excel("data/WORLD-MACHE_Gender_6.8.15.xls", "Sheet1", col_names=T)
+
+# select iso3, and matleave columns by index
+matleave <- df[ , c(3, 6:24)]
+
+# str() to inspect the data structure of 
+str(matleave)
+```
+
+```
+## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
+##  $ iso3       : chr [1:197] "AFG" "ALB" "DZA" "AND" ...
+##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_96: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_97: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_98: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_99: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
+##  $ matleave_00: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_01: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_02: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_03: num [1:197] 2 5 3 3 2 2 2 3 1 5 ...
+##  $ matleave_04: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_05: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_06: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_07: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_08: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_09: num [1:197] 2 5 3 3 2 2 2 5 1 5 ...
+##  $ matleave_10: num [1:197] 2 5 3 3 2 2 2 5 NA 5 ...
+##  $ matleave_11: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_12: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
+```
+
+```r
+# select all NA cells and assign 0 to them
+matleave[is.na(matleave)] <- 0
+
+# filter rows by condition
+m5 <- matleave[matleave$'matleave_13' == 5, ]
+
+# filter rows by condition
+m55<- m5[m5$'matleave_95' == 5,]
+
+# plot
+par(mfrow=c(4,6), mai= c(0.2, 0.2, 0.2, 0.2))
+for (i in c(1:nrow(m55))){
+	barplot(unlist(m55[i,-1]),
+			border=NA, space=0,xaxt="n", yaxt="n", ylim = c(0,5))
+	title(m55[i,1], line = -4, cex.main=3)
+}
+```
+
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
 ### Code by dplyr
 
 首先，程式碼使用 **`filter()`** 函數篩選出符合條件的列，其中 **`matleave_13`** 和 **`matleave_95`** 兩欄都必須等於 5。接著，**`pivot_longer()`** 函數將資料框轉換成長格式（long format），將從第二欄到第二十欄的資料整合到兩個欄位 **`year`** 和 **`degree`** 中。這裡 **`names_to`** 參數指定新欄位 **`year`** 的名稱，**`values_to`** 參數指定新欄位 **`degree`** 的名稱，**`cols`** 參數指定要整合的欄位範圍。
@@ -58,7 +118,7 @@ matleave %>%
   theme_void()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 下圖為原始資料的截圖，`matleave_95`代表1995年的資料，每個變數的數據1至5分別代表產假時給付薪水的月數區間共有五個區間。區間大小通常需要查看編碼簿來獲取定義。
 
@@ -104,55 +164,55 @@ generating_plot <- function(df){
 matleave %>% filter(matleave_13 == 5, matleave_95 == 5) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 5, matleave_95 != 5) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-2.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-2.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 4, matleave_95 == 4) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-3.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-3.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 4, matleave_95 != 4) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-4.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-4.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 3, matleave_95 == 3) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-5.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-5.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 3, matleave_95 != 3) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-6.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-6.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 2, matleave_95 == 2) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-7.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-7.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 2, matleave_95 != 2) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-8.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-8.png" width="672" />
 
 ```r
 matleave %>% filter(matleave_13 == 1) %>% generating_plot()
 ```
 
-<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-9.png" width="672" />
+<img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-9.png" width="672" />
 
 ### Gathering subplots by cowplot
 

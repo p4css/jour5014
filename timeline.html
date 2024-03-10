@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-03" />
+<meta name="date" content="2024-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -302,9 +302,10 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.2</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.3</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.4</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -820,25 +821,25 @@ POSIXct 時間物件，並將其存入 <strong><code>ptime</code></strong>
 函數中，你可以使用這些格式碼來指定一個字串的時間格式，以便將其轉換為時間物件。例如，如果一個字串的格式是
 <strong><code>2022-03-31 14:30:00</code></strong>，那麼可以使用 <strong><code>%Y-%m-%d %H:%M:%S</code></strong>
 這個時間格式來將其轉換為一個時間物件。</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="timeline.html#cb423-1" tabindex="-1"></a><span class="co"># Reading from url</span></span>
-<span id="cb423-2"><a href="timeline.html#cb423-2" tabindex="-1"></a><span class="co"># ptturl &lt;- &quot;https://github.com/P4CSS/R4CSSData/raw/main/ptt_hang_posts.csv&quot;</span></span>
-<span id="cb423-3"><a href="timeline.html#cb423-3" tabindex="-1"></a><span class="co"># raw &lt;- read.csv(url(ptturl))</span></span>
-<span id="cb423-4"><a href="timeline.html#cb423-4" tabindex="-1"></a></span>
-<span id="cb423-5"><a href="timeline.html#cb423-5" tabindex="-1"></a></span>
-<span id="cb423-6"><a href="timeline.html#cb423-6" tabindex="-1"></a><span class="co"># read_csv() won&#39;t convert timestamp to POSIXct automatically</span></span>
-<span id="cb423-7"><a href="timeline.html#cb423-7" tabindex="-1"></a><span class="co"># raw &lt;- read.csv(&quot;data/ptt_hang_posts.csv&quot;)</span></span>
-<span id="cb423-8"><a href="timeline.html#cb423-8" tabindex="-1"></a><span class="co"># clean &lt;- raw %&gt;%</span></span>
-<span id="cb423-9"><a href="timeline.html#cb423-9" tabindex="-1"></a><span class="co">#         mutate(ptime = as.POSIXct(strptime(ptime, &quot;%Y-%m-%dT%H:%M:%SZ&quot;)))</span></span>
-<span id="cb423-10"><a href="timeline.html#cb423-10" tabindex="-1"></a></span>
-<span id="cb423-11"><a href="timeline.html#cb423-11" tabindex="-1"></a></span>
-<span id="cb423-12"><a href="timeline.html#cb423-12" tabindex="-1"></a><span class="co"># read_csv() will convert timestamp to POSIXct automatically</span></span>
-<span id="cb423-13"><a href="timeline.html#cb423-13" tabindex="-1"></a>clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ptt_hang_posts.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="timeline.html#cb424-1" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="st">&quot;2019-04-12T00:48:19Z&quot;</span></span>
-<span id="cb424-2"><a href="timeline.html#cb424-2" tabindex="-1"></a><span class="fu">class</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="timeline.html#cb428-1" tabindex="-1"></a><span class="co"># Reading from url</span></span>
+<span id="cb428-2"><a href="timeline.html#cb428-2" tabindex="-1"></a><span class="co"># ptturl &lt;- &quot;https://github.com/P4CSS/R4CSSData/raw/main/ptt_hang_posts.csv&quot;</span></span>
+<span id="cb428-3"><a href="timeline.html#cb428-3" tabindex="-1"></a><span class="co"># raw &lt;- read.csv(url(ptturl))</span></span>
+<span id="cb428-4"><a href="timeline.html#cb428-4" tabindex="-1"></a></span>
+<span id="cb428-5"><a href="timeline.html#cb428-5" tabindex="-1"></a></span>
+<span id="cb428-6"><a href="timeline.html#cb428-6" tabindex="-1"></a><span class="co"># read_csv() won&#39;t convert timestamp to POSIXct automatically</span></span>
+<span id="cb428-7"><a href="timeline.html#cb428-7" tabindex="-1"></a><span class="co"># raw &lt;- read.csv(&quot;data/ptt_hang_posts.csv&quot;)</span></span>
+<span id="cb428-8"><a href="timeline.html#cb428-8" tabindex="-1"></a><span class="co"># clean &lt;- raw %&gt;%</span></span>
+<span id="cb428-9"><a href="timeline.html#cb428-9" tabindex="-1"></a><span class="co">#         mutate(ptime = as.POSIXct(strptime(ptime, &quot;%Y-%m-%dT%H:%M:%SZ&quot;)))</span></span>
+<span id="cb428-10"><a href="timeline.html#cb428-10" tabindex="-1"></a></span>
+<span id="cb428-11"><a href="timeline.html#cb428-11" tabindex="-1"></a></span>
+<span id="cb428-12"><a href="timeline.html#cb428-12" tabindex="-1"></a><span class="co"># read_csv() will convert timestamp to POSIXct automatically</span></span>
+<span id="cb428-13"><a href="timeline.html#cb428-13" tabindex="-1"></a>clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ptt_hang_posts.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="timeline.html#cb429-1" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="st">&quot;2019-04-12T00:48:19Z&quot;</span></span>
+<span id="cb429-2"><a href="timeline.html#cb429-2" tabindex="-1"></a><span class="fu">class</span>(t)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="timeline.html#cb426-1" tabindex="-1"></a>?strptime</span>
-<span id="cb426-2"><a href="timeline.html#cb426-2" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">strptime</span>(t, <span class="st">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span>)</span>
-<span id="cb426-3"><a href="timeline.html#cb426-3" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="timeline.html#cb431-1" tabindex="-1"></a>?strptime</span>
+<span id="cb431-2"><a href="timeline.html#cb431-2" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">strptime</span>(t, <span class="st">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span>)</span>
+<span id="cb431-3"><a href="timeline.html#cb431-3" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre class="output"><code>## function (length = 0L)</code></pre>
 </div>
 <div id="density-plot-along-time" class="section level2 hasAnchor" number="9.2">
@@ -850,9 +851,9 @@ plot）。密度圖顯示了一個連續變量的概率密度函數的近似值�
 函數可以很方便地繪製密度圖。我們只需要指定變量名稱，即可繪製出該變量的密度圖。此外，我們也可以使用
 <strong><code>stat_density()</code></strong>
 函數來繪製密度圖，這個函數允許我們對密度圖進行更多的自定義設置，例如指定核函數、調整帶寬等。繪製密度圖可以讓我們更直觀地了解變量的分佈情況，進而對資料進行更深入的分析和探索。</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="timeline.html#cb428-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
-<span id="cb428-2"><a href="timeline.html#cb428-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ptime) <span class="sc">+</span> </span>
-<span id="cb428-3"><a href="timeline.html#cb428-3" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="timeline.html#cb433-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
+<span id="cb433-2"><a href="timeline.html#cb433-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ptime) <span class="sc">+</span> </span>
+<span id="cb433-3"><a href="timeline.html#cb433-3" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="freq-by-month" class="section level2 hasAnchor" number="9.3">
@@ -865,12 +866,12 @@ plot）。密度圖顯示了一個連續變量的概率密度函數的近似值�
 <strong><code>x</code></strong> 軸為月份 <strong><code>m</code></strong>，<strong><code>y</code></strong> 軸為出現次數 <strong><code>n</code></strong>，然後使用
 <strong><code>geom_col()</code></strong>
 函數繪製直方圖。這樣可以很直觀地看到每個月份資料的出現次數，進而觀察到逐年逐月的變化趨勢。如果需要更詳細的觀察，可以將資料劃分為更小的時間單位，例如週，然後使用類似的方法繪製直方圖。</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="timeline.html#cb429-1" tabindex="-1"></a>?lubridate</span>
-<span id="cb429-2"><a href="timeline.html#cb429-2" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
-<span id="cb429-3"><a href="timeline.html#cb429-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">month</span>(ptime)) <span class="sc">%&gt;%</span> </span>
-<span id="cb429-4"><a href="timeline.html#cb429-4" tabindex="-1"></a>    <span class="fu">count</span>(m) <span class="sc">%&gt;%</span></span>
-<span id="cb429-5"><a href="timeline.html#cb429-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(m, n) <span class="sc">+</span> </span>
-<span id="cb429-6"><a href="timeline.html#cb429-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="timeline.html#cb434-1" tabindex="-1"></a>?lubridate</span>
+<span id="cb434-2"><a href="timeline.html#cb434-2" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
+<span id="cb434-3"><a href="timeline.html#cb434-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">month</span>(ptime)) <span class="sc">%&gt;%</span> </span>
+<span id="cb434-4"><a href="timeline.html#cb434-4" tabindex="-1"></a>    <span class="fu">count</span>(m) <span class="sc">%&gt;%</span></span>
+<span id="cb434-5"><a href="timeline.html#cb434-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(m, n) <span class="sc">+</span> </span>
+<span id="cb434-6"><a href="timeline.html#cb434-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="freq-by-date-good" class="section level2 hasAnchor" number="9.4">
@@ -884,12 +885,12 @@ plot）。密度圖顯示了一個連續變量的概率密度函數的近似值�
 函數繪製直方圖，可以看到在時間軸上的年份特性被保留了下來。</p>
 <p>總之，當我們需要從時間序列資料中提取某一個時間單位時，應該採用能夠保留日期（如年）特性的方法，例如使用
 <strong><code>floor_date()</code></strong> 函數，以便進行更加精細的分析和視覺化。</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="timeline.html#cb430-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
-<span id="cb430-2"><a href="timeline.html#cb430-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-03-18&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb430-3"><a href="timeline.html#cb430-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">floor_date</span>(ptime, <span class="at">unit =</span> <span class="st">&quot;day&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb430-4"><a href="timeline.html#cb430-4" tabindex="-1"></a>    <span class="fu">count</span>(m) <span class="sc">%&gt;%</span></span>
-<span id="cb430-5"><a href="timeline.html#cb430-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(m, n) <span class="sc">+</span> </span>
-<span id="cb430-6"><a href="timeline.html#cb430-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="timeline.html#cb435-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
+<span id="cb435-2"><a href="timeline.html#cb435-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-03-18&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb435-3"><a href="timeline.html#cb435-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">floor_date</span>(ptime, <span class="at">unit =</span> <span class="st">&quot;day&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb435-4"><a href="timeline.html#cb435-4" tabindex="-1"></a>    <span class="fu">count</span>(m) <span class="sc">%&gt;%</span></span>
+<span id="cb435-5"><a href="timeline.html#cb435-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(m, n) <span class="sc">+</span> </span>
+<span id="cb435-6"><a href="timeline.html#cb435-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="freq-by-hour" class="section level2 hasAnchor" number="9.5">
@@ -910,18 +911,18 @@ X 軸作為 24 小時的時間點，而 Y
 <strong><code>color</code></strong>。然後，使用 <strong><code>geom_line()</code></strong> 函數繪製折線圖，並使用
 <strong><code>facet_wrap()</code></strong> 函數將資料分為週末和週間兩個子圖。</p>
 <p>透過這樣的方式，我們可以很清楚地看到週末和週間的文章量變化趨勢，從而對資料進行更深入的分析和探索。</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="timeline.html#cb431-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
-<span id="cb431-2"><a href="timeline.html#cb431-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-03-25&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb431-3"><a href="timeline.html#cb431-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">d =</span> <span class="fu">floor_date</span>(ptime, <span class="at">unit =</span> <span class="st">&quot;day&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb431-4"><a href="timeline.html#cb431-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">h =</span> <span class="fu">hour</span>(ptime)) <span class="sc">%&gt;%</span></span>
-<span id="cb431-5"><a href="timeline.html#cb431-5" tabindex="-1"></a>    <span class="fu">count</span>(d, h) <span class="sc">%&gt;%</span></span>
-<span id="cb431-6"><a href="timeline.html#cb431-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">wd =</span> <span class="fu">wday</span>(d, <span class="at">label =</span> F, <span class="at">locale =</span> <span class="fu">Sys.getlocale</span>(<span class="st">&quot;LC_TIME&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb431-7"><a href="timeline.html#cb431-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">isweekend =</span> <span class="fu">ifelse</span>(wd <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="st">&quot;weekend&quot;</span>, <span class="st">&quot;weekday&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb431-8"><a href="timeline.html#cb431-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(h, n, <span class="at">color =</span> <span class="fu">as.character</span>(d)) <span class="sc">+</span> </span>
-<span id="cb431-9"><a href="timeline.html#cb431-9" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb431-10"><a href="timeline.html#cb431-10" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>isweekend)</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="timeline.html#cb436-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
+<span id="cb436-2"><a href="timeline.html#cb436-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-03-25&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb436-3"><a href="timeline.html#cb436-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">d =</span> <span class="fu">floor_date</span>(ptime, <span class="at">unit =</span> <span class="st">&quot;day&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb436-4"><a href="timeline.html#cb436-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">h =</span> <span class="fu">hour</span>(ptime)) <span class="sc">%&gt;%</span></span>
+<span id="cb436-5"><a href="timeline.html#cb436-5" tabindex="-1"></a>    <span class="fu">count</span>(d, h) <span class="sc">%&gt;%</span></span>
+<span id="cb436-6"><a href="timeline.html#cb436-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">wd =</span> <span class="fu">wday</span>(d, <span class="at">label =</span> F, <span class="at">locale =</span> <span class="fu">Sys.getlocale</span>(<span class="st">&quot;LC_TIME&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb436-7"><a href="timeline.html#cb436-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">isweekend =</span> <span class="fu">ifelse</span>(wd <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="st">&quot;weekend&quot;</span>, <span class="st">&quot;weekday&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb436-8"><a href="timeline.html#cb436-8" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(h, n, <span class="at">color =</span> <span class="fu">as.character</span>(d)) <span class="sc">+</span> </span>
+<span id="cb436-9"><a href="timeline.html#cb436-9" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb436-10"><a href="timeline.html#cb436-10" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>isweekend)</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="timeline.html#cb432-1" tabindex="-1"></a>?ifelse</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="timeline.html#cb437-1" tabindex="-1"></a>?ifelse</span></code></pre></div>
 
 </div>
 </div>

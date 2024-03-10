@@ -6,25 +6,17 @@
 
 **From base to tidyverse style**
 
-相較於R base的較為傳統的R編程風格，tidyverse style的R
-programming具有以下幾個特點：
+相較於R base的較為傳統的R編程風格，tidyverse style的R programming具有以下幾個特點：
 
-1.  基於tidy data理念：tidyverse style的R programming基於tidy
-    data理念，即資料應該以規律的方式組織，以方便分析和視覺化。tidyverse
-    style的R程式庫提供了一些工具和函數，用於處理和轉換tidy
-    data格式的資料，如dplyr、tidyr等。
+1.  基於tidy data理念：tidyverse style的R programming基於tidy data理念，即資料應該以規律的方式組織，以方便分析和視覺化。tidyverse style的R程式庫提供了一些工具和函數，用於處理和轉換tidy data格式的資料，如dplyr、tidyr等。
 
-2.  使用管道操作符：tidyverse style的R
-    programming通常使用管道操作符（%\>%），將資料通過多個函數連接起來，形成一個清晰和易於理解的資料處理流程。使用管道操作符可以簡化程式碼並提高程式的可讀性。
+2.  使用管道操作符：tidyverse style的R programming通常使用管道操作符（%\>%），將資料通過多個函數連接起來，形成一個清晰和易於理解的資料處理流程。使用管道操作符可以簡化程式碼並提高程式的可讀性。
 
-3.  強調函數庫的一致性：tidyverse style的R
-    programming強調函數庫之間的一致性，即不同函數庫之間使用相似的函數名稱、參數名稱和返回值等，以方便使用者的學習和使用。
+3.  強調函數庫的一致性：tidyverse style的R programming強調函數庫之間的一致性，即不同函數庫之間使用相似的函數名稱、參數名稱和返回值等，以方便使用者的學習和使用。
 
-4.  使用簡潔的命名方式：tidyverse style的R
-    programming通常使用簡潔和易於理解的變數和函數命名方式，例如使用動詞表示操作，使用名詞表示資料，以方便使用者理解程式碼的含義。
+4.  使用簡潔的命名方式：tidyverse style的R programming通常使用簡潔和易於理解的變數和函數命名方式，例如使用動詞表示操作，使用名詞表示資料，以方便使用者理解程式碼的含義。
 
-5.  提供高級的視覺化工具：tidyverse style的R
-    programming提供了一些高級的視覺化工具，如ggplot2、gganimate等，可以幫助使用者更加輕鬆地進行資料視覺化和探索。
+5.  提供高級的視覺化工具：tidyverse style的R programming提供了一些高級的視覺化工具，如ggplot2、gganimate等，可以幫助使用者更加輕鬆地進行資料視覺化和探索。
 
 ## dplyr
 
@@ -77,9 +69,37 @@ df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
 ### Cleaning data I
 
 -   Renaming variables by `select()`
--   Generating variable year
--   Generating variable month
--   Retrieving area
+-   Generating variable year by `mutate()`
+-   Generating variable month by `mutate()`
+-   Retrieving area by `mutate()`
+
+#### (1) Without pipeline I
+
+
+```r
+df1 <- select(df, id = 編號, cat = 案類, date = `發生日期`, time = `發生時段`, location = `發生地點`)
+
+df2 <- mutate(df1, year = date %/% 10000)
+df3 <- mutate(df2, month = date %/% 100 %% 100)
+df4 <- mutate(df3, area = str_sub(location, 4, 6))
+selected_df <- mutate(df4, county = str_sub(location, 1, 3))
+```
+
+#### (2) Without pipeline II
+
+
+```r
+library(stringr)
+
+selected_df <- select(df, id = 編號, cat = 案類, date = `發生日期`, time = `發生時段`, location = `發生地點`)
+
+selected_df <- mutate(selected_df, year = date %/% 10000)
+selected_df <- mutate(selected_df, month = date %/% 100 %% 100)
+selected_df <- mutate(selected_df, area = str_sub(location, 4, 6))
+selected_df <- mutate(selected_df, county = str_sub(location, 1, 3))
+```
+
+#### (3) With pipeline
 
 
 ```r
@@ -150,7 +170,7 @@ mosaicplot(df.wide, color=colors, border=0, off = 3,
            main="Theft rate of Taipei city (region by hour)")
 ```
 
-<img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ### Clean version
 
@@ -258,4 +278,4 @@ mosaicplot(df.wide, color=colors, border=0, off = 3,
            main="Theft rate of Taipei city (region by hour)")  
 ```
 
-<img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-11-1.png" width="672" />
