@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-10" />
+<meta name="date" content="2024-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -338,11 +338,15 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
-<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
-<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
-<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
-<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#time-object"><i class="fa fa-check"></i><b>9.1</b> Time object</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#example-processing-time-object-in-social-opinions"><i class="fa fa-check"></i><b>9.2</b> Example: Processing time object in social opinions</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="timeline.html"><a href="timeline.html#char-to-time"><i class="fa fa-check"></i><b>9.2.1</b> Char-to-Time</a></li>
+<li class="chapter" data-level="9.2.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.2.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.2.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.2.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.2.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.2.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.2.5</b> Freq-by-hour</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
 <ul>
@@ -555,25 +559,27 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#essentials-of-ggplot"><i class="fa fa-check"></i><b>22.1</b> Essentials of ggplot</a>
 <ul>
-<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#ggplot-秀出預備要繪製的繪圖區"><i class="fa fa-check"></i><b>22.1.1</b> (1) <code>ggplot()</code> 秀出預備要繪製的繪圖區</a></li>
+<li class="chapter" data-level="22.1.2" data-path="ggplot.html"><a href="ggplot.html#aes-指定xy軸與群組因子"><i class="fa fa-check"></i><b>22.1.2</b> <strong>(2) <code>aes()</code> 指定X／Y軸與群組因子</strong></a></li>
+<li class="chapter" data-level="22.1.3" data-path="ggplot.html"><a href="ggplot.html#geom_-指定要繪製的圖表類型"><i class="fa fa-check"></i><b>22.1.3</b> <strong>(3) <code>geom_???()</code> 指定要繪製的圖表類型</strong>。</a></li>
 </ul></li>
 <li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
 <ul>
-<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
-<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#loading-data-1"><i class="fa fa-check"></i><b>22.2.1</b> (1) Loading data</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.2</b> (2) Visualizing</a></li>
 </ul></li>
 <li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
 <ul>
-<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#type-of-points-and-lines"><i class="fa fa-check"></i><b>22.3.1</b> Type of Points and Lines</a></li>
 <li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
-<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
-<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
-<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
-<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
-<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
-<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#title-labels-and-legends"><i class="fa fa-check"></i><b>22.3.3</b> Title, Labels and Legends</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#font"><i class="fa fa-check"></i><b>22.3.4</b> Font</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#color-themes"><i class="fa fa-check"></i><b>22.3.5</b> Color Themes</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#set-up-default-theme"><i class="fa fa-check"></i><b>22.3.6</b> Set-up Default Theme</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#show-chinese-text"><i class="fa fa-check"></i><b>22.3.7</b> Show Chinese Text</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy-axis"><i class="fa fa-check"></i><b>22.3.8</b> X/Y axis</a></li>
 </ul></li>
 <li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
 <ul>
@@ -700,7 +706,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
 <li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
-<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
 </ul></li>
@@ -777,50 +783,32 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="timeline" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Processing Timeline<a href="timeline.html#timeline" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>現今網路上有許多開放資料可以供使用者下載或查詢，其中很多資料都包含了時間相關的訊息，例如訂單成立時間、氣象觀測時間、股價報價時間等等。這些時間資訊通常會以字串的方式儲存，但若要在程式中進行時間相關的運算，例如計算時間差、建立時間序列等，就必須先將其轉換為時間物件。在
-R 裡面，常用的時間物件有 <strong><code>POSIXct</code></strong> 與 <strong><code>POSIXlt</code></strong>
-兩種，我們可以使用 <strong><code>as.POSIXct()</code></strong> 或 <strong><code>as.POSIXlt()</code></strong>
-函數將字串轉換為對應的時間物件。轉換完成後，我們就可以方便地進行時間相關的運算，例如計算兩個時間點之間的時間差、將時間轉換為不同的時區、擷取時間序列中的某個時間區間等等。這些時間相關的運算在很多領域都很常見，例如金融、氣象、交通等，因此學習如何使用時間物件進行運算是非常重要的一環。</p>
-<p><strong><code>POSIXct</code></strong> 以自從 1970 年 1 月 1 日 00:00:00 UTC
-開始經過的秒數來表示一個時間點，而 <strong><code>POSIXlt</code></strong>
-則是以結構化的列表方式來表示，其中包含了年、月、日、時、分、秒等元素。兩者最大的不同在於
-<strong><code>POSIXct</code></strong> 更適合用於一些計算，而 <strong><code>POSIXlt</code></strong>
-則更容易人類閱讀。我們可以使用 <strong><code>as.POSIXct()</code></strong> 或 <strong><code>as.POSIXlt()</code></strong>
-函數來將一個字串轉換為對應的時間物件，也可以使用 <strong><code>Sys.time()</code></strong>
-函數來取得當前的時間點。使用這些時間物件，我們可以方便地進行日期與時間的計算，例如算出兩個時間點之間的時間差，或是在時間序列上進行操作等。</p>
-<div id="char-to-timestamp" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> char-to-timestamp<a href="timeline.html#char-to-timestamp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>在 R 裡面，我們可以使用 <strong><code>strptime()</code></strong> 函數將字串轉換為時間物件，其中
-<strong><code>%Y</code></strong>、<strong><code>%m</code></strong>、<strong><code>%d</code></strong>、<strong><code>%H</code></strong>、<strong><code>%M</code></strong>、<strong><code>%S</code></strong>
-等是用來表示時間的格式碼。在這段程式碼中，我們使用 <strong><code>strptime()</code></strong>
-函數將 <strong><code>ptime</code></strong> 這個字串轉換為一個時間物件，其中
-<strong><code>%Y-%m-%dT%H:%M:%SZ</code></strong> 是該字串的時間格式，也就是說這個字串是以 ISO
-8601 的格式表示的時間，例如
-<strong><code>2022-03-31T14:30:00Z</code></strong>。<strong><code>tz = "ASIA/Taipeiw"</code></strong>
-則是指定時間所在的時區，這裡指定的是台灣時間。轉換完成後，我們使用
-<strong><code>as.POSIXct()</code></strong> 函數將 <strong><code>strptime()</code></strong> 轉換出來的時間物件再轉換為
-POSIXct 時間物件，並將其存入 <strong><code>ptime</code></strong>
-這個欄位中。這段程式碼的作用是將一個 ISO 8601 格式的字串轉換為 POSIXct
-時間物件，並指定時區為台灣，方便之後進行時間相關的運算。</p>
-<p>在 <strong><code>strptime()</code></strong>
-函數中，可以使用不同的格式碼來指定時間的格式。以下是常用的幾種格式碼及其意義：</p>
+<div id="time-object" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Time object<a href="timeline.html#time-object" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>在當前的數位時代，網路上充斥著豐富的開放資料，許多其中包含著關鍵的時間資訊，如訂單成立的時間、氣象觀測的時刻以及股票的交易時間等。這些時間數據往往以字串形式存在，但若需進行時間計算或構建時間序列分析，在程式處理前必須將其轉化為專門的時間物件。</p>
+<p>在R語言中，主要有兩種時間物件：<strong><code>POSIXct</code></strong>和<strong><code>POSIXlt</code></strong>，它們可通過<strong><code>as.POSIXct()</code></strong>和<strong><code>as.POSIXlt()</code></strong>函數將字串轉換成相應的時間物件形式。一旦轉換完成，各種時間相關的計算操作，如時間點之間的差異計算、時區轉換、時間序列的特定區間提取等，便可輕鬆進行。具體而言，<strong><code>POSIXct</code></strong>是以1970年1月1日00:00:00 UTC至當前的總秒數來表示時間點，適合於進行數學計算；而<strong><code>POSIXlt</code></strong>則採用結構化列表形式存儲，包括年、月、日、小時、分、秒等時間單位，更便於人工閱讀與理解。這兩種時間物件的主要差異在於，<strong><code>POSIXct</code></strong>較為適合於計算處理，<strong><code>POSIXlt</code></strong>則在時間元素的展示與處理上更為直觀。</p>
+<p>此外，利用<strong><code>Sys.time()</code></strong>函數能夠獲取當前時刻的時間物件，這為時間數據的動態處理提供了便利。學習如何有效運用這些時間物件進行日期與時間的計算在許多領域，例如金融、氣象、交通等，都是非常關鍵的能力。</p>
+</div>
+<div id="example-processing-time-object-in-social-opinions" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Example: Processing time object in social opinions<a href="timeline.html#example-processing-time-object-in-social-opinions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="char-to-time" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Char-to-Time<a href="timeline.html#char-to-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在 R 裡面，我們可以使用 <code>strptime()</code> 函數將字串轉換為時間物件，其中 <code>%Y</code>、<code>%m</code>、<code>%d</code>、<code>%H</code>、<code>%M</code>、<code>%S</code> 等是用來表示時間的格式碼。在這段程式碼中，我們使用 <code>strptime()</code> 函數將 <code>ptime</code> 這個字串轉換為一個時間物件，其中 <code>%Y-%m-%dT%H:%M:%SZ</code> 是該字串的時間格式，也就是說這個字串是以 ISO 8601 的格式表示的時間，例如 <code>2022-03-31T14:30:00Z</code>。<code>tz = "ASIA/Taipei"</code> 則是指定時間所在的時區，這裡指定的是台灣時間。轉換完成後，我們使用 <code>as.POSIXct()</code> 函數將 <code>strptime()</code> 轉換出來的時間物件再轉換為<code>POSIXct</code>時間物件，並將其存入 <code>ptime</code> 這個欄位中。這段程式碼的作用是將一個 ISO 8601 格式的字串轉換為 <code>POSIXct</code> 時間物件，並指定時區為台灣，方便之後進行時間相關的運算。</p>
+<p>在 <strong><code>strptime()</code></strong> 函數中，可以使用不同的格式碼來指定時間的格式。以下是常用的幾種格式碼及其意義：</p>
 <ul>
-<li><p><strong><code>%Y</code></strong>：四位數的年份，例如 2022。</p></li>
-<li><p><strong><code>%m</code></strong>：兩位數的月份，範圍是 01 到 12。</p></li>
-<li><p><strong><code>%d</code></strong>：兩位數的日期，範圍是 01 到 31。</p></li>
-<li><p><strong><code>%H</code></strong>：兩位數的小時，範圍是 00 到 23。</p></li>
-<li><p><strong><code>%M</code></strong>：兩位數的分鐘，範圍是 00 到 59。</p></li>
-<li><p><strong><code>%S</code></strong>：兩位數的秒數，範圍是 00 到 59。</p></li>
-<li><p><strong><code>%b</code></strong>：縮寫形式的月份名稱，例如 Jan。</p></li>
-<li><p><strong><code>%B</code></strong>：完整形式的月份名稱，例如 January。</p></li>
-<li><p><strong><code>%a</code></strong>：縮寫形式的星期幾名稱，例如 Mon。</p></li>
-<li><p><strong><code>%A</code></strong>：完整形式的星期幾名稱，例如 Monday。</p></li>
-<li><p><strong><code>%p</code></strong>：AM 或 PM，例如 AM。</p></li>
+<li><strong><code>%Y</code></strong>：四位數的年份，例如 2022。</li>
+<li><strong><code>%m</code></strong>：兩位數的月份，範圍是 01 到 12。</li>
+<li><strong><code>%d</code></strong>：兩位數的日期，範圍是 01 到 31。</li>
+<li><strong><code>%H</code></strong>：兩位數的小時，範圍是 00 到 23。</li>
+<li><strong><code>%M</code></strong>：兩位數的分鐘，範圍是 00 到 59。</li>
+<li><strong><code>%S</code></strong>：兩位數的秒數，範圍是 00 到 59。</li>
+<li><strong><code>%b</code></strong>：縮寫形式的月份名稱，例如 Jan。</li>
+<li><strong><code>%B</code></strong>：完整形式的月份名稱，例如 January。</li>
+<li><strong><code>%a</code></strong>：縮寫形式的星期幾名稱，例如 Mon。</li>
+<li><strong><code>%A</code></strong>：完整形式的星期幾名稱，例如 Monday。</li>
+<li><strong><code>%p</code></strong>：AM 或 PM，例如 AM。</li>
 </ul>
-<p>在 <strong><code>strptime()</code></strong>
-函數中，你可以使用這些格式碼來指定一個字串的時間格式，以便將其轉換為時間物件。例如，如果一個字串的格式是
-<strong><code>2022-03-31 14:30:00</code></strong>，那麼可以使用 <strong><code>%Y-%m-%d %H:%M:%S</code></strong>
-這個時間格式來將其轉換為一個時間物件。</p>
+<p>在 <strong><code>strptime()</code></strong> 函數中，你可以使用這些格式碼來指定一個字串的時間格式，以便將其轉換為時間物件。例如，如果一個字串的格式是 <strong><code>2022-03-31 14:30:00</code></strong>，那麼可以使用 <strong><code>%Y-%m-%d %H:%M:%S</code></strong> 這個時間格式來將其轉換為一個時間物件。</p>
 <div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="timeline.html#cb428-1" tabindex="-1"></a><span class="co"># Reading from url</span></span>
 <span id="cb428-2"><a href="timeline.html#cb428-2" tabindex="-1"></a><span class="co"># ptturl &lt;- &quot;https://github.com/P4CSS/R4CSSData/raw/main/ptt_hang_posts.csv&quot;</span></span>
 <span id="cb428-3"><a href="timeline.html#cb428-3" tabindex="-1"></a><span class="co"># raw &lt;- read.csv(url(ptturl))</span></span>
@@ -842,30 +830,19 @@ POSIXct 時間物件，並將其存入 <strong><code>ptime</code></strong>
 <span id="cb431-3"><a href="timeline.html#cb431-3" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre class="output"><code>## function (length = 0L)</code></pre>
 </div>
-<div id="density-plot-along-time" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Density plot along time<a href="timeline.html#density-plot-along-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>在資料分析的過程中，我們經常需要對資料進行分布分析，以了解資料的特性。<strong><code>ggplot2</code></strong>
-套件提供了 <strong><code>geom_density()</code></strong> 函數，可以用來繪製密度圖（density
-plot）。密度圖顯示了一個連續變量的概率密度函數的近似值，可以用來了解該變量的分佈情況。密度圖與直方圖類似，但它是基於核密度估計方法繪製的，所以在某些情況下可以提供更好的分佈近似。它將一個連續變量區間劃分為若干個小區間，然後對每個小區間的密度進行估計，再將這些小區間的密度估計值連接起來，形成一條平滑曲線，用以描述變量的分佈情況。</p>
-<p>在 <strong><code>ggplot2</code></strong> 中，使用 <strong><code>geom_density()</code></strong>
-函數可以很方便地繪製密度圖。我們只需要指定變量名稱，即可繪製出該變量的密度圖。此外，我們也可以使用
-<strong><code>stat_density()</code></strong>
-函數來繪製密度圖，這個函數允許我們對密度圖進行更多的自定義設置，例如指定核函數、調整帶寬等。繪製密度圖可以讓我們更直觀地了解變量的分佈情況，進而對資料進行更深入的分析和探索。</p>
+<div id="density-plot-along-time" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Density plot along time<a href="timeline.html#density-plot-along-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在資料分析的過程中，我們經常需要對資料進行分布分析，以了解資料的特性。<strong><code>ggplot2</code></strong> 套件提供了 <strong><code>geom_density()</code></strong> 函數，可以用來繪製密度圖（density plot）。密度圖顯示了一個連續變量的概率密度函數的近似值，可以用來了解該變量的分佈情況。密度圖與直方圖類似，但它是基於核密度估計方法繪製的，所以在某些情況下可以提供更好的分佈近似。它將一個連續變量區間劃分為若干個小區間，然後對每個小區間的密度進行估計，再將這些小區間的密度估計值連接起來，形成一條平滑曲線，用以描述變量的分佈情況。</p>
+<p>在 <strong><code>ggplot2</code></strong> 中，使用 <strong><code>geom_density()</code></strong> 函數可以很方便地繪製密度圖。我們只需要指定變量名稱，即可繪製出該變量的密度圖。此外，我們也可以使用 <strong><code>stat_density()</code></strong> 函數來繪製密度圖，這個函數允許我們對密度圖進行更多的自定義設置，例如指定核函數、調整帶寬等。繪製密度圖可以讓我們更直觀地了解變量的分佈情況，進而對資料進行更深入的分析和探索。</p>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="timeline.html#cb433-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
 <span id="cb433-2"><a href="timeline.html#cb433-2" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(ptime) <span class="sc">+</span> </span>
 <span id="cb433-3"><a href="timeline.html#cb433-3" tabindex="-1"></a>    <span class="fu">geom_density</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
-<div id="freq-by-month" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> Freq by month<a href="timeline.html#freq-by-month" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>如果想要詳細觀察逐年逐月的變化，使用密度圖可能不夠直觀，此時可以考慮使用直方圖來呈現資料。直方圖可以將資料劃分為若干個等寬的區間，並計算每個區間內資料的頻率，然後將這些頻率顯示為長方形柱，以反映資料的分佈情況。對於時間序列資料，我們可以將其劃分為月、週等時間單位，然後計算每個時間單位內資料的出現次數，再使用
-<strong><code>ggplot2</code></strong> 中的 <strong><code>geom_col()</code></strong> 函數繪製直方圖。</p>
-<p>以上程式碼中，我們使用 <strong><code>mutate()</code></strong> 函數將 <strong><code>ptime</code></strong> 欄位轉換為月份
-<strong><code>m</code></strong>，然後使用 <strong><code>count()</code></strong> 函數計算每個月份出現的次數。接著使用
-<strong><code>ggplot()</code></strong> 函數初始化一個 <strong><code>ggplot</code></strong> 對象，指定 <strong><code>aes()</code></strong> 函數的
-<strong><code>x</code></strong> 軸為月份 <strong><code>m</code></strong>，<strong><code>y</code></strong> 軸為出現次數 <strong><code>n</code></strong>，然後使用
-<strong><code>geom_col()</code></strong>
-函數繪製直方圖。這樣可以很直觀地看到每個月份資料的出現次數，進而觀察到逐年逐月的變化趨勢。如果需要更詳細的觀察，可以將資料劃分為更小的時間單位，例如週，然後使用類似的方法繪製直方圖。</p>
+<div id="freq-by-month" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Freq by month<a href="timeline.html#freq-by-month" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>如果想要詳細觀察逐年逐月的變化，使用密度圖可能不夠直觀，此時可以考慮使用直方圖來呈現資料。直方圖可以將資料劃分為若干個等寬的區間，並計算每個區間內資料的頻率，然後將這些頻率顯示為長方形柱，以反映資料的分佈情況。對於時間序列資料，我們可以將其劃分為月、週等時間單位，然後計算每個時間單位內資料的出現次數，再使用 <strong><code>ggplot2</code></strong> 中的 <strong><code>geom_col()</code></strong> 函數繪製直方圖。</p>
+<p>以上程式碼中，我們使用 <strong><code>mutate()</code></strong> 函數將 <strong><code>ptime</code></strong> 欄位轉換為月份 <strong><code>m</code></strong>，然後使用 <strong><code>count()</code></strong> 函數計算每個月份出現的次數。接著使用 <strong><code>ggplot()</code></strong> 函數初始化一個 <strong><code>ggplot</code></strong> 對象，指定 <strong><code>aes()</code></strong> 函數的 <strong><code>x</code></strong> 軸為月份 <strong><code>m</code></strong>，<strong><code>y</code></strong> 軸為出現次數 <strong><code>n</code></strong>，然後使用 <strong><code>geom_col()</code></strong> 函數繪製直方圖。這樣可以很直觀地看到每個月份資料的出現次數，進而觀察到逐年逐月的變化趨勢。如果需要更詳細的觀察，可以將資料劃分為更小的時間單位，例如週，然後使用類似的方法繪製直方圖。</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="timeline.html#cb434-1" tabindex="-1"></a>?lubridate</span>
 <span id="cb434-2"><a href="timeline.html#cb434-2" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
 <span id="cb434-3"><a href="timeline.html#cb434-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">month</span>(ptime)) <span class="sc">%&gt;%</span> </span>
@@ -874,17 +851,11 @@ plot）。密度圖顯示了一個連續變量的概率密度函數的近似值�
 <span id="cb434-6"><a href="timeline.html#cb434-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="freq-by-date-good" class="section level2 hasAnchor" number="9.4">
-<h2><span class="header-section-number">9.4</span> Freq-by-date (good)<a href="timeline.html#freq-by-date-good" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="freq-by-date-good" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Freq-by-date (good)<a href="timeline.html#freq-by-date-good" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在處理時間序列資料時，我們常常需要將資料劃分為不同的時間單位，例如月、週、日等，以便進行更精細的分析和視覺化。然而，如果只是單純地提取出時間序列資料中的某一個時間單位，例如月份，就會失去時間軸在年的特性，因此需要採取一些方法來保留日期（如年）的特性。</p>
-<p>以上程式碼中，我們使用 <strong><code>filter()</code></strong> 函數選取了時間範圍為 2019 年 3 月
-18 日到 4 月 1 日的資料，然後使用 <strong><code>floor_date()</code></strong>
-函數將每個時間點取整為當天的起始時間，以保留日期（如年）的特性。這樣可以確保同一天的資料都被歸到同一個時間單位中，進而保留時間軸在年的特性。接著使用
-<strong><code>count()</code></strong> 函數計算每個時間單位內資料的出現次數，再使用
-<strong><code>ggplot()</code></strong> 函數和 <strong><code>geom_col()</code></strong>
-函數繪製直方圖，可以看到在時間軸上的年份特性被保留了下來。</p>
-<p>總之，當我們需要從時間序列資料中提取某一個時間單位時，應該採用能夠保留日期（如年）特性的方法，例如使用
-<strong><code>floor_date()</code></strong> 函數，以便進行更加精細的分析和視覺化。</p>
+<p>以上程式碼中，我們使用 <strong><code>filter()</code></strong> 函數選取了時間範圍為 2019 年 3 月 18 日到 4 月 1 日的資料，然後使用 <strong><code>floor_date()</code></strong> 函數將每個時間點取整為當天的起始時間，以保留日期（如年）的特性。這樣可以確保同一天的資料都被歸到同一個時間單位中，進而保留時間軸在年的特性。接著使用 <strong><code>count()</code></strong> 函數計算每個時間單位內資料的出現次數，再使用 <strong><code>ggplot()</code></strong> 函數和 <strong><code>geom_col()</code></strong> 函數繪製直方圖，可以看到在時間軸上的年份特性被保留了下來。</p>
+<p>總之，當我們需要從時間序列資料中提取某一個時間單位時，應該採用能夠保留日期（如年）特性的方法，例如使用 <strong><code>floor_date()</code></strong> 函數，以便進行更加精細的分析和視覺化。</p>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="timeline.html#cb435-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
 <span id="cb435-2"><a href="timeline.html#cb435-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-03-18&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_date</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb435-3"><a href="timeline.html#cb435-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">floor_date</span>(ptime, <span class="at">unit =</span> <span class="st">&quot;day&quot;</span>)) <span class="sc">%&gt;%</span> </span>
@@ -893,23 +864,10 @@ plot）。密度圖顯示了一個連續變量的概率密度函數的近似值�
 <span id="cb435-6"><a href="timeline.html#cb435-6" tabindex="-1"></a>    <span class="fu">geom_col</span>()</span></code></pre></div>
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="freq-by-hour" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Freq-by-hour<a href="timeline.html#freq-by-hour" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>透過觀察資料在週末和週間的變化，可以幫助我們了解不同時間段的資料分佈情況。以下是一個範例程式碼，可以根據每天的時間點和文章數來觀察資料在週末和週間的變化。相較於將資料分為週間和週末，這個範例程式碼使用
-X 軸作為 24 小時的時間點，而 Y
-軸為不同日期的文章量，使用分組的方式，針對不同日期繪製折線圖，最後使用
-<strong><code>facet_wrap()</code></strong> 函數將資料分成週末和週間兩個子圖來進行比較。</p>
-<p>首先，我們使用 <strong><code>filter()</code></strong> 函數選取時間範圍為 2019 年 3 月 25 日到 4
-月 1 日的資料。接著，使用 <strong><code>floor_date()</code></strong>
-函數將每個時間點取整為當天的起始時間，以便進行統計。然後，使用
-<strong><code>hour()</code></strong> 函數取出每個時間點的小時數，以及使用 <strong><code>count()</code></strong>
-函數計算每個時間點和日期的文章數。接著，使用 <strong><code>wday()</code></strong>
-函數取出每個日期的星期幾，並使用 <strong><code>ifelse()</code></strong>
-函數將週末和週間的日期標記為不同的類別。最後，使用 <strong><code>ggplot()</code></strong>
-函數初始化一個 <strong><code>ggplot</code></strong> 對象，指定 <strong><code>aes()</code></strong> 函數的 <strong><code>x</code></strong>
-軸為小時數 <strong><code>h</code></strong>，<strong><code>y</code></strong> 軸為文章數 <strong><code>n</code></strong>，以及日期 <strong><code>d</code></strong> 的類別
-<strong><code>color</code></strong>。然後，使用 <strong><code>geom_line()</code></strong> 函數繪製折線圖，並使用
-<strong><code>facet_wrap()</code></strong> 函數將資料分為週末和週間兩個子圖。</p>
+<div id="freq-by-hour" class="section level3 hasAnchor" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Freq-by-hour<a href="timeline.html#freq-by-hour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>透過觀察資料在週末和週間的變化，可以幫助我們了解不同時間段的資料分佈情況。以下是一個範例程式碼，可以根據每天的時間點和文章數來觀察資料在週末和週間的變化。相較於將資料分為週間和週末，這個範例程式碼使用 X 軸作為 24 小時的時間點，而 Y 軸為不同日期的文章量，使用分組的方式，針對不同日期繪製折線圖，最後使用 <strong><code>facet_wrap()</code></strong> 函數將資料分成週末和週間兩個子圖來進行比較。</p>
+<p>首先，我們使用 <strong><code>filter()</code></strong> 函數選取時間範圍為 2019 年 3 月 25 日到 4 月 1 日的資料。接著，使用 <strong><code>floor_date()</code></strong> 函數將每個時間點取整為當天的起始時間，以便進行統計。然後，使用 <strong><code>hour()</code></strong> 函數取出每個時間點的小時數，以及使用 <strong><code>count()</code></strong> 函數計算每個時間點和日期的文章數。接著，使用 <strong><code>wday()</code></strong> 函數取出每個日期的星期幾，並使用 <strong><code>ifelse()</code></strong> 函數將週末和週間的日期標記為不同的類別。最後，使用 <strong><code>ggplot()</code></strong> 函數初始化一個 <strong><code>ggplot</code></strong> 對象，指定 <strong><code>aes()</code></strong> 函數的 <strong><code>x</code></strong> 軸為小時數 <strong><code>h</code></strong>，<strong><code>y</code></strong> 軸為文章數 <strong><code>n</code></strong>，以及日期 <strong><code>d</code></strong> 的類別 <strong><code>color</code></strong>。然後，使用 <strong><code>geom_line()</code></strong> 函數繪製折線圖，並使用 <strong><code>facet_wrap()</code></strong> 函數將資料分為週末和週間兩個子圖。</p>
 <p>透過這樣的方式，我們可以很清楚地看到週末和週間的文章量變化趨勢，從而對資料進行更深入的分析和探索。</p>
 <div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="timeline.html#cb436-1" tabindex="-1"></a>clean <span class="sc">%&gt;%</span></span>
 <span id="cb436-2"><a href="timeline.html#cb436-2" tabindex="-1"></a>    <span class="fu">filter</span>(ptime <span class="sc">&gt;=</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-03-25&quot;</span>) <span class="sc">&amp;</span> ptime <span class="sc">&lt;</span> <span class="fu">as_datetime</span>(<span class="st">&quot;2019-04-01&quot;</span>)) <span class="sc">%&gt;%</span></span>
@@ -924,6 +882,7 @@ X 軸作為 24 小時的時間點，而 Y
 <p><img src="R25_tidy_temoral_features_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="timeline.html#cb437-1" tabindex="-1"></a>?ifelse</span></code></pre></div>
 
+</div>
 </div>
 </div>
             </section>

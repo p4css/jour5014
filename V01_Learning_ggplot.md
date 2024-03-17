@@ -4,13 +4,11 @@
 
 
 
-**訣竅：**可在一開始便透過`knitr::opts_chunk$set(echo = TRUE, fig.width = 2, fig.asp = 0.4)`來一次設定所有圖片。`fig.width = 8`與`fig.height = 6` 是以英吋（inches）為單位，或用`fig.dim = c(8, 6)`一次設定長寬[^v01_learning_ggplot-1]。`echo = TRUE`是設定knit出輸出格式（如html）時，也要包含程式碼。如果`echo = FALSE`的話，就只會輸出文字和圖形。
+**小訣竅：**可在一開始便透過`knitr::opts_chunk$set(echo = TRUE, fig.width = 2, fig.asp = 0.4)`來一次設定所有圖片。`fig.width = 8`與`fig.height = 6` 是以英吋（inches）為單位，或用`fig.dim = c(8, 6)`一次設定長寬[^v01_learning_ggplot-1]。`echo = TRUE`是設定knit出輸出格式（如html）時，也要包含程式碼。如果`echo = FALSE`的話，就只會輸出文字和圖形。
 
 [^v01_learning_ggplot-1]: 參考資料：[5.4 Control the size of plots/images \| R Markdown Cookbook (bookdown.org)](https://bookdown.org/yihui/rmarkdown-cookbook/figure-size.html)
 
-## 繪圖基礎：折線圖
-
-### 繪圖三要素
+## Essentials of ggplot
 
 用ggplot來繪製圖形有三個基本函式`ggplot()` + `aes()` + `geom_圖表類型`。
 
@@ -20,7 +18,7 @@
 
 ![ggplot-cheat-sheet](images/paste-E7629FF5.png)
 
-#### `ggplot()` 會秀出預備要繪製的繪圖區
+### (1) `ggplot()` 秀出預備要繪製的繪圖區
 
 
 ```r
@@ -30,7 +28,9 @@ tibble(a=1:5, b=5:1) %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" />
 
-#### **指定X／Y軸與群組因子`aes()`**：`aes()`會在繪圖區上繪製X與Y軸
+### **(2) `aes()` 指定X／Y軸與群組因子**
+
+`aes()`會在繪圖區上繪製X與Y軸
 
 
 ```r
@@ -41,9 +41,9 @@ tibble(a=1:5, b=5:1) %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" />
 
-#### **指定要繪製的圖表類型**。
+### **(3) `geom_???()` 指定要繪製的圖表類型**。
 
-例如折線圖為為`geom_line()`、X/Y散佈圖為`geom_point()`、長條圖我多會使用`geom_col()`。
+例如折線圖為為`geom_line()`、X/Y散佈圖為`geom_point()`、長條圖我多會使用`geom_col()`。ggplot繪圖種類除了可以參照前面的[ggplot cheat sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf)之外，可以詢問ChatGPT有哪些常見的類別，甚至可以請他舉例給你測試該繪圖方法。
 
 
 ```r
@@ -68,13 +68,17 @@ tibble(a=1:5, b=5:1) %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" />
 
+注意：ggplot是以變數為基礎的視覺化套件，也就是說，當準備好dataframe後，就可以在ggplot中指定要用哪些變數來繪圖。也因此，務必把dataframe整理為tidy型態，也就是長表格（long-form）的型態。整理完資料後，我會習慣地用`names(plot)`或`glimpse(plot)`來看一下該資料所有的變項，好可以在下一階段的繪圖做參考。
+
 ## NYT: Inequality
 
-[Teach About Inequality With These 28 New York Times Graphs - The New York Times (nytimes.com)](https://www.nytimes.com/2021/05/11/learning/lesson-plans/teach-about-inequality-with-these-28-new-york-times-graphs.html)
+以下將以紐時的這個[Teach About Inequality With These 28 New York Times Graphs](https://www.nytimes.com/2021/05/11/learning/lesson-plans/teach-about-inequality-with-these-28-new-york-times-graphs.html) 案例來做繪圖教學。該教學引用了[Opinion \| America Will Struggle After Coronavirus. These Charts Show Why.](https://www.nytimes.com/interactive/2020/04/10/opinion/coronavirus-us-economy-inequality.html)這篇新聞中的圖表，我們拿來做範例的這張圖，主要是在說財富趨勢對年輕人而言尤其艱難。35歲以下美國人的凈資產中位數 - 他們平均比年長的美國人差得多 - 比2004年35歲以下美國人的凈資產低40%。相比之下，65歲以上美國人的凈資產在同一時期增長了9%。簡而言之，嬰兒潮一代比他們的前輩更富有，而千禧一代和X世代比他們的前輩更窮；或者說，年輕人拿自己和10年前的年輕人相比，現在的年輕人更窮；而現在的老年人拿自己和10年前的老年人比，現在的老年人更富有。
 
-ggplot是以變數為基礎的視覺化套件，也就是說，當準備好dataframe後，就可以在ggplot中指定要用哪些變數來繪圖。也因此，務必把dataframe整理為tidy型態，也就是長表格（long-form）的型態。整理完資料後，我會習慣地用`names(plot)`或`glimpse(plot)`來看一下該資料所有的變項，好可以在下一階段的繪圖做參考。
+### (1) Loading data
 
-### Visualizing
+仔細觀察一下資料，你會怎樣描述這個資料？
+
+這個Dataframe包含三個變數（Category, year, Net_Worth），共66個觀測值。變數「Category」描述的是年齡範圍，包含六個類別（Level）。變數「year」代表年份，從1989年到2019年，以三年為一個週期觀察，共有11個Levels。變數「Net_Worth」則表示在該年齡範圍內的淨資產。從資料可以觀察到，在不同的時間點，不同年齡範圍的人群的財富狀況看似有明顯差異。例如，比較1989年和2019年，45-54歲的年齡組在這段期間內的淨值似乎較35-44歲組要高，這可能反映了隨著年齡增長，個人或家庭的財富累積增加的趨勢。
 
 
 ```r
@@ -97,22 +101,46 @@ NW <- read_csv("data/interactive_bulletin_charts_agecl_median.csv") %>%
 ```
 
 ```r
-NW %>% glimpse()
+NW %>% head(12)
 ```
 
 ```
-## Rows: 66
-## Columns: 3
-## $ Category  <chr> "Less than 35", "35-44", "45-54", "55-64", "65-74", "75 or o…
-## $ year      <dbl> 1989, 1989, 1989, 1989, 1989, 1989, 1992, 1992, 1992, 1992, …
-## $ Net_Worth <dbl> 16.17019, 112.47530, 195.11630, 195.25554, 154.34277, 144.29…
+## # A tibble: 12 × 3
+##    Category      year Net_Worth
+##    <chr>        <dbl>     <dbl>
+##  1 Less than 35  1989      16.2
+##  2 35-44         1989     112. 
+##  3 45-54         1989     195. 
+##  4 55-64         1989     195. 
+##  5 65-74         1989     154. 
+##  6 75 or older   1989     144. 
+##  7 Less than 35  1992      16.6
+##  8 35-44         1992      79.9
+##  9 45-54         1992     140. 
+## 10 55-64         1992     203. 
+## 11 65-74         1992     176. 
+## 12 75 or older   1992     155.
 ```
+
+#### (1.1) `group_by()`的概念
+
+在提供的程式碼中，`group_by(Category)`是一個關鍵步驟，它影響了數據處理的方式，尤其是在隨後的操作中。以下是有和沒有`group_by(Category)`時的主要差異：
+
+-   有`group_by(Category)`：當在程式碼中使用`group_by(Category)`時，這意味著接下來的操作將在每個`Category`類別的子集上單獨進行。這對於需要按類別分析或操作數據時非常有用。在此程式碼中，`arrange(year)`將會在每個`Category`內部對`year`進行排序。這意味著每個類別內的年份會從最小到最大排序，但這種排序是獨立於其他類別的。
+
+-   沒有`group_by(Category)`：如果省略`group_by(Category)`，則後續的操作將考慮所有的數據作為一個整體來進行。
+
+    省略`group_by(Category)`後，`arrange(year)`會對整個數據集按`year`進行全局排序，而不會考慮`Category`的界限。由於`year`是一個類別變項，出現在多個`Category`組中，因此，會有多個相同`year`的列排在一起。
+
+### (2) Visualizing
 
 這是預期視覺化的結果。
 
 ![](images/paste-B46B3CD7.png)
 
-先將`year`和`Net_worth`分別繪製在X與Y軸上，並用`geom_line()`繪製為折現圖。結果圖表中呈現鋸齒狀的折線，看似有問題，但其實是合理的。因為`year`是一個離散變數，而我們希望每個年齡層一條線的話，那就要照年齡層來分組。也因此，每一年都有有每個年齡層的資料，當我們把「年」作為X軸時，自然同一年就會有數筆不同年齡層的資料，因此才會是鋸齒狀的。
+#### (2.1) Plot without group
+
+先將`year`和`Net_worth`分別繪製在X與Y軸上，並用`geom_line()`繪製為折線圖。結果圖表中呈現鋸齒狀的折線，看似有問題，但其實是合理的。因為`year`是一個離散變數，而我們希望每個年齡層一條線的話，那就要照年齡層來分組。也因此，每一年都有有每個年齡層的資料，當我們把「年」作為X軸時，自然同一年就會有數筆不同年齡層的資料，因此才會是鋸齒狀的。
 
 
 ```r
@@ -137,7 +165,7 @@ NW %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" />
 
-### Grouping
+#### (2.2) Grouping
 
 上圖是我們把多個年齡層的逐年資料畫在同一條折線上，所以會呈現鋸齒狀折現的狀況。但這些年齡層並非在同一條線上呀？因此，我們要根據`Category`這個變數來做分組。
 
@@ -165,11 +193,13 @@ NW %>%
 
 用color、fill或group來做分組？
 
-:   `geom_line()`的色彩是在**線**，而不是在**面**上。如果色彩是在點（如`geom_point()`）或線（`geom_line()`）上，就是用`color`來指定顏色。
+:   在使用`geom_line()`函數時，顏色的設定是針對線條本身，而非填充面積。當我們希望指定點（透過`geom_point()`）或線條（使用`geom_line()`）的顏色時，我們會使用`color`參數來定義顏色。
 
-    但如果是如類似下面的例子，用`geom_area()`來視覺化的話，因為顏色填的是**面**，所以要用`fill=Category`。以下範例甚至同時指定`color=Category, fill=Category`。但折線圖如果要用`geom_area()`來視覺化的話，最好要上顏色的不要超過二個，不然就會像底下這個例子一樣，即使設定`alpha=0.2`的半透明，仍然會看不懂哪些顏色疊在一起。
+```         
+相對地，當使用`geom_area()`函數進行視覺化時，由於它涉及的是面積的填充，因此我們應該使用`fill`參數來指定填充色。在某些情況下，我們可能會同時使用`color=Category`和`fill=Category`來對`geom_area()`進行設定，這樣做能夠同時定義邊線顏色和填充顏色。然而，當利用`geom_area()`來展示折線圖時，建議限制使用的顏色種類不超過兩種，以避免顏色層疊導致的視覺混淆，即便是設定了`alpha=0.2`以降低透明度。
 
-    `geom_area()`預設應該是累積分佈圖（也就是不同的群組會在Y軸方向疊加），如果希望觀察兩個分布的差別，而不是希望看見整體趨勢的話，那要增加`position="dodge"`的參數，並把`alpha`（半透明）設定為1以下的數值。
+`geom_area()`函數默認展示的是累積分佈圖，即不同群組的數值會在Y軸方向上疊加。若目的是比較兩個群組之間的差異，而非觀察整體趨勢，則可以通過添加`position="dodge"`參數來調整分佈方式，並將`alpha`設定為小於1的值以增加圖形的透明度，從而更清晰地分辨不同群組之間的差異。
+```
 
 
 ```r
@@ -182,7 +212,7 @@ NW %>%
 
 ## Adjusting Chart
 
-### 點線型態
+### Type of Points and Lines
 
 下面的例子同時用了`geom_line()`和`geom_point()`，且分別設定了線寬（`size=1`）、點的大小(`size=2`)，折線型態（`linetype="dashed"`）、半透明程度（`alpha`）。
 
@@ -227,7 +257,7 @@ gather(economics, variable, value, -date) %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" />
 
-### 標題、標籤與圖說
+### Title, Labels and Legends
 
 Titles, labels, and legend **設定標題與X／Y軸標題（法一）**：以下設定了圖表的圖表標題、和X軸與Y軸的軸標題（`xlab`與`ylab`）。
 
@@ -306,7 +336,7 @@ NW %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" />
 
-### 字體樣式
+### Font
 
 調整字型會建議都從`theme()`來做調整，所有圖面上看得到的字都有相對應的變數可以調整字型。例如以下的例子中，把標題的字型大小調整為14粗體、X與Y軸的字型則調整了向右對齊、10粗斜體、顏色為dimgrey。
 
@@ -331,7 +361,7 @@ NW %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;" />
 
-### 圖表主題色調
+### Color Themes
 
 ggplot也有其圖表主題色調。之前範例的灰色圖表背景就是預設的主題，ggplot中還有好幾個預設圖表主題可以選，例如`theme_minimal()`或`theme_tw()`等等。
 
@@ -348,7 +378,7 @@ NW %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-20-1.png" width="576" style="display: block; margin: auto;" />
 
-### 預設主題
+### Set-up Default Theme
 
 如果希望所有的圖表都有一致的顏色和排版的調性，可以在一開始編輯Rmd的時候就設計好一套`theme()`並指給一個變數（例如以下的`th`）。
 
@@ -375,7 +405,7 @@ NW %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-21-1.png" width="576" style="display: block; margin: auto;" />
 
-### 顯示中文字體
+### Show Chinese Text
 
 Python和R這些程式語言的預設視覺化套件都沒辦法顯示中文，所以如果要顯示中文的話，就要指定圖表標題、X、Y軸標籤、圖說和各個部件的字型。因為我在Mac上繪圖，所以我將字型指定為**Heiti TC Light**。如果想知道自己的電腦上有什麼可以用，可以到電腦的字體簿上查找中文字體名稱，或者上網google「ggplot 中文字型選擇」。
 
@@ -449,7 +479,7 @@ county %>%
 
 <img src="V01_Learning_ggplot_files/figure-html/unnamed-chunk-23-1.png" width="576" style="display: block; margin: auto;" />
 
-### X/Y軸方向
+### X/Y axis
 
 調整圖表方向
 

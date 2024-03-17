@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-10" />
+<meta name="date" content="2024-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -338,11 +338,15 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#char-to-timestamp"><i class="fa fa-check"></i><b>9.1</b> char-to-timestamp</a></li>
-<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2</b> Density plot along time</a></li>
-<li class="chapter" data-level="9.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.3</b> Freq by month</a></li>
-<li class="chapter" data-level="9.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.4</b> Freq-by-date (good)</a></li>
-<li class="chapter" data-level="9.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.5</b> Freq-by-hour</a></li>
+<li class="chapter" data-level="9.1" data-path="timeline.html"><a href="timeline.html#time-object"><i class="fa fa-check"></i><b>9.1</b> Time object</a></li>
+<li class="chapter" data-level="9.2" data-path="timeline.html"><a href="timeline.html#example-processing-time-object-in-social-opinions"><i class="fa fa-check"></i><b>9.2</b> Example: Processing time object in social opinions</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="timeline.html"><a href="timeline.html#char-to-time"><i class="fa fa-check"></i><b>9.2.1</b> Char-to-Time</a></li>
+<li class="chapter" data-level="9.2.2" data-path="timeline.html"><a href="timeline.html#density-plot-along-time"><i class="fa fa-check"></i><b>9.2.2</b> Density plot along time</a></li>
+<li class="chapter" data-level="9.2.3" data-path="timeline.html"><a href="timeline.html#freq-by-month"><i class="fa fa-check"></i><b>9.2.3</b> Freq by month</a></li>
+<li class="chapter" data-level="9.2.4" data-path="timeline.html"><a href="timeline.html#freq-by-date-good"><i class="fa fa-check"></i><b>9.2.4</b> Freq-by-date (good)</a></li>
+<li class="chapter" data-level="9.2.5" data-path="timeline.html"><a href="timeline.html#freq-by-hour"><i class="fa fa-check"></i><b>9.2.5</b> Freq-by-hour</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="na.html"><a href="na.html"><i class="fa fa-check"></i><b>10</b> NA Processing</a>
 <ul>
@@ -555,25 +559,27 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="22" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>22</b> ggplot</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#繪圖基礎折線圖"><i class="fa fa-check"></i><b>22.1</b> 繪圖基礎：折線圖</a>
+<li class="chapter" data-level="22.1" data-path="ggplot.html"><a href="ggplot.html#essentials-of-ggplot"><i class="fa fa-check"></i><b>22.1</b> Essentials of ggplot</a>
 <ul>
-<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#繪圖三要素"><i class="fa fa-check"></i><b>22.1.1</b> 繪圖三要素</a></li>
+<li class="chapter" data-level="22.1.1" data-path="ggplot.html"><a href="ggplot.html#ggplot-秀出預備要繪製的繪圖區"><i class="fa fa-check"></i><b>22.1.1</b> (1) <code>ggplot()</code> 秀出預備要繪製的繪圖區</a></li>
+<li class="chapter" data-level="22.1.2" data-path="ggplot.html"><a href="ggplot.html#aes-指定xy軸與群組因子"><i class="fa fa-check"></i><b>22.1.2</b> <strong>(2) <code>aes()</code> 指定X／Y軸與群組因子</strong></a></li>
+<li class="chapter" data-level="22.1.3" data-path="ggplot.html"><a href="ggplot.html#geom_-指定要繪製的圖表類型"><i class="fa fa-check"></i><b>22.1.3</b> <strong>(3) <code>geom_???()</code> 指定要繪製的圖表類型</strong>。</a></li>
 </ul></li>
 <li class="chapter" data-level="22.2" data-path="ggplot.html"><a href="ggplot.html#nyt-inequality"><i class="fa fa-check"></i><b>22.2</b> NYT: Inequality</a>
 <ul>
-<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.1</b> Visualizing</a></li>
-<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#grouping"><i class="fa fa-check"></i><b>22.2.2</b> Grouping</a></li>
+<li class="chapter" data-level="22.2.1" data-path="ggplot.html"><a href="ggplot.html#loading-data-1"><i class="fa fa-check"></i><b>22.2.1</b> (1) Loading data</a></li>
+<li class="chapter" data-level="22.2.2" data-path="ggplot.html"><a href="ggplot.html#visualizing"><i class="fa fa-check"></i><b>22.2.2</b> (2) Visualizing</a></li>
 </ul></li>
 <li class="chapter" data-level="22.3" data-path="ggplot.html"><a href="ggplot.html#adjusting-chart"><i class="fa fa-check"></i><b>22.3</b> Adjusting Chart</a>
 <ul>
-<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#點線型態"><i class="fa fa-check"></i><b>22.3.1</b> 點線型態</a></li>
+<li class="chapter" data-level="22.3.1" data-path="ggplot.html"><a href="ggplot.html#type-of-points-and-lines"><i class="fa fa-check"></i><b>22.3.1</b> Type of Points and Lines</a></li>
 <li class="chapter" data-level="22.3.2" data-path="ggplot.html"><a href="ggplot.html#line-types"><i class="fa fa-check"></i><b>22.3.2</b> Line Types</a></li>
-<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#標題標籤與圖說"><i class="fa fa-check"></i><b>22.3.3</b> 標題、標籤與圖說</a></li>
-<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#字體樣式"><i class="fa fa-check"></i><b>22.3.4</b> 字體樣式</a></li>
-<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#圖表主題色調"><i class="fa fa-check"></i><b>22.3.5</b> 圖表主題色調</a></li>
-<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#預設主題"><i class="fa fa-check"></i><b>22.3.6</b> 預設主題</a></li>
-<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#顯示中文字體"><i class="fa fa-check"></i><b>22.3.7</b> 顯示中文字體</a></li>
-<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy軸方向"><i class="fa fa-check"></i><b>22.3.8</b> X/Y軸方向</a></li>
+<li class="chapter" data-level="22.3.3" data-path="ggplot.html"><a href="ggplot.html#title-labels-and-legends"><i class="fa fa-check"></i><b>22.3.3</b> Title, Labels and Legends</a></li>
+<li class="chapter" data-level="22.3.4" data-path="ggplot.html"><a href="ggplot.html#font"><i class="fa fa-check"></i><b>22.3.4</b> Font</a></li>
+<li class="chapter" data-level="22.3.5" data-path="ggplot.html"><a href="ggplot.html#color-themes"><i class="fa fa-check"></i><b>22.3.5</b> Color Themes</a></li>
+<li class="chapter" data-level="22.3.6" data-path="ggplot.html"><a href="ggplot.html#set-up-default-theme"><i class="fa fa-check"></i><b>22.3.6</b> Set-up Default Theme</a></li>
+<li class="chapter" data-level="22.3.7" data-path="ggplot.html"><a href="ggplot.html#show-chinese-text"><i class="fa fa-check"></i><b>22.3.7</b> Show Chinese Text</a></li>
+<li class="chapter" data-level="22.3.8" data-path="ggplot.html"><a href="ggplot.html#xy-axis"><i class="fa fa-check"></i><b>22.3.8</b> X/Y axis</a></li>
 </ul></li>
 <li class="chapter" data-level="22.4" data-path="ggplot.html"><a href="ggplot.html#highlighting-storytelling"><i class="fa fa-check"></i><b>22.4</b> Highlighting &amp; Storytelling</a>
 <ul>
@@ -700,7 +706,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="29.5.1" data-path="geospatial.html"><a href="geospatial.html#loading-taiwan-map"><i class="fa fa-check"></i><b>29.5.1</b> Loading Taiwan map</a></li>
 <li class="chapter" data-level="29.5.2" data-path="geospatial.html"><a href="geospatial.html#building-grid"><i class="fa fa-check"></i><b>29.5.2</b> Building grid</a></li>
-<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-1"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
+<li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
 </ul></li>
@@ -790,7 +796,7 @@ div.csl-indent {
 <li><code>uempmed</code>：失業中位數持續時間，以週為單位，資料來源為 <a href="https://fred.stlouisfed.org/series/UEMPMED" class="uri">https://fred.stlouisfed.org/series/UEMPMED</a></li>
 <li><code>unemploy</code>：失業人數，以千人為單位，資料來源為 <a href="https://fred.stlouisfed.org/series/UNEMPLOY" class="uri">https://fred.stlouisfed.org/series/UNEMPLOY</a></li>
 </ul>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="time-trends.html#cb753-1" tabindex="-1"></a>economics <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="time-trends.html#cb754-1" tabindex="-1"></a>economics <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 6
 ##   date         pce    pop psavert uempmed unemploy
 ##   &lt;date&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
@@ -803,28 +809,28 @@ div.csl-indent {
 </div>
 <div id="setting-marking-area" class="section level3 hasAnchor" number="28.1.2">
 <h3><span class="header-section-number">28.1.2</span> Setting marking area<a href="time-trends.html#setting-marking-area" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="time-trends.html#cb755-1" tabindex="-1"></a>recess <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb755-2"><a href="time-trends.html#cb755-2" tabindex="-1"></a>  <span class="at">begin =</span> <span class="fu">c</span>(<span class="st">&quot;1969-12-01&quot;</span>,<span class="st">&quot;1973-11-01&quot;</span>,<span class="st">&quot;1980-01-01&quot;</span>,<span class="st">&quot;1981-07-01&quot;</span>,<span class="st">&quot;1990-07-01&quot;</span>,<span class="st">&quot;2001-03-01&quot;</span>, <span class="st">&quot;2007-12-01&quot;</span>), </span>
-<span id="cb755-3"><a href="time-trends.html#cb755-3" tabindex="-1"></a>  <span class="at">end =</span> <span class="fu">c</span>(<span class="st">&quot;1970-11-01&quot;</span>,<span class="st">&quot;1975-03-01&quot;</span>,<span class="st">&quot;1980-07-01&quot;</span>,<span class="st">&quot;1982-11-01&quot;</span>,<span class="st">&quot;1991-03-01&quot;</span>,<span class="st">&quot;2001-11-01&quot;</span>, <span class="st">&quot;2009-07-30&quot;</span>),</span>
-<span id="cb755-4"><a href="time-trends.html#cb755-4" tabindex="-1"></a>  <span class="at">event =</span> <span class="fu">c</span>(<span class="st">&quot;Fiscal &amp; Monetary</span><span class="sc">\n</span><span class="st">tightening&quot;</span>, <span class="st">&quot;1973 Oil crisis&quot;</span>, <span class="st">&quot;Double dip I&quot;</span>,<span class="st">&quot;Double dip II&quot;</span>, <span class="st">&quot;Oil price shock&quot;</span>, <span class="st">&quot;Dot-com bubble&quot;</span>, <span class="st">&quot;Sub-prime</span><span class="sc">\n</span><span class="st">mortgage crisis&quot;</span>),</span>
-<span id="cb755-5"><a href="time-trends.html#cb755-5" tabindex="-1"></a>  <span class="at">y =</span>  <span class="fu">c</span>(.<span class="dv">01415981</span>, <span class="fl">0.02067402</span>, <span class="fl">0.02951190</span>,  <span class="fl">0.03419201</span>,  <span class="fl">0.02767339</span>, <span class="fl">0.02159662</span>, <span class="fl">0.02520715</span>)</span>
-<span id="cb755-6"><a href="time-trends.html#cb755-6" tabindex="-1"></a>  )</span>
-<span id="cb755-7"><a href="time-trends.html#cb755-7" tabindex="-1"></a></span>
-<span id="cb755-8"><a href="time-trends.html#cb755-8" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb755-9"><a href="time-trends.html#cb755-9" tabindex="-1"></a>recess <span class="ot">&lt;-</span> recess <span class="sc">%&gt;%</span></span>
-<span id="cb755-10"><a href="time-trends.html#cb755-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">begin =</span> <span class="fu">ymd</span>(begin), </span>
-<span id="cb755-11"><a href="time-trends.html#cb755-11" tabindex="-1"></a>         <span class="at">end =</span> <span class="fu">ymd</span>(end))</span>
-<span id="cb755-12"><a href="time-trends.html#cb755-12" tabindex="-1"></a></span>
-<span id="cb755-13"><a href="time-trends.html#cb755-13" tabindex="-1"></a>economics <span class="sc">%&gt;%</span> </span>
-<span id="cb755-14"><a href="time-trends.html#cb755-14" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb755-15"><a href="time-trends.html#cb755-15" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> unemploy<span class="sc">/</span>pop) <span class="sc">+</span> </span>
-<span id="cb755-16"><a href="time-trends.html#cb755-16" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">c</span>(<span class="st">&quot;The percentage of unemployed Americans </span><span class="sc">\n</span><span class="st"> increases sharply during recessions&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb755-17"><a href="time-trends.html#cb755-17" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb755-18"><a href="time-trends.html#cb755-18" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> recess, </span>
-<span id="cb755-19"><a href="time-trends.html#cb755-19" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">xmin =</span> begin, <span class="at">xmax =</span> end, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="sc">+</span><span class="cn">Inf</span>, <span class="at">fill =</span> <span class="st">&quot;Recession&quot;</span>), </span>
-<span id="cb755-20"><a href="time-trends.html#cb755-20" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb755-21"><a href="time-trends.html#cb755-21" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> recess, <span class="fu">aes</span>(<span class="at">x =</span> end, <span class="at">y =</span> y, <span class="at">label=</span>event), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb755-22"><a href="time-trends.html#cb755-22" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">values=</span><span class="st">&quot;red&quot;</span>, <span class="at">label=</span><span class="st">&quot;Recessions&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="time-trends.html#cb756-1" tabindex="-1"></a>recess <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb756-2"><a href="time-trends.html#cb756-2" tabindex="-1"></a>  <span class="at">begin =</span> <span class="fu">c</span>(<span class="st">&quot;1969-12-01&quot;</span>,<span class="st">&quot;1973-11-01&quot;</span>,<span class="st">&quot;1980-01-01&quot;</span>,<span class="st">&quot;1981-07-01&quot;</span>,<span class="st">&quot;1990-07-01&quot;</span>,<span class="st">&quot;2001-03-01&quot;</span>, <span class="st">&quot;2007-12-01&quot;</span>), </span>
+<span id="cb756-3"><a href="time-trends.html#cb756-3" tabindex="-1"></a>  <span class="at">end =</span> <span class="fu">c</span>(<span class="st">&quot;1970-11-01&quot;</span>,<span class="st">&quot;1975-03-01&quot;</span>,<span class="st">&quot;1980-07-01&quot;</span>,<span class="st">&quot;1982-11-01&quot;</span>,<span class="st">&quot;1991-03-01&quot;</span>,<span class="st">&quot;2001-11-01&quot;</span>, <span class="st">&quot;2009-07-30&quot;</span>),</span>
+<span id="cb756-4"><a href="time-trends.html#cb756-4" tabindex="-1"></a>  <span class="at">event =</span> <span class="fu">c</span>(<span class="st">&quot;Fiscal &amp; Monetary</span><span class="sc">\n</span><span class="st">tightening&quot;</span>, <span class="st">&quot;1973 Oil crisis&quot;</span>, <span class="st">&quot;Double dip I&quot;</span>,<span class="st">&quot;Double dip II&quot;</span>, <span class="st">&quot;Oil price shock&quot;</span>, <span class="st">&quot;Dot-com bubble&quot;</span>, <span class="st">&quot;Sub-prime</span><span class="sc">\n</span><span class="st">mortgage crisis&quot;</span>),</span>
+<span id="cb756-5"><a href="time-trends.html#cb756-5" tabindex="-1"></a>  <span class="at">y =</span>  <span class="fu">c</span>(.<span class="dv">01415981</span>, <span class="fl">0.02067402</span>, <span class="fl">0.02951190</span>,  <span class="fl">0.03419201</span>,  <span class="fl">0.02767339</span>, <span class="fl">0.02159662</span>, <span class="fl">0.02520715</span>)</span>
+<span id="cb756-6"><a href="time-trends.html#cb756-6" tabindex="-1"></a>  )</span>
+<span id="cb756-7"><a href="time-trends.html#cb756-7" tabindex="-1"></a></span>
+<span id="cb756-8"><a href="time-trends.html#cb756-8" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb756-9"><a href="time-trends.html#cb756-9" tabindex="-1"></a>recess <span class="ot">&lt;-</span> recess <span class="sc">%&gt;%</span></span>
+<span id="cb756-10"><a href="time-trends.html#cb756-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">begin =</span> <span class="fu">ymd</span>(begin), </span>
+<span id="cb756-11"><a href="time-trends.html#cb756-11" tabindex="-1"></a>         <span class="at">end =</span> <span class="fu">ymd</span>(end))</span>
+<span id="cb756-12"><a href="time-trends.html#cb756-12" tabindex="-1"></a></span>
+<span id="cb756-13"><a href="time-trends.html#cb756-13" tabindex="-1"></a>economics <span class="sc">%&gt;%</span> </span>
+<span id="cb756-14"><a href="time-trends.html#cb756-14" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb756-15"><a href="time-trends.html#cb756-15" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> unemploy<span class="sc">/</span>pop) <span class="sc">+</span> </span>
+<span id="cb756-16"><a href="time-trends.html#cb756-16" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">c</span>(<span class="st">&quot;The percentage of unemployed Americans </span><span class="sc">\n</span><span class="st"> increases sharply during recessions&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb756-17"><a href="time-trends.html#cb756-17" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb756-18"><a href="time-trends.html#cb756-18" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> recess, </span>
+<span id="cb756-19"><a href="time-trends.html#cb756-19" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">xmin =</span> begin, <span class="at">xmax =</span> end, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="sc">+</span><span class="cn">Inf</span>, <span class="at">fill =</span> <span class="st">&quot;Recession&quot;</span>), </span>
+<span id="cb756-20"><a href="time-trends.html#cb756-20" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb756-21"><a href="time-trends.html#cb756-21" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> recess, <span class="fu">aes</span>(<span class="at">x =</span> end, <span class="at">y =</span> y, <span class="at">label=</span>event), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb756-22"><a href="time-trends.html#cb756-22" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">values=</span><span class="st">&quot;red&quot;</span>, <span class="at">label=</span><span class="st">&quot;Recessions&quot;</span>)</span></code></pre></div>
 <p><img src="V11_Time_and_Trends_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -833,21 +839,21 @@ div.csl-indent {
 <ul>
 <li>Smooth by <a href="http://rafalab.dfci.harvard.edu/dsbook/smoothing.html#bin-smoothing">bin smoothing</a></li>
 </ul>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="time-trends.html#cb756-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(economics,</span>
-<span id="cb756-2"><a href="time-trends.html#cb756-2" tabindex="-1"></a>            <span class="fu">ksmooth</span>(date, unemploy, <span class="at">kernel =</span> <span class="st">&quot;box&quot;</span>, <span class="at">bandwidth=</span><span class="dv">210</span>))</span>
-<span id="cb756-3"><a href="time-trends.html#cb756-3" tabindex="-1"></a></span>
-<span id="cb756-4"><a href="time-trends.html#cb756-4" tabindex="-1"></a>economics <span class="sc">%&gt;%</span></span>
-<span id="cb756-5"><a href="time-trends.html#cb756-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">smooth =</span> fit<span class="sc">$</span>y) <span class="sc">%&gt;%</span></span>
-<span id="cb756-6"><a href="time-trends.html#cb756-6" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(date, unemploy) <span class="sc">+</span> </span>
-<span id="cb756-7"><a href="time-trends.html#cb756-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb756-8"><a href="time-trends.html#cb756-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(date, smooth), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="time-trends.html#cb757-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(economics,</span>
+<span id="cb757-2"><a href="time-trends.html#cb757-2" tabindex="-1"></a>            <span class="fu">ksmooth</span>(date, unemploy, <span class="at">kernel =</span> <span class="st">&quot;box&quot;</span>, <span class="at">bandwidth=</span><span class="dv">210</span>))</span>
+<span id="cb757-3"><a href="time-trends.html#cb757-3" tabindex="-1"></a></span>
+<span id="cb757-4"><a href="time-trends.html#cb757-4" tabindex="-1"></a>economics <span class="sc">%&gt;%</span></span>
+<span id="cb757-5"><a href="time-trends.html#cb757-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">smooth =</span> fit<span class="sc">$</span>y) <span class="sc">%&gt;%</span></span>
+<span id="cb757-6"><a href="time-trends.html#cb757-6" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(date, unemploy) <span class="sc">+</span> </span>
+<span id="cb757-7"><a href="time-trends.html#cb757-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb757-8"><a href="time-trends.html#cb757-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(date, smooth), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="V11_Time_and_Trends_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="polls_2008" class="section level3 hasAnchor" number="28.2.1">
 <h3><span class="header-section-number">28.2.1</span> Polls_2008<a href="time-trends.html#polls_2008" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Second Example comes from <a href="http://rafalab.dfci.harvard.edu/dsbook/smoothing.html">Rafael’s online book</a></p>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="time-trends.html#cb757-1" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
-<span id="cb757-2"><a href="time-trends.html#cb757-2" tabindex="-1"></a>span <span class="ot">&lt;-</span> <span class="dv">7</span> </span>
-<span id="cb757-3"><a href="time-trends.html#cb757-3" tabindex="-1"></a>polls_2008</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="time-trends.html#cb758-1" tabindex="-1"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb758-2"><a href="time-trends.html#cb758-2" tabindex="-1"></a>span <span class="ot">&lt;-</span> <span class="dv">7</span> </span>
+<span id="cb758-3"><a href="time-trends.html#cb758-3" tabindex="-1"></a>polls_2008</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 131 × 2
 ##      day margin
 ##    &lt;dbl&gt;  &lt;dbl&gt;
@@ -862,14 +868,14 @@ div.csl-indent {
 ##  9  -145 0.0267
 ## 10  -144 0.0300
 ## # ℹ 121 more rows</code></pre>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="time-trends.html#cb759-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(polls_2008, </span>
-<span id="cb759-2"><a href="time-trends.html#cb759-2" tabindex="-1"></a>            <span class="fu">ksmooth</span>(day, margin, <span class="at">kernel =</span> <span class="st">&quot;box&quot;</span>, <span class="at">bandwidth =</span> span))</span>
-<span id="cb759-3"><a href="time-trends.html#cb759-3" tabindex="-1"></a></span>
-<span id="cb759-4"><a href="time-trends.html#cb759-4" tabindex="-1"></a>polls_2008 <span class="sc">%&gt;%</span> </span>
-<span id="cb759-5"><a href="time-trends.html#cb759-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">smooth =</span> fit<span class="sc">$</span>y) <span class="sc">%&gt;%</span></span>
-<span id="cb759-6"><a href="time-trends.html#cb759-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, margin)) <span class="sc">+</span></span>
-<span id="cb759-7"><a href="time-trends.html#cb759-7" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb759-8"><a href="time-trends.html#cb759-8" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(day, smooth), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="time-trends.html#cb760-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(polls_2008, </span>
+<span id="cb760-2"><a href="time-trends.html#cb760-2" tabindex="-1"></a>            <span class="fu">ksmooth</span>(day, margin, <span class="at">kernel =</span> <span class="st">&quot;box&quot;</span>, <span class="at">bandwidth =</span> span))</span>
+<span id="cb760-3"><a href="time-trends.html#cb760-3" tabindex="-1"></a></span>
+<span id="cb760-4"><a href="time-trends.html#cb760-4" tabindex="-1"></a>polls_2008 <span class="sc">%&gt;%</span> </span>
+<span id="cb760-5"><a href="time-trends.html#cb760-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">smooth =</span> fit<span class="sc">$</span>y) <span class="sc">%&gt;%</span></span>
+<span id="cb760-6"><a href="time-trends.html#cb760-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, margin)) <span class="sc">+</span></span>
+<span id="cb760-7"><a href="time-trends.html#cb760-7" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb760-8"><a href="time-trends.html#cb760-8" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(day, smooth), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="V11_Time_and_Trends_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
 
 </div>
