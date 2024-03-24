@@ -309,7 +309,7 @@ raw$retVal[["0001"]]
 
 ## Case 1: Air-Quality (well-formatted )
 
-前往 [https://data.gov.tw/dataset/40448](https://data.gov.tw/dataset/40448，點擊)對JSON 檔案按右鍵，然後複製連結，例如 "[https://data.epa.gov.tw/api/v2/aqx_p\_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"。](https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON%22。) (但是，連結地址，特別是 `api_key=9be7b239-557b-4c10-9775-78cadfc555e9`，每次都會更改。所以你必須要自己嘗試)。
+前往 [https://data.gov.tw/dataset/40448](https://data.gov.tw/dataset/40448，點擊)對JSON 檔案按右鍵，然後複製連結，例如 "[https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"。](https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON%22。) (但是，連結地址，特別是 `api_key=9be7b239-557b-4c10-9775-78cadfc555e9`，每次都會更改。所以你必須要自己嘗試)。
 
 
 ```r
@@ -384,7 +384,7 @@ glimpse(df)
 ### Combining all
 
 -   UVI Open data: <https://data.gov.tw/dataset/6076>
--   [https://data.epa.gov.tw/api/v2/uv_s\_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=publishtime desc&format=JSON](https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=publishtime%20desc&format=JSON)
+-   [https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=publishtime desc&format=JSON](https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=publishtime%20desc&format=JSON)
 
 #### Get from web api
 

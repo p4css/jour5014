@@ -50,12 +50,9 @@ raw %>% head
 
 ### 清理資料 {#moi_clean}
 
-我們之前在談資料的「觀察、統計、和二維表格」三種型態時，曾經談到統計型態和二維表格型態間的差異。當時所提到的「統計型態」，也就是每個變項欄恰好是我們所認知的單一變項（如每一個變項欄恰是人口統計變項的年齡、性別、教育程度、數量），會有助於進行統計分析，也就是tidy型態的資料。相較之下，上述的表格是把資料攤成二維的型態，每一個變項是某個年齡層的某種性別的某種婚姻狀況，包含了三個人口統計變項，是方便一般大眾讀的，但不是適合進行統計的tidy型態。
-這類的資料tidyverse的相關套件把它稱為tidy form。遵守tidy
-form形式的資料是，每一個欄恰好一個變項。例如在內政部開放資料「15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分」中，每個變數（年齡、婚姻狀況、教育程度、人口數等等）均各自為一個欄上的變項。
+我們之前在談資料的「觀察、統計、和二維表格」三種型態時，曾經談到統計型態和二維表格型態間的差異。當時所提到的「統計型態」，也就是每個變項欄恰好是我們所認知的單一變項（如每一個變項欄恰是人口統計變項的年齡、性別、教育程度、數量），會有助於進行統計分析，也就是tidy型態的資料。相較之下，上述的表格是把資料攤成二維的型態，每一個變項是某個年齡層的某種性別的某種婚姻狀況，包含了三個人口統計變項，是方便一般大眾讀的，但不是適合進行統計的tidy型態。 這類的資料tidyverse的相關套件把它稱為tidy form。遵守tidy form形式的資料是，每一個欄恰好一個變項。例如在內政部開放資料「15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分」中，每個變數（年齡、婚姻狀況、教育程度、人口數等等）均各自為一個欄上的變項。
 
--   [15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分 \|
-    政府資料開放平臺 (data.gov.tw)](https://data.gov.tw/dataset/32944)
+-   [15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分 \| 政府資料開放平臺 (data.gov.tw)](https://data.gov.tw/dataset/32944)
 
 接下來，我要把表格型態的資料轉為tidy型態資料。原本的資料是這樣的型態。
 
@@ -85,9 +82,7 @@ tidy_data <- raw %>%
 之後，我使用`tidyr::separate()`函式將`key`切成四個變項，分別為`married`、`ageLower`、`ageUpper`、`gender`。
 
 -   `separate()`有一個參數是`remove=T`（預設值），意思是說，當把`key`變項切割為四個變項後，預設把key變項給丟棄；但如果未來你還會用到`key`變項的話，你可以把`remove`改為`FALSE`，代表切割完後，還保留`key`變項。
--   `tidyr::separate()`：Given either regular expression or a vector of
-    character positions, separate() turns a single character column into
-    multiple columns.
+-   `tidyr::separate()`：Given either regular expression or a vector of character positions, separate() turns a single character column into multiple columns.
 
 此時我清理出來的資料大致如下：
 

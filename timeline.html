@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-17" />
+<meta name="date" content="2024-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -827,8 +827,16 @@ div.csl-indent {
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="timeline.html#cb431-1" tabindex="-1"></a>?strptime</span>
 <span id="cb431-2"><a href="timeline.html#cb431-2" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">strptime</span>(t, <span class="st">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span>)</span>
-<span id="cb431-3"><a href="timeline.html#cb431-3" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
-<pre class="output"><code>## function (length = 0L)</code></pre>
+<span id="cb431-3"><a href="timeline.html#cb431-3" tabindex="-1"></a>clean <span class="sc">%&gt;%</span> head <span class="co"># %&gt;% View</span></span></code></pre></div>
+<pre class="output"><code>## # A tibble: 6 × 7
+##   plink                  board pcontent poster ptitle ptime               ipaddr
+##   &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;dttm&gt;              &lt;chr&gt; 
+## 1 https://www.ptt.cc/bb… Hate… &quot;\n\n韓… loveb… Re: [… 2019-04-12 02:21:14 83.22…
+## 2 https://www.ptt.cc/bb… Hate… &quot;\n\n\n… ikr36… Re: [… 2019-04-12 02:13:45 114.4…
+## 3 https://www.ptt.cc/bb… Hate… &quot;\n\n正… sunye… Re: [… 2019-04-12 02:10:18 118.1…
+## 4 https://www.ptt.cc/bb… Hate… &quot;\n:\n\… rock7… Re: [… 2019-04-12 02:03:14 118.1…
+## 5 https://www.ptt.cc/bb… Hate… &quot;\n\n我… btm97… Re: [… 2019-04-12 02:01:12 101.1…
+## 6 https://www.ptt.cc/bb… Hate… &quot;\n\n\n… cblade [討論… 2019-04-12 01:55:06 180.2…</code></pre>
 </div>
 <div id="density-plot-along-time" class="section level3 hasAnchor" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> Density plot along time<a href="timeline.html#density-plot-along-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>

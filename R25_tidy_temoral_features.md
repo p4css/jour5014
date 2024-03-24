@@ -62,11 +62,19 @@ class(t)
 ```r
 ?strptime
 t1 <- strptime(t, "%Y-%m-%dT%H:%M:%SZ")
-raw %>% glimpse()
+clean %>% head # %>% View
 ```
 
 ```{.output}
-## function (length = 0L)
+## # A tibble: 6 × 7
+##   plink                  board pcontent poster ptitle ptime               ipaddr
+##   <chr>                  <chr> <chr>    <chr>  <chr>  <dttm>              <chr> 
+## 1 https://www.ptt.cc/bb… Hate… "\n\n韓… loveb… Re: [… 2019-04-12 02:21:14 83.22…
+## 2 https://www.ptt.cc/bb… Hate… "\n\n\n… ikr36… Re: [… 2019-04-12 02:13:45 114.4…
+## 3 https://www.ptt.cc/bb… Hate… "\n\n正… sunye… Re: [… 2019-04-12 02:10:18 118.1…
+## 4 https://www.ptt.cc/bb… Hate… "\n:\n\… rock7… Re: [… 2019-04-12 02:03:14 118.1…
+## 5 https://www.ptt.cc/bb… Hate… "\n\n我… btm97… Re: [… 2019-04-12 02:01:12 101.1…
+## 6 https://www.ptt.cc/bb… Hate… "\n\n\n… cblade [討論… 2019-04-12 01:55:06 180.2…
 ```
 
 ### Density plot along time

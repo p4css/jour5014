@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-17" />
+<meta name="date" content="2024-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -821,12 +821,9 @@ div.csl-indent {
 </div>
 <div id="moi_clean" class="section level3 hasAnchor" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> 清理資料<a href="joindata.html#moi_clean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>我們之前在談資料的「觀察、統計、和二維表格」三種型態時，曾經談到統計型態和二維表格型態間的差異。當時所提到的「統計型態」，也就是每個變項欄恰好是我們所認知的單一變項（如每一個變項欄恰是人口統計變項的年齡、性別、教育程度、數量），會有助於進行統計分析，也就是tidy型態的資料。相較之下，上述的表格是把資料攤成二維的型態，每一個變項是某個年齡層的某種性別的某種婚姻狀況，包含了三個人口統計變項，是方便一般大眾讀的，但不是適合進行統計的tidy型態。
-這類的資料tidyverse的相關套件把它稱為tidy form。遵守tidy
-form形式的資料是，每一個欄恰好一個變項。例如在內政部開放資料「15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分」中，每個變數（年齡、婚姻狀況、教育程度、人口數等等）均各自為一個欄上的變項。</p>
+<p>我們之前在談資料的「觀察、統計、和二維表格」三種型態時，曾經談到統計型態和二維表格型態間的差異。當時所提到的「統計型態」，也就是每個變項欄恰好是我們所認知的單一變項（如每一個變項欄恰是人口統計變項的年齡、性別、教育程度、數量），會有助於進行統計分析，也就是tidy型態的資料。相較之下，上述的表格是把資料攤成二維的型態，每一個變項是某個年齡層的某種性別的某種婚姻狀況，包含了三個人口統計變項，是方便一般大眾讀的，但不是適合進行統計的tidy型態。 這類的資料tidyverse的相關套件把它稱為tidy form。遵守tidy form形式的資料是，每一個欄恰好一個變項。例如在內政部開放資料「15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分」中，每個變數（年齡、婚姻狀況、教育程度、人口數等等）均各自為一個欄上的變項。</p>
 <ul>
-<li><a href="https://data.gov.tw/dataset/32944">15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分 |
-政府資料開放平臺 (data.gov.tw)</a></li>
+<li><a href="https://data.gov.tw/dataset/32944">15歲以上現住人口按性別、年齡、婚姻狀況及教育程度分 | 政府資料開放平臺 (data.gov.tw)</a></li>
 </ul>
 <p>接下來，我要把表格型態的資料轉為tidy型態資料。原本的資料是這樣的型態。</p>
 <p><img src="images/R04_fig1.png" /></p>
@@ -847,9 +844,7 @@ form形式的資料是，每一個欄恰好一個變項。例如在內政部開�
 <p>之後，我使用<code>tidyr::separate()</code>函式將<code>key</code>切成四個變項，分別為<code>married</code>、<code>ageLower</code>、<code>ageUpper</code>、<code>gender</code>。</p>
 <ul>
 <li><code>separate()</code>有一個參數是<code>remove=T</code>（預設值），意思是說，當把<code>key</code>變項切割為四個變項後，預設把key變項給丟棄；但如果未來你還會用到<code>key</code>變項的話，你可以把<code>remove</code>改為<code>FALSE</code>，代表切割完後，還保留<code>key</code>變項。</li>
-<li><code>tidyr::separate()</code>：Given either regular expression or a vector of
-character positions, separate() turns a single character column into
-multiple columns.</li>
+<li><code>tidyr::separate()</code>：Given either regular expression or a vector of character positions, separate() turns a single character column into multiple columns.</li>
 </ul>
 <p>此時我清理出來的資料大致如下：</p>
 <p><img src="images/%E6%88%AA%E5%9C%96%202023-03-29%20%E4%B8%8B%E5%8D%889.01.09.png" /></p>
