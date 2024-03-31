@@ -190,13 +190,23 @@ town_stat <- village_stat %>%
 
 
 ```r
+th <- 
+  theme(title = element_text(family="Heiti TC Light"),
+        text = element_text(family="Heiti TC Light"), 
+        axis.text.y = element_text(family="PingFang TC"),
+        axis.text.x = element_text(family="Heiti TC Light"),
+        legend.text = element_text(family="Heiti TC Light"),
+        plot.title = element_text(family="Heiti TC Light")
+        )
+
 town_stat %>%
     mutate(marriedPerc = marriedSum / legalPopulation) %>%
     mutate(womenPerc = womenSum / legalPopulation) %>%
     mutate(elderPerc = elderSum / legalPopulation) %>% 
     ggplot() +
-    aes(marriedPerc, elderPerc) + 
-    geom_point(alpha = 0.3)
+    aes(womenPerc, elderPerc) + 
+    geom_point(alpha = 0.3) +
+  geom_text(aes(label=site_id, vjust=1.3, size=4), family = "Heiti TC Light")  + th
 ```
 
 <img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-8-1.png" width="672" />

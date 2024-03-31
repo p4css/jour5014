@@ -241,10 +241,11 @@ Web API 和 JSON 之間的關係在於，Web API 通常會將回應資料以 JSO
 library(httr)
 library(jsonlite)
 
-raw <- GET("https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json") %>%
-    content("text") %>%
-    fromJSON()
-write_json(raw, "data/opendata_ubike_202304261243.json")
+url <- "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
+
+ubike.df <- fromJSON(content(GET(url),"text", encoding = "utf-8"))
+head(ubike.df) %>% select(1:6)
+# write_json(ubike.df, "data/opendata_ubike_202304261243.json")
 ```
 
 你可以讀取本書預先爬取好的json檔來觀察前述程式所爬回的json檔轉成R物件後的結果。

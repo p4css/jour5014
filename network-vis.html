@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-24" />
+<meta name="date" content="2024-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,6 +709,12 @@ div.csl-indent {
 <li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
+<li class="chapter" data-level="29.6" data-path="geospatial.html"><a href="geospatial.html#mapping-youbike-location"><i class="fa fa-check"></i><b>29.6</b> Mapping Youbike Location</a>
+<ul>
+<li class="chapter" data-level="29.6.1" data-path="geospatial.html"><a href="geospatial.html#creating-a-new-variable"><i class="fa fa-check"></i><b>29.6.1</b> Creating a new variable</a></li>
+<li class="chapter" data-level="29.6.2" data-path="geospatial.html"><a href="geospatial.html#mapping-with-sf"><i class="fa fa-check"></i><b>29.6.2</b> Mapping with sf</a></li>
+<li class="chapter" data-level="29.6.3" data-path="geospatial.html"><a href="geospatial.html#using-ggmap-deprecated"><i class="fa fa-check"></i><b>29.6.3</b> Using ggmap (Deprecated)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
 <ul>
@@ -784,116 +790,116 @@ div.csl-indent {
 <div id="network-vis" class="section level1 hasAnchor" number="30">
 <h1><span class="header-section-number">Chapter 30</span> NETWORK VIS<a href="network-vis.html#network-vis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>網絡視覺化其實已經有非常好的<a href="https://kateto.net/network-visualization">簡介和指南</a>。但在此補充一些常用的網絡視覺化參數</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="network-vis.html#cb809-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="network-vis.html#cb818-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code></pre></div>
 <div id="generating-networks" class="section level2 hasAnchor" number="30.1">
 <h2><span class="header-section-number">30.1</span> Generating networks<a href="network-vis.html#generating-networks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="random-network" class="section level3 hasAnchor" number="30.1.1">
 <h3><span class="header-section-number">30.1.1</span> Random network<a href="network-vis.html#random-network" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="network-vis.html#cb810-1" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(<span class="dv">500</span>, <span class="at">directed =</span> T)</span>
-<span id="cb810-2"><a href="network-vis.html#cb810-2" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb810-3"><a href="network-vis.html#cb810-3" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
-<span id="cb810-4"><a href="network-vis.html#cb810-4" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(g)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb810-5"><a href="network-vis.html#cb810-5" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="fu">reciprocity</span>(g)),</span>
-<span id="cb810-6"><a href="network-vis.html#cb810-6" tabindex="-1"></a>        <span class="fu">count_components</span>(g, <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>)</span>
-<span id="cb810-7"><a href="network-vis.html#cb810-7" tabindex="-1"></a>        )</span></code></pre></div>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="network-vis.html#cb811-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(g)</span>
-<span id="cb811-2"><a href="network-vis.html#cb811-2" tabindex="-1"></a><span class="co"># l &lt;- layout_with_kk(g)</span></span>
-<span id="cb811-3"><a href="network-vis.html#cb811-3" tabindex="-1"></a><span class="co"># l &lt;- layout_in_circle(g)</span></span>
-<span id="cb811-4"><a href="network-vis.html#cb811-4" tabindex="-1"></a></span>
-<span id="cb811-5"><a href="network-vis.html#cb811-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb811-6"><a href="network-vis.html#cb811-6" tabindex="-1"></a><span class="fu">plot</span>(g, </span>
-<span id="cb811-7"><a href="network-vis.html#cb811-7" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
-<span id="cb811-8"><a href="network-vis.html#cb811-8" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
-<span id="cb811-9"><a href="network-vis.html#cb811-9" tabindex="-1"></a>     <span class="co"># vertex.color = factor(V(g)$blocked),</span></span>
-<span id="cb811-10"><a href="network-vis.html#cb811-10" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
-<span id="cb811-11"><a href="network-vis.html#cb811-11" tabindex="-1"></a>     <span class="co"># vertex.size  = sqrt(V(g)$degree)*3,</span></span>
-<span id="cb811-12"><a href="network-vis.html#cb811-12" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
-<span id="cb811-13"><a href="network-vis.html#cb811-13" tabindex="-1"></a>     <span class="co"># vertex.label = V(g)$display,</span></span>
-<span id="cb811-14"><a href="network-vis.html#cb811-14" tabindex="-1"></a>     <span class="co"># vertex.label = str_sub(V(g)$name, 1, 10),</span></span>
-<span id="cb811-15"><a href="network-vis.html#cb811-15" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
-<span id="cb811-16"><a href="network-vis.html#cb811-16" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
-<span id="cb811-17"><a href="network-vis.html#cb811-17" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
-<span id="cb811-18"><a href="network-vis.html#cb811-18" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
-<span id="cb811-19"><a href="network-vis.html#cb811-19" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
-<span id="cb811-20"><a href="network-vis.html#cb811-20" tabindex="-1"></a>     <span class="co"># edge.width = sqrt(E(g)$weight),</span></span>
-<span id="cb811-21"><a href="network-vis.html#cb811-21" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$year,</span></span>
-<span id="cb811-22"><a href="network-vis.html#cb811-22" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$weight,</span></span>
-<span id="cb811-23"><a href="network-vis.html#cb811-23" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
-<span id="cb811-24"><a href="network-vis.html#cb811-24" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$color,</span></span>
-<span id="cb811-25"><a href="network-vis.html#cb811-25" tabindex="-1"></a>     <span class="co"># edge.label = E(g)$weight,</span></span>
-<span id="cb811-26"><a href="network-vis.html#cb811-26" tabindex="-1"></a>     <span class="co"># edge.label = E(g)$year,</span></span>
-<span id="cb811-27"><a href="network-vis.html#cb811-27" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
-<span id="cb811-28"><a href="network-vis.html#cb811-28" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb811-29"><a href="network-vis.html#cb811-29" tabindex="-1"></a>     )</span></code></pre></div>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="network-vis.html#cb819-1" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(<span class="dv">500</span>, <span class="at">directed =</span> T)</span>
+<span id="cb819-2"><a href="network-vis.html#cb819-2" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb819-3"><a href="network-vis.html#cb819-3" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb819-4"><a href="network-vis.html#cb819-4" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(g)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb819-5"><a href="network-vis.html#cb819-5" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="fu">reciprocity</span>(g)),</span>
+<span id="cb819-6"><a href="network-vis.html#cb819-6" tabindex="-1"></a>        <span class="fu">count_components</span>(g, <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>)</span>
+<span id="cb819-7"><a href="network-vis.html#cb819-7" tabindex="-1"></a>        )</span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="network-vis.html#cb820-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(g)</span>
+<span id="cb820-2"><a href="network-vis.html#cb820-2" tabindex="-1"></a><span class="co"># l &lt;- layout_with_kk(g)</span></span>
+<span id="cb820-3"><a href="network-vis.html#cb820-3" tabindex="-1"></a><span class="co"># l &lt;- layout_in_circle(g)</span></span>
+<span id="cb820-4"><a href="network-vis.html#cb820-4" tabindex="-1"></a></span>
+<span id="cb820-5"><a href="network-vis.html#cb820-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb820-6"><a href="network-vis.html#cb820-6" tabindex="-1"></a><span class="fu">plot</span>(g, </span>
+<span id="cb820-7"><a href="network-vis.html#cb820-7" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
+<span id="cb820-8"><a href="network-vis.html#cb820-8" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb820-9"><a href="network-vis.html#cb820-9" tabindex="-1"></a>     <span class="co"># vertex.color = factor(V(g)$blocked),</span></span>
+<span id="cb820-10"><a href="network-vis.html#cb820-10" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
+<span id="cb820-11"><a href="network-vis.html#cb820-11" tabindex="-1"></a>     <span class="co"># vertex.size  = sqrt(V(g)$degree)*3,</span></span>
+<span id="cb820-12"><a href="network-vis.html#cb820-12" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb820-13"><a href="network-vis.html#cb820-13" tabindex="-1"></a>     <span class="co"># vertex.label = V(g)$display,</span></span>
+<span id="cb820-14"><a href="network-vis.html#cb820-14" tabindex="-1"></a>     <span class="co"># vertex.label = str_sub(V(g)$name, 1, 10),</span></span>
+<span id="cb820-15"><a href="network-vis.html#cb820-15" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb820-16"><a href="network-vis.html#cb820-16" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
+<span id="cb820-17"><a href="network-vis.html#cb820-17" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
+<span id="cb820-18"><a href="network-vis.html#cb820-18" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
+<span id="cb820-19"><a href="network-vis.html#cb820-19" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
+<span id="cb820-20"><a href="network-vis.html#cb820-20" tabindex="-1"></a>     <span class="co"># edge.width = sqrt(E(g)$weight),</span></span>
+<span id="cb820-21"><a href="network-vis.html#cb820-21" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$year,</span></span>
+<span id="cb820-22"><a href="network-vis.html#cb820-22" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$weight,</span></span>
+<span id="cb820-23"><a href="network-vis.html#cb820-23" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
+<span id="cb820-24"><a href="network-vis.html#cb820-24" tabindex="-1"></a>     <span class="co"># edge.color = E(g)$color,</span></span>
+<span id="cb820-25"><a href="network-vis.html#cb820-25" tabindex="-1"></a>     <span class="co"># edge.label = E(g)$weight,</span></span>
+<span id="cb820-26"><a href="network-vis.html#cb820-26" tabindex="-1"></a>     <span class="co"># edge.label = E(g)$year,</span></span>
+<span id="cb820-27"><a href="network-vis.html#cb820-27" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb820-28"><a href="network-vis.html#cb820-28" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb820-29"><a href="network-vis.html#cb820-29" tabindex="-1"></a>     )</span></code></pre></div>
 <p><img src="V31_networkviz_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="random-network-1" class="section level3 hasAnchor" number="30.1.2">
 <h3><span class="header-section-number">30.1.2</span> Random network<a href="network-vis.html#random-network-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="network-vis.html#cb812-1" tabindex="-1"></a>rg <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(<span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="fu">length</span>(<span class="fu">E</span>(g)), <span class="at">directed=</span>T)</span>
-<span id="cb812-2"><a href="network-vis.html#cb812-2" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb812-3"><a href="network-vis.html#cb812-3" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
-<span id="cb812-4"><a href="network-vis.html#cb812-4" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb812-5"><a href="network-vis.html#cb812-5" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="fu">reciprocity</span>(rg)),</span>
-<span id="cb812-6"><a href="network-vis.html#cb812-6" tabindex="-1"></a>        <span class="fu">count_components</span>(rg, <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>)</span>
-<span id="cb812-7"><a href="network-vis.html#cb812-7" tabindex="-1"></a>        )</span></code></pre></div>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="network-vis.html#cb813-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(rg)</span>
-<span id="cb813-2"><a href="network-vis.html#cb813-2" tabindex="-1"></a></span>
-<span id="cb813-3"><a href="network-vis.html#cb813-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb813-4"><a href="network-vis.html#cb813-4" tabindex="-1"></a><span class="fu">plot</span>(rg, </span>
-<span id="cb813-5"><a href="network-vis.html#cb813-5" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
-<span id="cb813-6"><a href="network-vis.html#cb813-6" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
-<span id="cb813-7"><a href="network-vis.html#cb813-7" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
-<span id="cb813-8"><a href="network-vis.html#cb813-8" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
-<span id="cb813-9"><a href="network-vis.html#cb813-9" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
-<span id="cb813-10"><a href="network-vis.html#cb813-10" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
-<span id="cb813-11"><a href="network-vis.html#cb813-11" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
-<span id="cb813-12"><a href="network-vis.html#cb813-12" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
-<span id="cb813-13"><a href="network-vis.html#cb813-13" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
-<span id="cb813-14"><a href="network-vis.html#cb813-14" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
-<span id="cb813-15"><a href="network-vis.html#cb813-15" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
-<span id="cb813-16"><a href="network-vis.html#cb813-16" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb813-17"><a href="network-vis.html#cb813-17" tabindex="-1"></a>     )</span></code></pre></div>
+<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="network-vis.html#cb821-1" tabindex="-1"></a>rg <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(<span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="fu">length</span>(<span class="fu">E</span>(g)), <span class="at">directed=</span>T)</span>
+<span id="cb821-2"><a href="network-vis.html#cb821-2" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb821-3"><a href="network-vis.html#cb821-3" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb821-4"><a href="network-vis.html#cb821-4" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb821-5"><a href="network-vis.html#cb821-5" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="fu">reciprocity</span>(rg)),</span>
+<span id="cb821-6"><a href="network-vis.html#cb821-6" tabindex="-1"></a>        <span class="fu">count_components</span>(rg, <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>)</span>
+<span id="cb821-7"><a href="network-vis.html#cb821-7" tabindex="-1"></a>        )</span></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="network-vis.html#cb822-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(rg)</span>
+<span id="cb822-2"><a href="network-vis.html#cb822-2" tabindex="-1"></a></span>
+<span id="cb822-3"><a href="network-vis.html#cb822-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb822-4"><a href="network-vis.html#cb822-4" tabindex="-1"></a><span class="fu">plot</span>(rg, </span>
+<span id="cb822-5"><a href="network-vis.html#cb822-5" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
+<span id="cb822-6"><a href="network-vis.html#cb822-6" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb822-7"><a href="network-vis.html#cb822-7" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
+<span id="cb822-8"><a href="network-vis.html#cb822-8" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb822-9"><a href="network-vis.html#cb822-9" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb822-10"><a href="network-vis.html#cb822-10" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
+<span id="cb822-11"><a href="network-vis.html#cb822-11" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
+<span id="cb822-12"><a href="network-vis.html#cb822-12" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
+<span id="cb822-13"><a href="network-vis.html#cb822-13" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
+<span id="cb822-14"><a href="network-vis.html#cb822-14" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
+<span id="cb822-15"><a href="network-vis.html#cb822-15" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb822-16"><a href="network-vis.html#cb822-16" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb822-17"><a href="network-vis.html#cb822-17" tabindex="-1"></a>     )</span></code></pre></div>
 <p><img src="V31_networkviz_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="retrieve-top3-components" class="section level2 hasAnchor" number="30.2">
 <h2><span class="header-section-number">30.2</span> Retrieve Top3 Components<a href="network-vis.html#retrieve-top3-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="network-vis.html#cb814-1" tabindex="-1"></a>components <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">clusters</span>(rg, <span class="at">mode=</span><span class="st">&quot;weak&quot;</span>)</span>
-<span id="cb814-2"><a href="network-vis.html#cb814-2" tabindex="-1"></a>biggest_cluster_id <span class="ot">&lt;-</span> <span class="fu">which.max</span>(components<span class="sc">$</span>csize)</span>
-<span id="cb814-3"><a href="network-vis.html#cb814-3" tabindex="-1"></a><span class="co"># which.max(components$csize)</span></span>
-<span id="cb814-4"><a href="network-vis.html#cb814-4" tabindex="-1"></a><span class="co"># components$csize</span></span>
-<span id="cb814-5"><a href="network-vis.html#cb814-5" tabindex="-1"></a><span class="co"># biggest_cluster_id</span></span>
-<span id="cb814-6"><a href="network-vis.html#cb814-6" tabindex="-1"></a>top3_break <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(components<span class="sc">$</span>csize), <span class="at">decreasing =</span> T)[<span class="dv">3</span>]</span>
-<span id="cb814-7"><a href="network-vis.html#cb814-7" tabindex="-1"></a>biggest_cluster_id <span class="ot">&lt;-</span> <span class="fu">which</span>(components<span class="sc">$</span>csize <span class="sc">&gt;=</span>  top3_break)</span>
-<span id="cb814-8"><a href="network-vis.html#cb814-8" tabindex="-1"></a>vert_ids <span class="ot">&lt;-</span> <span class="fu">V</span>(rg)[components<span class="sc">$</span>membership <span class="sc">%in%</span> biggest_cluster_id]</span>
-<span id="cb814-9"><a href="network-vis.html#cb814-9" tabindex="-1"></a>rg <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">induced_subgraph</span>(rg, vert_ids)</span>
-<span id="cb814-10"><a href="network-vis.html#cb814-10" tabindex="-1"></a></span>
-<span id="cb814-11"><a href="network-vis.html#cb814-11" tabindex="-1"></a></span>
-<span id="cb814-12"><a href="network-vis.html#cb814-12" tabindex="-1"></a></span>
-<span id="cb814-13"><a href="network-vis.html#cb814-13" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb814-14"><a href="network-vis.html#cb814-14" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
-<span id="cb814-15"><a href="network-vis.html#cb814-15" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb814-16"><a href="network-vis.html#cb814-16" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f&quot;</span>, <span class="fu">reciprocity</span>(rg))</span>
-<span id="cb814-17"><a href="network-vis.html#cb814-17" tabindex="-1"></a>        )</span></code></pre></div>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="network-vis.html#cb823-1" tabindex="-1"></a>components <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">clusters</span>(rg, <span class="at">mode=</span><span class="st">&quot;weak&quot;</span>)</span>
+<span id="cb823-2"><a href="network-vis.html#cb823-2" tabindex="-1"></a>biggest_cluster_id <span class="ot">&lt;-</span> <span class="fu">which.max</span>(components<span class="sc">$</span>csize)</span>
+<span id="cb823-3"><a href="network-vis.html#cb823-3" tabindex="-1"></a><span class="co"># which.max(components$csize)</span></span>
+<span id="cb823-4"><a href="network-vis.html#cb823-4" tabindex="-1"></a><span class="co"># components$csize</span></span>
+<span id="cb823-5"><a href="network-vis.html#cb823-5" tabindex="-1"></a><span class="co"># biggest_cluster_id</span></span>
+<span id="cb823-6"><a href="network-vis.html#cb823-6" tabindex="-1"></a>top3_break <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(components<span class="sc">$</span>csize), <span class="at">decreasing =</span> T)[<span class="dv">3</span>]</span>
+<span id="cb823-7"><a href="network-vis.html#cb823-7" tabindex="-1"></a>biggest_cluster_id <span class="ot">&lt;-</span> <span class="fu">which</span>(components<span class="sc">$</span>csize <span class="sc">&gt;=</span>  top3_break)</span>
+<span id="cb823-8"><a href="network-vis.html#cb823-8" tabindex="-1"></a>vert_ids <span class="ot">&lt;-</span> <span class="fu">V</span>(rg)[components<span class="sc">$</span>membership <span class="sc">%in%</span> biggest_cluster_id]</span>
+<span id="cb823-9"><a href="network-vis.html#cb823-9" tabindex="-1"></a>rg <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">induced_subgraph</span>(rg, vert_ids)</span>
+<span id="cb823-10"><a href="network-vis.html#cb823-10" tabindex="-1"></a></span>
+<span id="cb823-11"><a href="network-vis.html#cb823-11" tabindex="-1"></a></span>
+<span id="cb823-12"><a href="network-vis.html#cb823-12" tabindex="-1"></a></span>
+<span id="cb823-13"><a href="network-vis.html#cb823-13" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">(V, E, Reciprocity, nComponent)</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb823-14"><a href="network-vis.html#cb823-14" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">V</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb823-15"><a href="network-vis.html#cb823-15" tabindex="-1"></a>        <span class="fu">length</span>(<span class="fu">E</span>(rg)), <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb823-16"><a href="network-vis.html#cb823-16" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;%.3f&quot;</span>, <span class="fu">reciprocity</span>(rg))</span>
+<span id="cb823-17"><a href="network-vis.html#cb823-17" tabindex="-1"></a>        )</span></code></pre></div>
 <div id="visualize-again" class="section level3 hasAnchor" number="30.2.1">
 <h3><span class="header-section-number">30.2.1</span> Visualize again<a href="network-vis.html#visualize-again" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="network-vis.html#cb815-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(rg)</span>
-<span id="cb815-2"><a href="network-vis.html#cb815-2" tabindex="-1"></a></span>
-<span id="cb815-3"><a href="network-vis.html#cb815-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb815-4"><a href="network-vis.html#cb815-4" tabindex="-1"></a><span class="fu">plot</span>(rg, </span>
-<span id="cb815-5"><a href="network-vis.html#cb815-5" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
-<span id="cb815-6"><a href="network-vis.html#cb815-6" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
-<span id="cb815-7"><a href="network-vis.html#cb815-7" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
-<span id="cb815-8"><a href="network-vis.html#cb815-8" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
-<span id="cb815-9"><a href="network-vis.html#cb815-9" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
-<span id="cb815-10"><a href="network-vis.html#cb815-10" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
-<span id="cb815-11"><a href="network-vis.html#cb815-11" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
-<span id="cb815-12"><a href="network-vis.html#cb815-12" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
-<span id="cb815-13"><a href="network-vis.html#cb815-13" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
-<span id="cb815-14"><a href="network-vis.html#cb815-14" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
-<span id="cb815-15"><a href="network-vis.html#cb815-15" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
-<span id="cb815-16"><a href="network-vis.html#cb815-16" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb815-17"><a href="network-vis.html#cb815-17" tabindex="-1"></a>     )</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="network-vis.html#cb824-1" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">layout.fruchterman.reingold</span>(rg)</span>
+<span id="cb824-2"><a href="network-vis.html#cb824-2" tabindex="-1"></a></span>
+<span id="cb824-3"><a href="network-vis.html#cb824-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span>
+<span id="cb824-4"><a href="network-vis.html#cb824-4" tabindex="-1"></a><span class="fu">plot</span>(rg, </span>
+<span id="cb824-5"><a href="network-vis.html#cb824-5" tabindex="-1"></a>     <span class="at">layout =</span> l,</span>
+<span id="cb824-6"><a href="network-vis.html#cb824-6" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb824-7"><a href="network-vis.html#cb824-7" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">3</span>,</span>
+<span id="cb824-8"><a href="network-vis.html#cb824-8" tabindex="-1"></a>     <span class="at">vertex.frame.color=</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb824-9"><a href="network-vis.html#cb824-9" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb824-10"><a href="network-vis.html#cb824-10" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.7</span>),</span>
+<span id="cb824-11"><a href="network-vis.html#cb824-11" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">&#39;Heiti TC Light&#39;</span>,</span>
+<span id="cb824-12"><a href="network-vis.html#cb824-12" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.1</span>,</span>
+<span id="cb824-13"><a href="network-vis.html#cb824-13" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
+<span id="cb824-14"><a href="network-vis.html#cb824-14" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;#4169E1&quot;</span>,</span>
+<span id="cb824-15"><a href="network-vis.html#cb824-15" tabindex="-1"></a>     <span class="at">edge.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb824-16"><a href="network-vis.html#cb824-16" tabindex="-1"></a>     <span class="at">edge.label.color =</span> <span class="fu">rgb</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb824-17"><a href="network-vis.html#cb824-17" tabindex="-1"></a>     )</span></code></pre></div>
 <p><img src="V31_networkviz_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -901,64 +907,64 @@ div.csl-indent {
 <h2><span class="header-section-number">30.3</span> Motif visualization and analysis<a href="network-vis.html#motif-visualization-and-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="motif-type" class="section level3 hasAnchor" number="30.3.1">
 <h3><span class="header-section-number">30.3.1</span> Motif type<a href="network-vis.html#motif-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="network-vis.html#cb816-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb816-2"><a href="network-vis.html#cb816-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="at">mai=</span> <span class="fu">rep</span>(<span class="fl">0.2</span>, <span class="dv">4</span>))</span>
-<span id="cb816-3"><a href="network-vis.html#cb816-3" tabindex="-1"></a></span>
-<span id="cb816-4"><a href="network-vis.html#cb816-4" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>){</span>
-<span id="cb816-5"><a href="network-vis.html#cb816-5" tabindex="-1"></a>    g1 <span class="ot">&lt;-</span> <span class="fu">graph_from_isomorphism_class</span>(<span class="dv">3</span>, i)</span>
-<span id="cb816-6"><a href="network-vis.html#cb816-6" tabindex="-1"></a>    <span class="fu">plot</span>(g1,</span>
-<span id="cb816-7"><a href="network-vis.html#cb816-7" tabindex="-1"></a>         <span class="at">vertex.color =</span> <span class="st">&quot;gold&quot;</span>,</span>
-<span id="cb816-8"><a href="network-vis.html#cb816-8" tabindex="-1"></a>         <span class="at">vertex.size =</span> <span class="dv">20</span>,</span>
-<span id="cb816-9"><a href="network-vis.html#cb816-9" tabindex="-1"></a>        <span class="co"># vertex.size = (V(g)$nTweets)^(1/3)+1,</span></span>
-<span id="cb816-10"><a href="network-vis.html#cb816-10" tabindex="-1"></a>        <span class="at">vertex.frame.color=</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb816-11"><a href="network-vis.html#cb816-11" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
-<span id="cb816-12"><a href="network-vis.html#cb816-12" tabindex="-1"></a>        <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb816-13"><a href="network-vis.html#cb816-13" tabindex="-1"></a>        <span class="at">edge.arrow.size =</span> <span class="fl">0.5</span>)</span>
-<span id="cb816-14"><a href="network-vis.html#cb816-14" tabindex="-1"></a>    <span class="fu">title</span>(i, <span class="at">line=</span><span class="sc">-</span><span class="dv">3</span>, <span class="at">adj=</span><span class="fl">0.4</span> ,<span class="at">col.main=</span><span class="st">&quot;royalblue&quot;</span>)</span>
-<span id="cb816-15"><a href="network-vis.html#cb816-15" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="network-vis.html#cb825-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb825-2"><a href="network-vis.html#cb825-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="at">mai=</span> <span class="fu">rep</span>(<span class="fl">0.2</span>, <span class="dv">4</span>))</span>
+<span id="cb825-3"><a href="network-vis.html#cb825-3" tabindex="-1"></a></span>
+<span id="cb825-4"><a href="network-vis.html#cb825-4" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>){</span>
+<span id="cb825-5"><a href="network-vis.html#cb825-5" tabindex="-1"></a>    g1 <span class="ot">&lt;-</span> <span class="fu">graph_from_isomorphism_class</span>(<span class="dv">3</span>, i)</span>
+<span id="cb825-6"><a href="network-vis.html#cb825-6" tabindex="-1"></a>    <span class="fu">plot</span>(g1,</span>
+<span id="cb825-7"><a href="network-vis.html#cb825-7" tabindex="-1"></a>         <span class="at">vertex.color =</span> <span class="st">&quot;gold&quot;</span>,</span>
+<span id="cb825-8"><a href="network-vis.html#cb825-8" tabindex="-1"></a>         <span class="at">vertex.size =</span> <span class="dv">20</span>,</span>
+<span id="cb825-9"><a href="network-vis.html#cb825-9" tabindex="-1"></a>        <span class="co"># vertex.size = (V(g)$nTweets)^(1/3)+1,</span></span>
+<span id="cb825-10"><a href="network-vis.html#cb825-10" tabindex="-1"></a>        <span class="at">vertex.frame.color=</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb825-11"><a href="network-vis.html#cb825-11" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb825-12"><a href="network-vis.html#cb825-12" tabindex="-1"></a>        <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb825-13"><a href="network-vis.html#cb825-13" tabindex="-1"></a>        <span class="at">edge.arrow.size =</span> <span class="fl">0.5</span>)</span>
+<span id="cb825-14"><a href="network-vis.html#cb825-14" tabindex="-1"></a>    <span class="fu">title</span>(i, <span class="at">line=</span><span class="sc">-</span><span class="dv">3</span>, <span class="at">adj=</span><span class="fl">0.4</span> ,<span class="at">col.main=</span><span class="st">&quot;royalblue&quot;</span>)</span>
+<span id="cb825-15"><a href="network-vis.html#cb825-15" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="V31_networkviz_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="motif-analysis" class="section level3 hasAnchor" number="30.3.2">
 <h3><span class="header-section-number">30.3.2</span> Motif analysis<a href="network-vis.html#motif-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="generate-network" class="section level4 hasAnchor" number="30.3.2.1">
 <h4><span class="header-section-number">30.3.2.1</span> Generate network<a href="network-vis.html#generate-network" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="network-vis.html#cb817-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>)</span>
-<span id="cb817-2"><a href="network-vis.html#cb817-2" tabindex="-1"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="network-vis.html#cb826-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>)</span>
+<span id="cb826-2"><a href="network-vis.html#cb826-2" tabindex="-1"></a>res</span></code></pre></div>
 <pre class="output"><code>##  [1]   NA   NA 4085   NA  419    0    0    0    0    0    0    0    0    0    0
 ## [16]    0</code></pre>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="network-vis.html#cb819-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">as.character</span>(res), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="network-vis.html#cb828-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="fu">as.character</span>(res), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre class="output"><code>## NA   NA  4085    NA  419 0   0   0   0   0   0   0   0   0   0   0   </code></pre>
 </div>
 </div>
 <div id="generate-motives" class="section level3 hasAnchor" number="30.3.3">
 <h3><span class="header-section-number">30.3.3</span> Generate motives<a href="network-vis.html#generate-motives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="network-vis.html#cb821-1" tabindex="-1"></a>barabas_motif <span class="ot">&lt;-</span> <span class="cf">function</span>(e){</span>
-<span id="cb821-2"><a href="network-vis.html#cb821-2" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(e, <span class="at">directed =</span> T)</span>
-<span id="cb821-3"><a href="network-vis.html#cb821-3" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
-<span id="cb821-4"><a href="network-vis.html#cb821-4" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){</span>
-<span id="cb821-5"><a href="network-vis.html#cb821-5" tabindex="-1"></a>        g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(e, <span class="at">directed =</span> T)</span>
-<span id="cb821-6"><a href="network-vis.html#cb821-6" tabindex="-1"></a>        tmp <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
-<span id="cb821-7"><a href="network-vis.html#cb821-7" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> vec <span class="sc">+</span> tmp</span>
-<span id="cb821-8"><a href="network-vis.html#cb821-8" tabindex="-1"></a>    }</span>
-<span id="cb821-9"><a href="network-vis.html#cb821-9" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> vec <span class="sc">/</span> <span class="dv">100</span></span>
-<span id="cb821-10"><a href="network-vis.html#cb821-10" tabindex="-1"></a>    <span class="fu">writeLines</span>(<span class="fu">as.character</span>(vec), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
-<span id="cb821-11"><a href="network-vis.html#cb821-11" tabindex="-1"></a></span>
-<span id="cb821-12"><a href="network-vis.html#cb821-12" tabindex="-1"></a>}</span>
-<span id="cb821-13"><a href="network-vis.html#cb821-13" tabindex="-1"></a></span>
-<span id="cb821-14"><a href="network-vis.html#cb821-14" tabindex="-1"></a>random_net_motif <span class="ot">&lt;-</span> <span class="cf">function</span>(v, e){</span>
-<span id="cb821-15"><a href="network-vis.html#cb821-15" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(v, e, <span class="at">directed=</span>T)</span>
-<span id="cb821-16"><a href="network-vis.html#cb821-16" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>)  <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
-<span id="cb821-17"><a href="network-vis.html#cb821-17" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){</span>
-<span id="cb821-18"><a href="network-vis.html#cb821-18" tabindex="-1"></a>        g <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(v, e, <span class="at">directed=</span>T)</span>
-<span id="cb821-19"><a href="network-vis.html#cb821-19" tabindex="-1"></a>        tmp <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
-<span id="cb821-20"><a href="network-vis.html#cb821-20" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> vec <span class="sc">+</span> tmp</span>
-<span id="cb821-21"><a href="network-vis.html#cb821-21" tabindex="-1"></a>    }</span>
-<span id="cb821-22"><a href="network-vis.html#cb821-22" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> vec <span class="sc">/</span> <span class="dv">100</span></span>
-<span id="cb821-23"><a href="network-vis.html#cb821-23" tabindex="-1"></a>    <span class="fu">writeLines</span>(<span class="fu">as.character</span>(vec), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
-<span id="cb821-24"><a href="network-vis.html#cb821-24" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="network-vis.html#cb822-1" tabindex="-1"></a><span class="fu">random_net_motif</span>(<span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="fu">length</span>(<span class="fu">E</span>(g)))</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="network-vis.html#cb830-1" tabindex="-1"></a>barabas_motif <span class="ot">&lt;-</span> <span class="cf">function</span>(e){</span>
+<span id="cb830-2"><a href="network-vis.html#cb830-2" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(e, <span class="at">directed =</span> T)</span>
+<span id="cb830-3"><a href="network-vis.html#cb830-3" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
+<span id="cb830-4"><a href="network-vis.html#cb830-4" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){</span>
+<span id="cb830-5"><a href="network-vis.html#cb830-5" tabindex="-1"></a>        g <span class="ot">&lt;-</span> <span class="fu">barabasi.game</span>(e, <span class="at">directed =</span> T)</span>
+<span id="cb830-6"><a href="network-vis.html#cb830-6" tabindex="-1"></a>        tmp <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
+<span id="cb830-7"><a href="network-vis.html#cb830-7" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> vec <span class="sc">+</span> tmp</span>
+<span id="cb830-8"><a href="network-vis.html#cb830-8" tabindex="-1"></a>    }</span>
+<span id="cb830-9"><a href="network-vis.html#cb830-9" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> vec <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb830-10"><a href="network-vis.html#cb830-10" tabindex="-1"></a>    <span class="fu">writeLines</span>(<span class="fu">as.character</span>(vec), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb830-11"><a href="network-vis.html#cb830-11" tabindex="-1"></a></span>
+<span id="cb830-12"><a href="network-vis.html#cb830-12" tabindex="-1"></a>}</span>
+<span id="cb830-13"><a href="network-vis.html#cb830-13" tabindex="-1"></a></span>
+<span id="cb830-14"><a href="network-vis.html#cb830-14" tabindex="-1"></a>random_net_motif <span class="ot">&lt;-</span> <span class="cf">function</span>(v, e){</span>
+<span id="cb830-15"><a href="network-vis.html#cb830-15" tabindex="-1"></a>    g <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(v, e, <span class="at">directed=</span>T)</span>
+<span id="cb830-16"><a href="network-vis.html#cb830-16" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>)  <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
+<span id="cb830-17"><a href="network-vis.html#cb830-17" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">99</span>){</span>
+<span id="cb830-18"><a href="network-vis.html#cb830-18" tabindex="-1"></a>        g <span class="ot">&lt;-</span> <span class="fu">sample_gnm</span>(v, e, <span class="at">directed=</span>T)</span>
+<span id="cb830-19"><a href="network-vis.html#cb830-19" tabindex="-1"></a>        tmp <span class="ot">&lt;-</span> <span class="fu">motifs</span>(g, <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">replace_na</span>(<span class="dv">0</span>)</span>
+<span id="cb830-20"><a href="network-vis.html#cb830-20" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> vec <span class="sc">+</span> tmp</span>
+<span id="cb830-21"><a href="network-vis.html#cb830-21" tabindex="-1"></a>    }</span>
+<span id="cb830-22"><a href="network-vis.html#cb830-22" tabindex="-1"></a>    vec <span class="ot">&lt;-</span> vec <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb830-23"><a href="network-vis.html#cb830-23" tabindex="-1"></a>    <span class="fu">writeLines</span>(<span class="fu">as.character</span>(vec), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb830-24"><a href="network-vis.html#cb830-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="network-vis.html#cb831-1" tabindex="-1"></a><span class="fu">random_net_motif</span>(<span class="fu">length</span>(<span class="fu">V</span>(g)), <span class="fu">length</span>(<span class="fu">E</span>(g)))</span></code></pre></div>
 <pre class="output"><code>## 0    0   245.78  0   490.12  0.87    247.04  0.77    0   0.78    0   0.36    0.01    0   0   0   </code></pre>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="network-vis.html#cb824-1" tabindex="-1"></a><span class="fu">barabas_motif</span>(<span class="fu">length</span>(<span class="fu">E</span>(g)))</span></code></pre></div>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="network-vis.html#cb833-1" tabindex="-1"></a><span class="fu">barabas_motif</span>(<span class="fu">length</span>(<span class="fu">E</span>(g)))</span></code></pre></div>
 <pre class="output"><code>## 0    0   2517.01 0   459.54  0   0   0   0   0   0   0   0   0   0   0   </code></pre>
 
 </div>

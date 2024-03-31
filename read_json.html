@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-24" />
+<meta name="date" content="2024-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,6 +709,12 @@ div.csl-indent {
 <li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
+<li class="chapter" data-level="29.6" data-path="geospatial.html"><a href="geospatial.html#mapping-youbike-location"><i class="fa fa-check"></i><b>29.6</b> Mapping Youbike Location</a>
+<ul>
+<li class="chapter" data-level="29.6.1" data-path="geospatial.html"><a href="geospatial.html#creating-a-new-variable"><i class="fa fa-check"></i><b>29.6.1</b> Creating a new variable</a></li>
+<li class="chapter" data-level="29.6.2" data-path="geospatial.html"><a href="geospatial.html#mapping-with-sf"><i class="fa fa-check"></i><b>29.6.2</b> Mapping with sf</a></li>
+<li class="chapter" data-level="29.6.3" data-path="geospatial.html"><a href="geospatial.html#using-ggmap-deprecated"><i class="fa fa-check"></i><b>29.6.3</b> Using ggmap (Deprecated)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
 <ul>
@@ -784,8 +790,8 @@ div.csl-indent {
 <div id="read_json" class="section level1 hasAnchor" number="17">
 <h1><span class="header-section-number">Chapter 17</span> Read JSON<a href="read_json.html#read_json" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>jsonlite套件提供了處理 JSON 格式資料的功能。</p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="read_json.html#cb594-1" tabindex="-1"></a><span class="co"># loading jsonlite package to parse a textual json file to an R object</span></span>
-<span id="cb594-2"><a href="read_json.html#cb594-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="read_json.html#cb596-1" tabindex="-1"></a><span class="co"># loading jsonlite package to parse a textual json file to an R object</span></span>
+<span id="cb596-2"><a href="read_json.html#cb596-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code></pre></div>
 <div id="reading-json" class="section level2 hasAnchor" number="17.1">
 <h2><span class="header-section-number">17.1</span> Reading JSON<a href="read_json.html#reading-json" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="json-as-a-string" class="section level3 hasAnchor" number="17.1.1">
@@ -807,20 +813,20 @@ div.csl-indent {
 <li><p>第二個元素的 JSON 物件中，鍵 <strong><code>a</code></strong> 對應的值為數字 1，鍵 <strong><code>b</code></strong> 對應的值為數字 3。</p></li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="read_json.html#cb595-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb595-2"><a href="read_json.html#cb595-2" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&#39;{&quot;a&quot;:1, &quot;b&quot;:2}&#39;</span>)</span>
-<span id="cb595-3"><a href="read_json.html#cb595-3" tabindex="-1"></a><span class="fu">class</span>(lst) <span class="co">#list</span></span></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="read_json.html#cb597-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb597-2"><a href="read_json.html#cb597-2" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&#39;{&quot;a&quot;:1, &quot;b&quot;:2}&#39;</span>)</span>
+<span id="cb597-3"><a href="read_json.html#cb597-3" tabindex="-1"></a><span class="fu">class</span>(lst) <span class="co">#list</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="read_json.html#cb597-1" tabindex="-1"></a>lst<span class="sc">$</span>a</span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="read_json.html#cb599-1" tabindex="-1"></a>lst<span class="sc">$</span>a</span></code></pre></div>
 <pre class="output"><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="read_json.html#cb599-1" tabindex="-1"></a><span class="fu">fromJSON</span>(<span class="st">&#39;[{&quot;a&quot;:1, &quot;b&quot;:2}, {&quot;a&quot;:1, &quot;b&quot;:3}]&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="read_json.html#cb601-1" tabindex="-1"></a><span class="fu">fromJSON</span>(<span class="st">&#39;[{&quot;a&quot;:1, &quot;b&quot;:2}, {&quot;a&quot;:1, &quot;b&quot;:3}]&#39;</span>)</span></code></pre></div>
 <pre class="output"><code>##   a b
 ## 1 1 2
 ## 2 1 3</code></pre>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="read_json.html#cb601-1" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&#39;[{&quot;a&quot;:1, &quot;b&quot;:2}, {&quot;a&quot;:1, &quot;b&quot;:3}, {&quot;a&quot;:5, &quot;b&quot;:7}]&#39;</span>)</span>
-<span id="cb601-2"><a href="read_json.html#cb601-2" tabindex="-1"></a><span class="fu">class</span>(tbl) <span class="co"># a data.frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="read_json.html#cb603-1" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&#39;[{&quot;a&quot;:1, &quot;b&quot;:2}, {&quot;a&quot;:1, &quot;b&quot;:3}, {&quot;a&quot;:5, &quot;b&quot;:7}]&#39;</span>)</span>
+<span id="cb603-2"><a href="read_json.html#cb603-2" tabindex="-1"></a><span class="fu">class</span>(tbl) <span class="co"># a data.frame</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="read_json.html#cb603-1" tabindex="-1"></a>tbl<span class="sc">$</span>a[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="read_json.html#cb605-1" tabindex="-1"></a>tbl<span class="sc">$</span>a[<span class="dv">1</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 1</code></pre>
 </div>
 <div id="json-as-a-local-file" class="section level3 hasAnchor" number="17.1.2">
@@ -833,9 +839,9 @@ div.csl-indent {
     ]
   }
 }</code></pre>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="read_json.html#cb606-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb606-2"><a href="read_json.html#cb606-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_json</span>(<span class="st">&quot;data/url_104.json&quot;</span>)</span>
-<span id="cb606-3"><a href="read_json.html#cb606-3" tabindex="-1"></a>raw<span class="sc">$</span>data<span class="sc">$</span>list[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="read_json.html#cb608-1" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb608-2"><a href="read_json.html#cb608-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_json</span>(<span class="st">&quot;data/url_104.json&quot;</span>)</span>
+<span id="cb608-3"><a href="read_json.html#cb608-3" tabindex="-1"></a>raw<span class="sc">$</span>data<span class="sc">$</span>list[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre class="output"><code>## $jobType
 ## [1] &quot;2&quot;
 ## 
@@ -962,16 +968,17 @@ div.csl-indent {
 <li><p><strong><code>%&gt;% content("text")</code></strong> ：<strong><code>content("text")</code></strong> 表示將 HTTP 回應的資料轉換為純文字格式，便於後續處理。當我們把該純文字格式打開後，會發現他以JSON格式書寫。</p></li>
 <li><p><strong><code>%&gt;% fromJSON()</code></strong> ：一旦確認回傳的訊息以JSON格式書寫，那麼就可以用<code>jsonlite</code>套件的<code>fromJSON()</code>將該文字字串轉為R的物件。</p></li>
 </ol>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="read_json.html#cb608-1" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
-<span id="cb608-2"><a href="read_json.html#cb608-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb608-3"><a href="read_json.html#cb608-3" tabindex="-1"></a></span>
-<span id="cb608-4"><a href="read_json.html#cb608-4" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="st">&quot;https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb608-5"><a href="read_json.html#cb608-5" tabindex="-1"></a>    <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb608-6"><a href="read_json.html#cb608-6" tabindex="-1"></a>    <span class="fu">fromJSON</span>()</span>
-<span id="cb608-7"><a href="read_json.html#cb608-7" tabindex="-1"></a><span class="fu">write_json</span>(raw, <span class="st">&quot;data/opendata_ubike_202304261243.json&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="read_json.html#cb610-1" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb610-2"><a href="read_json.html#cb610-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb610-3"><a href="read_json.html#cb610-3" tabindex="-1"></a></span>
+<span id="cb610-4"><a href="read_json.html#cb610-4" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json&quot;</span></span>
+<span id="cb610-5"><a href="read_json.html#cb610-5" tabindex="-1"></a></span>
+<span id="cb610-6"><a href="read_json.html#cb610-6" tabindex="-1"></a>ubike.df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url),<span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb610-7"><a href="read_json.html#cb610-7" tabindex="-1"></a><span class="fu">head</span>(ubike.df) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb610-8"><a href="read_json.html#cb610-8" tabindex="-1"></a><span class="co"># write_json(ubike.df, &quot;data/opendata_ubike_202304261243.json&quot;)</span></span></code></pre></div>
 <p>你可以讀取本書預先爬取好的json檔來觀察前述程式所爬回的json檔轉成R物件後的結果。</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="read_json.html#cb609-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_ubike_202304261243.json&quot;</span>)</span>
-<span id="cb609-2"><a href="read_json.html#cb609-2" tabindex="-1"></a>raw<span class="sc">$</span>retVal[[<span class="st">&quot;0001&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="read_json.html#cb611-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_ubike_202304261243.json&quot;</span>)</span>
+<span id="cb611-2"><a href="read_json.html#cb611-2" tabindex="-1"></a>raw<span class="sc">$</span>retVal[[<span class="st">&quot;0001&quot;</span>]]</span></code></pre></div>
 <pre class="output"><code>## $sno
 ## [1] &quot;0001&quot;
 ## 
@@ -1023,14 +1030,14 @@ div.csl-indent {
 <div id="case-1-air-quality-well-formatted" class="section level2 hasAnchor" number="17.2">
 <h2><span class="header-section-number">17.2</span> Case 1: Air-Quality (well-formatted )<a href="read_json.html#case-1-air-quality-well-formatted" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>前往 <a href="https://data.gov.tw/dataset/40448，點擊">https://data.gov.tw/dataset/40448</a>對JSON 檔案按右鍵，然後複製連結，例如 “<a href="https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=ImportDate%20desc&amp;format=JSON%22。">https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=ImportDate%20desc&amp;format=JSON”。</a> (但是，連結地址，特別是 <code>api_key=9be7b239-557b-4c10-9775-78cadfc555e9</code>，每次都會更改。所以你必須要自己嘗試)。</p>
-<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="read_json.html#cb611-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=ImportDate%20desc&amp;format=JSON&quot;</span></span>
-<span id="cb611-2"><a href="read_json.html#cb611-2" tabindex="-1"></a></span>
-<span id="cb611-3"><a href="read_json.html#cb611-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
-<span id="cb611-4"><a href="read_json.html#cb611-4" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span>
-<span id="cb611-5"><a href="read_json.html#cb611-5" tabindex="-1"></a>df<span class="sc">$</span>records <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="read_json.html#cb613-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=ImportDate%20desc&amp;format=JSON&quot;</span></span>
+<span id="cb613-2"><a href="read_json.html#cb613-2" tabindex="-1"></a></span>
+<span id="cb613-3"><a href="read_json.html#cb613-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb613-4"><a href="read_json.html#cb613-4" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span>
+<span id="cb613-5"><a href="read_json.html#cb613-5" tabindex="-1"></a>df<span class="sc">$</span>records <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <div id="using-knitrkable-for-better-printing" class="section level3 hasAnchor" number="17.2.1">
 <h3><span class="header-section-number">17.2.1</span> Using knitr::kable() for better printing<a href="read_json.html#using-knitrkable-for-better-printing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="read_json.html#cb612-1" tabindex="-1"></a>df<span class="sc">$</span>records <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="read_json.html#cb614-1" tabindex="-1"></a>df<span class="sc">$</span>records <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 </div>
 <div id="step-by-step-parse-json-format-string-to-r-objects" class="section level3 hasAnchor" number="17.2.2">
 <h3><span class="header-section-number">17.2.2</span> Step-by-step: Parse JSON format string to R objects<a href="read_json.html#step-by-step-parse-json-format-string-to-r-objects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1039,34 +1046,34 @@ div.csl-indent {
 <div id="step-1.-get-發送請求" class="section level4 hasAnchor" number="17.2.2.1">
 <h4><span class="header-section-number">17.2.2.1</span> <code>Step 1. GET()</code> 發送請求<a href="read_json.html#step-1.-get-發送請求" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>向該URL的伺服器發送<code>GET()</code> request以取得該檔案。若成功取得，他會回覆一個<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status">HTML status code</a>（你可上網查詢看看有哪些Status code）。如果成功的話就是2開頭的數字例如<code>200 OK</code>代表該伺服器接受該請求並開始傳回檔案。</p>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="read_json.html#cb613-1" tabindex="-1"></a><span class="co"># Getting url back by GET()</span></span>
-<span id="cb613-2"><a href="read_json.html#cb613-2" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">GET</span>(url)</span>
-<span id="cb613-3"><a href="read_json.html#cb613-3" tabindex="-1"></a></span>
-<span id="cb613-4"><a href="read_json.html#cb613-4" tabindex="-1"></a><span class="co"># Inspecting returned data</span></span>
-<span id="cb613-5"><a href="read_json.html#cb613-5" tabindex="-1"></a>response</span>
-<span id="cb613-6"><a href="read_json.html#cb613-6" tabindex="-1"></a><span class="fu">class</span>(response)</span></code></pre></div>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="read_json.html#cb615-1" tabindex="-1"></a><span class="co"># Getting url back by GET()</span></span>
+<span id="cb615-2"><a href="read_json.html#cb615-2" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">GET</span>(url)</span>
+<span id="cb615-3"><a href="read_json.html#cb615-3" tabindex="-1"></a></span>
+<span id="cb615-4"><a href="read_json.html#cb615-4" tabindex="-1"></a><span class="co"># Inspecting returned data</span></span>
+<span id="cb615-5"><a href="read_json.html#cb615-5" tabindex="-1"></a>response</span>
+<span id="cb615-6"><a href="read_json.html#cb615-6" tabindex="-1"></a><span class="fu">class</span>(response)</span></code></pre></div>
 <p>(Tips) Using <code>?httr::GET</code> to inspect the function</p>
 </div>
 <div id="step-2.-httrcontent-將回應資料的轉純文字" class="section level4 hasAnchor" number="17.2.2.2">
 <h4><span class="header-section-number">17.2.2.2</span> <code>Step 2. httr::content()</code> 將回應資料的轉純文字<a href="read_json.html#step-2.-httrcontent-將回應資料的轉純文字" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>回應的資料看他的<code>class</code>是一個<code>response</code>，但如果看Global Environment看來是個<code>list</code>，裡面裝載很多資料，而主要核心的內容在<code>content</code>這個欄位，但看來是用<code>binary code</code>裝起來的，而不是純文字。</p>
 <p>因此，對於這個抓回來的檔案，我需要用<code>httr::content()</code>幫忙把純文字給解出來。經查詢<code>help</code>可得知<code>content()</code>後面的參數有三類，其中可以要轉為純文字的就是<code>content(response, "text")</code>。因此偵測轉出來的變數會是長度為1的<code>character</code>。</p>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="read_json.html#cb614-1" tabindex="-1"></a><span class="co"># Parsing to textual data by content()</span></span>
-<span id="cb614-2"><a href="read_json.html#cb614-2" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">content</span>(response, <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>) </span>
-<span id="cb614-3"><a href="read_json.html#cb614-3" tabindex="-1"></a><span class="fu">nchar</span>(text)</span>
-<span id="cb614-4"><a href="read_json.html#cb614-4" tabindex="-1"></a><span class="fu">cat</span>(text)</span>
-<span id="cb614-5"><a href="read_json.html#cb614-5" tabindex="-1"></a><span class="fu">class</span>(text)</span>
-<span id="cb614-6"><a href="read_json.html#cb614-6" tabindex="-1"></a><span class="fu">length</span>(text)</span></code></pre></div>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="read_json.html#cb616-1" tabindex="-1"></a><span class="co"># Parsing to textual data by content()</span></span>
+<span id="cb616-2"><a href="read_json.html#cb616-2" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">content</span>(response, <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>) </span>
+<span id="cb616-3"><a href="read_json.html#cb616-3" tabindex="-1"></a><span class="fu">nchar</span>(text)</span>
+<span id="cb616-4"><a href="read_json.html#cb616-4" tabindex="-1"></a><span class="fu">cat</span>(text)</span>
+<span id="cb616-5"><a href="read_json.html#cb616-5" tabindex="-1"></a><span class="fu">class</span>(text)</span>
+<span id="cb616-6"><a href="read_json.html#cb616-6" tabindex="-1"></a><span class="fu">length</span>(text)</span></code></pre></div>
 <p>(Tips) using <code>??httr::content</code> to inspect the function</p>
 </div>
 <div id="step-3.-fromjson-將json格式文字轉為r物件" class="section level4 hasAnchor" number="17.2.2.3">
 <h4><span class="header-section-number">17.2.2.3</span> Step 3. <code>fromJSON()</code>: 將JSON格式文字轉為R物件<a href="read_json.html#step-3.-fromjson-將json格式文字轉為r物件" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>最後是將這個<code>character</code>轉為R的物件，也就是data.frame或list。注意，此時text是一個<code>character</code>，那是我們知道他是用JSON格式編寫的文字檔，就像我們知道.csv檔是用逗號分隔表示法依樣，JSON就是用層層疊疊的<code>[]{}</code>記號來表述資料的結構。</p>
 <p>並要提醒初學者，<code>.json</code>或<code>.csv</code>都只是幫助程式初步篩選檔案的副檔名罷了，這兩種類型的檔案跟<code>.txt</code>檔一樣，都被歸屬為Win系統所謂的「純文字文件檔案」（就打開以後看得到文字的意思）。裡面的究竟是不是個完整的json檔這都要去看、去測。我自然也可以在<code>.json</code>的檔案裡偷偷亂用逗號分隔模式撰寫。</p>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="read_json.html#cb615-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(text)</span>
-<span id="cb615-2"><a href="read_json.html#cb615-2" tabindex="-1"></a><span class="fu">dim</span>(df)</span>
-<span id="cb615-3"><a href="read_json.html#cb615-3" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span>
-<span id="cb615-4"><a href="read_json.html#cb615-4" tabindex="-1"></a>?fromJSON</span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="read_json.html#cb617-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(text)</span>
+<span id="cb617-2"><a href="read_json.html#cb617-2" tabindex="-1"></a><span class="fu">dim</span>(df)</span>
+<span id="cb617-3"><a href="read_json.html#cb617-3" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span>
+<span id="cb617-4"><a href="read_json.html#cb617-4" tabindex="-1"></a>?fromJSON</span></code></pre></div>
 </div>
 </div>
 <div id="combining-all" class="section level3 hasAnchor" number="17.2.3">
@@ -1077,19 +1084,19 @@ div.csl-indent {
 </ul>
 <div id="get-from-web-api" class="section level4 hasAnchor" number="17.2.3.1">
 <h4><span class="header-section-number">17.2.3.1</span> Get from web api<a href="read_json.html#get-from-web-api" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="read_json.html#cb616-1" tabindex="-1"></a><span class="co"># specify data url</span></span>
-<span id="cb616-2"><a href="read_json.html#cb616-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=publishtime%20desc&amp;format=JSON&quot;</span></span>
-<span id="cb616-3"><a href="read_json.html#cb616-3" tabindex="-1"></a></span>
-<span id="cb616-4"><a href="read_json.html#cb616-4" tabindex="-1"></a><span class="co"># GET(), content(), then converting to R object by fromJSON()</span></span>
-<span id="cb616-5"><a href="read_json.html#cb616-5" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="read_json.html#cb618-1" tabindex="-1"></a><span class="co"># specify data url</span></span>
+<span id="cb618-2"><a href="read_json.html#cb618-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&amp;limit=1000&amp;sort=publishtime%20desc&amp;format=JSON&quot;</span></span>
+<span id="cb618-3"><a href="read_json.html#cb618-3" tabindex="-1"></a></span>
+<span id="cb618-4"><a href="read_json.html#cb618-4" tabindex="-1"></a><span class="co"># GET(), content(), then converting to R object by fromJSON()</span></span>
+<span id="cb618-5"><a href="read_json.html#cb618-5" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span></code></pre></div>
 </div>
 <div id="read-from-pre-saved-json" class="section level4 hasAnchor" number="17.2.3.2">
 <h4><span class="header-section-number">17.2.3.2</span> Read from pre-saved JSON<a href="read_json.html#read-from-pre-saved-json" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>你可以讀取本書預先爬取好的json檔來觀察前述程式所爬回的json檔轉成R物件後的結果。</p>
-<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="read_json.html#cb617-1" tabindex="-1"></a><span class="co"># You can read the pre-crawled JSON file  to observe the R object.</span></span>
-<span id="cb617-2"><a href="read_json.html#cb617-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_uvi_202304261215.json&quot;</span>)</span>
-<span id="cb617-3"><a href="read_json.html#cb617-3" tabindex="-1"></a></span>
-<span id="cb617-4"><a href="read_json.html#cb617-4" tabindex="-1"></a>raw<span class="sc">$</span>records <span class="sc">%&gt;%</span> head <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="read_json.html#cb619-1" tabindex="-1"></a><span class="co"># You can read the pre-crawled JSON file  to observe the R object.</span></span>
+<span id="cb619-2"><a href="read_json.html#cb619-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_uvi_202304261215.json&quot;</span>)</span>
+<span id="cb619-3"><a href="read_json.html#cb619-3" tabindex="-1"></a></span>
+<span id="cb619-4"><a href="read_json.html#cb619-4" tabindex="-1"></a>raw<span class="sc">$</span>records <span class="sc">%&gt;%</span> head <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <colgroup>
 <col width="12%" />
@@ -1195,13 +1202,13 @@ raw$items$data</code></pre>
 <div id="case-2-cnyes-news-well-formatted" class="section level2 hasAnchor" number="17.4">
 <h2><span class="header-section-number">17.4</span> Case 2: cnyes news (well-formatted)<a href="read_json.html#case-2-cnyes-news-well-formatted" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>第二類是最常會見到的例子，解出來的資料是個很多階層的<code>list</code>，通常一筆資料傳回來時多會附加一些metadata，比方說，一共幾筆資料、下一個資料區塊在哪裡，好讓使用者或者本地端的瀏覽器能夠繼續取得下一筆資料。因此，資料通常會在樹狀節點的某一個子節點。</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="read_json.html#cb620-1" tabindex="-1"></a>url_cnyes <span class="ot">&lt;-</span> <span class="st">&quot;https://news.cnyes.com/api/v3/news/category/headline?startAt=1588262400&amp;endAt=1589212799&amp;limit=30&quot;</span></span>
-<span id="cb620-2"><a href="read_json.html#cb620-2" tabindex="-1"></a></span>
-<span id="cb620-3"><a href="read_json.html#cb620-3" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url_cnyes), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
-<span id="cb620-4"><a href="read_json.html#cb620-4" tabindex="-1"></a><span class="fu">glimpse</span>(res)</span></code></pre></div>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="read_json.html#cb621-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/url_cnyes.json&quot;</span>)</span>
-<span id="cb621-2"><a href="read_json.html#cb621-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> raw<span class="sc">$</span>items<span class="sc">$</span>data</span>
-<span id="cb621-3"><a href="read_json.html#cb621-3" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="read_json.html#cb622-1" tabindex="-1"></a>url_cnyes <span class="ot">&lt;-</span> <span class="st">&quot;https://news.cnyes.com/api/v3/news/category/headline?startAt=1588262400&amp;endAt=1589212799&amp;limit=30&quot;</span></span>
+<span id="cb622-2"><a href="read_json.html#cb622-2" tabindex="-1"></a></span>
+<span id="cb622-3"><a href="read_json.html#cb622-3" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url_cnyes), <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
+<span id="cb622-4"><a href="read_json.html#cb622-4" tabindex="-1"></a><span class="fu">glimpse</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="read_json.html#cb623-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/url_cnyes.json&quot;</span>)</span>
+<span id="cb623-2"><a href="read_json.html#cb623-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> raw<span class="sc">$</span>items<span class="sc">$</span>data</span>
+<span id="cb623-3"><a href="read_json.html#cb623-3" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="output"><code>##    newsId                                                      title
 ## 1 4475846                〈財報〉疫情衝擊 Under Armour Q1營收大減23%
 ## 2 4475874 若一年內疫情未控制 避險基金大佬：美國將面臨第2次經濟大蕭條
@@ -1367,21 +1374,21 @@ raw$items$data</code></pre>
 <div id="case-3-footrumor-ill-formatted" class="section level2 hasAnchor" number="17.5">
 <h2><span class="header-section-number">17.5</span> Case 3: footRumor (ill-formatted)<a href="read_json.html#case-3-footrumor-ill-formatted" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>食品闢謠的例子可能是個沒好好編過JSON的單位所編出來的案子，資料很簡單，但卻是一個list裡面有329個data.frame，且每個data.frame只有對腳現有資料，然後每一筆資料就一個data.frame。</p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="read_json.html#cb624-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&#39;http://data.fda.gov.tw/cacheData/159_3.json&#39;</span></span>
-<span id="cb624-2"><a href="read_json.html#cb624-2" tabindex="-1"></a>safefood <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url),<span class="st">&#39;text&#39;</span>))</span>
-<span id="cb624-3"><a href="read_json.html#cb624-3" tabindex="-1"></a><span class="co"># write_json(safefood, &quot;data/opendata_safefood_202304261256.json&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="read_json.html#cb626-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&#39;http://data.fda.gov.tw/cacheData/159_3.json&#39;</span></span>
+<span id="cb626-2"><a href="read_json.html#cb626-2" tabindex="-1"></a>safefood <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url),<span class="st">&#39;text&#39;</span>))</span>
+<span id="cb626-3"><a href="read_json.html#cb626-3" tabindex="-1"></a><span class="co"># write_json(safefood, &quot;data/opendata_safefood_202304261256.json&quot;)</span></span></code></pre></div>
 <p>為了避免產製本書時出錯，本程式採用預備好的資料來練習。但仍建議你用前述方式自網路上爬取資料下來練習。</p>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="read_json.html#cb625-1" tabindex="-1"></a>safefood <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_safefood_202304261256.json&quot;</span>)</span>
-<span id="cb625-2"><a href="read_json.html#cb625-2" tabindex="-1"></a><span class="co"># str(safefood)</span></span>
-<span id="cb625-3"><a href="read_json.html#cb625-3" tabindex="-1"></a><span class="fu">class</span>(safefood)</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="read_json.html#cb627-1" tabindex="-1"></a>safefood <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">&quot;data/opendata_safefood_202304261256.json&quot;</span>)</span>
+<span id="cb627-2"><a href="read_json.html#cb627-2" tabindex="-1"></a><span class="co"># str(safefood)</span></span>
+<span id="cb627-3"><a href="read_json.html#cb627-3" tabindex="-1"></a><span class="fu">class</span>(safefood)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="read_json.html#cb627-1" tabindex="-1"></a><span class="fu">class</span>(safefood[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="read_json.html#cb629-1" tabindex="-1"></a><span class="fu">class</span>(safefood[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="read_json.html#cb629-1" tabindex="-1"></a><span class="fu">dim</span>(safefood[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="read_json.html#cb631-1" tabindex="-1"></a><span class="fu">dim</span>(safefood[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre class="output"><code>## [1] 5 5</code></pre>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="read_json.html#cb631-1" tabindex="-1"></a><span class="co"># View(safefood[[1]])</span></span>
-<span id="cb631-2"><a href="read_json.html#cb631-2" tabindex="-1"></a><span class="co"># View(safefood)</span></span>
-<span id="cb631-3"><a href="read_json.html#cb631-3" tabindex="-1"></a><span class="co"># print(content(GET(url), &quot;text&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="read_json.html#cb633-1" tabindex="-1"></a><span class="co"># View(safefood[[1]])</span></span>
+<span id="cb633-2"><a href="read_json.html#cb633-2" tabindex="-1"></a><span class="co"># View(safefood)</span></span>
+<span id="cb633-3"><a href="read_json.html#cb633-3" tabindex="-1"></a><span class="co"># print(content(GET(url), &quot;text&quot;))</span></span></code></pre></div>
 <div id="處理非典型的json檔" class="section level3 hasAnchor" number="17.5.1">
 <h3><span class="header-section-number">17.5.1</span> 處理非典型的JSON檔<a href="read_json.html#處理非典型的json檔" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -1394,40 +1401,40 @@ raw$items$data</code></pre>
 <li><code>safefood.m &lt;- matrix(safefood.v, byrow = T, ncol = 5)</code>照列來折，因為每五個就一筆資料，所以是照列折，然後用<code>ncol = 5</code>來指定五個一折。</li>
 </ol></li>
 </ul>
-<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="read_json.html#cb632-1" tabindex="-1"></a><span class="co"># unlist data structure to a list</span></span>
-<span id="cb632-2"><a href="read_json.html#cb632-2" tabindex="-1"></a>safefood.v <span class="ot">&lt;-</span> <span class="fu">unlist</span>(safefood)</span>
-<span id="cb632-3"><a href="read_json.html#cb632-3" tabindex="-1"></a><span class="fu">head</span>(safefood.v)</span></code></pre></div>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="read_json.html#cb634-1" tabindex="-1"></a><span class="co"># unlist data structure to a list</span></span>
+<span id="cb634-2"><a href="read_json.html#cb634-2" tabindex="-1"></a>safefood.v <span class="ot">&lt;-</span> <span class="fu">unlist</span>(safefood)</span>
+<span id="cb634-3"><a href="read_json.html#cb634-3" tabindex="-1"></a><span class="fu">head</span>(safefood.v)</span></code></pre></div>
 <pre class="output"><code>## 分類1 分類2 分類3 分類4 分類5 標題1 
 ##    &quot;&quot;    NA    NA    NA    NA    NA</code></pre>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="read_json.html#cb634-1" tabindex="-1"></a><span class="co"># anyNA() to check if NAs still exist</span></span>
-<span id="cb634-2"><a href="read_json.html#cb634-2" tabindex="-1"></a><span class="fu">anyNA</span>(safefood.v)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="read_json.html#cb636-1" tabindex="-1"></a><span class="co"># anyNA() to check if NAs still exist</span></span>
+<span id="cb636-2"><a href="read_json.html#cb636-2" tabindex="-1"></a><span class="fu">anyNA</span>(safefood.v)</span></code></pre></div>
 <pre class="output"><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="read_json.html#cb636-1" tabindex="-1"></a><span class="co"># (option) check if NAs exist</span></span>
-<span id="cb636-2"><a href="read_json.html#cb636-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(safefood.v))</span></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="read_json.html#cb638-1" tabindex="-1"></a><span class="co"># (option) check if NAs exist</span></span>
+<span id="cb638-2"><a href="read_json.html#cb638-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(safefood.v))</span></code></pre></div>
 <pre class="output"><code>## [1] 10720</code></pre>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="read_json.html#cb638-1" tabindex="-1"></a><span class="co"># remove NAs</span></span>
-<span id="cb638-2"><a href="read_json.html#cb638-2" tabindex="-1"></a>safefood.v <span class="ot">&lt;-</span> safefood.v[<span class="sc">!</span><span class="fu">is.na</span>(safefood.v)]</span>
-<span id="cb638-3"><a href="read_json.html#cb638-3" tabindex="-1"></a><span class="co"># length(safefood.v)</span></span>
-<span id="cb638-4"><a href="read_json.html#cb638-4" tabindex="-1"></a></span>
-<span id="cb638-5"><a href="read_json.html#cb638-5" tabindex="-1"></a><span class="co"># double-check NAs</span></span>
-<span id="cb638-6"><a href="read_json.html#cb638-6" tabindex="-1"></a><span class="fu">anyNA</span>(safefood.v)</span></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="read_json.html#cb640-1" tabindex="-1"></a><span class="co"># remove NAs</span></span>
+<span id="cb640-2"><a href="read_json.html#cb640-2" tabindex="-1"></a>safefood.v <span class="ot">&lt;-</span> safefood.v[<span class="sc">!</span><span class="fu">is.na</span>(safefood.v)]</span>
+<span id="cb640-3"><a href="read_json.html#cb640-3" tabindex="-1"></a><span class="co"># length(safefood.v)</span></span>
+<span id="cb640-4"><a href="read_json.html#cb640-4" tabindex="-1"></a></span>
+<span id="cb640-5"><a href="read_json.html#cb640-5" tabindex="-1"></a><span class="co"># double-check NAs</span></span>
+<span id="cb640-6"><a href="read_json.html#cb640-6" tabindex="-1"></a><span class="fu">anyNA</span>(safefood.v)</span></code></pre></div>
 <pre class="output"><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="read_json.html#cb640-1" tabindex="-1"></a><span class="co"># head(safefood.v)</span></span>
-<span id="cb640-2"><a href="read_json.html#cb640-2" tabindex="-1"></a></span>
-<span id="cb640-3"><a href="read_json.html#cb640-3" tabindex="-1"></a></span>
-<span id="cb640-4"><a href="read_json.html#cb640-4" tabindex="-1"></a><span class="co"># convert vector to matrix</span></span>
-<span id="cb640-5"><a href="read_json.html#cb640-5" tabindex="-1"></a>safefood.m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(safefood.v, <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
-<span id="cb640-6"><a href="read_json.html#cb640-6" tabindex="-1"></a><span class="co"># ?matrix</span></span>
-<span id="cb640-7"><a href="read_json.html#cb640-7" tabindex="-1"></a></span>
-<span id="cb640-8"><a href="read_json.html#cb640-8" tabindex="-1"></a><span class="co"># convert matrix to dataframe</span></span>
-<span id="cb640-9"><a href="read_json.html#cb640-9" tabindex="-1"></a>safefood.df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(safefood.m)</span>
-<span id="cb640-10"><a href="read_json.html#cb640-10" tabindex="-1"></a></span>
-<span id="cb640-11"><a href="read_json.html#cb640-11" tabindex="-1"></a><span class="co"># delete the 4th column</span></span>
-<span id="cb640-12"><a href="read_json.html#cb640-12" tabindex="-1"></a>safefood.df <span class="ot">&lt;-</span> safefood.df[<span class="sc">-</span><span class="dv">4</span>]</span>
-<span id="cb640-13"><a href="read_json.html#cb640-13" tabindex="-1"></a></span>
-<span id="cb640-14"><a href="read_json.html#cb640-14" tabindex="-1"></a><span class="co"># naming the data.frame</span></span>
-<span id="cb640-15"><a href="read_json.html#cb640-15" tabindex="-1"></a><span class="fu">names</span>(safefood.df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;category&#39;</span>, <span class="st">&#39;question&#39;</span>, <span class="st">&#39;answer&#39;</span>, <span class="st">&#39;timestamp&#39;</span>)</span>
-<span id="cb640-16"><a href="read_json.html#cb640-16" tabindex="-1"></a><span class="fu">head</span>(safefood.df)</span></code></pre></div>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="read_json.html#cb642-1" tabindex="-1"></a><span class="co"># head(safefood.v)</span></span>
+<span id="cb642-2"><a href="read_json.html#cb642-2" tabindex="-1"></a></span>
+<span id="cb642-3"><a href="read_json.html#cb642-3" tabindex="-1"></a></span>
+<span id="cb642-4"><a href="read_json.html#cb642-4" tabindex="-1"></a><span class="co"># convert vector to matrix</span></span>
+<span id="cb642-5"><a href="read_json.html#cb642-5" tabindex="-1"></a>safefood.m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(safefood.v, <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb642-6"><a href="read_json.html#cb642-6" tabindex="-1"></a><span class="co"># ?matrix</span></span>
+<span id="cb642-7"><a href="read_json.html#cb642-7" tabindex="-1"></a></span>
+<span id="cb642-8"><a href="read_json.html#cb642-8" tabindex="-1"></a><span class="co"># convert matrix to dataframe</span></span>
+<span id="cb642-9"><a href="read_json.html#cb642-9" tabindex="-1"></a>safefood.df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(safefood.m)</span>
+<span id="cb642-10"><a href="read_json.html#cb642-10" tabindex="-1"></a></span>
+<span id="cb642-11"><a href="read_json.html#cb642-11" tabindex="-1"></a><span class="co"># delete the 4th column</span></span>
+<span id="cb642-12"><a href="read_json.html#cb642-12" tabindex="-1"></a>safefood.df <span class="ot">&lt;-</span> safefood.df[<span class="sc">-</span><span class="dv">4</span>]</span>
+<span id="cb642-13"><a href="read_json.html#cb642-13" tabindex="-1"></a></span>
+<span id="cb642-14"><a href="read_json.html#cb642-14" tabindex="-1"></a><span class="co"># naming the data.frame</span></span>
+<span id="cb642-15"><a href="read_json.html#cb642-15" tabindex="-1"></a><span class="fu">names</span>(safefood.df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;category&#39;</span>, <span class="st">&#39;question&#39;</span>, <span class="st">&#39;answer&#39;</span>, <span class="st">&#39;timestamp&#39;</span>)</span>
+<span id="cb642-16"><a href="read_json.html#cb642-16" tabindex="-1"></a><span class="fu">head</span>(safefood.df)</span></code></pre></div>
 <pre class="output"><code>##   category                                         question
 ## 1           使用含有acetaminophen成分藥品會傷腎，是真的嗎？
 ## 2                          使用退燒藥會延誤治療，是真的嗎？

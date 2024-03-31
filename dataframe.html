@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-24" />
+<meta name="date" content="2024-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,6 +709,12 @@ div.csl-indent {
 <li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
+<li class="chapter" data-level="29.6" data-path="geospatial.html"><a href="geospatial.html#mapping-youbike-location"><i class="fa fa-check"></i><b>29.6</b> Mapping Youbike Location</a>
+<ul>
+<li class="chapter" data-level="29.6.1" data-path="geospatial.html"><a href="geospatial.html#creating-a-new-variable"><i class="fa fa-check"></i><b>29.6.1</b> Creating a new variable</a></li>
+<li class="chapter" data-level="29.6.2" data-path="geospatial.html"><a href="geospatial.html#mapping-with-sf"><i class="fa fa-check"></i><b>29.6.2</b> Mapping with sf</a></li>
+<li class="chapter" data-level="29.6.3" data-path="geospatial.html"><a href="geospatial.html#using-ggmap-deprecated"><i class="fa fa-check"></i><b>29.6.3</b> Using ggmap (Deprecated)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
 <ul>
@@ -790,23 +796,23 @@ div.csl-indent {
 <div id="建立資料並assign給vector" class="section level4 hasAnchor" number="4.1.1.1">
 <h4><span class="header-section-number">4.1.1.1</span> 建立資料並Assign給vector<a href="dataframe.html#建立資料並assign給vector" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>用以下ChatGPT問句來產生測試資料「我現在正在準備R的教學範例， 請協助我產生台北市所有行政區的資料，包含行政區名、面積、人口數 分別指給town, area, population三個變數」。</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="dataframe.html#cb171-1" tabindex="-1"></a>town <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;松山區&quot;</span>, <span class="st">&quot;信義區&quot;</span>, <span class="st">&quot;大安區&quot;</span>, <span class="st">&quot;中山區&quot;</span>, <span class="st">&quot;中正區&quot;</span>, <span class="st">&quot;大同區&quot;</span>, <span class="st">&quot;萬華區&quot;</span>, <span class="st">&quot;文山區&quot;</span>, <span class="st">&quot;南港區&quot;</span>, <span class="st">&quot;內湖區&quot;</span>, <span class="st">&quot;士林區&quot;</span>, <span class="st">&quot;北投區&quot;</span>)</span>
-<span id="cb171-2"><a href="dataframe.html#cb171-2" tabindex="-1"></a></span>
-<span id="cb171-3"><a href="dataframe.html#cb171-3" tabindex="-1"></a>area <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">9.2878</span>, <span class="fl">11.2077</span>, <span class="fl">11.3614</span>, <span class="fl">13.6821</span>, <span class="fl">7.6071</span>, <span class="fl">5.6815</span>, <span class="fl">8.8522</span>, <span class="fl">31.5090</span>, <span class="fl">21.8424</span>, <span class="fl">31.5787</span>, <span class="fl">62.3682</span>, <span class="fl">56.8216</span>) <span class="co"># 單位：平方公里</span></span>
-<span id="cb171-4"><a href="dataframe.html#cb171-4" tabindex="-1"></a></span>
-<span id="cb171-5"><a href="dataframe.html#cb171-5" tabindex="-1"></a>population <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">206375</span>, <span class="dv">225561</span>, <span class="dv">309835</span>, <span class="dv">203276</span>, <span class="dv">159608</span>, <span class="dv">132397</span>, <span class="dv">194160</span>, <span class="dv">275207</span>, <span class="dv">122103</span>, <span class="dv">287726</span>, <span class="dv">288324</span>, <span class="dv">255688</span>)  <span class="co"># 2023年的估計值</span></span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="dataframe.html#cb173-1" tabindex="-1"></a>town <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;松山區&quot;</span>, <span class="st">&quot;信義區&quot;</span>, <span class="st">&quot;大安區&quot;</span>, <span class="st">&quot;中山區&quot;</span>, <span class="st">&quot;中正區&quot;</span>, <span class="st">&quot;大同區&quot;</span>, <span class="st">&quot;萬華區&quot;</span>, <span class="st">&quot;文山區&quot;</span>, <span class="st">&quot;南港區&quot;</span>, <span class="st">&quot;內湖區&quot;</span>, <span class="st">&quot;士林區&quot;</span>, <span class="st">&quot;北投區&quot;</span>)</span>
+<span id="cb173-2"><a href="dataframe.html#cb173-2" tabindex="-1"></a></span>
+<span id="cb173-3"><a href="dataframe.html#cb173-3" tabindex="-1"></a>area <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">9.2878</span>, <span class="fl">11.2077</span>, <span class="fl">11.3614</span>, <span class="fl">13.6821</span>, <span class="fl">7.6071</span>, <span class="fl">5.6815</span>, <span class="fl">8.8522</span>, <span class="fl">31.5090</span>, <span class="fl">21.8424</span>, <span class="fl">31.5787</span>, <span class="fl">62.3682</span>, <span class="fl">56.8216</span>) <span class="co"># 單位：平方公里</span></span>
+<span id="cb173-4"><a href="dataframe.html#cb173-4" tabindex="-1"></a></span>
+<span id="cb173-5"><a href="dataframe.html#cb173-5" tabindex="-1"></a>population <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">206375</span>, <span class="dv">225561</span>, <span class="dv">309835</span>, <span class="dv">203276</span>, <span class="dv">159608</span>, <span class="dv">132397</span>, <span class="dv">194160</span>, <span class="dv">275207</span>, <span class="dv">122103</span>, <span class="dv">287726</span>, <span class="dv">288324</span>, <span class="dv">255688</span>)  <span class="co"># 2023年的估計值</span></span></code></pre></div>
 </div>
 <div id="合併等長vector為dataframe" class="section level4 hasAnchor" number="4.1.1.2">
 <h4><span class="header-section-number">4.1.1.2</span> 合併等長vector為dataframe<a href="dataframe.html#合併等長vector為dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="dataframe.html#cb172-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(town, population, area)</span>
-<span id="cb172-2"><a href="dataframe.html#cb172-2" tabindex="-1"></a>df<span class="sc">$</span>density <span class="ot">=</span> df<span class="sc">$</span>population <span class="sc">/</span> df<span class="sc">$</span>area</span>
-<span id="cb172-3"><a href="dataframe.html#cb172-3" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="dataframe.html#cb174-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(town, population, area)</span>
+<span id="cb174-2"><a href="dataframe.html#cb174-2" tabindex="-1"></a>df<span class="sc">$</span>density <span class="ot">=</span> df<span class="sc">$</span>population <span class="sc">/</span> df<span class="sc">$</span>area</span>
+<span id="cb174-3"><a href="dataframe.html#cb174-3" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="output"><code>## &#39;data.frame&#39;:    6 obs. of  4 variables:
 ##  $ town      : chr  &quot;中正&quot; &quot;大同&quot; &quot;中山&quot; &quot;松山&quot; ...
 ##  $ population: num  158228 126687 228075 204903 308383 ...
 ##  $ area      : num  7.61 5.68 13.68 9.29 11.36 ...
 ##  $ density   : num  20800 22298 16670 22062 27143 ...</code></pre>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="dataframe.html#cb174-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="dataframe.html#cb176-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre class="output"><code>##      town             population          area           density     
 ##  Length:6           Min.   :126687   Min.   : 5.681   Min.   :16670  
 ##  Class :character   1st Qu.:165651   1st Qu.: 7.918   1st Qu.:20907  
@@ -814,37 +820,37 @@ div.csl-indent {
 ##                     Mean   :202366   Mean   : 9.412   Mean   :21700  
 ##                     3rd Qu.:222282   3rd Qu.:10.843   3rd Qu.:22239  
 ##                     Max.   :308383   Max.   :13.682   Max.   :27143</code></pre>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="dataframe.html#cb176-1" tabindex="-1"></a><span class="co"># View(df)</span></span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="dataframe.html#cb178-1" tabindex="-1"></a><span class="co"># View(df)</span></span></code></pre></div>
 </div>
 <div id="存放台灣貿易各國進出口量" class="section level4 hasAnchor" number="4.1.1.3">
 <h4><span class="header-section-number">4.1.1.3</span> 存放台灣貿易各國進出口量<a href="dataframe.html#存放台灣貿易各國進出口量" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
 <li>運用<a href="https://cuswebo.trade.gov.tw/">國際貿易署貿易統計系統 (trade.gov.tw)</a>獲取臺灣進出口貿易資料。</li>
 </ul>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="dataframe.html#cb177-1" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CN&quot;</span>, <span class="st">&quot;US&quot;</span>, <span class="st">&quot;JP&quot;</span>, <span class="st">&quot;HK&quot;</span>, <span class="st">&quot;KR&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;DE&quot;</span>, <span class="st">&quot;MY&quot;</span>, <span class="st">&quot;VN&quot;</span>, <span class="st">&quot;PH&quot;</span>, <span class="st">&quot;TH&quot;</span>, <span class="st">&quot;AU&quot;</span>, <span class="st">&quot;NL&quot;</span>, <span class="st">&quot;SA&quot;</span>, <span class="st">&quot;ID&quot;</span>, <span class="st">&quot;GB&quot;</span>, <span class="st">&quot;IN&quot;</span>, <span class="st">&quot;FR&quot;</span>, <span class="st">&quot;IT&quot;</span>, <span class="st">&quot;AE&quot;</span>)</span>
-<span id="cb177-2"><a href="dataframe.html#cb177-2" tabindex="-1"></a></span>
-<span id="cb177-3"><a href="dataframe.html#cb177-3" tabindex="-1"></a>import <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">26.142</span>, <span class="fl">12.008</span>, <span class="fl">7.032</span>, <span class="fl">13.646</span>, <span class="fl">4.589</span>, <span class="fl">5.768</span>, <span class="fl">2.131</span>, <span class="fl">2.802</span>, <span class="fl">3.428</span>, <span class="fl">3.019</span>, <span class="fl">1.976</span>, <span class="fl">1.118</span>, <span class="fl">1.624</span>, <span class="fl">0.449</span>, <span class="fl">0.983</span>, <span class="fl">1.302</span>, <span class="fl">1.027</span>, <span class="fl">0.553</span>, <span class="fl">0.670</span>, <span class="fl">0.455</span>)</span>
-<span id="cb177-4"><a href="dataframe.html#cb177-4" tabindex="-1"></a></span>
-<span id="cb177-5"><a href="dataframe.html#cb177-5" tabindex="-1"></a>export <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">22.987</span>, <span class="fl">12.204</span>, <span class="fl">11.837</span>, <span class="fl">7.739</span>, <span class="fl">5.381</span>, <span class="fl">4.610</span>, <span class="fl">2.866</span>, <span class="fl">2.784</span>, <span class="fl">2.414</span>, <span class="fl">2.092</span>, <span class="fl">1.839</span>, <span class="fl">1.788</span>, <span class="fl">1.665</span>, <span class="fl">1.409</span>, <span class="fl">1.391</span>, <span class="fl">1.075</span>, <span class="fl">0.974</span>, <span class="fl">0.899</span>, <span class="fl">0.800</span>, <span class="fl">0.728</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="dataframe.html#cb179-1" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CN&quot;</span>, <span class="st">&quot;US&quot;</span>, <span class="st">&quot;JP&quot;</span>, <span class="st">&quot;HK&quot;</span>, <span class="st">&quot;KR&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;DE&quot;</span>, <span class="st">&quot;MY&quot;</span>, <span class="st">&quot;VN&quot;</span>, <span class="st">&quot;PH&quot;</span>, <span class="st">&quot;TH&quot;</span>, <span class="st">&quot;AU&quot;</span>, <span class="st">&quot;NL&quot;</span>, <span class="st">&quot;SA&quot;</span>, <span class="st">&quot;ID&quot;</span>, <span class="st">&quot;GB&quot;</span>, <span class="st">&quot;IN&quot;</span>, <span class="st">&quot;FR&quot;</span>, <span class="st">&quot;IT&quot;</span>, <span class="st">&quot;AE&quot;</span>)</span>
+<span id="cb179-2"><a href="dataframe.html#cb179-2" tabindex="-1"></a></span>
+<span id="cb179-3"><a href="dataframe.html#cb179-3" tabindex="-1"></a>import <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">26.142</span>, <span class="fl">12.008</span>, <span class="fl">7.032</span>, <span class="fl">13.646</span>, <span class="fl">4.589</span>, <span class="fl">5.768</span>, <span class="fl">2.131</span>, <span class="fl">2.802</span>, <span class="fl">3.428</span>, <span class="fl">3.019</span>, <span class="fl">1.976</span>, <span class="fl">1.118</span>, <span class="fl">1.624</span>, <span class="fl">0.449</span>, <span class="fl">0.983</span>, <span class="fl">1.302</span>, <span class="fl">1.027</span>, <span class="fl">0.553</span>, <span class="fl">0.670</span>, <span class="fl">0.455</span>)</span>
+<span id="cb179-4"><a href="dataframe.html#cb179-4" tabindex="-1"></a></span>
+<span id="cb179-5"><a href="dataframe.html#cb179-5" tabindex="-1"></a>export <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">22.987</span>, <span class="fl">12.204</span>, <span class="fl">11.837</span>, <span class="fl">7.739</span>, <span class="fl">5.381</span>, <span class="fl">4.610</span>, <span class="fl">2.866</span>, <span class="fl">2.784</span>, <span class="fl">2.414</span>, <span class="fl">2.092</span>, <span class="fl">1.839</span>, <span class="fl">1.788</span>, <span class="fl">1.665</span>, <span class="fl">1.409</span>, <span class="fl">1.391</span>, <span class="fl">1.075</span>, <span class="fl">0.974</span>, <span class="fl">0.899</span>, <span class="fl">0.800</span>, <span class="fl">0.728</span>)</span></code></pre></div>
 </div>
 <div id="合併vector為data.frame" class="section level4 hasAnchor" number="4.1.1.4">
 <h4><span class="header-section-number">4.1.1.4</span> 合併vector為data.frame<a href="dataframe.html#合併vector為data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>當我們讀取或創建資料框架時，過去R預設會將字符串類型的變數轉換為因子（Factors），這對於統計分析而言是有益的，因為統計分析經常將文字型態的數據視為類別變數來處理。然而，隨著資料科學領域的快速發展，需要處理大量文字數據的情況日益增多，這時將文字資料預設為因子型態可能不再適合所有情境。因此，現在R的預設的處理方式已經改變，預設將文字型態的變數保持為字符型態（Character），而不是自動將其轉換為因子。這意味著，當我們使用<code>read.csv</code>等函數讀取數據時，除非明確指定，否則讀入的字符串不會自動轉換為Factors型態。</p>
 <p>如果你在進行統計分析時希望將文字型態的變數作為類別變數（即因子）處理，你需要手動設定<code>stringsAsFactors</code>參數為<code>TRUE</code>。這可以在讀取數據時（如使用<code>read.csv</code>函數）或在數據處理過程中明確進行轉換。例如，當使用<code>read.csv</code>讀取CSV文件時，若想將所有的字符串變數自動轉為因子型態，可以這樣做：<code>df &lt;- read.csv("your_file.csv", stringsAsFactors = TRUE)</code>。若已經讀取數據且數據框架中的文字型態變數仍為Character型態，而你希望將其轉換為Factors，可以使用<code>factor</code>函數進行轉換：<code>df$your_column &lt;- factor(df$your_column)</code>。</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="dataframe.html#cb178-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb178-2"><a href="dataframe.html#cb178-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="dataframe.html#cb180-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb180-2"><a href="dataframe.html#cb180-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
 ##  $ country: Factor w/ 20 levels &quot;AE&quot;,&quot;AU&quot;,&quot;CN&quot;,..: 3 19 11 7 12 17 4 13 20 15 ...
 ##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="dataframe.html#cb180-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export)</span>
-<span id="cb180-2"><a href="dataframe.html#cb180-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="dataframe.html#cb182-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export)</span>
+<span id="cb182-2"><a href="dataframe.html#cb182-2" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
 ##  $ country: chr  &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; ...
 ##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
 <p>其他功能：建立一個新且空的<code>data.frame</code>。</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="dataframe.html#cb182-1" tabindex="-1"></a>df.test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="dataframe.html#cb184-1" tabindex="-1"></a>df.test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span></code></pre></div>
 </div>
 </div>
 <div id="觀察dataframe" class="section level3 hasAnchor" number="4.1.2">
@@ -857,8 +863,8 @@ div.csl-indent {
 <li><p><code>str(df)</code>: <code>str</code>是結構（structure）的縮寫，這個函數提供了dataframe的詳細結構信息，包括變項的數量、變項名稱、變項數據類型以及每個變項前幾個值。這是一個非常強大的函數，用於深入了解數據集的內部結構，特別是當處理大型數據集時。</p></li>
 <li><p><code>summary(df)</code>: 此函數提供了數據框架的摘要統計信息，包括數值變數的最小值、最大值、中位數、平均值、第一四分位數和第三四分位數，以及因子變數的水平計數。這對於快速獲取數據集的統計概述非常有用。</p></li>
 </ol>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="dataframe.html#cb183-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
-<span id="cb183-2"><a href="dataframe.html#cb183-2" tabindex="-1"></a><span class="fu">head</span>(df)    <span class="co"># get first part of the data.frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="dataframe.html#cb185-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
+<span id="cb185-2"><a href="dataframe.html#cb185-2" tabindex="-1"></a><span class="fu">head</span>(df)    <span class="co"># get first part of the data.frame</span></span></code></pre></div>
 <pre class="output"><code>##   country import export
 ## 1      CN 26.142 22.987
 ## 2      US 12.008 12.204
@@ -866,14 +872,14 @@ div.csl-indent {
 ## 4      HK 13.646  7.739
 ## 5      KR  4.589  5.381
 ## 6      SG  5.768  4.610</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="dataframe.html#cb185-1" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="dataframe.html#cb187-1" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="dataframe.html#cb187-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="dataframe.html#cb189-1" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre class="output"><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
 ##  $ country: chr  &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; ...
 ##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="dataframe.html#cb189-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="dataframe.html#cb191-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre class="output"><code>##    country              import           export      
 ##  Length:20          Min.   : 0.449   Min.   : 0.728  
 ##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
@@ -881,18 +887,18 @@ div.csl-indent {
 ##                     Mean   : 4.536   Mean   : 4.374  
 ##                     3rd Qu.: 4.884   3rd Qu.: 4.803  
 ##                     Max.   :26.142   Max.   :22.987</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="dataframe.html#cb191-1" tabindex="-1"></a><span class="co"># look up help</span></span>
-<span id="cb191-2"><a href="dataframe.html#cb191-2" tabindex="-1"></a><span class="fu">help</span>(summary)</span>
-<span id="cb191-3"><a href="dataframe.html#cb191-3" tabindex="-1"></a>?summary</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="dataframe.html#cb193-1" tabindex="-1"></a><span class="co"># look up help</span></span>
+<span id="cb193-2"><a href="dataframe.html#cb193-2" tabindex="-1"></a><span class="fu">help</span>(summary)</span>
+<span id="cb193-3"><a href="dataframe.html#cb193-3" tabindex="-1"></a>?summary</span></code></pre></div>
 <div id="觀察資料維度" class="section level4 hasAnchor" number="4.1.2.1">
 <h4><span class="header-section-number">4.1.2.1</span> 觀察資料維度<a href="dataframe.html#觀察資料維度" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="dataframe.html#cb192-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="dataframe.html#cb194-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 20  3</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="dataframe.html#cb194-1" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="dataframe.html#cb196-1" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="dataframe.html#cb196-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="dataframe.html#cb198-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 20</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="dataframe.html#cb198-1" tabindex="-1"></a><span class="fu">length</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="dataframe.html#cb200-1" tabindex="-1"></a><span class="fu">length</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 3</code></pre>
 </div>
 </div>
@@ -906,13 +912,13 @@ div.csl-indent {
 <li><code>df$發生時段</code> 顯示該變數內容</li>
 <li><code>length(df$發生時段)</code> 顯示該變數的長度（相當於有幾個）</li>
 </ul>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="dataframe.html#cb200-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="dataframe.html#cb202-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;country&quot; &quot;import&quot;  &quot;export&quot;</code></pre>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="dataframe.html#cb202-1" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>export)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="dataframe.html#cb204-1" tabindex="-1"></a><span class="fu">head</span>(df<span class="sc">$</span>export)</span></code></pre></div>
 <pre class="output"><code>## [1] 22.987 12.204 11.837  7.739  5.381  4.610</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="dataframe.html#cb204-1" tabindex="-1"></a><span class="fu">length</span>(df<span class="sc">$</span>import)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="dataframe.html#cb206-1" tabindex="-1"></a><span class="fu">length</span>(df<span class="sc">$</span>import)</span></code></pre></div>
 <pre class="output"><code>## [1] 20</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="dataframe.html#cb206-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="dataframe.html#cb208-1" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
 <pre class="output"><code>##    country              import           export      
 ##  Length:20          Min.   : 0.449   Min.   : 0.728  
 ##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
@@ -927,7 +933,7 @@ div.csl-indent {
 <li>這裡容易犯錯的是，要記得跟程式講說你要加總或四則運算的是哪個df的variable。</li>
 <li>從下面的這個操作中，該data.frame會產生一個新的變數<code>sub</code>，這就相當於Excel中的某一行減去某一行，然後把資料放在新的一行。</li>
 </ul>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="dataframe.html#cb208-1" tabindex="-1"></a>df<span class="sc">$</span>sub <span class="ot">&lt;-</span> df<span class="sc">$</span>import <span class="sc">-</span> df<span class="sc">$</span>export</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="dataframe.html#cb210-1" tabindex="-1"></a>df<span class="sc">$</span>sub <span class="ot">&lt;-</span> df<span class="sc">$</span>import <span class="sc">-</span> df<span class="sc">$</span>export</span></code></pre></div>
 </div>
 <div id="filter篩選資料選取變數" class="section level4 hasAnchor" number="4.1.3.3">
 <h4><span class="header-section-number">4.1.3.3</span> (filter)篩選資料、選取變數<a href="dataframe.html#filter篩選資料選取變數" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -937,7 +943,7 @@ div.csl-indent {
 <li><p>下面的例子<code>nrow(df)</code>為1894，有1894筆資料，所以自然df<span class="math inline">\(import與df\)</span>export的長度都是1894。因此，比較這兩個變數的大小會得到一個長度為1894的boolean (logical) variable。因此把這個長度為1894、充滿TRUE和FALSE的logical vector丟進df的row之處，因為取自df，大小判斷式結果的長度自然和原本的df的列數相同。因此當這個TRUE/FALSE被丟在df的列之處，便會篩選出<code>import</code>大於<code>p.xport</code>的數值。</p></li>
 <li><p>原本的df有五個variable，而上述的操作是篩選資料，所以被篩選的是列，因此行的數量、名稱都不會變。因此，我篩選完後，直接存取這個被篩選過的data.frame的country variable，自然是可以的。</p></li>
 </ul>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="dataframe.html#cb209-1" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="dataframe.html#cb211-1" tabindex="-1"></a>df</span></code></pre></div>
 <pre class="output"><code>##    country import export    sub
 ## 1       CN 26.142 22.987  3.155
 ## 2       US 12.008 12.204 -0.196
@@ -959,12 +965,12 @@ div.csl-indent {
 ## 18      FR  0.553  0.899 -0.346
 ## 19      IT  0.670  0.800 -0.130
 ## 20      AE  0.455  0.728 -0.273</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="dataframe.html#cb211-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="dataframe.html#cb213-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;country&quot; &quot;import&quot;  &quot;export&quot;  &quot;sub&quot;</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="dataframe.html#cb213-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="dataframe.html#cb215-1" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 20</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="dataframe.html#cb215-1" tabindex="-1"></a><span class="co"># filter row data by column value</span></span>
-<span id="cb215-2"><a href="dataframe.html#cb215-2" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="dataframe.html#cb217-1" tabindex="-1"></a><span class="co"># filter row data by column value</span></span>
+<span id="cb217-2"><a href="dataframe.html#cb217-2" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]</span></code></pre></div>
 <pre class="output"><code>##    country import export   sub
 ## 1       CN 26.142 22.987 3.155
 ## 4       HK 13.646  7.739 5.907
@@ -975,18 +981,18 @@ div.csl-indent {
 ## 11      TH  1.976  1.839 0.137
 ## 16      GB  1.302  1.075 0.227
 ## 17      IN  1.027  0.974 0.053</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="dataframe.html#cb217-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]<span class="sc">$</span>country</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="dataframe.html#cb219-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,]<span class="sc">$</span>country</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;CN&quot; &quot;HK&quot; &quot;SG&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;GB&quot; &quot;IN&quot;</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="dataframe.html#cb219-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="dataframe.html#cb221-1" tabindex="-1"></a>df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;CN&quot; &quot;HK&quot; &quot;SG&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;GB&quot; &quot;IN&quot;</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="dataframe.html#cb221-1" tabindex="-1"></a><span class="co"># 1 row == a data.frame with only one data entry</span></span>
-<span id="cb221-2"><a href="dataframe.html#cb221-2" tabindex="-1"></a><span class="fu">class</span>(df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="dataframe.html#cb223-1" tabindex="-1"></a><span class="co"># 1 row == a data.frame with only one data entry</span></span>
+<span id="cb223-2"><a href="dataframe.html#cb223-2" tabindex="-1"></a><span class="fu">class</span>(df[df<span class="sc">$</span>import <span class="sc">&gt;</span> df<span class="sc">$</span>export,<span class="dv">1</span>])</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="dataframe.html#cb223-1" tabindex="-1"></a><span class="fu">class</span>(df[,<span class="dv">1</span>]) <span class="co"># character vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="dataframe.html#cb225-1" tabindex="-1"></a><span class="fu">class</span>(df[,<span class="dv">1</span>]) <span class="co"># character vector</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="dataframe.html#cb225-1" tabindex="-1"></a><span class="fu">class</span>(df[<span class="dv">1</span>,]) <span class="co"># data.frame</span></span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="dataframe.html#cb227-1" tabindex="-1"></a><span class="fu">class</span>(df[<span class="dv">1</span>,]) <span class="co"># data.frame</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="dataframe.html#cb227-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(df[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])) <span class="co"># filter the 1st row and select all columns except 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="dataframe.html#cb229-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(df[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>])) <span class="co"># filter the 1st row and select all columns except 1</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
 </div>
 <div id="arrange-按某個變數排序" class="section level4 hasAnchor" number="4.1.3.4">
@@ -994,17 +1000,17 @@ div.csl-indent {
 <ul>
 <li><code>df.sorted &lt;- df[order(df$import),]</code>會使得整個df照<code>import</code>的大小排序重新做排列。因為<code>order(df$import)</code>會把資料照指定順序排列後的位置傳回來，所以把他丟給<code>df</code>的列的位置，便會使得<code>df</code>的資料照指定的順序排列。 預設是由小到大，加上<code>decreasing = T</code>這個參數後變成由大而小。</li>
 </ul>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="dataframe.html#cb229-1" tabindex="-1"></a><span class="co"># sort rows by df$import column</span></span>
-<span id="cb229-2"><a href="dataframe.html#cb229-2" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import),]</span>
-<span id="cb229-3"><a href="dataframe.html#cb229-3" tabindex="-1"></a><span class="co"># View(df.sorted)</span></span>
-<span id="cb229-4"><a href="dataframe.html#cb229-4" tabindex="-1"></a></span>
-<span id="cb229-5"><a href="dataframe.html#cb229-5" tabindex="-1"></a><span class="co"># sort rows in decreasing order</span></span>
-<span id="cb229-6"><a href="dataframe.html#cb229-6" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import, <span class="at">decreasing =</span> T),]</span>
-<span id="cb229-7"><a href="dataframe.html#cb229-7" tabindex="-1"></a></span>
-<span id="cb229-8"><a href="dataframe.html#cb229-8" tabindex="-1"></a><span class="co"># add - to column in order() can sort in decreasing order</span></span>
-<span id="cb229-9"><a href="dataframe.html#cb229-9" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>import),]</span>
-<span id="cb229-10"><a href="dataframe.html#cb229-10" tabindex="-1"></a></span>
-<span id="cb229-11"><a href="dataframe.html#cb229-11" tabindex="-1"></a><span class="fu">head</span>(df.sorted)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="dataframe.html#cb231-1" tabindex="-1"></a><span class="co"># sort rows by df$import column</span></span>
+<span id="cb231-2"><a href="dataframe.html#cb231-2" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import),]</span>
+<span id="cb231-3"><a href="dataframe.html#cb231-3" tabindex="-1"></a><span class="co"># View(df.sorted)</span></span>
+<span id="cb231-4"><a href="dataframe.html#cb231-4" tabindex="-1"></a></span>
+<span id="cb231-5"><a href="dataframe.html#cb231-5" tabindex="-1"></a><span class="co"># sort rows in decreasing order</span></span>
+<span id="cb231-6"><a href="dataframe.html#cb231-6" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>import, <span class="at">decreasing =</span> T),]</span>
+<span id="cb231-7"><a href="dataframe.html#cb231-7" tabindex="-1"></a></span>
+<span id="cb231-8"><a href="dataframe.html#cb231-8" tabindex="-1"></a><span class="co"># add - to column in order() can sort in decreasing order</span></span>
+<span id="cb231-9"><a href="dataframe.html#cb231-9" tabindex="-1"></a>df.sorted <span class="ot">&lt;-</span> df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>import),]</span>
+<span id="cb231-10"><a href="dataframe.html#cb231-10" tabindex="-1"></a></span>
+<span id="cb231-11"><a href="dataframe.html#cb231-11" tabindex="-1"></a><span class="fu">head</span>(df.sorted)</span></code></pre></div>
 <pre class="output"><code>##   country import export    sub
 ## 1      CN 26.142 22.987  3.155
 ## 4      HK 13.646  7.739  5.907
@@ -1020,14 +1026,14 @@ div.csl-indent {
 <ul>
 <li><code>graphics::plot()</code>為會預載入R的繪圖套件，如果希望繪圖的同時加上回歸線和資料點標籤的話，必須要三行一起執行。</li>
 </ul>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="dataframe.html#cb231-1" tabindex="-1"></a><span class="co"># plot(df) # raise error, 1st column is a character vector</span></span>
-<span id="cb231-2"><a href="dataframe.html#cb231-2" tabindex="-1"></a><span class="fu">plot</span>(df[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="dataframe.html#cb233-1" tabindex="-1"></a><span class="co"># plot(df) # raise error, 1st column is a character vector</span></span>
+<span id="cb233-2"><a href="dataframe.html#cb233-2" tabindex="-1"></a><span class="fu">plot</span>(df[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <p><img src="R04_dataframe_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="dataframe.html#cb232-1" tabindex="-1"></a><span class="fu">plot</span>(df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
-<span id="cb232-2"><a href="dataframe.html#cb232-2" tabindex="-1"></a><span class="fu">text</span>(import, export, <span class="at">labels=</span>country, <span class="at">cex=</span> <span class="fl">0.5</span>, <span class="at">pos=</span><span class="dv">3</span>)</span>
-<span id="cb232-3"><a href="dataframe.html#cb232-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="dataframe.html#cb234-1" tabindex="-1"></a><span class="fu">plot</span>(df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb234-2"><a href="dataframe.html#cb234-2" tabindex="-1"></a><span class="fu">text</span>(import, export, <span class="at">labels=</span>country, <span class="at">cex=</span> <span class="fl">0.5</span>, <span class="at">pos=</span><span class="dv">3</span>)</span>
+<span id="cb234-3"><a href="dataframe.html#cb234-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 <p><img src="R04_dataframe_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="dataframe.html#cb233-1" tabindex="-1"></a>?plot</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="dataframe.html#cb235-1" tabindex="-1"></a>?plot</span></code></pre></div>
 <pre class="output"><code>## Help on topic &#39;plot&#39; was found in the following packages:
 ## 
 ##   Package               Library
@@ -1041,10 +1047,10 @@ div.csl-indent {
 <h2><span class="header-section-number">4.3</span> 延伸學習<a href="dataframe.html#延伸學習" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="使用dplyr" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> 使用dplyr<a href="dataframe.html#使用dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="dataframe.html#cb235-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb235-2"><a href="dataframe.html#cb235-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb235-3"><a href="dataframe.html#cb235-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">sub =</span> import <span class="sc">-</span> export)</span>
-<span id="cb235-4"><a href="dataframe.html#cb235-4" tabindex="-1"></a><span class="fu">filter</span>(df, import <span class="sc">&gt;</span> export)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="dataframe.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb237-2"><a href="dataframe.html#cb237-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, import, export, <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb237-3"><a href="dataframe.html#cb237-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">sub =</span> import <span class="sc">-</span> export)</span>
+<span id="cb237-4"><a href="dataframe.html#cb237-4" tabindex="-1"></a><span class="fu">filter</span>(df, import <span class="sc">&gt;</span> export)</span></code></pre></div>
 <pre class="output"><code>##   country import export   sub
 ## 1      CN 26.142 22.987 3.155
 ## 2      HK 13.646  7.739 5.907
@@ -1055,7 +1061,7 @@ div.csl-indent {
 ## 7      TH  1.976  1.839 0.137
 ## 8      GB  1.302  1.075 0.227
 ## 9      IN  1.027  0.974 0.053</code></pre>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="dataframe.html#cb237-1" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="dataframe.html#cb239-1" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre class="output"><code>##    country export
 ## 1       CN 22.987
 ## 2       US 12.204
@@ -1077,22 +1083,22 @@ div.csl-indent {
 ## 18      FR  0.899
 ## 19      IT  0.800
 ## 20      AE  0.728</code></pre>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="dataframe.html#cb239-1" tabindex="-1"></a><span class="fu">message</span>(df<span class="sc">$</span>country)</span>
-<span id="cb239-2"><a href="dataframe.html#cb239-2" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>country)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="dataframe.html#cb241-1" tabindex="-1"></a><span class="fu">message</span>(df<span class="sc">$</span>country)</span>
+<span id="cb241-2"><a href="dataframe.html#cb241-2" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>country)</span></code></pre></div>
 <pre class="output"><code>##  [1] &quot;CN&quot; &quot;US&quot; &quot;JP&quot; &quot;HK&quot; &quot;KR&quot; &quot;SG&quot; &quot;DE&quot; &quot;MY&quot; &quot;VN&quot; &quot;PH&quot; &quot;TH&quot; &quot;AU&quot; &quot;NL&quot; &quot;SA&quot; &quot;ID&quot;
 ## [16] &quot;GB&quot; &quot;IN&quot; &quot;FR&quot; &quot;IT&quot; &quot;AE&quot;</code></pre>
 </div>
 <div id="比較tibble-data_frame-data.frame" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> 比較tibble, data_frame, data.frame<a href="dataframe.html#比較tibble-data_frame-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>警告： "data_frame()" was deprecated in tibble 1.1.0. Please use "tibble()" instead.</code></p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="dataframe.html#cb241-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb241-2"><a href="dataframe.html#cb241-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
-<pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="dataframe.html#cb243-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="dataframe.html#cb243-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
 <span id="cb243-2"><a href="dataframe.html#cb243-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
-<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="dataframe.html#cb245-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<pre class="output"><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="dataframe.html#cb245-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
 <span id="cb245-2"><a href="dataframe.html#cb245-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
+<pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="dataframe.html#cb247-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">c=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb247-2"><a href="dataframe.html#cb247-2" tabindex="-1"></a><span class="fu">class</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 
 </div>
@@ -1107,22 +1113,22 @@ div.csl-indent {
 <h3><span class="header-section-number">4.4.1</span> Reading .xlsx by readxl package<a href="dataframe.html#reading-.xlsx-by-readxl-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在進行產假支薪調查數據的分析與視覺化時，我們從該調查網站上所下載的資料是一個Excel文件。由於R語言本身不直接支援讀取Excel格式的文件，我們必須依靠外部的套件來實現這一功能，如<strong><code>readxl</code></strong>套件。它是專門設計來讀取<strong><code>.xls</code></strong>和<strong><code>.xlsx</code></strong>格式文件的強大工具。<strong><code>readxl</code></strong>套件是<strong><code>tidyverse</code></strong>套件集的一部分。<strong><code>tidyverse</code></strong>是一組旨在數據科學和數據處理領域提供便利的R套件集合，包括了<strong><code>ggplot2</code></strong>、<strong><code>dplyr</code></strong>、<strong><code>tidyr</code></strong>等多個流行的套件。如果你之前已經安裝了<strong><code>tidyverse</code></strong>，那麼<strong><code>readxl</code></strong>套件應該也已經安裝在你的系統上，無需進行重複安裝。</p>
 <p>然而，即便<strong><code>readxl</code></strong>已經安裝，它並不會隨著<strong><code>tidyverse</code></strong>套件集的其他部分自動加載到R的執行環境中。這意味著，在你打算使用<strong><code>readxl</code></strong>套件來讀取Excel文件之前，需要先手動執行<strong><code>library(readxl)</code></strong>命令來加載它。</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="dataframe.html#cb247-1" tabindex="-1"></a><span class="co"># Import readxl package</span></span>
-<span id="cb247-2"><a href="dataframe.html#cb247-2" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span>
-<span id="cb247-3"><a href="dataframe.html#cb247-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="dataframe.html#cb249-1" tabindex="-1"></a><span class="co"># Import readxl package</span></span>
+<span id="cb249-2"><a href="dataframe.html#cb249-2" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span>
+<span id="cb249-3"><a href="dataframe.html#cb249-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
 <p>這段程式碼使用<code>read_excel()</code>函式從<code>data</code>資料夾中的<code>WORLD-MACHE_Gender_6.8.15.xls</code>檔案中的<code>Sheet1</code>工作表讀取資料。其中<code>col_names=T</code>為該函式的參數，表示第一列為欄位名稱。讀取後的資料會被Assign給變數<code>df</code>。</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="dataframe.html#cb248-1" tabindex="-1"></a><span class="co"># Use read_excel() to convert excel sheet to data.frame</span></span>
-<span id="cb248-2"><a href="dataframe.html#cb248-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="dataframe.html#cb250-1" tabindex="-1"></a><span class="co"># Use read_excel() to convert excel sheet to data.frame</span></span>
+<span id="cb250-2"><a href="dataframe.html#cb250-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span></code></pre></div>
 </div>
 <div id="previewing-data-by-view-class-dim-str-summary-and-names" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="dataframe.html#cb249-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
-<span id="cb249-2"><a href="dataframe.html#cb249-2" tabindex="-1"></a><span class="fu">class</span>(df)       <span class="co"># [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="dataframe.html#cb251-1" tabindex="-1"></a><span class="co"># View(df)</span></span>
+<span id="cb251-2"><a href="dataframe.html#cb251-2" tabindex="-1"></a><span class="fu">class</span>(df)       <span class="co"># [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="dataframe.html#cb251-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="dataframe.html#cb253-1" tabindex="-1"></a><span class="fu">dim</span>(df)</span></code></pre></div>
 <pre class="output"><code>## [1] 197 156</code></pre>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="dataframe.html#cb253-1" tabindex="-1"></a><span class="co"># Show names of variables (vectors, columns) by names()</span></span>
-<span id="cb253-2"><a href="dataframe.html#cb253-2" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="dataframe.html#cb255-1" tabindex="-1"></a><span class="co"># Show names of variables (vectors, columns) by names()</span></span>
+<span id="cb255-2"><a href="dataframe.html#cb255-2" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
 <pre class="output"><code>##   [1] &quot;country&quot;           &quot;iso2&quot;              &quot;iso3&quot;             
 ##   [4] &quot;region&quot;            &quot;wb_econ&quot;           &quot;matleave_95&quot;      
 ##   [7] &quot;matleave_96&quot;       &quot;matleave_97&quot;       &quot;matleave_98&quot;      
@@ -1179,15 +1185,15 @@ div.csl-indent {
 <div id="select-variables" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Select variables<a href="dataframe.html#select-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>由於所需要的資料為第三欄的變數<code>iso3</code>（為國家代碼）和第六至24欄的<code>matleave95</code>~<code>matleave13</code>共29年的資料，所以需要在<code>df[ , ]</code>中選出這幾欄。只要把所要取的欄以vector的型態放在<code>df[row,col]</code>之<code>col</code>的位置，便可以選出所要的欄。</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="dataframe.html#cb255-1" tabindex="-1"></a><span class="co"># Select the 3rd and 6th to 24th columns</span></span>
-<span id="cb255-2"><a href="dataframe.html#cb255-2" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
-<span id="cb255-3"><a href="dataframe.html#cb255-3" tabindex="-1"></a></span>
-<span id="cb255-4"><a href="dataframe.html#cb255-4" tabindex="-1"></a><span class="co"># Use class(), dim(), and str() to inspect the data</span></span>
-<span id="cb255-5"><a href="dataframe.html#cb255-5" tabindex="-1"></a><span class="fu">class</span>(matleave)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="dataframe.html#cb257-1" tabindex="-1"></a><span class="co"># Select the 3rd and 6th to 24th columns</span></span>
+<span id="cb257-2"><a href="dataframe.html#cb257-2" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb257-3"><a href="dataframe.html#cb257-3" tabindex="-1"></a></span>
+<span id="cb257-4"><a href="dataframe.html#cb257-4" tabindex="-1"></a><span class="co"># Use class(), dim(), and str() to inspect the data</span></span>
+<span id="cb257-5"><a href="dataframe.html#cb257-5" tabindex="-1"></a><span class="fu">class</span>(matleave)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="dataframe.html#cb257-1" tabindex="-1"></a><span class="fu">dim</span>(matleave)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="dataframe.html#cb259-1" tabindex="-1"></a><span class="fu">dim</span>(matleave)</span></code></pre></div>
 <pre class="output"><code>## [1] 197  20</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="dataframe.html#cb259-1" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="dataframe.html#cb261-1" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
 <pre class="output"><code>## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
 ##  $ iso3       : chr [1:197] &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;AND&quot; ...
 ##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
@@ -1218,8 +1224,8 @@ div.csl-indent {
 <li>在某些情況下，你可能會想要以某個特定值來取代<strong><code>NA</code></strong>值，以避免在繪圖或進行其他數據分析時產生錯誤。例如，你可以選擇以0來取代所有的<strong><code>NA</code></strong>值，這可以通過<strong><code>v[is.na(v)] &lt;- 0</code></strong>來實現。這樣，所有原本為<strong><code>NA</code></strong>的資料格都會被賦予0值。</li>
 <li>此外，<strong><code>sum(is.na(v))</code></strong>這個表達式可以用來檢測向量<strong><code>v</code></strong>中還有多少<strong><code>NA</code></strong>值。這個函數的運作機制是計算所有<strong><code>is.na(v)</code></strong>為<strong><code>TRUE</code></strong>的情況，即所有<strong><code>NA</code></strong>值的總數。如果這個結果不是0，那麼就表示在向量或dataframe中還存在<strong><code>NA</code></strong>值。這對於確保數據清理工作已經完成，並且數據集準備好進行分析是非常有用的。</li>
 </ul>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="dataframe.html#cb261-1" tabindex="-1"></a><span class="co"># is.na() to indicate each element is NA or NOT(TRUE/FALSE)</span></span>
-<span id="cb261-2"><a href="dataframe.html#cb261-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">is.na</span>(matleave), <span class="at">n=</span><span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="dataframe.html#cb263-1" tabindex="-1"></a><span class="co"># is.na() to indicate each element is NA or NOT(TRUE/FALSE)</span></span>
+<span id="cb263-2"><a href="dataframe.html#cb263-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">is.na</span>(matleave), <span class="at">n=</span><span class="dv">20</span>)</span></code></pre></div>
 <pre class="output"><code>##        iso3 matleave_95 matleave_96 matleave_97 matleave_98 matleave_99
 ##  [1,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
 ##  [2,] FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
@@ -1304,14 +1310,14 @@ div.csl-indent {
 ## [18,]       FALSE       FALSE
 ## [19,]       FALSE       FALSE
 ## [20,]       FALSE       FALSE</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="dataframe.html#cb263-1" tabindex="-1"></a><span class="co"># Assign 0 to those NA data</span></span>
-<span id="cb263-2"><a href="dataframe.html#cb263-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb263-3"><a href="dataframe.html#cb263-3" tabindex="-1"></a></span>
-<span id="cb263-4"><a href="dataframe.html#cb263-4" tabindex="-1"></a><span class="co"># anyNA() to check if there are still NA cells.</span></span>
-<span id="cb263-5"><a href="dataframe.html#cb263-5" tabindex="-1"></a><span class="fu">anyNA</span>(matleave)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="dataframe.html#cb265-1" tabindex="-1"></a><span class="co"># Assign 0 to those NA data</span></span>
+<span id="cb265-2"><a href="dataframe.html#cb265-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb265-3"><a href="dataframe.html#cb265-3" tabindex="-1"></a></span>
+<span id="cb265-4"><a href="dataframe.html#cb265-4" tabindex="-1"></a><span class="co"># anyNA() to check if there are still NA cells.</span></span>
+<span id="cb265-5"><a href="dataframe.html#cb265-5" tabindex="-1"></a><span class="fu">anyNA</span>(matleave)</span></code></pre></div>
 <pre class="output"><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="dataframe.html#cb265-1" tabindex="-1"></a><span class="co"># sum(is.na()) to count the number of NA</span></span>
-<span id="cb265-2"><a href="dataframe.html#cb265-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(matleave))</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="dataframe.html#cb267-1" tabindex="-1"></a><span class="co"># sum(is.na()) to count the number of NA</span></span>
+<span id="cb267-2"><a href="dataframe.html#cb267-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(matleave))</span></code></pre></div>
 <pre class="output"><code>## [1] 0</code></pre>
 </div>
 <div id="filtering-data" class="section level3 hasAnchor" number="4.4.5">
@@ -1319,26 +1325,26 @@ div.csl-indent {
 <div id="filtered-by-the-last-year-value" class="section level4 hasAnchor" number="4.4.5.1">
 <h4><span class="header-section-number">4.4.5.1</span> Filtered by the last year value<a href="dataframe.html#filtered-by-the-last-year-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><code>matleave[matleave$'matleave_13'==5, ]</code>中的第一個<code>matleave</code>表示要篩選的資料集，中括號中的<code>matleave$'matleave_13'==5</code>是篩選條件，表示將篩選<code>matleave</code>資料集中的<code>matleave_13</code>變數值等於<code>5</code>的列；中括號中的逗號後方未有欄位名稱表示將保留所有欄位（變項），僅篩選出符合條件的列，並將篩選後所產生的dataframe指給變數<code>m5</code>。</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="dataframe.html#cb267-1" tabindex="-1"></a><span class="co"># Use logical comparison to see if the last year equals to 5</span></span>
-<span id="cb267-2"><a href="dataframe.html#cb267-2" tabindex="-1"></a><span class="co"># Assign matching data to var m5</span></span>
-<span id="cb267-3"><a href="dataframe.html#cb267-3" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span><span class="sc">==</span><span class="dv">5</span>, ]</span>
-<span id="cb267-4"><a href="dataframe.html#cb267-4" tabindex="-1"></a></span>
-<span id="cb267-5"><a href="dataframe.html#cb267-5" tabindex="-1"></a><span class="co"># nrow() to count matching data</span></span>
-<span id="cb267-6"><a href="dataframe.html#cb267-6" tabindex="-1"></a><span class="fu">nrow</span>(m5)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="dataframe.html#cb269-1" tabindex="-1"></a><span class="co"># Use logical comparison to see if the last year equals to 5</span></span>
+<span id="cb269-2"><a href="dataframe.html#cb269-2" tabindex="-1"></a><span class="co"># Assign matching data to var m5</span></span>
+<span id="cb269-3"><a href="dataframe.html#cb269-3" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span><span class="sc">==</span><span class="dv">5</span>, ]</span>
+<span id="cb269-4"><a href="dataframe.html#cb269-4" tabindex="-1"></a></span>
+<span id="cb269-5"><a href="dataframe.html#cb269-5" tabindex="-1"></a><span class="co"># nrow() to count matching data</span></span>
+<span id="cb269-6"><a href="dataframe.html#cb269-6" tabindex="-1"></a><span class="fu">nrow</span>(m5)</span></code></pre></div>
 <pre class="output"><code>## [1] 34</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="dataframe.html#cb269-1" tabindex="-1"></a><span class="co"># Is it possible to use length() to check the data length?</span></span>
-<span id="cb269-2"><a href="dataframe.html#cb269-2" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;</span></span>
-<span id="cb269-3"><a href="dataframe.html#cb269-3" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;==5</span></span>
-<span id="cb269-4"><a href="dataframe.html#cb269-4" tabindex="-1"></a><span class="co"># length(matleave$&#39;matleave_13&#39;==5)</span></span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="dataframe.html#cb271-1" tabindex="-1"></a><span class="co"># Is it possible to use length() to check the data length?</span></span>
+<span id="cb271-2"><a href="dataframe.html#cb271-2" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;</span></span>
+<span id="cb271-3"><a href="dataframe.html#cb271-3" tabindex="-1"></a><span class="co"># matleave$&#39;matleave_13&#39;==5</span></span>
+<span id="cb271-4"><a href="dataframe.html#cb271-4" tabindex="-1"></a><span class="co"># length(matleave$&#39;matleave_13&#39;==5)</span></span></code></pre></div>
 </div>
 <div id="filtered-data-by-the-first-year-value" class="section level4 hasAnchor" number="4.4.5.2">
 <h4><span class="header-section-number">4.4.5.2</span> Filtered data by the first year value<a href="dataframe.html#filtered-data-by-the-first-year-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>接下來我們再做一次篩選，從<code>m5</code>中篩選出<code>matleave_95</code>這個欄位為<code>5</code>的資料，並指給<code>m55</code>；同時也從<code>m5</code>中篩選出<code>matleave_95</code>這個欄位不為<code>5</code>的資料，並指給<code>m05</code>。<code>m5</code>、<code>m55</code>和<code>m05</code>無特殊含義，只是變數名稱而已。</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="dataframe.html#cb270-1" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is 5, and assign to var m55</span></span>
-<span id="cb270-2"><a href="dataframe.html#cb270-2" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">==</span><span class="dv">5</span>,]</span>
-<span id="cb270-3"><a href="dataframe.html#cb270-3" tabindex="-1"></a></span>
-<span id="cb270-4"><a href="dataframe.html#cb270-4" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is not 5, and assign to var m05</span></span>
-<span id="cb270-5"><a href="dataframe.html#cb270-5" tabindex="-1"></a>m05<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">!=</span><span class="dv">5</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="dataframe.html#cb272-1" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is 5, and assign to var m55</span></span>
+<span id="cb272-2"><a href="dataframe.html#cb272-2" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">==</span><span class="dv">5</span>,]</span>
+<span id="cb272-3"><a href="dataframe.html#cb272-3" tabindex="-1"></a></span>
+<span id="cb272-4"><a href="dataframe.html#cb272-4" tabindex="-1"></a><span class="co"># filter rows whose &#39;matleave_95&#39; is not 5, and assign to var m05</span></span>
+<span id="cb272-5"><a href="dataframe.html#cb272-5" tabindex="-1"></a>m05<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span><span class="sc">!=</span><span class="dv">5</span>,]</span></code></pre></div>
 </div>
 </div>
 <div id="plotting" class="section level3 hasAnchor" number="4.4.6">
@@ -1351,32 +1357,32 @@ div.csl-indent {
 </ul>
 <div id="plotting-one-row-one-country" class="section level4 hasAnchor" number="4.4.6.1">
 <h4><span class="header-section-number">4.4.6.1</span> Plotting one row (one country)<a href="dataframe.html#plotting-one-row-one-country" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="dataframe.html#cb271-1" tabindex="-1"></a><span class="co"># barplot() the second row of m55</span></span>
-<span id="cb271-2"><a href="dataframe.html#cb271-2" tabindex="-1"></a><span class="co"># barplot(m55[2, ])       # raise error</span></span>
-<span id="cb271-3"><a href="dataframe.html#cb271-3" tabindex="-1"></a></span>
-<span id="cb271-4"><a href="dataframe.html#cb271-4" tabindex="-1"></a><span class="co"># barplot() the second row when neglecting the first column</span></span>
-<span id="cb271-5"><a href="dataframe.html#cb271-5" tabindex="-1"></a><span class="co"># barplot(m55[2, -1])     # raise error</span></span>
-<span id="cb271-6"><a href="dataframe.html#cb271-6" tabindex="-1"></a></span>
-<span id="cb271-7"><a href="dataframe.html#cb271-7" tabindex="-1"></a><span class="co"># Take a look at the data type of matleave[2, ]</span></span>
-<span id="cb271-8"><a href="dataframe.html#cb271-8" tabindex="-1"></a><span class="fu">class</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="dataframe.html#cb273-1" tabindex="-1"></a><span class="co"># barplot() the second row of m55</span></span>
+<span id="cb273-2"><a href="dataframe.html#cb273-2" tabindex="-1"></a><span class="co"># barplot(m55[2, ])       # raise error</span></span>
+<span id="cb273-3"><a href="dataframe.html#cb273-3" tabindex="-1"></a></span>
+<span id="cb273-4"><a href="dataframe.html#cb273-4" tabindex="-1"></a><span class="co"># barplot() the second row when neglecting the first column</span></span>
+<span id="cb273-5"><a href="dataframe.html#cb273-5" tabindex="-1"></a><span class="co"># barplot(m55[2, -1])     # raise error</span></span>
+<span id="cb273-6"><a href="dataframe.html#cb273-6" tabindex="-1"></a></span>
+<span id="cb273-7"><a href="dataframe.html#cb273-7" tabindex="-1"></a><span class="co"># Take a look at the data type of matleave[2, ]</span></span>
+<span id="cb273-8"><a href="dataframe.html#cb273-8" tabindex="-1"></a><span class="fu">class</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="dataframe.html#cb273-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="dataframe.html#cb275-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">unlist</span>(matleave[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="dataframe.html#cb275-1" tabindex="-1"></a><span class="co"># unlist() to convert a single row data.frame to a vector for barplot()</span></span>
-<span id="cb275-2"><a href="dataframe.html#cb275-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="dataframe.html#cb277-1" tabindex="-1"></a><span class="co"># unlist() to convert a single row data.frame to a vector for barplot()</span></span>
+<span id="cb277-2"><a href="dataframe.html#cb277-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Testing</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="dataframe.html#cb276-1" tabindex="-1"></a><span class="co"># View(matleave[1]) # select the 1st variable</span></span>
-<span id="cb276-2"><a href="dataframe.html#cb276-2" tabindex="-1"></a><span class="co"># View(matleave[ ,1]) # select the 1st column</span></span>
-<span id="cb276-3"><a href="dataframe.html#cb276-3" tabindex="-1"></a><span class="co"># View(matleave[1, ]) # select the 1st row</span></span>
-<span id="cb276-4"><a href="dataframe.html#cb276-4" tabindex="-1"></a></span>
-<span id="cb276-5"><a href="dataframe.html#cb276-5" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>])       <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="dataframe.html#cb278-1" tabindex="-1"></a><span class="co"># View(matleave[1]) # select the 1st variable</span></span>
+<span id="cb278-2"><a href="dataframe.html#cb278-2" tabindex="-1"></a><span class="co"># View(matleave[ ,1]) # select the 1st column</span></span>
+<span id="cb278-3"><a href="dataframe.html#cb278-3" tabindex="-1"></a><span class="co"># View(matleave[1, ]) # select the 1st row</span></span>
+<span id="cb278-4"><a href="dataframe.html#cb278-4" tabindex="-1"></a></span>
+<span id="cb278-5"><a href="dataframe.html#cb278-5" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>])       <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="dataframe.html#cb278-1" tabindex="-1"></a><span class="fu">class</span>(m55[ ,<span class="dv">1</span>]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="dataframe.html#cb280-1" tabindex="-1"></a><span class="fu">class</span>(m55[ ,<span class="dv">1</span>]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="dataframe.html#cb280-1" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>, ]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="dataframe.html#cb282-1" tabindex="-1"></a><span class="fu">class</span>(m55[<span class="dv">1</span>, ]) <span class="co"># &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="dataframe.html#cb282-1" tabindex="-1"></a><span class="fu">class</span>(m55<span class="sc">$</span>iso3) <span class="co"># character (vector)</span></span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="dataframe.html#cb284-1" tabindex="-1"></a><span class="fu">class</span>(m55<span class="sc">$</span>iso3) <span class="co"># character (vector)</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
 </div>
 <div id="more-arguments-args" class="section level4 hasAnchor" number="4.4.6.2">
@@ -1390,44 +1396,44 @@ div.csl-indent {
 <li><code>xaxt="n"</code>: 不顯示x軸的標籤。</li>
 <li><code>yaxt="n"</code>: 不顯示y軸的標籤。</li>
 </ol>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="dataframe.html#cb284-1" tabindex="-1"></a><span class="co"># barplot() the unlisted second row (neglecting the first col)</span></span>
-<span id="cb284-2"><a href="dataframe.html#cb284-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="dataframe.html#cb286-1" tabindex="-1"></a><span class="co"># barplot() the unlisted second row (neglecting the first col)</span></span>
+<span id="cb286-2"><a href="dataframe.html#cb286-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]))</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="dataframe.html#cb285-1" tabindex="-1"></a><span class="co"># use ?barplot to know more argument of the function.</span></span>
-<span id="cb285-2"><a href="dataframe.html#cb285-2" tabindex="-1"></a>?barplot</span>
-<span id="cb285-3"><a href="dataframe.html#cb285-3" tabindex="-1"></a></span>
-<span id="cb285-4"><a href="dataframe.html#cb285-4" tabindex="-1"></a><span class="co"># Add arguments ylim, space, border, and axat/yaxt one by one to barplot()</span></span>
-<span id="cb285-5"><a href="dataframe.html#cb285-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="dataframe.html#cb287-1" tabindex="-1"></a><span class="co"># use ?barplot to know more argument of the function.</span></span>
+<span id="cb287-2"><a href="dataframe.html#cb287-2" tabindex="-1"></a>?barplot</span>
+<span id="cb287-3"><a href="dataframe.html#cb287-3" tabindex="-1"></a></span>
+<span id="cb287-4"><a href="dataframe.html#cb287-4" tabindex="-1"></a><span class="co"># Add arguments ylim, space, border, and axat/yaxt one by one to barplot()</span></span>
+<span id="cb287-5"><a href="dataframe.html#cb287-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="dataframe.html#cb286-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="dataframe.html#cb288-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="dataframe.html#cb287-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="dataframe.html#cb289-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>)</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="dataframe.html#cb288-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="dataframe.html#cb290-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
 </div>
 <div id="plotting-multiple-lines" class="section level4 hasAnchor" number="4.4.6.3">
 <h4><span class="header-section-number">4.4.6.3</span> Plotting multiple lines<a href="dataframe.html#plotting-multiple-lines" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>我們已經成功繪製了一個國家的資料，接下來我們要繪出所有國家的資料。以<code>m55</code>這個篩選後的資料為例，我分別要繪製出第1列至第6列的國家。底下可以看見每一行非常相似且一致的特徵，僅有<code>matleave</code>內的索引由1被列出至6。對於這種重複的程式碼，最好的方法是用迴圈（for-loop）的方式將相同的程式碼，從1~6之間做六次。</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="dataframe.html#cb289-1" tabindex="-1"></a><span class="co"># plot the first row</span></span>
-<span id="cb289-2"><a href="dataframe.html#cb289-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb289-3"><a href="dataframe.html#cb289-3" tabindex="-1"></a></span>
-<span id="cb289-4"><a href="dataframe.html#cb289-4" tabindex="-1"></a><span class="co"># plot the second to 6th rows</span></span>
-<span id="cb289-5"><a href="dataframe.html#cb289-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="dataframe.html#cb291-1" tabindex="-1"></a><span class="co"># plot the first row</span></span>
+<span id="cb291-2"><a href="dataframe.html#cb291-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb291-3"><a href="dataframe.html#cb291-3" tabindex="-1"></a></span>
+<span id="cb291-4"><a href="dataframe.html#cb291-4" tabindex="-1"></a><span class="co"># plot the second to 6th rows</span></span>
+<span id="cb291-5"><a href="dataframe.html#cb291-5" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="dataframe.html#cb290-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb290-2"><a href="dataframe.html#cb290-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb290-3"><a href="dataframe.html#cb290-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb290-4"><a href="dataframe.html#cb290-4" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="dataframe.html#cb292-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-2"><a href="dataframe.html#cb292-2" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">4</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-3"><a href="dataframe.html#cb292-3" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb292-4"><a href="dataframe.html#cb292-4" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[<span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 </div>
 <div id="for-loop-to-plot-multiple-lines" class="section level4 hasAnchor" number="4.4.6.4">
 <h4><span class="header-section-number">4.4.6.4</span> for-loop to plot multiple lines<a href="dataframe.html#for-loop-to-plot-multiple-lines" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>這段R語言程式碼使用for-loop來重複執行一個指定的程式區塊，將<code>m55</code>資料集的前六行資料分別繪製成長條圖。在這段程式碼中，變數<code>i</code>控制了for-loop的迭代次數，它從1到6依次取值，然後依次執行所指定的程式區塊。</p>
 <p>一般的for-loop的結構如下：<code>for (variable in sequence) {# code block to be executed}</code>。其中，變數<code>variable</code>是用來控制for-loop的迭代次數的，它會從序列<code>sequence</code>中逐一取出元素，並將其賦值給變數<code>variable</code>，然後執行大括號<code>{...}</code>中所指定的程式區塊。</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="dataframe.html#cb291-1" tabindex="-1"></a><span class="co"># use for loop and use i as index to barplot multiple subgraphs</span></span>
-<span id="cb291-2"><a href="dataframe.html#cb291-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
-<span id="cb291-3"><a href="dataframe.html#cb291-3" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb291-4"><a href="dataframe.html#cb291-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="dataframe.html#cb293-1" tabindex="-1"></a><span class="co"># use for loop and use i as index to barplot multiple subgraphs</span></span>
+<span id="cb293-2"><a href="dataframe.html#cb293-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb293-3"><a href="dataframe.html#cb293-3" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb293-4"><a href="dataframe.html#cb293-4" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 </div>
 <div id="subplots" class="section level4 hasAnchor" number="4.4.6.5">
@@ -1442,43 +1448,43 @@ div.csl-indent {
 <li><code>lty</code>：設置線條的類型。</li>
 </ul>
 <p>在這段程式碼中，<code>par</code>函數被用來設置畫布的分割和邊緣大小，具體來說，<code>par(mfrow=c(3,2), mai= c(0.2, 0.2, 0.2, 0.2))</code>表示將畫布分為3行2列的子圖，並設置邊緣大小為0.2，包括上下左右四個邊緣。這樣可以方便地在同一張畫布上顯示多個圖形，並控制它們之間的排列和間距。</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="dataframe.html#cb292-1" tabindex="-1"></a><span class="co"># use ?par to get more plotting parameters</span></span>
-<span id="cb292-2"><a href="dataframe.html#cb292-2" tabindex="-1"></a>?par</span>
-<span id="cb292-3"><a href="dataframe.html#cb292-3" tabindex="-1"></a></span>
-<span id="cb292-4"><a href="dataframe.html#cb292-4" tabindex="-1"></a><span class="co"># use par() to set-up the layout of subgraphs</span></span>
-<span id="cb292-5"><a href="dataframe.html#cb292-5" tabindex="-1"></a><span class="co"># use the parameter main=c(0.2, 0.2, 0.2, 0.2) to thrink the padding of figures.</span></span>
-<span id="cb292-6"><a href="dataframe.html#cb292-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb292-7"><a href="dataframe.html#cb292-7" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
-<span id="cb292-8"><a href="dataframe.html#cb292-8" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb292-9"><a href="dataframe.html#cb292-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="dataframe.html#cb294-1" tabindex="-1"></a><span class="co"># use ?par to get more plotting parameters</span></span>
+<span id="cb294-2"><a href="dataframe.html#cb294-2" tabindex="-1"></a>?par</span>
+<span id="cb294-3"><a href="dataframe.html#cb294-3" tabindex="-1"></a></span>
+<span id="cb294-4"><a href="dataframe.html#cb294-4" tabindex="-1"></a><span class="co"># use par() to set-up the layout of subgraphs</span></span>
+<span id="cb294-5"><a href="dataframe.html#cb294-5" tabindex="-1"></a><span class="co"># use the parameter main=c(0.2, 0.2, 0.2, 0.2) to thrink the padding of figures.</span></span>
+<span id="cb294-6"><a href="dataframe.html#cb294-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb294-7"><a href="dataframe.html#cb294-7" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb294-8"><a href="dataframe.html#cb294-8" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb294-9"><a href="dataframe.html#cb294-9" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>接下來我們用相同的<code>for-loop</code>來繪製10張子圖（十個國家）看看。會發現<code>mfrow=c(3,2)</code>可以容納六張子圖，多餘六張子圖時，會繪製至下一張。</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="dataframe.html#cb293-1" tabindex="-1"></a><span class="co"># plot more rows to see what happens</span></span>
-<span id="cb293-2"><a href="dataframe.html#cb293-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb293-3"><a href="dataframe.html#cb293-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
-<span id="cb293-4"><a href="dataframe.html#cb293-4" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb293-5"><a href="dataframe.html#cb293-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="dataframe.html#cb295-1" tabindex="-1"></a><span class="co"># plot more rows to see what happens</span></span>
+<span id="cb295-2"><a href="dataframe.html#cb295-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb295-3"><a href="dataframe.html#cb295-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb295-4"><a href="dataframe.html#cb295-4" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">space=</span><span class="dv">0</span>, <span class="at">border=</span><span class="cn">NA</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb295-5"><a href="dataframe.html#cb295-5" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/pml-plot-test-1.png" width="672" /></p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="dataframe.html#cb294-1" tabindex="-1"></a><span class="co"># plot all subplots in a figure</span></span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="dataframe.html#cb296-1" tabindex="-1"></a><span class="co"># plot all subplots in a figure</span></span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/pml-plot-test-2.png" width="672" /></p>
 <p>最後，我用<code>nrow(m55)</code>來取得<code>m55</code>這個<code>data.frame</code>共有多少個國家，然後，我讓<code>for-loop</code>從<code>1:nrow(m55)</code>相當於繪製完所有<code>m55</code>中的子圖。注意我已經修改了<code>mfrow</code>為<code>mfrow=c(4, 6)</code>。</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="dataframe.html#cb295-1" tabindex="-1"></a><span class="co"># nrow() to check number of row of m55.</span></span>
-<span id="cb295-2"><a href="dataframe.html#cb295-2" tabindex="-1"></a><span class="fu">nrow</span>(m55)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="dataframe.html#cb297-1" tabindex="-1"></a><span class="co"># nrow() to check number of row of m55.</span></span>
+<span id="cb297-2"><a href="dataframe.html#cb297-2" tabindex="-1"></a><span class="fu">nrow</span>(m55)</span></code></pre></div>
 <pre class="output"><code>## [1] 18</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="dataframe.html#cb297-1" tabindex="-1"></a><span class="co"># use par() to set-up plotting parameters.</span></span>
-<span id="cb297-2"><a href="dataframe.html#cb297-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb297-3"><a href="dataframe.html#cb297-3" tabindex="-1"></a></span>
-<span id="cb297-4"><a href="dataframe.html#cb297-4" tabindex="-1"></a><span class="co"># use for-loop to plot all graph as subgraph</span></span>
-<span id="cb297-5"><a href="dataframe.html#cb297-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
-<span id="cb297-6"><a href="dataframe.html#cb297-6" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
-<span id="cb297-7"><a href="dataframe.html#cb297-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="dataframe.html#cb299-1" tabindex="-1"></a><span class="co"># use par() to set-up plotting parameters.</span></span>
+<span id="cb299-2"><a href="dataframe.html#cb299-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb299-3"><a href="dataframe.html#cb299-3" tabindex="-1"></a></span>
+<span id="cb299-4"><a href="dataframe.html#cb299-4" tabindex="-1"></a><span class="co"># use for-loop to plot all graph as subgraph</span></span>
+<span id="cb299-5"><a href="dataframe.html#cb299-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
+<span id="cb299-6"><a href="dataframe.html#cb299-6" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>, <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb299-7"><a href="dataframe.html#cb299-7" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/plot-m55-1.png" width="672" /></p>
 <p>在每個子圖上，我要加上每個國家的國別代碼<code>iso3</code>，也就是<code>m55</code>的第一行，我用同樣的i來掃過每一列，繪製完<code>barplot()</code>後，便用<code>title()</code>函式來繪製文字。結果如下。注意我的設定<code>title(m55[i,1], line = -4, cex.main=3)</code>。<code>line</code>為繪製文字的基線，而<code>cex.main</code>是字型大小。</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="dataframe.html#cb298-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb298-2"><a href="dataframe.html#cb298-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
-<span id="cb298-3"><a href="dataframe.html#cb298-3" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
-<span id="cb298-4"><a href="dataframe.html#cb298-4" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
-<span id="cb298-5"><a href="dataframe.html#cb298-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="dataframe.html#cb300-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb300-2"><a href="dataframe.html#cb300-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55)){</span>
+<span id="cb300-3"><a href="dataframe.html#cb300-3" tabindex="-1"></a>  <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i, <span class="sc">-</span><span class="dv">1</span>]), <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb300-4"><a href="dataframe.html#cb300-4" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb300-5"><a href="dataframe.html#cb300-5" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/plot-caption-1.png" width="672" /></p>
 </div>
 </div>
@@ -1489,46 +1495,46 @@ div.csl-indent {
 <li>請繪製<code>m04</code>的資料，也就是<code>matleave_95!=4</code>但<code>matleave_13==4</code>的資料。</li>
 <li>請繪製<code>m44</code>的資料，也就是<code>matleave_95==4</code>但<code>matleave_13==4</code>的資料。</li>
 </ul>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="dataframe.html#cb299-1" tabindex="-1"></a><span class="co"># plotting matleave_95 != 5 but matleave_13 == 5</span></span>
-<span id="cb299-2"><a href="dataframe.html#cb299-2" tabindex="-1"></a></span>
-<span id="cb299-3"><a href="dataframe.html#cb299-3" tabindex="-1"></a><span class="co"># plotting for matleave_13 == 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="dataframe.html#cb301-1" tabindex="-1"></a><span class="co"># plotting matleave_95 != 5 but matleave_13 == 5</span></span>
+<span id="cb301-2"><a href="dataframe.html#cb301-2" tabindex="-1"></a></span>
+<span id="cb301-3"><a href="dataframe.html#cb301-3" tabindex="-1"></a><span class="co"># plotting for matleave_13 == 4</span></span></code></pre></div>
 </div>
 <div id="practice.-selecting-and-filtering-by-dplyr-i" class="section level3 hasAnchor" number="4.4.8">
 <h3><span class="header-section-number">4.4.8</span> Practice. Selecting and filtering by dplyr I<a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>請嘗試問問ChatGPT，如果將以下程式碼改為dplyr的寫法，要怎麼寫。</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="dataframe.html#cb300-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
-<span id="cb300-2"><a href="dataframe.html#cb300-2" tabindex="-1"></a></span>
-<span id="cb300-3"><a href="dataframe.html#cb300-3" tabindex="-1"></a><span class="co"># select columns by index</span></span>
-<span id="cb300-4"><a href="dataframe.html#cb300-4" tabindex="-1"></a><span class="co"># matleave &lt;- df[ , c(3, 6:24)]</span></span>
-<span id="cb300-5"><a href="dataframe.html#cb300-5" tabindex="-1"></a></span>
-<span id="cb300-6"><a href="dataframe.html#cb300-6" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
-<span id="cb300-7"><a href="dataframe.html#cb300-7" tabindex="-1"></a><span class="co"># matleave[is.na(matleave)] &lt;- 0</span></span>
-<span id="cb300-8"><a href="dataframe.html#cb300-8" tabindex="-1"></a></span>
-<span id="cb300-9"><a href="dataframe.html#cb300-9" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb300-10"><a href="dataframe.html#cb300-10" tabindex="-1"></a><span class="co"># m5 &lt;- matleave[matleave$&#39;matleave_13&#39; == 5, ]</span></span>
-<span id="cb300-11"><a href="dataframe.html#cb300-11" tabindex="-1"></a></span>
-<span id="cb300-12"><a href="dataframe.html#cb300-12" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb300-13"><a href="dataframe.html#cb300-13" tabindex="-1"></a><span class="co"># m55&lt;- m5[m5$&#39;matleave_95&#39; == 5,]</span></span>
-<span id="cb300-14"><a href="dataframe.html#cb300-14" tabindex="-1"></a></span>
-<span id="cb300-15"><a href="dataframe.html#cb300-15" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb300-16"><a href="dataframe.html#cb300-16" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb300-17"><a href="dataframe.html#cb300-17" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
-<span id="cb300-18"><a href="dataframe.html#cb300-18" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
-<span id="cb300-19"><a href="dataframe.html#cb300-19" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
-<span id="cb300-20"><a href="dataframe.html#cb300-20" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
-<span id="cb300-21"><a href="dataframe.html#cb300-21" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="dataframe.html#cb302-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb302-2"><a href="dataframe.html#cb302-2" tabindex="-1"></a></span>
+<span id="cb302-3"><a href="dataframe.html#cb302-3" tabindex="-1"></a><span class="co"># select columns by index</span></span>
+<span id="cb302-4"><a href="dataframe.html#cb302-4" tabindex="-1"></a><span class="co"># matleave &lt;- df[ , c(3, 6:24)]</span></span>
+<span id="cb302-5"><a href="dataframe.html#cb302-5" tabindex="-1"></a></span>
+<span id="cb302-6"><a href="dataframe.html#cb302-6" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
+<span id="cb302-7"><a href="dataframe.html#cb302-7" tabindex="-1"></a><span class="co"># matleave[is.na(matleave)] &lt;- 0</span></span>
+<span id="cb302-8"><a href="dataframe.html#cb302-8" tabindex="-1"></a></span>
+<span id="cb302-9"><a href="dataframe.html#cb302-9" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb302-10"><a href="dataframe.html#cb302-10" tabindex="-1"></a><span class="co"># m5 &lt;- matleave[matleave$&#39;matleave_13&#39; == 5, ]</span></span>
+<span id="cb302-11"><a href="dataframe.html#cb302-11" tabindex="-1"></a></span>
+<span id="cb302-12"><a href="dataframe.html#cb302-12" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb302-13"><a href="dataframe.html#cb302-13" tabindex="-1"></a><span class="co"># m55&lt;- m5[m5$&#39;matleave_95&#39; == 5,]</span></span>
+<span id="cb302-14"><a href="dataframe.html#cb302-14" tabindex="-1"></a></span>
+<span id="cb302-15"><a href="dataframe.html#cb302-15" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb302-16"><a href="dataframe.html#cb302-16" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb302-17"><a href="dataframe.html#cb302-17" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
+<span id="cb302-18"><a href="dataframe.html#cb302-18" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
+<span id="cb302-19"><a href="dataframe.html#cb302-19" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb302-20"><a href="dataframe.html#cb302-20" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb302-21"><a href="dataframe.html#cb302-21" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="more-clean-version" class="section level3 hasAnchor" number="4.4.9">
 <h3><span class="header-section-number">4.4.9</span> (More) Clean version<a href="dataframe.html#more-clean-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="dataframe.html#cb301-1" tabindex="-1"></a><span class="co"># readxl::read_excel() to import the xls file</span></span>
-<span id="cb301-2"><a href="dataframe.html#cb301-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
-<span id="cb301-3"><a href="dataframe.html#cb301-3" tabindex="-1"></a></span>
-<span id="cb301-4"><a href="dataframe.html#cb301-4" tabindex="-1"></a><span class="co"># select iso3, and matleave columns by index</span></span>
-<span id="cb301-5"><a href="dataframe.html#cb301-5" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
-<span id="cb301-6"><a href="dataframe.html#cb301-6" tabindex="-1"></a></span>
-<span id="cb301-7"><a href="dataframe.html#cb301-7" tabindex="-1"></a><span class="co"># str() to inspect the data structure of </span></span>
-<span id="cb301-8"><a href="dataframe.html#cb301-8" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="dataframe.html#cb303-1" tabindex="-1"></a><span class="co"># readxl::read_excel() to import the xls file</span></span>
+<span id="cb303-2"><a href="dataframe.html#cb303-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb303-3"><a href="dataframe.html#cb303-3" tabindex="-1"></a></span>
+<span id="cb303-4"><a href="dataframe.html#cb303-4" tabindex="-1"></a><span class="co"># select iso3, and matleave columns by index</span></span>
+<span id="cb303-5"><a href="dataframe.html#cb303-5" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb303-6"><a href="dataframe.html#cb303-6" tabindex="-1"></a></span>
+<span id="cb303-7"><a href="dataframe.html#cb303-7" tabindex="-1"></a><span class="co"># str() to inspect the data structure of </span></span>
+<span id="cb303-8"><a href="dataframe.html#cb303-8" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
 <pre class="output"><code>## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
 ##  $ iso3       : chr [1:197] &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;AND&quot; ...
 ##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
@@ -1550,30 +1556,30 @@ div.csl-indent {
 ##  $ matleave_11: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ##  $ matleave_12: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="dataframe.html#cb303-1" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
-<span id="cb303-2"><a href="dataframe.html#cb303-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb303-3"><a href="dataframe.html#cb303-3" tabindex="-1"></a></span>
-<span id="cb303-4"><a href="dataframe.html#cb303-4" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb303-5"><a href="dataframe.html#cb303-5" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span> <span class="sc">==</span> <span class="dv">5</span>, ]</span>
-<span id="cb303-6"><a href="dataframe.html#cb303-6" tabindex="-1"></a></span>
-<span id="cb303-7"><a href="dataframe.html#cb303-7" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb303-8"><a href="dataframe.html#cb303-8" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span> <span class="sc">==</span> <span class="dv">5</span>,]</span>
-<span id="cb303-9"><a href="dataframe.html#cb303-9" tabindex="-1"></a></span>
-<span id="cb303-10"><a href="dataframe.html#cb303-10" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb303-11"><a href="dataframe.html#cb303-11" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb303-12"><a href="dataframe.html#cb303-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
-<span id="cb303-13"><a href="dataframe.html#cb303-13" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
-<span id="cb303-14"><a href="dataframe.html#cb303-14" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
-<span id="cb303-15"><a href="dataframe.html#cb303-15" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
-<span id="cb303-16"><a href="dataframe.html#cb303-16" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="dataframe.html#cb305-1" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
+<span id="cb305-2"><a href="dataframe.html#cb305-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb305-3"><a href="dataframe.html#cb305-3" tabindex="-1"></a></span>
+<span id="cb305-4"><a href="dataframe.html#cb305-4" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb305-5"><a href="dataframe.html#cb305-5" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span> <span class="sc">==</span> <span class="dv">5</span>, ]</span>
+<span id="cb305-6"><a href="dataframe.html#cb305-6" tabindex="-1"></a></span>
+<span id="cb305-7"><a href="dataframe.html#cb305-7" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb305-8"><a href="dataframe.html#cb305-8" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span> <span class="sc">==</span> <span class="dv">5</span>,]</span>
+<span id="cb305-9"><a href="dataframe.html#cb305-9" tabindex="-1"></a></span>
+<span id="cb305-10"><a href="dataframe.html#cb305-10" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb305-11"><a href="dataframe.html#cb305-11" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb305-12"><a href="dataframe.html#cb305-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
+<span id="cb305-13"><a href="dataframe.html#cb305-13" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
+<span id="cb305-14"><a href="dataframe.html#cb305-14" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb305-15"><a href="dataframe.html#cb305-15" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb305-16"><a href="dataframe.html#cb305-16" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="more-the-fittest-version-to-compute-staysame" class="section level3 hasAnchor" number="4.4.10">
 <h3><span class="header-section-number">4.4.10</span> (More) The fittest version to compute staySame<a href="dataframe.html#more-the-fittest-version-to-compute-staysame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="dataframe.html#cb304-1" tabindex="-1"></a><span class="co"># staySame version</span></span>
-<span id="cb304-2"><a href="dataframe.html#cb304-2" tabindex="-1"></a><span class="co"># staySame &lt;- apply(m5[,2:20], 1, function(x) length(unique(x[!is.na(x)]))) </span></span>
-<span id="cb304-3"><a href="dataframe.html#cb304-3" tabindex="-1"></a><span class="co"># m55 &lt;- m5[staySame, ]</span></span>
-<span id="cb304-4"><a href="dataframe.html#cb304-4" tabindex="-1"></a><span class="co"># m50 &lt;- m5[!staySame, ]</span></span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="dataframe.html#cb306-1" tabindex="-1"></a><span class="co"># staySame version</span></span>
+<span id="cb306-2"><a href="dataframe.html#cb306-2" tabindex="-1"></a><span class="co"># staySame &lt;- apply(m5[,2:20], 1, function(x) length(unique(x[!is.na(x)]))) </span></span>
+<span id="cb306-3"><a href="dataframe.html#cb306-3" tabindex="-1"></a><span class="co"># m55 &lt;- m5[staySame, ]</span></span>
+<span id="cb306-4"><a href="dataframe.html#cb306-4" tabindex="-1"></a><span class="co"># m50 &lt;- m5[!staySame, ]</span></span></code></pre></div>
 
 </div>
 </div>

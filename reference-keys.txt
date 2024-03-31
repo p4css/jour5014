@@ -389,6 +389,10 @@ loading-taiwan-map
 building-grid
 loading-data-2
 merging-data
+mapping-youbike-location
+creating-a-new-variable
+mapping-with-sf
+using-ggmap-deprecated
 network-vis
 generating-networks
 random-network

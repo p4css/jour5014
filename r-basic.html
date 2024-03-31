@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-24" />
+<meta name="date" content="2024-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,6 +709,12 @@ div.csl-indent {
 <li class="chapter" data-level="29.5.3" data-path="geospatial.html"><a href="geospatial.html#loading-data-2"><i class="fa fa-check"></i><b>29.5.3</b> loading data</a></li>
 <li class="chapter" data-level="29.5.4" data-path="geospatial.html"><a href="geospatial.html#merging-data"><i class="fa fa-check"></i><b>29.5.4</b> Merging data</a></li>
 </ul></li>
+<li class="chapter" data-level="29.6" data-path="geospatial.html"><a href="geospatial.html#mapping-youbike-location"><i class="fa fa-check"></i><b>29.6</b> Mapping Youbike Location</a>
+<ul>
+<li class="chapter" data-level="29.6.1" data-path="geospatial.html"><a href="geospatial.html#creating-a-new-variable"><i class="fa fa-check"></i><b>29.6.1</b> Creating a new variable</a></li>
+<li class="chapter" data-level="29.6.2" data-path="geospatial.html"><a href="geospatial.html#mapping-with-sf"><i class="fa fa-check"></i><b>29.6.2</b> Mapping with sf</a></li>
+<li class="chapter" data-level="29.6.3" data-path="geospatial.html"><a href="geospatial.html#using-ggmap-deprecated"><i class="fa fa-check"></i><b>29.6.3</b> Using ggmap (Deprecated)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="network-vis.html"><a href="network-vis.html"><i class="fa fa-check"></i><b>30</b> NETWORK VIS</a>
 <ul>
@@ -804,11 +810,11 @@ div.csl-indent {
 <li>Assignment對變數型態（Variable Type）的影響：<code>&lt;-</code>右側如果是numeric，那左側的變數就是numeric變數；右側如果是character，左側的變數就是character變數。</li>
 <li>在幾乎所有程式語言中，單等號<code>=</code>指的是assignment，把右方的算式、值或物件指給左方的變數。而比較兩者相不相等，則用雙等號<code>==</code>，例如<code>1==3-2</code>。R當初在設計時可能是為了避免混淆，所以把assignment的符號設計為<code>&lt;-</code>。</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="r-basic.html#cb12-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb12-2"><a href="r-basic.html#cb12-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb12-3"><a href="r-basic.html#cb12-3" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>)</span>
-<span id="cb12-4"><a href="r-basic.html#cb12-4" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(b, a)</span>
-<span id="cb12-5"><a href="r-basic.html#cb12-5" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="st">&quot;abcd&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-basic.html#cb14-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-2"><a href="r-basic.html#cb14-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb14-3"><a href="r-basic.html#cb14-3" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>)</span>
+<span id="cb14-4"><a href="r-basic.html#cb14-4" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(b, a)</span>
+<span id="cb14-5"><a href="r-basic.html#cb14-5" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="st">&quot;abcd&quot;</span></span></code></pre></div>
 </div>
 <div id="comments-註解" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Comments 註解<a href="r-basic.html#comments-註解" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -816,7 +822,7 @@ div.csl-indent {
 <li><strong>註解</strong>：在程式碼區塊若前面有<code>#</code>字號後面跟著空白的話，那代表那行被標示為註解，程式執行時會自動跳過註解不執行。</li>
 <li><strong>快速鍵</strong>：當游標在某一行程式碼時打<code>cmd(ctrl)-shift-c</code>，就可以產生註解。</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="r-basic.html#cb13-1" tabindex="-1"></a><span class="co"># df &lt;- data.frame(a = c(1, 2, 3), b = c(3, 4, 5))</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="r-basic.html#cb15-1" tabindex="-1"></a><span class="co"># df &lt;- data.frame(a = c(1, 2, 3), b = c(3, 4, 5))</span></span></code></pre></div>
 </div>
 </div>
 <div id="vector" class="section level2 hasAnchor" number="3.2">
@@ -828,40 +834,40 @@ div.csl-indent {
 <div id="creating-vectors" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Creating vectors<a href="r-basic.html#creating-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>vector通常用<code>c()</code>函數創建，其中c表示”combine”或”concatenate”，可以將多個元素組合成一個vector。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-basic.html#cb14-1" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70100</span>, <span class="dv">51300</span>, <span class="dv">51100</span>, <span class="dv">48400</span>, <span class="dv">47600</span>, <span class="dv">43000</span>)</span>
-<span id="cb14-2"><a href="r-basic.html#cb14-2" tabindex="-1"></a>county <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;台北&quot;</span>, <span class="st">&quot;新北&quot;</span>, <span class="st">&quot;桃園&quot;</span>, <span class="st">&quot;高雄&quot;</span>, <span class="st">&quot;台中&quot;</span>, <span class="st">&quot;台南&quot;</span>)</span>
-<span id="cb14-3"><a href="r-basic.html#cb14-3" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.6</span>, <span class="fl">3.9</span>, <span class="fl">2.2</span>, <span class="fl">2.7</span>, <span class="fl">2.8</span>, <span class="fl">1.8</span>)</span>
-<span id="cb14-4"><a href="r-basic.html#cb14-4" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">271.8</span>, <span class="fl">2052.5</span>, <span class="dv">1221</span>, <span class="fl">2951.9</span>, <span class="fl">2214.9</span>, <span class="fl">2191.7</span>)</span>
-<span id="cb14-5"><a href="r-basic.html#cb14-5" tabindex="-1"></a>income</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-basic.html#cb16-1" tabindex="-1"></a>income <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70100</span>, <span class="dv">51300</span>, <span class="dv">51100</span>, <span class="dv">48400</span>, <span class="dv">47600</span>, <span class="dv">43000</span>)</span>
+<span id="cb16-2"><a href="r-basic.html#cb16-2" tabindex="-1"></a>county <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;台北&quot;</span>, <span class="st">&quot;新北&quot;</span>, <span class="st">&quot;桃園&quot;</span>, <span class="st">&quot;高雄&quot;</span>, <span class="st">&quot;台中&quot;</span>, <span class="st">&quot;台南&quot;</span>)</span>
+<span id="cb16-3"><a href="r-basic.html#cb16-3" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.6</span>, <span class="fl">3.9</span>, <span class="fl">2.2</span>, <span class="fl">2.7</span>, <span class="fl">2.8</span>, <span class="fl">1.8</span>)</span>
+<span id="cb16-4"><a href="r-basic.html#cb16-4" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">271.8</span>, <span class="fl">2052.5</span>, <span class="dv">1221</span>, <span class="fl">2951.9</span>, <span class="fl">2214.9</span>, <span class="fl">2191.7</span>)</span>
+<span id="cb16-5"><a href="r-basic.html#cb16-5" tabindex="-1"></a>income</span></code></pre></div>
 <pre class="output"><code>## [1] 70100 51300 51100 48400 47600 43000</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-basic.html#cb16-1" tabindex="-1"></a>county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-basic.html#cb18-1" tabindex="-1"></a>county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-basic.html#cb18-1" tabindex="-1"></a>county <span class="ot">&lt;-</span> county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)]</span>
-<span id="cb18-2"><a href="r-basic.html#cb18-2" tabindex="-1"></a>county</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-basic.html#cb20-1" tabindex="-1"></a>county <span class="ot">&lt;-</span> county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)]</span>
+<span id="cb20-2"><a href="r-basic.html#cb20-2" tabindex="-1"></a>county</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-basic.html#cb20-1" tabindex="-1"></a>area</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-basic.html#cb22-1" tabindex="-1"></a>area</span></code></pre></div>
 <pre class="output"><code>## [1]  271.8 2052.5 1221.0 2951.9 2214.9 2191.7</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-basic.html#cb22-1" tabindex="-1"></a>population</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-basic.html#cb24-1" tabindex="-1"></a>population</span></code></pre></div>
 <pre class="output"><code>## [1] 2.6 3.9 2.2 2.7 2.8 1.8</code></pre>
 <div id="creating-a-sequence" class="section level4 hasAnchor" number="3.2.1.1">
 <h4><span class="header-section-number">3.2.1.1</span> Creating a sequence<a href="r-basic.html#creating-a-sequence" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-basic.html#cb24-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
-<span id="cb24-2"><a href="r-basic.html#cb24-2" tabindex="-1"></a>a</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-basic.html#cb26-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
+<span id="cb26-2"><a href="r-basic.html#cb26-2" tabindex="-1"></a>a</span></code></pre></div>
 <pre class="output"><code>## [1] 11 22 33 44 55 66 77 88 99</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-basic.html#cb26-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb26-2"><a href="r-basic.html#cb26-2" tabindex="-1"></a>b</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-basic.html#cb28-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb28-2"><a href="r-basic.html#cb28-2" tabindex="-1"></a>b</span></code></pre></div>
 <pre class="output"><code>##  [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
 <div id="creating-sequences-by-distribution" class="section level4 hasAnchor" number="3.2.1.2">
 <h4><span class="header-section-number">3.2.1.2</span> Creating sequences by distribution<a href="r-basic.html#creating-sequences-by-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-basic.html#cb28-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># uniform dist, n=1000</span></span>
-<span id="cb28-2"><a href="r-basic.html#cb28-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(x))</span></code></pre></div>
-<p><img src="R03_vector_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="r-basic.html#cb29-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># uniform dist, n=1000</span></span>
-<span id="cb29-2"><a href="r-basic.html#cb29-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(x))</span></code></pre></div>
-<p><img src="R03_vector_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-basic.html#cb30-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># normal dist, n=1000</span></span>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-basic.html#cb30-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># uniform dist, n=1000</span></span>
 <span id="cb30-2"><a href="r-basic.html#cb30-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(x))</span></code></pre></div>
+<p><img src="R03_vector_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="r-basic.html#cb31-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># uniform dist, n=1000</span></span>
+<span id="cb31-2"><a href="r-basic.html#cb31-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(x))</span></code></pre></div>
+<p><img src="R03_vector_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r-basic.html#cb32-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000000</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="co"># normal dist, n=1000</span></span>
+<span id="cb32-2"><a href="r-basic.html#cb32-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(x))</span></code></pre></div>
 <p><img src="R03_vector_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 </div>
 </div>
@@ -871,40 +877,40 @@ div.csl-indent {
 </div>
 <div id="viewing" class="section level3 hasAnchor" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Viewing<a href="r-basic.html#viewing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="r-basic.html#cb31-1" tabindex="-1"></a>county</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-basic.html#cb33-1" tabindex="-1"></a>county</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-basic.html#cb33-1" tabindex="-1"></a>income</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basic.html#cb35-1" tabindex="-1"></a>income</span></code></pre></div>
 <pre class="output"><code>## [1] 70100 51300 51100 48400 47600 43000</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basic.html#cb35-1" tabindex="-1"></a><span class="fu">head</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-basic.html#cb37-1" tabindex="-1"></a><span class="fu">head</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-basic.html#cb37-1" tabindex="-1"></a><span class="fu">tail</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="r-basic.html#cb39-1" tabindex="-1"></a><span class="fu">tail</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="r-basic.html#cb39-1" tabindex="-1"></a><span class="fu">length</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="r-basic.html#cb41-1" tabindex="-1"></a><span class="fu">length</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="r-basic.html#cb41-1" tabindex="-1"></a><span class="fu">mode</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="r-basic.html#cb43-1" tabindex="-1"></a><span class="fu">mode</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="r-basic.html#cb43-1" tabindex="-1"></a><span class="fu">class</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="r-basic.html#cb45-1" tabindex="-1"></a><span class="fu">class</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="r-basic.html#cb45-1" tabindex="-1"></a><span class="co"># View(county)</span></span>
-<span id="cb45-2"><a href="r-basic.html#cb45-2" tabindex="-1"></a><span class="fu">length</span>(county)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="r-basic.html#cb47-1" tabindex="-1"></a><span class="co"># View(county)</span></span>
+<span id="cb47-2"><a href="r-basic.html#cb47-2" tabindex="-1"></a><span class="fu">length</span>(county)</span></code></pre></div>
 <pre class="output"><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="r-basic.html#cb47-1" tabindex="-1"></a><span class="fu">length</span>(income)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="r-basic.html#cb49-1" tabindex="-1"></a><span class="fu">length</span>(income)</span></code></pre></div>
 <pre class="output"><code>## [1] 6</code></pre>
 </div>
 <div id="subsetting-filtering" class="section level3 hasAnchor" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Subsetting, filtering<a href="r-basic.html#subsetting-filtering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>vector可以用中括號<code>[]</code>搭配數字來取用vector中的元素，下標從1開始。例如，要取用上述的vector中的第三個元素，可以使用<code>my_vector[3]</code>。</p>
 <p>It is important to know how to neglect first n or last n elements. For example, a[1:(length(a)-2)] will neglect the last two elements. Thinking why I need parentheses for <code>length(a)-2</code> here.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="r-basic.html#cb49-1" tabindex="-1"></a>county</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="r-basic.html#cb51-1" tabindex="-1"></a>county</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台中&quot; &quot;桃園&quot; &quot;台北&quot;</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="r-basic.html#cb51-1" tabindex="-1"></a>county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)] <span class="co"># how about country[c(1, 3, 5)]</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-basic.html#cb53-1" tabindex="-1"></a>county[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>)] <span class="co"># how about country[c(1, 3, 5)]</span></span></code></pre></div>
 <pre class="output"><code>## [1] NA     &quot;台北&quot; &quot;台中&quot;</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-basic.html#cb53-1" tabindex="-1"></a>county[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>] <span class="co"># is it equal to country[c(3, 4, 5, 6)]</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="r-basic.html#cb55-1" tabindex="-1"></a>county[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>] <span class="co"># is it equal to country[c(3, 4, 5, 6)]</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;台北&quot; NA     NA     NA</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="r-basic.html#cb55-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
-<span id="cb55-2"><a href="r-basic.html#cb55-2" tabindex="-1"></a>a[<span class="dv">3</span><span class="sc">:</span><span class="fu">length</span>(a)]</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="r-basic.html#cb57-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
+<span id="cb57-2"><a href="r-basic.html#cb57-2" tabindex="-1"></a>a[<span class="dv">3</span><span class="sc">:</span><span class="fu">length</span>(a)]</span></code></pre></div>
 <pre class="output"><code>## [1] 13 14 15 16 17 18 19</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="r-basic.html#cb57-1" tabindex="-1"></a>a[<span class="fu">length</span>(a)<span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-basic.html#cb59-1" tabindex="-1"></a>a[<span class="fu">length</span>(a)<span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 19 18 17 16 15 14 13</code></pre>
 </div>
 <div id="deleting" class="section level3 hasAnchor" number="3.2.5">
@@ -912,22 +918,22 @@ div.csl-indent {
 <ul>
 <li>Without assignment, deletion won’t change original vectors</li>
 </ul>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-basic.html#cb59-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb59-2"><a href="r-basic.html#cb59-2" tabindex="-1"></a>b[<span class="sc">-</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="r-basic.html#cb61-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb61-2"><a href="r-basic.html#cb61-2" tabindex="-1"></a>b[<span class="sc">-</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] 11 12 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="r-basic.html#cb61-1" tabindex="-1"></a>b[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-basic.html#cb63-1" tabindex="-1"></a>b[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] 12 14 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-basic.html#cb63-1" tabindex="-1"></a>b</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="r-basic.html#cb65-1" tabindex="-1"></a>b</span></code></pre></div>
 <pre class="output"><code>##  [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
 <ul>
 <li>Correct deleting operations with assignment to replace original vector</li>
 </ul>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="r-basic.html#cb65-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> b[<span class="sc">-</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)]</span>
-<span id="cb65-2"><a href="r-basic.html#cb65-2" tabindex="-1"></a>b</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="r-basic.html#cb67-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> b[<span class="sc">-</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb67-2"><a href="r-basic.html#cb67-2" tabindex="-1"></a>b</span></code></pre></div>
 <pre class="output"><code>## [1] 11 12 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="r-basic.html#cb67-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
-<span id="cb67-2"><a href="r-basic.html#cb67-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> a[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span>
-<span id="cb67-3"><a href="r-basic.html#cb67-3" tabindex="-1"></a>a</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="r-basic.html#cb69-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
+<span id="cb69-2"><a href="r-basic.html#cb69-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> a[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span>
+<span id="cb69-3"><a href="r-basic.html#cb69-3" tabindex="-1"></a>a</span></code></pre></div>
 <pre class="output"><code>## [1] 22 44 66 77 88 99</code></pre>
 </div>
 <div id="concatenating" class="section level3 hasAnchor" number="3.2.6">
@@ -935,17 +941,17 @@ div.csl-indent {
 <ul>
 <li>Concatenating is quite useful for web crawling when you crawl article links page by page. You may be not sure the number of page you need to crawl. So you need to append entire new vector to old vector. It is concatenating. (“Appending” often means adding one new element at the end of data.)</li>
 </ul>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="r-basic.html#cb69-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb69-2"><a href="r-basic.html#cb69-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, <span class="dv">11</span>)</span>
-<span id="cb69-3"><a href="r-basic.html#cb69-3" tabindex="-1"></a>a</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="r-basic.html#cb71-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb71-2"><a href="r-basic.html#cb71-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, <span class="dv">11</span>)</span>
+<span id="cb71-3"><a href="r-basic.html#cb71-3" tabindex="-1"></a>a</span></code></pre></div>
 <pre class="output"><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="r-basic.html#cb71-1" tabindex="-1"></a>b</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="r-basic.html#cb73-1" tabindex="-1"></a>b</span></code></pre></div>
 <pre class="output"><code>## [1] 11 12 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="r-basic.html#cb73-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, b)</span>
-<span id="cb73-2"><a href="r-basic.html#cb73-2" tabindex="-1"></a>a</span></code></pre></div>
-<pre class="output"><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 11 12 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="r-basic.html#cb75-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, a, b)</span>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="r-basic.html#cb75-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, b)</span>
 <span id="cb75-2"><a href="r-basic.html#cb75-2" tabindex="-1"></a>a</span></code></pre></div>
+<pre class="output"><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 11 12 16 17 18 19 20</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="r-basic.html#cb77-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, a, b)</span>
+<span id="cb77-2"><a href="r-basic.html#cb77-2" tabindex="-1"></a>a</span></code></pre></div>
 <pre class="output"><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 11 12 16 17 18 19 20  1  2  3  4  5  6  7
 ## [26]  8  9 10 11 11 12 16 17 18 19 20 11 12 16 17 18 19 20</code></pre>
 </div>
@@ -954,51 +960,51 @@ div.csl-indent {
 <h2><span class="header-section-number">3.3</span> Calculating with vectors<a href="r-basic.html#calculating-with-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="arithmetic-operations" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Arithmetic operations<a href="r-basic.html#arithmetic-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="r-basic.html#cb77-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
-<span id="cb77-2"><a href="r-basic.html#cb77-2" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="r-basic.html#cb79-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
+<span id="cb79-2"><a href="r-basic.html#cb79-2" tabindex="-1"></a>a <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
 <pre class="output"><code>## [1] 14 15 16 17 18 19 20 21 22</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="r-basic.html#cb79-1" tabindex="-1"></a>a <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="r-basic.html#cb81-1" tabindex="-1"></a>a <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
 <pre class="output"><code>## [1] 5.5 6.0 6.5 7.0 7.5 8.0 8.5 9.0 9.5</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="r-basic.html#cb81-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="r-basic.html#cb83-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
 <pre class="output"><code>## [1] 1 0 1 0 1 0 1 0 1</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="r-basic.html#cb83-1" tabindex="-1"></a>a <span class="sc">%/%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="r-basic.html#cb85-1" tabindex="-1"></a>a <span class="sc">%/%</span> <span class="dv">2</span></span></code></pre></div>
 <pre class="output"><code>## [1] 5 6 6 7 7 8 8 9 9</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="r-basic.html#cb85-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span><span class="sc">==</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="r-basic.html#cb87-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span><span class="sc">==</span> <span class="dv">0</span></span></code></pre></div>
 <pre class="output"><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="r-basic.html#cb87-1" tabindex="-1"></a><span class="fu">which</span>(a <span class="sc">%%</span> <span class="dv">2</span><span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="r-basic.html#cb89-1" tabindex="-1"></a><span class="fu">which</span>(a <span class="sc">%%</span> <span class="dv">2</span><span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre class="output"><code>## [1] 2 4 6 8</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="r-basic.html#cb89-1" tabindex="-1"></a>a[<span class="fu">which</span>(a<span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="r-basic.html#cb91-1" tabindex="-1"></a>a[<span class="fu">which</span>(a<span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] 12 14 16 18</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="r-basic.html#cb91-1" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="r-basic.html#cb93-1" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] 12 14 16 18</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="r-basic.html#cb93-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="r-basic.html#cb95-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span></span></code></pre></div>
 <pre class="output"><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="r-basic.html#cb95-1" tabindex="-1"></a>a[a<span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="r-basic.html#cb97-1" tabindex="-1"></a>a[a<span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 12 14 16 18</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="r-basic.html#cb97-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="r-basic.html#cb99-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 11 13 15 17 19</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="r-basic.html#cb99-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">%%</span> <span class="dv">2</span>     <span class="co"># modular arithmetic, get the reminder</span></span>
-<span id="cb99-2"><a href="r-basic.html#cb99-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">%/%</span> <span class="dv">2</span>    <span class="co"># Quotient</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="r-basic.html#cb101-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">%%</span> <span class="dv">2</span>     <span class="co"># modular arithmetic, get the reminder</span></span>
+<span id="cb101-2"><a href="r-basic.html#cb101-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> a <span class="sc">%/%</span> <span class="dv">2</span>    <span class="co"># Quotient</span></span></code></pre></div>
 </div>
 <div id="logic-comparisons" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Logic comparisons<a href="r-basic.html#logic-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="r-basic.html#cb100-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>     <span class="co"># deteting odd/even number</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="r-basic.html#cb102-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>     <span class="co"># deteting odd/even number</span></span></code></pre></div>
 <pre class="output"><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="r-basic.html#cb102-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="r-basic.html#cb104-1" tabindex="-1"></a>a <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span></span></code></pre></div>
 <pre class="output"><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="r-basic.html#cb104-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="r-basic.html#cb106-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">0</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 0 0 0 0 0 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="r-basic.html#cb106-1" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="r-basic.html#cb108-1" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code></pre></div>
 <pre class="output"><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="r-basic.html#cb108-1" tabindex="-1"></a>income <span class="sc">&gt;</span> <span class="fu">mean</span>(income)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="r-basic.html#cb110-1" tabindex="-1"></a>income <span class="sc">&gt;</span> <span class="fu">mean</span>(income)</span></code></pre></div>
 <pre class="output"><code>## [1]  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="r-basic.html#cb110-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">==</span> T       <span class="co"># == equal to,</span></span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="r-basic.html#cb112-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">==</span> T       <span class="co"># == equal to,</span></span></code></pre></div>
 <pre class="output"><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="r-basic.html#cb112-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">!=</span> F       <span class="co"># != Not equal to</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="r-basic.html#cb114-1" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">!=</span> F       <span class="co"># != Not equal to</span></span></code></pre></div>
 <pre class="output"><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="r-basic.html#cb114-1" tabindex="-1"></a><span class="fu">any</span>(a<span class="sc">&gt;</span><span class="dv">11</span>) <span class="co"># is there any element larger than 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-basic.html#cb116-1" tabindex="-1"></a><span class="fu">any</span>(a<span class="sc">&gt;</span><span class="dv">11</span>) <span class="co"># is there any element larger than 1</span></span></code></pre></div>
 <pre class="output"><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-basic.html#cb116-1" tabindex="-1"></a><span class="fu">all</span>(a<span class="sc">&gt;</span><span class="dv">11</span>) <span class="co"># are all elements larger than 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="r-basic.html#cb118-1" tabindex="-1"></a><span class="fu">all</span>(a<span class="sc">&gt;</span><span class="dv">11</span>) <span class="co"># are all elements larger than 1</span></span></code></pre></div>
 <pre class="output"><code>## [1] FALSE</code></pre>
 </div>
 <div id="subsetting-by-logic-comparisons" class="section level3 hasAnchor" number="3.3.3">
@@ -1006,23 +1012,23 @@ div.csl-indent {
 <ul>
 <li>two methods to filter data from vectors, by index vector or a logical vector with equal length.</li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="r-basic.html#cb118-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
-<span id="cb118-2"><a href="r-basic.html#cb118-2" tabindex="-1"></a>a[<span class="fu">c</span>(T, F, T, F, T)]</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="r-basic.html#cb120-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
+<span id="cb120-2"><a href="r-basic.html#cb120-2" tabindex="-1"></a>a[<span class="fu">c</span>(T, F, T, F, T)]</span></code></pre></div>
 <pre class="output"><code>## [1] 11 33 55</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="r-basic.html#cb120-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="r-basic.html#cb122-1" tabindex="-1"></a>a[a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] 11 33 55</code></pre>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="r-basic.html#cb122-1" tabindex="-1"></a>a<span class="sc">%%</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-basic.html#cb124-1" tabindex="-1"></a>a<span class="sc">%%</span><span class="dv">2</span></span></code></pre></div>
 <pre class="output"><code>## [1] 1 0 1 0 1</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-basic.html#cb124-1" tabindex="-1"></a>a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="r-basic.html#cb126-1" tabindex="-1"></a>a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span></span></code></pre></div>
 <pre class="output"><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="r-basic.html#cb126-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;你好&quot;</span>,<span class="st">&quot;你好棒棒&quot;</span>,<span class="st">&quot;你好棒&quot;</span>,<span class="st">&quot;你真的好棒&quot;</span>)</span>
-<span id="cb126-2"><a href="r-basic.html#cb126-2" tabindex="-1"></a>a[<span class="fu">nchar</span>(a)<span class="sc">&gt;</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="r-basic.html#cb128-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;你好&quot;</span>,<span class="st">&quot;你好棒棒&quot;</span>,<span class="st">&quot;你好棒&quot;</span>,<span class="st">&quot;你真的好棒&quot;</span>)</span>
+<span id="cb128-2"><a href="r-basic.html#cb128-2" tabindex="-1"></a>a[<span class="fu">nchar</span>(a)<span class="sc">&gt;</span><span class="dv">3</span>]</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;你好棒棒&quot;   &quot;你真的好棒&quot;</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="r-basic.html#cb128-1" tabindex="-1"></a><span class="co"># which will return &quot;index-of&quot;</span></span>
-<span id="cb128-2"><a href="r-basic.html#cb128-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
-<span id="cb128-3"><a href="r-basic.html#cb128-3" tabindex="-1"></a>a[<span class="fu">which</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="r-basic.html#cb130-1" tabindex="-1"></a><span class="co"># which will return &quot;index-of&quot;</span></span>
+<span id="cb130-2"><a href="r-basic.html#cb130-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
+<span id="cb130-3"><a href="r-basic.html#cb130-3" tabindex="-1"></a>a[<span class="fu">which</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1] 11 33 55</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="r-basic.html#cb130-1" tabindex="-1"></a><span class="fu">which</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="r-basic.html#cb132-1" tabindex="-1"></a><span class="fu">which</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
 <pre class="output"><code>## [1] 1 3 5</code></pre>
 </div>
 <div id="sorting-and-ordering" class="section level3 hasAnchor" number="3.3.4">
@@ -1032,51 +1038,51 @@ div.csl-indent {
 <li><p><code>order(x)</code>函式會傳回<code>x</code>數值由小到大的<strong>索引</strong>。這個例子的結果是<code>5, 4, 3, 6, 1, 2</code>，也就是<code>5</code>位置的那個數最小、<code>4</code>那個位置的數次小、接下來<code>3, 6, 1, 2</code>。</p></li>
 <li><p><code>x[order(x)]</code>把<code>order(x)</code>結果（也就是<code>c(5, 4, 3, 6, 1, 2)</code>）傳給原本的<code>x</code>便會使得原本的<code>x</code>重新排序。通常<code>order()</code>的用途是，我們可以將兩個等長的variables例如var1和var2，依據var2來重新排序var1，例如var1[order(var2)]。</p></li>
 </ul>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="r-basic.html#cb132-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">55</span>, <span class="dv">22</span>, <span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">24</span>)</span>
-<span id="cb132-2"><a href="r-basic.html#cb132-2" tabindex="-1"></a><span class="fu">mode</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="r-basic.html#cb134-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">55</span>, <span class="dv">22</span>, <span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">24</span>)</span>
+<span id="cb134-2"><a href="r-basic.html#cb134-2" tabindex="-1"></a><span class="fu">mode</span>(x)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="r-basic.html#cb134-1" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="r-basic.html#cb136-1" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="r-basic.html#cb136-1" tabindex="-1"></a><span class="fu">sort</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="r-basic.html#cb138-1" tabindex="-1"></a><span class="fu">sort</span>(x)</span></code></pre></div>
 <pre class="output"><code>## [1]  4 13 22 24 33 55</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="r-basic.html#cb138-1" tabindex="-1"></a><span class="co"># x &lt;- sort(x) # assign to replace original x</span></span>
-<span id="cb138-2"><a href="r-basic.html#cb138-2" tabindex="-1"></a><span class="fu">order</span>(x) </span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="r-basic.html#cb140-1" tabindex="-1"></a><span class="co"># x &lt;- sort(x) # assign to replace original x</span></span>
+<span id="cb140-2"><a href="r-basic.html#cb140-2" tabindex="-1"></a><span class="fu">order</span>(x) </span></code></pre></div>
 <pre class="output"><code>## [1] 5 4 3 6 1 2</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="r-basic.html#cb140-1" tabindex="-1"></a>x[<span class="fu">order</span>(x)]</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-basic.html#cb142-1" tabindex="-1"></a>x[<span class="fu">order</span>(x)]</span></code></pre></div>
 <pre class="output"><code>## [1]  4 13 22 24 33 55</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="r-basic.html#cb142-1" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">2</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-basic.html#cb144-1" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">2</span>)]</span></code></pre></div>
 <pre class="output"><code>## [1]  4 13 22 24 33 55</code></pre>
 </div>
 <div id="built-in-math-functions" class="section level3 hasAnchor" number="3.3.5">
 <h3><span class="header-section-number">3.3.5</span> Built-in math functions<a href="r-basic.html#built-in-math-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="r-basic.html#cb144-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
-<span id="cb144-2"><a href="r-basic.html#cb144-2" tabindex="-1"></a><span class="fu">min</span>(a); <span class="fu">max</span>(a); <span class="fu">mean</span>(a); <span class="fu">median</span>(a); <span class="fu">sd</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="r-basic.html#cb146-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">19</span></span>
+<span id="cb146-2"><a href="r-basic.html#cb146-2" tabindex="-1"></a><span class="fu">min</span>(a); <span class="fu">max</span>(a); <span class="fu">mean</span>(a); <span class="fu">median</span>(a); <span class="fu">sd</span>(a)</span></code></pre></div>
 <pre class="output"><code>## [1] 11</code></pre>
 <pre class="output"><code>## [1] 19</code></pre>
 <pre class="output"><code>## [1] 15</code></pre>
 <pre class="output"><code>## [1] 15</code></pre>
 <pre class="output"><code>## [1] 2.738613</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="r-basic.html#cb150-1" tabindex="-1"></a><span class="fu">log2</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="r-basic.html#cb152-1" tabindex="-1"></a><span class="fu">log2</span>(a)</span></code></pre></div>
 <pre class="output"><code>## [1] 3.459432 3.584963 3.700440 3.807355 3.906891 4.000000 4.087463 4.169925
 ## [9] 4.247928</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="r-basic.html#cb152-1" tabindex="-1"></a><span class="fu">log1p</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="r-basic.html#cb154-1" tabindex="-1"></a><span class="fu">log1p</span>(a)</span></code></pre></div>
 <pre class="output"><code>## [1] 2.484907 2.564949 2.639057 2.708050 2.772589 2.833213 2.890372 2.944439
 ## [9] 2.995732</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="r-basic.html#cb154-1" tabindex="-1"></a>?log1p</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="r-basic.html#cb156-1" tabindex="-1"></a>?log1p</span></code></pre></div>
 </div>
 </div>
 <div id="data-types" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Data types<a href="r-basic.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="checking-data-type" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Checking data type<a href="r-basic.html#checking-data-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="r-basic.html#cb155-1" tabindex="-1"></a><span class="fu">mode</span>(county)                <span class="co"># character</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="r-basic.html#cb157-1" tabindex="-1"></a><span class="fu">mode</span>(county)                <span class="co"># character</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="r-basic.html#cb157-1" tabindex="-1"></a><span class="fu">mode</span>(income)                    <span class="co"># numeric</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="r-basic.html#cb159-1" tabindex="-1"></a><span class="fu">mode</span>(income)                    <span class="co"># numeric</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="r-basic.html#cb159-1" tabindex="-1"></a><span class="fu">mode</span>(income <span class="sc">&gt;</span> <span class="fu">mean</span>(income)) <span class="co"># logical</span></span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="r-basic.html#cb161-1" tabindex="-1"></a><span class="fu">mode</span>(income <span class="sc">&gt;</span> <span class="fu">mean</span>(income)) <span class="co"># logical</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;logical&quot;</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="r-basic.html#cb161-1" tabindex="-1"></a>testing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;26.142&quot;</span>, <span class="st">&quot;12.008&quot;</span>, <span class="st">&quot;7.032&quot;</span>, <span class="st">&quot;13.646&quot;</span>, <span class="st">&quot;4.589&quot;</span>)</span>
-<span id="cb161-2"><a href="r-basic.html#cb161-2" tabindex="-1"></a><span class="fu">mode</span>(testing)               <span class="co"># character</span></span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="r-basic.html#cb163-1" tabindex="-1"></a>testing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;26.142&quot;</span>, <span class="st">&quot;12.008&quot;</span>, <span class="st">&quot;7.032&quot;</span>, <span class="st">&quot;13.646&quot;</span>, <span class="st">&quot;4.589&quot;</span>)</span>
+<span id="cb163-2"><a href="r-basic.html#cb163-2" tabindex="-1"></a><span class="fu">mode</span>(testing)               <span class="co"># character</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;character&quot;</code></pre>
 </div>
 <div id="converting-data-type" class="section level3 hasAnchor" number="3.4.2">
@@ -1086,25 +1092,25 @@ div.csl-indent {
 <li><p>如果硬是在logical vector後附加一個numeric element的話，那就會整個vector被轉為numeric vector；相仿地，如果numeric vector後附加一個character element的話那整個vector就會被轉為character vector。</p></li>
 <li><p>可以用<code>sum()</code>函式來計算logical vector有幾個<code>TRUE</code>值。例如<code>sum(a%%2==1)</code>就是計算<code>a</code>中有幾個奇數。<code>TRUE</code>可視為<code>1</code>、<code>FALSE</code>可視為<code>0</code>，所以加總起來就是<code>TRUE</code>有幾個。</p></li>
 </ul>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="r-basic.html#cb163-1" tabindex="-1"></a>income.c <span class="ot">&lt;-</span> <span class="fu">as.character</span>(income)</span>
-<span id="cb163-2"><a href="r-basic.html#cb163-2" tabindex="-1"></a>population.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(population)</span>
-<span id="cb163-3"><a href="r-basic.html#cb163-3" tabindex="-1"></a></span>
-<span id="cb163-4"><a href="r-basic.html#cb163-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
-<span id="cb163-5"><a href="r-basic.html#cb163-5" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, <span class="st">&quot;100&quot;</span>)</span>
-<span id="cb163-6"><a href="r-basic.html#cb163-6" tabindex="-1"></a></span>
-<span id="cb163-7"><a href="r-basic.html#cb163-7" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
-<span id="cb163-8"><a href="r-basic.html#cb163-8" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="r-basic.html#cb165-1" tabindex="-1"></a>income.c <span class="ot">&lt;-</span> <span class="fu">as.character</span>(income)</span>
+<span id="cb165-2"><a href="r-basic.html#cb165-2" tabindex="-1"></a>population.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(population)</span>
+<span id="cb165-3"><a href="r-basic.html#cb165-3" tabindex="-1"></a></span>
+<span id="cb165-4"><a href="r-basic.html#cb165-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
+<span id="cb165-5"><a href="r-basic.html#cb165-5" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(a, <span class="st">&quot;100&quot;</span>)</span>
+<span id="cb165-6"><a href="r-basic.html#cb165-6" tabindex="-1"></a></span>
+<span id="cb165-7"><a href="r-basic.html#cb165-7" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">99</span>, <span class="dv">11</span>)</span>
+<span id="cb165-8"><a href="r-basic.html#cb165-8" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
 <pre class="output"><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="r-basic.html#cb165-1" tabindex="-1"></a><span class="fu">max</span>(a)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="r-basic.html#cb167-1" tabindex="-1"></a><span class="fu">max</span>(a)</span></code></pre></div>
 <pre class="output"><code>## [1] 99</code></pre>
 </div>
 </div>
 <div id="character-operations" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Character operations<a href="r-basic.html#character-operations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="r-basic.html#cb167-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
-<span id="cb167-2"><a href="r-basic.html#cb167-2" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;A&quot;</span>, a)       <span class="co"># concatenate</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="r-basic.html#cb169-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">11</span>, <span class="dv">55</span>, <span class="dv">11</span>)</span>
+<span id="cb169-2"><a href="r-basic.html#cb169-2" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;A&quot;</span>, a)       <span class="co"># concatenate</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;A 11&quot; &quot;A 22&quot; &quot;A 33&quot; &quot;A 44&quot; &quot;A 55&quot;</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="r-basic.html#cb169-1" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;A&quot;</span>, a)      <span class="co"># concatenate</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="r-basic.html#cb171-1" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;A&quot;</span>, a)      <span class="co"># concatenate</span></span></code></pre></div>
 <pre class="output"><code>## [1] &quot;A11&quot; &quot;A22&quot; &quot;A33&quot; &quot;A44&quot; &quot;A55&quot;</code></pre>
 
 </div>
