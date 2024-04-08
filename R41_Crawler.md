@@ -110,4 +110,4 @@ Chrome DevTools是一款由Google開發的網頁開發工具，可以幫助開�
 
 6.  點選JSON請求，您可以查看Request和Response中的的詳細信息，包括URL、Headers、Request Payload和Response等。
 
-7.  在Response分頁中，您可以看到JSON數據的內容。如果JSON數據很大，您可以右鍵點擊JSON數據，然後選擇「Save Response As\...」將其保存到本地檔案中。
+7.  在Response分頁中，您可以看到JSON數據的內容。如果JSON數據很大，您可以右鍵點擊JSON數據，然後選擇「Save Response As...」將其保存到本地檔案中。

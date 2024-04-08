@@ -120,6 +120,10 @@ code-by-dplyr
 generating-each
 gathering-subplots-by-cowplot
 joindata
+simple
+left_join-right_join
+inner_join-and-full_join
+join-by-different-keys
 moi
 moi_plan
 moi_clean

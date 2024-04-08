@@ -2,6 +2,129 @@
 
 # Data manipultaiton: Join data {#joindata}
 
+在資料處理與分析領域中，我們常常需要合併不同來源的資料，例如合併公投資料和內政部的人口統計資料、例如合併健保資料和長照資料、家戶資料、財稅局的所得資料等。這種合併資料的操作的語法源生於資料庫管理系統，而其中一種常見的操作就是使用不同類型的 join 來合併資料表。在資料庫中，當我們需要結合兩個或多個資料表時，我們通常會使用像是 left join、right join、inner join 和 full join 等不同類型的 join 操作。這些 join 操作可以根據指定的欄位值將兩個資料表中的資料按照不同的方式進行合併，以滿足具體的分析需求。
+
+## A Simple Example: Joining Two Data Frames {#simple}
+
+以下為用來解釋 join 的簡單範例。其中 **`posts`** 有 **`pid`**（貼文編號）和 **`pcontent`**（貼文內容）兩個欄位；而 **`comments`** 包含了留言的資訊，有 **`pid`**（所屬的貼文編號）和 **`ccontent`**（留言內容）兩個欄位。
+
+
+```r
+posts <- tibble(pid=c("p01", "p02", "p03"), pcontent=c("post01", "post02", "post03"))
+comments <- tibble(pid=c("p02", "p03", "p04"), ccontent=c("comment01", "comment02", "comment03"))
+posts
+```
+
+```{.output}
+## # A tibble: 3 × 2
+##   pid   pcontent
+##   <chr> <chr>   
+## 1 p01   post01  
+## 2 p02   post02  
+## 3 p03   post03
+```
+
+```r
+comments
+```
+
+```{.output}
+## # A tibble: 3 × 2
+##   pid   ccontent 
+##   <chr> <chr>    
+## 1 p02   comment01
+## 2 p03   comment02
+## 3 p04   comment03
+```
+
+### `left_join()` & `right_join()`
+
+-   `left_join()`會將兩個表格中的資料以左邊表格為主，並將右邊表格中符合左邊表格的資料進行合併。如果右邊表格中沒有符合的資料，則以 `NA`值填充。 在下面的範例中，我們將`posts`作為左表，`comments`作為右表，以`pid`欄位為連接依據，所以會返回`posts`表格中的所有資料，並將符合的`comments`資料合併進來。
+-   `right_join()`與`left_join()`相反，它將兩個表格中的資料以右表為主，並將左邊表格中符合右表的資料進行合併。如果左表中沒有符合的資料，則以`NA`值填充。
+
+
+```r
+left_join(posts, comments)
+```
+
+```{.output}
+## # A tibble: 3 × 3
+##   pid   pcontent ccontent 
+##   <chr> <chr>    <chr>    
+## 1 p01   post01   <NA>     
+## 2 p02   post02   comment01
+## 3 p03   post03   comment02
+```
+
+```r
+right_join(posts, comments)
+```
+
+```{.output}
+## # A tibble: 3 × 3
+##   pid   pcontent ccontent 
+##   <chr> <chr>    <chr>    
+## 1 p02   post02   comment01
+## 2 p03   post03   comment02
+## 3 p04   <NA>     comment03
+```
+
+```r
+right_join(comments, posts)
+```
+
+```{.output}
+## # A tibble: 3 × 3
+##   pid   ccontent  pcontent
+##   <chr> <chr>     <chr>   
+## 1 p02   comment01 post02  
+## 2 p03   comment02 post03  
+## 3 p01   <NA>      post01
+```
+
+### `inner_join()` and `full_join()`
+
+-   `inner_join()`會返回兩個表格中共同符合連接條件的資料。換句話說，它會保留左右兩表中都有對應資料的列。如果左右表格中有任一邊缺少符合的資料，則該資料將不會出現在結果中。
+-   `full_join()`會返回兩個表格中所有的資料，並將缺失的值以`NA`填充。如果兩表中有共同符合的資料，則會將它們合併在一起；如果某個表格中有但另一個表格中沒有的資料，則會將缺失的資料補上`NA`。
+
+
+```r
+inner_join(posts, comments)
+```
+
+```{.output}
+## # A tibble: 2 × 3
+##   pid   pcontent ccontent 
+##   <chr> <chr>    <chr>    
+## 1 p02   post02   comment01
+## 2 p03   post03   comment02
+```
+
+```r
+full_join(posts, comments)
+```
+
+```{.output}
+## # A tibble: 4 × 3
+##   pid   pcontent ccontent 
+##   <chr> <chr>    <chr>    
+## 1 p01   post01   <NA>     
+## 2 p02   post02   comment01
+## 3 p03   post03   comment02
+## 4 p04   <NA>     comment03
+```
+
+### `join()` by different keys
+
+我們將 **`posts`** 作為左表，**`comments`** 作為右表，並使用 **`postid`** 和 **`pid`** 欄位進行連接。由於我們經由觀察知道左邊表格中的 **`postid`** 和右邊表格中的 **`pid`** 有對應關係，所以它們會根據這個關係進行連接，語法為`by=c("postid"="pid")`，指定左表的`postid`和右表的`pid`相對應。
+
+
+```r
+posts <- tibble(postid=c("p01", "p02", "p03"), pcontent=c("post01", "post02", "post03"))
+comments <- tibble(pid=c("p02", "p03", "p04"), ccontent=c("comment01", "comment02", "comment03"))
+result <- left_join(posts, comments, by = c("postid" = "pid"))
+```
+
 ## 讀取內政部人口統計資料 {#moi}
 
 先使用`slice(-1)`減去第一行中文欄位名稱。再來，目前縣市鄉鎮市區（`site_id`）和村里（`village`）分別是兩個變項，由於不同的鄉鎮市可能會有相同的村里名，所以把`site_id`與`village`粘接起來成為完整的村里名`vname`。
@@ -209,7 +332,7 @@ town_stat %>%
   geom_text(aes(label=site_id, vjust=1.3, size=4), family = "Heiti TC Light")  + th
 ```
 
-<img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ```r
     # geom_jitter(alpha = 0.3)
@@ -287,4 +410,4 @@ town_stat %>%
     theme_light()
 ```
 
-<img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-15-1.png" width="672" />

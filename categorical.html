@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-03-31" />
+<meta name="date" content="2024-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -310,17 +310,23 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.1</b> 讀取內政部人口統計資料</a>
+<li class="chapter" data-level="7.1" data-path="joindata.html"><a href="joindata.html#simple"><i class="fa fa-check"></i><b>7.1</b> A Simple Example: Joining Two Data Frames</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.1.1</b> 分析規劃</a></li>
-<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.1.2</b> 清理資料</a></li>
-<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.1.3</b> 進階：運用<code>rowwise()</code></a></li>
-<li class="chapter" data-level="7.1.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.1.4</b> 建立鄉鎮市區與村里指標</a></li>
-<li class="chapter" data-level="7.1.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.1.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+<li class="chapter" data-level="7.1.1" data-path="joindata.html"><a href="joindata.html#left_join-right_join"><i class="fa fa-check"></i><b>7.1.1</b> <code>left_join()</code> &amp; <code>right_join()</code></a></li>
+<li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#inner_join-and-full_join"><i class="fa fa-check"></i><b>7.1.2</b> <code>inner_join()</code> and <code>full_join()</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#join-by-different-keys"><i class="fa fa-check"></i><b>7.1.3</b> <code>join()</code> by different keys</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.2</b> 讀取公投資料</a>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.2</b> 讀取內政部人口統計資料</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.2.1</b> 合併公投資料並視覺化</a></li>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.2.1</b> 分析規劃</a></li>
+<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.2.2</b> 清理資料</a></li>
+<li class="chapter" data-level="7.2.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.2.3</b> 進階：運用<code>rowwise()</code></a></li>
+<li class="chapter" data-level="7.2.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.2.4</b> 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.2.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.2.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.3</b> 讀取公投資料</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.3.1</b> 合併公投資料並視覺化</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
@@ -799,8 +805,8 @@ div.csl-indent {
 <div id="the-case-misinformation-perception" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> The Case: Misinformation Perception<a href="categorical.html#the-case-misinformation-perception" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>這個範例涵括了在做問卷分析時常用的處理步驟。最核心的步驟是將文字陳述的類別資料轉換為便於後續運算的<code>factor</code>或數值資料。如果類別數量過多的時候，在這個過程會順便進行重新分組。例如依照年齡組把填答者分為老年、中壯年、青少年、兒童四組。</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="categorical.html#cb390-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/tfc_survey.rds&quot;</span>)</span>
-<span id="cb390-2"><a href="categorical.html#cb390-2" tabindex="-1"></a>raw</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="categorical.html#cb405-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/tfc_survey.rds&quot;</span>)</span>
+<span id="cb405-2"><a href="categorical.html#cb405-2" tabindex="-1"></a>raw</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 1,216 × 6
 ##    Q7    Q8     QAParty      QASide       QA3   QA4               
 ##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;             
@@ -819,37 +825,37 @@ div.csl-indent {
 <div id="factorize" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Factorizing data<a href="categorical.html#factorize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>通常問卷會分為兩種類型的資料，一種是人口統計用的基本資料（如性別、年齡組、教育程度）、另一種是問卷本身要問的題項。以下是常見的問卷型態，包含把年齡從20歲開始每五年作為一組，70歲以上則歸類為一組，共會有十一組。而教育程度則常分為五至六組，但在問卷設計的時候，通常會需要增加「拒答」的選項。如果問卷中包含政黨意識形態，就必須要決定要以黨派作為類別變項，或者以意識形態做順序尺度。以下即為一個順序尺度的案例，從「非常接近泛綠」到「非常接近泛藍」共五個等第，但另增「拒答」選項。</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="categorical.html#cb392-1" tabindex="-1"></a>dt <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb392-2"><a href="categorical.html#cb392-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3 =</span> <span class="fu">ordered</span>(QA3, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;20-24&quot;</span>, <span class="st">&quot;25-29&quot;</span>, <span class="st">&quot;30-34&quot;</span>, <span class="st">&quot;35-39&quot;</span>, </span>
-<span id="cb392-3"><a href="categorical.html#cb392-3" tabindex="-1"></a>                                     <span class="st">&quot;40-44&quot;</span>, <span class="st">&quot;45-49&quot;</span>, <span class="st">&quot;50-54&quot;</span>, <span class="st">&quot;55-59&quot;</span>, </span>
-<span id="cb392-4"><a href="categorical.html#cb392-4" tabindex="-1"></a>                                     <span class="st">&quot;60-64&quot;</span>, <span class="st">&quot;65-69&quot;</span>, <span class="st">&quot;70及以上&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb392-5"><a href="categorical.html#cb392-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3_lv =</span> <span class="fu">ordered</span>(QA3, </span>
-<span id="cb392-6"><a href="categorical.html#cb392-6" tabindex="-1"></a>                          <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;20-24&quot;</span>, <span class="st">&quot;25-29&quot;</span>, <span class="st">&quot;30-34&quot;</span>, <span class="st">&quot;35-39&quot;</span>, </span>
-<span id="cb392-7"><a href="categorical.html#cb392-7" tabindex="-1"></a>                                   <span class="st">&quot;40-44&quot;</span>, <span class="st">&quot;45-49&quot;</span>, <span class="st">&quot;50-54&quot;</span>, <span class="st">&quot;55-59&quot;</span>, </span>
-<span id="cb392-8"><a href="categorical.html#cb392-8" tabindex="-1"></a>                                   <span class="st">&quot;60-64&quot;</span>, <span class="st">&quot;65-69&quot;</span>, <span class="st">&quot;70及以上&quot;</span>),</span>
-<span id="cb392-9"><a href="categorical.html#cb392-9" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;青年&quot;</span>, <span class="st">&quot;青年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, </span>
-<span id="cb392-10"><a href="categorical.html#cb392-10" tabindex="-1"></a>                                     <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;中年&quot;</span>, </span>
-<span id="cb392-11"><a href="categorical.html#cb392-11" tabindex="-1"></a>                                     <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;老年&quot;</span>, <span class="st">&quot;老年&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb392-12"><a href="categorical.html#cb392-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA4 =</span> <span class="fu">ordered</span>(QA4, </span>
-<span id="cb392-13"><a href="categorical.html#cb392-13" tabindex="-1"></a>                       <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;拒答&quot;</span>, <span class="st">&quot;國小及以下&quot;</span>, <span class="st">&quot;初中、國中&quot;</span>, </span>
-<span id="cb392-14"><a href="categorical.html#cb392-14" tabindex="-1"></a>                                <span class="st">&quot;高中、高職&quot;</span>, <span class="st">&quot;大專（專科與大學）&quot;</span>,</span>
-<span id="cb392-15"><a href="categorical.html#cb392-15" tabindex="-1"></a>                                <span class="st">&quot;研究所及以上&quot;</span>), </span>
-<span id="cb392-16"><a href="categorical.html#cb392-16" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;拒答&quot;</span>, <span class="st">&quot;國小以下&quot;</span>, <span class="st">&quot;國中&quot;</span>, </span>
-<span id="cb392-17"><a href="categorical.html#cb392-17" tabindex="-1"></a>                                <span class="st">&quot;高中職&quot;</span>, <span class="st">&quot;大專&quot;</span>, <span class="st">&quot;研究所以上&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb392-18"><a href="categorical.html#cb392-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QASide=</span><span class="fu">ordered</span>(QASide, </span>
-<span id="cb392-19"><a href="categorical.html#cb392-19" tabindex="-1"></a>                        <span class="at">exclude=</span><span class="st">&quot;拒答&quot;</span>, </span>
-<span id="cb392-20"><a href="categorical.html#cb392-20" tabindex="-1"></a>                        <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;非常接近泛綠&quot;</span>, <span class="st">&quot;接近泛綠&quot;</span>, </span>
-<span id="cb392-21"><a href="categorical.html#cb392-21" tabindex="-1"></a>                                 <span class="st">&quot;都不接近&quot;</span>, <span class="st">&quot;接近泛藍&quot;</span>, <span class="st">&quot;非常接近泛藍&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="categorical.html#cb407-1" tabindex="-1"></a>dt <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
+<span id="cb407-2"><a href="categorical.html#cb407-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3 =</span> <span class="fu">ordered</span>(QA3, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;20-24&quot;</span>, <span class="st">&quot;25-29&quot;</span>, <span class="st">&quot;30-34&quot;</span>, <span class="st">&quot;35-39&quot;</span>, </span>
+<span id="cb407-3"><a href="categorical.html#cb407-3" tabindex="-1"></a>                                     <span class="st">&quot;40-44&quot;</span>, <span class="st">&quot;45-49&quot;</span>, <span class="st">&quot;50-54&quot;</span>, <span class="st">&quot;55-59&quot;</span>, </span>
+<span id="cb407-4"><a href="categorical.html#cb407-4" tabindex="-1"></a>                                     <span class="st">&quot;60-64&quot;</span>, <span class="st">&quot;65-69&quot;</span>, <span class="st">&quot;70及以上&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb407-5"><a href="categorical.html#cb407-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3_lv =</span> <span class="fu">ordered</span>(QA3, </span>
+<span id="cb407-6"><a href="categorical.html#cb407-6" tabindex="-1"></a>                          <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;20-24&quot;</span>, <span class="st">&quot;25-29&quot;</span>, <span class="st">&quot;30-34&quot;</span>, <span class="st">&quot;35-39&quot;</span>, </span>
+<span id="cb407-7"><a href="categorical.html#cb407-7" tabindex="-1"></a>                                   <span class="st">&quot;40-44&quot;</span>, <span class="st">&quot;45-49&quot;</span>, <span class="st">&quot;50-54&quot;</span>, <span class="st">&quot;55-59&quot;</span>, </span>
+<span id="cb407-8"><a href="categorical.html#cb407-8" tabindex="-1"></a>                                   <span class="st">&quot;60-64&quot;</span>, <span class="st">&quot;65-69&quot;</span>, <span class="st">&quot;70及以上&quot;</span>),</span>
+<span id="cb407-9"><a href="categorical.html#cb407-9" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;青年&quot;</span>, <span class="st">&quot;青年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, </span>
+<span id="cb407-10"><a href="categorical.html#cb407-10" tabindex="-1"></a>                                     <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;中年&quot;</span>, </span>
+<span id="cb407-11"><a href="categorical.html#cb407-11" tabindex="-1"></a>                                     <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;老年&quot;</span>, <span class="st">&quot;老年&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb407-12"><a href="categorical.html#cb407-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA4 =</span> <span class="fu">ordered</span>(QA4, </span>
+<span id="cb407-13"><a href="categorical.html#cb407-13" tabindex="-1"></a>                       <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;拒答&quot;</span>, <span class="st">&quot;國小及以下&quot;</span>, <span class="st">&quot;初中、國中&quot;</span>, </span>
+<span id="cb407-14"><a href="categorical.html#cb407-14" tabindex="-1"></a>                                <span class="st">&quot;高中、高職&quot;</span>, <span class="st">&quot;大專（專科與大學）&quot;</span>,</span>
+<span id="cb407-15"><a href="categorical.html#cb407-15" tabindex="-1"></a>                                <span class="st">&quot;研究所及以上&quot;</span>), </span>
+<span id="cb407-16"><a href="categorical.html#cb407-16" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;拒答&quot;</span>, <span class="st">&quot;國小以下&quot;</span>, <span class="st">&quot;國中&quot;</span>, </span>
+<span id="cb407-17"><a href="categorical.html#cb407-17" tabindex="-1"></a>                                <span class="st">&quot;高中職&quot;</span>, <span class="st">&quot;大專&quot;</span>, <span class="st">&quot;研究所以上&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb407-18"><a href="categorical.html#cb407-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QASide=</span><span class="fu">ordered</span>(QASide, </span>
+<span id="cb407-19"><a href="categorical.html#cb407-19" tabindex="-1"></a>                        <span class="at">exclude=</span><span class="st">&quot;拒答&quot;</span>, </span>
+<span id="cb407-20"><a href="categorical.html#cb407-20" tabindex="-1"></a>                        <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;非常接近泛綠&quot;</span>, <span class="st">&quot;接近泛綠&quot;</span>, </span>
+<span id="cb407-21"><a href="categorical.html#cb407-21" tabindex="-1"></a>                                 <span class="st">&quot;都不接近&quot;</span>, <span class="st">&quot;接近泛藍&quot;</span>, <span class="st">&quot;非常接近泛藍&quot;</span>)))</span></code></pre></div>
 <div id="factor2order" class="section level3 hasAnchor" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> factor-to-order<a href="categorical.html#factor2order" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在一開始清理資料的時候，會建議先把類別變數（通常是文字型態）轉為<code>factor</code>型態。常用的函式是用<code>mutate()</code>搭配<code>ordered()</code>來改變變數型態。<code>ordered()</code>會照類別順序來標定該<code>factor</code>所對應到的數字。可以用<code>as.integer()</code>將<code>factor</code>轉為整數後就可以看到各類別的順序。</p>
 <pre><code>  mutate(QA3 = ordered(QA3, levels=c(&quot;20-24&quot;, &quot;25-29&quot;, &quot;30-34&quot;, &quot;35-39&quot;, 
                                      &quot;40-44&quot;, &quot;45-49&quot;, &quot;50-54&quot;, &quot;55-59&quot;, 
                                      &quot;60-64&quot;, &quot;65-69&quot;, &quot;70及以上&quot;))) %&gt;%</code></pre>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="categorical.html#cb394-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="categorical.html#cb409-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre class="output"><code>##  [1] 25-29 35-39 35-39 20-24 45-49 25-29 30-34 20-24 20-24 55-59
 ## 11 Levels: 20-24 &lt; 25-29 &lt; 30-34 &lt; 35-39 &lt; 40-44 &lt; 45-49 &lt; 50-54 &lt; ... &lt; 70及以上</code></pre>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="categorical.html#cb396-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="categorical.html#cb411-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
 <pre class="output"><code>##  [1] 2 4 4 1 6 2 3 1 1 8</code></pre>
 </div>
 <div id="excluding" class="section level3 hasAnchor" number="8.3.2">
@@ -859,11 +865,11 @@ div.csl-indent {
                         exclude=&quot;拒答&quot;, 
                         levels=c(&quot;非常接近泛綠&quot;, &quot;接近泛綠&quot;, 
                                  &quot;都不接近&quot;, &quot;接近泛藍&quot;, &quot;非常接近泛藍&quot;)))</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="categorical.html#cb399-1" tabindex="-1"></a>dt<span class="sc">$</span>QASide[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="categorical.html#cb414-1" tabindex="-1"></a>dt<span class="sc">$</span>QASide[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre class="output"><code>##  [1] 非常接近泛綠 接近泛藍     接近泛綠     接近泛綠     非常接近泛綠
 ##  [6] 非常接近泛藍 接近泛綠     接近泛綠     接近泛藍     接近泛綠    
 ## Levels: 非常接近泛綠 &lt; 接近泛綠 &lt; 都不接近 &lt; 接近泛藍 &lt; 非常接近泛藍</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="categorical.html#cb401-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QASide[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="categorical.html#cb416-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QASide[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
 <pre class="output"><code>##  [1] 1 4 2 2 1 5 2 2 4 2</code></pre>
 </div>
 <div id="groupup" class="section level3 hasAnchor" number="8.3.3">
@@ -876,12 +882,12 @@ div.csl-indent {
                           labels = c(&quot;青年&quot;, &quot;青年&quot;, &quot;壯年&quot;, &quot;壯年&quot;, 
                                      &quot;壯年&quot;, &quot;中年&quot;, &quot;中年&quot;, &quot;中年&quot;, 
                                      &quot;中年&quot;, &quot;老年&quot;, &quot;老年&quot;))) %&gt;%</code></pre>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="categorical.html#cb404-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="categorical.html#cb419-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre class="output"><code>##  [1] 25-29 35-39 35-39 20-24 45-49 25-29 30-34 20-24 20-24 55-59
 ## 11 Levels: 20-24 &lt; 25-29 &lt; 30-34 &lt; 35-39 &lt; 40-44 &lt; 45-49 &lt; 50-54 &lt; ... &lt; 70及以上</code></pre>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="categorical.html#cb406-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="categorical.html#cb421-1" tabindex="-1"></a><span class="fu">as.integer</span>(dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code></pre></div>
 <pre class="output"><code>##  [1] 2 4 4 1 6 2 3 1 1 8</code></pre>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="categorical.html#cb408-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3_lv[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="categorical.html#cb423-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3_lv[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre class="output"><code>##  [1] 青年 壯年 壯年 青年 中年 青年 壯年 青年 青年 中年
 ## Levels: 青年 &lt; 壯年 &lt; 中年 &lt; 老年</code></pre>
 </div>
@@ -893,15 +899,15 @@ div.csl-indent {
 <li>Q8 請問您認為其他人會不會受到假消息的影響？</li>
 </ul>
 <p>對於Q7、Q8的問題是詢問填答者認為自己或他人會不會受到假消息影響，並從「一點也不會」、「不會」、「會」到「絕對會」共分四個等第。Q7分別是「81, 446, 650, 39」、Q8分別是「5, 58, 803, 350」。相較於Q7，Q8的分佈略為左傾，亦即傾向於認為其他人較容易受影響。此時如果想要分析Q7和Q8間的關係，由於各有四個等第，其交叉分析表會有16個項目，相當難以分析。</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="categorical.html#cb410-1" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> dt <span class="sc">%&gt;%</span></span>
-<span id="cb410-2"><a href="categorical.html#cb410-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7 =</span> <span class="fu">ordered</span>(Q7, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>, <span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb410-3"><a href="categorical.html#cb410-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q8 =</span> <span class="fu">ordered</span>(Q8, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>, <span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb410-4"><a href="categorical.html#cb410-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd =</span> <span class="fu">as.numeric</span>(Q8)<span class="sc">-</span><span class="fu">as.numeric</span>(Q7)) <span class="sc">%&gt;%</span></span>
-<span id="cb410-5"><a href="categorical.html#cb410-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd_lv =</span> <span class="fu">ifelse</span>(Q7 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>) <span class="sc">&amp;</span> Q8 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>), <span class="st">&quot;高&quot;</span>, <span class="st">&quot;低&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb410-6"><a href="categorical.html#cb410-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd_lv =</span> <span class="fu">ordered</span>(Q7_3rd_lv, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;低&quot;</span>, <span class="st">&quot;高&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="categorical.html#cb425-1" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> dt <span class="sc">%&gt;%</span></span>
+<span id="cb425-2"><a href="categorical.html#cb425-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7 =</span> <span class="fu">ordered</span>(Q7, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>, <span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb425-3"><a href="categorical.html#cb425-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q8 =</span> <span class="fu">ordered</span>(Q8, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>, <span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb425-4"><a href="categorical.html#cb425-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd =</span> <span class="fu">as.numeric</span>(Q8)<span class="sc">-</span><span class="fu">as.numeric</span>(Q7)) <span class="sc">%&gt;%</span></span>
+<span id="cb425-5"><a href="categorical.html#cb425-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd_lv =</span> <span class="fu">ifelse</span>(Q7 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;一點也不會&quot;</span>, <span class="st">&quot;不會&quot;</span>) <span class="sc">&amp;</span> Q8 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;會&quot;</span>, <span class="st">&quot;絕對會&quot;</span>), <span class="st">&quot;高&quot;</span>, <span class="st">&quot;低&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb425-6"><a href="categorical.html#cb425-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q7_3rd_lv =</span> <span class="fu">ordered</span>(Q7_3rd_lv, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;低&quot;</span>, <span class="st">&quot;高&quot;</span>)))</span></code></pre></div>
 <p>這時候一種策略是把這兩題視為順序尺度變數，然後把兩題的分數相減。相減後的分數從「-1, 0, 1, 2, 3」各有「12, 482, 600, 103, 19」，不難猜到會是一個較為集中的分佈，後續僅能當作順序尺度或連續變項來分析，不適合找一個閾值轉類別變項。</p>
 <p>另一種策略是，分別先把Q7與Q8的「一點也不會」和「不會」群組為「不會」、再把「會」與「絕對會」群組為「會」，這樣Q7與Q8的交叉分析表會變成2X2的分析表，雖然群組數量比較少，但別忘記Q7的填答結果集中在會與不會、而Q8為一個較為偏右的分佈，集中在「會」和「絕對會」。Q8勢必會造成比例不均的分組。</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="categorical.html#cb411-1" tabindex="-1"></a>dt2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">as.integer</span>(Q8)<span class="sc">-</span><span class="fu">as.integer</span>(Q7))</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="categorical.html#cb426-1" tabindex="-1"></a>dt2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(<span class="fu">as.integer</span>(Q8)<span class="sc">-</span><span class="fu">as.integer</span>(Q7))</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 5 × 2
 ##   `as.integer(Q8) - as.integer(Q7)`     n
 ##                               &lt;int&gt; &lt;int&gt;
@@ -911,7 +917,7 @@ div.csl-indent {
 ## 4                                 2   103
 ## 5                                 3    19</code></pre>
 <p>最後這題所採行的策略是，做高、低第三人效果分組，也就是根據認為自己「一點也不會」、「不會」受影響，而他人「會」或「絕對會」受影響的重新群組為「高第三人效果組」，其他則為「低第三人效果組」。亦即，分組的一句是在對自己與他人的認知上，無模糊空間的分組方法（也就是認為自己至少不會，和認為別人應該會）。</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="categorical.html#cb413-1" tabindex="-1"></a>dt2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(Q7_3rd_lv)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="categorical.html#cb428-1" tabindex="-1"></a>dt2 <span class="sc">%&gt;%</span> <span class="fu">count</span>(Q7_3rd_lv)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 2 × 2
 ##   Q7_3rd_lv     n
 ##   &lt;ord&gt;     &lt;int&gt;
@@ -932,20 +938,20 @@ div.csl-indent {
 <li>這些統計量用於評估<strong><code>QA3_lv</code></strong>和<strong><code>Q7_3rd_lv</code></strong>之間的關聯性程度。</li>
 <li>連續性係數（Contingency Coeff.）和克拉瑪爾V（Cramer’s V）的值，表示兩個變數之間的關聯性較弱，但仍存在一定程度的相關性。</li>
 </ul>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="categorical.html#cb415-1" tabindex="-1"></a>(xtb <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>QA3_lv <span class="sc">+</span> Q7_3rd_lv, <span class="at">data=</span>dt2))</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="categorical.html#cb430-1" tabindex="-1"></a>(xtb <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span>QA3_lv <span class="sc">+</span> Q7_3rd_lv, <span class="at">data=</span>dt2))</span></code></pre></div>
 <pre class="output"><code>##       Q7_3rd_lv
 ## QA3_lv  低  高
 ##   青年 178 110
 ##   壯年 370 199
 ##   中年 157 134
 ##   老年  41  27</code></pre>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="categorical.html#cb417-1" tabindex="-1"></a>(chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(xtb))</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="categorical.html#cb432-1" tabindex="-1"></a>(chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(xtb))</span></code></pre></div>
 <pre class="output"><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  xtb
 ## X-squared = 10.017, df = 3, p-value = 0.01842</code></pre>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="categorical.html#cb419-1" tabindex="-1"></a>vcd<span class="sc">::</span><span class="fu">assocstats</span>(xtb)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="categorical.html#cb434-1" tabindex="-1"></a>vcd<span class="sc">::</span><span class="fu">assocstats</span>(xtb)</span></code></pre></div>
 <pre class="output"><code>##                      X^2 df P(&gt; X^2)
 ## Likelihood Ratio  9.9301  3  0.01917
 ## Pearson          10.0173  3  0.01842
@@ -953,54 +959,54 @@ div.csl-indent {
 ## Phi-Coefficient   : NA 
 ## Contingency Coeff.: 0.09 
 ## Cramer&#39;s V        : 0.091</code></pre>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="categorical.html#cb421-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>observed, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="categorical.html#cb436-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>observed, <span class="dv">2</span>))</span></code></pre></div>
 <pre class="output"><code>##       Q7_3rd_lv
 ## QA3_lv  低  高
 ##   青年 178 110
 ##   壯年 370 199
 ##   中年 157 134
 ##   老年  41  27</code></pre>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="categorical.html#cb423-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>expected, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="categorical.html#cb438-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>expected, <span class="dv">2</span>))</span></code></pre></div>
 <pre class="output"><code>##       Q7_3rd_lv
 ## QA3_lv     低     高
 ##   青年 176.68 111.32
 ##   壯年 349.07 219.93
 ##   中年 178.52 112.48
 ##   老年  41.72  26.28</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="categorical.html#cb425-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>residuals, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="categorical.html#cb440-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(chi2<span class="sc">$</span>residuals, <span class="dv">2</span>))</span></code></pre></div>
 <pre class="output"><code>##       Q7_3rd_lv
 ## QA3_lv    低    高
 ##   青年  0.10 -0.12
 ##   壯年  1.12 -1.41
 ##   中年 -1.61  2.03
 ##   老年 -0.11  0.14</code></pre>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="categorical.html#cb427-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
-<span id="cb427-2"><a href="categorical.html#cb427-2" tabindex="-1"></a>gplots<span class="sc">::</span><span class="fu">balloonplot</span>(<span class="fu">t</span>(xtb), <span class="at">xlab=</span><span class="st">&quot;第三人效果&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;年齡組&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb427-3"><a href="categorical.html#cb427-3" tabindex="-1"></a>            <span class="at">dotsize=</span><span class="dv">4</span><span class="sc">/</span><span class="fu">max</span>(<span class="fu">strwidth</span>(<span class="dv">40</span>),<span class="fu">strheight</span>(<span class="dv">40</span>)),</span>
-<span id="cb427-4"><a href="categorical.html#cb427-4" tabindex="-1"></a>            <span class="at">text.size=</span><span class="fl">1.5</span>,<span class="at">label.size=</span><span class="dv">2</span>,</span>
-<span id="cb427-5"><a href="categorical.html#cb427-5" tabindex="-1"></a>            <span class="at">rowmar=</span><span class="dv">1</span>, <span class="at">colmar=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="categorical.html#cb442-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
+<span id="cb442-2"><a href="categorical.html#cb442-2" tabindex="-1"></a>gplots<span class="sc">::</span><span class="fu">balloonplot</span>(<span class="fu">t</span>(xtb), <span class="at">xlab=</span><span class="st">&quot;第三人效果&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;年齡組&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb442-3"><a href="categorical.html#cb442-3" tabindex="-1"></a>            <span class="at">dotsize=</span><span class="dv">4</span><span class="sc">/</span><span class="fu">max</span>(<span class="fu">strwidth</span>(<span class="dv">40</span>),<span class="fu">strheight</span>(<span class="dv">40</span>)),</span>
+<span id="cb442-4"><a href="categorical.html#cb442-4" tabindex="-1"></a>            <span class="at">text.size=</span><span class="fl">1.5</span>,<span class="at">label.size=</span><span class="dv">2</span>,</span>
+<span id="cb442-5"><a href="categorical.html#cb442-5" tabindex="-1"></a>            <span class="at">rowmar=</span><span class="dv">1</span>, <span class="at">colmar=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="R24_categorical_data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="categorical.html#cb428-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
-<span id="cb428-2"><a href="categorical.html#cb428-2" tabindex="-1"></a>corrplot<span class="sc">::</span><span class="fu">corrplot</span>(chi2<span class="sc">$</span>residuals, <span class="at">is.corr =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="categorical.html#cb443-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
+<span id="cb443-2"><a href="categorical.html#cb443-2" tabindex="-1"></a>corrplot<span class="sc">::</span><span class="fu">corrplot</span>(chi2<span class="sc">$</span>residuals, <span class="at">is.corr =</span> F)</span></code></pre></div>
 <p><img src="R24_categorical_data_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="categorical.html#cb429-1" tabindex="-1"></a>xtb <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb429-2"><a href="categorical.html#cb429-2" tabindex="-1"></a>  <span class="fu">group_by</span>(QA3_lv) <span class="sc">%&gt;%</span></span>
-<span id="cb429-3"><a href="categorical.html#cb429-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fill =</span> <span class="fu">if_else</span>(n <span class="sc">==</span> <span class="fu">max</span>(n), <span class="st">&quot;orangered&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb429-4"><a href="categorical.html#cb429-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb429-5"><a href="categorical.html#cb429-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3_lv =</span> <span class="fu">ordered</span>(QA3_lv, </span>
-<span id="cb429-6"><a href="categorical.html#cb429-6" tabindex="-1"></a>                          <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;青年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;老年&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb429-7"><a href="categorical.html#cb429-7" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(QA3_lv)) <span class="sc">%&gt;%</span></span>
-<span id="cb429-8"><a href="categorical.html#cb429-8" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y =</span> QA3_lv, <span class="at">x=</span>Q7_3rd_lv, <span class="at">color =</span> fill, <span class="at">size =</span> n) <span class="sc">+</span> </span>
-<span id="cb429-9"><a href="categorical.html#cb429-9" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size=</span><span class="dv">70</span>, <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb429-10"><a href="categorical.html#cb429-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span> </span>
-<span id="cb429-11"><a href="categorical.html#cb429-11" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;orangered&quot;</span>, <span class="st">&quot;skyblue&quot;</span>), <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb429-12"><a href="categorical.html#cb429-12" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
-<span id="cb429-13"><a href="categorical.html#cb429-13" tabindex="-1"></a>    <span class="at">label=</span>n, </span>
-<span id="cb429-14"><a href="categorical.html#cb429-14" tabindex="-1"></a>    <span class="at">vjust=</span><span class="fl">1.3</span>,</span>
-<span id="cb429-15"><a href="categorical.html#cb429-15" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">10</span></span>
-<span id="cb429-16"><a href="categorical.html#cb429-16" tabindex="-1"></a>    ), <span class="at">color=</span><span class="st">&quot;black&quot;</span>,) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb429-17"><a href="categorical.html#cb429-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
-<span id="cb429-18"><a href="categorical.html#cb429-18" tabindex="-1"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="categorical.html#cb444-1" tabindex="-1"></a>xtb <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb444-2"><a href="categorical.html#cb444-2" tabindex="-1"></a>  <span class="fu">group_by</span>(QA3_lv) <span class="sc">%&gt;%</span></span>
+<span id="cb444-3"><a href="categorical.html#cb444-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fill =</span> <span class="fu">if_else</span>(n <span class="sc">==</span> <span class="fu">max</span>(n), <span class="st">&quot;orangered&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb444-4"><a href="categorical.html#cb444-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb444-5"><a href="categorical.html#cb444-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3_lv =</span> <span class="fu">ordered</span>(QA3_lv, </span>
+<span id="cb444-6"><a href="categorical.html#cb444-6" tabindex="-1"></a>                          <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;青年&quot;</span>, <span class="st">&quot;壯年&quot;</span>, <span class="st">&quot;中年&quot;</span>, <span class="st">&quot;老年&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb444-7"><a href="categorical.html#cb444-7" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(QA3_lv)) <span class="sc">%&gt;%</span></span>
+<span id="cb444-8"><a href="categorical.html#cb444-8" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y =</span> QA3_lv, <span class="at">x=</span>Q7_3rd_lv, <span class="at">color =</span> fill, <span class="at">size =</span> n) <span class="sc">+</span> </span>
+<span id="cb444-9"><a href="categorical.html#cb444-9" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size=</span><span class="dv">70</span>, <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb444-10"><a href="categorical.html#cb444-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span> </span>
+<span id="cb444-11"><a href="categorical.html#cb444-11" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;orangered&quot;</span>, <span class="st">&quot;skyblue&quot;</span>), <span class="at">guide =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb444-12"><a href="categorical.html#cb444-12" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
+<span id="cb444-13"><a href="categorical.html#cb444-13" tabindex="-1"></a>    <span class="at">label=</span>n, </span>
+<span id="cb444-14"><a href="categorical.html#cb444-14" tabindex="-1"></a>    <span class="at">vjust=</span><span class="fl">1.3</span>,</span>
+<span id="cb444-15"><a href="categorical.html#cb444-15" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">10</span></span>
+<span id="cb444-16"><a href="categorical.html#cb444-16" tabindex="-1"></a>    ), <span class="at">color=</span><span class="st">&quot;black&quot;</span>,) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb444-17"><a href="categorical.html#cb444-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb444-18"><a href="categorical.html#cb444-18" tabindex="-1"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
 <p><img src="R24_categorical_data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 
 </div>
