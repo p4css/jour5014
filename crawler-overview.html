@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-08" />
+<meta name="date" content="2024-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -441,9 +441,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="15.2.1" data-path="crawler-overview.html"><a href="crawler-overview.html#status_code"><i class="fa fa-check"></i><b>15.2.1</b> HTTP Status Code</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.3</b> Using Chrome DevTools</a>
+<li class="chapter" data-level="15.3" data-path="crawler-overview.html"><a href="crawler-overview.html#webpage-browsing"><i class="fa fa-check"></i><b>15.3</b> Webpage Browsing</a></li>
+<li class="chapter" data-level="15.4" data-path="crawler-overview.html"><a href="crawler-overview.html#using-chrome-devtools"><i class="fa fa-check"></i><b>15.4</b> Using Chrome DevTools</a>
 <ul>
-<li class="chapter" data-level="15.3.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.3.1</b> Observing web request</a></li>
+<li class="chapter" data-level="15.4.1" data-path="crawler-overview.html"><a href="crawler-overview.html#observing-web-request"><i class="fa fa-check"></i><b>15.4.1</b> Observing web request</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="scraping-104.html"><a href="scraping-104.html"><i class="fa fa-check"></i><b>16</b> Scraping 104.com</a>
@@ -856,11 +857,21 @@ div.csl-indent {
 </ul>
 </div>
 </div>
-<div id="using-chrome-devtools" class="section level2 hasAnchor" number="15.3">
-<h2><span class="header-section-number">15.3</span> Using Chrome DevTools<a href="crawler-overview.html#using-chrome-devtools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="webpage-browsing" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Webpage Browsing<a href="crawler-overview.html#webpage-browsing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>我們常說「上網」，但實際上當我們把網址輸入網址列後，執行所產生的動作是，到該網址的伺服器把該網頁和網頁相關的頁面給抓回來在瀏覽器上重組起來。</p>
+<p>比方說，<a href="https://alan000322.github.io/cemetery_story/" class="uri">https://alan000322.github.io/cemetery_story/</a>這個結構簡單的學生作品，當我們打開 Chrome DevTools來看輸入網址後發生了什麼事。首先他仔入的第一頁是cemetery_story/，然後連續載入很多個<code>.jpg</code>檔、和<code>.js</code>檔，也常有<code>css</code>檔。css是用來處裡網頁的視覺表現的，新的css3也可以帶入一些簡單的動態；js則是用來處理網頁動態的。</p>
+<p>Chrome DevTools的頁面明白的表示，當你輸入這個網址時，其實是你向伺服器端要求了這些頁面，而瀏覽器照網頁頁面內容把這些頁面依序抓回來，然後在使用者端的瀏覽器上重組。如此說的話「上網」的概念就有點怪怪的，其實是「載網」，把網路內容載到自己的瀏覽器上來。</p>
+<p>但瀏覽器怎麼知道要抓這些檔案？原因是</p>
+<p><img src="images/clipboard-1095594786.png" /></p>
+<p>但瀏覽器怎麼會知道要抓這些檔案？而不是別的？原因是你載入的第一個頁面（如下圖），上面就有很多的超鏈結，鏈結到圖片、影片、js或css。當瀏覽器讀到這個頁面有這些鏈結時，瀏覽器就會把這些鏈結所指到的頁面用request的方式給要回來。</p>
+<p><img src="images/clipboard-4281154837.png" /></p>
+</div>
+<div id="using-chrome-devtools" class="section level2 hasAnchor" number="15.4">
+<h2><span class="header-section-number">15.4</span> Using Chrome DevTools<a href="crawler-overview.html#using-chrome-devtools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Chrome DevTools是一款由Google開發的網頁開發工具，可以幫助開發人員進行網頁測試、網頁性能分析、網頁設計等工作。DevTools提供了豐富的功能，包括元素查看器、Console、網絡監測器、源代碼編輯器等，可讓開發人員在開發過程中快速找到和解決問題。此外，DevTools還可以幫助開發人員模擬不同設備、網速，以及對網站進行性能分析和優化，提高網站的速度和使用體驗。</p>
-<div id="observing-web-request" class="section level3 hasAnchor" number="15.3.1">
-<h3><span class="header-section-number">15.3.1</span> Observing web request<a href="crawler-overview.html#observing-web-request" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="observing-web-request" class="section level3 hasAnchor" number="15.4.1">
+<h3><span class="header-section-number">15.4.1</span> Observing web request<a href="crawler-overview.html#observing-web-request" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在開始網頁爬蟲之前，我們需要找到網頁中的JSON數據，以便進行後續的數據提取和處理。使用Chrome DevTools可以很容易地找到網頁背後的JSON檔案。以下是一些步驟：</p>
 <ol style="list-style-type: decimal">
 <li><p>打開Chrome瀏覽器，進入要爬取的網站。</p></li>
