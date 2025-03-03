@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | R for Data Journalism" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -796,36 +798,28 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>本書從基本的 <strong><code>base</code></strong> R 語法開始學習，因為 R 語言最初是為統計學研究而開發的。因此，許多統計套件和基礎操作都是使用 <strong><code>base</code></strong> R 語法編寫的，這些知識對於瞭解 R 的核心功能和基本操作是非常重要的，並能夠建立起對於數據分析和統計建模的基礎知識。不過，現在 <strong><code>tidyverse</code></strong> 風格的編寫方式越來越流行，這種方式使得程式碼撰寫效率更高且可讀性更強，對於數據科學家而言是非常有用的。因此，本書會接續使用 <strong><code>tidyverse</code></strong> 中的主要函式庫和函數，例如 <strong><code>dplyr</code></strong>、<strong><code>ggplot2</code></strong> 和 <strong><code>tidyr</code></strong>，以便讀者能夠掌握這些工具，並能夠有效地應用於實際數據分析項目中。</p>
-<div id="preloaded-tool-kits" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Preloaded tool kits<a href="introduction.html#preloaded-tool-kits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>當 R 的程式開始執行時，會預載入一些基本的套件，包括 <strong><code>stats</code></strong>、<strong><code>graphics</code></strong>、<strong><code>grDevices</code></strong>、<strong><code>utils</code></strong> 和 <strong><code>datasets</code></strong>。這些套件為 R 提供了基本的數據處理、統計分析、圖形顯示和檔案處理等功能。以下是這些套件的重要函式：</p>
-<ul>
-<li><p><strong><code>stats</code></strong>：這個套件包含了許多統計分析相關的函式，例如假設檢定、方差分析、線性迴歸和時間序列分析等。其中，比較常用的函式有 <strong><code>t.test()</code></strong>、<strong><code>lm()</code></strong>、<strong><code>glm()</code></strong>、<strong><code>anova()</code></strong>、<strong><code>cor()</code></strong> 等。</p></li>
-<li><p><strong><code>graphics</code></strong>：這個套件提供了用於繪製各種圖形的函式，例如散佈圖、直方圖、盒鬚圖、線圖、散點矩陣等。其中，常用的函式有 <strong><code>plot()</code></strong>、<strong><code>hist()</code></strong>、<strong><code>boxplot()</code></strong>、<strong><code>lines()</code></strong>、<strong><code>points()</code></strong> 等。</p></li>
-<li><p><strong><code>grDevices</code></strong>：這個套件包含了用於輸出圖形的函式，例如 <strong><code>pdf()</code></strong>、<strong><code>png()</code></strong>、<strong><code>jpeg()</code></strong> 和 <strong><code>tiff()</code></strong> 等。</p></li>
-<li><p><strong><code>utils</code></strong>：這個套件包含了一些實用的函式，例如 <strong><code>install.packages()</code></strong>、<strong><code>help()</code></strong>、<strong><code>data()</code></strong> 等。</p></li>
-<li><p><strong><code>datasets</code></strong>：這個套件包含了一些內建的數據集，可以用來進行測試和練習，例如 <strong><code>iris</code></strong>、<strong><code>mtcars</code></strong>、<strong><code>CO2</code></strong> 等。可以使用 <strong><code>data()</code></strong> 函式載入這些數據集。</p></li>
-</ul>
+<p>本書旨在為新聞傳播領域的研究生與專業記者提供一部實用指南，介紹如何運用 R 語言進行數據分析與視覺化，進而產出具有深度與說服力的數據驅動新聞報導。全書內容由淺入深，初步以 R 語言的基礎語法（base R）入門，幫助讀者了解 R 語言最初為統計分析而設計的初衷，並掌握數據操作與統計建模的核心知識。打好這一堅實基礎後，讀者將能更深入地理解並應用後續進階工具。</p>
+<p>隨著數據科學在各行各業中迅速發展，<code>tidyverse</code> 生態系統以其直觀的語法和高效的數據處理流程已成為現代數據分析的主流。本書後半部將重點介紹 <code>tidyverse</code> 主要函式庫，如 <code>dplyr</code>、<code>ggplot2</code> 與 <code>tidyr</code>，協助讀者熟悉這些工具，並能夠靈活應用於實際新聞報導製作中。透過本書，讀者不僅能夠學習 R 語言的基本與進階技能，還能夠將數據轉化為具有新聞價值的故事與視覺呈現。</p>
+<div id="書中數據集" class="section level3 hasAnchor" number="1.0.1">
+<h3><span class="header-section-number">1.0.1</span> <strong>書中數據集</strong><a href="introduction.html#書中數據集" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>本書所使用的各項資料皆可從 GitHub <a href="https://github.com/p4css/R4CSS/tree/master/data">R4CSS/data</a> 下載，這些數據涵蓋了多元的新聞議題，旨在提供讀者真實且豐富的練習素材。</p>
 </div>
-<div id="dataset-used-in-the-book" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Dataset used in the book<a href="introduction.html#dataset-used-in-the-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>本書所採用的資料可以從台大新聞所「新聞資料分析與視覺呈現」的github repository下載。<a href="https://github.com/p4css/R4CSS/tree/master/data">R4CSS/data</a>。</p>
-</div>
-<div id="cases-in-the-book" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Cases in the book<a href="introduction.html#cases-in-the-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="案例介紹" class="section level3 hasAnchor" number="1.0.2">
+<h3><span class="header-section-number">1.0.2</span> <strong>案例介紹</strong><a href="introduction.html#案例介紹" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>書中精心挑選了多個實例，以展示如何應用 R 語言處理與視覺化不同類型的新聞數據，案例包括但不限於：</p>
 <ul>
-<li>WP: Paid maternity leave</li>
-<li>Taipei Residential Hot spot: Contingency table, categorical data</li>
-<li>Trump’s tweets: Line plot, Bar chart, timeline, and text processing</li>
-<li>NYT: Net worth: Line plot</li>
-<li>NYT: Carbon Proportion: Treemap</li>
-<li>NYT: Optimism by countries</li>
-<li>NYT: Population growth</li>
-<li>Annual Budget of TW government: NA Processing, Treemap</li>
-<li>Vaccinating proportion by country x year: Proportion</li>
-<li>NYT: LeBron James’s Achievement</li>
+<li><p><strong>Paid Maternity Leave over 197 Countries</strong>：以條形圖呈現各國帶薪產假的情況</p></li>
+<li><p><strong>Taipei Residential Hot Spot</strong>：利用列聯表分析台北住宅熱點與類別數據</p></li>
+<li><p><strong>Trump’s Tweets</strong>：結合折線圖、條形圖、時間軸以及文字處理技術解析特朗普推文</p></li>
+<li><p><strong>NYT: Net Worth by Age Group</strong>：透過折線圖展示不同年齡層的淨資產趨勢</p></li>
+<li><p><strong>NYT: Carbon Proportion</strong>：採用樹狀圖展示碳排放比例</p></li>
+<li><p><strong>NYT: Optimism by Countries</strong>：分析各國民眾的樂觀程度</p></li>
+<li><p><strong>NYT: Population Growth</strong>：呈現人口增長趨勢</p></li>
+<li><p><strong>Annual Budget of TW Government</strong>：通過 NA 處理與樹狀圖解析台灣政府年度預算</p></li>
+<li><p><strong>Vaccinating Proportion by Country x Year</strong>：展示各國不同年度的疫苗接種比例</p></li>
+<li><p><strong>NYT: LeBron James’s Achievement</strong>：呈現 LeBron James 的成就數據</p></li>
 </ul>
+<p>透過上述案例，讀者將學會如何從原始數據出發，經由清理、轉換、分析，再到最終的圖表視覺化，將複雜的數據故事轉化為直觀易懂的新聞內容。這不僅能提升讀者在數據分析方面的專業能力，更能培養其將數據應用於實際新聞製作的創意思維。</p>
 
 </div>
 </div>

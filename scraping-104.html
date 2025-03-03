@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Scraping 104.com | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Scraping 104.com | R for Data Journalism" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -803,29 +805,29 @@ div.csl-indent {
 <li><p><code>httr</code>：<code>httr</code> 庫是 R 語言中用於發送 HTTP 請求和處理 HTTP 響應的函式庫，它提供了一組簡單易用的函數，可以讓使用者方便地設置 HTTP 請求的各種參數，如 URL、HTTP 方法、HTTP 頭、HTTP 主體等，並處理 HTTP 響應的內容和狀態碼等。</p></li>
 <li><p><code>jsonlite</code>：<code>jsonlite</code> 庫是 R 語言中用於解析和生成 JSON 數據的函式庫，它提供了 <code>fromJSON()</code> 函數，可以將 JSON 字符串轉換為 R 物件，並提供 <code>toJSON()</code> 函數，可以將 R 物件轉換為 JSON 字符串。這個函式庫通常用於處理 API 回應數據中的 JSON 格式數據。</p></li>
 </ol>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="scraping-104.html#cb601-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb601-2"><a href="scraping-104.html#cb601-2" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
-<span id="cb601-3"><a href="scraping-104.html#cb601-3" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb601-4"><a href="scraping-104.html#cb601-4" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span></code></pre></div>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="scraping-104.html#cb602-1" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
-<span id="cb602-2"><a href="scraping-104.html#cb602-2" tabindex="-1"></a>refer_url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw&quot;</span></span>
-<span id="cb602-3"><a href="scraping-104.html#cb602-3" tabindex="-1"></a></span>
-<span id="cb602-4"><a href="scraping-104.html#cb602-4" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
-<span id="cb602-5"><a href="scraping-104.html#cb602-5" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&#39;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&amp;order=12&amp;asc=0&amp;page=&#39;</span>, </span>
-<span id="cb602-6"><a href="scraping-104.html#cb602-6" tabindex="-1"></a>                 p, </span>
-<span id="cb602-7"><a href="scraping-104.html#cb602-7" tabindex="-1"></a>                 <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
-<span id="cb602-8"><a href="scraping-104.html#cb602-8" tabindex="-1"></a>    <span class="fu">print</span>(p)</span>
-<span id="cb602-9"><a href="scraping-104.html#cb602-9" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">GET</span>(url, <span class="fu">add_headers</span>(<span class="st">&quot;referer&quot;</span><span class="ot">=</span>refer_url)) <span class="sc">%&gt;%</span></span>
-<span id="cb602-10"><a href="scraping-104.html#cb602-10" tabindex="-1"></a>        <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb602-11"><a href="scraping-104.html#cb602-11" tabindex="-1"></a>        <span class="fu">fromJSON</span>()</span>
-<span id="cb602-12"><a href="scraping-104.html#cb602-12" tabindex="-1"></a>    </span>
-<span id="cb602-13"><a href="scraping-104.html#cb602-13" tabindex="-1"></a>    res<span class="sc">$</span>data<span class="sc">$</span>list<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb602-14"><a href="scraping-104.html#cb602-14" tabindex="-1"></a>    res<span class="sc">$</span>data<span class="sc">$</span>list<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb602-15"><a href="scraping-104.html#cb602-15" tabindex="-1"></a>    </span>
-<span id="cb602-16"><a href="scraping-104.html#cb602-16" tabindex="-1"></a>    all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(all.df, res<span class="sc">$</span>data<span class="sc">$</span>list)</span>
-<span id="cb602-17"><a href="scraping-104.html#cb602-17" tabindex="-1"></a>}</span>
-<span id="cb602-18"><a href="scraping-104.html#cb602-18" tabindex="-1"></a></span>
-<span id="cb602-19"><a href="scraping-104.html#cb602-19" tabindex="-1"></a>all.df<span class="sc">$</span>jobNo <span class="sc">%&gt;%</span> unique <span class="sc">%&gt;%</span> length</span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="scraping-104.html#cb599-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb599-2"><a href="scraping-104.html#cb599-2" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb599-3"><a href="scraping-104.html#cb599-3" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb599-4"><a href="scraping-104.html#cb599-4" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="scraping-104.html#cb600-1" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb600-2"><a href="scraping-104.html#cb600-2" tabindex="-1"></a>refer_url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw&quot;</span></span>
+<span id="cb600-3"><a href="scraping-104.html#cb600-3" tabindex="-1"></a></span>
+<span id="cb600-4"><a href="scraping-104.html#cb600-4" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb600-5"><a href="scraping-104.html#cb600-5" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&#39;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&amp;order=12&amp;asc=0&amp;page=&#39;</span>, </span>
+<span id="cb600-6"><a href="scraping-104.html#cb600-6" tabindex="-1"></a>                 p, </span>
+<span id="cb600-7"><a href="scraping-104.html#cb600-7" tabindex="-1"></a>                 <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
+<span id="cb600-8"><a href="scraping-104.html#cb600-8" tabindex="-1"></a>    <span class="fu">print</span>(p)</span>
+<span id="cb600-9"><a href="scraping-104.html#cb600-9" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">GET</span>(url, <span class="fu">add_headers</span>(<span class="st">&quot;referer&quot;</span><span class="ot">=</span>refer_url)) <span class="sc">%&gt;%</span></span>
+<span id="cb600-10"><a href="scraping-104.html#cb600-10" tabindex="-1"></a>        <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb600-11"><a href="scraping-104.html#cb600-11" tabindex="-1"></a>        <span class="fu">fromJSON</span>()</span>
+<span id="cb600-12"><a href="scraping-104.html#cb600-12" tabindex="-1"></a>    </span>
+<span id="cb600-13"><a href="scraping-104.html#cb600-13" tabindex="-1"></a>    res<span class="sc">$</span>data<span class="sc">$</span>list<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb600-14"><a href="scraping-104.html#cb600-14" tabindex="-1"></a>    res<span class="sc">$</span>data<span class="sc">$</span>list<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb600-15"><a href="scraping-104.html#cb600-15" tabindex="-1"></a>    </span>
+<span id="cb600-16"><a href="scraping-104.html#cb600-16" tabindex="-1"></a>    all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(all.df, res<span class="sc">$</span>data<span class="sc">$</span>list)</span>
+<span id="cb600-17"><a href="scraping-104.html#cb600-17" tabindex="-1"></a>}</span>
+<span id="cb600-18"><a href="scraping-104.html#cb600-18" tabindex="-1"></a></span>
+<span id="cb600-19"><a href="scraping-104.html#cb600-19" tabindex="-1"></a>all.df<span class="sc">$</span>jobNo <span class="sc">%&gt;%</span> unique <span class="sc">%&gt;%</span> length</span></code></pre></div>
 </div>
 <div id="step-by-step" class="section level2 hasAnchor" number="16.2">
 <h2><span class="header-section-number">16.2</span> Step-by-Step<a href="scraping-104.html#step-by-step" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -834,111 +836,111 @@ div.csl-indent {
 <p>這段程式碼是用於爬取104人力銀行網站上與「資料科學」相關的職缺資訊，並將其存儲到名為df2的Data.Frame中。首先，我們嘗試點選104人力銀行網站上的第1頁、第2頁和第3頁的職缺搜尋結果，並將這三個網址儲存為三個URL變量，應該不難觀察到，這三個網址有何差別？僅有<code>page=1</code>、<code>page=2</code>、<code>page=3</code>有所差別。接下來，我們使用R語言中的<code>httr</code>套件中的<code>GET()</code>函數，將URL作為參數傳入，從網站中獲取對應的數據，並使用<code>fromJSON()</code>函數將該JSON格式的內容轉換為R中的Data.Frame格式。下面程式在獲取第2頁數據時，使用了<code>add_headers()</code>函數設置了一個HTTP header，用於識別HTTP請求的來源。</p>
 <p>這段程式碼使用了<code>add_headers</code>函數添加了一個名為「<code>Referer</code>」的HTTP header。這個header的作用是告訴104人力銀行網站，訪問這個頁面的用戶是從哪個網頁轉跳過來的，也就是告訴網站當前HTTP請求的來源。具體來說，這裡設置的「Referer」值為<a href="https://www.104.com.tw/"><code>https://www.104.com.tw/</code></a>，代表我們偽裝這個請求是來自於104人力銀行首頁。如果沒有這個Referer，該網站會認為你是一個可疑的爬取，從沒根據和不當的頁面或用不當的方式（例如爬蟲）連過來。</p>
 <p>對的！人家網站不歡迎你爬它，所以我們應止於測試。</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="scraping-104.html#cb603-1" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb603-2"><a href="scraping-104.html#cb603-2" tabindex="-1"></a></span>
-<span id="cb603-3"><a href="scraping-104.html#cb603-3" tabindex="-1"></a><span class="co"># Assigning the 2nd page data url to url2</span></span>
-<span id="cb603-4"><a href="scraping-104.html#cb603-4" tabindex="-1"></a>url2 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&amp;order=14&amp;asc=0&amp;page=2&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb603-5"><a href="scraping-104.html#cb603-5" tabindex="-1"></a></span>
-<span id="cb603-6"><a href="scraping-104.html#cb603-6" tabindex="-1"></a><span class="co"># Assigning the 3rd page data url to url3</span></span>
-<span id="cb603-7"><a href="scraping-104.html#cb603-7" tabindex="-1"></a>url3 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=3&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb603-8"><a href="scraping-104.html#cb603-8" tabindex="-1"></a></span>
-<span id="cb603-9"><a href="scraping-104.html#cb603-9" tabindex="-1"></a><span class="co"># Getting back the url1 data, assigning to result1</span></span>
-<span id="cb603-10"><a href="scraping-104.html#cb603-10" tabindex="-1"></a></span>
-<span id="cb603-11"><a href="scraping-104.html#cb603-11" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">GET</span>(url2, <span class="at">config =</span> <span class="fu">add_headers</span>(<span class="st">&quot;Referer&quot;</span> <span class="ot">=</span> <span class="st">&quot;https://www.104.com.tw/&quot;</span>))</span>
-<span id="cb603-12"><a href="scraping-104.html#cb603-12" tabindex="-1"></a></span>
-<span id="cb603-13"><a href="scraping-104.html#cb603-13" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> <span class="fu">content</span>(res, <span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fromJSON</span>()</span>
-<span id="cb603-14"><a href="scraping-104.html#cb603-14" tabindex="-1"></a></span>
-<span id="cb603-15"><a href="scraping-104.html#cb603-15" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url2), <span class="st">&quot;text&quot;</span>))</span>
-<span id="cb603-16"><a href="scraping-104.html#cb603-16" tabindex="-1"></a></span>
-<span id="cb603-17"><a href="scraping-104.html#cb603-17" tabindex="-1"></a><span class="co"># Tracing variable result2 and finding the data.frame, assigning to df2</span></span>
-<span id="cb603-18"><a href="scraping-104.html#cb603-18" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> res1<span class="sc">$</span>data<span class="sc">$</span>list</span></code></pre></div>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="scraping-104.html#cb601-1" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb601-2"><a href="scraping-104.html#cb601-2" tabindex="-1"></a></span>
+<span id="cb601-3"><a href="scraping-104.html#cb601-3" tabindex="-1"></a><span class="co"># Assigning the 2nd page data url to url2</span></span>
+<span id="cb601-4"><a href="scraping-104.html#cb601-4" tabindex="-1"></a>url2 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&amp;order=14&amp;asc=0&amp;page=2&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb601-5"><a href="scraping-104.html#cb601-5" tabindex="-1"></a></span>
+<span id="cb601-6"><a href="scraping-104.html#cb601-6" tabindex="-1"></a><span class="co"># Assigning the 3rd page data url to url3</span></span>
+<span id="cb601-7"><a href="scraping-104.html#cb601-7" tabindex="-1"></a>url3 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=3&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb601-8"><a href="scraping-104.html#cb601-8" tabindex="-1"></a></span>
+<span id="cb601-9"><a href="scraping-104.html#cb601-9" tabindex="-1"></a><span class="co"># Getting back the url1 data, assigning to result1</span></span>
+<span id="cb601-10"><a href="scraping-104.html#cb601-10" tabindex="-1"></a></span>
+<span id="cb601-11"><a href="scraping-104.html#cb601-11" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">GET</span>(url2, <span class="at">config =</span> <span class="fu">add_headers</span>(<span class="st">&quot;Referer&quot;</span> <span class="ot">=</span> <span class="st">&quot;https://www.104.com.tw/&quot;</span>))</span>
+<span id="cb601-12"><a href="scraping-104.html#cb601-12" tabindex="-1"></a></span>
+<span id="cb601-13"><a href="scraping-104.html#cb601-13" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> <span class="fu">content</span>(res, <span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fromJSON</span>()</span>
+<span id="cb601-14"><a href="scraping-104.html#cb601-14" tabindex="-1"></a></span>
+<span id="cb601-15"><a href="scraping-104.html#cb601-15" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url2), <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb601-16"><a href="scraping-104.html#cb601-16" tabindex="-1"></a></span>
+<span id="cb601-17"><a href="scraping-104.html#cb601-17" tabindex="-1"></a><span class="co"># Tracing variable result2 and finding the data.frame, assigning to df2</span></span>
+<span id="cb601-18"><a href="scraping-104.html#cb601-18" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> res1<span class="sc">$</span>data<span class="sc">$</span>list</span></code></pre></div>
 </div>
 <div id="get-the-first-page-by-modifying-url" class="section level3 hasAnchor" number="16.2.2">
 <h3><span class="header-section-number">16.2.2</span> Get the first page by modifying url<a href="scraping-104.html#get-the-first-page-by-modifying-url" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="scraping-104.html#cb604-1" tabindex="-1"></a><span class="co"># Guessing the 1st page data url to url1</span></span>
-<span id="cb604-2"><a href="scraping-104.html#cb604-2" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb604-3"><a href="scraping-104.html#cb604-3" tabindex="-1"></a></span>
-<span id="cb604-4"><a href="scraping-104.html#cb604-4" tabindex="-1"></a><span class="co"># Getting back the 1st page data</span></span>
-<span id="cb604-5"><a href="scraping-104.html#cb604-5" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb604-6"><a href="scraping-104.html#cb604-6" tabindex="-1"></a></span>
-<span id="cb604-7"><a href="scraping-104.html#cb604-7" tabindex="-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url1), <span class="st">&quot;text&quot;</span>))</span>
-<span id="cb604-8"><a href="scraping-104.html#cb604-8" tabindex="-1"></a></span>
-<span id="cb604-9"><a href="scraping-104.html#cb604-9" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>list</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="scraping-104.html#cb602-1" tabindex="-1"></a><span class="co"># Guessing the 1st page data url to url1</span></span>
+<span id="cb602-2"><a href="scraping-104.html#cb602-2" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb602-3"><a href="scraping-104.html#cb602-3" tabindex="-1"></a></span>
+<span id="cb602-4"><a href="scraping-104.html#cb602-4" tabindex="-1"></a><span class="co"># Getting back the 1st page data</span></span>
+<span id="cb602-5"><a href="scraping-104.html#cb602-5" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb602-6"><a href="scraping-104.html#cb602-6" tabindex="-1"></a></span>
+<span id="cb602-7"><a href="scraping-104.html#cb602-7" tabindex="-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url1), <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb602-8"><a href="scraping-104.html#cb602-8" tabindex="-1"></a></span>
+<span id="cb602-9"><a href="scraping-104.html#cb602-9" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>list</span></code></pre></div>
 </div>
 <div id="combine-two-data-with-the-same-variables" class="section level3 hasAnchor" number="16.2.3">
 <h3><span class="header-section-number">16.2.3</span> Combine two data with the same variables<a href="scraping-104.html#combine-two-data-with-the-same-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="scraping-104.html#cb605-1" tabindex="-1"></a><span class="co"># all.df &lt;- bind_rows(df1, df2) # will raise error</span></span>
-<span id="cb605-2"><a href="scraping-104.html#cb605-2" tabindex="-1"></a><span class="co"># Error in bind_rows_(x, .id) : </span></span>
-<span id="cb605-3"><a href="scraping-104.html#cb605-3" tabindex="-1"></a><span class="co">#   Argument 31 can&#39;t be a list containing data frames</span></span></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="scraping-104.html#cb603-1" tabindex="-1"></a><span class="co"># all.df &lt;- bind_rows(df1, df2) # will raise error</span></span>
+<span id="cb603-2"><a href="scraping-104.html#cb603-2" tabindex="-1"></a><span class="co"># Error in bind_rows_(x, .id) : </span></span>
+<span id="cb603-3"><a href="scraping-104.html#cb603-3" tabindex="-1"></a><span class="co">#   Argument 31 can&#39;t be a list containing data frames</span></span></code></pre></div>
 </div>
 <div id="drop-out-hierarchical-variables" class="section level3 hasAnchor" number="16.2.4">
 <h3><span class="header-section-number">16.2.4</span> Drop out hierarchical variables<a href="scraping-104.html#drop-out-hierarchical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Preserving numeric or character, dropping list of data.frame by assigning NULL to the variable</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="scraping-104.html#cb606-1" tabindex="-1"></a><span class="co"># Drop list and data.frame inside the data.frame</span></span>
-<span id="cb606-2"><a href="scraping-104.html#cb606-2" tabindex="-1"></a>df1<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb606-3"><a href="scraping-104.html#cb606-3" tabindex="-1"></a>df1<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb606-4"><a href="scraping-104.html#cb606-4" tabindex="-1"></a>df2<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb606-5"><a href="scraping-104.html#cb606-5" tabindex="-1"></a>df2<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb606-6"><a href="scraping-104.html#cb606-6" tabindex="-1"></a></span>
-<span id="cb606-7"><a href="scraping-104.html#cb606-7" tabindex="-1"></a><span class="co"># Re-binding two data.frame df1 and df2</span></span>
-<span id="cb606-8"><a href="scraping-104.html#cb606-8" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="scraping-104.html#cb604-1" tabindex="-1"></a><span class="co"># Drop list and data.frame inside the data.frame</span></span>
+<span id="cb604-2"><a href="scraping-104.html#cb604-2" tabindex="-1"></a>df1<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb604-3"><a href="scraping-104.html#cb604-3" tabindex="-1"></a>df1<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb604-4"><a href="scraping-104.html#cb604-4" tabindex="-1"></a>df2<span class="sc">$</span>link <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb604-5"><a href="scraping-104.html#cb604-5" tabindex="-1"></a>df2<span class="sc">$</span>tags <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb604-6"><a href="scraping-104.html#cb604-6" tabindex="-1"></a></span>
+<span id="cb604-7"><a href="scraping-104.html#cb604-7" tabindex="-1"></a><span class="co"># Re-binding two data.frame df1 and df2</span></span>
+<span id="cb604-8"><a href="scraping-104.html#cb604-8" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span></code></pre></div>
 </div>
 <div id="dropping-hierarchical-variables-by-dplyr-way" class="section level3 hasAnchor" number="16.2.5">
 <h3><span class="header-section-number">16.2.5</span> Dropping hierarchical variables by dplyr way<a href="scraping-104.html#dropping-hierarchical-variables-by-dplyr-way" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="scraping-104.html#cb607-1" tabindex="-1"></a><span class="co"># Getting the 1st page data and dropping variable tags and link</span></span>
-<span id="cb607-2"><a href="scraping-104.html#cb607-2" tabindex="-1"></a><span class="co"># Assigning to df1</span></span>
-<span id="cb607-3"><a href="scraping-104.html#cb607-3" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>list <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>tags, <span class="sc">-</span>link)</span>
-<span id="cb607-4"><a href="scraping-104.html#cb607-4" tabindex="-1"></a></span>
-<span id="cb607-5"><a href="scraping-104.html#cb607-5" tabindex="-1"></a><span class="co"># Getting the 2nd page data and dropping variable tags and link</span></span>
-<span id="cb607-6"><a href="scraping-104.html#cb607-6" tabindex="-1"></a><span class="co"># Assigning to df2</span></span>
-<span id="cb607-7"><a href="scraping-104.html#cb607-7" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> result2<span class="sc">$</span>data<span class="sc">$</span>list <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>tags, <span class="sc">-</span>link)</span>
-<span id="cb607-8"><a href="scraping-104.html#cb607-8" tabindex="-1"></a></span>
-<span id="cb607-9"><a href="scraping-104.html#cb607-9" tabindex="-1"></a><span class="co"># binding df1 and df2</span></span>
-<span id="cb607-10"><a href="scraping-104.html#cb607-10" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="scraping-104.html#cb605-1" tabindex="-1"></a><span class="co"># Getting the 1st page data and dropping variable tags and link</span></span>
+<span id="cb605-2"><a href="scraping-104.html#cb605-2" tabindex="-1"></a><span class="co"># Assigning to df1</span></span>
+<span id="cb605-3"><a href="scraping-104.html#cb605-3" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>list <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>tags, <span class="sc">-</span>link)</span>
+<span id="cb605-4"><a href="scraping-104.html#cb605-4" tabindex="-1"></a></span>
+<span id="cb605-5"><a href="scraping-104.html#cb605-5" tabindex="-1"></a><span class="co"># Getting the 2nd page data and dropping variable tags and link</span></span>
+<span id="cb605-6"><a href="scraping-104.html#cb605-6" tabindex="-1"></a><span class="co"># Assigning to df2</span></span>
+<span id="cb605-7"><a href="scraping-104.html#cb605-7" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> result2<span class="sc">$</span>data<span class="sc">$</span>list <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>tags, <span class="sc">-</span>link)</span>
+<span id="cb605-8"><a href="scraping-104.html#cb605-8" tabindex="-1"></a></span>
+<span id="cb605-9"><a href="scraping-104.html#cb605-9" tabindex="-1"></a><span class="co"># binding df1 and df2</span></span>
+<span id="cb605-10"><a href="scraping-104.html#cb605-10" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span></code></pre></div>
 </div>
 <div id="finding-out-the-last-page-number" class="section level3 hasAnchor" number="16.2.6">
 <h3><span class="header-section-number">16.2.6</span> Finding out the last page number<a href="scraping-104.html#finding-out-the-last-page-number" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="scraping-104.html#cb608-1" tabindex="-1"></a><span class="co"># Tracing the number of pages in result1</span></span>
-<span id="cb608-2"><a href="scraping-104.html#cb608-2" tabindex="-1"></a>last_page_num <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>totalPage</span>
-<span id="cb608-3"><a href="scraping-104.html#cb608-3" tabindex="-1"></a><span class="co"># Checking the availability of the last page</span></span>
-<span id="cb608-4"><a href="scraping-104.html#cb608-4" tabindex="-1"></a></span>
-<span id="cb608-5"><a href="scraping-104.html#cb608-5" tabindex="-1"></a><span class="co"># Examining if the last page data available by re-composing URL with paste0()</span></span>
-<span id="cb608-6"><a href="scraping-104.html#cb608-6" tabindex="-1"></a>url.last_page <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, last_page_num, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
-<span id="cb608-7"><a href="scraping-104.html#cb608-7" tabindex="-1"></a></span>
-<span id="cb608-8"><a href="scraping-104.html#cb608-8" tabindex="-1"></a><span class="co"># Getting back and parsing the last page data</span></span>
-<span id="cb608-9"><a href="scraping-104.html#cb608-9" tabindex="-1"></a>result.last_page <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url.last_page), <span class="st">&quot;text&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="scraping-104.html#cb606-1" tabindex="-1"></a><span class="co"># Tracing the number of pages in result1</span></span>
+<span id="cb606-2"><a href="scraping-104.html#cb606-2" tabindex="-1"></a>last_page_num <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>totalPage</span>
+<span id="cb606-3"><a href="scraping-104.html#cb606-3" tabindex="-1"></a><span class="co"># Checking the availability of the last page</span></span>
+<span id="cb606-4"><a href="scraping-104.html#cb606-4" tabindex="-1"></a></span>
+<span id="cb606-5"><a href="scraping-104.html#cb606-5" tabindex="-1"></a><span class="co"># Examining if the last page data available by re-composing URL with paste0()</span></span>
+<span id="cb606-6"><a href="scraping-104.html#cb606-6" tabindex="-1"></a>url.last_page <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, last_page_num, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
+<span id="cb606-7"><a href="scraping-104.html#cb606-7" tabindex="-1"></a></span>
+<span id="cb606-8"><a href="scraping-104.html#cb606-8" tabindex="-1"></a><span class="co"># Getting back and parsing the last page data</span></span>
+<span id="cb606-9"><a href="scraping-104.html#cb606-9" tabindex="-1"></a>result.last_page <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url.last_page), <span class="st">&quot;text&quot;</span>))</span></code></pre></div>
 </div>
 <div id="using-for-loop-to-get-all-pages" class="section level3 hasAnchor" number="16.2.7">
 <h3><span class="header-section-number">16.2.7</span> Using for-loop to get all pages<a href="scraping-104.html#using-for-loop-to-get-all-pages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="scraping-104.html#cb609-1" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>last_page_num){</span>
-<span id="cb609-2"><a href="scraping-104.html#cb609-2" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, p, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
-<span id="cb609-3"><a href="scraping-104.html#cb609-3" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>))</span>
-<span id="cb609-4"><a href="scraping-104.html#cb609-4" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result<span class="sc">$</span>data<span class="sc">$</span>list)</span>
-<span id="cb609-5"><a href="scraping-104.html#cb609-5" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(p, <span class="fu">nrow</span>(temp.df)))</span>
-<span id="cb609-6"><a href="scraping-104.html#cb609-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="scraping-104.html#cb607-1" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>last_page_num){</span>
+<span id="cb607-2"><a href="scraping-104.html#cb607-2" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, p, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
+<span id="cb607-3"><a href="scraping-104.html#cb607-3" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb607-4"><a href="scraping-104.html#cb607-4" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result<span class="sc">$</span>data<span class="sc">$</span>list)</span>
+<span id="cb607-5"><a href="scraping-104.html#cb607-5" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(p, <span class="fu">nrow</span>(temp.df)))</span>
+<span id="cb607-6"><a href="scraping-104.html#cb607-6" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="combine-all-data.frame" class="section level3 hasAnchor" number="16.2.8">
 <h3><span class="header-section-number">16.2.8</span> combine all data.frame<a href="scraping-104.html#combine-all-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="scraping-104.html#cb610-1" tabindex="-1"></a><span class="co">#  The 1st url of the query</span></span>
-<span id="cb610-2"><a href="scraping-104.html#cb610-2" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
-<span id="cb610-3"><a href="scraping-104.html#cb610-3" tabindex="-1"></a></span>
-<span id="cb610-4"><a href="scraping-104.html#cb610-4" tabindex="-1"></a><span class="co"># Getting back the 1st page data</span></span>
-<span id="cb610-5"><a href="scraping-104.html#cb610-5" tabindex="-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url1), <span class="st">&quot;text&quot;</span>))</span>
-<span id="cb610-6"><a href="scraping-104.html#cb610-6" tabindex="-1"></a></span>
-<span id="cb610-7"><a href="scraping-104.html#cb610-7" tabindex="-1"></a><span class="co"># Tracing and getting total number of page</span></span>
-<span id="cb610-8"><a href="scraping-104.html#cb610-8" tabindex="-1"></a>last_page_num <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>totalPage</span>
-<span id="cb610-9"><a href="scraping-104.html#cb610-9" tabindex="-1"></a></span>
-<span id="cb610-10"><a href="scraping-104.html#cb610-10" tabindex="-1"></a><span class="co"># Truncating hierarchical variables: link and tags</span></span>
-<span id="cb610-11"><a href="scraping-104.html#cb610-11" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result1<span class="sc">$</span>data<span class="sc">$</span>list, <span class="sc">-</span>link, <span class="sc">-</span>tags)</span>
-<span id="cb610-12"><a href="scraping-104.html#cb610-12" tabindex="-1"></a></span>
-<span id="cb610-13"><a href="scraping-104.html#cb610-13" tabindex="-1"></a><span class="co"># for-loop to getting back data and joining them</span></span>
-<span id="cb610-14"><a href="scraping-104.html#cb610-14" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>last_page_num){</span>
-<span id="cb610-15"><a href="scraping-104.html#cb610-15" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, p, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
-<span id="cb610-16"><a href="scraping-104.html#cb610-16" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>))</span>
-<span id="cb610-17"><a href="scraping-104.html#cb610-17" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result<span class="sc">$</span>data<span class="sc">$</span>list)</span>
-<span id="cb610-18"><a href="scraping-104.html#cb610-18" tabindex="-1"></a>    all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(all.df, temp.df)</span>
-<span id="cb610-19"><a href="scraping-104.html#cb610-19" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(p, <span class="fu">nrow</span>(all.df)))</span>
-<span id="cb610-20"><a href="scraping-104.html#cb610-20" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="scraping-104.html#cb608-1" tabindex="-1"></a><span class="co">#  The 1st url of the query</span></span>
+<span id="cb608-2"><a href="scraping-104.html#cb608-2" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=1&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span></span>
+<span id="cb608-3"><a href="scraping-104.html#cb608-3" tabindex="-1"></a></span>
+<span id="cb608-4"><a href="scraping-104.html#cb608-4" tabindex="-1"></a><span class="co"># Getting back the 1st page data</span></span>
+<span id="cb608-5"><a href="scraping-104.html#cb608-5" tabindex="-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url1), <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb608-6"><a href="scraping-104.html#cb608-6" tabindex="-1"></a></span>
+<span id="cb608-7"><a href="scraping-104.html#cb608-7" tabindex="-1"></a><span class="co"># Tracing and getting total number of page</span></span>
+<span id="cb608-8"><a href="scraping-104.html#cb608-8" tabindex="-1"></a>last_page_num <span class="ot">&lt;-</span> result1<span class="sc">$</span>data<span class="sc">$</span>totalPage</span>
+<span id="cb608-9"><a href="scraping-104.html#cb608-9" tabindex="-1"></a></span>
+<span id="cb608-10"><a href="scraping-104.html#cb608-10" tabindex="-1"></a><span class="co"># Truncating hierarchical variables: link and tags</span></span>
+<span id="cb608-11"><a href="scraping-104.html#cb608-11" tabindex="-1"></a>all.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result1<span class="sc">$</span>data<span class="sc">$</span>list, <span class="sc">-</span>link, <span class="sc">-</span>tags)</span>
+<span id="cb608-12"><a href="scraping-104.html#cb608-12" tabindex="-1"></a></span>
+<span id="cb608-13"><a href="scraping-104.html#cb608-13" tabindex="-1"></a><span class="co"># for-loop to getting back data and joining them</span></span>
+<span id="cb608-14"><a href="scraping-104.html#cb608-14" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>last_page_num){</span>
+<span id="cb608-15"><a href="scraping-104.html#cb608-15" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;https://www.104.com.tw/jobs/search/list?ro=0&amp;kwop=7&amp;keyword=%E7%88%AC%E8%9F%B2&amp;order=1&amp;asc=0&amp;page=&quot;</span>, p, <span class="st">&quot;&amp;mode=s&amp;jobsource=2018indexpoc&quot;</span>)</span>
+<span id="cb608-16"><a href="scraping-104.html#cb608-16" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url), <span class="st">&quot;text&quot;</span>))</span>
+<span id="cb608-17"><a href="scraping-104.html#cb608-17" tabindex="-1"></a>    temp.df <span class="ot">&lt;-</span> <span class="fu">select</span>(result<span class="sc">$</span>data<span class="sc">$</span>list)</span>
+<span id="cb608-18"><a href="scraping-104.html#cb608-18" tabindex="-1"></a>    all.df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(all.df, temp.df)</span>
+<span id="cb608-19"><a href="scraping-104.html#cb608-19" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(p, <span class="fu">nrow</span>(all.df)))</span>
+<span id="cb608-20"><a href="scraping-104.html#cb608-20" tabindex="-1"></a>}</span></code></pre></div>
 
 </div>
 </div>

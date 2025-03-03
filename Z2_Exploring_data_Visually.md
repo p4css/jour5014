@@ -3,7 +3,7 @@
 ## TW AQI Visual Studies
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
@@ -11,16 +11,16 @@ library(tidyverse)
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
-```r
+``` r
 library(readxl)
 # options(stringsAsFactors = F)
 ```
@@ -34,7 +34,7 @@ library(readxl)
 ### eda-load-data-from-github
 
 
-```r
+``` r
 # aqi_data <- read_rds("https://github.com/p4css/R4CSS/raw/master/data/AQI_Chaozhou.rds")
 aqi_data <- read_rds("data/AQI_Chaozhou.rds")
 ```
@@ -42,7 +42,7 @@ aqi_data <- read_rds("data/AQI_Chaozhou.rds")
 ### Trending: Central tendency
 
 
-```r
+``` r
 toplot <- aqi_data %>%
     arrange(日期)%>%
     filter(測項=="PM2.5") %>%
@@ -74,7 +74,7 @@ toplot <- aqi_data %>%
 Counting data by month and plotting to ensure the degree of data loss.
 
 
-```r
+``` r
 aqi_data %>%
     filter(測項=="PM2.5") %>%
     arrange(日期)%>%
@@ -106,7 +106,7 @@ aqi_data %>%
 -   [台灣PM2.5三大面向：空汙現況多嚴重？要怪中國還是怪自己？ - 第 1 頁 - The News Lens 關鍵評論網](https://www.thenewslens.com/article/115229)
 
 
-```r
+``` r
 library(gghighlight)
 toplot %>%
     mutate(month = as.character(month)) %>%
@@ -136,7 +136,7 @@ toplot %>%
 ### Trending: Extreme value
 
 
-```r
+``` r
 toplot2 <- aqi_data %>%
     arrange(日期)%>%
     filter(測項=="PM2.5") %>%
@@ -166,7 +166,7 @@ toplot2 <- aqi_data %>%
 ## `.groups` argument.
 ```
 
-```r
+``` r
 toplot2 %>%
     mutate(month = as.character(month)) %>%
     group_by(month) %>%
@@ -191,7 +191,7 @@ toplot2 %>%
 <img src="Z2_Exploring_data_Visually_files/figure-html/eda-boxplot-1.png" width="672" />
 
 
-```r
+``` r
 toplot3 <- aqi_data %>%
     arrange(日期)%>%
     filter(測項=="PM2.5") %>%
@@ -210,7 +210,7 @@ toplot3 <- aqi_data %>%
 ```
 
 
-```r
+``` r
 toplot3 %>%
     mutate(year = as.character(year)) %>%
     ggplot() + aes(y=year, x=PM25)  + 

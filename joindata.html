@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Data manipultaiton: Join data | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Data manipultaiton: Join data | R for Data Journalism" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -800,16 +802,16 @@ div.csl-indent {
 <div id="simple" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> A Simple Example: Joining Two Data Frames<a href="joindata.html#simple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>以下為用來解釋 join 的簡單範例。其中 <strong><code>posts</code></strong> 有 <strong><code>pid</code></strong>（貼文編號）和 <strong><code>pcontent</code></strong>（貼文內容）兩個欄位；而 <strong><code>comments</code></strong> 包含了留言的資訊，有 <strong><code>pid</code></strong>（所屬的貼文編號）和 <strong><code>ccontent</code></strong>（留言內容）兩個欄位。</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="joindata.html#cb374-1" tabindex="-1"></a>posts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p01&quot;</span>, <span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>), <span class="at">pcontent=</span><span class="fu">c</span>(<span class="st">&quot;post01&quot;</span>, <span class="st">&quot;post02&quot;</span>, <span class="st">&quot;post03&quot;</span>))</span>
-<span id="cb374-2"><a href="joindata.html#cb374-2" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>, <span class="st">&quot;p04&quot;</span>), <span class="at">ccontent=</span><span class="fu">c</span>(<span class="st">&quot;comment01&quot;</span>, <span class="st">&quot;comment02&quot;</span>, <span class="st">&quot;comment03&quot;</span>))</span>
-<span id="cb374-3"><a href="joindata.html#cb374-3" tabindex="-1"></a>posts</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="joindata.html#cb372-1" tabindex="-1"></a>posts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p01&quot;</span>, <span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>), <span class="at">pcontent=</span><span class="fu">c</span>(<span class="st">&quot;post01&quot;</span>, <span class="st">&quot;post02&quot;</span>, <span class="st">&quot;post03&quot;</span>))</span>
+<span id="cb372-2"><a href="joindata.html#cb372-2" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>, <span class="st">&quot;p04&quot;</span>), <span class="at">ccontent=</span><span class="fu">c</span>(<span class="st">&quot;comment01&quot;</span>, <span class="st">&quot;comment02&quot;</span>, <span class="st">&quot;comment03&quot;</span>))</span>
+<span id="cb372-3"><a href="joindata.html#cb372-3" tabindex="-1"></a>posts</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 3 × 2
 ##   pid   pcontent
 ##   &lt;chr&gt; &lt;chr&gt;   
 ## 1 p01   post01  
 ## 2 p02   post02  
 ## 3 p03   post03</code></pre>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="joindata.html#cb376-1" tabindex="-1"></a>comments</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="joindata.html#cb374-1" tabindex="-1"></a>comments</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 3 × 2
 ##   pid   ccontent 
 ##   &lt;chr&gt; &lt;chr&gt;    
@@ -822,21 +824,21 @@ div.csl-indent {
 <li><code>left_join()</code>會將兩個表格中的資料以左邊表格為主，並將右邊表格中符合左邊表格的資料進行合併。如果右邊表格中沒有符合的資料，則以 <code>NA</code>值填充。 在下面的範例中，我們將<code>posts</code>作為左表，<code>comments</code>作為右表，以<code>pid</code>欄位為連接依據，所以會返回<code>posts</code>表格中的所有資料，並將符合的<code>comments</code>資料合併進來。</li>
 <li><code>right_join()</code>與<code>left_join()</code>相反，它將兩個表格中的資料以右表為主，並將左邊表格中符合右表的資料進行合併。如果左表中沒有符合的資料，則以<code>NA</code>值填充。</li>
 </ul>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="joindata.html#cb378-1" tabindex="-1"></a><span class="fu">left_join</span>(posts, comments)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="joindata.html#cb376-1" tabindex="-1"></a><span class="fu">left_join</span>(posts, comments)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 3 × 3
 ##   pid   pcontent ccontent 
 ##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
 ## 1 p01   post01   &lt;NA&gt;     
 ## 2 p02   post02   comment01
 ## 3 p03   post03   comment02</code></pre>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="joindata.html#cb380-1" tabindex="-1"></a><span class="fu">right_join</span>(posts, comments)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="joindata.html#cb378-1" tabindex="-1"></a><span class="fu">right_join</span>(posts, comments)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 3 × 3
 ##   pid   pcontent ccontent 
 ##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
 ## 1 p02   post02   comment01
 ## 2 p03   post03   comment02
 ## 3 p04   &lt;NA&gt;     comment03</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="joindata.html#cb382-1" tabindex="-1"></a><span class="fu">right_join</span>(comments, posts)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="joindata.html#cb380-1" tabindex="-1"></a><span class="fu">right_join</span>(comments, posts)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 3 × 3
 ##   pid   ccontent  pcontent
 ##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   
@@ -850,13 +852,13 @@ div.csl-indent {
 <li><code>inner_join()</code>會返回兩個表格中共同符合連接條件的資料。換句話說，它會保留左右兩表中都有對應資料的列。如果左右表格中有任一邊缺少符合的資料，則該資料將不會出現在結果中。</li>
 <li><code>full_join()</code>會返回兩個表格中所有的資料，並將缺失的值以<code>NA</code>填充。如果兩表中有共同符合的資料，則會將它們合併在一起；如果某個表格中有但另一個表格中沒有的資料，則會將缺失的資料補上<code>NA</code>。</li>
 </ul>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="joindata.html#cb384-1" tabindex="-1"></a><span class="fu">inner_join</span>(posts, comments)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="joindata.html#cb382-1" tabindex="-1"></a><span class="fu">inner_join</span>(posts, comments)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 2 × 3
 ##   pid   pcontent ccontent 
 ##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
 ## 1 p02   post02   comment01
 ## 2 p03   post03   comment02</code></pre>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="joindata.html#cb386-1" tabindex="-1"></a><span class="fu">full_join</span>(posts, comments)</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="joindata.html#cb384-1" tabindex="-1"></a><span class="fu">full_join</span>(posts, comments)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 4 × 3
 ##   pid   pcontent ccontent 
 ##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
@@ -868,21 +870,21 @@ div.csl-indent {
 <div id="join-by-different-keys" class="section level3 hasAnchor" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> <code>join()</code> by different keys<a href="joindata.html#join-by-different-keys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>我們將 <strong><code>posts</code></strong> 作為左表，<strong><code>comments</code></strong> 作為右表，並使用 <strong><code>postid</code></strong> 和 <strong><code>pid</code></strong> 欄位進行連接。由於我們經由觀察知道左邊表格中的 <strong><code>postid</code></strong> 和右邊表格中的 <strong><code>pid</code></strong> 有對應關係，所以它們會根據這個關係進行連接，語法為<code>by=c("postid"="pid")</code>，指定左表的<code>postid</code>和右表的<code>pid</code>相對應。</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="joindata.html#cb388-1" tabindex="-1"></a>posts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postid=</span><span class="fu">c</span>(<span class="st">&quot;p01&quot;</span>, <span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>), <span class="at">pcontent=</span><span class="fu">c</span>(<span class="st">&quot;post01&quot;</span>, <span class="st">&quot;post02&quot;</span>, <span class="st">&quot;post03&quot;</span>))</span>
-<span id="cb388-2"><a href="joindata.html#cb388-2" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>, <span class="st">&quot;p04&quot;</span>), <span class="at">ccontent=</span><span class="fu">c</span>(<span class="st">&quot;comment01&quot;</span>, <span class="st">&quot;comment02&quot;</span>, <span class="st">&quot;comment03&quot;</span>))</span>
-<span id="cb388-3"><a href="joindata.html#cb388-3" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">left_join</span>(posts, comments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;postid&quot;</span> <span class="ot">=</span> <span class="st">&quot;pid&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="joindata.html#cb386-1" tabindex="-1"></a>posts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postid=</span><span class="fu">c</span>(<span class="st">&quot;p01&quot;</span>, <span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>), <span class="at">pcontent=</span><span class="fu">c</span>(<span class="st">&quot;post01&quot;</span>, <span class="st">&quot;post02&quot;</span>, <span class="st">&quot;post03&quot;</span>))</span>
+<span id="cb386-2"><a href="joindata.html#cb386-2" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">pid=</span><span class="fu">c</span>(<span class="st">&quot;p02&quot;</span>, <span class="st">&quot;p03&quot;</span>, <span class="st">&quot;p04&quot;</span>), <span class="at">ccontent=</span><span class="fu">c</span>(<span class="st">&quot;comment01&quot;</span>, <span class="st">&quot;comment02&quot;</span>, <span class="st">&quot;comment03&quot;</span>))</span>
+<span id="cb386-3"><a href="joindata.html#cb386-3" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">left_join</span>(posts, comments, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;postid&quot;</span> <span class="ot">=</span> <span class="st">&quot;pid&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="moi" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> 讀取內政部人口統計資料<a href="joindata.html#moi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>先使用<code>slice(-1)</code>減去第一行中文欄位名稱。再來，目前縣市鄉鎮市區（<code>site_id</code>）和村里（<code>village</code>）分別是兩個變項，由於不同的鄉鎮市可能會有相同的村里名，所以把<code>site_id</code>與<code>village</code>粘接起來成為完整的村里名<code>vname</code>。</p>
 <p>這邊我多加了一行程式碼讓<code>vname</code>可以排到前面一點的變項欄，可以用<code>select()</code>達到這個目的，我之後的變項欄的還要寶劉，所以我多打一個<code>everything()</code>就可以把剩下的變項欄都擺放在後面。因此這個重排變項欄的完整程式碼為<code>select(vname, everything())</code>。</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="joindata.html#cb389-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/opendata107Y030.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb389-2"><a href="joindata.html#cb389-2" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb389-3"><a href="joindata.html#cb389-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">vname =</span> <span class="fu">str_c</span>(site_id, village)) <span class="sc">%&gt;%</span></span>
-<span id="cb389-4"><a href="joindata.html#cb389-4" tabindex="-1"></a>    <span class="fu">select</span>(vname, <span class="fu">everything</span>())</span>
-<span id="cb389-5"><a href="joindata.html#cb389-5" tabindex="-1"></a></span>
-<span id="cb389-6"><a href="joindata.html#cb389-6" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="joindata.html#cb387-1" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/opendata107Y030.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb387-2"><a href="joindata.html#cb387-2" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb387-3"><a href="joindata.html#cb387-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">vname =</span> <span class="fu">str_c</span>(site_id, village)) <span class="sc">%&gt;%</span></span>
+<span id="cb387-4"><a href="joindata.html#cb387-4" tabindex="-1"></a>    <span class="fu">select</span>(vname, <span class="fu">everything</span>())</span>
+<span id="cb387-5"><a href="joindata.html#cb387-5" tabindex="-1"></a></span>
+<span id="cb387-6"><a href="joindata.html#cb387-6" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 157
 ##   vname         statistic_yyy district_code site_id village single_age_15down_m
 ##   &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;              
@@ -899,7 +901,7 @@ div.csl-indent {
 ## #   single_age_55_59_m &lt;chr&gt;, single_age_60_64_m &lt;chr&gt;,
 ## #   single_age_65_69_m &lt;chr&gt;, single_age_70_74_m &lt;chr&gt;,
 ## #   single_age_75_79_m &lt;chr&gt;, single_age_80_84_m &lt;chr&gt;, …</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="joindata.html#cb391-1" tabindex="-1"></a><span class="co"># raw %&gt;% glimpse()</span></span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="joindata.html#cb389-1" tabindex="-1"></a><span class="co"># raw %&gt;% glimpse()</span></span></code></pre></div>
 <div id="moi_plan" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> 分析規劃<a href="joindata.html#moi_plan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
@@ -918,8 +920,8 @@ div.csl-indent {
 <p>接下來，我要把表格型態的資料轉為tidy型態資料。原本的資料是這樣的型態。</p>
 <p><img src="images/R04_fig1.png" /></p>
 <p>我要將後方的數值變項欄（<code>single_age_15down_m</code>等）轉為單一變項key的值，再把其所對應到的資料值，也轉為單一變項value。請注意看上圖和程式碼後方結果圖的顏色區塊。南投縣中寮鄉中寮村（綠色）被複製且展開為多列。而原本多個年齡層和資料的變數項（紅色）變成一個變項欄的資料，分別對應到其原本對應的數值（藍色）。</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="joindata.html#cb392-1" tabindex="-1"></a>tidy_data <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb392-2"><a href="joindata.html#cb392-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>, <span class="at">cols =</span> <span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(.))</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="joindata.html#cb390-1" tabindex="-1"></a>tidy_data <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
+<span id="cb390-2"><a href="joindata.html#cb390-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>, <span class="at">cols =</span> <span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(.))</span></code></pre></div>
 <p>相對於<code>pivot_wider()</code>把變項展開成欄，<code>pivot_longer()</code>函式可以收合被展開的變項，在此將要收合的變數名稱統一稱為<code>key</code>，並將該變數所對應到的數值稱為<code>value</code>。並且我用<code>6:ncol(.)</code>來指定我要收合哪些變項欄。</p>
 <ul>
 <li><code>ncol(.)</code>的「<code>.</code>」代表從前面<code>%&gt;%</code> pipe進來的那個data.frame。</li>
@@ -939,28 +941,28 @@ div.csl-indent {
 <p>此時我清理出來的資料大致如下：</p>
 <p><img src="images/%E6%88%AA%E5%9C%96%202023-03-29%20%E4%B8%8B%E5%8D%889.01.09.png" /></p>
 <p>最後就剩零星的操作，包含轉換資料為數值型態、或者你也可以在這裡建立新的指標（例如年齡平均）。最後加上一個<code>arrange(vname)</code>讓他按照村里的全名排序。</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="joindata.html#cb393-1" tabindex="-1"></a>tidy_data <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb393-2"><a href="joindata.html#cb393-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>, <span class="at">cols =</span> <span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(.)) <span class="sc">%&gt;%</span> </span>
-<span id="cb393-3"><a href="joindata.html#cb393-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;_age&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb393-4"><a href="joindata.html#cb393-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;100up&quot;</span>, <span class="st">&quot;100_110&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb393-5"><a href="joindata.html#cb393-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;15down&quot;</span>, <span class="st">&quot;0_15&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb393-6"><a href="joindata.html#cb393-6" tabindex="-1"></a>    <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;ageLower&quot;</span>, <span class="st">&quot;ageUpper&quot;</span>, <span class="st">&quot;gender&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb393-7"><a href="joindata.html#cb393-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ageLower =</span> <span class="fu">as.numeric</span>(ageLower),</span>
-<span id="cb393-8"><a href="joindata.html#cb393-8" tabindex="-1"></a>           <span class="co"># age = str(ageLower, ageUpper), </span></span>
-<span id="cb393-9"><a href="joindata.html#cb393-9" tabindex="-1"></a>           <span class="at">ageUpper =</span> <span class="fu">as.numeric</span>(ageUpper),</span>
-<span id="cb393-10"><a href="joindata.html#cb393-10" tabindex="-1"></a>           <span class="at">value =</span> <span class="fu">as.numeric</span>(value)) <span class="sc">%&gt;%</span></span>
-<span id="cb393-11"><a href="joindata.html#cb393-11" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>statistic_yyy) <span class="sc">%&gt;%</span></span>
-<span id="cb393-12"><a href="joindata.html#cb393-12" tabindex="-1"></a>    <span class="fu">arrange</span>(vname)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="joindata.html#cb391-1" tabindex="-1"></a>tidy_data <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
+<span id="cb391-2"><a href="joindata.html#cb391-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>, <span class="at">cols =</span> <span class="dv">6</span><span class="sc">:</span><span class="fu">ncol</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb391-3"><a href="joindata.html#cb391-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;_age&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb391-4"><a href="joindata.html#cb391-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;100up&quot;</span>, <span class="st">&quot;100_110&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb391-5"><a href="joindata.html#cb391-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">key =</span> <span class="fu">str_replace</span>(key, <span class="st">&quot;15down&quot;</span>, <span class="st">&quot;0_15&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb391-6"><a href="joindata.html#cb391-6" tabindex="-1"></a>    <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;ageLower&quot;</span>, <span class="st">&quot;ageUpper&quot;</span>, <span class="st">&quot;gender&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb391-7"><a href="joindata.html#cb391-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ageLower =</span> <span class="fu">as.numeric</span>(ageLower),</span>
+<span id="cb391-8"><a href="joindata.html#cb391-8" tabindex="-1"></a>           <span class="co"># age = str(ageLower, ageUpper), </span></span>
+<span id="cb391-9"><a href="joindata.html#cb391-9" tabindex="-1"></a>           <span class="at">ageUpper =</span> <span class="fu">as.numeric</span>(ageUpper),</span>
+<span id="cb391-10"><a href="joindata.html#cb391-10" tabindex="-1"></a>           <span class="at">value =</span> <span class="fu">as.numeric</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb391-11"><a href="joindata.html#cb391-11" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>statistic_yyy) <span class="sc">%&gt;%</span></span>
+<span id="cb391-12"><a href="joindata.html#cb391-12" tabindex="-1"></a>    <span class="fu">arrange</span>(vname)</span></code></pre></div>
 </div>
 <div id="moi_rowwise" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> 進階：運用<code>rowwise()</code><a href="joindata.html#moi_rowwise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="joindata.html#cb394-1" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> </span>
-<span id="cb394-2"><a href="joindata.html#cb394-2" tabindex="-1"></a>    <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">157</span>), as.numeric) <span class="sc">%&gt;%</span></span>
-<span id="cb394-3"><a href="joindata.html#cb394-3" tabindex="-1"></a>    <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb394-4"><a href="joindata.html#cb394-4" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb394-5"><a href="joindata.html#cb394-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">married =</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(<span class="fu">matches</span>(<span class="st">&quot;widowed|divorced|married&quot;</span>)), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb394-6"><a href="joindata.html#cb394-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lt65 =</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(<span class="fu">matches</span>(<span class="st">&quot;65|70|75|80|85|90|95|100&quot;</span>)), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb394-7"><a href="joindata.html#cb394-7" tabindex="-1"></a>    <span class="fu">select</span>(vname, married, lt65) <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="joindata.html#cb392-1" tabindex="-1"></a>raw <span class="sc">%&gt;%</span> </span>
+<span id="cb392-2"><a href="joindata.html#cb392-2" tabindex="-1"></a>    <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">157</span>), as.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb392-3"><a href="joindata.html#cb392-3" tabindex="-1"></a>    <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb392-4"><a href="joindata.html#cb392-4" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb392-5"><a href="joindata.html#cb392-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">married =</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(<span class="fu">matches</span>(<span class="st">&quot;widowed|divorced|married&quot;</span>)), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb392-6"><a href="joindata.html#cb392-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">lt65 =</span> <span class="fu">sum</span>(<span class="fu">c_across</span>(<span class="fu">matches</span>(<span class="st">&quot;65|70|75|80|85|90|95|100&quot;</span>)), <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb392-7"><a href="joindata.html#cb392-7" tabindex="-1"></a>    <span class="fu">select</span>(vname, married, lt65) <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 3
 ## # Rowwise: 
 ##   vname              married  lt65
@@ -982,74 +984,74 @@ div.csl-indent {
 <p>簡單地說，相當於按照不同的村里（<code>district_code</code>）各別做<code>value</code>的加總（該村里的總人口數）、篩選出年齡65歲以上的人口組別進行加總、篩選出不是單身者的人口組別進行加總。之後會加一個<code>ungroup()</code>解開群組。</p>
 <p>最後一行<code>left_join(raw %&gt;% select(vname, site_id), by = "vname")</code>是由於<code>group_by()</code>後會讓其他變數消失（例如鄉鎮市區名<code>site_id</code>），所以我希望將原本資料<code>raw</code>中的<code>site_id</code>給併回來。我可以抽取出<code>raw</code>中的<code>vname</code>和<code>site_id</code>兩個變項，然後以<code>vname</code>為key，用<code>left_join()</code>將<code>site_id</code>給併回來。</p>
 <p>筆記：當<code>group_by()</code>、<code>summarize()</code>後不參與的變項會消失，但可以透過<code>left_join()</code>的方式將原有的變項併回來。</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="joindata.html#cb396-1" tabindex="-1"></a>village_stat <span class="ot">&lt;-</span> tidy_data <span class="sc">%&gt;%</span></span>
-<span id="cb396-2"><a href="joindata.html#cb396-2" tabindex="-1"></a>    <span class="fu">filter</span>(ageLower <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb396-3"><a href="joindata.html#cb396-3" tabindex="-1"></a>    <span class="fu">group_by</span>(vname) <span class="sc">%&gt;%</span></span>
-<span id="cb396-4"><a href="joindata.html#cb396-4" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">legalPopulation =</span> <span class="fu">sum</span>(value),</span>
-<span id="cb396-5"><a href="joindata.html#cb396-5" tabindex="-1"></a>              <span class="at">elderSum =</span> <span class="fu">sum</span>(value[ageLower <span class="sc">&gt;=</span> <span class="dv">65</span>]),</span>
-<span id="cb396-6"><a href="joindata.html#cb396-6" tabindex="-1"></a>              <span class="at">marriedSum =</span> <span class="fu">sum</span>(value[married <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;divorced&quot;</span>, <span class="st">&quot;widowed&quot;</span>)]),</span>
-<span id="cb396-7"><a href="joindata.html#cb396-7" tabindex="-1"></a>              <span class="at">womenSum =</span> <span class="fu">sum</span>(value[gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb396-8"><a href="joindata.html#cb396-8" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb396-9"><a href="joindata.html#cb396-9" tabindex="-1"></a>    <span class="fu">left_join</span>(raw <span class="sc">%&gt;%</span> <span class="fu">select</span>(vname, site_id), <span class="at">by =</span> <span class="st">&quot;vname&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="joindata.html#cb394-1" tabindex="-1"></a>village_stat <span class="ot">&lt;-</span> tidy_data <span class="sc">%&gt;%</span></span>
+<span id="cb394-2"><a href="joindata.html#cb394-2" tabindex="-1"></a>    <span class="fu">filter</span>(ageLower <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb394-3"><a href="joindata.html#cb394-3" tabindex="-1"></a>    <span class="fu">group_by</span>(vname) <span class="sc">%&gt;%</span></span>
+<span id="cb394-4"><a href="joindata.html#cb394-4" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">legalPopulation =</span> <span class="fu">sum</span>(value),</span>
+<span id="cb394-5"><a href="joindata.html#cb394-5" tabindex="-1"></a>              <span class="at">elderSum =</span> <span class="fu">sum</span>(value[ageLower <span class="sc">&gt;=</span> <span class="dv">65</span>]),</span>
+<span id="cb394-6"><a href="joindata.html#cb394-6" tabindex="-1"></a>              <span class="at">marriedSum =</span> <span class="fu">sum</span>(value[married <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;married&quot;</span>, <span class="st">&quot;divorced&quot;</span>, <span class="st">&quot;widowed&quot;</span>)]),</span>
+<span id="cb394-7"><a href="joindata.html#cb394-7" tabindex="-1"></a>              <span class="at">womenSum =</span> <span class="fu">sum</span>(value[gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>])) <span class="sc">%&gt;%</span></span>
+<span id="cb394-8"><a href="joindata.html#cb394-8" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb394-9"><a href="joindata.html#cb394-9" tabindex="-1"></a>    <span class="fu">left_join</span>(raw <span class="sc">%&gt;%</span> <span class="fu">select</span>(vname, site_id), <span class="at">by =</span> <span class="st">&quot;vname&quot;</span>)</span></code></pre></div>
 <p>測試</p>
 </div>
 <div id="moi_town_groupby" class="section level4 hasAnchor" number="7.2.4.2">
 <h4><span class="header-section-number">7.2.4.2</span> 將村里指標匯總為鄉鎮市區指標<a href="joindata.html#moi_town_groupby" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>剛剛是根據村里（village）來建立指標，現在要根據鄉鎮市區來建立指標。走過前方的邏輯後，我們只需要把原本用來做<code>group_by()</code>的村里變項<code>vname</code>改為鄉鎮市區的變項<code>site_id</code>，就可以完成這件事，其他都一樣，你發現沒？</p>
 <p>不過這邊我要多做一件事。因為三民區和鳳山區兩個區非常的大（我猜），所以內政資料中的鄉鎮市區資料有分「三民一」、「三民二」、「鳳山一」、「鳳山二」。我們只要在彙整資料前，將<code>site_id</code>的這四類值取代好，便可以在鄉鎮市區的指標中一併彙整。以下我一共彙整出四種資料，分別為該區人口數（<code>legalPopulation</code>）、老年人口數（<code>elderSum</code>）、曾婚人口數（<code>marriedSum</code>）、女性人口數（<code>womenSum</code>）。不難想像接下來可以計算出各鄉鎮市區的老年人口比例、曾婚比例、女性比例等。</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="joindata.html#cb397-1" tabindex="-1"></a>town_stat <span class="ot">&lt;-</span> village_stat <span class="sc">%&gt;%</span></span>
-<span id="cb397-2"><a href="joindata.html#cb397-2" tabindex="-1"></a>    <span class="co"># mutate(site_id = str_sub(vname, 1, 6)) %&gt;%</span></span>
-<span id="cb397-3"><a href="joindata.html#cb397-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;三民一|三民二&quot;</span>, <span class="st">&quot;三民區&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb397-4"><a href="joindata.html#cb397-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;鳳山一|鳳山二&quot;</span>, <span class="st">&quot;鳳山區&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb397-5"><a href="joindata.html#cb397-5" tabindex="-1"></a>    <span class="fu">group_by</span>(site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb397-6"><a href="joindata.html#cb397-6" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">legalPopulation =</span>  <span class="fu">sum</span>(legalPopulation),</span>
-<span id="cb397-7"><a href="joindata.html#cb397-7" tabindex="-1"></a>              <span class="at">elderSum =</span> <span class="fu">sum</span>(elderSum),</span>
-<span id="cb397-8"><a href="joindata.html#cb397-8" tabindex="-1"></a>              <span class="at">marriedSum =</span> <span class="fu">sum</span>(marriedSum),</span>
-<span id="cb397-9"><a href="joindata.html#cb397-9" tabindex="-1"></a>              <span class="at">womenSum =</span> <span class="fu">sum</span>(womenSum)</span>
-<span id="cb397-10"><a href="joindata.html#cb397-10" tabindex="-1"></a>              )<span class="sc">%&gt;%</span></span>
-<span id="cb397-11"><a href="joindata.html#cb397-11" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="joindata.html#cb395-1" tabindex="-1"></a>town_stat <span class="ot">&lt;-</span> village_stat <span class="sc">%&gt;%</span></span>
+<span id="cb395-2"><a href="joindata.html#cb395-2" tabindex="-1"></a>    <span class="co"># mutate(site_id = str_sub(vname, 1, 6)) %&gt;%</span></span>
+<span id="cb395-3"><a href="joindata.html#cb395-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;三民一|三民二&quot;</span>, <span class="st">&quot;三民區&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb395-4"><a href="joindata.html#cb395-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;鳳山一|鳳山二&quot;</span>, <span class="st">&quot;鳳山區&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb395-5"><a href="joindata.html#cb395-5" tabindex="-1"></a>    <span class="fu">group_by</span>(site_id) <span class="sc">%&gt;%</span></span>
+<span id="cb395-6"><a href="joindata.html#cb395-6" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">legalPopulation =</span>  <span class="fu">sum</span>(legalPopulation),</span>
+<span id="cb395-7"><a href="joindata.html#cb395-7" tabindex="-1"></a>              <span class="at">elderSum =</span> <span class="fu">sum</span>(elderSum),</span>
+<span id="cb395-8"><a href="joindata.html#cb395-8" tabindex="-1"></a>              <span class="at">marriedSum =</span> <span class="fu">sum</span>(marriedSum),</span>
+<span id="cb395-9"><a href="joindata.html#cb395-9" tabindex="-1"></a>              <span class="at">womenSum =</span> <span class="fu">sum</span>(womenSum)</span>
+<span id="cb395-10"><a href="joindata.html#cb395-10" tabindex="-1"></a>              )<span class="sc">%&gt;%</span></span>
+<span id="cb395-11"><a href="joindata.html#cb395-11" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
 </div>
 </div>
 <div id="moi_visual_popul" class="section level3 hasAnchor" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> 視覺化測試（老年人口數 x 曾婚人口數）<a href="joindata.html#moi_visual_popul" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="joindata.html#cb398-1" tabindex="-1"></a>th <span class="ot">&lt;-</span> </span>
-<span id="cb398-2"><a href="joindata.html#cb398-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
-<span id="cb398-3"><a href="joindata.html#cb398-3" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>), </span>
-<span id="cb398-4"><a href="joindata.html#cb398-4" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;PingFang TC&quot;</span>),</span>
-<span id="cb398-5"><a href="joindata.html#cb398-5" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
-<span id="cb398-6"><a href="joindata.html#cb398-6" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
-<span id="cb398-7"><a href="joindata.html#cb398-7" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
-<span id="cb398-8"><a href="joindata.html#cb398-8" tabindex="-1"></a>        )</span>
-<span id="cb398-9"><a href="joindata.html#cb398-9" tabindex="-1"></a></span>
-<span id="cb398-10"><a href="joindata.html#cb398-10" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span></span>
-<span id="cb398-11"><a href="joindata.html#cb398-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">marriedPerc =</span> marriedSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span></span>
-<span id="cb398-12"><a href="joindata.html#cb398-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">womenPerc =</span> womenSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span></span>
-<span id="cb398-13"><a href="joindata.html#cb398-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">elderPerc =</span> elderSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span> </span>
-<span id="cb398-14"><a href="joindata.html#cb398-14" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb398-15"><a href="joindata.html#cb398-15" tabindex="-1"></a>    <span class="fu">aes</span>(womenPerc, elderPerc) <span class="sc">+</span> </span>
-<span id="cb398-16"><a href="joindata.html#cb398-16" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb398-17"><a href="joindata.html#cb398-17" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>site_id, <span class="at">vjust=</span><span class="fl">1.3</span>, <span class="at">size=</span><span class="dv">4</span>), <span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>)  <span class="sc">+</span> th</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="joindata.html#cb396-1" tabindex="-1"></a>th <span class="ot">&lt;-</span> </span>
+<span id="cb396-2"><a href="joindata.html#cb396-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb396-3"><a href="joindata.html#cb396-3" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>), </span>
+<span id="cb396-4"><a href="joindata.html#cb396-4" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;PingFang TC&quot;</span>),</span>
+<span id="cb396-5"><a href="joindata.html#cb396-5" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb396-6"><a href="joindata.html#cb396-6" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>),</span>
+<span id="cb396-7"><a href="joindata.html#cb396-7" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>)</span>
+<span id="cb396-8"><a href="joindata.html#cb396-8" tabindex="-1"></a>        )</span>
+<span id="cb396-9"><a href="joindata.html#cb396-9" tabindex="-1"></a></span>
+<span id="cb396-10"><a href="joindata.html#cb396-10" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span></span>
+<span id="cb396-11"><a href="joindata.html#cb396-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">marriedPerc =</span> marriedSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span></span>
+<span id="cb396-12"><a href="joindata.html#cb396-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">womenPerc =</span> womenSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span></span>
+<span id="cb396-13"><a href="joindata.html#cb396-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">elderPerc =</span> elderSum <span class="sc">/</span> legalPopulation) <span class="sc">%&gt;%</span> </span>
+<span id="cb396-14"><a href="joindata.html#cb396-14" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb396-15"><a href="joindata.html#cb396-15" tabindex="-1"></a>    <span class="fu">aes</span>(womenPerc, elderPerc) <span class="sc">+</span> </span>
+<span id="cb396-16"><a href="joindata.html#cb396-16" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb396-17"><a href="joindata.html#cb396-17" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>site_id, <span class="at">vjust=</span><span class="fl">1.3</span>, <span class="at">size=</span><span class="dv">4</span>), <span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>)  <span class="sc">+</span> th</span></code></pre></div>
 <p><img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="joindata.html#cb399-1" tabindex="-1"></a>    <span class="co"># geom_jitter(alpha = 0.3)</span></span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="joindata.html#cb397-1" tabindex="-1"></a>    <span class="co"># geom_jitter(alpha = 0.3)</span></span></code></pre></div>
 </div>
 </div>
 <div id="referendum" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> 讀取公投資料<a href="joindata.html#referendum" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>首先，先讀取資料並重新命名每個變項。由於我們要連結公投資料和前面的內政部人口統計資料，所以要注意兩筆資料間是否有共通的key（資料庫稱為鍵值）。<code>town_stat</code>的是以<code>site_id</code>鄉鎮市區名為主鍵，所以公投資料這邊也產生一個同名的鄉鎮市區變項<code>site_id</code>。</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="joindata.html#cb400-1" tabindex="-1"></a>ref10 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ref10.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb400-2"><a href="joindata.html#cb400-2" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">county =</span> 縣市, <span class="at">town =</span> 鄉鎮市區,</span>
-<span id="cb400-3"><a href="joindata.html#cb400-3" tabindex="-1"></a>           <span class="at">agree =</span> 同意票數, <span class="at">disagree =</span> 不同意票數,</span>
-<span id="cb400-4"><a href="joindata.html#cb400-4" tabindex="-1"></a>           <span class="at">legalVote =</span> 有效票數, <span class="at">illegalVote =</span> 無效票數, </span>
-<span id="cb400-5"><a href="joindata.html#cb400-5" tabindex="-1"></a>           <span class="at">vote =</span> 投票數, <span class="at">legalPopulation =</span>  投票權人數)  <span class="sc">%&gt;%</span></span>
-<span id="cb400-6"><a href="joindata.html#cb400-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_c</span>(county, town)) <span class="sc">%&gt;%</span></span>
-<span id="cb400-7"><a href="joindata.html#cb400-7" tabindex="-1"></a>    <span class="fu">drop_na</span>(site_id)</span>
-<span id="cb400-8"><a href="joindata.html#cb400-8" tabindex="-1"></a></span>
-<span id="cb400-9"><a href="joindata.html#cb400-9" tabindex="-1"></a><span class="fu">names</span>(ref10)</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="joindata.html#cb398-1" tabindex="-1"></a>ref10 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ref10.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb398-2"><a href="joindata.html#cb398-2" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">county =</span> 縣市, <span class="at">town =</span> 鄉鎮市區,</span>
+<span id="cb398-3"><a href="joindata.html#cb398-3" tabindex="-1"></a>           <span class="at">agree =</span> 同意票數, <span class="at">disagree =</span> 不同意票數,</span>
+<span id="cb398-4"><a href="joindata.html#cb398-4" tabindex="-1"></a>           <span class="at">legalVote =</span> 有效票數, <span class="at">illegalVote =</span> 無效票數, </span>
+<span id="cb398-5"><a href="joindata.html#cb398-5" tabindex="-1"></a>           <span class="at">vote =</span> 投票數, <span class="at">legalPopulation =</span>  投票權人數)  <span class="sc">%&gt;%</span></span>
+<span id="cb398-6"><a href="joindata.html#cb398-6" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_c</span>(county, town)) <span class="sc">%&gt;%</span></span>
+<span id="cb398-7"><a href="joindata.html#cb398-7" tabindex="-1"></a>    <span class="fu">drop_na</span>(site_id)</span>
+<span id="cb398-8"><a href="joindata.html#cb398-8" tabindex="-1"></a></span>
+<span id="cb398-9"><a href="joindata.html#cb398-9" tabindex="-1"></a><span class="fu">names</span>(ref10)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;county&quot;          &quot;town&quot;            &quot;agree&quot;           &quot;disagree&quot;       
 ## [5] &quot;legalVote&quot;       &quot;illegalVote&quot;     &quot;vote&quot;            &quot;legalPopulation&quot;
 ## [9] &quot;site_id&quot;</code></pre>
 <p>合併資料測試，注意，由於兩邊都有<code>legalPopulation</code>，所以<code>town_stat</code>中的<code>legalPopulation</code>增生為<code>legalPopulation.x</code>，而<code>ref10</code>中的<code>legalPopulation</code>則重新命名為<code>legalPopulation.y</code>。</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="joindata.html#cb402-1" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(ref10, <span class="at">by =</span> <span class="st">&quot;site_id&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="joindata.html#cb400-1" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(ref10, <span class="at">by =</span> <span class="st">&quot;site_id&quot;</span>)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 368 × 13
 ##    site_id     legalPopulation.x elderSum marriedSum womenSum county town  agree
 ##    &lt;chr&gt;                   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
@@ -1069,21 +1071,21 @@ div.csl-indent {
 <div id="moi_join_ref" class="section level3 hasAnchor" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> 合併公投資料並視覺化<a href="joindata.html#moi_join_ref" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>由於人口統計資料中的鄉鎮市區若只有兩個字如「東區」中間有一全形空白「東　區」，但公投資料中並沒有這樣的空白，所以為了兩者要能夠正確合併，需要先做好取代。可以逐一取代，或者，直接取代掉該全形空白為空字串即可。</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="joindata.html#cb404-1" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span></span>
-<span id="cb404-2"><a href="joindata.html#cb404-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;　&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb404-3"><a href="joindata.html#cb404-3" tabindex="-1"></a>    <span class="co"># mutate(site_id = str_replace(site_id, &quot;東　區&quot;, &quot;東區&quot;),</span></span>
-<span id="cb404-4"><a href="joindata.html#cb404-4" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;西　區&quot;, &quot;西區&quot;),</span></span>
-<span id="cb404-5"><a href="joindata.html#cb404-5" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;南　區&quot;, &quot;南區&quot;),</span></span>
-<span id="cb404-6"><a href="joindata.html#cb404-6" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;北　區&quot;, &quot;北區&quot;),</span></span>
-<span id="cb404-7"><a href="joindata.html#cb404-7" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;中　區&quot;, &quot;中區&quot;)) %&gt;%</span></span>
-<span id="cb404-8"><a href="joindata.html#cb404-8" tabindex="-1"></a>    <span class="fu">left_join</span>(ref10, <span class="at">by =</span> <span class="st">&quot;site_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb404-9"><a href="joindata.html#cb404-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">agreeRate =</span> agree <span class="sc">/</span> legalVote,</span>
-<span id="cb404-10"><a href="joindata.html#cb404-10" tabindex="-1"></a>           <span class="at">marriedPerc =</span> marriedSum <span class="sc">/</span> legalPopulation.x) <span class="sc">%&gt;%</span></span>
-<span id="cb404-11"><a href="joindata.html#cb404-11" tabindex="-1"></a>    <span class="co"># select(site_id, agree, legalVote, marriedSum, legalPopulation.x) %&gt;%</span></span>
-<span id="cb404-12"><a href="joindata.html#cb404-12" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb404-13"><a href="joindata.html#cb404-13" tabindex="-1"></a>    <span class="fu">aes</span>(agreeRate, marriedPerc) <span class="sc">+</span> </span>
-<span id="cb404-14"><a href="joindata.html#cb404-14" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb404-15"><a href="joindata.html#cb404-15" tabindex="-1"></a>    <span class="fu">theme_light</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="joindata.html#cb402-1" tabindex="-1"></a>town_stat <span class="sc">%&gt;%</span></span>
+<span id="cb402-2"><a href="joindata.html#cb402-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site_id =</span> <span class="fu">str_replace</span>(site_id, <span class="st">&quot;　&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb402-3"><a href="joindata.html#cb402-3" tabindex="-1"></a>    <span class="co"># mutate(site_id = str_replace(site_id, &quot;東　區&quot;, &quot;東區&quot;),</span></span>
+<span id="cb402-4"><a href="joindata.html#cb402-4" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;西　區&quot;, &quot;西區&quot;),</span></span>
+<span id="cb402-5"><a href="joindata.html#cb402-5" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;南　區&quot;, &quot;南區&quot;),</span></span>
+<span id="cb402-6"><a href="joindata.html#cb402-6" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;北　區&quot;, &quot;北區&quot;),</span></span>
+<span id="cb402-7"><a href="joindata.html#cb402-7" tabindex="-1"></a>    <span class="co">#        site_id = str_replace(site_id, &quot;中　區&quot;, &quot;中區&quot;)) %&gt;%</span></span>
+<span id="cb402-8"><a href="joindata.html#cb402-8" tabindex="-1"></a>    <span class="fu">left_join</span>(ref10, <span class="at">by =</span> <span class="st">&quot;site_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb402-9"><a href="joindata.html#cb402-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">agreeRate =</span> agree <span class="sc">/</span> legalVote,</span>
+<span id="cb402-10"><a href="joindata.html#cb402-10" tabindex="-1"></a>           <span class="at">marriedPerc =</span> marriedSum <span class="sc">/</span> legalPopulation.x) <span class="sc">%&gt;%</span></span>
+<span id="cb402-11"><a href="joindata.html#cb402-11" tabindex="-1"></a>    <span class="co"># select(site_id, agree, legalVote, marriedSum, legalPopulation.x) %&gt;%</span></span>
+<span id="cb402-12"><a href="joindata.html#cb402-12" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb402-13"><a href="joindata.html#cb402-13" tabindex="-1"></a>    <span class="fu">aes</span>(agreeRate, marriedPerc) <span class="sc">+</span> </span>
+<span id="cb402-14"><a href="joindata.html#cb402-14" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb402-15"><a href="joindata.html#cb402-15" tabindex="-1"></a>    <span class="fu">theme_light</span>()</span></code></pre></div>
 <p><img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 
 </div>

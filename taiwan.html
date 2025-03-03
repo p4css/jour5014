@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 35 Case Studies (Taiwan) | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 35 Case Studies (Taiwan) | R for Data Journalism" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -798,40 +800,40 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 35</span> Case Studies (Taiwan)<a href="taiwan.html#taiwan" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="tw-aqi-visual-studies" class="section level2 hasAnchor" number="35.1">
 <h2><span class="header-section-number">35.1</span> TW AQI Visual Studies<a href="taiwan.html#tw-aqi-visual-studies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="taiwan.html#cb877-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="taiwan.html#cb875-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="taiwan.html#cb879-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb879-2"><a href="taiwan.html#cb879-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span></code></pre></div>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="taiwan.html#cb877-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb877-2"><a href="taiwan.html#cb877-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span></code></pre></div>
 <div id="eda-load-data-from-github" class="section level3 hasAnchor" number="35.1.1">
 <h3><span class="header-section-number">35.1.1</span> eda-load-data-from-github<a href="taiwan.html#eda-load-data-from-github" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb880-1"><a href="taiwan.html#cb880-1" tabindex="-1"></a><span class="co"># aqi_data &lt;- read_rds(&quot;https://github.com/p4css/R4CSS/raw/master/data/AQI_Chaozhou.rds&quot;)</span></span>
-<span id="cb880-2"><a href="taiwan.html#cb880-2" tabindex="-1"></a>aqi_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/AQI_Chaozhou.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="taiwan.html#cb878-1" tabindex="-1"></a><span class="co"># aqi_data &lt;- read_rds(&quot;https://github.com/p4css/R4CSS/raw/master/data/AQI_Chaozhou.rds&quot;)</span></span>
+<span id="cb878-2"><a href="taiwan.html#cb878-2" tabindex="-1"></a>aqi_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/AQI_Chaozhou.rds&quot;</span>)</span></code></pre></div>
 </div>
 <div id="trending-central-tendency" class="section level3 hasAnchor" number="35.1.2">
 <h3><span class="header-section-number">35.1.2</span> Trending: Central tendency<a href="taiwan.html#trending-central-tendency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="taiwan.html#cb881-1" tabindex="-1"></a>toplot <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
-<span id="cb881-2"><a href="taiwan.html#cb881-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
-<span id="cb881-3"><a href="taiwan.html#cb881-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb881-4"><a href="taiwan.html#cb881-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb881-5"><a href="taiwan.html#cb881-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
-<span id="cb881-6"><a href="taiwan.html#cb881-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb881-7"><a href="taiwan.html#cb881-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
-<span id="cb881-8"><a href="taiwan.html#cb881-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(PM25)) <span class="sc">%&gt;%</span> </span>
-<span id="cb881-9"><a href="taiwan.html#cb881-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb881-10"><a href="taiwan.html#cb881-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), </span>
-<span id="cb881-11"><a href="taiwan.html#cb881-11" tabindex="-1"></a>           <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
-<span id="cb881-12"><a href="taiwan.html#cb881-12" tabindex="-1"></a>    <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span> </span>
-<span id="cb881-13"><a href="taiwan.html#cb881-13" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(avg)) <span class="sc">%&gt;%</span></span>
-<span id="cb881-14"><a href="taiwan.html#cb881-14" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="taiwan.html#cb879-1" tabindex="-1"></a>toplot <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
+<span id="cb879-2"><a href="taiwan.html#cb879-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
+<span id="cb879-3"><a href="taiwan.html#cb879-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb879-4"><a href="taiwan.html#cb879-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb879-5"><a href="taiwan.html#cb879-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
+<span id="cb879-6"><a href="taiwan.html#cb879-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb879-7"><a href="taiwan.html#cb879-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
+<span id="cb879-8"><a href="taiwan.html#cb879-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(PM25)) <span class="sc">%&gt;%</span> </span>
+<span id="cb879-9"><a href="taiwan.html#cb879-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb879-10"><a href="taiwan.html#cb879-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), </span>
+<span id="cb879-11"><a href="taiwan.html#cb879-11" tabindex="-1"></a>           <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
+<span id="cb879-12"><a href="taiwan.html#cb879-12" tabindex="-1"></a>    <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span> </span>
+<span id="cb879-13"><a href="taiwan.html#cb879-13" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(avg)) <span class="sc">%&gt;%</span></span>
+<span id="cb879-14"><a href="taiwan.html#cb879-14" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
 <pre><code>## Warning: There was 1 warning in `mutate()`.
 ## ℹ In argument: `PM25 = as.numeric(PM25)`.
 ## Caused by warning:
@@ -839,22 +841,22 @@ div.csl-indent {
 <pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <p>Counting data by month and plotting to ensure the degree of data loss.</p>
-<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="taiwan.html#cb884-1" tabindex="-1"></a>aqi_data <span class="sc">%&gt;%</span></span>
-<span id="cb884-2"><a href="taiwan.html#cb884-2" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb884-3"><a href="taiwan.html#cb884-3" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
-<span id="cb884-4"><a href="taiwan.html#cb884-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb884-5"><a href="taiwan.html#cb884-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
-<span id="cb884-6"><a href="taiwan.html#cb884-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb884-7"><a href="taiwan.html#cb884-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
-<span id="cb884-8"><a href="taiwan.html#cb884-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(PM25)) <span class="sc">%&gt;%</span> </span>
-<span id="cb884-9"><a href="taiwan.html#cb884-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb884-10"><a href="taiwan.html#cb884-10" tabindex="-1"></a>    <span class="fu">arrange</span>(日期) <span class="sc">%&gt;%</span></span>
-<span id="cb884-11"><a href="taiwan.html#cb884-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), </span>
-<span id="cb884-12"><a href="taiwan.html#cb884-12" tabindex="-1"></a>           <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
-<span id="cb884-13"><a href="taiwan.html#cb884-13" tabindex="-1"></a>    <span class="fu">count</span>(year, month) <span class="sc">%&gt;%</span></span>
-<span id="cb884-14"><a href="taiwan.html#cb884-14" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rn =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb884-15"><a href="taiwan.html#cb884-15" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(rn, n) <span class="sc">+</span> </span>
-<span id="cb884-16"><a href="taiwan.html#cb884-16" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb882"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb882-1"><a href="taiwan.html#cb882-1" tabindex="-1"></a>aqi_data <span class="sc">%&gt;%</span></span>
+<span id="cb882-2"><a href="taiwan.html#cb882-2" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb882-3"><a href="taiwan.html#cb882-3" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
+<span id="cb882-4"><a href="taiwan.html#cb882-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb882-5"><a href="taiwan.html#cb882-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
+<span id="cb882-6"><a href="taiwan.html#cb882-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb882-7"><a href="taiwan.html#cb882-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
+<span id="cb882-8"><a href="taiwan.html#cb882-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(PM25)) <span class="sc">%&gt;%</span> </span>
+<span id="cb882-9"><a href="taiwan.html#cb882-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb882-10"><a href="taiwan.html#cb882-10" tabindex="-1"></a>    <span class="fu">arrange</span>(日期) <span class="sc">%&gt;%</span></span>
+<span id="cb882-11"><a href="taiwan.html#cb882-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), </span>
+<span id="cb882-12"><a href="taiwan.html#cb882-12" tabindex="-1"></a>           <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
+<span id="cb882-13"><a href="taiwan.html#cb882-13" tabindex="-1"></a>    <span class="fu">count</span>(year, month) <span class="sc">%&gt;%</span></span>
+<span id="cb882-14"><a href="taiwan.html#cb882-14" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rn =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb882-15"><a href="taiwan.html#cb882-15" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(rn, n) <span class="sc">+</span> </span>
+<span id="cb882-16"><a href="taiwan.html#cb882-16" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <pre><code>## Warning: There was 1 warning in `mutate()`.
 ## ℹ In argument: `PM25 = as.numeric(PM25)`.
 ## Caused by warning:
@@ -864,19 +866,19 @@ div.csl-indent {
 <li><a href="https://fphsa.org.tw/eh/%E7%A7%91%E6%99%AE%E5%B0%8F%E5%AD%B8%E5%A0%82%EF%BD%9C%E7%A9%BA%E6%B0%A3%E4%B8%AD%E7%9A%84%E5%8D%B1%E5%AE%B3%EF%BC%8D%E7%B4%B0%E6%87%B8%E6%B5%AE%E5%BE%AE%E7%B2%92pm2-5/?gclid=Cj0KCQjw_4-SBhCgARIsAAlegrXyT47_JTqzwuZ93EiEaerVLEwwIR03XgBkMVIvQKFvLQ9GNeMQh9kaAh3vEALw_wcB">科普小學堂-空氣中的懸浮粒子</a></li>
 <li><a href="https://www.thenewslens.com/article/115229">台灣PM2.5三大面向：空汙現況多嚴重？要怪中國還是怪自己？ - 第 1 頁 - The News Lens 關鍵評論網</a></li>
 </ul>
-<div class="sourceCode" id="cb886"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb886-1"><a href="taiwan.html#cb886-1" tabindex="-1"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb886-2"><a href="taiwan.html#cb886-2" tabindex="-1"></a>toplot <span class="sc">%&gt;%</span></span>
-<span id="cb886-3"><a href="taiwan.html#cb886-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.character</span>(month)) <span class="sc">%&gt;%</span></span>
-<span id="cb886-4"><a href="taiwan.html#cb886-4" tabindex="-1"></a>    <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
-<span id="cb886-5"><a href="taiwan.html#cb886-5" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb886-6"><a href="taiwan.html#cb886-6" tabindex="-1"></a>    <span class="co"># mutate(diff = avg -first(avg),</span></span>
-<span id="cb886-7"><a href="taiwan.html#cb886-7" tabindex="-1"></a>    <span class="co">#        month = as.character(month)) %&gt;%</span></span>
-<span id="cb886-8"><a href="taiwan.html#cb886-8" tabindex="-1"></a>    <span class="co"># ungroup() %&gt;%</span></span>
-<span id="cb886-9"><a href="taiwan.html#cb886-9" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, avg, <span class="at">color =</span> month) <span class="sc">+</span> </span>
-<span id="cb886-10"><a href="taiwan.html#cb886-10" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb886-11"><a href="taiwan.html#cb886-11" tabindex="-1"></a>    <span class="co"># geom_point() + </span></span>
-<span id="cb886-12"><a href="taiwan.html#cb886-12" tabindex="-1"></a>    <span class="fu">gghighlight</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb886-13"><a href="taiwan.html#cb886-13" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="taiwan.html#cb884-1" tabindex="-1"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb884-2"><a href="taiwan.html#cb884-2" tabindex="-1"></a>toplot <span class="sc">%&gt;%</span></span>
+<span id="cb884-3"><a href="taiwan.html#cb884-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.character</span>(month)) <span class="sc">%&gt;%</span></span>
+<span id="cb884-4"><a href="taiwan.html#cb884-4" tabindex="-1"></a>    <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb884-5"><a href="taiwan.html#cb884-5" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb884-6"><a href="taiwan.html#cb884-6" tabindex="-1"></a>    <span class="co"># mutate(diff = avg -first(avg),</span></span>
+<span id="cb884-7"><a href="taiwan.html#cb884-7" tabindex="-1"></a>    <span class="co">#        month = as.character(month)) %&gt;%</span></span>
+<span id="cb884-8"><a href="taiwan.html#cb884-8" tabindex="-1"></a>    <span class="co"># ungroup() %&gt;%</span></span>
+<span id="cb884-9"><a href="taiwan.html#cb884-9" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, avg, <span class="at">color =</span> month) <span class="sc">+</span> </span>
+<span id="cb884-10"><a href="taiwan.html#cb884-10" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb884-11"><a href="taiwan.html#cb884-11" tabindex="-1"></a>    <span class="co"># geom_point() + </span></span>
+<span id="cb884-12"><a href="taiwan.html#cb884-12" tabindex="-1"></a>    <span class="fu">gghighlight</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb884-13"><a href="taiwan.html#cb884-13" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <pre><code>## Warning: Tried to calculate with group_by(), but the calculation failed.
 ## Falling back to ungrouped filter operation...</code></pre>
 <pre><code>## label_key: month</code></pre>
@@ -884,59 +886,59 @@ div.csl-indent {
 </div>
 <div id="trending-extreme-value" class="section level3 hasAnchor" number="35.1.3">
 <h3><span class="header-section-number">35.1.3</span> Trending: Extreme value<a href="taiwan.html#trending-extreme-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="taiwan.html#cb889-1" tabindex="-1"></a>toplot2 <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
-<span id="cb889-2"><a href="taiwan.html#cb889-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
-<span id="cb889-3"><a href="taiwan.html#cb889-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb889-4"><a href="taiwan.html#cb889-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb889-5"><a href="taiwan.html#cb889-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
-<span id="cb889-6"><a href="taiwan.html#cb889-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb889-7"><a href="taiwan.html#cb889-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
-<span id="cb889-8"><a href="taiwan.html#cb889-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">sum</span>(PM25)<span class="sc">/</span><span class="dv">24</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb889-9"><a href="taiwan.html#cb889-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb889-10"><a href="taiwan.html#cb889-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
-<span id="cb889-11"><a href="taiwan.html#cb889-11" tabindex="-1"></a>    <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span></span>
-<span id="cb889-12"><a href="taiwan.html#cb889-12" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">purple =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">150</span>),</span>
-<span id="cb889-13"><a href="taiwan.html#cb889-13" tabindex="-1"></a>              <span class="at">red =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">54</span>),</span>
-<span id="cb889-14"><a href="taiwan.html#cb889-14" tabindex="-1"></a>              <span class="at">orange =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">35</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb889-15"><a href="taiwan.html#cb889-15" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="taiwan.html#cb887-1" tabindex="-1"></a>toplot2 <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
+<span id="cb887-2"><a href="taiwan.html#cb887-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
+<span id="cb887-3"><a href="taiwan.html#cb887-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb887-4"><a href="taiwan.html#cb887-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb887-5"><a href="taiwan.html#cb887-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
+<span id="cb887-6"><a href="taiwan.html#cb887-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb887-7"><a href="taiwan.html#cb887-7" tabindex="-1"></a>    <span class="fu">group_by</span>(日期) <span class="sc">%&gt;%</span></span>
+<span id="cb887-8"><a href="taiwan.html#cb887-8" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">sum</span>(PM25)<span class="sc">/</span><span class="dv">24</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb887-9"><a href="taiwan.html#cb887-9" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb887-10"><a href="taiwan.html#cb887-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
+<span id="cb887-11"><a href="taiwan.html#cb887-11" tabindex="-1"></a>    <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span></span>
+<span id="cb887-12"><a href="taiwan.html#cb887-12" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">purple =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">150</span>),</span>
+<span id="cb887-13"><a href="taiwan.html#cb887-13" tabindex="-1"></a>              <span class="at">red =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">54</span>),</span>
+<span id="cb887-14"><a href="taiwan.html#cb887-14" tabindex="-1"></a>              <span class="at">orange =</span> <span class="fu">sum</span>(avg<span class="sc">&gt;</span><span class="dv">35</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb887-15"><a href="taiwan.html#cb887-15" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
 <pre><code>## Warning: There was 1 warning in `mutate()`.
 ## ℹ In argument: `PM25 = as.numeric(PM25)`.
 ## Caused by warning:
 ## ! NAs introduced by coercion</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the
 ## `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb892"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb892-1"><a href="taiwan.html#cb892-1" tabindex="-1"></a>toplot2 <span class="sc">%&gt;%</span></span>
-<span id="cb892-2"><a href="taiwan.html#cb892-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.character</span>(month)) <span class="sc">%&gt;%</span></span>
-<span id="cb892-3"><a href="taiwan.html#cb892-3" tabindex="-1"></a>    <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
-<span id="cb892-4"><a href="taiwan.html#cb892-4" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb892-5"><a href="taiwan.html#cb892-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, orange, <span class="at">color =</span> month) <span class="sc">+</span> </span>
-<span id="cb892-6"><a href="taiwan.html#cb892-6" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb892-7"><a href="taiwan.html#cb892-7" tabindex="-1"></a>    <span class="co"># geom_point() + </span></span>
-<span id="cb892-8"><a href="taiwan.html#cb892-8" tabindex="-1"></a>    <span class="fu">gghighlight</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb892-9"><a href="taiwan.html#cb892-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Days (PM25 &gt; 35) in one month&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb892-10"><a href="taiwan.html#cb892-10" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb890"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb890-1"><a href="taiwan.html#cb890-1" tabindex="-1"></a>toplot2 <span class="sc">%&gt;%</span></span>
+<span id="cb890-2"><a href="taiwan.html#cb890-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.character</span>(month)) <span class="sc">%&gt;%</span></span>
+<span id="cb890-3"><a href="taiwan.html#cb890-3" tabindex="-1"></a>    <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb890-4"><a href="taiwan.html#cb890-4" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb890-5"><a href="taiwan.html#cb890-5" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(year, orange, <span class="at">color =</span> month) <span class="sc">+</span> </span>
+<span id="cb890-6"><a href="taiwan.html#cb890-6" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb890-7"><a href="taiwan.html#cb890-7" tabindex="-1"></a>    <span class="co"># geom_point() + </span></span>
+<span id="cb890-8"><a href="taiwan.html#cb890-8" tabindex="-1"></a>    <span class="fu">gghighlight</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb890-9"><a href="taiwan.html#cb890-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Days (PM25 &gt; 35) in one month&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb890-10"><a href="taiwan.html#cb890-10" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <pre><code>## Warning: Tried to calculate with group_by(), but the calculation failed.
 ## Falling back to ungrouped filter operation...</code></pre>
 <pre><code>## label_key: month</code></pre>
 <p><img src="Z2_Exploring_data_Visually_files/figure-html/eda-boxplot-1.png" width="672" /></p>
-<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="taiwan.html#cb895-1" tabindex="-1"></a>toplot3 <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
-<span id="cb895-2"><a href="taiwan.html#cb895-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
-<span id="cb895-3"><a href="taiwan.html#cb895-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb895-4"><a href="taiwan.html#cb895-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb895-5"><a href="taiwan.html#cb895-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
-<span id="cb895-6"><a href="taiwan.html#cb895-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb895-7"><a href="taiwan.html#cb895-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
-<span id="cb895-8"><a href="taiwan.html#cb895-8" tabindex="-1"></a>    <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="taiwan.html#cb893-1" tabindex="-1"></a>toplot3 <span class="ot">&lt;-</span> aqi_data <span class="sc">%&gt;%</span></span>
+<span id="cb893-2"><a href="taiwan.html#cb893-2" tabindex="-1"></a>    <span class="fu">arrange</span>(日期)<span class="sc">%&gt;%</span></span>
+<span id="cb893-3"><a href="taiwan.html#cb893-3" tabindex="-1"></a>    <span class="fu">filter</span>(測項<span class="sc">==</span><span class="st">&quot;PM2.5&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb893-4"><a href="taiwan.html#cb893-4" tabindex="-1"></a>    <span class="fu">gather</span>(<span class="st">&quot;hour&quot;</span>, <span class="st">&quot;PM25&quot;</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb893-5"><a href="taiwan.html#cb893-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">PM25 =</span> <span class="fu">as.numeric</span>(PM25)) <span class="sc">%&gt;%</span></span>
+<span id="cb893-6"><a href="taiwan.html#cb893-6" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb893-7"><a href="taiwan.html#cb893-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(日期), <span class="at">month =</span> lubridate<span class="sc">::</span><span class="fu">month</span>(日期)) <span class="sc">%&gt;%</span></span>
+<span id="cb893-8"><a href="taiwan.html#cb893-8" tabindex="-1"></a>    <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## Warning: There was 1 warning in `mutate()`.
 ## ℹ In argument: `PM25 = as.numeric(PM25)`.
 ## Caused by warning:
 ## ! NAs introduced by coercion</code></pre>
-<div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="taiwan.html#cb897-1" tabindex="-1"></a>toplot3 <span class="sc">%&gt;%</span></span>
-<span id="cb897-2"><a href="taiwan.html#cb897-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.character</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb897-3"><a href="taiwan.html#cb897-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y=</span>year, <span class="at">x=</span>PM25)  <span class="sc">+</span> </span>
-<span id="cb897-4"><a href="taiwan.html#cb897-4" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb897-5"><a href="taiwan.html#cb897-5" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">200</span>) <span class="sc">+</span> </span>
-<span id="cb897-6"><a href="taiwan.html#cb897-6" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="taiwan.html#cb895-1" tabindex="-1"></a>toplot3 <span class="sc">%&gt;%</span></span>
+<span id="cb895-2"><a href="taiwan.html#cb895-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.character</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb895-3"><a href="taiwan.html#cb895-3" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y=</span>year, <span class="at">x=</span>PM25)  <span class="sc">+</span> </span>
+<span id="cb895-4"><a href="taiwan.html#cb895-4" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>, <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb895-5"><a href="taiwan.html#cb895-5" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">200</span>) <span class="sc">+</span> </span>
+<span id="cb895-6"><a href="taiwan.html#cb895-6" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="Z2_Exploring_data_Visually_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 
 </div>

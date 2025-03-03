@@ -2,20 +2,32 @@
 
 ## Paid Maternity Leave {#maternity_dplyr}
 
-### Visual Strategies
-
-這個例子之所以有趣在於記者選定了「美國沒有產假支薪」作為新聞的賣點。在呈現的時候，就必須要盡可能地凸顯這樣的情形。一般來說，會繪製世界地圖來呈現美國是目前少數沒有產假支薪的國家之一（在本資料197個國家中僅有9國目前沒有給付產假薪水。其實該筆來自[Word Policy Analysis Center](https://www.worldpolicycenter.org/)資料含有自1995年至2003年共19年的資料（本案例即就是下載該中心所分享的調查資料，不用申請帳號）。於是該專題的作者便構思利用過去到現在的資料來凸顯美國在這方面一直沒有改變。
-
-但要處理197個國家的在19年間的變化相當不易。例如若為每年繪製一張世界地圖，然後以動畫或動態卷軸來凸顯這19年間美國的變化，也會因為國家數過多而難以聚焦在作者想突顯的美國。
-
-而這便是作者在視覺化上相當具有巧思的地方。由於產假給付程度在該調查中分為五個等級，包含0週、0-14週、14-25週、26-51週、52週以上等。作者便從給付程度最高的層級開始做長條圖，共五個階層的子圖。而每個階層的子圖，作者又將該層級的圖分為「保持不變（Stay Same）」和「持續增加（Increase）」兩組。經過這樣的分組，會得到9個子圖。分別為等級5（保持不變、持續增加）、等級4（保持不變、持續增加）、...、等級1（保持不變）。讀者在看的時候，會依次看到給付程度最高到最低的國家，也可以看到哪些國家在這19年間制度有所變化（通常是增加）。但看到最後的時候，便會看到美國的情形，即是無產假給付。
+這個案例「[The world is getting better at paid maternity leave. The U.S. is not](https://www.washingtonpost.com/news/worldviews/wp/2016/08/13/the-world-is-getting-better-at-paid-maternity-leave-the-u-s-is-not/?tid=sm_tw#comments)」為華盛頓郵報記者Melissa Etehad和Jeremy C.F. Lin在2016年8月13日所撰寫的新聞。記者選定了「美國沒有產假支薪」作為新聞切入點。在呈現的時候，就必須要盡可能地凸顯這樣的情形。一般來說，會繪製世界地圖且用顏色來凸顯美國是目前少數沒有產假支薪的國家之一如下：
 
 ![](https://www.washingtonpost.com/blogs/worldviews/files/2016/08/matleave-map.jpg)
+
+### The Data
+
+該筆資料來自位於UCLA公衛學院的[World Policy Analysis Center](http://www.worldpolicycenter.org/)，其包含兩個壓縮檔，分別為橫斷式資料與部分資料的縱貫性資料。就產假支薪而言，其調查了198個國家的政策，將支薪週數分為五個等級，並蒐錄了1995年至2013年間的變化（matleave_95\~matleave13）。通常在資料分析時，應先閱讀資料了解資料。首先要先觀察資料，開啟資料後概略如下：
+
+![](images/clipboard-265029472.png)
+
+打開資料後便先觀察資料的「列（Row）」是什麼？又有哪些「欄（Column）」？通常在列上的會是逐筆的觀察值，如前述資料每一筆是個國家，而欄上面則是每個觀察所觀察到的變項，例如國名縮寫（iso2、iso3）、地區（region）、經濟等級（wb_econ）、和本案例所要觀察的產假支付等級。但產假支付等級可以看從matleave_95到matleave_13共19欄是19年的資料，數值為1到5，空白的通常是該年沒記錄到的缺漏值。通常統計資料如果是用等第來紀錄的話，會給編碼表，也就是1到5分別代表哪種等級、哪種程度。這份資料也有給編碼表如下，產假給付程度在該調查中分為五個等級，包含**1**（0週）、**2**（0-14週）、**3**（14-25週）、**4**（26-51週）、**5**（52週以上）等。
+
+![](images/clipboard-3879755206.png){width="425"}
+
+### Advanced Visual Strategies
+
+但如果只是繪製地圖，卻又略顯單薄。而該筆來自[Word Policy Analysis Center](https://www.worldpolicycenter.org/)資料其實含有自1995年至2003年共19年的資料（本案例即就是下載該中心所分享的調查資料，不用申請帳號）。於是該專題的作者便利用這些歷史資料，進一步凸顯美國在這方面一直沒有改變，始終都是保持0週，即使其他各國逐漸在調高產假的給付程度。但要處理197個國家的在19年間的變化相當不易。若為每年繪製一張世界地圖，然後以動畫或動態卷軸來凸顯這19年間美國的變化，也會因為國家數過多而難以聚焦在作者想突顯的美國。
+
+而這便是作者在視覺化上相當具有巧思的地方。作者便從給付程度最高的層級開始做長條圖，共五個階層的子圖。而每個階層的子圖，作者又將該層級的圖分為「保持不變（Stay Same）」和「持續增加（Increase）」兩組。經過這樣的分組，會得到9個子圖。分別為等級5（保持不變、持續增加）、等級4（保持不變、持續增加）、...、等級1（保持不變）。讀者在看的時候，會依次看到給付程度最高到最低的國家，也可以看到哪些國家在這19年間制度有所變化（通常是增加）。但看到最後的時候，便會看到美國的情形，即是無產假給付。
+
+![](images/clipboard-1939265210.png){width="441"}
 
 ### Code by base R
 
 
-```r
+``` r
 library(readxl)
 # readxl::read_excel() to import the xls file
 df <- read_excel("data/WORLD-MACHE_Gender_6.8.15.xls", "Sheet1", col_names=T)
@@ -51,7 +63,7 @@ str(matleave)
 ##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ```
 
-```r
+``` r
 # select all NA cells and assign 0 to them
 matleave[is.na(matleave)] <- 0
 
@@ -81,7 +93,7 @@ for (i in c(1:nrow(m55))){
 **`ggplot()`** 函數創建了一個空的 ggplot2 圖形物件，使用 **`aes()`** 函數定義了 x 軸 **`year`** 和 y 軸 **`degree`** 的變數名稱。**`geom_col()`** 函數指定用長條圖呈現資料，設置了顏色和填充顏色。**`ylim()`** 函數限制了 y 軸的範圍，將其設置為 0 到 5，無論y軸資料有沒有到5或者是否超過5，都會限定在0到5之間。**`facet_wrap()`** 函數則根據 **`iso3`** 欄位生成多個子圖。最後，**`theme_void()`** 函數將圖形主題設置為空白，不帶任何邊框或背景。
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
@@ -89,16 +101,16 @@ library(tidyverse)
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
-```r
+``` r
 options(scipen = 999)
 
 library(readxl)
@@ -137,7 +149,7 @@ matleave %>%
 在 R 中，創建一個函式需要使用 **`function()`** 關鍵字。一個最簡單的函式可能只包含一個輸入參數和一個返回值，例如：`my_function <- function(x) {return(x^2)}`。在這個例子中，函式名稱是 **`my_function`**，它有一個輸入參數 **`x`**，函式主體是 **`x^2`**，表示將輸入的 **`x`** 參數平方。函式主體的執行結果通過 **`return()`** 函數返回，並可以存儲到變數中，例如：`result <- my_function(3)`。函式的定義亦可包含多個輸入參數，可以用數字、list、或Data.Frame等當成輸入參數。
 
 
-```r
+``` r
 library(tidyverse)
 options(scipen = 999)
 
@@ -166,49 +178,49 @@ matleave %>% filter(matleave_13 == 5, matleave_95 == 5) %>% generating_plot()
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 5, matleave_95 != 5) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-2.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 4, matleave_95 == 4) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-3.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 4, matleave_95 != 4) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-4.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 3, matleave_95 == 3) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-5.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 3, matleave_95 != 3) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-6.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 2, matleave_95 == 2) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-7.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 2, matleave_95 != 2) %>% generating_plot()
 ```
 
 <img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-8.png" width="672" />
 
-```r
+``` r
 matleave %>% filter(matleave_13 == 1) %>% generating_plot()
 ```
 
@@ -223,7 +235,7 @@ matleave %>% filter(matleave_13 == 1) %>% generating_plot()
 總的來說，這段程式碼的作用是將多個 ggplot2 圖形物件組合成一個網格，並將這個網格圖形儲存為一個圖像文件。這樣做可以方便地進行圖像導出和共享，並且可以將多個圖形合併在一起進行比較和分析。
 
 
-```r
+``` r
 library(cowplot)
 
 plot55 <- matleave %>% filter(matleave_13 == 5, matleave_95 == 5) %>% generating_plot()

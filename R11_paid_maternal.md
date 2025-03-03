@@ -4,13 +4,31 @@
 
 本案例將使用R重新製作華盛頓郵報2016年8月13日的一篇報導，該報導探討了美國婦女產假支薪情況。案例中將應用data.frame和基本的繪圖與資料摘要方法。
 
-原始新聞來源：[The world is getting better at paid maternity leave. The U.S. is not. - The Washington Post](https://www.washingtonpost.com/news/worldviews/wp/2016/08/13/the-world-is-getting-better-at-paid-maternity-leave-the-u-s-is-not/)。該篇報導提及，美國因為目前的政策不保障帶薪產假，許多女性感到必須在工作和照顧家庭之間做出選擇，這種性別不平等破壞了她們在工作機會上的平等機會。同時，世界各地的婦女待遇正在逐漸改善。至少190個國家對嬰兒的母親規定了某種形式的帶薪假期，產假待遇在56個國家有所提高。專家表示，現在美國城市和州正通過不同形式的帶薪家庭假法案，這顯示美國雇主正在展示有競爭力的福利不會影響員工表現。特別是科技公司，如Twitter、Facebook和Google等，處於提供員工帶薪產假福利的前沿，美國可能有望追趕其他國家。
+原始新聞來源：[The world is getting better at paid maternity leave. The U.S. is not. - The Washington Post](https://www.washingtonpost.com/news/worldviews/wp/2016/08/13/the-world-is-getting-better-at-paid-maternity-leave-the-u-s-is-not/)。該篇報導提及，美國因為目前的政策不保障帶薪產假，許多女性感到必須在工作和照顧家庭之間做出選擇，這種性別不平等破壞了她們在工作機會上的平等機會。同時，世界各地的婦女待遇正在逐漸改善。至少190個國家對嬰兒的母親規定了某種形式的帶薪假期，產假待遇在52個國家有所提高。專家表示，現在美國城市和州正通過不同形式的帶薪家庭假法案，這顯示美國雇主正在展示有競爭力的福利不會影響員工表現。記者選定了「美國沒有產假支薪」作為新聞切入點。在呈現的時候，就必須要盡可能地凸顯這樣的情形。一般來說，會繪製世界地圖且用顏色來凸顯美國是目前少數沒有產假支薪的國家之一如下：
 
 ![](https://www.washingtonpost.com/blogs/worldviews/files/2016/08/matleave-map.jpg)
 
-本案例主要呈現核心的視覺化概念，可以在[Review Paid Maternity by dplyr](#maternity_dplyr)找到更詳盡的案例說明與解析。
+### The Data
 
-### Reading .xlsx by readxl package
+該筆資料來自位於UCLA公衛學院的[World Policy Analysis Center](http://www.worldpolicycenter.org/)，其包含兩個壓縮檔，分別為橫斷式資料與部分資料的縱貫性資料。就產假支薪而言，其調查了198個國家的政策，將支薪週數分為五個等級，並蒐錄了1995年至2013年間的變化（matleave_95\~matleave13）。通常在資料分析時，應先閱讀資料了解資料。首先要先觀察資料，開啟資料後概略如下：
+
+![](images/clipboard-265029472.png)
+
+打開資料後便先觀察資料的「列（Row）」是什麼？又有哪些「欄（Column）」？通常在列上的會是逐筆的觀察值，如前述資料每一筆是個國家，而欄上面則是每個觀察所觀察到的變項，例如國名縮寫（iso2、iso3）、地區（region）、經濟等級（wb_econ）、和本案例所要觀察的產假支付等級。但產假支付等級可以看從matleave_95到matleave_13共19欄是19年的資料，數值為1到5，空白的通常是該年沒記錄到的缺漏值。通常統計資料如果是用等第來紀錄的話，會給編碼表，也就是1到5分別代表哪種等級、哪種程度。這份資料也有給編碼表如下，產假給付程度在該調查中分為五個等級，包含**1**（0週）、**2**（0-14週）、**3**（14-25週）、**4**（26-51週）、**5**（52週以上）等。
+
+![](images/clipboard-3879755206.png){width="425"}
+
+### Visual Strategies
+
+但如果只是繪製地圖，卻又略顯單薄。而該筆來自[Word Policy Analysis Center](https://www.worldpolicycenter.org/)資料其實含有自1995年至2003年共19年的資料（本案例即就是下載該中心所分享的調查資料，不用申請帳號）。於是該專題的作者便利用這些歷史資料，進一步凸顯美國在這方面一直沒有改變，始終都是保持0週，即使其他各國逐漸在調高產假的給付程度。但要處理197個國家的在19年間的變化相當不易。若為每年繪製一張世界地圖，然後以動畫或動態卷軸來凸顯這19年間美國的變化，也會因為國家數過多而難以聚焦在作者想突顯的美國。
+
+而這便是作者在視覺化上相當具有巧思的地方。作者便從給付程度最高的層級開始做長條圖，共五個階層的子圖。而每個階層的子圖，作者又將該層級的圖分為「保持不變（Stay Same）」和「持續增加（Increase）」兩組。經過這樣的分組，會得到9個子圖。分別為等級5（保持不變、持續增加）、等級4（保持不變、持續增加）、...、等級1（保持不變）。讀者在看的時候，會依次看到給付程度最高到最低的國家，也可以看到哪些國家在這19年間制度有所變化（通常是增加）。但看到最後的時候，便會看到美國的情形，即是無產假給付。
+
+![](images/clipboard-1939265210.png){width="441"}
+
+### Cleaning
+
+#### Read .xlsx
 
 在進行產假支薪調查數據的分析與視覺化時，我們從該調查網站上所下載的資料是一個Excel文件。由於R語言本身不直接支援讀取Excel格式的文件，我們必須依靠外部的套件來實現這一功能，如**`readxl`**套件。它是專門設計來讀取**`.xls`**和**`.xlsx`**格式文件的強大工具。**`readxl`**套件是**`tidyverse`**套件集的一部分。**`tidyverse`**是一組旨在數據科學和數據處理領域提供便利的R套件集合，包括了**`ggplot2`**、**`dplyr`**、**`tidyr`**等多個流行的套件。如果你之前已經安裝了**`tidyverse`**，那麼**`readxl`**套件應該也已經安裝在你的系統上，無需進行重複安裝。
 
@@ -31,7 +49,9 @@ library(readxl)
 df <- read_excel("data/WORLD-MACHE_Gender_6.8.15.xls", "Sheet1", col_names=T)
 ```
 
-### Previewing data by `View()`, `class()`, `dim()`, `str()`, `summary()` and `names()`
+#### Preview data
+
+Preview data by `View()`, `class()`, `dim()`, `str()`, `summary()` and `names()`
 
 
 ```r
@@ -111,9 +131,9 @@ names(df)
 ## [154] "minwage_ppp_2013"  "mw_overtime"       "oecd"
 ```
 
-### Select variables
+#### Select variables
 
-由於所需要的資料為第三欄的變數`iso3`（為國家代碼）和第六至24欄的`matleave95`\~`matleave13`共29年的資料，所以需要在`df[ , ]`中選出這幾欄。只要把所要取的欄以vector的型態放在`df[row,col]`之`col`的位置，便可以選出所要的欄。
+由於所需要的資料為第三欄的變數`iso3`（為國家代碼）和第六至24欄的`matleave95`\~`matleave13`共29年的資料，所以需要在`df[ , ]`中選出這幾欄。只要把所要取的欄以vector的型態放在`df[row,col]`之`col`的位置，便可以選出所要的欄。程式碼`c(3, 6:24)`代表取出`df`的第3欄、第6至24欄。最後，我們將取出來的欄位指給一個新的變數`matleave`。
 
 
 ```r
@@ -164,7 +184,7 @@ str(matleave)
 ##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ```
 
-### Check & Replace NAs
+#### Check & Replace NAs
 
 -   處理開放資料常常會遇到紀錄遺漏的情形，這些遺漏的值在R語言中通常以**`NA`**（Not Available）來表示。這種情況很常見，特別是當數據來自於廣泛的來源，如網絡調查或公開資料庫時。適當處理這些**`NA`**值對於維持分析的準確性和可靠性至關重要。
 -   為了識別和處理這些**`NA`**值，R提供了一些有用的函數和技巧。例如，**`is.na(v)`**函數可以用來檢測向量**`v`**中的**`NA`**值。如果你想選擇所有的**`NA`**紀錄，可以使用**`v[is.na(v)]`**這樣的語法。這個表達式會傳回所有在向量**`v`**中為**`NA`**的元素，這對於進一步的分析和資料清洗非常有幫助。
@@ -285,57 +305,48 @@ sum(is.na(matleave))
 ## [1] 0
 ```
 
-### Filtering data
+#### Filtering data
 
-#### Filtered by the last year value
+這個階段我希望篩選出2013年（matleave_13）給付等級為5，而1995年（matleave_95）也是5的國家。也就是抽取出有資料記錄以來給付程度就都是最高等級的那群國家，注意，這邊是根據「欄」的資料數值來篩選出合乎條件的「列」。
 
-`matleave[matleave$'matleave_13'==5, ]`中的第一個`matleave`表示要篩選的資料集，中括號中的`matleave$'matleave_13'==5`是篩選條件，表示將篩選`matleave`資料集中的`matleave_13`變數值等於`5`的列；中括號中的逗號後方未有欄位名稱表示將保留所有欄位（變項），僅篩選出符合條件的列，並將篩選後所產生的dataframe指給變數`m5`。
+`matleave[matleave$'matleave_13'==5, ]`中的第一個`matleave`表示要篩選的資料集，中括號中的`matleave$'matleave_13'==5`是篩選條件，表示將篩選`matleave`資料集中的`matleave_13`變數值等於`5`的列；但我同時要滿足第二個條件`matleave$'matleave_95'`，因此要用一個AND符號\<span color="red"\>`&`\</span\>表示兩個條件必須同時成立。中括號中的逗號後方未有欄位名稱表示將保留所有欄位（變項），僅篩選出符合條件的列，並將篩選後所產生的dataframe指給變數`m55`。
 
 
-```r
+``` r
 # Use logical comparison to see if the last year equals to 5
 # Assign matching data to var m5
-m5 <- matleave[matleave$'matleave_13'==5, ]
+# filter rows by condition
+m55 <- matleave[matleave$'matleave_13' == 5 &
+                  matleave$'matleave_95' == 5, ]
 
 # nrow() to count matching data
-nrow(m5)
+nrow(m55)
 ```
 
-```{.output}
-## [1] 34
+``` output
+## [1] 18
 ```
 
-```r
+``` r
 # Is it possible to use length() to check the data length?
 # matleave$'matleave_13'
 # matleave$'matleave_13'==5
 # length(matleave$'matleave_13'==5)
 ```
 
-#### Filtered data by the first year value
-
-接下來我們再做一次篩選，從`m5`中篩選出`matleave_95`這個欄位為`5`的資料，並指給`m55`；同時也從`m5`中篩選出`matleave_95`這個欄位不為`5`的資料，並指給`m05`。`m5`、`m55`和`m05`無特殊含義，只是變數名稱而已。
-
-
-```r
-# filter rows whose 'matleave_95' is 5, and assign to var m55
-m55<- m5[m5$'matleave_95'==5,]
-
-# filter rows whose 'matleave_95' is not 5, and assign to var m05
-m05<- m5[m5$'matleave_95'!=5,]
-```
-
 ### Plotting
 
--   當我們在R中進行資料視覺化時，理解資料結構對於正確使用圖形化函數是非常重要的。以**`matleave`**資料集為例，如果我們想要繪製其第二列所有行（除了第一行）的條形圖，這裡有一段示範程式碼及相關的概念解釋。
--   首先，為何要除去第一行？因為第一行為國家名稱。所以我們利用**`class(matleave[2, -1])`**來查看**`matleave`**資料集第二行和除了第一列外所有列的資料類型。這個操作返回的是一個**`data.frame`**的資料類型，因為即使是單一行的選取，R仍然保持了資料的**`data.frame`**結構。
--   然而，當我們嘗試使用**`barplot()`**函數繪製長條圖時，就不能直接把`data.frame`給`barplot()`進行繪製。。這是因為**`barplot()`**函數期望的輸入是一個`vector`。因此，我們使用**`unlist(matleave[2, -1])`**將單行的**`data.frame`**轉換成`vector`。**`unlist()`**函數的作用是將一個列表（或在這個案例中是**`data.frame`**）中的所有元素合併成一個`vector`，這樣就可以用於**`barplot()`**。
--   為了進一步理解這種差異，我們可以使用**`class()`**或**`str()`**函數來觀察未經**`unlist()`**處理的資料。這將顯示出資料仍然保留在**`data.frame`**結構中，與**`unlist()`**後轉換為`vector`的結構有顯著的不同。這種轉換對於使用某些特定的繪圖函數，如**`barplot()`**，是必要的，因為它們需要一個`vector`作為輸入來正確地繪製圖形。
+當我們在R中進行資料視覺化時，理解資料結構對於正確使用圖形化函數是非常重要的。以**`matleave`**資料集為例，如果我們想要繪製其第二列所有行（除了第一行）的條形圖，預設可以被加入繪製的應該要是數值，所以，
+
+-   首先要除去第一欄。因為第一欄為國家名稱（iso3）。所以，選取第二列資料，但忽略第一欄，應該是**`matleave[2, -1]`**。
+-   再來，利用**`class(matleave[2, -1])`**來查看**`matleave[2, -1]`**的資料類型。結果會是一個**`data.frame`**的資料類型，因為選取單一列時，R仍然保持了資料的**`data.frame`**結構。
+-   然而，當我們嘗試使用**`barplot()`**函數繪製長條圖時，就不能直接把`data.frame`給`barplot()`進行繪製。。這是因為**`barplot()`**函數期望的輸入是一個`vector`。因此，我們使用**`unlist(matleave[2, -1])`**將單列的**`data.frame`**轉換成`vector`。**`unlist()`**函數的作用是將一個列表（或在這個案例中是**`data.frame`**）中的所有元素合併成一個`vector`，這樣就可以用於**`barplot()`**。
+-   為了進一步理解這種差異，我們可以使用**`class()`**或**`str()`**函數來觀察未經**`unlist()`**處理的資料。這將顯示出資料仍然保留在**`data.frame`**結構中，與**`unlist()`**後轉換為`vector`的結構不同。這種轉換對於使用某些特定的繪圖函數，如**`barplot()`**，是必要的，因為它們需要一個`vector`作為輸入來正確地繪製圖形。
 
 #### Plotting one row (one country)
 
 
-```r
+``` r
 # barplot() the second row of m55
 # barplot(m55[2, ])       # raise error
 
@@ -346,29 +357,29 @@ m05<- m5[m5$'matleave_95'!=5,]
 class(matleave[2, -1])
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 class(unlist(matleave[2, -1]))
 ```
 
-```{.output}
+``` output
 ## [1] "numeric"
 ```
 
-```r
+``` r
 # unlist() to convert a single row data.frame to a vector for barplot()
 barplot(unlist(m55[2, -1]))
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 Testing
 
 
-```r
+``` r
 # View(matleave[1]) # select the 1st variable
 # View(matleave[ ,1]) # select the 1st column
 # View(matleave[1, ]) # select the 1st row
@@ -376,31 +387,31 @@ Testing
 class(m55[1])		# "tbl_df"     "tbl"        "data.frame"
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 class(m55[ ,1])	# "tbl_df"     "tbl"        "data.frame"
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 class(m55[1, ])	# "tbl_df"     "tbl"        "data.frame"
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 class(m55$iso3)	# character (vector)
 ```
 
-```{.output}
+``` output
 ## [1] "character"
 ```
 
@@ -416,14 +427,14 @@ class(m55$iso3)	# character (vector)
 6.  `yaxt="n"`: 不顯示y軸的標籤。
 
 
-```r
+``` r
 # barplot() the unlisted second row (neglecting the first col)
 barplot(unlist(m55[2, -1]))
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
-```r
+``` r
 # use ?barplot to know more argument of the function.
 ?barplot
 
@@ -431,42 +442,41 @@ barplot(unlist(m55[2, -1]))
 barplot(unlist(m55[2, -1]), ylim=c(0, 5))
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-2.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-8-2.png" width="672" />
 
-```r
+``` r
 barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0)
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-3.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-8-3.png" width="672" />
 
-```r
+``` r
 barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0, border=NA)
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-4.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-8-4.png" width="672" />
 
-```r
+``` r
 barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-5.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-8-5.png" width="672" />
 
 #### Plotting multiple lines
 
 我們已經成功繪製了一個國家的資料，接下來我們要繪出所有國家的資料。以`m55`這個篩選後的資料為例，我分別要繪製出第1列至第6列的國家。底下可以看見每一行非常相似且一致的特徵，僅有`matleave`內的索引由1被列出至6。對於這種重複的程式碼，最好的方法是用迴圈（for-loop）的方式將相同的程式碼，從1\~6之間做六次。
 
 
-```r
+``` r
 # plot the first row
 barplot(unlist(m55[1, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
-
-# plot the second to 6th rows
-barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
-```r
+``` r
+# plot the second to 6th rows
+barplot(unlist(m55[2, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 barplot(unlist(m55[3, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 barplot(unlist(m55[4, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 barplot(unlist(m55[5, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
@@ -480,14 +490,14 @@ barplot(unlist(m55[6, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n"
 一般的for-loop的結構如下：`for (variable in sequence) {# code block to be executed}`。其中，變數`variable`是用來控制for-loop的迭代次數的，它會從序列`sequence`中逐一取出元素，並將其賦值給變數`variable`，然後執行大括號`{...}`中所指定的程式區塊。
 
 
-```r
+``` r
 # use for loop and use i as index to barplot multiple subgraphs
 for(i in 1:6){
   barplot(unlist(m55[i, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
 }
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-2.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="R11_paid_maternal_files/figure-html/unnamed-chunk-10-2.png" width="672" />
 
 #### Subplots
 
@@ -503,7 +513,7 @@ for(i in 1:6){
 在這段程式碼中，`par`函數被用來設置畫布的分割和邊緣大小，具體來說，`par(mfrow=c(3,2), mai= c(0.2, 0.2, 0.2, 0.2))`表示將畫布分為3行2列的子圖，並設置邊緣大小為0.2，包括上下左右四個邊緣。這樣可以方便地在同一張畫布上顯示多個圖形，並控制它們之間的排列和間距。
 
 
-```r
+``` r
 # use ?par to get more plotting parameters
 ?par
 
@@ -515,28 +525,9 @@ for(i in 1:6){
 }
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
-接下來我們用相同的`for-loop`來繪製10張子圖（十個國家）看看。會發現`mfrow=c(3,2)`可以容納六張子圖，多餘六張子圖時，會繪製至下一張。
-
-
-```r
-# plot more rows to see what happens
-par(mfrow=c(3,2), mai= c(0.2, 0.2, 0.2, 0.2))
-for(i in 1:10){
-    barplot(unlist(m55[i, -1]), ylim=c(0, 5), space=0, border=NA, xaxt="n", yaxt="n")
-}
-```
-
-<img src="R11_paid_maternal_files/figure-html/pml-plot-test-1.png" width="672" />
-
-```r
-# plot all subplots in a figure
-```
-
-<img src="R11_paid_maternal_files/figure-html/pml-plot-test-2.png" width="672" />
-
-最後，我用`nrow(m55)`來取得`m55`這個`data.frame`共有多少個國家，然後，我讓`for-loop`從`1:nrow(m55)`相當於繪製完所有`m55`中的子圖。注意我已經修改了`mfrow`為`mfrow=c(4, 6)`。
+我用`nrow(m55)`來取得`m55`這個`data.frame`共有多少個國家，然後，我讓`for-loop`從`1:nrow(m55)`相當於繪製完所有`m55`中的子圖。注意我修改了`mfrow`為`mfrow=c(4, 6)`。
 
 
 ```r
@@ -560,7 +551,7 @@ for (i in 1:nrow(m55)){
 
 <img src="R11_paid_maternal_files/figure-html/plot-m55-1.png" width="672" />
 
-在每個子圖上，我要加上每個國家的國別代碼`iso3`，也就是`m55`的第一行，我用同樣的i來掃過每一列，繪製完`barplot()`後，便用`title()`函式來繪製文字。結果如下。注意我的設定`title(m55[i,1], line = -4, cex.main=3)`。`line`為繪製文字的基線，而`cex.main`是字型大小。
+在每個子圖上，我要加上每個國家的國別代碼`iso3`，也就是`m55`的第一行如`m55[i,1]`，我用同樣的`i`來掃過每一列，繪製完`barplot()`後，便用`title()`函式來繪製文字。結果如下。注意我的設定`title(m55[i,1], line = -4, cex.main=3)`。`line`為繪製文字的基線，而`cex.main`是字型大小。
 
 
 ```r
@@ -575,12 +566,12 @@ for (i in 1:nrow(m55)){
 
 ### Practice. Plotting more
 
--   請繪製`m05`的資料，也就是`matleave_95!=5`但`matleave_13==5`的資料。
--   請繪製`m04`的資料，也就是`matleave_95!=4`但`matleave_13==4`的資料。
--   請繪製`m44`的資料，也就是`matleave_95==4`但`matleave_13==4`的資料。
+-   繪製`m05`的資料，也就是`matleave_95!=5`但`matleave_13==5`的資料。
+-   繪製`m04`的資料，也就是`matleave_95!=4`但`matleave_13==4`的資料。
+-   繪製`m44`的資料，也就是`matleave_95==4`但`matleave_13==4`的資料。
 
 
-```r
+``` r
 # plotting matleave_95 != 5 but matleave_13 == 5
 
 # plotting for matleave_13 == 4
@@ -591,7 +582,7 @@ for (i in 1:nrow(m55)){
 請嘗試問問ChatGPT，如果將以下程式碼改為dplyr的寫法，要怎麼寫。
 
 
-```r
+``` r
 df <- read_excel("data/WORLD-MACHE_Gender_6.8.15.xls", "Sheet1", col_names=T)
 
 # select columns by index
@@ -615,13 +606,15 @@ for (i in c(1:nrow(m55))){
 }
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ### (More) Clean version
 
 
-```r
+``` r
 # readxl::read_excel() to import the xls file
+library(readxl)
+
 df <- read_excel("data/WORLD-MACHE_Gender_6.8.15.xls", "Sheet1", col_names=T)
 
 # select iso3, and matleave columns by index
@@ -631,7 +624,7 @@ matleave <- df[ , c(3, 6:24)]
 str(matleave)
 ```
 
-```{.output}
+``` output
 ## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
 ##  $ iso3       : chr [1:197] "AFG" "ALB" "DZA" "AND" ...
 ##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
@@ -655,15 +648,12 @@ str(matleave)
 ##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ```
 
-```r
+``` r
 # select all NA cells and assign 0 to them
 matleave[is.na(matleave)] <- 0
 
 # filter rows by condition
-m5 <- matleave[matleave$'matleave_13' == 5, ]
-
-# filter rows by condition
-m55<- m5[m5$'matleave_95' == 5,]
+m55 <- matleave[matleave$'matleave_13' == 5 & matleave$'matleave_95' == 5, ]
 
 # plot
 par(mfrow=c(4,6), mai= c(0.2, 0.2, 0.2, 0.2))
@@ -674,12 +664,12 @@ for (i in c(1:nrow(m55))){
 }
 ```
 
-<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="R11_paid_maternal_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 ### (More) The fittest version to compute staySame
 
 
-```r
+``` r
 # staySame version
 # staySame <- apply(m5[,2:20], 1, function(x) length(unique(x[!is.na(x)]))) 
 # m55 <- m5[staySame, ]

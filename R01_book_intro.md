@@ -2,35 +2,36 @@
 
 # Introduction {#introduction}
 
-本書從基本的 **`base`** R 語法開始學習，因為 R 語言最初是為統計學研究而開發的。因此，許多統計套件和基礎操作都是使用 **`base`** R 語法編寫的，這些知識對於瞭解 R 的核心功能和基本操作是非常重要的，並能夠建立起對於數據分析和統計建模的基礎知識。不過，現在 **`tidyverse`** 風格的編寫方式越來越流行，這種方式使得程式碼撰寫效率更高且可讀性更強，對於數據科學家而言是非常有用的。因此，本書會接續使用 **`tidyverse`** 中的主要函式庫和函數，例如 **`dplyr`**、**`ggplot2`** 和 **`tidyr`**，以便讀者能夠掌握這些工具，並能夠有效地應用於實際數據分析項目中。
+本書旨在為新聞傳播領域的研究生與專業記者提供一部實用指南，介紹如何運用 R 語言進行數據分析與視覺化，進而產出具有深度與說服力的數據驅動新聞報導。全書內容由淺入深，初步以 R 語言的基礎語法（base R）入門，幫助讀者了解 R 語言最初為統計分析而設計的初衷，並掌握數據操作與統計建模的核心知識。打好這一堅實基礎後，讀者將能更深入地理解並應用後續進階工具。
 
-## Preloaded tool kits
+隨著數據科學在各行各業中迅速發展，`tidyverse` 生態系統以其直觀的語法和高效的數據處理流程已成為現代數據分析的主流。本書後半部將重點介紹 `tidyverse` 主要函式庫，如 `dplyr`、`ggplot2` 與 `tidyr`，協助讀者熟悉這些工具，並能夠靈活應用於實際新聞報導製作中。透過本書，讀者不僅能夠學習 R 語言的基本與進階技能，還能夠將數據轉化為具有新聞價值的故事與視覺呈現。
 
-當 R 的程式開始執行時，會預載入一些基本的套件，包括 **`stats`**、**`graphics`**、**`grDevices`**、**`utils`** 和 **`datasets`**。這些套件為 R 提供了基本的數據處理、統計分析、圖形顯示和檔案處理等功能。以下是這些套件的重要函式：
+### **書中數據集**
 
--   **`stats`**：這個套件包含了許多統計分析相關的函式，例如假設檢定、方差分析、線性迴歸和時間序列分析等。其中，比較常用的函式有 **`t.test()`**、**`lm()`**、**`glm()`**、**`anova()`**、**`cor()`** 等。
+本書所使用的各項資料皆可從 GitHub [R4CSS/data](https://github.com/p4css/R4CSS/tree/master/data) 下載，這些數據涵蓋了多元的新聞議題，旨在提供讀者真實且豐富的練習素材。
 
--   **`graphics`**：這個套件提供了用於繪製各種圖形的函式，例如散佈圖、直方圖、盒鬚圖、線圖、散點矩陣等。其中，常用的函式有 **`plot()`**、**`hist()`**、**`boxplot()`**、**`lines()`**、**`points()`** 等。
+### **案例介紹**
 
--   **`grDevices`**：這個套件包含了用於輸出圖形的函式，例如 **`pdf()`**、**`png()`**、**`jpeg()`** 和 **`tiff()`** 等。
+書中精心挑選了多個實例，以展示如何應用 R 語言處理與視覺化不同類型的新聞數據，案例包括但不限於：
 
--   **`utils`**：這個套件包含了一些實用的函式，例如 **`install.packages()`**、**`help()`**、**`data()`** 等。
+-   **Paid Maternity Leave over 197 Countries**：以條形圖呈現各國帶薪產假的情況
 
--   **`datasets`**：這個套件包含了一些內建的數據集，可以用來進行測試和練習，例如 **`iris`**、**`mtcars`**、**`CO2`** 等。可以使用 **`data()`** 函式載入這些數據集。
+-   **Taipei Residential Hot Spot**：利用列聯表分析台北住宅熱點與類別數據
 
-## Dataset used in the book
+-   **Trump's Tweets**：結合折線圖、條形圖、時間軸以及文字處理技術解析特朗普推文
 
-本書所採用的資料可以從台大新聞所「新聞資料分析與視覺呈現」的github repository下載。[R4CSS/data](https://github.com/p4css/R4CSS/tree/master/data)。
+-   **NYT: Net Worth by Age Group**：透過折線圖展示不同年齡層的淨資產趨勢
 
-## Cases in the book
+-   **NYT: Carbon Proportion**：採用樹狀圖展示碳排放比例
 
--   WP: Paid maternity leave
--   Taipei Residential Hot spot: Contingency table, categorical data
--   Trump's tweets: Line plot, Bar chart, timeline, and text processing
--   NYT: Net worth: Line plot
--   NYT: Carbon Proportion: Treemap
--   NYT: Optimism by countries
--   NYT: Population growth
--   Annual Budget of TW government: NA Processing, Treemap
--   Vaccinating proportion by country x year: Proportion
--   NYT: LeBron James's Achievement
+-   **NYT: Optimism by Countries**：分析各國民眾的樂觀程度
+
+-   **NYT: Population Growth**：呈現人口增長趨勢
+
+-   **Annual Budget of TW Government**：通過 NA 處理與樹狀圖解析台灣政府年度預算
+
+-   **Vaccinating Proportion by Country x Year**：展示各國不同年度的疫苗接種比例
+
+-   **NYT: LeBron James's Achievement**：呈現 LeBron James 的成就數據
+
+透過上述案例，讀者將學會如何從原始數據出發，經由清理、轉換、分析，再到最終的圖表視覺化，將複雜的數據故事轉化為直觀易懂的新聞內容。這不僅能提升讀者在數據分析方面的專業能力，更能培養其將數據應用於實際新聞製作的創意思維。

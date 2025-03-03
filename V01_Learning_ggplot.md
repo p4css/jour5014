@@ -21,7 +21,7 @@
 ### (1) `ggplot()` 秀出預備要繪製的繪圖區
 
 
-```r
+``` r
 tibble(a=1:5, b=5:1) %>%
     ggplot()
 ```
@@ -33,7 +33,7 @@ tibble(a=1:5, b=5:1) %>%
 `aes()`會在繪圖區上繪製X與Y軸
 
 
-```r
+``` r
 tibble(a=1:5, b=5:1) %>%
     ggplot() +
     aes(x=a, y=b)
@@ -46,7 +46,7 @@ tibble(a=1:5, b=5:1) %>%
 例如折線圖為為`geom_line()`、X/Y散佈圖為`geom_point()`、長條圖我多會使用`geom_col()`。ggplot繪圖種類除了可以參照前面的[ggplot cheat sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf)之外，可以詢問ChatGPT有哪些常見的類別，甚至可以請他舉例給你測試該繪圖方法。
 
 
-```r
+``` r
 tibble(a=1:5, b=5:1) %>%
     ggplot() +
     aes(x=a, y=b) + 
@@ -58,7 +58,7 @@ tibble(a=1:5, b=5:1) %>%
 亦可同時繪製兩種類型的圖表於同一張圖上。例如以下同時繪製了`geom_line()`與`geom_plot()`。
 
 
-```r
+``` r
 tibble(a=1:5, b=5:1) %>%
     ggplot() +
     aes(x=a, y=b) + 
@@ -81,7 +81,7 @@ tibble(a=1:5, b=5:1) %>%
 這個Dataframe包含三個變數（Category, year, Net_Worth），共66個觀測值。變數「Category」描述的是年齡範圍，包含六個類別（Level）。變數「year」代表年份，從1989年到2019年，以三年為一個週期觀察，共有11個Levels。變數「Net_Worth」則表示在該年齡範圍內的淨資產。從資料可以觀察到，在不同的時間點，不同年齡範圍的人群的財富狀況看似有明顯差異。例如，比較1989年和2019年，45-54歲的年齡組在這段期間內的淨值似乎較35-44歲組要高，這可能反映了隨著年齡增長，個人或家庭的財富累積增加的趨勢。
 
 
-```r
+``` r
 NW <- read_csv("data/interactive_bulletin_charts_agecl_median.csv") %>%
     select(Category, year, Net_Worth)  %>%
     group_by(Category) %>%
@@ -100,7 +100,7 @@ NW <- read_csv("data/interactive_bulletin_charts_agecl_median.csv") %>%
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
-```r
+``` r
 NW %>% head(12)
 ```
 
@@ -143,7 +143,7 @@ NW %>% head(12)
 先將`year`和`Net_worth`分別繪製在X與Y軸上，並用`geom_line()`繪製為折線圖。結果圖表中呈現鋸齒狀的折線，看似有問題，但其實是合理的。因為`year`是一個離散變數，而我們希望每個年齡層一條線的話，那就要照年齡層來分組。也因此，每一年都有有每個年齡層的資料，當我們把「年」作為X軸時，自然同一年就會有數筆不同年齡層的資料，因此才會是鋸齒狀的。
 
 
-```r
+``` r
 NW %>%
     ggplot() + 
     aes(x=year, y=Net_Worth) + 
@@ -155,7 +155,7 @@ NW %>%
 **不同的圖表類型是可以疊加在同一張圖上的**。我們也可以把`geom_point()` 另一種圖表型態加入，也是可以的，兩者的X與Y不相衝突。`geom_line()`、`geom_point()`、`geom_text()`三者會經常伴隨出現。
 
 
-```r
+``` r
 NW %>%
     ggplot() + 
     aes(x=year, y=Net_Worth) + 
@@ -170,7 +170,7 @@ NW %>%
 上圖是我們把多個年齡層的逐年資料畫在同一條折線上，所以會呈現鋸齒狀折現的狀況。但這些年齡層並非在同一條線上呀？因此，我們要根據`Category`這個變數來做分組。
 
 
-```r
+``` r
 NW %>%
     ggplot() + 
     aes(x=year, y=Net_Worth, group=Category) + 
@@ -183,7 +183,7 @@ NW %>%
 如希望不同線條上不一樣的色彩，應指定`color=Category`。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line()
@@ -202,7 +202,7 @@ NW %>%
 ```
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category, fill=Category) + 
     geom_area(position="dodge", alpha=0.2)
@@ -219,7 +219,7 @@ NW %>%
 [ggplot2 line types : How to change line types of a graph in R software? - Easy Guides - Wiki - STHDA](http://www.sthda.com/english/wiki/ggplot2-line-types-how-to-change-line-types-of-a-graph-in-r-software)
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line(size=1, linetype = "dashed", alpha=0.5) + 
@@ -241,7 +241,7 @@ NW %>%
 See more from ggthemes <https://github.com/BTJ01/ggthemes/tree/master/inst/examples>
 
 
-```r
+``` r
 library(ggthemes)
 rescale01 <- function(x) {
     (x - min(x)) / diff(range(x))
@@ -262,7 +262,7 @@ gather(economics, variable, value, -date) %>%
 Titles, labels, and legend **設定標題與X／Y軸標題（法一）**：以下設定了圖表的圖表標題、和X軸與Y軸的軸標題（`xlab`與`ylab`）。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() + 
@@ -277,7 +277,7 @@ NW %>%
 **設定標題與X／Y軸標題（法二）**：這是一次設定圖表標題（`title`）、次標題（`suttitle`）、X軸與Y軸標題的方法。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() +  
@@ -293,7 +293,7 @@ NW %>%
 **調整X軸與Y軸標題位置的**：必須要透過`theme()`來設定`axis.title.x = element_text(hjust=1)`。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() + 
@@ -310,7 +310,7 @@ NW %>%
 **去除X／Y軸標題（不佳）**：直接將空字串Assign給`title`、`x`、與`y`即可。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() + 
@@ -323,7 +323,7 @@ NW %>%
 **去除X／Y軸標題（較佳）**：透過設定`theme()`來調整。可發現透過這種設定方法，原本標題和X／Y軸標題的邊界空間就會被釋放出來。
 
 
-```r
+``` r
 # No extra space for xlab, ylab and title
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
@@ -341,7 +341,7 @@ NW %>%
 調整字型會建議都從`theme()`來做調整，所有圖面上看得到的字都有相對應的變數可以調整字型。例如以下的例子中，把標題的字型大小調整為14粗體、X與Y軸的字型則調整了向右對齊、10粗斜體、顏色為dimgrey。
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() + 
@@ -369,7 +369,7 @@ ggplot也有其圖表主題色調。之前範例的灰色圖表背景就是預�
 -   [bbplot/bbc_style.R at master · bbc/bbplot (github.com)](https://github.com/bbc/bbplot/blob/master/R/bbc_style.R)
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color=Category) + 
     geom_line() + 
@@ -383,7 +383,7 @@ NW %>%
 如果希望所有的圖表都有一致的顏色和排版的調性，可以在一開始編輯Rmd的時候就設計好一套`theme()`並指給一個變數（例如以下的`th`）。
 
 
-```r
+``` r
 th <- theme(plot.title = element_text(size=14, face="bold"),
           axis.title.x = element_text(hjust=1, size=10,
                                       color="dimgrey", 
@@ -412,7 +412,7 @@ Python和R這些程式語言的預設視覺化套件都沒辦法顯示中文，�
 ![](images/paste-A259BC75.png)
 
 
-```r
+``` r
 county <- read_csv("data/tw_population_opendata110N010.csv") %>%
     slice(-1, -(370:375)) %>%
     type_convert() %>%
@@ -447,7 +447,7 @@ county <- read_csv("data/tw_population_opendata110N010.csv") %>%
 下面這是一個長條圖的範例（barplot，不是histogram）。Barplot可以直接指定X軸為縣市（county）和Y軸為總人口數（people_total），但是要用`geom_col()`而非`geom_bar()`。除此之外，Bar的顏色有「面」的特徵，所以若要自訂整條bar的顏色，要用`fill`而非`color`，`color`只會是每條Bar的外框。
 
 
-```r
+``` r
 county %>%
     arrange(desc(people_total)) %>%
     ggplot() + aes(county, people_total) %>%
@@ -461,7 +461,7 @@ county %>%
 舉例來說，中文字型可以是標楷體（BiauKai）、宋體（Songti TC）、黑體（Heiti TC Light）、蘋方（PingFang TC）、Noto（Noto Sans CJK TC）
 
 
-```r
+``` r
 th <- 
   theme(title = element_text(family="Heiti TC Light"),
         text = element_text(family="Heiti TC Light"), 
@@ -484,7 +484,7 @@ county %>%
 調整圖表方向
 
 
-```r
+``` r
 county %>%
   ggplot() + aes(county, people_total) %>%
   geom_col(fill="skyblue") +
@@ -498,7 +498,7 @@ county %>%
 通常`coord_flip()`後往往會希望這些bar會是由上而下排序好的，但用`arrange(desc(people_total)`是無法解決問題的，因為Y軸原本會是照Y軸的刻度排列，而不是Y軸的數值。所以，要被排序的應該是Y軸的「文字」也就是那些縣市。因此，我們需要將該縣市轉為factor（1\~n），並且讓這些縣市被安排的factor數值照`people_total`排列，因此要用`mutate(county = reorder(county, people_total))`。`reorder()`是一個將文字轉factor的函式，但在此特別指定照`people_total`的編排。
 
 
-```r
+``` r
 county %>%
   # arrange(desc(people_total) %>%
   mutate(county = reorder(county, people_total)) %>%
@@ -519,7 +519,7 @@ county %>%
 `scale_color_manual()` 與`scale_fill_manual()`
 
 
-```r
+``` r
 NW %>% 
     ggplot() + aes(year, Net_Worth, color = Category) + 
     geom_line() + 
@@ -539,7 +539,7 @@ NW %>%
 ### 使用gghighlight套件
 
 
-```r
+``` r
 library(gghighlight)
 NW %>%    
     ggplot() + aes(year, Net_Worth, color = Category) + 
@@ -557,7 +557,7 @@ NW %>%
 使用`gghighlight`仍能自己使用`scale_color_manual()`來指定顏色
 
 
-```r
+``` r
 NW %>%    
     ggplot() + aes(year, Net_Worth, color = Category) + 
     geom_line() + 
@@ -584,7 +584,7 @@ NW %>%
 這個方法是在原本的資料並沒有可以作為color或fill的因子，所以自行創建一個要突顯的群組。
 
 
-```r
+``` r
 county %>%
   mutate(group = if_else(county %in% c("新竹縣", "新竹市"), "highlight", "other")) %>%
   mutate(county = reorder(county, people_total)) %>%
@@ -601,7 +601,7 @@ county %>%
 但事實上也可以用`gghighlight`直接達成
 
 
-```r
+``` r
 county %>%
     mutate(county = reorder(county, people_total)) %>%
     ggplot() + aes(county, people_total) %>%

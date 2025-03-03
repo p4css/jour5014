@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 From base R to dplyr | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 From base R to dplyr | R for Data Journalism" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -826,18 +828,18 @@ div.csl-indent {
 </div>
 <div id="tptheft_dplyr" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Taipie Theft Count (base to dplyr)<a href="base2dplyr.html#tptheft_dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="base2dplyr.html#cb342-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb342-2"><a href="base2dplyr.html#cb342-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F) # default options in R ver.&gt; 4.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="base2dplyr.html#cb340-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb340-2"><a href="base2dplyr.html#cb340-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F) # default options in R ver.&gt; 4.0</span></span></code></pre></div>
 <div id="reading-data" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Reading data<a href="base2dplyr.html#reading-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="base2dplyr.html#cb343-1" tabindex="-1"></a><span class="co"># Read by read_csv()</span></span>
-<span id="cb343-2"><a href="base2dplyr.html#cb343-2" tabindex="-1"></a><span class="co"># Will raise error</span></span>
-<span id="cb343-3"><a href="base2dplyr.html#cb343-3" tabindex="-1"></a><span class="co"># Error in make.names(x) : invalid multibyte string at &#39;&lt;bd&gt;s&lt;b8&gt;&lt;b9&gt;&#39;</span></span>
-<span id="cb343-4"><a href="base2dplyr.html#cb343-4" tabindex="-1"></a><span class="co"># df &lt;- read_csv(&quot;data/tp_theft.csv&quot;)</span></span>
-<span id="cb343-5"><a href="base2dplyr.html#cb343-5" tabindex="-1"></a></span>
-<span id="cb343-6"><a href="base2dplyr.html#cb343-6" tabindex="-1"></a><span class="co"># read_csv() with locale = locale(encoding = &quot;Big5&quot;)</span></span>
-<span id="cb343-7"><a href="base2dplyr.html#cb343-7" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb343-8"><a href="base2dplyr.html#cb343-8" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="base2dplyr.html#cb341-1" tabindex="-1"></a><span class="co"># Read by read_csv()</span></span>
+<span id="cb341-2"><a href="base2dplyr.html#cb341-2" tabindex="-1"></a><span class="co"># Will raise error</span></span>
+<span id="cb341-3"><a href="base2dplyr.html#cb341-3" tabindex="-1"></a><span class="co"># Error in make.names(x) : invalid multibyte string at &#39;&lt;bd&gt;s&lt;b8&gt;&lt;b9&gt;&#39;</span></span>
+<span id="cb341-4"><a href="base2dplyr.html#cb341-4" tabindex="-1"></a><span class="co"># df &lt;- read_csv(&quot;data/tp_theft.csv&quot;)</span></span>
+<span id="cb341-5"><a href="base2dplyr.html#cb341-5" tabindex="-1"></a></span>
+<span id="cb341-6"><a href="base2dplyr.html#cb341-6" tabindex="-1"></a><span class="co"># read_csv() with locale = locale(encoding = &quot;Big5&quot;)</span></span>
+<span id="cb341-7"><a href="base2dplyr.html#cb341-7" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb341-8"><a href="base2dplyr.html#cb341-8" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="cleaning-data-i" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Cleaning data I<a href="base2dplyr.html#cleaning-data-i" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -849,37 +851,37 @@ div.csl-indent {
 </ul>
 <div id="without-pipeline-i" class="section level4 hasAnchor" number="6.2.2.1">
 <h4><span class="header-section-number">6.2.2.1</span> (1) Without pipeline I<a href="base2dplyr.html#without-pipeline-i" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="base2dplyr.html#cb344-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">select</span>(df, <span class="at">id =</span> 編號, <span class="at">cat =</span> 案類, <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>)</span>
-<span id="cb344-2"><a href="base2dplyr.html#cb344-2" tabindex="-1"></a></span>
-<span id="cb344-3"><a href="base2dplyr.html#cb344-3" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df1, <span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>)</span>
-<span id="cb344-4"><a href="base2dplyr.html#cb344-4" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df2, <span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>)</span>
-<span id="cb344-5"><a href="base2dplyr.html#cb344-5" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df3, <span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>))</span>
-<span id="cb344-6"><a href="base2dplyr.html#cb344-6" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df4, <span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="base2dplyr.html#cb342-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">select</span>(df, <span class="at">id =</span> 編號, <span class="at">cat =</span> 案類, <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>)</span>
+<span id="cb342-2"><a href="base2dplyr.html#cb342-2" tabindex="-1"></a></span>
+<span id="cb342-3"><a href="base2dplyr.html#cb342-3" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df1, <span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>)</span>
+<span id="cb342-4"><a href="base2dplyr.html#cb342-4" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df2, <span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>)</span>
+<span id="cb342-5"><a href="base2dplyr.html#cb342-5" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df3, <span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>))</span>
+<span id="cb342-6"><a href="base2dplyr.html#cb342-6" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df4, <span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
 </div>
 <div id="without-pipeline-ii" class="section level4 hasAnchor" number="6.2.2.2">
 <h4><span class="header-section-number">6.2.2.2</span> (2) Without pipeline II<a href="base2dplyr.html#without-pipeline-ii" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="base2dplyr.html#cb345-1" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb345-2"><a href="base2dplyr.html#cb345-2" tabindex="-1"></a></span>
-<span id="cb345-3"><a href="base2dplyr.html#cb345-3" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">select</span>(df, <span class="at">id =</span> 編號, <span class="at">cat =</span> 案類, <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>)</span>
-<span id="cb345-4"><a href="base2dplyr.html#cb345-4" tabindex="-1"></a></span>
-<span id="cb345-5"><a href="base2dplyr.html#cb345-5" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>)</span>
-<span id="cb345-6"><a href="base2dplyr.html#cb345-6" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>)</span>
-<span id="cb345-7"><a href="base2dplyr.html#cb345-7" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>))</span>
-<span id="cb345-8"><a href="base2dplyr.html#cb345-8" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="base2dplyr.html#cb343-1" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb343-2"><a href="base2dplyr.html#cb343-2" tabindex="-1"></a></span>
+<span id="cb343-3"><a href="base2dplyr.html#cb343-3" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">select</span>(df, <span class="at">id =</span> 編號, <span class="at">cat =</span> 案類, <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>)</span>
+<span id="cb343-4"><a href="base2dplyr.html#cb343-4" tabindex="-1"></a></span>
+<span id="cb343-5"><a href="base2dplyr.html#cb343-5" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>)</span>
+<span id="cb343-6"><a href="base2dplyr.html#cb343-6" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>)</span>
+<span id="cb343-7"><a href="base2dplyr.html#cb343-7" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>))</span>
+<span id="cb343-8"><a href="base2dplyr.html#cb343-8" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(selected_df, <span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
 </div>
 <div id="with-pipeline" class="section level4 hasAnchor" number="6.2.2.3">
 <h4><span class="header-section-number">6.2.2.3</span> (3) With pipeline<a href="base2dplyr.html#with-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="base2dplyr.html#cb346-1" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb346-2"><a href="base2dplyr.html#cb346-2" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb346-3"><a href="base2dplyr.html#cb346-3" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">id =</span> 編號, </span>
-<span id="cb346-4"><a href="base2dplyr.html#cb346-4" tabindex="-1"></a>           <span class="at">cat =</span> 案類, </span>
-<span id="cb346-5"><a href="base2dplyr.html#cb346-5" tabindex="-1"></a>           <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, </span>
-<span id="cb346-6"><a href="base2dplyr.html#cb346-6" tabindex="-1"></a>           <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, </span>
-<span id="cb346-7"><a href="base2dplyr.html#cb346-7" tabindex="-1"></a>           <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb346-8"><a href="base2dplyr.html#cb346-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb346-9"><a href="base2dplyr.html#cb346-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb346-10"><a href="base2dplyr.html#cb346-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb346-11"><a href="base2dplyr.html#cb346-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="base2dplyr.html#cb344-1" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb344-2"><a href="base2dplyr.html#cb344-2" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb344-3"><a href="base2dplyr.html#cb344-3" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">id =</span> 編號, </span>
+<span id="cb344-4"><a href="base2dplyr.html#cb344-4" tabindex="-1"></a>           <span class="at">cat =</span> 案類, </span>
+<span id="cb344-5"><a href="base2dplyr.html#cb344-5" tabindex="-1"></a>           <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, </span>
+<span id="cb344-6"><a href="base2dplyr.html#cb344-6" tabindex="-1"></a>           <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, </span>
+<span id="cb344-7"><a href="base2dplyr.html#cb344-7" tabindex="-1"></a>           <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb344-8"><a href="base2dplyr.html#cb344-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb344-9"><a href="base2dplyr.html#cb344-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb344-10"><a href="base2dplyr.html#cb344-10" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">area =</span> <span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb344-11"><a href="base2dplyr.html#cb344-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="cleaning-data-ii" class="section level3 hasAnchor" number="6.2.3">
@@ -887,14 +889,14 @@ div.csl-indent {
 <ul>
 <li>Filtering out irrelevant data records</li>
 </ul>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="base2dplyr.html#cb347-1" tabindex="-1"></a><span class="co"># readr::guess_encoding(&quot;data/tp_theft.csv&quot;)</span></span>
-<span id="cb347-2"><a href="base2dplyr.html#cb347-2" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> selected_df <span class="sc">%&gt;%</span></span>
-<span id="cb347-3"><a href="base2dplyr.html#cb347-3" tabindex="-1"></a>    <span class="co"># count(year) %&gt;% View</span></span>
-<span id="cb347-4"><a href="base2dplyr.html#cb347-4" tabindex="-1"></a>    <span class="fu">filter</span>(county <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb347-5"><a href="base2dplyr.html#cb347-5" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">104</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb347-6"><a href="base2dplyr.html#cb347-6" tabindex="-1"></a>    <span class="co"># count(time) %&gt;% View</span></span>
-<span id="cb347-7"><a href="base2dplyr.html#cb347-7" tabindex="-1"></a>    <span class="co"># count(location) %&gt;%</span></span>
-<span id="cb347-8"><a href="base2dplyr.html#cb347-8" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>area <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;中和市&quot;</span>, <span class="st">&quot;板橋市&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="base2dplyr.html#cb345-1" tabindex="-1"></a><span class="co"># readr::guess_encoding(&quot;data/tp_theft.csv&quot;)</span></span>
+<span id="cb345-2"><a href="base2dplyr.html#cb345-2" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> selected_df <span class="sc">%&gt;%</span></span>
+<span id="cb345-3"><a href="base2dplyr.html#cb345-3" tabindex="-1"></a>    <span class="co"># count(year) %&gt;% View</span></span>
+<span id="cb345-4"><a href="base2dplyr.html#cb345-4" tabindex="-1"></a>    <span class="fu">filter</span>(county <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb345-5"><a href="base2dplyr.html#cb345-5" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">104</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb345-6"><a href="base2dplyr.html#cb345-6" tabindex="-1"></a>    <span class="co"># count(time) %&gt;% View</span></span>
+<span id="cb345-7"><a href="base2dplyr.html#cb345-7" tabindex="-1"></a>    <span class="co"># count(location) %&gt;%</span></span>
+<span id="cb345-8"><a href="base2dplyr.html#cb345-8" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>area <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;中和市&quot;</span>, <span class="st">&quot;板橋市&quot;</span>))</span></code></pre></div>
 </div>
 <div id="long-to-wide-form" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Long to wide form<a href="base2dplyr.html#long-to-wide-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -902,48 +904,48 @@ div.csl-indent {
 <li><code>count()</code> two variables</li>
 <li><code>pivot_wider()</code> spread one variable as columns to wide form</li>
 </ul>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="base2dplyr.html#cb348-1" tabindex="-1"></a><span class="co"># count() then pivot_wider()</span></span>
-<span id="cb348-2"><a href="base2dplyr.html#cb348-2" tabindex="-1"></a>df.wide <span class="ot">&lt;-</span> filtered_df <span class="sc">%&gt;%</span> </span>
-<span id="cb348-3"><a href="base2dplyr.html#cb348-3" tabindex="-1"></a>  <span class="fu">count</span>(time, area) <span class="sc">%&gt;%</span></span>
-<span id="cb348-4"><a href="base2dplyr.html#cb348-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> area, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb348-5"><a href="base2dplyr.html#cb348-5" tabindex="-1"></a>??pivot_wider</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="base2dplyr.html#cb346-1" tabindex="-1"></a><span class="co"># count() then pivot_wider()</span></span>
+<span id="cb346-2"><a href="base2dplyr.html#cb346-2" tabindex="-1"></a>df.wide <span class="ot">&lt;-</span> filtered_df <span class="sc">%&gt;%</span> </span>
+<span id="cb346-3"><a href="base2dplyr.html#cb346-3" tabindex="-1"></a>  <span class="fu">count</span>(time, area) <span class="sc">%&gt;%</span></span>
+<span id="cb346-4"><a href="base2dplyr.html#cb346-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> area, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb346-5"><a href="base2dplyr.html#cb346-5" tabindex="-1"></a>??pivot_wider</span></code></pre></div>
 </div>
 <div id="setting-time-as-row.name-for-mosaicplot" class="section level3 hasAnchor" number="6.2.5">
 <h3><span class="header-section-number">6.2.5</span> Setting time as row.name for mosaicplot<a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="base2dplyr.html#cb349-1" tabindex="-1"></a><span class="fu">row.names</span>(df.wide) <span class="ot">&lt;-</span> df.wide<span class="sc">$</span>time</span>
-<span id="cb349-2"><a href="base2dplyr.html#cb349-2" tabindex="-1"></a>df.wide<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="base2dplyr.html#cb350-1" tabindex="-1"></a><span class="co"># Specify fonts for Chinese</span></span>
-<span id="cb350-2"><a href="base2dplyr.html#cb350-2" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;)) </span></span>
-<span id="cb350-3"><a href="base2dplyr.html#cb350-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>)) <span class="co"># for mac</span></span>
-<span id="cb350-4"><a href="base2dplyr.html#cb350-4" tabindex="-1"></a></span>
-<span id="cb350-5"><a href="base2dplyr.html#cb350-5" tabindex="-1"></a><span class="co"># Specify colors</span></span>
-<span id="cb350-6"><a href="base2dplyr.html#cb350-6" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
-<span id="cb350-7"><a href="base2dplyr.html#cb350-7" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
-<span id="cb350-8"><a href="base2dplyr.html#cb350-8" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
-<span id="cb350-9"><a href="base2dplyr.html#cb350-9" tabindex="-1"></a></span>
-<span id="cb350-10"><a href="base2dplyr.html#cb350-10" tabindex="-1"></a><span class="co"># mosaicplot()</span></span>
-<span id="cb350-11"><a href="base2dplyr.html#cb350-11" tabindex="-1"></a><span class="fu">mosaicplot</span>(df.wide, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
-<span id="cb350-12"><a href="base2dplyr.html#cb350-12" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="base2dplyr.html#cb347-1" tabindex="-1"></a><span class="fu">row.names</span>(df.wide) <span class="ot">&lt;-</span> df.wide<span class="sc">$</span>time</span>
+<span id="cb347-2"><a href="base2dplyr.html#cb347-2" tabindex="-1"></a>df.wide<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="base2dplyr.html#cb348-1" tabindex="-1"></a><span class="co"># Specify fonts for Chinese</span></span>
+<span id="cb348-2"><a href="base2dplyr.html#cb348-2" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;)) </span></span>
+<span id="cb348-3"><a href="base2dplyr.html#cb348-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>)) <span class="co"># for mac</span></span>
+<span id="cb348-4"><a href="base2dplyr.html#cb348-4" tabindex="-1"></a></span>
+<span id="cb348-5"><a href="base2dplyr.html#cb348-5" tabindex="-1"></a><span class="co"># Specify colors</span></span>
+<span id="cb348-6"><a href="base2dplyr.html#cb348-6" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
+<span id="cb348-7"><a href="base2dplyr.html#cb348-7" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
+<span id="cb348-8"><a href="base2dplyr.html#cb348-8" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
+<span id="cb348-9"><a href="base2dplyr.html#cb348-9" tabindex="-1"></a></span>
+<span id="cb348-10"><a href="base2dplyr.html#cb348-10" tabindex="-1"></a><span class="co"># mosaicplot()</span></span>
+<span id="cb348-11"><a href="base2dplyr.html#cb348-11" tabindex="-1"></a><span class="fu">mosaicplot</span>(df.wide, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
+<span id="cb348-12"><a href="base2dplyr.html#cb348-12" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
 <p><img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="clean-version" class="section level3 hasAnchor" number="6.2.6">
 <h3><span class="header-section-number">6.2.6</span> Clean version<a href="base2dplyr.html#clean-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="base2dplyr.html#cb351-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb351-2"><a href="base2dplyr.html#cb351-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span>
-<span id="cb351-3"><a href="base2dplyr.html#cb351-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span>
-<span id="cb351-4"><a href="base2dplyr.html#cb351-4" tabindex="-1"></a></span>
-<span id="cb351-5"><a href="base2dplyr.html#cb351-5" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb351-6"><a href="base2dplyr.html#cb351-6" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">id =</span> 編號, </span>
-<span id="cb351-7"><a href="base2dplyr.html#cb351-7" tabindex="-1"></a>           <span class="at">cat =</span> 案類,</span>
-<span id="cb351-8"><a href="base2dplyr.html#cb351-8" tabindex="-1"></a>           <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, </span>
-<span id="cb351-9"><a href="base2dplyr.html#cb351-9" tabindex="-1"></a>           <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, </span>
-<span id="cb351-10"><a href="base2dplyr.html#cb351-10" tabindex="-1"></a>           <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-11"><a href="base2dplyr.html#cb351-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-12"><a href="base2dplyr.html#cb351-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-13"><a href="base2dplyr.html#cb351-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">area =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb351-14"><a href="base2dplyr.html#cb351-14" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb351-15"><a href="base2dplyr.html#cb351-15" tabindex="-1"></a></span>
-<span id="cb351-16"><a href="base2dplyr.html#cb351-16" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(year)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="base2dplyr.html#cb349-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb349-2"><a href="base2dplyr.html#cb349-2" tabindex="-1"></a><span class="co"># options(stringsAsFactors = F)</span></span>
+<span id="cb349-3"><a href="base2dplyr.html#cb349-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span>
+<span id="cb349-4"><a href="base2dplyr.html#cb349-4" tabindex="-1"></a></span>
+<span id="cb349-5"><a href="base2dplyr.html#cb349-5" tabindex="-1"></a>selected_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb349-6"><a href="base2dplyr.html#cb349-6" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">id =</span> 編號, </span>
+<span id="cb349-7"><a href="base2dplyr.html#cb349-7" tabindex="-1"></a>           <span class="at">cat =</span> 案類,</span>
+<span id="cb349-8"><a href="base2dplyr.html#cb349-8" tabindex="-1"></a>           <span class="at">date =</span> <span class="st">`</span><span class="at">發生日期</span><span class="st">`</span>, </span>
+<span id="cb349-9"><a href="base2dplyr.html#cb349-9" tabindex="-1"></a>           <span class="at">time =</span> <span class="st">`</span><span class="at">發生時段</span><span class="st">`</span>, </span>
+<span id="cb349-10"><a href="base2dplyr.html#cb349-10" tabindex="-1"></a>           <span class="at">location =</span> <span class="st">`</span><span class="at">發生地點</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb349-11"><a href="base2dplyr.html#cb349-11" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> date <span class="sc">%/%</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb349-12"><a href="base2dplyr.html#cb349-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">month =</span> date <span class="sc">%/%</span> <span class="dv">100</span> <span class="sc">%%</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb349-13"><a href="base2dplyr.html#cb349-13" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">area =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(location, <span class="dv">4</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb349-14"><a href="base2dplyr.html#cb349-14" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">county =</span> stringr<span class="sc">::</span><span class="fu">str_sub</span>(location, <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb349-15"><a href="base2dplyr.html#cb349-15" tabindex="-1"></a></span>
+<span id="cb349-16"><a href="base2dplyr.html#cb349-16" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(year)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 9 × 2
 ##    year     n
 ##   &lt;dbl&gt; &lt;int&gt;
@@ -956,7 +958,7 @@ div.csl-indent {
 ## 7   109   304
 ## 8   110   189
 ## 9   111    31</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="base2dplyr.html#cb353-1" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(time) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="base2dplyr.html#cb351-1" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(time) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 10 × 2
 ##    time      n
 ##    &lt;chr&gt; &lt;int&gt;
@@ -970,7 +972,7 @@ div.csl-indent {
 ##  8 09~11     6
 ##  9 10~12   338
 ## 10 11~03     1</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="base2dplyr.html#cb355-1" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(time) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="base2dplyr.html#cb353-1" tabindex="-1"></a>selected_df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(time) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 10 × 9
 ##       id cat         date time  location                 year month area  county
 ##    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
@@ -984,56 +986,64 @@ div.csl-indent {
 ##  8    92 住宅竊盜 1040210 00~02 臺北市北投區大同路200…    104     2 北投… 臺北市
 ##  9    95 住宅竊盜 1040212 00~02 臺北市萬華區萬大路493…    104     2 萬華… 臺北市
 ## 10   106 住宅竊盜 1040216 00~02 臺北市信義區吳興街269…    104     2 信義… 臺北市</code></pre>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="base2dplyr.html#cb357-1" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> selected_df <span class="sc">%&gt;%</span></span>
-<span id="cb357-2"><a href="base2dplyr.html#cb357-2" tabindex="-1"></a>    <span class="co"># count(year) %&gt;% View</span></span>
-<span id="cb357-3"><a href="base2dplyr.html#cb357-3" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">104</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb357-4"><a href="base2dplyr.html#cb357-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;03~05&quot;</span>, <span class="st">&quot;05~07&quot;</span>, <span class="st">&quot;09~11&quot;</span>, <span class="st">&quot;11~13&quot;</span>, <span class="st">&quot;15~17&quot;</span>, <span class="st">&quot;17~19&quot;</span>, <span class="st">&quot;18~21&quot;</span>, <span class="st">&quot;21~23&quot;</span>, <span class="st">&quot;23~01&quot;</span>))</span>
-<span id="cb357-5"><a href="base2dplyr.html#cb357-5" tabindex="-1"></a>    <span class="co"># count(time) %&gt;% View</span></span>
-<span id="cb357-6"><a href="base2dplyr.html#cb357-6" tabindex="-1"></a>    <span class="co"># count(location) %&gt;%</span></span>
-<span id="cb357-7"><a href="base2dplyr.html#cb357-7" tabindex="-1"></a>    <span class="co"># filter(!area %in% c(&quot;中和市&quot;, &quot;板橋市&quot;))</span></span>
-<span id="cb357-8"><a href="base2dplyr.html#cb357-8" tabindex="-1"></a></span>
-<span id="cb357-9"><a href="base2dplyr.html#cb357-9" tabindex="-1"></a>df.wide <span class="ot">&lt;-</span> filtered_df <span class="sc">%&gt;%</span> </span>
-<span id="cb357-10"><a href="base2dplyr.html#cb357-10" tabindex="-1"></a>    <span class="fu">count</span>(time, area) <span class="sc">%&gt;%</span></span>
-<span id="cb357-11"><a href="base2dplyr.html#cb357-11" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> area, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb357-12"><a href="base2dplyr.html#cb357-12" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
-<span id="cb357-13"><a href="base2dplyr.html#cb357-13" tabindex="-1"></a></span>
-<span id="cb357-14"><a href="base2dplyr.html#cb357-14" tabindex="-1"></a><span class="fu">row.names</span>(df.wide) <span class="ot">&lt;-</span> df.wide<span class="sc">$</span>time</span>
-<span id="cb357-15"><a href="base2dplyr.html#cb357-15" tabindex="-1"></a>df.wide<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb357-16"><a href="base2dplyr.html#cb357-16" tabindex="-1"></a></span>
-<span id="cb357-17"><a href="base2dplyr.html#cb357-17" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>)) <span class="co"># for mac</span></span>
-<span id="cb357-18"><a href="base2dplyr.html#cb357-18" tabindex="-1"></a></span>
-<span id="cb357-19"><a href="base2dplyr.html#cb357-19" tabindex="-1"></a><span class="co"># Specify colors</span></span>
-<span id="cb357-20"><a href="base2dplyr.html#cb357-20" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
-<span id="cb357-21"><a href="base2dplyr.html#cb357-21" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
-<span id="cb357-22"><a href="base2dplyr.html#cb357-22" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
-<span id="cb357-23"><a href="base2dplyr.html#cb357-23" tabindex="-1"></a></span>
-<span id="cb357-24"><a href="base2dplyr.html#cb357-24" tabindex="-1"></a><span class="co"># mosaicplot()</span></span>
-<span id="cb357-25"><a href="base2dplyr.html#cb357-25" tabindex="-1"></a><span class="fu">mosaicplot</span>(df.wide, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
-<span id="cb357-26"><a href="base2dplyr.html#cb357-26" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="base2dplyr.html#cb355-1" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> selected_df <span class="sc">%&gt;%</span></span>
+<span id="cb355-2"><a href="base2dplyr.html#cb355-2" tabindex="-1"></a>    <span class="co"># count(year) %&gt;% View</span></span>
+<span id="cb355-3"><a href="base2dplyr.html#cb355-3" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">104</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb355-4"><a href="base2dplyr.html#cb355-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;03~05&quot;</span>, <span class="st">&quot;05~07&quot;</span>, <span class="st">&quot;09~11&quot;</span>, <span class="st">&quot;11~13&quot;</span>, <span class="st">&quot;15~17&quot;</span>, <span class="st">&quot;17~19&quot;</span>, <span class="st">&quot;18~21&quot;</span>, <span class="st">&quot;21~23&quot;</span>, <span class="st">&quot;23~01&quot;</span>))</span>
+<span id="cb355-5"><a href="base2dplyr.html#cb355-5" tabindex="-1"></a>    <span class="co"># count(time) %&gt;% View</span></span>
+<span id="cb355-6"><a href="base2dplyr.html#cb355-6" tabindex="-1"></a>    <span class="co"># count(location) %&gt;%</span></span>
+<span id="cb355-7"><a href="base2dplyr.html#cb355-7" tabindex="-1"></a>    <span class="co"># filter(!area %in% c(&quot;中和市&quot;, &quot;板橋市&quot;))</span></span>
+<span id="cb355-8"><a href="base2dplyr.html#cb355-8" tabindex="-1"></a></span>
+<span id="cb355-9"><a href="base2dplyr.html#cb355-9" tabindex="-1"></a>df.wide <span class="ot">&lt;-</span> filtered_df <span class="sc">%&gt;%</span> </span>
+<span id="cb355-10"><a href="base2dplyr.html#cb355-10" tabindex="-1"></a>    <span class="fu">count</span>(time, area) <span class="sc">%&gt;%</span></span>
+<span id="cb355-11"><a href="base2dplyr.html#cb355-11" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> area, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb355-12"><a href="base2dplyr.html#cb355-12" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
+<span id="cb355-13"><a href="base2dplyr.html#cb355-13" tabindex="-1"></a></span>
+<span id="cb355-14"><a href="base2dplyr.html#cb355-14" tabindex="-1"></a><span class="fu">row.names</span>(df.wide) <span class="ot">&lt;-</span> df.wide<span class="sc">$</span>time</span>
+<span id="cb355-15"><a href="base2dplyr.html#cb355-15" tabindex="-1"></a>df.wide<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb355-16"><a href="base2dplyr.html#cb355-16" tabindex="-1"></a></span>
+<span id="cb355-17"><a href="base2dplyr.html#cb355-17" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>)) <span class="co"># for mac</span></span>
+<span id="cb355-18"><a href="base2dplyr.html#cb355-18" tabindex="-1"></a></span>
+<span id="cb355-19"><a href="base2dplyr.html#cb355-19" tabindex="-1"></a><span class="co"># Specify colors</span></span>
+<span id="cb355-20"><a href="base2dplyr.html#cb355-20" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
+<span id="cb355-21"><a href="base2dplyr.html#cb355-21" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
+<span id="cb355-22"><a href="base2dplyr.html#cb355-22" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
+<span id="cb355-23"><a href="base2dplyr.html#cb355-23" tabindex="-1"></a></span>
+<span id="cb355-24"><a href="base2dplyr.html#cb355-24" tabindex="-1"></a><span class="co"># mosaicplot()</span></span>
+<span id="cb355-25"><a href="base2dplyr.html#cb355-25" tabindex="-1"></a><span class="fu">mosaicplot</span>(df.wide, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
+<span id="cb355-26"><a href="base2dplyr.html#cb355-26" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)  </span></code></pre></div>
 <p><img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 
 </div>
 </div>
 <div id="maternity_dplyr" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Paid Maternity Leave<a href="base2dplyr.html#maternity_dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="visual-strategies" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Visual Strategies<a href="base2dplyr.html#visual-strategies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>這個例子之所以有趣在於記者選定了「美國沒有產假支薪」作為新聞的賣點。在呈現的時候，就必須要盡可能地凸顯這樣的情形。一般來說，會繪製世界地圖來呈現美國是目前少數沒有產假支薪的國家之一（在本資料197個國家中僅有9國目前沒有給付產假薪水。其實該筆來自<a href="https://www.worldpolicycenter.org/">Word Policy Analysis Center</a>資料含有自1995年至2003年共19年的資料（本案例即就是下載該中心所分享的調查資料，不用申請帳號）。於是該專題的作者便構思利用過去到現在的資料來凸顯美國在這方面一直沒有改變。</p>
-<p>但要處理197個國家的在19年間的變化相當不易。例如若為每年繪製一張世界地圖，然後以動畫或動態卷軸來凸顯這19年間美國的變化，也會因為國家數過多而難以聚焦在作者想突顯的美國。</p>
-<p>而這便是作者在視覺化上相當具有巧思的地方。由於產假給付程度在該調查中分為五個等級，包含0週、0-14週、14-25週、26-51週、52週以上等。作者便從給付程度最高的層級開始做長條圖，共五個階層的子圖。而每個階層的子圖，作者又將該層級的圖分為「保持不變（Stay Same）」和「持續增加（Increase）」兩組。經過這樣的分組，會得到9個子圖。分別為等級5（保持不變、持續增加）、等級4（保持不變、持續增加）、…、等級1（保持不變）。讀者在看的時候，會依次看到給付程度最高到最低的國家，也可以看到哪些國家在這19年間制度有所變化（通常是增加）。但看到最後的時候，便會看到美國的情形，即是無產假給付。</p>
+<p>這個案例「<a href="https://www.washingtonpost.com/news/worldviews/wp/2016/08/13/the-world-is-getting-better-at-paid-maternity-leave-the-u-s-is-not/?tid=sm_tw#comments">The world is getting better at paid maternity leave. The U.S. is not</a>」為華盛頓郵報記者Melissa Etehad和Jeremy C.F. Lin在2016年8月13日所撰寫的新聞。記者選定了「美國沒有產假支薪」作為新聞切入點。在呈現的時候，就必須要盡可能地凸顯這樣的情形。一般來說，會繪製世界地圖且用顏色來凸顯美國是目前少數沒有產假支薪的國家之一如下：</p>
 <p><img src="https://www.washingtonpost.com/blogs/worldviews/files/2016/08/matleave-map.jpg" /></p>
+<div id="the-data-1" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> The Data<a href="base2dplyr.html#the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>該筆資料來自位於UCLA公衛學院的<a href="http://www.worldpolicycenter.org/">World Policy Analysis Center</a>，其包含兩個壓縮檔，分別為橫斷式資料與部分資料的縱貫性資料。就產假支薪而言，其調查了198個國家的政策，將支薪週數分為五個等級，並蒐錄了1995年至2013年間的變化（matleave_95~matleave13）。通常在資料分析時，應先閱讀資料了解資料。首先要先觀察資料，開啟資料後概略如下：</p>
+<p><img src="images/clipboard-265029472.png" /></p>
+<p>打開資料後便先觀察資料的「列（Row）」是什麼？又有哪些「欄（Column）」？通常在列上的會是逐筆的觀察值，如前述資料每一筆是個國家，而欄上面則是每個觀察所觀察到的變項，例如國名縮寫（iso2、iso3）、地區（region）、經濟等級（wb_econ）、和本案例所要觀察的產假支付等級。但產假支付等級可以看從matleave_95到matleave_13共19欄是19年的資料，數值為1到5，空白的通常是該年沒記錄到的缺漏值。通常統計資料如果是用等第來紀錄的話，會給編碼表，也就是1到5分別代表哪種等級、哪種程度。這份資料也有給編碼表如下，產假給付程度在該調查中分為五個等級，包含<strong>1</strong>（0週）、<strong>2</strong>（0-14週）、<strong>3</strong>（14-25週）、<strong>4</strong>（26-51週）、<strong>5</strong>（52週以上）等。</p>
+<p><img src="images/clipboard-3879755206.png" width="425" /></p>
 </div>
-<div id="code-by-base-r" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Code by base R<a href="base2dplyr.html#code-by-base-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="base2dplyr.html#cb358-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb358-2"><a href="base2dplyr.html#cb358-2" tabindex="-1"></a><span class="co"># readxl::read_excel() to import the xls file</span></span>
-<span id="cb358-3"><a href="base2dplyr.html#cb358-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
-<span id="cb358-4"><a href="base2dplyr.html#cb358-4" tabindex="-1"></a></span>
-<span id="cb358-5"><a href="base2dplyr.html#cb358-5" tabindex="-1"></a><span class="co"># select iso3, and matleave columns by index</span></span>
-<span id="cb358-6"><a href="base2dplyr.html#cb358-6" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
-<span id="cb358-7"><a href="base2dplyr.html#cb358-7" tabindex="-1"></a></span>
-<span id="cb358-8"><a href="base2dplyr.html#cb358-8" tabindex="-1"></a><span class="co"># str() to inspect the data structure of </span></span>
-<span id="cb358-9"><a href="base2dplyr.html#cb358-9" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
+<div id="advanced-visual-strategies" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Advanced Visual Strategies<a href="base2dplyr.html#advanced-visual-strategies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>但如果只是繪製地圖，卻又略顯單薄。而該筆來自<a href="https://www.worldpolicycenter.org/">Word Policy Analysis Center</a>資料其實含有自1995年至2003年共19年的資料（本案例即就是下載該中心所分享的調查資料，不用申請帳號）。於是該專題的作者便利用這些歷史資料，進一步凸顯美國在這方面一直沒有改變，始終都是保持0週，即使其他各國逐漸在調高產假的給付程度。但要處理197個國家的在19年間的變化相當不易。若為每年繪製一張世界地圖，然後以動畫或動態卷軸來凸顯這19年間美國的變化，也會因為國家數過多而難以聚焦在作者想突顯的美國。</p>
+<p>而這便是作者在視覺化上相當具有巧思的地方。作者便從給付程度最高的層級開始做長條圖，共五個階層的子圖。而每個階層的子圖，作者又將該層級的圖分為「保持不變（Stay Same）」和「持續增加（Increase）」兩組。經過這樣的分組，會得到9個子圖。分別為等級5（保持不變、持續增加）、等級4（保持不變、持續增加）、…、等級1（保持不變）。讀者在看的時候，會依次看到給付程度最高到最低的國家，也可以看到哪些國家在這19年間制度有所變化（通常是增加）。但看到最後的時候，便會看到美國的情形，即是無產假給付。</p>
+<p><img src="images/clipboard-1939265210.png" width="441" /></p>
+</div>
+<div id="code-by-base-r" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Code by base R<a href="base2dplyr.html#code-by-base-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="base2dplyr.html#cb356-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb356-2"><a href="base2dplyr.html#cb356-2" tabindex="-1"></a><span class="co"># readxl::read_excel() to import the xls file</span></span>
+<span id="cb356-3"><a href="base2dplyr.html#cb356-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T)</span>
+<span id="cb356-4"><a href="base2dplyr.html#cb356-4" tabindex="-1"></a></span>
+<span id="cb356-5"><a href="base2dplyr.html#cb356-5" tabindex="-1"></a><span class="co"># select iso3, and matleave columns by index</span></span>
+<span id="cb356-6"><a href="base2dplyr.html#cb356-6" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> df[ , <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)]</span>
+<span id="cb356-7"><a href="base2dplyr.html#cb356-7" tabindex="-1"></a></span>
+<span id="cb356-8"><a href="base2dplyr.html#cb356-8" tabindex="-1"></a><span class="co"># str() to inspect the data structure of </span></span>
+<span id="cb356-9"><a href="base2dplyr.html#cb356-9" tabindex="-1"></a><span class="fu">str</span>(matleave)</span></code></pre></div>
 <pre><code>## tibble [197 × 20] (S3: tbl_df/tbl/data.frame)
 ##  $ iso3       : chr [1:197] &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;AND&quot; ...
 ##  $ matleave_95: num [1:197] 2 5 3 2 2 2 2 3 1 5 ...
@@ -1055,138 +1065,138 @@ div.csl-indent {
 ##  $ matleave_11: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ##  $ matleave_12: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...
 ##  $ matleave_13: num [1:197] 2 5 3 3 2 2 2 5 3 5 ...</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="base2dplyr.html#cb360-1" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
-<span id="cb360-2"><a href="base2dplyr.html#cb360-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb360-3"><a href="base2dplyr.html#cb360-3" tabindex="-1"></a></span>
-<span id="cb360-4"><a href="base2dplyr.html#cb360-4" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb360-5"><a href="base2dplyr.html#cb360-5" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span> <span class="sc">==</span> <span class="dv">5</span>, ]</span>
-<span id="cb360-6"><a href="base2dplyr.html#cb360-6" tabindex="-1"></a></span>
-<span id="cb360-7"><a href="base2dplyr.html#cb360-7" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
-<span id="cb360-8"><a href="base2dplyr.html#cb360-8" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span> <span class="sc">==</span> <span class="dv">5</span>,]</span>
-<span id="cb360-9"><a href="base2dplyr.html#cb360-9" tabindex="-1"></a></span>
-<span id="cb360-10"><a href="base2dplyr.html#cb360-10" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb360-11"><a href="base2dplyr.html#cb360-11" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
-<span id="cb360-12"><a href="base2dplyr.html#cb360-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
-<span id="cb360-13"><a href="base2dplyr.html#cb360-13" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
-<span id="cb360-14"><a href="base2dplyr.html#cb360-14" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
-<span id="cb360-15"><a href="base2dplyr.html#cb360-15" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
-<span id="cb360-16"><a href="base2dplyr.html#cb360-16" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="base2dplyr.html#cb358-1" tabindex="-1"></a><span class="co"># select all NA cells and assign 0 to them</span></span>
+<span id="cb358-2"><a href="base2dplyr.html#cb358-2" tabindex="-1"></a>matleave[<span class="fu">is.na</span>(matleave)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb358-3"><a href="base2dplyr.html#cb358-3" tabindex="-1"></a></span>
+<span id="cb358-4"><a href="base2dplyr.html#cb358-4" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb358-5"><a href="base2dplyr.html#cb358-5" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> matleave[matleave<span class="sc">$</span><span class="st">&#39;matleave_13&#39;</span> <span class="sc">==</span> <span class="dv">5</span>, ]</span>
+<span id="cb358-6"><a href="base2dplyr.html#cb358-6" tabindex="-1"></a></span>
+<span id="cb358-7"><a href="base2dplyr.html#cb358-7" tabindex="-1"></a><span class="co"># filter rows by condition</span></span>
+<span id="cb358-8"><a href="base2dplyr.html#cb358-8" tabindex="-1"></a>m55<span class="ot">&lt;-</span> m5[m5<span class="sc">$</span><span class="st">&#39;matleave_95&#39;</span> <span class="sc">==</span> <span class="dv">5</span>,]</span>
+<span id="cb358-9"><a href="base2dplyr.html#cb358-9" tabindex="-1"></a></span>
+<span id="cb358-10"><a href="base2dplyr.html#cb358-10" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb358-11"><a href="base2dplyr.html#cb358-11" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">mai=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb358-12"><a href="base2dplyr.html#cb358-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m55))){</span>
+<span id="cb358-13"><a href="base2dplyr.html#cb358-13" tabindex="-1"></a>    <span class="fu">barplot</span>(<span class="fu">unlist</span>(m55[i,<span class="sc">-</span><span class="dv">1</span>]),</span>
+<span id="cb358-14"><a href="base2dplyr.html#cb358-14" tabindex="-1"></a>            <span class="at">border=</span><span class="cn">NA</span>, <span class="at">space=</span><span class="dv">0</span>,<span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">yaxt=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>))</span>
+<span id="cb358-15"><a href="base2dplyr.html#cb358-15" tabindex="-1"></a>    <span class="fu">title</span>(m55[i,<span class="dv">1</span>], <span class="at">line =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">cex.main=</span><span class="dv">3</span>)</span>
+<span id="cb358-16"><a href="base2dplyr.html#cb358-16" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
-<div id="code-by-dplyr" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> Code by dplyr<a href="base2dplyr.html#code-by-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="code-by-dplyr" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Code by dplyr<a href="base2dplyr.html#code-by-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>首先，程式碼使用 <strong><code>filter()</code></strong> 函數篩選出符合條件的列，其中 <strong><code>matleave_13</code></strong> 和 <strong><code>matleave_95</code></strong> 兩欄都必須等於 5。接著，<strong><code>pivot_longer()</code></strong> 函數將資料框轉換成長格式（long format），將從第二欄到第二十欄的資料整合到兩個欄位 <strong><code>year</code></strong> 和 <strong><code>degree</code></strong> 中。這裡 <strong><code>names_to</code></strong> 參數指定新欄位 <strong><code>year</code></strong> 的名稱，<strong><code>values_to</code></strong> 參數指定新欄位 <strong><code>degree</code></strong> 的名稱，<strong><code>cols</code></strong> 參數指定要整合的欄位範圍。</p>
 <p>接下來，<strong><code>replace_na()</code></strong> 函數將 <strong><code>degree</code></strong> 欄位中的 NA 值替換為 0。然後，<strong><code>mutate()</code></strong> 函數使用 <strong><code>as.POSIXct()</code></strong> 函數將 <strong><code>year</code></strong> 欄位中的字串轉換為日期時間格式，再使用 <strong><code>year()</code></strong> 函數從日期時間中提取年份，最終將年份資訊存儲回 <strong><code>year</code></strong> 欄位中。其中 “matleave_%y” 是日期時間格式字串，其中 “%y” 表示兩位數的年份（例如 “13”）。這樣就將 “matleave_13”、“matleave_14” 等字串轉換成了對應的日期時間。</p>
 <p><strong><code>ggplot()</code></strong> 函數創建了一個空的 ggplot2 圖形物件，使用 <strong><code>aes()</code></strong> 函數定義了 x 軸 <strong><code>year</code></strong> 和 y 軸 <strong><code>degree</code></strong> 的變數名稱。<strong><code>geom_col()</code></strong> 函數指定用長條圖呈現資料，設置了顏色和填充顏色。<strong><code>ylim()</code></strong> 函數限制了 y 軸的範圍，將其設置為 0 到 5，無論y軸資料有沒有到5或者是否超過5，都會限定在0到5之間。<strong><code>facet_wrap()</code></strong> 函數則根據 <strong><code>iso3</code></strong> 欄位生成多個子圖。最後，<strong><code>theme_void()</code></strong> 函數將圖形主題設置為空白，不帶任何邊框或背景。</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="base2dplyr.html#cb361-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="base2dplyr.html#cb359-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="base2dplyr.html#cb363-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb363-2"><a href="base2dplyr.html#cb363-2" tabindex="-1"></a></span>
-<span id="cb363-3"><a href="base2dplyr.html#cb363-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb363-4"><a href="base2dplyr.html#cb363-4" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T) <span class="sc">%&gt;%</span> </span>
-<span id="cb363-5"><a href="base2dplyr.html#cb363-5" tabindex="-1"></a>  <span class="fu">select</span>(iso3, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)</span>
-<span id="cb363-6"><a href="base2dplyr.html#cb363-6" tabindex="-1"></a></span>
-<span id="cb363-7"><a href="base2dplyr.html#cb363-7" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span></span>
-<span id="cb363-8"><a href="base2dplyr.html#cb363-8" tabindex="-1"></a>  <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb363-9"><a href="base2dplyr.html#cb363-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;degree&quot;</span>, <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb363-10"><a href="base2dplyr.html#cb363-10" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">degree =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb363-11"><a href="base2dplyr.html#cb363-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(<span class="fu">as.POSIXct</span>(<span class="fu">strptime</span>(year, <span class="st">&quot;matleave_%y&quot;</span>)))) <span class="sc">%&gt;%</span></span>
-<span id="cb363-12"><a href="base2dplyr.html#cb363-12" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb363-13"><a href="base2dplyr.html#cb363-13" tabindex="-1"></a>  <span class="fu">aes</span>(year, degree) <span class="sc">+</span> </span>
-<span id="cb363-14"><a href="base2dplyr.html#cb363-14" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb363-15"><a href="base2dplyr.html#cb363-15" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb363-16"><a href="base2dplyr.html#cb363-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> iso3) <span class="sc">+</span></span>
-<span id="cb363-17"><a href="base2dplyr.html#cb363-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="base2dplyr.html#cb361-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb361-2"><a href="base2dplyr.html#cb361-2" tabindex="-1"></a></span>
+<span id="cb361-3"><a href="base2dplyr.html#cb361-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb361-4"><a href="base2dplyr.html#cb361-4" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T) <span class="sc">%&gt;%</span> </span>
+<span id="cb361-5"><a href="base2dplyr.html#cb361-5" tabindex="-1"></a>  <span class="fu">select</span>(iso3, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)</span>
+<span id="cb361-6"><a href="base2dplyr.html#cb361-6" tabindex="-1"></a></span>
+<span id="cb361-7"><a href="base2dplyr.html#cb361-7" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span></span>
+<span id="cb361-8"><a href="base2dplyr.html#cb361-8" tabindex="-1"></a>  <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb361-9"><a href="base2dplyr.html#cb361-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;degree&quot;</span>, <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb361-10"><a href="base2dplyr.html#cb361-10" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">degree =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb361-11"><a href="base2dplyr.html#cb361-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(<span class="fu">as.POSIXct</span>(<span class="fu">strptime</span>(year, <span class="st">&quot;matleave_%y&quot;</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb361-12"><a href="base2dplyr.html#cb361-12" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb361-13"><a href="base2dplyr.html#cb361-13" tabindex="-1"></a>  <span class="fu">aes</span>(year, degree) <span class="sc">+</span> </span>
+<span id="cb361-14"><a href="base2dplyr.html#cb361-14" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb361-15"><a href="base2dplyr.html#cb361-15" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb361-16"><a href="base2dplyr.html#cb361-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> iso3) <span class="sc">+</span></span>
+<span id="cb361-17"><a href="base2dplyr.html#cb361-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>下圖為原始資料的截圖，<code>matleave_95</code>代表1995年的資料，每個變數的數據1至5分別代表產假時給付薪水的月數區間共有五個區間。區間大小通常需要查看編碼簿來獲取定義。</p>
 <p><img src="images/paste-63576241.png" /></p>
 <p>這類資料由於採用數字（其實是Factor）來替代類別，通常隨著數據會釋出該調查的編碼簿（Code Book），這個案例的編碼（1至5）如下：</p>
 <p><img src="images/paste-7156C64F.png" /></p>
 </div>
-<div id="generating-each" class="section level3 hasAnchor" number="6.3.4">
-<h3><span class="header-section-number">6.3.4</span> Generating each<a href="base2dplyr.html#generating-each" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="generating-each" class="section level3 hasAnchor" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Generating each<a href="base2dplyr.html#generating-each" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>在 R 中，函式是一個可重複使用的程式碼塊，可以接受輸入參數，並返回計算結果。函式可以簡化程式碼，使其更易於維護和修改。<strong>為了不要重複相同的程式碼</strong>，以下程式碼將視覺化的部分改用「函式」來進行撰寫，再輸入不同子圖所要使用的資料來進行繪圖。</p>
 <p>在這個程式碼中，<strong><code>generating_plot()</code></strong> 是一個自定義的函式，它接受一個資料框 <strong><code>df</code></strong> 作為輸入參數。成對大括號內部為該函式所執行的步驟，包含<code>pivot_longer()</code>、<code>replace_na()</code>等。輸出則是一個 ggplot2 圖形物件，其中包含了將這些資料轉換為長條圖的視覺化表示。</p>
 <p>在 R 中，創建一個函式需要使用 <strong><code>function()</code></strong> 關鍵字。一個最簡單的函式可能只包含一個輸入參數和一個返回值，例如：<code>my_function &lt;- function(x) {return(x^2)}</code>。在這個例子中，函式名稱是 <strong><code>my_function</code></strong>，它有一個輸入參數 <strong><code>x</code></strong>，函式主體是 <strong><code>x^2</code></strong>，表示將輸入的 <strong><code>x</code></strong> 參數平方。函式主體的執行結果通過 <strong><code>return()</code></strong> 函數返回，並可以存儲到變數中，例如：<code>result &lt;- my_function(3)</code>。函式的定義亦可包含多個輸入參數，可以用數字、list、或Data.Frame等當成輸入參數。</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="base2dplyr.html#cb364-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb364-2"><a href="base2dplyr.html#cb364-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb364-3"><a href="base2dplyr.html#cb364-3" tabindex="-1"></a></span>
-<span id="cb364-4"><a href="base2dplyr.html#cb364-4" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb364-5"><a href="base2dplyr.html#cb364-5" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T) <span class="sc">%&gt;%</span> </span>
-<span id="cb364-6"><a href="base2dplyr.html#cb364-6" tabindex="-1"></a>    <span class="fu">select</span>(iso3, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)</span>
-<span id="cb364-7"><a href="base2dplyr.html#cb364-7" tabindex="-1"></a></span>
-<span id="cb364-8"><a href="base2dplyr.html#cb364-8" tabindex="-1"></a>generating_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb364-9"><a href="base2dplyr.html#cb364-9" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb364-10"><a href="base2dplyr.html#cb364-10" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;degree&quot;</span>, <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb364-11"><a href="base2dplyr.html#cb364-11" tabindex="-1"></a>    <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">degree =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb364-12"><a href="base2dplyr.html#cb364-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(<span class="fu">as.POSIXct</span>(<span class="fu">strptime</span>(year, <span class="st">&quot;matleave_%y&quot;</span>)))) <span class="sc">%&gt;%</span></span>
-<span id="cb364-13"><a href="base2dplyr.html#cb364-13" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb364-14"><a href="base2dplyr.html#cb364-14" tabindex="-1"></a>    <span class="fu">aes</span>(year, degree) <span class="sc">+</span> </span>
-<span id="cb364-15"><a href="base2dplyr.html#cb364-15" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb364-16"><a href="base2dplyr.html#cb364-16" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span> </span>
-<span id="cb364-17"><a href="base2dplyr.html#cb364-17" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> iso3) <span class="sc">+</span></span>
-<span id="cb364-18"><a href="base2dplyr.html#cb364-18" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
-<span id="cb364-19"><a href="base2dplyr.html#cb364-19" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust=</span><span class="fl">0.5</span>),</span>
-<span id="cb364-20"><a href="base2dplyr.html#cb364-20" tabindex="-1"></a>          <span class="at">strip.placement =</span> <span class="st">&quot;inside&quot;</span></span>
-<span id="cb364-21"><a href="base2dplyr.html#cb364-21" tabindex="-1"></a>          )  </span>
-<span id="cb364-22"><a href="base2dplyr.html#cb364-22" tabindex="-1"></a>}</span>
-<span id="cb364-23"><a href="base2dplyr.html#cb364-23" tabindex="-1"></a></span>
-<span id="cb364-24"><a href="base2dplyr.html#cb364-24" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="base2dplyr.html#cb362-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb362-2"><a href="base2dplyr.html#cb362-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb362-3"><a href="base2dplyr.html#cb362-3" tabindex="-1"></a></span>
+<span id="cb362-4"><a href="base2dplyr.html#cb362-4" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb362-5"><a href="base2dplyr.html#cb362-5" tabindex="-1"></a>matleave <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/WORLD-MACHE_Gender_6.8.15.xls&quot;</span>, <span class="st">&quot;Sheet1&quot;</span>, <span class="at">col_names=</span>T) <span class="sc">%&gt;%</span> </span>
+<span id="cb362-6"><a href="base2dplyr.html#cb362-6" tabindex="-1"></a>    <span class="fu">select</span>(iso3, <span class="dv">6</span><span class="sc">:</span><span class="dv">24</span>)</span>
+<span id="cb362-7"><a href="base2dplyr.html#cb362-7" tabindex="-1"></a></span>
+<span id="cb362-8"><a href="base2dplyr.html#cb362-8" tabindex="-1"></a>generating_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb362-9"><a href="base2dplyr.html#cb362-9" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb362-10"><a href="base2dplyr.html#cb362-10" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;degree&quot;</span>, <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb362-11"><a href="base2dplyr.html#cb362-11" tabindex="-1"></a>    <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">degree =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb362-12"><a href="base2dplyr.html#cb362-12" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(<span class="fu">as.POSIXct</span>(<span class="fu">strptime</span>(year, <span class="st">&quot;matleave_%y&quot;</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb362-13"><a href="base2dplyr.html#cb362-13" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb362-14"><a href="base2dplyr.html#cb362-14" tabindex="-1"></a>    <span class="fu">aes</span>(year, degree) <span class="sc">+</span> </span>
+<span id="cb362-15"><a href="base2dplyr.html#cb362-15" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;royalblue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb362-16"><a href="base2dplyr.html#cb362-16" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb362-17"><a href="base2dplyr.html#cb362-17" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> iso3) <span class="sc">+</span></span>
+<span id="cb362-18"><a href="base2dplyr.html#cb362-18" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb362-19"><a href="base2dplyr.html#cb362-19" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb362-20"><a href="base2dplyr.html#cb362-20" tabindex="-1"></a>          <span class="at">strip.placement =</span> <span class="st">&quot;inside&quot;</span></span>
+<span id="cb362-21"><a href="base2dplyr.html#cb362-21" tabindex="-1"></a>          )  </span>
+<span id="cb362-22"><a href="base2dplyr.html#cb362-22" tabindex="-1"></a>}</span>
+<span id="cb362-23"><a href="base2dplyr.html#cb362-23" tabindex="-1"></a></span>
+<span id="cb362-24"><a href="base2dplyr.html#cb362-24" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="base2dplyr.html#cb365-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="base2dplyr.html#cb363-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="base2dplyr.html#cb366-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="base2dplyr.html#cb364-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="base2dplyr.html#cb367-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">!=</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="base2dplyr.html#cb365-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">!=</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="base2dplyr.html#cb368-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="base2dplyr.html#cb366-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-5.png" width="672" /></p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="base2dplyr.html#cb369-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">!=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="base2dplyr.html#cb367-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">!=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-6.png" width="672" /></p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="base2dplyr.html#cb370-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="base2dplyr.html#cb368-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-7.png" width="672" /></p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="base2dplyr.html#cb371-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="base2dplyr.html#cb369-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-8.png" width="672" /></p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="base2dplyr.html#cb372-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="base2dplyr.html#cb370-1" tabindex="-1"></a>matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span></code></pre></div>
 <p><img src="R22_paid_maternity_dplyr_files/figure-html/unnamed-chunk-3-9.png" width="672" /></p>
 </div>
-<div id="gathering-subplots-by-cowplot" class="section level3 hasAnchor" number="6.3.5">
-<h3><span class="header-section-number">6.3.5</span> Gathering subplots by cowplot<a href="base2dplyr.html#gathering-subplots-by-cowplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="gathering-subplots-by-cowplot" class="section level3 hasAnchor" number="6.3.6">
+<h3><span class="header-section-number">6.3.6</span> Gathering subplots by cowplot<a href="base2dplyr.html#gathering-subplots-by-cowplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>這段程式碼的作用是將多個 ggplot2 圖形物件組合成一個網格，然後將這個網格圖形儲存為一個圖像文件。首先，這段程式碼定義了多個變數，如 <strong><code>plot_row1</code></strong>、<strong><code>plot_row2</code></strong>、<strong><code>plot_row3</code></strong> 等，每個變數都是一個網格圖形。這些變數通過 <strong><code>plot_grid()</code></strong> 函數來創建，這個函數可以將多個 ggplot2 圖形物件組合成一個網格。在 <strong><code>plot_grid()</code></strong> 函數中，可以設置 <strong><code>labels</code></strong> 參數來為每個子圖添加標籤。</p>
 <p>然後，這些變數通過 <strong><code>plot_grid()</code></strong> 函數再次組合，形成一個更大的網格圖形。這裡使用 <strong><code>ncol = 1</code></strong> 參數將多個網格排列成一列。最後，使用 <strong><code>ggsave()</code></strong> 函數將這個網格圖形儲存為一個圖像文件。在這個例子中，圖像文件的名稱是 “test.png”，大小為 10 英寸 x 30 英寸，分辨率為 300 DPI。</p>
 <p>總的來說，這段程式碼的作用是將多個 ggplot2 圖形物件組合成一個網格，並將這個網格圖形儲存為一個圖像文件。這樣做可以方便地進行圖像導出和共享，並且可以將多個圖形合併在一起進行比較和分析。</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="base2dplyr.html#cb373-1" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb373-2"><a href="base2dplyr.html#cb373-2" tabindex="-1"></a></span>
-<span id="cb373-3"><a href="base2dplyr.html#cb373-3" tabindex="-1"></a>plot55 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-4"><a href="base2dplyr.html#cb373-4" tabindex="-1"></a>plot05 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-5"><a href="base2dplyr.html#cb373-5" tabindex="-1"></a>plot44 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-6"><a href="base2dplyr.html#cb373-6" tabindex="-1"></a>plot04 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">!=</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-7"><a href="base2dplyr.html#cb373-7" tabindex="-1"></a>plot33 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-8"><a href="base2dplyr.html#cb373-8" tabindex="-1"></a>plot03 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">!=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-9"><a href="base2dplyr.html#cb373-9" tabindex="-1"></a>plot22 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-10"><a href="base2dplyr.html#cb373-10" tabindex="-1"></a>plot02 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-11"><a href="base2dplyr.html#cb373-11" tabindex="-1"></a>plot11 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
-<span id="cb373-12"><a href="base2dplyr.html#cb373-12" tabindex="-1"></a></span>
-<span id="cb373-13"><a href="base2dplyr.html#cb373-13" tabindex="-1"></a></span>
-<span id="cb373-14"><a href="base2dplyr.html#cb373-14" tabindex="-1"></a>plot_row1 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot55, plot05, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 5&#39;</span>, <span class="st">&#39;INCREASE TO 5&#39;</span>))</span>
-<span id="cb373-15"><a href="base2dplyr.html#cb373-15" tabindex="-1"></a>plot_row2 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot44, plot04, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 4&#39;</span>, <span class="st">&#39;INCREASE TO 4&#39;</span>))</span>
-<span id="cb373-16"><a href="base2dplyr.html#cb373-16" tabindex="-1"></a>plot_row3 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot33, plot03, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 3&#39;</span>, <span class="st">&#39;INCREASE TO 3&#39;</span>))</span>
-<span id="cb373-17"><a href="base2dplyr.html#cb373-17" tabindex="-1"></a>plot_row4 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot22, plot02, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 2&#39;</span>, <span class="st">&#39;INCREASE TO 2&#39;</span>))</span>
-<span id="cb373-18"><a href="base2dplyr.html#cb373-18" tabindex="-1"></a></span>
-<span id="cb373-19"><a href="base2dplyr.html#cb373-19" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(</span>
-<span id="cb373-20"><a href="base2dplyr.html#cb373-20" tabindex="-1"></a>  plot_row1, plot_row2, plot_row3, plot_row4, plot11, </span>
-<span id="cb373-21"><a href="base2dplyr.html#cb373-21" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span></span>
-<span id="cb373-22"><a href="base2dplyr.html#cb373-22" tabindex="-1"></a>)</span>
-<span id="cb373-23"><a href="base2dplyr.html#cb373-23" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;test.png&quot;</span>, final_plot, <span class="at">width=</span><span class="dv">10</span>, <span class="at">height=</span><span class="dv">30</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="base2dplyr.html#cb371-1" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb371-2"><a href="base2dplyr.html#cb371-2" tabindex="-1"></a></span>
+<span id="cb371-3"><a href="base2dplyr.html#cb371-3" tabindex="-1"></a>plot55 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">==</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-4"><a href="base2dplyr.html#cb371-4" tabindex="-1"></a>plot05 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">5</span>, matleave_95 <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-5"><a href="base2dplyr.html#cb371-5" tabindex="-1"></a>plot44 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-6"><a href="base2dplyr.html#cb371-6" tabindex="-1"></a>plot04 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">4</span>, matleave_95 <span class="sc">!=</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-7"><a href="base2dplyr.html#cb371-7" tabindex="-1"></a>plot33 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-8"><a href="base2dplyr.html#cb371-8" tabindex="-1"></a>plot03 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">3</span>, matleave_95 <span class="sc">!=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-9"><a href="base2dplyr.html#cb371-9" tabindex="-1"></a>plot22 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-10"><a href="base2dplyr.html#cb371-10" tabindex="-1"></a>plot02 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">2</span>, matleave_95 <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-11"><a href="base2dplyr.html#cb371-11" tabindex="-1"></a>plot11 <span class="ot">&lt;-</span> matleave <span class="sc">%&gt;%</span> <span class="fu">filter</span>(matleave_13 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">generating_plot</span>()</span>
+<span id="cb371-12"><a href="base2dplyr.html#cb371-12" tabindex="-1"></a></span>
+<span id="cb371-13"><a href="base2dplyr.html#cb371-13" tabindex="-1"></a></span>
+<span id="cb371-14"><a href="base2dplyr.html#cb371-14" tabindex="-1"></a>plot_row1 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot55, plot05, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 5&#39;</span>, <span class="st">&#39;INCREASE TO 5&#39;</span>))</span>
+<span id="cb371-15"><a href="base2dplyr.html#cb371-15" tabindex="-1"></a>plot_row2 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot44, plot04, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 4&#39;</span>, <span class="st">&#39;INCREASE TO 4&#39;</span>))</span>
+<span id="cb371-16"><a href="base2dplyr.html#cb371-16" tabindex="-1"></a>plot_row3 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot33, plot03, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 3&#39;</span>, <span class="st">&#39;INCREASE TO 3&#39;</span>))</span>
+<span id="cb371-17"><a href="base2dplyr.html#cb371-17" tabindex="-1"></a>plot_row4 <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(plot22, plot02, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;STAY 2&#39;</span>, <span class="st">&#39;INCREASE TO 2&#39;</span>))</span>
+<span id="cb371-18"><a href="base2dplyr.html#cb371-18" tabindex="-1"></a></span>
+<span id="cb371-19"><a href="base2dplyr.html#cb371-19" tabindex="-1"></a>final_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(</span>
+<span id="cb371-20"><a href="base2dplyr.html#cb371-20" tabindex="-1"></a>  plot_row1, plot_row2, plot_row3, plot_row4, plot11, </span>
+<span id="cb371-21"><a href="base2dplyr.html#cb371-21" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span></span>
+<span id="cb371-22"><a href="base2dplyr.html#cb371-22" tabindex="-1"></a>)</span>
+<span id="cb371-23"><a href="base2dplyr.html#cb371-23" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;test.png&quot;</span>, final_plot, <span class="at">width=</span><span class="dv">10</span>, <span class="at">height=</span><span class="dv">30</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
 
 </div>
 </div>

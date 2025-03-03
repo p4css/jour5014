@@ -15,7 +15,7 @@
 -   `row_number()`產生每列的編號，所以這邊就直接把每列的編號視為每篇文章的id，可以保持該id的唯一性。當你在進行文本探勘或資料分析時，為每篇文章分配一個唯一的ID是非常重要的。唯一的ID確保每篇文章都有獨一無二的標識符號。這對於跟踪和識別特定文章非常重要，特別是當你處理大量的文本資料時。在進行資料合併時，唯一的ID可用於將不同來源的資料準確地匹配和合併在一起。這是非常實用的，尤其當你需要整合來自多個來源的文本資料時，例如合併多個資料集或者在不同時間點上進行的數據採集。
 
 
-```r
+``` r
 news.df <- readRDS("data/typhoon.rds") %>%
     mutate(doc_id = row_number()) %>%
   drop_na(title)
@@ -40,7 +40,7 @@ news.df <- readRDS("data/typhoon.rds") %>%
     10. 感嘆詞：嗯、哦、啊、呀、吧、喔等。
 
 
-```r
+``` r
 # segment_not to avoid to be segmented by jeiba cutter
 segment_not <- c("第卅六條", "第卅八條", "蘇南成", "災前", "災後", "莫拉克", "颱風", "應變中心", "停班停課", "停課", "停班", "停駛", "路樹", "里長", "賀伯", "採收", "菜價", "蘇迪", "受災戶", "颱風警報", "韋恩", "台東縣", "馬總統", "豪大雨", "梅姬", "台東", "台北市政府", "工務段", "漂流木", "陳菊", "台南縣", "卡玫基", "魚塭", "救助金", "陳情", "全省", "強颱", "中颱", "輕颱", "小林村", "野溪", "蚵民", "農委會", "來襲", "中油公司", "蔣總統經國", "颱風天", "土石流", "蘇迪勒", "水利署", "陳說", "颱風假", "颱風地區", "台灣", "臺灣", "柯羅莎", "八八風災", "紓困","傅崑萁", "傅崐萁","台中", "文旦柚", "鄉鎮市公所", "鄉鎮市", "房屋稅", "高雄", "未達", "台灣省", "台北市")
 
@@ -51,11 +51,11 @@ cutter <- worker()
 new_user_word(cutter, segment_not)
 ```
 
-```{.output}
+``` output
 ## [1] TRUE
 ```
 
-```r
+``` r
 # loading Chinese stop words
 stopWords <- readRDS("data/stopWords.rds")
 
@@ -97,7 +97,7 @@ Tokenization（分詞）在文本探勘的過程中是將文本轉換為更小�
 在`segment(x, cutter)`後會產生一個多詞的向量。亦即每一格就是一個向量，你可以把它印出來看看。可以用`unnest()`將**`word`**列中的字詞向量展開，使每個單詞成為一列。這樣可以將每個單詞視為一個觀察值，方便後續的處理。
 
 
-```r
+``` r
 # news.df$time %>% summary
 
 tokenized.df <- news.df %>% 
@@ -111,19 +111,19 @@ tokenized.df <- news.df %>%
 tokenized.df %>% select(title, word) %>% head()
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 2
-##   title                                                                   word  
-##   <chr>                                                                   <list>
-## 1 "昨天上班的人沒加班費也不補假\n依法 員工無權利要求•體恤 雇主可酌情嘉惠" <chr> 
-## 2 "走過桑梓千田\n東台水保之旅"                                            <chr> 
-## 3 "走過桑梓千田\n東台水保之旅"                                            <chr> 
-## 4 "總統祝福大家新春如意\n期勉迎接挑戰贏得勝利"                            <chr> 
-## 5 "總統至為關切颱風災害\n電囑儘速展開救災重建"                            <chr> 
-## 6 "總統關懷澎湖災情 俞揆冒雨巡視災區\n指示搶修道路•優先供應水電 復建資金… <chr>
+##   title                                                                    word 
+##   <chr>                                                                    <lis>
+## 1 "昨天上班的人沒加班費也不補假\n依法 員工無權利要求•體恤 雇主可酌情嘉惠"  <chr>
+## 2 "走過桑梓千田\n東台水保之旅"                                             <chr>
+## 3 "走過桑梓千田\n東台水保之旅"                                             <chr>
+## 4 "總統祝福大家新春如意\n期勉迎接挑戰贏得勝利"                             <chr>
+## 5 "總統至為關切颱風災害\n電囑儘速展開救災重建"                             <chr>
+## 6 "總統關懷澎湖災情 俞揆冒雨巡視災區\n指示搶修道路•優先供應水電 復建資金經費•統籌支援撥用"…… <chr>
 ```
 
-```r
+``` r
 # unnest() to spread character into a new word variable
 # filter out stop words
 # filter out alphabetical and numeric characters
@@ -137,16 +137,16 @@ unnested.df <- tokenized.df %>%
 unnested.df %>% head
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 3
 ##   doc_id text                                                              word 
 ##    <int> <chr>                                                             <chr>
-## 1      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 昨天 
-## 2      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 颱風…
-## 3      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 北部 
-## 4      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 地區 
-## 5      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 機關 
-## 6      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業… 學校
+## 1      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 昨天 
+## 2      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 颱風天……
+## 3      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 北部 
+## 4      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 地區 
+## 5      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 機關 
+## 6      1 昨天颱風天，北部各地區機關、學校經主管機關宣佈放假一天。民營事業可比照辦理，但昨天照常上班的員工，雇主依法並無加倍發給工資的義務… 學校
 ```
 
 ## Exploring wording features
@@ -170,7 +170,7 @@ unnested.df %>% head
 3.  分佈斜率：對數尺度下的power-law distribution，通常可以通過斜率來描述分佈的特性。斜率表示每個X單位變化對應的Y單位變化，或者說在對數尺度下，表示對數Y值相對於對數X值的變化率。如果數據點遵循power-law distribution，斜率會呈現相對恆定的特性。
 
 
-```r
+``` r
 word.count <- tokenized.df %>%
     unnest(word) %>%
     count(word, sort=T) %>%
@@ -188,7 +188,7 @@ word.count %>%
 
 <img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
-```r
+``` r
 word.count %>%
     count(n, sort=T) %>%
     ggplot(aes(n, nn)) + 
@@ -204,7 +204,7 @@ word.count %>%
 早、近期用字差異
 
 
-```r
+``` r
 cat_word.tf <- tokenized.df %>%
   unnest(word) %>%
   count(cat, word) %>%
@@ -215,7 +215,7 @@ cat_word.tf <- tokenized.df %>%
 ```
 
 
-```r
+``` r
 early_lat_ratio <- cat_word.tf %>%
 	filter(n>1) %>%
   pivot_wider(names_from = cat, values_from = n, values_fill = 0) %>%
@@ -227,7 +227,7 @@ early_lat_ratio <- cat_word.tf %>%
 ```
 
 
-```r
+``` r
 early_lat_ratio %>%
 	group_by(logratio > 0) %>%
 	top_n(20, abs(logratio)) %>%
@@ -247,7 +247,7 @@ early_lat_ratio %>%
 ### Keyness by scatter
 
 
-```r
+``` r
 frequency <- cat_word.tf %>%
     filter(n>3) %>%
     group_by(cat) %>%
@@ -260,7 +260,7 @@ frequency <- cat_word.tf %>%
 ```
 
 
-```r
+``` r
 library(scales)
 frequency %>%
 ggplot(aes(x = early, y = lat, color = abs(early - lat))) + 
@@ -296,7 +296,7 @@ TF-IDF 的應用主要有兩個方面：
 ### Term-frequency
 
 
-```r
+``` r
 word.tf <- tokenized.df %>%
     unnest(word) %>%
     count(cat, word, sort=T) %>%
@@ -307,7 +307,7 @@ word.tf <- tokenized.df %>%
 -   如果是跑histrogram因為不是常態分佈而是power-law分佈，通常會看不出什麼來
 
 
-```r
+``` r
 ggplot(word.tf, aes(tf, fill=cat)) + 
     geom_histogram(show.legend = F) + 
     xlim(NA, 0.0009) + 
@@ -321,7 +321,7 @@ ggplot(word.tf, aes(tf, fill=cat)) +
 -   加上rank後可以看出最高rank到最後的差異，中段差不多，但是，相較於晚近的文章，早期文章用過很少次的字比較多，但用過很多次的字比較少。（是否可推論用字越來越貧乏？）
 
 
-```r
+``` r
 word.tf %>%
     ggplot(aes(rank, tf, color=cat)) + 
     geom_line(size=1.1, alpha=0.5) + 
@@ -332,7 +332,7 @@ word.tf %>%
 <img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
-```r
+``` r
 rank_subset <- word.tf %>%
     filter(rank < 500,
            rank > 10)
@@ -341,12 +341,12 @@ lm_result <- lm(log10(tf) ~ log10(rank), data = rank_subset)
 lm_result$coefficients[[1]]
 ```
 
-```{.output}
+``` output
 ## [1] -1.739581
 ```
 
 
-```r
+``` r
 word.tf %>% 
   ggplot(aes(rank, tf, color = cat)) + 
   geom_abline(intercept = lm_result$coefficients[[1]], 
@@ -370,7 +370,7 @@ TF-IDF計算結果可以將原本的詞頻（TF）分布從一個長尾分佈轉
 透過這樣的過濾和選擇，我們可以得到一個更精簡且具有代表性的詞彙集合，這些詞彙能夠更好地描述和區分不同的文章。因此，使用TF-IDF計算結果進行這樣的處理，可以在文本分析和信息檢索等領域中提供更有價值的結果。
 
 
-```r
+``` r
 news_count <- tokenized.df %>%
     unnest(word) %>%
     count(doc_id, word) %>%
@@ -386,7 +386,7 @@ news_count %>%
 <img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
-```r
+``` r
 news_count %>% 
     left_join(news.df, by="doc_id") %>%
     filter(!(word %in% c("NA"))) %>%

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 R Basic | R for Data Journalism</title>
+  <title>Chapter 2 Using R | R for Data Journalism</title>
   <meta name="description" content="For my Class teaching how to make data news reports" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 R Basic | R for Data Journalism" />
+  <meta property="og:title" content="Chapter 2 Using R | R for Data Journalism" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="For my Class teaching how to make data news reports" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 R Basic | R for Data Journalism" />
+  <meta name="twitter:title" content="Chapter 2 Using R | R for Data Journalism" />
   
   <meta name="twitter:description" content="For my Class teaching how to make data news reports" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2024-04-22" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -66,7 +67,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -76,7 +77,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -138,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -175,29 +177,30 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#preloaded-tool-kits"><i class="fa fa-check"></i><b>1.1</b> Preloaded tool kits</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#dataset-used-in-the-book"><i class="fa fa-check"></i><b>1.2</b> Dataset used in the book</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#cases-in-the-book"><i class="fa fa-check"></i><b>1.3</b> Cases in the book</a></li>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#書中數據集"><i class="fa fa-check"></i><b>1.0.1</b> <strong>書中數據集</strong></a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#案例介紹"><i class="fa fa-check"></i><b>1.0.2</b> <strong>案例介紹</strong></a></li>
 </ul></li>
 <li class="part"><span><b>I R BASIC</b></span></li>
-<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> R Basic</a>
+<li class="chapter" data-level="2" data-path="basic.html"><a href="basic.html"><i class="fa fa-check"></i><b>2</b> Using R</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="basic.html"><a href="basic.html#using-rstudio"><i class="fa fa-check"></i><b>2.1</b> Using RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#rstudio-interface"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Interface</a></li>
-<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#writing-r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> Writing R Markdown</a></li>
-<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#installing-third-party-packages"><i class="fa fa-check"></i><b>2.1.3</b> Installing third-party packages</a></li>
-<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#code-comment"><i class="fa fa-check"></i><b>2.1.4</b> Code “Comment”</a></li>
+<li class="chapter" data-level="2.1.1" data-path="basic.html"><a href="basic.html#介面概覽"><i class="fa fa-check"></i><b>2.1.1</b> 介面概覽</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic.html"><a href="basic.html#撰寫r-markdown"><i class="fa fa-check"></i><b>2.1.2</b> 撰寫R Markdown</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic.html"><a href="basic.html#常用快捷鍵"><i class="fa fa-check"></i><b>2.1.3</b> 常用快捷鍵</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic.html"><a href="basic.html#安裝與載入第三方套件"><i class="fa fa-check"></i><b>2.1.4</b> 安裝與載入第三方套件</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic.html"><a href="basic.html#r-預載套件介紹"><i class="fa fa-check"></i><b>2.1.5</b> R 預載套件介紹</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic.html"><a href="basic.html#程式碼註解技巧"><i class="fa fa-check"></i><b>2.1.6</b> 程式碼註解技巧</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#first-attempt"><i class="fa fa-check"></i><b>2.2</b> First Attempt</a>
+<li class="chapter" data-level="2.2" data-path="basic.html"><a href="basic.html#practical-examples"><i class="fa fa-check"></i><b>2.2</b> Practical Examples</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#loading-open-data-from-the-moi"><i class="fa fa-check"></i><b>2.2.1</b> Loading Open Data from the MOI</a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#obtaining-taipei-youbike-v2-realtime-data"><i class="fa fa-check"></i><b>2.2.2</b> Obtaining Taipei Youbike (v2) Realtime Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#reading-taipei-residential-burglary-data"><i class="fa fa-check"></i><b>2.2.3</b> Reading Taipei Residential Burglary Data</a></li>
+<li class="chapter" data-level="2.2.1" data-path="basic.html"><a href="basic.html#從內政部開放資料讀取資料"><i class="fa fa-check"></i><b>2.2.1</b> 從內政部開放資料讀取資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic.html"><a href="basic.html#取得臺北-youbike-v2-即時資料"><i class="fa fa-check"></i><b>2.2.2</b> 取得臺北 YouBike (v2) 即時資料</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic.html"><a href="basic.html#讀取臺北住宅竊盜點位資訊"><i class="fa fa-check"></i><b>2.2.3</b> 讀取臺北住宅竊盜點位資訊</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#r-qa"><i class="fa fa-check"></i><b>2.3</b> R Q&amp;A</a>
+<li class="chapter" data-level="2.3" data-path="basic.html"><a href="basic.html#qa"><i class="fa fa-check"></i><b>2.3</b> Q&amp;A</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#encoding-and-language"><i class="fa fa-check"></i><b>2.3.1</b> Encoding and Language</a></li>
+<li class="chapter" data-level="2.3.1" data-path="basic.html"><a href="basic.html#編碼與語系設定"><i class="fa fa-check"></i><b>2.3.1</b> 編碼與語系設定</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic.html"><a href="basic.html#rmdr-notebook無法儲存"><i class="fa fa-check"></i><b>2.3.2</b> RMD/R Notebook無法儲存</a></li>
 </ul></li>
 </ul></li>
@@ -232,7 +235,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="r-basic.html"><a href="r-basic.html#character-operations"><i class="fa fa-check"></i><b>3.5</b> Character operations</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> Dataframe</a>
+<li class="chapter" data-level="4" data-path="dataframe.html"><a href="dataframe.html"><i class="fa fa-check"></i><b>4</b> DataFrame</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="dataframe.html"><a href="dataframe.html#基本操作"><i class="fa fa-check"></i><b>4.1</b> 基本操作</a>
 <ul>
@@ -243,21 +246,19 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="dataframe.html"><a href="dataframe.html#簡易繪圖"><i class="fa fa-check"></i><b>4.2</b> 簡易繪圖</a></li>
 <li class="chapter" data-level="4.3" data-path="dataframe.html"><a href="dataframe.html#延伸學習"><i class="fa fa-check"></i><b>4.3</b> 延伸學習</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#使用dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 使用dplyr</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dataframe.html"><a href="dataframe.html#預覽dplyr"><i class="fa fa-check"></i><b>4.3.1</b> 預覽dplyr</a></li>
 <li class="chapter" data-level="4.3.2" data-path="dataframe.html"><a href="dataframe.html#比較tibble-data_frame-data.frame"><i class="fa fa-check"></i><b>4.3.2</b> 比較tibble, data_frame, data.frame</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="dataframe.html"><a href="dataframe.html#maternity"><i class="fa fa-check"></i><b>4.4</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#reading-.xlsx-by-readxl-package"><i class="fa fa-check"></i><b>4.4.1</b> Reading .xlsx by readxl package</a></li>
-<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#previewing-data-by-view-class-dim-str-summary-and-names"><i class="fa fa-check"></i><b>4.4.2</b> Previewing data by <code>View()</code>, <code>class()</code>, <code>dim()</code>, <code>str()</code>, <code>summary()</code> and <code>names()</code></a></li>
-<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#select-variables"><i class="fa fa-check"></i><b>4.4.3</b> Select variables</a></li>
-<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#check-replace-nas"><i class="fa fa-check"></i><b>4.4.4</b> Check &amp; Replace NAs</a></li>
-<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#filtering-data"><i class="fa fa-check"></i><b>4.4.5</b> Filtering data</a></li>
-<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.6</b> Plotting</a></li>
-<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.7</b> Practice. Plotting more</a></li>
-<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.8</b> Practice. Selecting and filtering by dplyr I</a></li>
-<li class="chapter" data-level="4.4.9" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.9</b> (More) Clean version</a></li>
-<li class="chapter" data-level="4.4.10" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.10</b> (More) The fittest version to compute staySame</a></li>
+<li class="chapter" data-level="4.4.1" data-path="dataframe.html"><a href="dataframe.html#the-data"><i class="fa fa-check"></i><b>4.4.1</b> The Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframe.html"><a href="dataframe.html#visual-strategies"><i class="fa fa-check"></i><b>4.4.2</b> Visual Strategies</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframe.html"><a href="dataframe.html#cleaning"><i class="fa fa-check"></i><b>4.4.3</b> Cleaning</a></li>
+<li class="chapter" data-level="4.4.4" data-path="dataframe.html"><a href="dataframe.html#plotting"><i class="fa fa-check"></i><b>4.4.4</b> Plotting</a></li>
+<li class="chapter" data-level="4.4.5" data-path="dataframe.html"><a href="dataframe.html#practice.-plotting-more"><i class="fa fa-check"></i><b>4.4.5</b> Practice. Plotting more</a></li>
+<li class="chapter" data-level="4.4.6" data-path="dataframe.html"><a href="dataframe.html#practice.-selecting-and-filtering-by-dplyr-i"><i class="fa fa-check"></i><b>4.4.6</b> Practice. Selecting and filtering by dplyr I</a></li>
+<li class="chapter" data-level="4.4.7" data-path="dataframe.html"><a href="dataframe.html#more-clean-version"><i class="fa fa-check"></i><b>4.4.7</b> (More) Clean version</a></li>
+<li class="chapter" data-level="4.4.8" data-path="dataframe.html"><a href="dataframe.html#more-the-fittest-version-to-compute-staysame"><i class="fa fa-check"></i><b>4.4.8</b> (More) The fittest version to compute staySame</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="crosstab.html"><a href="crosstab.html"><i class="fa fa-check"></i><b>5</b> Counting and Cross-tabulation</a>
@@ -301,11 +302,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#visual-strategies"><i class="fa fa-check"></i><b>6.3.1</b> Visual Strategies</a></li>
-<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.2</b> Code by base R</a></li>
-<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.3</b> Code by dplyr</a></li>
-<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.4</b> Generating each</a></li>
-<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.5</b> Gathering subplots by cowplot</a></li>
+<li class="chapter" data-level="6.3.1" data-path="base2dplyr.html"><a href="base2dplyr.html#the-data-1"><i class="fa fa-check"></i><b>6.3.1</b> The Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="base2dplyr.html"><a href="base2dplyr.html#advanced-visual-strategies"><i class="fa fa-check"></i><b>6.3.2</b> Advanced Visual Strategies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-base-r"><i class="fa fa-check"></i><b>6.3.3</b> Code by base R</a></li>
+<li class="chapter" data-level="6.3.4" data-path="base2dplyr.html"><a href="base2dplyr.html#code-by-dplyr"><i class="fa fa-check"></i><b>6.3.4</b> Code by dplyr</a></li>
+<li class="chapter" data-level="6.3.5" data-path="base2dplyr.html"><a href="base2dplyr.html#generating-each"><i class="fa fa-check"></i><b>6.3.5</b> Generating each</a></li>
+<li class="chapter" data-level="6.3.6" data-path="base2dplyr.html"><a href="base2dplyr.html#gathering-subplots-by-cowplot"><i class="fa fa-check"></i><b>6.3.6</b> Gathering subplots by cowplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="joindata.html"><a href="joindata.html"><i class="fa fa-check"></i><b>7</b> Data manipultaiton: Join data</a>
@@ -795,25 +797,36 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="basic" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> R Basic<a href="basic.html#basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 2</span> Using R<a href="basic.html#basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>本章介紹如何使用 RStudio 編寫和執行 R 程式語言、R語言的基本語法、以及Vector和data.frame資料型態。</p>
 <div id="using-rstudio" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Using RStudio<a href="basic.html#using-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="rstudio-interface" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> RStudio Interface<a href="basic.html#rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>RStudio的介面主要分為四大區塊：</p>
+<div id="介面概覽" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> 介面概覽<a href="basic.html#介面概覽" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>RStudio 的介面主要劃分為四大區塊，各自負責不同功能：</p>
 <ul>
-<li><p>左上的區塊是「Source」（可切換至「Visual」）是撰寫程式碼與R Markdown的區塊；</p></li>
-<li><p>左下角「Console」的區塊，每行程式碼的執行和執行結果都會出現在此，也可觀察程式執行結果；</p></li>
-<li><p>右上角區塊最常用的是「Environment」這個分頁，程式碼執行過程產生的變數／變項都會出現在這裡。</p></li>
-<li><p>右下角區塊我最常用的是「Files」這個分頁，顯示的是我自己電腦本機端的檔案目錄。右下角區塊也常常用到「Packages」，可查閱現在的程式執行環境有載入哪些套件；當用<code>help(some_function)</code>查詢某個套件或某個函式的功能是，就會自動跳到「Help」分頁。</p></li>
+<li><p><strong>左上區（Source/Visual）：</strong> 撰寫程式碼及 R Markdown 文件的區域。</p></li>
+<li><p><strong>左下區（Console）：</strong> 顯示程式碼執行的即時結果，可直接輸入命令進行互動式操作。</p></li>
+<li><p><strong>右上區（Environment）：</strong> 呈現執行過程中產生的變數與資料物件，方便檢查數據內容。</p></li>
+<li><p><strong>右下區（Files/Packages/Help）：</strong></p>
+<ul>
+<li><p><strong>Files：</strong> 顯示本機檔案目錄，便於瀏覽資料。</p></li>
+<li><p><strong>Packages：</strong> 列出目前已載入與可用的套件。</p></li>
+<li><p><strong>Help：</strong> 查詢函式與套件說明，方便尋求技術支援。</p></li>
+</ul></li>
 </ul>
 <p><img src="images/image-1886736556.png" /></p>
 </div>
-<div id="writing-r-markdown" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Writing R Markdown<a href="basic.html#writing-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>R Markdown這種格式讓程式寫作者可以將程式碼和非程式碼的內容寫在同一份文件中。例如我想要寫作一本關於程式的書，裡面有很多的程式碼，但也要有很多說明、章節與段落。此時，這些非程式碼的區塊通常被稱為「內容區塊（Text Cell）」，而程式碼的區塊就稱為「Code Cell」。尤其是資料分析師或資料科學家很愛用這種格式，因為經常要為程式的執行結果寫很多說明，甚至利用標題一、標題二來區分章節。</p>
-<p><strong>內容區塊</strong>使用Markdown格式撰寫，顧名思義，支援用Markdown這種標記語法來快速撰寫如標題一、標題二、點列、編號等格式化文字。詳細指令可以參考<a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">rmarkdown-cheatsheet (rstudio.com)</a>。這種格式的靈活性和強大功能，使得 R Markdown 成為撰寫技術文檔和學術報告的理想選擇，能夠有效地將敘述性文本與程式碼結果結合，提升文檔的互動性和表達力。</p>
+<div id="撰寫r-markdown" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> 撰寫R Markdown<a href="basic.html#撰寫r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R Markdown 格式允許作者在同一份文件中同時混合撰寫程式碼與敘述性文字，非常適合用來撰寫技術文件與學術報告。文件中常見的區塊包括：</p>
+<ul>
+<li><p><strong>內容區塊（Text Cell）：</strong> 使用 Markdown 語法撰寫標題、段落、點列等格式化文字。詳細指令可以參考<a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">rmarkdown-cheatsheet (rstudio.com)</a>。這種格式的靈活性和強大功能，使得 R Markdown 成為撰寫技術文檔和學術報告的理想選擇，能夠有效地將敘述性文本與程式碼結果結合，提升文檔的互動性和表達力。</p></li>
+<li><p><strong>程式碼區塊（Code Cell）：</strong> 撰寫 R 程式碼，並可直接執行以呈現結果。</p></li>
+</ul>
+</div>
+<div id="常用快捷鍵" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> 常用快捷鍵<a href="basic.html#常用快捷鍵" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>程式碼區塊</strong>可以用下列鍵盤指令來新增和執行。</p>
 <ul>
 <li><code>Cmd(Ctrl)+Option(Alt)+i</code> 新增一個程式碼區塊</li>
@@ -828,36 +841,46 @@ div.csl-indent {
 <code>a*b</code></p>
 </div>
 </div>
-<div id="installing-third-party-packages" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Installing third-party packages<a href="basic.html#installing-third-party-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="安裝與載入第三方套件" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> 安裝與載入第三方套件<a href="basic.html#安裝與載入第三方套件" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>套件的使用分為<strong>安裝(<code>install.packages("pkg_name")</code>)</strong>和<strong>載入（<code>library(pkg_name)</code>）</strong>兩個動作。通常安裝好R的時候就已經安裝好基本<code>base</code>套件。當執行R時便會將base套件<strong>預載</strong>入程式的執行環境中。</li>
-<li>熱心的R使用者會編寫第三方套件，並且將這些套件開放給群眾使用。通常這些套件已經被上載到<strong>R cran</strong>提供下載。而<strong>R cran</strong>上的套件我們可以使用<code>install.packages("package_name")</code>來自動安裝到我們的電腦中。</li>
+<li>套件的使用分為「<strong>安裝(<code>install.packages("pkg_name")</code>)」</strong>和「<strong>載入（<code>library(pkg_name)</code>）」</strong>兩個步驟。</li>
+<li>通常安裝好R的時候就已經安裝好基本<code>base</code>套件。當執行R時便會將base套件<strong>預載</strong>入程式的執行環境中。</li>
+<li>熱心的R使用者會編寫第三方套件，而第三方套件則可透過 R CRAN 自動安裝。。而<strong>R cran</strong>上的套件我們可以使用<code>install.packages("package_name")</code>來自動安裝到我們的電腦中。</li>
 </ul>
 <p><strong><em>Practice 1.</em></strong> 執行以下程式碼</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basic.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
 <span id="cb1-2"><a href="basic.html#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>)</span>
 <span id="cb1-3"><a href="basic.html#cb1-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;httr&quot;</span>)</span></code></pre></div>
-<div id="loading-package" class="section level4 hasAnchor" number="2.1.3.1">
-<h4><span class="header-section-number">2.1.3.1</span> <strong>Loading package</strong><a href="basic.html#loading-package" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>在安裝這些第三方套件之後，需要將它們載入到程式的運行環境中，然後才能使用。因此，需要使用 <strong><code>library(package_name)</code></strong> 命令來載入它們。</p>
+<p><strong>載入套件。</strong>在安裝這些第三方套件之後，需要將它們載入到程式的運行環境中，然後才能使用。因此，需要使用 <strong><code>library(package_name)</code></strong> 命令來載入它們。</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basic.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="basic.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
 <span id="cb2-3"><a href="basic.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(httr)</span></code></pre></div>
 </div>
+<div id="r-預載套件介紹" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> R 預載套件介紹<a href="basic.html#r-預載套件介紹" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>當 R 的程式開始執行時，會預載入一些基本的套件，包括 <strong><code>stats</code></strong>、<strong><code>graphics</code></strong>、<strong><code>grDevices</code></strong>、<strong><code>utils</code></strong> 和 <strong><code>datasets</code></strong>。這些套件為 R 提供了基本的數據處理、統計分析、圖形顯示和檔案處理等功能。以下是這些套件的重要函式：</p>
+<ul>
+<li><p><strong><code>stats</code></strong>：這個套件包含了許多統計分析相關的函式，例如假設檢定、方差分析、線性迴歸和時間序列分析等。其中，比較常用的函式有 <strong><code>t.test()</code></strong>、<strong><code>lm()</code></strong>、<strong><code>glm()</code></strong>、<strong><code>anova()</code></strong>、<strong><code>cor()</code></strong> 等。</p></li>
+<li><p><strong><code>graphics</code></strong>：這個套件提供了用於繪製各種圖形的函式，例如散佈圖、直方圖、盒鬚圖、線圖、散點矩陣等。其中，常用的函式有 <strong><code>plot()</code></strong>、<strong><code>hist()</code></strong>、<strong><code>boxplot()</code></strong>、<strong><code>lines()</code></strong>、<strong><code>points()</code></strong> 等。</p></li>
+<li><p><strong><code>grDevices</code></strong>：這個套件包含了用於輸出圖形的函式，例如 <strong><code>pdf()</code></strong>、<strong><code>png()</code></strong>、<strong><code>jpeg()</code></strong> 和 <strong><code>tiff()</code></strong> 等。</p></li>
+<li><p><strong><code>utils</code></strong>：這個套件包含了一些實用的函式，例如 <strong><code>install.packages()</code></strong>、<strong><code>help()</code></strong>、<strong><code>data()</code></strong> 等。</p></li>
+<li><p><strong><code>datasets</code></strong>：這個套件包含了一些內建的數據集，可以用來進行測試和練習，例如 <strong><code>iris</code></strong>、<strong><code>mtcars</code></strong>、<strong><code>CO2</code></strong> 等。可以使用 <strong><code>data()</code></strong> 函式載入這些數據集。</p></li>
+</ul>
 </div>
-<div id="code-comment" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Code “Comment”<a href="basic.html#code-comment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="程式碼註解技巧" class="section level3 hasAnchor" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> 程式碼註解技巧<a href="basic.html#程式碼註解技巧" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>下列程式碼中開頭有<code>#</code>符號者為註解，程式設計師用這種註解來為程式碼做說明，便於自己日後閱讀或與他人溝通。程式在執行時會自動忽略前面有<code>#</code>符號的程式碼。如果要執行以下程式碼，要把前面的<code>#</code>記號給拿掉。在RStudio中你可以用滑鼠或鍵盤圈選下三行，然後用快速鍵<code>command(ctrl)+shift+c</code>就可以開關（Comment/Un-comment)這幾行程式碼。</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="basic.html#cb3-1" tabindex="-1"></a><span class="co"># a &lt;- c(1, 2, 3, 4, 5)</span></span>
 <span id="cb3-2"><a href="basic.html#cb3-2" tabindex="-1"></a><span class="co"># b &lt;- 4</span></span>
 <span id="cb3-3"><a href="basic.html#cb3-3" tabindex="-1"></a><span class="co"># a*b</span></span></code></pre></div>
 </div>
 </div>
-<div id="first-attempt" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> First Attempt<a href="basic.html#first-attempt" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="loading-open-data-from-the-moi" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Loading Open Data from the MOI<a href="basic.html#loading-open-data-from-the-moi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="practical-examples" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Practical Examples<a href="basic.html#practical-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>本節將透過實作範例，展示如何使用 R 讀取線上資料並進行基本資料操作。</p>
+<div id="從內政部開放資料讀取資料" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 從內政部開放資料讀取資料<a href="basic.html#從內政部開放資料讀取資料" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>MOS（Ministry of the Interior）: 中華民國行政院內政部</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basic.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
 <span id="cb4-2"><a href="basic.html#cb4-2" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
@@ -873,22 +896,9 @@ div.csl-indent {
 ## 5           107   65000010001 新北市板橋區  留侯里 高中畢  男  122
 ## 6           107   65000010001 新北市板橋區  留侯里 國中畢  男   40</code></pre>
 </div>
-<div id="obtaining-taipei-youbike-v2-realtime-data" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Obtaining Taipei Youbike (v2) Realtime Data<a href="basic.html#obtaining-taipei-youbike-v2-realtime-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li><p>觀察<a href="https://data.taipei/dataset?qs=youbike">臺北市資料大平臺 (data.taipei)</a>上關於Youbike的資料，你認為哪些資料是具有資料新聞價值的？</p>
-<ul>
-<li><p><a href="https://data.taipei/dataset/detail?id=fe8a0ddd-6f70-4e63-92a1-a3463c790a1b">YouBike區域互補站點</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=9e97cd13-c21a-44a1-80e8-069bf1c7517c">YouBike站位每月熱門站點</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=e521c4cb-8f72-4cd4-a53d-9bbe6fff2137">YouBike場站建置成本</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=25da6e50-a955-4281-93be-921b4ff75e28">YouBike臺北市權利金與補助支出</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=d8cefb03-aba2-41ca-9996-d8774313cdc6">YouBike臺北市站位每月使用量</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=c7dbdb7c-6bbd-495a-bd23-49b22defd83e">YouBike起訖站點統計</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=ba0dafae-043c-4730-b97e-2defd7af766c">YouBike見車率統計</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=1aae7069-cb8d-4e6e-a0e3-83dd296d29b8">YouBike潛在需求預測</a></p></li>
-<li><p><a href="https://data.taipei/dataset/detail?id=c6bc8aed-557d-41d5-bfb1-8da24f78f2fb">YouBike2.0臺北市公共自行車即時資訊</a></p></li>
-</ul></li>
-</ul>
+<div id="取得臺北-youbike-v2-即時資料" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 取得臺北 YouBike (v2) 即時資料<a href="basic.html#取得臺北-youbike-v2-即時資料" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>以下範例從臺北市資料大平臺下載 YouBike 即時資訊，並檢視前六欄資料</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basic.html#cb6-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json&quot;</span></span>
 <span id="cb6-2"><a href="basic.html#cb6-2" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="basic.html#cb6-3" tabindex="-1"></a>ubike.df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url),<span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
@@ -10624,10 +10634,24 @@ div.csl-indent {
 ## 1386 2024-03-31
 ## 1387 2024-03-31
 ## 1388 2024-03-31</code></pre>
+<ul>
+<li><p>觀察<a href="https://data.taipei/dataset?qs=youbike">臺北市資料大平臺 (data.taipei)</a>上關於Youbike的資料，你認為哪些資料是具有資料新聞價值的？</p>
+<ul>
+<li><p><a href="https://data.taipei/dataset/detail?id=fe8a0ddd-6f70-4e63-92a1-a3463c790a1b">YouBike區域互補站點</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=9e97cd13-c21a-44a1-80e8-069bf1c7517c">YouBike站位每月熱門站點</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=e521c4cb-8f72-4cd4-a53d-9bbe6fff2137">YouBike場站建置成本</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=25da6e50-a955-4281-93be-921b4ff75e28">YouBike臺北市權利金與補助支出</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=d8cefb03-aba2-41ca-9996-d8774313cdc6">YouBike臺北市站位每月使用量</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=c7dbdb7c-6bbd-495a-bd23-49b22defd83e">YouBike起訖站點統計</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=ba0dafae-043c-4730-b97e-2defd7af766c">YouBike見車率統計</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=1aae7069-cb8d-4e6e-a0e3-83dd296d29b8">YouBike潛在需求預測</a></p></li>
+<li><p><a href="https://data.taipei/dataset/detail?id=c6bc8aed-557d-41d5-bfb1-8da24f78f2fb">YouBike2.0臺北市公共自行車即時資訊</a></p></li>
+</ul></li>
+</ul>
 </div>
-<div id="reading-taipei-residential-burglary-data" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Reading Taipei Residential Burglary Data<a href="basic.html#reading-taipei-residential-burglary-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>該資料網址可到<a href="https://data.taipei/">臺北市資料大平臺 (data.taipei)</a>上查詢「住宅竊盜點位資訊」後，點選「API」後複製取得。</p>
+<div id="讀取臺北住宅竊盜點位資訊" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 讀取臺北住宅竊盜點位資訊<a href="basic.html#讀取臺北住宅竊盜點位資訊" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>使用 <code>read_json()</code> 讀取臺北市住宅竊盜點位資訊的 API 資料，並利用 <code>dplyr</code> 檢視資料結構。該資料網址可到<a href="https://data.taipei/">臺北市資料大平臺 (data.taipei)</a>上查詢「住宅竊盜點位資訊」後，點選「API」後複製取得。</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basic.html#cb10-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://data.taipei/api/v1/dataset/93d9bc2d-af08-4db7-a56b-9f0a49226fa3?scope=resourceAquire&quot;</span></span>
 <span id="cb10-2"><a href="basic.html#cb10-2" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">read_json</span>(url, <span class="at">simplifyVector =</span> T)</span>
 <span id="cb10-3"><a href="basic.html#cb10-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> res<span class="sc">$</span>result<span class="sc">$</span>results</span>
@@ -10635,19 +10659,19 @@ div.csl-indent {
 <span id="cb10-5"><a href="basic.html#cb10-5" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(df)</span></code></pre></div>
 </div>
 </div>
-<div id="r-qa" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> R Q&amp;A<a href="basic.html#r-qa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="encoding-and-language" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Encoding and Language<a href="basic.html#encoding-and-language" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="qa" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Q&amp;A<a href="basic.html#qa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="編碼與語系設定" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 編碼與語系設定<a href="basic.html#編碼與語系設定" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在處理含有中文資料時，可能會遇到編碼問題，可透過 <code>Sys.setlocale()</code> 指定適當的語系：</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="basic.html#cb11-1" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">&quot;LC_ALL&quot;</span>, <span class="at">locale =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
 <span id="cb11-2"><a href="basic.html#cb11-2" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">&quot;LC_ALL&quot;</span>, <span class="at">locale =</span> <span class="st">&quot;cht&quot;</span>)</span></code></pre></div>
-<p>如果讀取到資料有中文的話，此時，你只需要指定locale為cht，然後重開該data.frame就可以解決該問題。</p>
+<p>如果讀取到資料有中文的話，此時，你只需要指定<code>locale</code>為<code>cht</code>，然後重開該<code>data.frame</code>就可以解決該問題。</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basic.html#cb12-1" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">&quot;LC_ALL&quot;</span>, <span class="at">locale =</span> <span class="st">&quot;cht&quot;</span>)</span></code></pre></div>
-<p>但你在寫程式剖析HTML時若使用了rvest這個套件，有可能在html_node()函式時會因為編碼而產生問題，此時你會需要把locale改為C。這個C指的是C語言的C。</p>
+<p>若在使用 <code>rvest</code> 套件解析 HTML 時遇到編碼問題，則可將語系設定為 C（代表 C 語言的預設語系）：</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basic.html#cb13-1" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">&quot;LC_ALL&quot;</span>, <span class="at">locale =</span> <span class="st">&quot;C&quot;</span>)</span></code></pre></div>
 <ul>
-<li>參考連結：<a href="http://psmethods.postach.io/post/ru-he-geng-gai-rde-yu-she-yu-xi" class="uri">http://psmethods.postach.io/post/ru-he-geng-gai-rde-yu-she-yu-xi</a></li>
-<li>參考連結：<a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/locales.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/locales.html</a></li>
+<li>參考連結：<a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/locales.html">R: Query or Set Aspects of the Locale</a></li>
 <li>The locale describes aspects of the internationalization of a program. Initially most aspects of the locale of R are set to “C” (which is the default for the C language and reflects North-American usage)</li>
 </ul>
 </div>

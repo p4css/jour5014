@@ -1,14 +1,24 @@
 
 
-# Dataframe
+# DataFrame
+
+DataFrame 是 R 語言中最常用的資料結構之一，它是一種表格形式的數據集，類似於 Excel 表格或 SQL 資料表。每一列代表一個變數（Variable），而每一行代表一個觀測值（Observation）。
+
+DataFrame 具備以下特性：
+
+-   **列（Row）**：每一列都是一個完整的觀測數據。
+
+-   **欄（Column）**：每一欄是相同型態的變數，例如數字、文字、因子等。
+
+-   **索引（Index）**：R 自動為 DataFrame 的列加上索引，方便存取數據。
 
 ## 基本操作
 
 ### 產生新的Dataframe
 
-#### 建立資料並Assign給vector
+在 R 中，可以透過 `data.frame()` 函數將數個等長的向量（Vectors）合併為 DataFrame。例如，我們建立台北市各行政區的基本資料，包括區名、面積（平方公里）和人口數（2023 年估計值）。
 
-用以下ChatGPT問句來產生測試資料「我現在正在準備R的教學範例， 請協助我產生台北市所有行政區的資料，包含行政區名、面積、人口數 分別指給town, area, population三個變數」。
+-   用以下ChatGPT問句來產生測試資料「我現在正在準備R的教學範例， 請協助我產生台北市所有行政區的資料，包含行政區名、面積、人口數 分別指給town, area, population三個變數」。
 
 
 ```r
@@ -19,7 +29,15 @@ area = c(9.2878, 11.2077, 11.3614, 13.6821, 7.6071, 5.6815, 8.8522, 31.5090, 21.
 population = c(206375, 225561, 309835, 203276, 159608, 132397, 194160, 275207, 122103, 287726, 288324, 255688)  # 2023年的估計值
 ```
 
-#### 合併等長vector為dataframe
+#### 合併等長vector為DataFrame
+
+-   `data.frame(town, population, area)`：將三個向量合併成一個 DataFrame。
+
+-   `df$density <- df$population / df$area`：新增一欄「人口密度」，計算方式為人口數除以區域面積。
+
+-   `str(df)`：顯示 DataFrame 的結構資訊。
+
+-   `summary(df)`：輸出基本統計摘要，例如平均數、中位數、最小值、最大值等。
 
 
 ```r
@@ -54,7 +72,7 @@ summary(df)
 # View(df)
 ```
 
-#### 存放台灣貿易各國進出口量
+#### 範例：臺灣貿易各國進出口量
 
 -   運用[國際貿易署貿易統計系統 (trade.gov.tw)](https://cuswebo.trade.gov.tw/)獲取臺灣進出口貿易資料。
 
@@ -69,31 +87,34 @@ export <- c(22.987, 12.204, 11.837, 7.739, 5.381, 4.610, 2.866, 2.784, 2.414, 2.
 
 #### 合併vector為data.frame
 
-當我們讀取或創建資料框架時，過去R預設會將字符串類型的變數轉換為因子（Factors），這對於統計分析而言是有益的，因為統計分析經常將文字型態的數據視為類別變數來處理。然而，隨著資料科學領域的快速發展，需要處理大量文字數據的情況日益增多，這時將文字資料預設為因子型態可能不再適合所有情境。因此，現在R的預設的處理方式已經改變，預設將文字型態的變數保持為字符型態（Character），而不是自動將其轉換為因子。這意味著，當我們使用`read.csv`等函數讀取數據時，除非明確指定，否則讀入的字符串不會自動轉換為Factors型態。
-
-如果你在進行統計分析時希望將文字型態的變數作為類別變數（即因子）處理，你需要手動設定`stringsAsFactors`參數為`TRUE`。這可以在讀取數據時（如使用`read.csv`函數）或在數據處理過程中明確進行轉換。例如，當使用`read.csv`讀取CSV文件時，若想將所有的字符串變數自動轉為因子型態，可以這樣做：`df <- read.csv("your_file.csv", stringsAsFactors = TRUE)`。若已經讀取數據且數據框架中的文字型態變數仍為Character型態，而你希望將其轉換為Factors，可以使用`factor`函數進行轉換：`df$your_column <- factor(df$your_column)`。
+在 R 早期版本中，當我們讀取或創建資料框架（DataFrame）時，R 預設會將字串類型的變數轉換為因子（Factors）。這樣的設計對於統計分析是有益的，因為統計方法通常將文字數據視為類別變數來處理。然而，隨著資料科學領域的快速發展，需要處理大量文字數據的情況日益增多，因此將字串自動轉換為因子可能不再適用於所有情境。
 
 
-```r
-df <- data.frame(country, import, export, stringsAsFactors = TRUE)
-str(df)
-```
-
-```{.output}
-## 'data.frame':	20 obs. of  3 variables:
-##  $ country: Factor w/ 20 levels "AE","AU","CN",..: 3 19 11 7 12 17 4 13 20 15 ...
-##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
-##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
-```
-
-```r
+``` r
 df <- data.frame(country, import, export)
 str(df)
 ```
 
-```{.output}
+``` output
 ## 'data.frame':	20 obs. of  3 variables:
 ##  $ country: chr  "CN" "US" "JP" "HK" ...
+##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
+##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
+```
+
+自 **R 4.0** 起，R 的預設行為已改變，**現在建立 DataFrame 或讀取數據時，字串變數預設會保持為字串（Character），而不會自動轉換為因子**。這意味著，當我們使用 `data.frame()` 或 `read.csv()` 等函數讀取數據時，除非明確指定，R 不會自動將字串轉換為因子。
+
+如果你在統計分析中仍然希望將文字型態的變數作為類別變數（即因子）處理，你需要手動進行轉換。例如：在合併資料時，若希望所有`Character`變數自動轉換為`Factor`，可以這樣設定：
+
+
+``` r
+df <- data.frame(country, import, export, stringsAsFactors = TRUE)
+str(df)
+```
+
+``` output
+## 'data.frame':	20 obs. of  3 variables:
+##  $ country: Factor w/ 20 levels "AE","AU","CN",..: 3 19 11 7 12 17 4 13 20 15 ...
 ##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
 ```
@@ -101,7 +122,7 @@ str(df)
 其他功能：建立一個新且空的`data.frame`。
 
 
-```r
+``` r
 df.test <- data.frame()
 ```
 
@@ -120,12 +141,12 @@ df.test <- data.frame()
 5.  `summary(df)`: 此函數提供了數據框架的摘要統計信息，包括數值變數的最小值、最大值、中位數、平均值、第一四分位數和第三四分位數，以及因子變數的水平計數。這對於快速獲取數據集的統計概述非常有用。
 
 
-```r
+``` r
 # View(df)
 head(df)	# get first part of the data.frame
 ```
 
-```{.output}
+``` output
 ##   country import export
 ## 1      CN 26.142 22.987
 ## 2      US 12.008 12.204
@@ -135,40 +156,41 @@ head(df)	# get first part of the data.frame
 ## 6      SG  5.768  4.610
 ```
 
-```r
+``` r
 class(df)
 ```
 
-```{.output}
+``` output
 ## [1] "data.frame"
 ```
 
-```r
+``` r
 str(df)
 ```
 
-```{.output}
+``` output
 ## 'data.frame':	20 obs. of  3 variables:
-##  $ country: chr  "CN" "US" "JP" "HK" ...
+##  $ country: Factor w/ 20 levels "AE","AU","CN",..: 3 19 11 7 12 17 4 13 20 15 ...
 ##  $ import : num  26.14 12.01 7.03 13.65 4.59 ...
 ##  $ export : num  22.99 12.2 11.84 7.74 5.38 ...
 ```
 
-```r
+``` r
 summary(df)
 ```
 
-```{.output}
-##    country              import           export      
-##  Length:20          Min.   : 0.449   Min.   : 0.728  
-##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
-##  Mode  :character   Median : 2.054   Median : 1.966  
-##                     Mean   : 4.536   Mean   : 4.374  
-##                     3rd Qu.: 4.884   3rd Qu.: 4.803  
-##                     Max.   :26.142   Max.   :22.987
+``` output
+##     country       import           export      
+##  AE     : 1   Min.   : 0.449   Min.   : 0.728  
+##  AU     : 1   1st Qu.: 1.016   1st Qu.: 1.312  
+##  CN     : 1   Median : 2.054   Median : 1.966  
+##  DE     : 1   Mean   : 4.536   Mean   : 4.374  
+##  FR     : 1   3rd Qu.: 4.884   3rd Qu.: 4.803  
+##  GB     : 1   Max.   :26.142   Max.   :22.987  
+##  (Other):14
 ```
 
-```r
+``` r
 # look up help
 help(summary)
 ?summary
@@ -177,97 +199,102 @@ help(summary)
 #### 觀察資料維度
 
 
-```r
+``` r
 dim(df)
 ```
 
-```{.output}
+``` output
 ## [1] 20  3
 ```
 
-```r
+``` r
 ncol(df)
 ```
 
-```{.output}
+``` output
 ## [1] 3
 ```
 
-```r
+``` r
 nrow(df)
 ```
 
-```{.output}
+``` output
 ## [1] 20
 ```
 
-```r
+``` r
 length(df)
 ```
 
-```{.output}
+``` output
 ## [1] 3
 ```
 
 ### 操作dataframe
 
-#### 取出一個變項
+以下將介紹 DataFrame 的基本操作，包括變數提取、變數創建、篩選數據、排序等常見應用。
 
--   `names(df)` 列出變數名稱
+#### 選擇某變項（Select）
+
+-   `names(df)` 列出變數名稱。
 -   `df$發生.現.地點` 顯示該變數內容
 -   `df$發生時段` 顯示該變數內容
 -   `length(df$發生時段)` 顯示該變數的長度（相當於有幾個）
+-   `summary()` 函數可以用來查看數據的基本統計資訊，例如最小值、最大值、平均數、四分位數等：
 
 
-```r
+``` r
 names(df)
 ```
 
-```{.output}
+``` output
 ## [1] "country" "import"  "export"
 ```
 
-```r
+``` r
 head(df$export)
 ```
 
-```{.output}
+``` output
 ## [1] 22.987 12.204 11.837  7.739  5.381  4.610
 ```
 
-```r
+``` r
 length(df$import)
 ```
 
-```{.output}
+``` output
 ## [1] 20
 ```
 
-```r
+``` r
 summary(df)
 ```
 
-```{.output}
-##    country              import           export      
-##  Length:20          Min.   : 0.449   Min.   : 0.728  
-##  Class :character   1st Qu.: 1.016   1st Qu.: 1.312  
-##  Mode  :character   Median : 2.054   Median : 1.966  
-##                     Mean   : 4.536   Mean   : 4.374  
-##                     3rd Qu.: 4.884   3rd Qu.: 4.803  
-##                     Max.   :26.142   Max.   :22.987
+``` output
+##     country       import           export      
+##  AE     : 1   Min.   : 0.449   Min.   : 0.728  
+##  AU     : 1   1st Qu.: 1.016   1st Qu.: 1.312  
+##  CN     : 1   Median : 2.054   Median : 1.966  
+##  DE     : 1   Mean   : 4.536   Mean   : 4.374  
+##  FR     : 1   3rd Qu.: 4.884   3rd Qu.: 4.803  
+##  GB     : 1   Max.   :26.142   Max.   :22.987  
+##  (Other):14
 ```
 
-#### (mutate)透過運算產生新變數
+#### 創建新變數（Mutate）
 
+-   在 DataFrame 中，我們可以使用 `$` 符號來新增一個變數，並且透過四則運算來計算新變數的值。在 R 中，尤其是未來運用到 dplyr 套件時，會把DataFrame新增一個變項的動作稱為Mutate，亦即透過運算新增變項。
 -   這裡容易犯錯的是，要記得跟程式講說你要加總或四則運算的是哪個df的variable。
 -   從下面的這個操作中，該data.frame會產生一個新的變數`sub`，這就相當於Excel中的某一行減去某一行，然後把資料放在新的一行。
 
 
-```r
+``` r
 df$sub <- df$import - df$export
 ```
 
-#### (filter)篩選資料、選取變數
+#### 篩選資料（Filter）
 
 -   注意，要告訴程式`import`和`export`是哪個`data.frame`的。
 
@@ -278,11 +305,11 @@ df$sub <- df$import - df$export
 -   原本的df有五個variable，而上述的操作是篩選資料，所以被篩選的是列，因此行的數量、名稱都不會變。因此，我篩選完後，直接存取這個被篩選過的data.frame的country variable，自然是可以的。
 
 
-```r
+``` r
 df
 ```
 
-```{.output}
+``` output
 ##    country import export    sub
 ## 1       CN 26.142 22.987  3.155
 ## 2       US 12.008 12.204 -0.196
@@ -306,28 +333,28 @@ df
 ## 20      AE  0.455  0.728 -0.273
 ```
 
-```r
+``` r
 names(df)
 ```
 
-```{.output}
+``` output
 ## [1] "country" "import"  "export"  "sub"
 ```
 
-```r
+``` r
 nrow(df)
 ```
 
-```{.output}
+``` output
 ## [1] 20
 ```
 
-```r
+``` r
 # filter row data by column value
 df[df$import > df$export,]
 ```
 
-```{.output}
+``` output
 ##    country import export   sub
 ## 1       CN 26.142 22.987 3.155
 ## 4       HK 13.646  7.739 5.907
@@ -340,61 +367,65 @@ df[df$import > df$export,]
 ## 17      IN  1.027  0.974 0.053
 ```
 
-```r
+``` r
 df[df$import > df$export,]$country
 ```
 
-```{.output}
-## [1] "CN" "HK" "SG" "MY" "VN" "PH" "TH" "GB" "IN"
+``` output
+## [1] CN HK SG MY VN PH TH GB IN
+## Levels: AE AU CN DE FR GB HK ID IN IT JP KR MY NL PH SA SG TH US VN
 ```
 
-```r
+``` r
 df[df$import > df$export,1]
 ```
 
-```{.output}
-## [1] "CN" "HK" "SG" "MY" "VN" "PH" "TH" "GB" "IN"
+``` output
+## [1] CN HK SG MY VN PH TH GB IN
+## Levels: AE AU CN DE FR GB HK ID IN IT JP KR MY NL PH SA SG TH US VN
 ```
 
-```r
+``` r
 # 1 row == a data.frame with only one data entry
 class(df[df$import > df$export,1])
 ```
 
-```{.output}
-## [1] "character"
+``` output
+## [1] "factor"
 ```
 
-```r
+``` r
 class(df[,1]) # character vector
 ```
 
-```{.output}
-## [1] "character"
+``` output
+## [1] "factor"
 ```
 
-```r
+``` r
 class(df[1,]) # data.frame
 ```
 
-```{.output}
+``` output
 ## [1] "data.frame"
 ```
 
-```r
+``` r
 class(unlist(df[1, -1])) # filter the 1st row and select all columns except 1
 ```
 
-```{.output}
+``` output
 ## [1] "numeric"
 ```
 
-#### (arrange) 按某個變數排序
+#### 按某個變數排序（Arrange）
+
+對於DataFrame這樣一個有很多欄位（變項）的資料表，我們常會希望能夠依據哪一個變項從小而大或從大而小做排序。例如依據價格做排序、依據資料建立先後來排序。此時要用 `order()` ，未來在dplyr中會用 `arrange()`。
 
 -   `df.sorted <- df[order(df$import),]`會使得整個df照`import`的大小排序重新做排列。因為`order(df$import)`會把資料照指定順序排列後的位置傳回來，所以把他丟給`df`的列的位置，便會使得`df`的資料照指定的順序排列。 預設是由小到大，加上`decreasing = T`這個參數後變成由大而小。
 
 
-```r
+``` r
 # sort rows by df$import column
 df.sorted <- df[order(df$import),]
 # View(df.sorted)
@@ -408,7 +439,7 @@ df.sorted <- df[order(-df$import),]
 head(df.sorted)
 ```
 
-```{.output}
+``` output
 ##   country import export    sub
 ## 1      CN 26.142 22.987  3.155
 ## 4      HK 13.646  7.739  5.907
@@ -423,31 +454,31 @@ head(df.sorted)
 -   `graphics::plot()`為會預載入R的繪圖套件，如果希望繪圖的同時加上回歸線和資料點標籤的話，必須要三行一起執行。
 
 
-```r
+``` r
 # plot(df) # raise error, 1st column is a character vector
 plot(df[, 2:3])
 ```
 
-<img src="R04_dataframe_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="R04_dataframe_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
-```r
+``` r
 plot(df[1:10, 2:3])
 text(import, export, labels=country, cex= 0.5, pos=3)
 lines(1:25, 1:25, col='red')
 ```
 
-<img src="R04_dataframe_files/figure-html/unnamed-chunk-13-2.png" width="672" />
+<img src="R04_dataframe_files/figure-html/unnamed-chunk-14-2.png" width="672" />
 
-```r
+``` r
 ?plot
 ```
 
-```{.output}
+``` output
 ## Help on topic 'plot' was found in the following packages:
 ## 
 ##   Package               Library
-##   graphics              /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 ##   base                  /Library/Frameworks/R.framework/Resources/library
+##   graphics              /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library
 ## 
 ## 
 ## Using the first match ...
@@ -455,17 +486,17 @@ lines(1:25, 1:25, col='red')
 
 ## 延伸學習
 
-### 使用dplyr
+### 預覽dplyr
 
 
-```r
+``` r
 library(dplyr)
 df <- data.frame(country, import, export, stringsAsFactors = F)
 df <- mutate(df, sub = import - export)
 filter(df, import > export)
 ```
 
-```{.output}
+``` output
 ##   country import export   sub
 ## 1      CN 26.142 22.987 3.155
 ## 2      HK 13.646  7.739 5.907
@@ -478,11 +509,11 @@ filter(df, import > export)
 ## 9      IN  1.027  0.974 0.053
 ```
 
-```r
+``` r
 select(df, c(1, 3))
 ```
 
-```{.output}
+``` output
 ##    country export
 ## 1       CN 22.987
 ## 2       US 12.204
@@ -506,12 +537,12 @@ select(df, c(1, 3))
 ## 20      AE  0.728
 ```
 
-```r
+``` r
 message(df$country)
 print(df$country)
 ```
 
-```{.output}
+``` output
 ##  [1] "CN" "US" "JP" "HK" "KR" "SG" "DE" "MY" "VN" "PH" "TH" "AU" "NL" "SA" "ID"
 ## [16] "GB" "IN" "FR" "IT" "AE"
 ```
@@ -521,29 +552,29 @@ print(df$country)
 `警告： "data_frame()" was deprecated in tibble 1.1.0. Please use "tibble()" instead.`
 
 
-```r
+``` r
 df <- data.frame(a=1:2, b=3:4, c=5:6)
 class(df)
 ```
 
-```{.output}
+``` output
 ## [1] "data.frame"
 ```
 
-```r
+``` r
 df <- data_frame(a=1:2, b=3:4, c=5:6)
 class(df)
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 df <- tibble(a=1:2, b=3:4, c=5:6)
 class(df)
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
