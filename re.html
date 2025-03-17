@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2025-03-03" />
+<meta name="date" content="2025-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,8 +296,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
 <li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
 <li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
-<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
-<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-table"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide table</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#plot-with-long-table"><i class="fa fa-check"></i><b>6.2.5</b> Plot with long table</a></li>
 <li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
@@ -318,17 +318,21 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#inner_join-and-full_join"><i class="fa fa-check"></i><b>7.1.2</b> <code>inner_join()</code> and <code>full_join()</code></a></li>
 <li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#join-by-different-keys"><i class="fa fa-check"></i><b>7.1.3</b> <code>join()</code> by different keys</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.2</b> 讀取內政部人口統計資料</a>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#案例說明"><i class="fa fa-check"></i><b>7.2</b> 案例說明</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.2.1</b> 分析規劃</a></li>
-<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.2.2</b> 清理資料</a></li>
-<li class="chapter" data-level="7.2.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.2.3</b> 進階：運用<code>rowwise()</code></a></li>
-<li class="chapter" data-level="7.2.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.2.4</b> 建立鄉鎮市區與村里指標</a></li>
-<li class="chapter" data-level="7.2.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.2.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#資料來源"><i class="fa fa-check"></i><b>7.2.1</b> 資料來源</a></li>
+<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#處理策略"><i class="fa fa-check"></i><b>7.2.2</b> 處理策略</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.3</b> 讀取公投資料</a>
+<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.3</b> 內政部人口統計資料</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.3.1</b> 合併公投資料並視覺化</a></li>
+<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.3.1</b> Step 1. 寬表轉長表</a></li>
+<li class="chapter" data-level="7.3.2" data-path="joindata.html"><a href="joindata.html#step-2.-切分變項"><i class="fa fa-check"></i><b>7.3.2</b> Step 2. 切分變項</a></li>
+<li class="chapter" data-level="7.3.3" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.3.3</b> Step 3. 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.3.4" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.3.4</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.4</b> 公投資料</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.4.1</b> 合併公投資料並視覺化</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
@@ -798,7 +802,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="re" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">Chapter 13</span> Regular expression<a href="re.html#re" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="re.html#cb500-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="re.html#cb493-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><br />
 正規表達式（Regular Expression）是一種用來描述、搜尋和操作文本的強大工具。它是由一系列字元和特殊符號所組成的模式，用於匹配和處理符合特定模式的字串。</p>
 <p>正規表達式提供了一種靈活且強大的方式來執行字串的模式匹配。這些模式可以包含字母、數字、特殊字符和控制字符等各種元素。使用正規表達式，可以進行字串的搜尋、替換、提取、驗證和分割等操作。</p>
@@ -1015,8 +1019,8 @@ div.csl-indent {
 <li><code>[ABC]</code> character set</li>
 <li><code>[^ABC]</code> neglect set (Leadning <code>^</code> in <code>[]</code> means neglecting)</li>
 </ul>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="re.html#cb501-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">&quot;   123   456   789   &quot;</span></span>
-<span id="cb501-2"><a href="re.html#cb501-2" tabindex="-1"></a><span class="fu">str_replace_all</span>(s, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="re.html#cb494-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">&quot;   123   456   789   &quot;</span></span>
+<span id="cb494-2"><a href="re.html#cb494-2" tabindex="-1"></a><span class="fu">str_replace_all</span>(s, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;123456789&quot;</code></pre>
 <div id="extracting" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Extracting<a href="re.html#extracting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1029,34 +1033,34 @@ div.csl-indent {
 <div id="by-str_extract" class="section level4 hasAnchor" number="13.1.1.1">
 <h4><span class="header-section-number">13.1.1.1</span> by <code>str_extract()</code><a href="re.html#by-str_extract" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>以下這個例子是在爬取PTT資料後，嘗試能夠取出每則貼文的ID與暱稱。</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="re.html#cb503-1" tabindex="-1"></a>pname <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;pttid111(kefan)&quot;</span>, <span class="st">&quot;pid2(hangfan)&quot;</span>)</span>
-<span id="cb503-2"><a href="re.html#cb503-2" tabindex="-1"></a></span>
-<span id="cb503-3"><a href="re.html#cb503-3" tabindex="-1"></a></span>
-<span id="cb503-4"><a href="re.html#cb503-4" tabindex="-1"></a><span class="co"># extracting at least one words until not word</span></span>
-<span id="cb503-5"><a href="re.html#cb503-5" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="re.html#cb496-1" tabindex="-1"></a>pname <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;pttid111(kefan)&quot;</span>, <span class="st">&quot;pid2(hangfan)&quot;</span>)</span>
+<span id="cb496-2"><a href="re.html#cb496-2" tabindex="-1"></a></span>
+<span id="cb496-3"><a href="re.html#cb496-3" tabindex="-1"></a></span>
+<span id="cb496-4"><a href="re.html#cb496-4" tabindex="-1"></a><span class="co"># extracting at least one words until not word</span></span>
+<span id="cb496-5"><a href="re.html#cb496-5" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;p&quot; &quot;p&quot;</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="re.html#cb505-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="re.html#cb498-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pttid111&quot; &quot;pid2&quot;</code></pre>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="re.html#cb507-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]+&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="re.html#cb500-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]+&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pttid111&quot; &quot;pid2&quot;</code></pre>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="re.html#cb509-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]*&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="re.html#cb502-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]*&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pttid111&quot; &quot;pid2&quot;</code></pre>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="re.html#cb511-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]{8}&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="re.html#cb504-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]{8}&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pttid111&quot; NA</code></pre>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="re.html#cb513-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]{1,8}&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="re.html#cb506-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;[A-Za-z0-9]{1,8}&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;pttid111&quot; &quot;pid2&quot;</code></pre>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="re.html#cb515-1" tabindex="-1"></a><span class="co"># extracting word between ()</span></span>
-<span id="cb515-2"><a href="re.html#cb515-2" tabindex="-1"></a><span class="co"># () is controlled vocabulary in regular expression, needing \\( and \\) to specify the character themself</span></span>
-<span id="cb515-3"><a href="re.html#cb515-3" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">)&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">&quot;[</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">)]&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="re.html#cb508-1" tabindex="-1"></a><span class="co"># extracting word between ()</span></span>
+<span id="cb508-2"><a href="re.html#cb508-2" tabindex="-1"></a><span class="co"># () is controlled vocabulary in regular expression, needing \\( and \\) to specify the character themself</span></span>
+<span id="cb508-3"><a href="re.html#cb508-3" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">)&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">&quot;[</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">)]&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;kefan&quot;   &quot;hangfan&quot;</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="re.html#cb517-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(.+</span><span class="sc">\\</span><span class="st">)&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="re.html#cb510-1" tabindex="-1"></a><span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(.+</span><span class="sc">\\</span><span class="st">)&quot;</span>) </span></code></pre></div>
 <pre><code>## [1] &quot;(kefan)&quot;   &quot;(hangfan)&quot;</code></pre>
 </div>
 <div id="by-str_extract-for-data-frame" class="section level4 hasAnchor" number="13.1.1.2">
 <h4><span class="header-section-number">13.1.1.2</span> by <code>str_extract</code> for data frame<a href="re.html#by-str_extract-for-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="re.html#cb519-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span></span>
-<span id="cb519-2"><a href="re.html#cb519-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">nickname =</span> <span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">)&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">&quot;[</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">)]&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb519-3"><a href="re.html#cb519-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="re.html#cb512-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span></span>
+<span id="cb512-2"><a href="re.html#cb512-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">nickname =</span> <span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">)&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">&quot;[</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">)]&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb512-3"><a href="re.html#cb512-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_extract</span>(pname, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
 ## ℹ Please use `tibble()` instead.
 ## This warning is displayed once every 8 hours.
@@ -1075,8 +1079,8 @@ div.csl-indent {
 <li><code>\\(.+\\)</code>則是把剩下的pattern matching 完</li>
 <li><code>\\1</code>代表我要抽取前面第一組抽取出來的pattern，也就是<code>(\\w+)</code>中間的<code>\\w+</code>。</li>
 </ul>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="re.html#cb522-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span></span>
-<span id="cb522-2"><a href="re.html#cb522-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_replace</span>(pname, <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">w+)</span><span class="sc">\\</span><span class="st">(.+</span><span class="sc">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="re.html#cb515-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span></span>
+<span id="cb515-2"><a href="re.html#cb515-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">str_replace</span>(pname, <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">w+)</span><span class="sc">\\</span><span class="st">(.+</span><span class="sc">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   pname           id      
 ##   &lt;chr&gt;           &lt;chr&gt;   
@@ -1085,14 +1089,14 @@ div.csl-indent {
 </div>
 <div id="by-tidyrextract-for-data-frame" class="section level4 hasAnchor" number="13.1.1.4">
 <h4><span class="header-section-number">13.1.1.4</span> by <code>tidyr::extract()</code> for data frame<a href="re.html#by-tidyrextract-for-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="re.html#cb524-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span> </span>
-<span id="cb524-2"><a href="re.html#cb524-2" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">extract</span>(pname, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;nickname&quot;</span>), <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">w+)</span><span class="sc">\\</span><span class="st">((.+)</span><span class="sc">\\</span><span class="st">)&quot;</span>, <span class="at">remove =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="re.html#cb517-1" tabindex="-1"></a><span class="fu">data_frame</span>(pname) <span class="sc">%&gt;%</span> </span>
+<span id="cb517-2"><a href="re.html#cb517-2" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">extract</span>(pname, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;nickname&quot;</span>), <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">w+)</span><span class="sc">\\</span><span class="st">((.+)</span><span class="sc">\\</span><span class="st">)&quot;</span>, <span class="at">remove =</span> F)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   pname           id       nickname
 ##   &lt;chr&gt;           &lt;chr&gt;    &lt;chr&gt;   
 ## 1 pttid111(kefan) pttid111 kefan   
 ## 2 pid2(hangfan)   pid2     hangfan</code></pre>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="re.html#cb526-1" tabindex="-1"></a>?tidyr<span class="sc">::</span>extract</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="re.html#cb519-1" tabindex="-1"></a>?tidyr<span class="sc">::</span>extract</span></code></pre></div>
 </div>
 </div>
 <div id="detecting-with-non-greedy" class="section level3 hasAnchor" number="13.1.2">
@@ -1105,15 +1109,15 @@ div.csl-indent {
 </ul>
 <p>回到我們的例子，當使用默認的貪婪模式時，我們的正則表達式<strong><code>"Twitter for (.*)&lt;"</code></strong>會從第一個<strong><code>&lt;p&gt;</code></strong>開始匹配，直到找到最後一個<strong><code>&lt;</code></strong>之前的所有字符。這意味著它會將整個<strong><code>&lt;p&gt;Twitter for iphone&lt;/p&gt;&lt;div&gt;&lt;p&gt;</code></strong>作為匹配結果，而不僅僅是<strong><code>&lt;p&gt;Twitter for iphone&lt;/p&gt;</code></strong>。</p>
 <p>但如果我們想要只匹配第一個<strong><code>&lt;p&gt;</code></strong>和之後的字符，而不是將整個<strong><code>&lt;p&gt;</code></strong>標籤內容都包括在內，我們可以使用「非貪婪」模式，將正則表達式修改為<strong><code>"Twitter for (.*?)&lt;"</code></strong>，在量詞<strong><code>*</code></strong>後面加上「?」。這樣，它會匹配到第一個<strong><code>&lt;</code></strong>之前的最短字串，即只匹配到<strong><code>&lt;p&gt;Twitter for iphone</code></strong>。</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="re.html#cb527-1" tabindex="-1"></a>source <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&lt;p&gt;Twitter for iphone&lt;/p&gt;&quot;</span>, </span>
-<span id="cb527-2"><a href="re.html#cb527-2" tabindex="-1"></a>            <span class="st">&quot;&lt;div&gt;&lt;p&gt;Twitter for iphone&lt;/p&gt;&lt;/div&gt;&quot;</span>)</span>
-<span id="cb527-3"><a href="re.html#cb527-3" tabindex="-1"></a><span class="fu">data_frame</span>(source) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(source, <span class="st">&quot;device&quot;</span>, <span class="st">&quot;Twitter for (.*)&lt;&quot;</span>)  <span class="co"># Greedy</span></span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="re.html#cb520-1" tabindex="-1"></a>source <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;&lt;p&gt;Twitter for iphone&lt;/p&gt;&quot;</span>, </span>
+<span id="cb520-2"><a href="re.html#cb520-2" tabindex="-1"></a>            <span class="st">&quot;&lt;div&gt;&lt;p&gt;Twitter for iphone&lt;/p&gt;&lt;/div&gt;&quot;</span>)</span>
+<span id="cb520-3"><a href="re.html#cb520-3" tabindex="-1"></a><span class="fu">data_frame</span>(source) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(source, <span class="st">&quot;device&quot;</span>, <span class="st">&quot;Twitter for (.*)&lt;&quot;</span>)  <span class="co"># Greedy</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 1
 ##   device    
 ##   &lt;chr&gt;     
 ## 1 iphone    
 ## 2 iphone&lt;/p&gt;</code></pre>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="re.html#cb529-1" tabindex="-1"></a><span class="fu">data_frame</span>(source) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(source, <span class="st">&quot;device&quot;</span>, <span class="st">&quot;Twitter for (.*?)&lt;&quot;</span>) <span class="co"># Non-Greedy</span></span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="re.html#cb522-1" tabindex="-1"></a><span class="fu">data_frame</span>(source) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(source, <span class="st">&quot;device&quot;</span>, <span class="st">&quot;Twitter for (.*?)&lt;&quot;</span>) <span class="co"># Non-Greedy</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 1
 ##   device
 ##   &lt;chr&gt; 
@@ -1130,28 +1134,28 @@ div.csl-indent {
 <li><p><strong><code>str_detect(teststr, re1) &amp; str_detect(teststr, re2)</code></strong> 通過 <strong><code>&amp;</code></strong> 進行邏輯「與」操作，將兩個邏輯向量進行元素級別的「與」運算，得到一個新的邏輯向量。該向量指示哪些句子同時符合 <strong><code>re1</code></strong> 和 <strong><code>re2</code></strong> 的模式。</p></li>
 <li><p><strong><code>str_detect(teststr, re1) | str_detect(teststr, re2)</code></strong> 通過 <strong><code>|</code></strong> 進行邏輯「或」操作，將兩個邏輯向量進行元素級別的「或」運算，得到一個新的邏輯向量。該向量指示哪些句子符合 <strong><code>re1</code></strong> 或 <strong><code>re2</code></strong> 的模式。</p></li>
 </ol>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="re.html#cb531-1" tabindex="-1"></a>teststr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;B和A是不是男女朋友呢&quot;</span>, </span>
-<span id="cb531-2"><a href="re.html#cb531-2" tabindex="-1"></a>             <span class="st">&quot;C與B是不是在一起呢&quot;</span>, </span>
-<span id="cb531-3"><a href="re.html#cb531-3" tabindex="-1"></a>             <span class="st">&quot;A就是B。&quot;</span>)</span>
-<span id="cb531-4"><a href="re.html#cb531-4" tabindex="-1"></a>re1 <span class="ot">&lt;-</span> <span class="st">&quot;(.*B.*呢$)&quot;</span></span>
-<span id="cb531-5"><a href="re.html#cb531-5" tabindex="-1"></a>re2 <span class="ot">&lt;-</span> <span class="st">&quot;(.*A.*)&quot;</span></span>
-<span id="cb531-6"><a href="re.html#cb531-6" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1)</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="re.html#cb524-1" tabindex="-1"></a>teststr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;B和A是不是男女朋友呢&quot;</span>, </span>
+<span id="cb524-2"><a href="re.html#cb524-2" tabindex="-1"></a>             <span class="st">&quot;C與B是不是在一起呢&quot;</span>, </span>
+<span id="cb524-3"><a href="re.html#cb524-3" tabindex="-1"></a>             <span class="st">&quot;A就是B。&quot;</span>)</span>
+<span id="cb524-4"><a href="re.html#cb524-4" tabindex="-1"></a>re1 <span class="ot">&lt;-</span> <span class="st">&quot;(.*B.*呢$)&quot;</span></span>
+<span id="cb524-5"><a href="re.html#cb524-5" tabindex="-1"></a>re2 <span class="ot">&lt;-</span> <span class="st">&quot;(.*A.*)&quot;</span></span>
+<span id="cb524-6"><a href="re.html#cb524-6" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1)</span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="re.html#cb533-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="re.html#cb526-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="re.html#cb535-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1) <span class="sc">&amp;</span> <span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="re.html#cb528-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1) <span class="sc">&amp;</span> <span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="re.html#cb537-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1) <span class="sc">|</span> <span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="re.html#cb530-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr, re1) <span class="sc">|</span> <span class="fu">str_detect</span>(teststr, re2)</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE</code></pre>
 </div>
 <div id="extracting-nearby-words" class="section level3 hasAnchor" number="13.1.4">
 <h3><span class="header-section-number">13.1.4</span> Extracting nearby words<a href="re.html#extracting-nearby-words" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="extracting-nearby-3-english-words" class="section level4 hasAnchor" number="13.1.4.1">
 <h4><span class="header-section-number">13.1.4.1</span> Extracting nearby 3 English words<a href="re.html#extracting-nearby-3-english-words" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="re.html#cb539-1" tabindex="-1"></a>string2 <span class="ot">&lt;-</span> <span class="st">&quot;..., compelled to defend as never before the hard-charging progressivism and ....&quot;</span></span>
-<span id="cb539-2"><a href="re.html#cb539-2" tabindex="-1"></a><span class="fu">data_frame</span>(string2) <span class="sc">%&gt;%</span></span>
-<span id="cb539-3"><a href="re.html#cb539-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">string2 =</span> <span class="fu">str_extract</span>(string2, <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">S+</span><span class="sc">\\</span><span class="st">s){3}before(</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">S+){3}&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb539-4"><a href="re.html#cb539-4" tabindex="-1"></a>    <span class="fu">extract</span>(string2, <span class="fu">c</span>(<span class="st">&quot;prefix&quot;</span>,<span class="st">&quot;hit&quot;</span>, <span class="st">&quot;tail&quot;</span>), <span class="st">&quot;(.+)(before)(.+)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="re.html#cb532-1" tabindex="-1"></a>string2 <span class="ot">&lt;-</span> <span class="st">&quot;..., compelled to defend as never before the hard-charging progressivism and ....&quot;</span></span>
+<span id="cb532-2"><a href="re.html#cb532-2" tabindex="-1"></a><span class="fu">data_frame</span>(string2) <span class="sc">%&gt;%</span></span>
+<span id="cb532-3"><a href="re.html#cb532-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">string2 =</span> <span class="fu">str_extract</span>(string2, <span class="st">&quot;(</span><span class="sc">\\</span><span class="st">S+</span><span class="sc">\\</span><span class="st">s){3}before(</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">S+){3}&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb532-4"><a href="re.html#cb532-4" tabindex="-1"></a>    <span class="fu">extract</span>(string2, <span class="fu">c</span>(<span class="st">&quot;prefix&quot;</span>,<span class="st">&quot;hit&quot;</span>, <span class="st">&quot;tail&quot;</span>), <span class="st">&quot;(.+)(before)(.+)&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   prefix             hit    tail                              
 ##   &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;                             
@@ -1159,20 +1163,20 @@ div.csl-indent {
 </div>
 <div id="extracting-nearby-3-chinese-words" class="section level4 hasAnchor" number="13.1.4.2">
 <h4><span class="header-section-number">13.1.4.2</span> Extracting nearby 3 Chinese words<a href="re.html#extracting-nearby-3-chinese-words" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="re.html#cb541-1" tabindex="-1"></a>string3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;呵呵呵呵呵呵呵我家就住在台灣，那是個美麗的地方&quot;</span>,</span>
-<span id="cb541-2"><a href="re.html#cb541-2" tabindex="-1"></a>             <span class="st">&quot;臺灣真是個美麗的地方齁齁齁&quot;</span>, </span>
-<span id="cb541-3"><a href="re.html#cb541-3" tabindex="-1"></a>             <span class="st">&quot;呵呵呵呵呵呵呵我愛台灣臺灣&quot;</span>)</span>
-<span id="cb541-4"><a href="re.html#cb541-4" tabindex="-1"></a><span class="fu">str_extract</span>(string3, <span class="st">&quot;.{5}台灣.{5}|.{5}臺灣.{5}&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="re.html#cb534-1" tabindex="-1"></a>string3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;呵呵呵呵呵呵呵我家就住在台灣，那是個美麗的地方&quot;</span>,</span>
+<span id="cb534-2"><a href="re.html#cb534-2" tabindex="-1"></a>             <span class="st">&quot;臺灣真是個美麗的地方齁齁齁&quot;</span>, </span>
+<span id="cb534-3"><a href="re.html#cb534-3" tabindex="-1"></a>             <span class="st">&quot;呵呵呵呵呵呵呵我愛台灣臺灣&quot;</span>)</span>
+<span id="cb534-4"><a href="re.html#cb534-4" tabindex="-1"></a><span class="fu">str_extract</span>(string3, <span class="st">&quot;.{5}台灣.{5}|.{5}臺灣.{5}&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;我家就住在台灣，那是個美&quot; NA                        
 ## [3] NA</code></pre>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="re.html#cb543-1" tabindex="-1"></a><span class="fu">str_extract</span>(string3, <span class="st">&quot;.{1,5}台灣.{1,5}|.{1,5}臺灣.{1,5}&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="re.html#cb536-1" tabindex="-1"></a><span class="fu">str_extract</span>(string3, <span class="st">&quot;.{1,5}台灣.{1,5}|.{1,5}臺灣.{1,5}&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;我家就住在台灣，那是個美&quot; NA                        
 ## [3] &quot;呵呵呵我愛台灣臺灣&quot;</code></pre>
 </div>
 <div id="extracting-nearby-3-chinese-words-1" class="section level4 hasAnchor" number="13.1.4.3">
 <h4><span class="header-section-number">13.1.4.3</span> Extracting nearby 3 Chinese words<a href="re.html#extracting-nearby-3-chinese-words-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="re.html#cb545-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(string3)</span>
-<span id="cb545-2"><a href="re.html#cb545-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">extract</span>(string3, <span class="fu">c</span>(<span class="st">&quot;pre&quot;</span>, <span class="st">&quot;hit&quot;</span>, <span class="st">&quot;tail&quot;</span>), <span class="st">&quot;(.{0,5})(台灣|臺灣)(.{0,5})&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="re.html#cb538-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(string3)</span>
+<span id="cb538-2"><a href="re.html#cb538-2" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">extract</span>(string3, <span class="fu">c</span>(<span class="st">&quot;pre&quot;</span>, <span class="st">&quot;hit&quot;</span>, <span class="st">&quot;tail&quot;</span>), <span class="st">&quot;(.{0,5})(台灣|臺灣)(.{0,5})&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   pre          hit   tail      
 ##   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;     
@@ -1187,14 +1191,14 @@ div.csl-indent {
 <div id="getting-the-last-page-of-ptt-hatepolitics" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Getting the last page of PTT HatePolitics<a href="re.html#getting-the-last-page-of-ptt-hatepolitics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>這段程式碼的目的是從URL中提取出頁數或特定的部分，並進行一些後續處理和轉換。這些操作可用於從URL中獲取有用的訊息，例如網頁索引、頁數等。</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="re.html#cb547-1" tabindex="-1"></a>urls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index4086.html&quot;</span>, </span>
-<span id="cb547-2"><a href="re.html#cb547-2" tabindex="-1"></a>          <span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index348.html&quot;</span>)</span>
-<span id="cb547-3"><a href="re.html#cb547-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(urls)</span>
-<span id="cb547-4"><a href="re.html#cb547-4" tabindex="-1"></a><span class="fu">str_extract</span>(urls, <span class="st">&quot;index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="re.html#cb540-1" tabindex="-1"></a>urls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index4086.html&quot;</span>, </span>
+<span id="cb540-2"><a href="re.html#cb540-2" tabindex="-1"></a>          <span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index348.html&quot;</span>)</span>
+<span id="cb540-3"><a href="re.html#cb540-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(urls)</span>
+<span id="cb540-4"><a href="re.html#cb540-4" tabindex="-1"></a><span class="fu">str_extract</span>(urls, <span class="st">&quot;index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;index4086.html&quot; &quot;index348.html&quot;</code></pre>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="re.html#cb549-1" tabindex="-1"></a><span class="fu">str_replace</span>(urls, <span class="st">&quot;.*index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="re.html#cb542-1" tabindex="-1"></a><span class="fu">str_replace</span>(urls, <span class="st">&quot;.*index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span></code></pre></div>
 <pre><code>## [1] 4086  348</code></pre>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="re.html#cb551-1" tabindex="-1"></a><span class="fu">data_frame</span>(urls) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(urls, <span class="st">&quot;last_page&quot;</span>, <span class="st">&quot;index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>, <span class="at">remove =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="re.html#cb544-1" tabindex="-1"></a><span class="fu">data_frame</span>(urls) <span class="sc">%&gt;%</span> <span class="fu">extract</span>(urls, <span class="st">&quot;last_page&quot;</span>, <span class="st">&quot;index(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">.html&quot;</span>, <span class="at">remove =</span> F)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   urls                                               last_page
 ##   &lt;chr&gt;                                              &lt;chr&gt;    
@@ -1234,12 +1238,12 @@ df &lt;- tibble(urls) %&gt;%
 <li><p><strong><code>\\.html</code></strong>：匹配字串中的”.html”字串。由於”.”在正則表達式中具有特殊意義，所以需要使用<strong><code>\\</code></strong>進行轉義。</p></li>
 </ul>
 </div>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="re.html#cb555-1" tabindex="-1"></a>urls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index4086.html&quot;</span>, </span>
-<span id="cb555-2"><a href="re.html#cb555-2" tabindex="-1"></a>          <span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index348.html&quot;</span>)</span>
-<span id="cb555-3"><a href="re.html#cb555-3" tabindex="-1"></a></span>
-<span id="cb555-4"><a href="re.html#cb555-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(urls) <span class="sc">%&gt;%</span></span>
-<span id="cb555-5"><a href="re.html#cb555-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">page_num =</span> <span class="fu">str_extract</span>(urls, <span class="st">&quot;(?&lt;=index)</span><span class="sc">\\</span><span class="st">d+(?=.html)&quot;</span>))</span>
-<span id="cb555-6"><a href="re.html#cb555-6" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="re.html#cb548-1" tabindex="-1"></a>urls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index4086.html&quot;</span>, </span>
+<span id="cb548-2"><a href="re.html#cb548-2" tabindex="-1"></a>          <span class="st">&quot;https://www.ptt.cc/bbs/HatePolitics/index348.html&quot;</span>)</span>
+<span id="cb548-3"><a href="re.html#cb548-3" tabindex="-1"></a></span>
+<span id="cb548-4"><a href="re.html#cb548-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(urls) <span class="sc">%&gt;%</span></span>
+<span id="cb548-5"><a href="re.html#cb548-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">page_num =</span> <span class="fu">str_extract</span>(urls, <span class="st">&quot;(?&lt;=index)</span><span class="sc">\\</span><span class="st">d+(?=.html)&quot;</span>))</span>
+<span id="cb548-6"><a href="re.html#cb548-6" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   urls                                               page_num
 ##   &lt;chr&gt;                                              &lt;chr&gt;   
@@ -1264,49 +1268,49 @@ df &lt;- tibble(urls) %&gt;%
 <li><p>捕獲更多的URL前綴：當前的正規表達式只捕獲了 <strong><code>http://</code></strong>、<strong><code>https://</code></strong>、<strong><code>ftp://</code></strong>、<strong><code>www.</code></strong> 和 <strong><code>ftp.</code></strong> 這些前綴。如果需要捕獲更多的前綴，可以擴展前綴部分，例如 <strong><code>((https?|ftp|file)://|(www|ftp)\\.)?</code></strong>，這樣可以捕獲 <strong><code>file://</code></strong> 這樣的前綴。</p></li>
 <li><p>更精確的域名部分：當前的正規表達式使用 <strong><code>[a-z0-9-]+(\\.[a-z0-9-]+)+</code></strong> 匹配域名部分，這允許了字母、數字和破折號字符。如果需要更精確的域名匹配，可以使用更複雜的正規表達式，例如 <strong><code>(?!-)[A-Za-z0-9-]{1,63}(?&lt;!-)\\.(?!-)[A-Za-z0-9-]{1,63}(?&lt;!-)</code></strong>，這樣可以確保符合域名規範。</p></li>
 </ol>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="re.html#cb557-1" tabindex="-1"></a>pattern <span class="ot">&lt;-</span> <span class="st">&quot;^((https?|ftp)://|(www|ftp)</span><span class="sc">\\</span><span class="st">.)?[a-z0-9-]+(</span><span class="sc">\\</span><span class="st">.[a-z0-9-]+)+([/?].*)?$&quot;</span></span>
-<span id="cb557-2"><a href="re.html#cb557-2" tabindex="-1"></a></span>
-<span id="cb557-3"><a href="re.html#cb557-3" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;http://www.yahoo.com.tw&quot;</span>, pattern)</span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="re.html#cb550-1" tabindex="-1"></a>pattern <span class="ot">&lt;-</span> <span class="st">&quot;^((https?|ftp)://|(www|ftp)</span><span class="sc">\\</span><span class="st">.)?[a-z0-9-]+(</span><span class="sc">\\</span><span class="st">.[a-z0-9-]+)+([/?].*)?$&quot;</span></span>
+<span id="cb550-2"><a href="re.html#cb550-2" tabindex="-1"></a></span>
+<span id="cb550-3"><a href="re.html#cb550-3" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;http://www.yahoo.com.tw&quot;</span>, pattern)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="re.html#cb559-1" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;https://m.facebook.com/story.php?story_fbid=1483357095305703&amp;id=1435979486710131&quot;</span>, pattern)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="re.html#cb552-1" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;https://m.facebook.com/story.php?story_fbid=1483357095305703&amp;id=1435979486710131&quot;</span>, pattern)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="re.html#cb561-1" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;https://www.facebook.com/groups/335691256571414/permalink/774316322708903/&quot;</span>, pattern)</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="re.html#cb554-1" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">&quot;https://www.facebook.com/groups/335691256571414/permalink/774316322708903/&quot;</span>, pattern)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="removing-all-html-tags-but-keeping-comment-content" class="section level3 hasAnchor" number="13.3.2">
 <h3><span class="header-section-number">13.3.2</span> Removing all html tags but keeping comment content<a href="re.html#removing-all-html-tags-but-keeping-comment-content" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>ANS: <code>"推 ya870801: 推  218.166.12.10 10/16 15:56"</code></p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="re.html#cb563-1" tabindex="-1"></a>comment <span class="ot">&lt;-</span> <span class="st">&#39;&lt;div class=&quot;push&quot;&gt;&lt;span class=&quot;hl push-tag&quot;&gt;推 &lt;/span&gt;&lt;span class=&quot;f3 hl push-userid&quot;&gt;ya870801&lt;/span&gt;&lt;span class=&quot;f3 push-content&quot;&gt;: 推&lt;/span&gt;&lt;span class=&quot;push-ipdatetime&quot;&gt;  218.166.12.10 10/16 15:56&lt;/span&gt;&lt;/div&gt;&#39;</span></span>
-<span id="cb563-2"><a href="re.html#cb563-2" tabindex="-1"></a><span class="fu">str_replace_all</span>(comment, <span class="st">&quot;&lt;.+?&gt;&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="re.html#cb556-1" tabindex="-1"></a>comment <span class="ot">&lt;-</span> <span class="st">&#39;&lt;div class=&quot;push&quot;&gt;&lt;span class=&quot;hl push-tag&quot;&gt;推 &lt;/span&gt;&lt;span class=&quot;f3 hl push-userid&quot;&gt;ya870801&lt;/span&gt;&lt;span class=&quot;f3 push-content&quot;&gt;: 推&lt;/span&gt;&lt;span class=&quot;push-ipdatetime&quot;&gt;  218.166.12.10 10/16 15:56&lt;/span&gt;&lt;/div&gt;&#39;</span></span>
+<span id="cb556-2"><a href="re.html#cb556-2" tabindex="-1"></a><span class="fu">str_replace_all</span>(comment, <span class="st">&quot;&lt;.+?&gt;&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;推 ya870801: 推  218.166.12.10 10/16 15:56&quot;</code></pre>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="re.html#cb565-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(comment, <span class="st">&quot;&lt;.*?&gt;&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="re.html#cb558-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(comment, <span class="st">&quot;&lt;.*?&gt;&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;推 ya870801: 推  218.166.12.10 10/16 15:56&quot;</code></pre>
 </div>
 <div id="removing-space" class="section level3 hasAnchor" number="13.3.3">
 <h3><span class="header-section-number">13.3.3</span> Removing space<a href="re.html#removing-space" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="re.html#cb567-1" tabindex="-1"></a><span class="co"># Removing space in Chinese sentence</span></span>
-<span id="cb567-2"><a href="re.html#cb567-2" tabindex="-1"></a>sentence <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39; 噓 wwHui: 這批安好純   </span><span class="sc">\n</span><span class="st">  辛苦了  </span><span class="sc">\n</span><span class="st"> 噓 &#39;</span>, <span class="st">&#39;噓 wwHui: 這批安好純   &#39;</span>, <span class="st">&#39;辛苦了  &#39;</span>)</span>
-<span id="cb567-3"><a href="re.html#cb567-3" tabindex="-1"></a></span>
-<span id="cb567-4"><a href="re.html#cb567-4" tabindex="-1"></a><span class="co"># Removing all space characters</span></span>
-<span id="cb567-5"><a href="re.html#cb567-5" tabindex="-1"></a><span class="fu">str_replace_all</span>(sentence, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="re.html#cb560-1" tabindex="-1"></a><span class="co"># Removing space in Chinese sentence</span></span>
+<span id="cb560-2"><a href="re.html#cb560-2" tabindex="-1"></a>sentence <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39; 噓 wwHui: 這批安好純   </span><span class="sc">\n</span><span class="st">  辛苦了  </span><span class="sc">\n</span><span class="st"> 噓 &#39;</span>, <span class="st">&#39;噓 wwHui: 這批安好純   &#39;</span>, <span class="st">&#39;辛苦了  &#39;</span>)</span>
+<span id="cb560-3"><a href="re.html#cb560-3" tabindex="-1"></a></span>
+<span id="cb560-4"><a href="re.html#cb560-4" tabindex="-1"></a><span class="co"># Removing all space characters</span></span>
+<span id="cb560-5"><a href="re.html#cb560-5" tabindex="-1"></a><span class="fu">str_replace_all</span>(sentence, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;噓wwHui:這批安好純辛苦了噓&quot; &quot;噓wwHui:這批安好純&quot;        
 ## [3] &quot;辛苦了&quot;</code></pre>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="re.html#cb569-1" tabindex="-1"></a><span class="co"># Removing leading and ending space by str_replace_all()</span></span>
-<span id="cb569-2"><a href="re.html#cb569-2" tabindex="-1"></a><span class="co"># You cannot use trimws()</span></span>
-<span id="cb569-3"><a href="re.html#cb569-3" tabindex="-1"></a><span class="fu">str_replace_all</span>(sentence, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">s+|</span><span class="sc">\\</span><span class="st">s+$&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="re.html#cb562-1" tabindex="-1"></a><span class="co"># Removing leading and ending space by str_replace_all()</span></span>
+<span id="cb562-2"><a href="re.html#cb562-2" tabindex="-1"></a><span class="co"># You cannot use trimws()</span></span>
+<span id="cb562-3"><a href="re.html#cb562-3" tabindex="-1"></a><span class="fu">str_replace_all</span>(sentence, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">s+|</span><span class="sc">\\</span><span class="st">s+$&quot;</span>, <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;噓 wwHui: 這批安好純   \n  辛苦了  \n 噓&quot;
 ## [2] &quot;噓 wwHui: 這批安好純&quot;                    
 ## [3] &quot;辛苦了&quot;</code></pre>
 </div>
 <div id="testing" class="section level3 hasAnchor" number="13.3.4">
 <h3><span class="header-section-number">13.3.4</span> Testing<a href="re.html#testing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="re.html#cb571-1" tabindex="-1"></a>teststr1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;我最近過的挺爽&quot;</span>, <span class="st">&quot;最近我過的不是很好。&quot;</span>, <span class="st">&quot;我最近過得不太好。&quot;</span>)</span>
-<span id="cb571-2"><a href="re.html#cb571-2" tabindex="-1"></a>re1 <span class="ot">&lt;-</span> <span class="st">&quot;(^我.+)&quot;</span></span>
-<span id="cb571-3"><a href="re.html#cb571-3" tabindex="-1"></a>re2 <span class="ot">&lt;-</span> <span class="st">&quot;(.*。)&quot;</span></span>
-<span id="cb571-4"><a href="re.html#cb571-4" tabindex="-1"></a></span>
-<span id="cb571-5"><a href="re.html#cb571-5" tabindex="-1"></a><span class="fu">str_detect</span>(teststr1, <span class="fu">str_c</span>(re1,re2, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="re.html#cb564-1" tabindex="-1"></a>teststr1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;我最近過的挺爽&quot;</span>, <span class="st">&quot;最近我過的不是很好。&quot;</span>, <span class="st">&quot;我最近過得不太好。&quot;</span>)</span>
+<span id="cb564-2"><a href="re.html#cb564-2" tabindex="-1"></a>re1 <span class="ot">&lt;-</span> <span class="st">&quot;(^我.+)&quot;</span></span>
+<span id="cb564-3"><a href="re.html#cb564-3" tabindex="-1"></a>re2 <span class="ot">&lt;-</span> <span class="st">&quot;(.*。)&quot;</span></span>
+<span id="cb564-4"><a href="re.html#cb564-4" tabindex="-1"></a></span>
+<span id="cb564-5"><a href="re.html#cb564-5" tabindex="-1"></a><span class="fu">str_detect</span>(teststr1, <span class="fu">str_c</span>(re1,re2, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="re.html#cb573-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr1, <span class="fu">str_c</span>(re1,re2, <span class="at">sep =</span> <span class="st">&quot;|&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="re.html#cb566-1" tabindex="-1"></a><span class="fu">str_detect</span>(teststr1, <span class="fu">str_c</span>(re1,re2, <span class="at">sep =</span> <span class="st">&quot;|&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE</code></pre>
 
 </div>

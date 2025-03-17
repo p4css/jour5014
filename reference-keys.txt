@@ -110,8 +110,8 @@ without-pipeline-i
 without-pipeline-ii
 with-pipeline
 cleaning-data-ii
-long-to-wide-form
-setting-time-as-row.name-for-mosaicplot
+long-to-wide-table
+plot-with-long-table
 clean-version
 maternity_dplyr
 the-data-1
@@ -125,9 +125,12 @@ simple
 left_join-right_join
 inner_join-and-full_join
 join-by-different-keys
+案例說明
+資料來源
+處理策略
 moi
-moi_plan
 moi_clean
+step-2.-切分變項
 moi_rowwise
 moi_vil
 moi_vil_groupby

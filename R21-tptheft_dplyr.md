@@ -55,7 +55,7 @@ library(tidyverse)
 ### Reading data
 
 
-```r
+``` r
 # Read by read_csv()
 # Will raise error
 # Error in make.names(x) : invalid multibyte string at '<bd>s<b8><b9>'
@@ -63,7 +63,21 @@ library(tidyverse)
 
 # read_csv() with locale = locale(encoding = "Big5")
 library(readr)
-df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
+# df <- read.csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv", fileEncoding = "Big5")
+df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv", locale = locale(encoding = "Big5"))
+head(df) 
+```
+
+``` output
+## # A tibble: 6 × 5
+##    編號 案類     發生日期 發生時段 發生地點                                   
+##   <dbl> <chr>       <dbl> <chr>    <chr>                                      
+## 1     1 住宅竊盜  1030623 08~10    臺北市中正區廈門街91~120號                 
+## 2     2 住宅竊盜  1040101 00~02    臺北市文山區萬美里萬寧街1~30號             
+## 3     3 住宅竊盜  1040101 00~02    臺北市信義區富台里忠孝東路5段295巷6弄1~30號
+## 4     4 住宅竊盜  1040101 06~08    臺北市中山區新生北路1段91~120號            
+## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30號          
+## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段130巷1~30號
 ```
 
 ### Cleaning data I
@@ -76,39 +90,39 @@ df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
 #### (1) Without pipeline I
 
 
-```r
-df1 <- select(df, id = 編號, cat = 案類, date = `發生日期`, time = `發生時段`, location = `發生地點`)
+``` r
+df1 <- select(df, id = 編號, cat = 案類, date = `發生日期`, timestamp = `發生時段`, location = `發生地點`)
 
 df2 <- mutate(df1, year = date %/% 10000)
 df3 <- mutate(df2, month = date %/% 100 %% 100)
 df4 <- mutate(df3, area = str_sub(location, 4, 6))
-selected_df <- mutate(df4, county = str_sub(location, 1, 3))
+df_selected <- mutate(df4, county = str_sub(location, 1, 3))
 ```
 
 #### (2) Without pipeline II
 
 
-```r
+``` r
 library(stringr)
 
-selected_df <- select(df, id = 編號, cat = 案類, date = `發生日期`, time = `發生時段`, location = `發生地點`)
+df_selected <- select(df, id = 編號, cat = 案類, date = `發生日期`, timestamp = `發生時段`, location = `發生地點`)
 
-selected_df <- mutate(selected_df, year = date %/% 10000)
-selected_df <- mutate(selected_df, month = date %/% 100 %% 100)
-selected_df <- mutate(selected_df, area = str_sub(location, 4, 6))
-selected_df <- mutate(selected_df, county = str_sub(location, 1, 3))
+df_selected <- mutate(df_selected, year = date %/% 10000)
+df_selected <- mutate(df_selected, month = date %/% 100 %% 100)
+df_selected <- mutate(df_selected, area = str_sub(location, 4, 6))
+df_selected <- mutate(df_selected, county = str_sub(location, 1, 3))
 ```
 
 #### (3) With pipeline
 
 
-```r
+``` r
 library(stringr)
-selected_df <- df %>%
+df_selected <- df %>%
     select(id = 編號, 
            cat = 案類, 
            date = `發生日期`, 
-           time = `發生時段`, 
+           timestamp = `發生時段`, 
            location = `發生地點`) %>%
     mutate(year = date %/% 10000) %>%
     mutate(month = date %/% 100 %% 100) %>%
@@ -121,53 +135,57 @@ selected_df <- df %>%
 -   Filtering out irrelevant data records
 
 
-```r
+``` r
 # readr::guess_encoding("data/tp_theft.csv")
-filtered_df <- selected_df %>%
-    # count(year) %>% View
-    filter(county == "臺北市") %>%
-    filter(year >= 104) %>%
-    # count(time) %>% View
-    # count(location) %>%
-    filter(!area %in% c("中和市", "板橋市"))
+df_filtered <- df_selected %>%
+  filter(county == "臺北市") %>%
+  filter(year >= 104) %>%
+  filter(!county %in% c("中和市", "板橋市")) %>%
+  filter(!timestamp %in% c("01~03","03~05", "05~07", "09~11", "11~13", "11~03", "12~15", "15~17", "15~18", "17~19", "18~21", "19~21", "21~23", "21~24", "23~01"))
 ```
 
-### Long to wide form
+### Long to wide table
 
 -   `count()` two variables
 -   `pivot_wider()` spread one variable as columns to wide form
 
 
-```r
+``` r
 # count() then pivot_wider()
-df.wide <- filtered_df %>% 
-  count(time, area) %>%
+df_wide <- df_filtered %>% 
+  count(timestamp, area) %>%
   pivot_wider(names_from = area, values_from = n, values_fill = 0)
+
 ??pivot_wider
 ```
 
-### Setting time as row.name for mosaicplot
 
-
-```r
-row.names(df.wide) <- df.wide$time
-df.wide$time <- NULL
+``` r
+df_long <- df_wide %>%
+  pivot_longer(cols = 2:ncol(.), names_to = "area", values_to = "n")
 ```
 
+### Plot with long table
 
-```r
-# Specify fonts for Chinese
-# par(family=('STKaiti')) 
-par(family=('Heiti TC Light')) # for mac
 
-# Specify colors
-colors <- c('#D0104C', '#DB4D6D', '#E83015',  '#F75C2F',
-            '#E79460', '#E98B2A', '#9B6E23', '#F7C242',
-            '#BEC23F', '#90B44B', '#66BAB7', '#1E88A8')
-
-# mosaicplot()
-mosaicplot(df.wide, color=colors, border=0, off = 3,
-           main="Theft rate of Taipei city (region by hour)")
+``` r
+df_filtered %>%
+  count(timestamp, area) %>%
+  ggplot() + 
+  aes(x = timestamp, y = n, fill = area) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(. ~ area) +
+  # facet_wrap(. ~ area, nrow=length(unique(df_filtered$area))) +
+  # facet_grid(. ~ area) +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Heiti TC Light"),  # Apply font to all text
+    axis.title = element_text(family = "Heiti TC Light"),  # X and Y axis labels
+    axis.text = element_text(family = "Heiti TC Light"),   # X and Y axis values
+    legend.text = element_text(family = "Heiti TC Light"), # Legend text
+    legend.title = element_text(family = "Heiti TC Light"), # Legend title
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)
+  )
 ```
 
 <img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-10-1.png" width="672" />
@@ -175,107 +193,46 @@ mosaicplot(df.wide, color=colors, border=0, off = 3,
 ### Clean version
 
 
-```r
+``` r
 library(readr)
-# options(stringsAsFactors = F)
-df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
+library(tidyverse)
 
-selected_df <- df %>%
+df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv", locale = locale(encoding = "Big5"))
+
+df_selected <- df %>%
     select(id = 編號, 
            cat = 案類,
            date = `發生日期`, 
-           time = `發生時段`, 
+           timestamp = `發生時段`, 
            location = `發生地點`) %>%
     mutate(year = date %/% 10000) %>%
     mutate(month = date %/% 100 %% 100) %>%
     mutate(area = stringr::str_sub(location, 4, 6)) %>%
     mutate(county = stringr::str_sub(location, 1, 3))
 
-selected_df %>% count(year)
-```
+df_filtered <- df_selected %>%
+  filter(county == "臺北市") %>%
+  filter(year >= 104) %>%
+  filter(!area %in% c("中和市", "板橋市")) %>%
+  filter(!timestamp %in% c("01~03","03~05", "05~07", "09~11", "11~13", "11~03", "12~15", "15~17", "15~18", "17~19", "18~21", "19~21", "21~23", "21~24", "23~01"))
 
-```{.output}
-## # A tibble: 9 × 2
-##    year     n
-##   <dbl> <int>
-## 1   103     1
-## 2   104   687
-## 3   105   663
-## 4   106   560
-## 5   107   501
-## 6   108   411
-## 7   109   304
-## 8   110   189
-## 9   111    31
-```
-
-```r
-selected_df %>% count(time) %>% head(10)
-```
-
-```{.output}
-## # A tibble: 10 × 2
-##    time      n
-##    <chr> <int>
-##  1 00~02   272
-##  2 02~04   214
-##  3 03~05     8
-##  4 04~06   156
-##  5 05~07    23
-##  6 06~08   191
-##  7 08~10   305
-##  8 09~11     6
-##  9 10~12   338
-## 10 11~03     1
-```
-
-```r
-selected_df %>% arrange(time) %>% head(10)
-```
-
-```{.output}
-## # A tibble: 10 × 9
-##       id cat         date time  location                 year month area  county
-##    <dbl> <chr>      <dbl> <chr> <chr>                   <dbl> <dbl> <chr> <chr> 
-##  1     2 住宅竊盜 1040101 00~02 臺北市文山區萬美里萬寧…   104     1 文山… 臺北市
-##  2     3 住宅竊盜 1040101 00~02 臺北市信義區富台里忠孝…   104     1 信義… 臺北市
-##  3     6 住宅竊盜 1040102 00~02 臺北市士林區天福里1鄰…    104     1 士林… 臺北市
-##  4    12 住宅竊盜 1040105 00~02 臺北市中山區南京東路3…    104     1 中山… 臺北市
-##  5    33 住宅竊盜 1040115 00~02 臺北市松山區饒河街181~…   104     1 松山… 臺北市
-##  6    74 住宅竊盜 1040131 00~02 臺北市南港區重陽路57巷…   104     1 南港… 臺北市
-##  7    75 住宅竊盜 1040201 00~02 臺北市北投區中心里中和…   104     2 北投… 臺北市
-##  8    92 住宅竊盜 1040210 00~02 臺北市北投區大同路200…    104     2 北投… 臺北市
-##  9    95 住宅竊盜 1040212 00~02 臺北市萬華區萬大路493…    104     2 萬華… 臺北市
-## 10   106 住宅竊盜 1040216 00~02 臺北市信義區吳興街269…    104     2 信義… 臺北市
-```
-
-```r
-filtered_df <- selected_df %>%
-    # count(year) %>% View
-    filter(year >= 104) %>%
-    filter(!time %in% c("03~05", "05~07", "09~11", "11~13", "15~17", "17~19", "18~21", "21~23", "23~01"))
-    # count(time) %>% View
-    # count(location) %>%
-    # filter(!area %in% c("中和市", "板橋市"))
-
-df.wide <- filtered_df %>% 
-    count(time, area) %>%
-    pivot_wider(names_from = area, values_from = n, values_fill = 0) %>%
-    as.data.frame()
-
-row.names(df.wide) <- df.wide$time
-df.wide$time <- NULL
-
-par(family=('Heiti TC Light')) # for mac
-
-# Specify colors
-colors <- c('#D0104C', '#DB4D6D', '#E83015',  '#F75C2F',
-            '#E79460', '#E98B2A', '#9B6E23', '#F7C242',
-            '#BEC23F', '#90B44B', '#66BAB7', '#1E88A8')
-
-# mosaicplot()
-mosaicplot(df.wide, color=colors, border=0, off = 3,
-           main="Theft rate of Taipei city (region by hour)")  
+df_filtered %>%
+  count(timestamp, area) %>%
+  ggplot() + 
+  aes(x = timestamp, y = n, fill = area) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(. ~ area) +
+  # facet_wrap(. ~ area, nrow=length(unique(df_filtered$area))) +
+  # facet_grid(. ~ area) +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Heiti TC Light"),  # Apply font to all text
+    axis.title = element_text(family = "Heiti TC Light"),  # X and Y axis labels
+    axis.text = element_text(family = "Heiti TC Light"),   # X and Y axis values
+    legend.text = element_text(family = "Heiti TC Light"), # Legend text
+    legend.title = element_text(family = "Heiti TC Light"), # Legend title
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)
+  )
 ```
 
 <img src="R21-tptheft_dplyr_files/figure-html/unnamed-chunk-11-1.png" width="672" />

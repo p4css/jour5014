@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2025-03-03" />
+<meta name="date" content="2025-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,8 +296,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
 <li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
 <li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
-<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
-<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-table"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide table</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#plot-with-long-table"><i class="fa fa-check"></i><b>6.2.5</b> Plot with long table</a></li>
 <li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
@@ -318,17 +318,21 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#inner_join-and-full_join"><i class="fa fa-check"></i><b>7.1.2</b> <code>inner_join()</code> and <code>full_join()</code></a></li>
 <li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#join-by-different-keys"><i class="fa fa-check"></i><b>7.1.3</b> <code>join()</code> by different keys</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.2</b> 讀取內政部人口統計資料</a>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#案例說明"><i class="fa fa-check"></i><b>7.2</b> 案例說明</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.2.1</b> 分析規劃</a></li>
-<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.2.2</b> 清理資料</a></li>
-<li class="chapter" data-level="7.2.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.2.3</b> 進階：運用<code>rowwise()</code></a></li>
-<li class="chapter" data-level="7.2.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.2.4</b> 建立鄉鎮市區與村里指標</a></li>
-<li class="chapter" data-level="7.2.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.2.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#資料來源"><i class="fa fa-check"></i><b>7.2.1</b> 資料來源</a></li>
+<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#處理策略"><i class="fa fa-check"></i><b>7.2.2</b> 處理策略</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.3</b> 讀取公投資料</a>
+<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.3</b> 內政部人口統計資料</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.3.1</b> 合併公投資料並視覺化</a></li>
+<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.3.1</b> Step 1. 寬表轉長表</a></li>
+<li class="chapter" data-level="7.3.2" data-path="joindata.html"><a href="joindata.html#step-2.-切分變項"><i class="fa fa-check"></i><b>7.3.2</b> Step 2. 切分變項</a></li>
+<li class="chapter" data-level="7.3.3" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.3.3</b> Step 3. 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.3.4" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.3.4</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.4</b> 公投資料</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.4.1</b> 合併公投資料並視覺化</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
@@ -812,9 +816,9 @@ div.csl-indent {
 <li>為了便於後續建立Document-Term-Matrix，這時候若Document自身沒有編號的話，就得把整個Document內容當成該篇文章的id，但也有（極小）可能有兩篇Document內容相同，那就會被視為同一篇文章或發生錯誤。所以必須要編id。</li>
 <li><code>row_number()</code>產生每列的編號，所以這邊就直接把每列的編號視為每篇文章的id，可以保持該id的唯一性。當你在進行文本探勘或資料分析時，為每篇文章分配一個唯一的ID是非常重要的。唯一的ID確保每篇文章都有獨一無二的標識符號。這對於跟踪和識別特定文章非常重要，特別是當你處理大量的文本資料時。在進行資料合併時，唯一的ID可用於將不同來源的資料準確地匹配和合併在一起。這是非常實用的，尤其當你需要整合來自多個來源的文本資料時，例如合併多個資料集或者在不同時間點上進行的數據採集。</li>
 </ul>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="tmchi.html#cb575-1" tabindex="-1"></a>news.df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/typhoon.rds&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb575-2"><a href="tmchi.html#cb575-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb575-3"><a href="tmchi.html#cb575-3" tabindex="-1"></a>  <span class="fu">drop_na</span>(title)</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="tmchi.html#cb568-1" tabindex="-1"></a>news.df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/typhoon.rds&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb568-2"><a href="tmchi.html#cb568-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb568-3"><a href="tmchi.html#cb568-3" tabindex="-1"></a>  <span class="fu">drop_na</span>(title)</span></code></pre></div>
 </div>
 </div>
 <div id="tokenization" class="section level2 hasAnchor" number="14.2">
@@ -838,19 +842,19 @@ div.csl-indent {
 <li>感嘆詞：嗯、哦、啊、呀、吧、喔等。</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="tmchi.html#cb576-1" tabindex="-1"></a><span class="co"># segment_not to avoid to be segmented by jeiba cutter</span></span>
-<span id="cb576-2"><a href="tmchi.html#cb576-2" tabindex="-1"></a>segment_not <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;第卅六條&quot;</span>, <span class="st">&quot;第卅八條&quot;</span>, <span class="st">&quot;蘇南成&quot;</span>, <span class="st">&quot;災前&quot;</span>, <span class="st">&quot;災後&quot;</span>, <span class="st">&quot;莫拉克&quot;</span>, <span class="st">&quot;颱風&quot;</span>, <span class="st">&quot;應變中心&quot;</span>, <span class="st">&quot;停班停課&quot;</span>, <span class="st">&quot;停課&quot;</span>, <span class="st">&quot;停班&quot;</span>, <span class="st">&quot;停駛&quot;</span>, <span class="st">&quot;路樹&quot;</span>, <span class="st">&quot;里長&quot;</span>, <span class="st">&quot;賀伯&quot;</span>, <span class="st">&quot;採收&quot;</span>, <span class="st">&quot;菜價&quot;</span>, <span class="st">&quot;蘇迪&quot;</span>, <span class="st">&quot;受災戶&quot;</span>, <span class="st">&quot;颱風警報&quot;</span>, <span class="st">&quot;韋恩&quot;</span>, <span class="st">&quot;台東縣&quot;</span>, <span class="st">&quot;馬總統&quot;</span>, <span class="st">&quot;豪大雨&quot;</span>, <span class="st">&quot;梅姬&quot;</span>, <span class="st">&quot;台東&quot;</span>, <span class="st">&quot;台北市政府&quot;</span>, <span class="st">&quot;工務段&quot;</span>, <span class="st">&quot;漂流木&quot;</span>, <span class="st">&quot;陳菊&quot;</span>, <span class="st">&quot;台南縣&quot;</span>, <span class="st">&quot;卡玫基&quot;</span>, <span class="st">&quot;魚塭&quot;</span>, <span class="st">&quot;救助金&quot;</span>, <span class="st">&quot;陳情&quot;</span>, <span class="st">&quot;全省&quot;</span>, <span class="st">&quot;強颱&quot;</span>, <span class="st">&quot;中颱&quot;</span>, <span class="st">&quot;輕颱&quot;</span>, <span class="st">&quot;小林村&quot;</span>, <span class="st">&quot;野溪&quot;</span>, <span class="st">&quot;蚵民&quot;</span>, <span class="st">&quot;農委會&quot;</span>, <span class="st">&quot;來襲&quot;</span>, <span class="st">&quot;中油公司&quot;</span>, <span class="st">&quot;蔣總統經國&quot;</span>, <span class="st">&quot;颱風天&quot;</span>, <span class="st">&quot;土石流&quot;</span>, <span class="st">&quot;蘇迪勒&quot;</span>, <span class="st">&quot;水利署&quot;</span>, <span class="st">&quot;陳說&quot;</span>, <span class="st">&quot;颱風假&quot;</span>, <span class="st">&quot;颱風地區&quot;</span>, <span class="st">&quot;台灣&quot;</span>, <span class="st">&quot;臺灣&quot;</span>, <span class="st">&quot;柯羅莎&quot;</span>, <span class="st">&quot;八八風災&quot;</span>, <span class="st">&quot;紓困&quot;</span>,<span class="st">&quot;傅崑萁&quot;</span>, <span class="st">&quot;傅崐萁&quot;</span>,<span class="st">&quot;台中&quot;</span>, <span class="st">&quot;文旦柚&quot;</span>, <span class="st">&quot;鄉鎮市公所&quot;</span>, <span class="st">&quot;鄉鎮市&quot;</span>, <span class="st">&quot;房屋稅&quot;</span>, <span class="st">&quot;高雄&quot;</span>, <span class="st">&quot;未達&quot;</span>, <span class="st">&quot;台灣省&quot;</span>, <span class="st">&quot;台北市&quot;</span>)</span>
-<span id="cb576-3"><a href="tmchi.html#cb576-3" tabindex="-1"></a></span>
-<span id="cb576-4"><a href="tmchi.html#cb576-4" tabindex="-1"></a><span class="co"># Initialize jieba cutter</span></span>
-<span id="cb576-5"><a href="tmchi.html#cb576-5" tabindex="-1"></a>cutter <span class="ot">&lt;-</span> <span class="fu">worker</span>()</span>
-<span id="cb576-6"><a href="tmchi.html#cb576-6" tabindex="-1"></a></span>
-<span id="cb576-7"><a href="tmchi.html#cb576-7" tabindex="-1"></a><span class="co"># Add segment_not into user defined dictionary to avoid being cutted</span></span>
-<span id="cb576-8"><a href="tmchi.html#cb576-8" tabindex="-1"></a><span class="fu">new_user_word</span>(cutter, segment_not)</span></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="tmchi.html#cb569-1" tabindex="-1"></a><span class="co"># segment_not to avoid to be segmented by jeiba cutter</span></span>
+<span id="cb569-2"><a href="tmchi.html#cb569-2" tabindex="-1"></a>segment_not <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;第卅六條&quot;</span>, <span class="st">&quot;第卅八條&quot;</span>, <span class="st">&quot;蘇南成&quot;</span>, <span class="st">&quot;災前&quot;</span>, <span class="st">&quot;災後&quot;</span>, <span class="st">&quot;莫拉克&quot;</span>, <span class="st">&quot;颱風&quot;</span>, <span class="st">&quot;應變中心&quot;</span>, <span class="st">&quot;停班停課&quot;</span>, <span class="st">&quot;停課&quot;</span>, <span class="st">&quot;停班&quot;</span>, <span class="st">&quot;停駛&quot;</span>, <span class="st">&quot;路樹&quot;</span>, <span class="st">&quot;里長&quot;</span>, <span class="st">&quot;賀伯&quot;</span>, <span class="st">&quot;採收&quot;</span>, <span class="st">&quot;菜價&quot;</span>, <span class="st">&quot;蘇迪&quot;</span>, <span class="st">&quot;受災戶&quot;</span>, <span class="st">&quot;颱風警報&quot;</span>, <span class="st">&quot;韋恩&quot;</span>, <span class="st">&quot;台東縣&quot;</span>, <span class="st">&quot;馬總統&quot;</span>, <span class="st">&quot;豪大雨&quot;</span>, <span class="st">&quot;梅姬&quot;</span>, <span class="st">&quot;台東&quot;</span>, <span class="st">&quot;台北市政府&quot;</span>, <span class="st">&quot;工務段&quot;</span>, <span class="st">&quot;漂流木&quot;</span>, <span class="st">&quot;陳菊&quot;</span>, <span class="st">&quot;台南縣&quot;</span>, <span class="st">&quot;卡玫基&quot;</span>, <span class="st">&quot;魚塭&quot;</span>, <span class="st">&quot;救助金&quot;</span>, <span class="st">&quot;陳情&quot;</span>, <span class="st">&quot;全省&quot;</span>, <span class="st">&quot;強颱&quot;</span>, <span class="st">&quot;中颱&quot;</span>, <span class="st">&quot;輕颱&quot;</span>, <span class="st">&quot;小林村&quot;</span>, <span class="st">&quot;野溪&quot;</span>, <span class="st">&quot;蚵民&quot;</span>, <span class="st">&quot;農委會&quot;</span>, <span class="st">&quot;來襲&quot;</span>, <span class="st">&quot;中油公司&quot;</span>, <span class="st">&quot;蔣總統經國&quot;</span>, <span class="st">&quot;颱風天&quot;</span>, <span class="st">&quot;土石流&quot;</span>, <span class="st">&quot;蘇迪勒&quot;</span>, <span class="st">&quot;水利署&quot;</span>, <span class="st">&quot;陳說&quot;</span>, <span class="st">&quot;颱風假&quot;</span>, <span class="st">&quot;颱風地區&quot;</span>, <span class="st">&quot;台灣&quot;</span>, <span class="st">&quot;臺灣&quot;</span>, <span class="st">&quot;柯羅莎&quot;</span>, <span class="st">&quot;八八風災&quot;</span>, <span class="st">&quot;紓困&quot;</span>,<span class="st">&quot;傅崑萁&quot;</span>, <span class="st">&quot;傅崐萁&quot;</span>,<span class="st">&quot;台中&quot;</span>, <span class="st">&quot;文旦柚&quot;</span>, <span class="st">&quot;鄉鎮市公所&quot;</span>, <span class="st">&quot;鄉鎮市&quot;</span>, <span class="st">&quot;房屋稅&quot;</span>, <span class="st">&quot;高雄&quot;</span>, <span class="st">&quot;未達&quot;</span>, <span class="st">&quot;台灣省&quot;</span>, <span class="st">&quot;台北市&quot;</span>)</span>
+<span id="cb569-3"><a href="tmchi.html#cb569-3" tabindex="-1"></a></span>
+<span id="cb569-4"><a href="tmchi.html#cb569-4" tabindex="-1"></a><span class="co"># Initialize jieba cutter</span></span>
+<span id="cb569-5"><a href="tmchi.html#cb569-5" tabindex="-1"></a>cutter <span class="ot">&lt;-</span> <span class="fu">worker</span>()</span>
+<span id="cb569-6"><a href="tmchi.html#cb569-6" tabindex="-1"></a></span>
+<span id="cb569-7"><a href="tmchi.html#cb569-7" tabindex="-1"></a><span class="co"># Add segment_not into user defined dictionary to avoid being cutted</span></span>
+<span id="cb569-8"><a href="tmchi.html#cb569-8" tabindex="-1"></a><span class="fu">new_user_word</span>(cutter, segment_not)</span></code></pre></div>
 <pre class="output"><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tmchi.html#cb578-1" tabindex="-1"></a><span class="co"># loading Chinese stop words</span></span>
-<span id="cb578-2"><a href="tmchi.html#cb578-2" tabindex="-1"></a>stopWords <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/stopWords.rds&quot;</span>)</span>
-<span id="cb578-3"><a href="tmchi.html#cb578-3" tabindex="-1"></a></span>
-<span id="cb578-4"><a href="tmchi.html#cb578-4" tabindex="-1"></a><span class="co"># load(&quot;../segment_not.R&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="tmchi.html#cb571-1" tabindex="-1"></a><span class="co"># loading Chinese stop words</span></span>
+<span id="cb571-2"><a href="tmchi.html#cb571-2" tabindex="-1"></a>stopWords <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/stopWords.rds&quot;</span>)</span>
+<span id="cb571-3"><a href="tmchi.html#cb571-3" tabindex="-1"></a></span>
+<span id="cb571-4"><a href="tmchi.html#cb571-4" tabindex="-1"></a><span class="co"># load(&quot;../segment_not.R&quot;)</span></span></code></pre></div>
 </div>
 <div id="tokenization-1" class="section level3 hasAnchor" number="14.2.2">
 <h3><span class="header-section-number">14.2.2</span> Tokenization<a href="tmchi.html#tokenization-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -874,17 +878,17 @@ div.csl-indent {
 <li><p>未知詞彙和低頻詞彙：分詞工具常基於詞典來進行切分，因此對於一些罕見或專有名詞、專術詞彙可能無法進行正確的切分。這些未知詞彙和低頻詞彙的處理需要特殊的處理策略，例如使用統計方法或自定義詞彙表。</p></li>
 </ol>
 <p>在<code>segment(x, cutter)</code>後會產生一個多詞的向量。亦即每一格就是一個向量，你可以把它印出來看看。可以用<code>unnest()</code>將<strong><code>word</code></strong>列中的字詞向量展開，使每個單詞成為一列。這樣可以將每個單詞視為一個觀察值，方便後續的處理。</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="tmchi.html#cb579-1" tabindex="-1"></a><span class="co"># news.df$time %&gt;% summary</span></span>
-<span id="cb579-2"><a href="tmchi.html#cb579-2" tabindex="-1"></a></span>
-<span id="cb579-3"><a href="tmchi.html#cb579-3" tabindex="-1"></a>tokenized.df <span class="ot">&lt;-</span> news.df <span class="sc">%&gt;%</span> </span>
-<span id="cb579-4"><a href="tmchi.html#cb579-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">3069</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb579-5"><a href="tmchi.html#cb579-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timestamp=</span><span class="fu">ymd</span>(time)) <span class="sc">%&gt;%</span> </span>
-<span id="cb579-6"><a href="tmchi.html#cb579-6" tabindex="-1"></a>    <span class="co"># filter(timestamp &gt; as.Date(&quot;2009-01-01&quot;)) %&gt;%</span></span>
-<span id="cb579-7"><a href="tmchi.html#cb579-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>time) <span class="sc">%&gt;%</span></span>
-<span id="cb579-8"><a href="tmchi.html#cb579-8" tabindex="-1"></a>  <span class="fu">select</span>(title, text, cat, timestamp, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb579-9"><a href="tmchi.html#cb579-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> purrr<span class="sc">::</span><span class="fu">map</span>(text, <span class="cf">function</span>(x)<span class="fu">segment</span>(x, cutter)))</span>
-<span id="cb579-10"><a href="tmchi.html#cb579-10" tabindex="-1"></a></span>
-<span id="cb579-11"><a href="tmchi.html#cb579-11" tabindex="-1"></a>tokenized.df <span class="sc">%&gt;%</span> <span class="fu">select</span>(title, word) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="tmchi.html#cb572-1" tabindex="-1"></a><span class="co"># news.df$time %&gt;% summary</span></span>
+<span id="cb572-2"><a href="tmchi.html#cb572-2" tabindex="-1"></a></span>
+<span id="cb572-3"><a href="tmchi.html#cb572-3" tabindex="-1"></a>tokenized.df <span class="ot">&lt;-</span> news.df <span class="sc">%&gt;%</span> </span>
+<span id="cb572-4"><a href="tmchi.html#cb572-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">3069</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb572-5"><a href="tmchi.html#cb572-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">timestamp=</span><span class="fu">ymd</span>(time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb572-6"><a href="tmchi.html#cb572-6" tabindex="-1"></a>    <span class="co"># filter(timestamp &gt; as.Date(&quot;2009-01-01&quot;)) %&gt;%</span></span>
+<span id="cb572-7"><a href="tmchi.html#cb572-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>time) <span class="sc">%&gt;%</span></span>
+<span id="cb572-8"><a href="tmchi.html#cb572-8" tabindex="-1"></a>  <span class="fu">select</span>(title, text, cat, timestamp, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb572-9"><a href="tmchi.html#cb572-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> purrr<span class="sc">::</span><span class="fu">map</span>(text, <span class="cf">function</span>(x)<span class="fu">segment</span>(x, cutter)))</span>
+<span id="cb572-10"><a href="tmchi.html#cb572-10" tabindex="-1"></a></span>
+<span id="cb572-11"><a href="tmchi.html#cb572-11" tabindex="-1"></a>tokenized.df <span class="sc">%&gt;%</span> <span class="fu">select</span>(title, word) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 2
 ##   title                                                                    word 
 ##   &lt;chr&gt;                                                                    &lt;lis&gt;
@@ -894,17 +898,17 @@ div.csl-indent {
 ## 4 &quot;總統祝福大家新春如意\n期勉迎接挑戰贏得勝利&quot;                             &lt;chr&gt;
 ## 5 &quot;總統至為關切颱風災害\n電囑儘速展開救災重建&quot;                             &lt;chr&gt;
 ## 6 &quot;總統關懷澎湖災情 俞揆冒雨巡視災區\n指示搶修道路•優先供應水電 復建資金經費•統籌支援撥用&quot;…… &lt;chr&gt;</code></pre>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="tmchi.html#cb581-1" tabindex="-1"></a><span class="co"># unnest() to spread character into a new word variable</span></span>
-<span id="cb581-2"><a href="tmchi.html#cb581-2" tabindex="-1"></a><span class="co"># filter out stop words</span></span>
-<span id="cb581-3"><a href="tmchi.html#cb581-3" tabindex="-1"></a><span class="co"># filter out alphabetical and numeric characters</span></span>
-<span id="cb581-4"><a href="tmchi.html#cb581-4" tabindex="-1"></a></span>
-<span id="cb581-5"><a href="tmchi.html#cb581-5" tabindex="-1"></a>unnested.df <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
-<span id="cb581-6"><a href="tmchi.html#cb581-6" tabindex="-1"></a>    <span class="fu">select</span>(doc_id, text, word) <span class="sc">%&gt;%</span></span>
-<span id="cb581-7"><a href="tmchi.html#cb581-7" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb581-8"><a href="tmchi.html#cb581-8" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
-<span id="cb581-9"><a href="tmchi.html#cb581-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>))</span>
-<span id="cb581-10"><a href="tmchi.html#cb581-10" tabindex="-1"></a></span>
-<span id="cb581-11"><a href="tmchi.html#cb581-11" tabindex="-1"></a>unnested.df <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="tmchi.html#cb574-1" tabindex="-1"></a><span class="co"># unnest() to spread character into a new word variable</span></span>
+<span id="cb574-2"><a href="tmchi.html#cb574-2" tabindex="-1"></a><span class="co"># filter out stop words</span></span>
+<span id="cb574-3"><a href="tmchi.html#cb574-3" tabindex="-1"></a><span class="co"># filter out alphabetical and numeric characters</span></span>
+<span id="cb574-4"><a href="tmchi.html#cb574-4" tabindex="-1"></a></span>
+<span id="cb574-5"><a href="tmchi.html#cb574-5" tabindex="-1"></a>unnested.df <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb574-6"><a href="tmchi.html#cb574-6" tabindex="-1"></a>    <span class="fu">select</span>(doc_id, text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb574-7"><a href="tmchi.html#cb574-7" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb574-8"><a href="tmchi.html#cb574-8" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb574-9"><a href="tmchi.html#cb574-9" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>))</span>
+<span id="cb574-10"><a href="tmchi.html#cb574-10" tabindex="-1"></a></span>
+<span id="cb574-11"><a href="tmchi.html#cb574-11" tabindex="-1"></a>unnested.df <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 3
 ##   doc_id text                                                              word 
 ##    &lt;int&gt; &lt;chr&gt;                                                             &lt;chr&gt;
@@ -932,81 +936,81 @@ div.csl-indent {
 <li><p>長尾尾部：power-law distribution的特點是長尾尾部的存在，即少數極端值或稀有事件的出現頻率相對較高。在對數尺度下，我們能夠更清楚地看到這些極端值或稀有事件在數據分佈中的位置，因為它們在對數尺度下會呈現較為明顯的特徵。</p></li>
 <li><p>分佈斜率：對數尺度下的power-law distribution，通常可以通過斜率來描述分佈的特性。斜率表示每個X單位變化對應的Y單位變化，或者說在對數尺度下，表示對數Y值相對於對數X值的變化率。如果數據點遵循power-law distribution，斜率會呈現相對恆定的特性。</p></li>
 </ol>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="tmchi.html#cb583-1" tabindex="-1"></a>word.count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
-<span id="cb583-2"><a href="tmchi.html#cb583-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb583-3"><a href="tmchi.html#cb583-3" tabindex="-1"></a>    <span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb583-4"><a href="tmchi.html#cb583-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
-<span id="cb583-5"><a href="tmchi.html#cb583-5" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb583-6"><a href="tmchi.html#cb583-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb583-7"><a href="tmchi.html#cb583-7" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
-<span id="cb583-8"><a href="tmchi.html#cb583-8" tabindex="-1"></a></span>
-<span id="cb583-9"><a href="tmchi.html#cb583-9" tabindex="-1"></a></span>
-<span id="cb583-10"><a href="tmchi.html#cb583-10" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
-<span id="cb583-11"><a href="tmchi.html#cb583-11" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb583-12"><a href="tmchi.html#cb583-12" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
-<span id="cb583-13"><a href="tmchi.html#cb583-13" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="tmchi.html#cb576-1" tabindex="-1"></a>word.count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb576-2"><a href="tmchi.html#cb576-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb576-3"><a href="tmchi.html#cb576-3" tabindex="-1"></a>    <span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb576-4"><a href="tmchi.html#cb576-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb576-5"><a href="tmchi.html#cb576-5" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb576-6"><a href="tmchi.html#cb576-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb576-7"><a href="tmchi.html#cb576-7" tabindex="-1"></a>    <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb576-8"><a href="tmchi.html#cb576-8" tabindex="-1"></a></span>
+<span id="cb576-9"><a href="tmchi.html#cb576-9" tabindex="-1"></a></span>
+<span id="cb576-10"><a href="tmchi.html#cb576-10" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
+<span id="cb576-11"><a href="tmchi.html#cb576-11" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb576-12"><a href="tmchi.html#cb576-12" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
+<span id="cb576-13"><a href="tmchi.html#cb576-13" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="tmchi.html#cb584-1" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
-<span id="cb584-2"><a href="tmchi.html#cb584-2" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb584-3"><a href="tmchi.html#cb584-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
-<span id="cb584-4"><a href="tmchi.html#cb584-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)  <span class="sc">+</span> </span>
-<span id="cb584-5"><a href="tmchi.html#cb584-5" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
-<span id="cb584-6"><a href="tmchi.html#cb584-6" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="tmchi.html#cb577-1" tabindex="-1"></a>word.count <span class="sc">%&gt;%</span></span>
+<span id="cb577-2"><a href="tmchi.html#cb577-2" tabindex="-1"></a>    <span class="fu">count</span>(n, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb577-3"><a href="tmchi.html#cb577-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, nn)) <span class="sc">+</span> </span>
+<span id="cb577-4"><a href="tmchi.html#cb577-4" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;#333333&quot;</span>)  <span class="sc">+</span> </span>
+<span id="cb577-5"><a href="tmchi.html#cb577-5" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb577-6"><a href="tmchi.html#cb577-6" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 <div id="keyness-by-logratio" class="section level3 hasAnchor" number="14.3.2">
 <h3><span class="header-section-number">14.3.2</span> Keyness by logratio<a href="tmchi.html#keyness-by-logratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>早、近期用字差異</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="tmchi.html#cb585-1" tabindex="-1"></a>cat_word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
-<span id="cb585-2"><a href="tmchi.html#cb585-2" tabindex="-1"></a>  <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb585-3"><a href="tmchi.html#cb585-3" tabindex="-1"></a>  <span class="fu">count</span>(cat, word) <span class="sc">%&gt;%</span></span>
-<span id="cb585-4"><a href="tmchi.html#cb585-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb585-5"><a href="tmchi.html#cb585-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb585-6"><a href="tmchi.html#cb585-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
-<span id="cb585-7"><a href="tmchi.html#cb585-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word)<span class="sc">&gt;</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="tmchi.html#cb586-1" tabindex="-1"></a>early_lat_ratio <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
-<span id="cb586-2"><a href="tmchi.html#cb586-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb586-3"><a href="tmchi.html#cb586-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cat, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb586-4"><a href="tmchi.html#cb586-4" tabindex="-1"></a>    <span class="co"># spread(cat, n, fill = 0) %&gt;%</span></span>
-<span id="cb586-5"><a href="tmchi.html#cb586-5" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb586-6"><a href="tmchi.html#cb586-6" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="fu">funs</span>((. <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">sum</span>(. <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb586-7"><a href="tmchi.html#cb586-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">logratio =</span> <span class="fu">log2</span>(early <span class="sc">/</span> lat)) <span class="sc">%&gt;%</span></span>
-<span id="cb586-8"><a href="tmchi.html#cb586-8" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(logratio))</span></code></pre></div>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="tmchi.html#cb587-1" tabindex="-1"></a>early_lat_ratio <span class="sc">%&gt;%</span></span>
-<span id="cb587-2"><a href="tmchi.html#cb587-2" tabindex="-1"></a>    <span class="fu">group_by</span>(logratio <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb587-3"><a href="tmchi.html#cb587-3" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">20</span>, <span class="fu">abs</span>(logratio)) <span class="sc">%&gt;%</span></span>
-<span id="cb587-4"><a href="tmchi.html#cb587-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb587-5"><a href="tmchi.html#cb587-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, logratio)) <span class="sc">%&gt;%</span></span>
-<span id="cb587-6"><a href="tmchi.html#cb587-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, logratio, <span class="at">fill =</span> logratio <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb587-7"><a href="tmchi.html#cb587-7" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb587-8"><a href="tmchi.html#cb587-8" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb587-9"><a href="tmchi.html#cb587-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;early / recent log ratio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb587-10"><a href="tmchi.html#cb587-10" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;early&quot;</span>, <span class="st">&quot;recent&quot;</span>),</span>
-<span id="cb587-11"><a href="tmchi.html#cb587-11" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;lightblue&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb587-12"><a href="tmchi.html#cb587-12" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tmchi.html#cb578-1" tabindex="-1"></a>cat_word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb578-2"><a href="tmchi.html#cb578-2" tabindex="-1"></a>  <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb578-3"><a href="tmchi.html#cb578-3" tabindex="-1"></a>  <span class="fu">count</span>(cat, word) <span class="sc">%&gt;%</span></span>
+<span id="cb578-4"><a href="tmchi.html#cb578-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb578-5"><a href="tmchi.html#cb578-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;[a-zA-Z0-9]+&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb578-6"><a href="tmchi.html#cb578-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stopWords<span class="sc">$</span>word)) <span class="sc">%&gt;%</span></span>
+<span id="cb578-7"><a href="tmchi.html#cb578-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word)<span class="sc">&gt;</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="tmchi.html#cb579-1" tabindex="-1"></a>early_lat_ratio <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb579-2"><a href="tmchi.html#cb579-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb579-3"><a href="tmchi.html#cb579-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cat, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb579-4"><a href="tmchi.html#cb579-4" tabindex="-1"></a>    <span class="co"># spread(cat, n, fill = 0) %&gt;%</span></span>
+<span id="cb579-5"><a href="tmchi.html#cb579-5" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb579-6"><a href="tmchi.html#cb579-6" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="fu">funs</span>((. <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">sum</span>(. <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb579-7"><a href="tmchi.html#cb579-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">logratio =</span> <span class="fu">log2</span>(early <span class="sc">/</span> lat)) <span class="sc">%&gt;%</span></span>
+<span id="cb579-8"><a href="tmchi.html#cb579-8" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(logratio))</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="tmchi.html#cb580-1" tabindex="-1"></a>early_lat_ratio <span class="sc">%&gt;%</span></span>
+<span id="cb580-2"><a href="tmchi.html#cb580-2" tabindex="-1"></a>    <span class="fu">group_by</span>(logratio <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb580-3"><a href="tmchi.html#cb580-3" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">20</span>, <span class="fu">abs</span>(logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb580-4"><a href="tmchi.html#cb580-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb580-5"><a href="tmchi.html#cb580-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, logratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb580-6"><a href="tmchi.html#cb580-6" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, logratio, <span class="at">fill =</span> logratio <span class="sc">&lt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb580-7"><a href="tmchi.html#cb580-7" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb580-8"><a href="tmchi.html#cb580-8" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb580-9"><a href="tmchi.html#cb580-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;early / recent log ratio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb580-10"><a href="tmchi.html#cb580-10" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;early&quot;</span>, <span class="st">&quot;recent&quot;</span>),</span>
+<span id="cb580-11"><a href="tmchi.html#cb580-11" tabindex="-1"></a>        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;lightblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb580-12"><a href="tmchi.html#cb580-12" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="keyness-by-scatter" class="section level3 hasAnchor" number="14.3.3">
 <h3><span class="header-section-number">14.3.3</span> Keyness by scatter<a href="tmchi.html#keyness-by-scatter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="tmchi.html#cb588-1" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
-<span id="cb588-2"><a href="tmchi.html#cb588-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb588-3"><a href="tmchi.html#cb588-3" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
-<span id="cb588-4"><a href="tmchi.html#cb588-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb588-5"><a href="tmchi.html#cb588-5" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb588-6"><a href="tmchi.html#cb588-6" tabindex="-1"></a>    <span class="fu">spread</span>(cat, proportion) <span class="sc">%&gt;%</span></span>
-<span id="cb588-7"><a href="tmchi.html#cb588-7" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
-<span id="cb588-8"><a href="tmchi.html#cb588-8" tabindex="-1"></a></span>
-<span id="cb588-9"><a href="tmchi.html#cb588-9" tabindex="-1"></a><span class="co"># datatable(frequency)</span></span></code></pre></div>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="tmchi.html#cb589-1" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb589-2"><a href="tmchi.html#cb589-2" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span></span>
-<span id="cb589-3"><a href="tmchi.html#cb589-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> early, <span class="at">y =</span> lat, <span class="at">color =</span> <span class="fu">abs</span>(early <span class="sc">-</span> lat))) <span class="sc">+</span> </span>
-<span id="cb589-4"><a href="tmchi.html#cb589-4" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb589-5"><a href="tmchi.html#cb589-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
-<span id="cb589-6"><a href="tmchi.html#cb589-6" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> word), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb589-7"><a href="tmchi.html#cb589-7" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
-<span id="cb589-8"><a href="tmchi.html#cb589-8" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
-<span id="cb589-9"><a href="tmchi.html#cb589-9" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb589-10"><a href="tmchi.html#cb589-10" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="tmchi.html#cb581-1" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> cat_word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb581-2"><a href="tmchi.html#cb581-2" tabindex="-1"></a>    <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb581-3"><a href="tmchi.html#cb581-3" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
+<span id="cb581-4"><a href="tmchi.html#cb581-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb581-5"><a href="tmchi.html#cb581-5" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb581-6"><a href="tmchi.html#cb581-6" tabindex="-1"></a>    <span class="fu">spread</span>(cat, proportion) <span class="sc">%&gt;%</span></span>
+<span id="cb581-7"><a href="tmchi.html#cb581-7" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb581-8"><a href="tmchi.html#cb581-8" tabindex="-1"></a></span>
+<span id="cb581-9"><a href="tmchi.html#cb581-9" tabindex="-1"></a><span class="co"># datatable(frequency)</span></span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="tmchi.html#cb582-1" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb582-2"><a href="tmchi.html#cb582-2" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span></span>
+<span id="cb582-3"><a href="tmchi.html#cb582-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> early, <span class="at">y =</span> lat, <span class="at">color =</span> <span class="fu">abs</span>(early <span class="sc">-</span> lat))) <span class="sc">+</span> </span>
+<span id="cb582-4"><a href="tmchi.html#cb582-4" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;gray40&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb582-5"><a href="tmchi.html#cb582-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">width =</span> <span class="fl">0.3</span>, <span class="at">height =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb582-6"><a href="tmchi.html#cb582-6" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> word), <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb582-7"><a href="tmchi.html#cb582-7" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb582-8"><a href="tmchi.html#cb582-8" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb582-9"><a href="tmchi.html#cb582-9" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb582-10"><a href="tmchi.html#cb582-10" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="dv">1</span>)</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
@@ -1026,45 +1030,45 @@ div.csl-indent {
 </ol>
 <div id="term-frequency" class="section level3 hasAnchor" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Term-frequency<a href="tmchi.html#term-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="tmchi.html#cb590-1" tabindex="-1"></a>word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
-<span id="cb590-2"><a href="tmchi.html#cb590-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb590-3"><a href="tmchi.html#cb590-3" tabindex="-1"></a>    <span class="fu">count</span>(cat, word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb590-4"><a href="tmchi.html#cb590-4" tabindex="-1"></a>    <span class="co"># mutate(total_words=sum(n)) %&gt;%</span></span>
-<span id="cb590-5"><a href="tmchi.html#cb590-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>(), <span class="at">tf=</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="tmchi.html#cb583-1" tabindex="-1"></a>word.tf <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb583-2"><a href="tmchi.html#cb583-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb583-3"><a href="tmchi.html#cb583-3" tabindex="-1"></a>    <span class="fu">count</span>(cat, word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb583-4"><a href="tmchi.html#cb583-4" tabindex="-1"></a>    <span class="co"># mutate(total_words=sum(n)) %&gt;%</span></span>
+<span id="cb583-5"><a href="tmchi.html#cb583-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">row_number</span>(), <span class="at">tf=</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <ul>
 <li>如果是跑histrogram因為不是常態分佈而是power-law分佈，通常會看不出什麼來</li>
 </ul>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="tmchi.html#cb591-1" tabindex="-1"></a><span class="fu">ggplot</span>(word.tf, <span class="fu">aes</span>(tf, <span class="at">fill=</span>cat)) <span class="sc">+</span> </span>
-<span id="cb591-2"><a href="tmchi.html#cb591-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
-<span id="cb591-3"><a href="tmchi.html#cb591-3" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="cn">NA</span>, <span class="fl">0.0009</span>) <span class="sc">+</span> </span>
-<span id="cb591-4"><a href="tmchi.html#cb591-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb591-5"><a href="tmchi.html#cb591-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb591-6"><a href="tmchi.html#cb591-6" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">scales=</span><span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="tmchi.html#cb584-1" tabindex="-1"></a><span class="fu">ggplot</span>(word.tf, <span class="fu">aes</span>(tf, <span class="at">fill=</span>cat)) <span class="sc">+</span> </span>
+<span id="cb584-2"><a href="tmchi.html#cb584-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
+<span id="cb584-3"><a href="tmchi.html#cb584-3" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="cn">NA</span>, <span class="fl">0.0009</span>) <span class="sc">+</span> </span>
+<span id="cb584-4"><a href="tmchi.html#cb584-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb584-5"><a href="tmchi.html#cb584-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb584-6"><a href="tmchi.html#cb584-6" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">scales=</span><span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <ul>
 <li>加上rank後可以看出最高rank到最後的差異，中段差不多，但是，相較於晚近的文章，早期文章用過很少次的字比較多，但用過很多次的字比較少。（是否可推論用字越來越貧乏？）</li>
 </ul>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="tmchi.html#cb592-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span></span>
-<span id="cb592-2"><a href="tmchi.html#cb592-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color=</span>cat)) <span class="sc">+</span> </span>
-<span id="cb592-3"><a href="tmchi.html#cb592-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.1</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb592-4"><a href="tmchi.html#cb592-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
-<span id="cb592-5"><a href="tmchi.html#cb592-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="tmchi.html#cb585-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb585-2"><a href="tmchi.html#cb585-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color=</span>cat)) <span class="sc">+</span> </span>
+<span id="cb585-3"><a href="tmchi.html#cb585-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.1</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb585-4"><a href="tmchi.html#cb585-4" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb585-5"><a href="tmchi.html#cb585-5" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="tmchi.html#cb593-1" tabindex="-1"></a>rank_subset <span class="ot">&lt;-</span> word.tf <span class="sc">%&gt;%</span></span>
-<span id="cb593-2"><a href="tmchi.html#cb593-2" tabindex="-1"></a>    <span class="fu">filter</span>(rank <span class="sc">&lt;</span> <span class="dv">500</span>,</span>
-<span id="cb593-3"><a href="tmchi.html#cb593-3" tabindex="-1"></a>           rank <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
-<span id="cb593-4"><a href="tmchi.html#cb593-4" tabindex="-1"></a></span>
-<span id="cb593-5"><a href="tmchi.html#cb593-5" tabindex="-1"></a>lm_result <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(tf) <span class="sc">~</span> <span class="fu">log10</span>(rank), <span class="at">data =</span> rank_subset)</span>
-<span id="cb593-6"><a href="tmchi.html#cb593-6" tabindex="-1"></a>lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="tmchi.html#cb586-1" tabindex="-1"></a>rank_subset <span class="ot">&lt;-</span> word.tf <span class="sc">%&gt;%</span></span>
+<span id="cb586-2"><a href="tmchi.html#cb586-2" tabindex="-1"></a>    <span class="fu">filter</span>(rank <span class="sc">&lt;</span> <span class="dv">500</span>,</span>
+<span id="cb586-3"><a href="tmchi.html#cb586-3" tabindex="-1"></a>           rank <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb586-4"><a href="tmchi.html#cb586-4" tabindex="-1"></a></span>
+<span id="cb586-5"><a href="tmchi.html#cb586-5" tabindex="-1"></a>lm_result <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(tf) <span class="sc">~</span> <span class="fu">log10</span>(rank), <span class="at">data =</span> rank_subset)</span>
+<span id="cb586-6"><a href="tmchi.html#cb586-6" tabindex="-1"></a>lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre class="output"><code>## [1] -1.739581</code></pre>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="tmchi.html#cb595-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span> </span>
-<span id="cb595-2"><a href="tmchi.html#cb595-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color =</span> cat)) <span class="sc">+</span> </span>
-<span id="cb595-3"><a href="tmchi.html#cb595-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]], </span>
-<span id="cb595-4"><a href="tmchi.html#cb595-4" tabindex="-1"></a>              <span class="at">slope =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">2</span>]], </span>
-<span id="cb595-5"><a href="tmchi.html#cb595-5" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray50&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb595-6"><a href="tmchi.html#cb595-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb595-7"><a href="tmchi.html#cb595-7" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb595-8"><a href="tmchi.html#cb595-8" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="tmchi.html#cb588-1" tabindex="-1"></a>word.tf <span class="sc">%&gt;%</span> </span>
+<span id="cb588-2"><a href="tmchi.html#cb588-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rank, tf, <span class="at">color =</span> cat)) <span class="sc">+</span> </span>
+<span id="cb588-3"><a href="tmchi.html#cb588-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">1</span>]], </span>
+<span id="cb588-4"><a href="tmchi.html#cb588-4" tabindex="-1"></a>              <span class="at">slope =</span> lm_result<span class="sc">$</span>coefficients[[<span class="dv">2</span>]], </span>
+<span id="cb588-5"><a href="tmchi.html#cb588-5" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray50&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb588-6"><a href="tmchi.html#cb588-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb588-7"><a href="tmchi.html#cb588-7" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb588-8"><a href="tmchi.html#cb588-8" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="tf-idf-to-filter-significant-words" class="section level3 hasAnchor" number="14.4.2">
@@ -1073,31 +1077,31 @@ div.csl-indent {
 <p>首先，透過刪除TF-IDF值很低的詞彙，我們可以去除那些在文本中出現頻率較低且普遍性較高的詞彙，這些詞彙對於區分不同文本的能力相對較低，因此可以忽略不計。</p>
 <p>其次，我們可以僅保留大於平均值加上一個或兩個標準差的TF-IDF值較高的詞彙，這些詞彙可以作為有效辨識文章的關鍵字。這是因為這些詞彙在文本中出現的頻率較高，同時其與該文本的關聯性也相對較強。</p>
 <p>透過這樣的過濾和選擇，我們可以得到一個更精簡且具有代表性的詞彙集合，這些詞彙能夠更好地描述和區分不同的文章。因此，使用TF-IDF計算結果進行這樣的處理，可以在文本分析和信息檢索等領域中提供更有價值的結果。</p>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="tmchi.html#cb596-1" tabindex="-1"></a>news_count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
-<span id="cb596-2"><a href="tmchi.html#cb596-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb596-3"><a href="tmchi.html#cb596-3" tabindex="-1"></a>    <span class="fu">count</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
-<span id="cb596-4"><a href="tmchi.html#cb596-4" tabindex="-1"></a>    <span class="fu">bind_tf_idf</span>(word, doc_id, n) <span class="sc">%&gt;%</span></span>
-<span id="cb596-5"><a href="tmchi.html#cb596-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
-<span id="cb596-6"><a href="tmchi.html#cb596-6" tabindex="-1"></a></span>
-<span id="cb596-7"><a href="tmchi.html#cb596-7" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span></span>
-<span id="cb596-8"><a href="tmchi.html#cb596-8" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(tf_idf)) <span class="sc">+</span></span>
-<span id="cb596-9"><a href="tmchi.html#cb596-9" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
-<span id="cb596-10"><a href="tmchi.html#cb596-10" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="tmchi.html#cb589-1" tabindex="-1"></a>news_count <span class="ot">&lt;-</span> tokenized.df <span class="sc">%&gt;%</span></span>
+<span id="cb589-2"><a href="tmchi.html#cb589-2" tabindex="-1"></a>    <span class="fu">unnest</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb589-3"><a href="tmchi.html#cb589-3" tabindex="-1"></a>    <span class="fu">count</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
+<span id="cb589-4"><a href="tmchi.html#cb589-4" tabindex="-1"></a>    <span class="fu">bind_tf_idf</span>(word, doc_id, n) <span class="sc">%&gt;%</span></span>
+<span id="cb589-5"><a href="tmchi.html#cb589-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb589-6"><a href="tmchi.html#cb589-6" tabindex="-1"></a></span>
+<span id="cb589-7"><a href="tmchi.html#cb589-7" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span></span>
+<span id="cb589-8"><a href="tmchi.html#cb589-8" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(tf_idf)) <span class="sc">+</span></span>
+<span id="cb589-9"><a href="tmchi.html#cb589-9" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb589-10"><a href="tmchi.html#cb589-10" tabindex="-1"></a>    <span class="fu">scale_x_log10</span>()</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="tmchi.html#cb597-1" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span> </span>
-<span id="cb597-2"><a href="tmchi.html#cb597-2" tabindex="-1"></a>    <span class="fu">left_join</span>(news.df, <span class="at">by=</span><span class="st">&quot;doc_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb597-3"><a href="tmchi.html#cb597-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb597-4"><a href="tmchi.html#cb597-4" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
-<span id="cb597-5"><a href="tmchi.html#cb597-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf)) <span class="sc">%&gt;%</span></span>
-<span id="cb597-6"><a href="tmchi.html#cb597-6" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">30</span>, tf_idf) <span class="sc">%&gt;%</span></span>
-<span id="cb597-7"><a href="tmchi.html#cb597-7" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb597-8"><a href="tmchi.html#cb597-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, tf_idf)) <span class="sc">%&gt;%</span></span>
-<span id="cb597-9"><a href="tmchi.html#cb597-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, tf_idf, <span class="at">fill =</span> cat)) <span class="sc">+</span></span>
-<span id="cb597-10"><a href="tmchi.html#cb597-10" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb597-11"><a href="tmchi.html#cb597-11" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;tf-idf&quot;</span>) <span class="sc">+</span></span>
-<span id="cb597-12"><a href="tmchi.html#cb597-12" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb597-13"><a href="tmchi.html#cb597-13" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb597-14"><a href="tmchi.html#cb597-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="tmchi.html#cb590-1" tabindex="-1"></a>news_count <span class="sc">%&gt;%</span> </span>
+<span id="cb590-2"><a href="tmchi.html#cb590-2" tabindex="-1"></a>    <span class="fu">left_join</span>(news.df, <span class="at">by=</span><span class="st">&quot;doc_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb590-3"><a href="tmchi.html#cb590-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb590-4"><a href="tmchi.html#cb590-4" tabindex="-1"></a>    <span class="fu">group_by</span>(cat) <span class="sc">%&gt;%</span></span>
+<span id="cb590-5"><a href="tmchi.html#cb590-5" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf)) <span class="sc">%&gt;%</span></span>
+<span id="cb590-6"><a href="tmchi.html#cb590-6" tabindex="-1"></a>    <span class="fu">top_n</span>(<span class="dv">30</span>, tf_idf) <span class="sc">%&gt;%</span></span>
+<span id="cb590-7"><a href="tmchi.html#cb590-7" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb590-8"><a href="tmchi.html#cb590-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, tf_idf)) <span class="sc">%&gt;%</span></span>
+<span id="cb590-9"><a href="tmchi.html#cb590-9" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, tf_idf, <span class="at">fill =</span> cat)) <span class="sc">+</span></span>
+<span id="cb590-10"><a href="tmchi.html#cb590-10" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb590-11"><a href="tmchi.html#cb590-11" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;tf-idf&quot;</span>) <span class="sc">+</span></span>
+<span id="cb590-12"><a href="tmchi.html#cb590-12" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb590-13"><a href="tmchi.html#cb590-13" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb590-14"><a href="tmchi.html#cb590-14" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y=</span><span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Heiti TC Light&quot;</span>))</span></code></pre></div>
 <p><img src="R35_tm_typhoon_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 <div id="practice.-understanding-tf-idf" class="section level3 hasAnchor practice" number="14.4.3">

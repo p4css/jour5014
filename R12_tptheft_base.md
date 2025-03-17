@@ -35,41 +35,19 @@
 
 如果知道這個套件是`readr`的話，也可以到右下方的工作區塊找到「Packages」工作視窗，裡面有列出現在載入的所有的套件，也有套件中的所有函式。偶而看一看會發現一些自己平常忽略的好用工具。
 
+**用read_csv()來讀取。**除了 base套件的`read.csv()`外，也可使用`readr`套件的`read_csv()`函式來讀取，該套件屬於tidyverse套件系的其中一個套件，如果已經有用`install.packages("tidyverse")`安裝過，只要用`library(tidyverse)`就可以使用`read_csv()`函式。在此鼓勵各位使用tidyverse系列套件。普遍來說，`read_csv()` 的功能和效果都會比`read.csv()`好，該函式還會自動猜測每個變數的變數型態並直接進行轉換（尤其是有時間欄位的時候，會非常方便）。
 
-```r
+
+``` r
 library(knitr)
-library(kableExtra)
 library(tidyverse)
 
-df <- read.csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
+df <- read.csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv", fileEncoding = "Big5")
+df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv", locale = locale(encoding = "Big5"))
 head(df) 
 ```
 
-```{.output}
-##   編號     案類 發生日期 發生時段                                    發生地點
-## 1    1 住宅竊盜  1030623    08~10                  臺北市中正區廈門街91~120號
-## 2    2 住宅竊盜  1040101    00~02              臺北市文山區萬美里萬寧街1~30號
-## 3    3 住宅竊盜  1040101    00~02 臺北市信義區富台里忠孝東路5段295巷6弄1~30號
-## 4    4 住宅竊盜  1040101    06~08             臺北市中山區新生北路1段91~120號
-## 5    5 住宅竊盜  1040101    10~12           臺北市文山區明興里興隆路4段1~30號
-## 6    6 住宅竊盜  1040102    00~02   臺北市士林區天福里1鄰忠誠路2段130巷1~30號
-```
-
-**用read_csv()來讀取。**除了 base套件的`read.csv()`外，也可使用`readr`套件的`read_csv()`函式來讀取，該套件屬於tidyverse套件系的其中一個套件，如果已經有用`install.packages("tidyverse")`安裝過，只要用`library(tidyverse)`就可以使用`read_csv()`函式。在此鼓勵各位使用tidyverse系列套件。普遍來說，`read_csv()` 的功能和效果都會比`read.csv()`好，該函式還會自動猜測每個變數的變數型態並直接進行轉換（尤其是有時間欄位的時候，會非常方便）。
-
-::: debug
-萬一遇到中文檔案會有讀檔編碼問題時，有可能該檔案是用big5來儲存的，可以在`read_csv()`中設定`locale`來指定讀取的編碼方法。如`read_csv(url, locale = locale(encoding = "Big5"))`
-:::
-
-
-```r
-library(readr)
-df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv")
-# df <- read_csv("data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv", locale = locale(encoding = "Big5"))
-head(df)
-```
-
-```{.output}
+``` output
 ## # A tibble: 6 × 5
 ##    編號 案類     發生日期 發生時段 發生地點                                   
 ##   <dbl> <chr>       <dbl> <chr>    <chr>                                      
@@ -80,6 +58,10 @@ head(df)
 ## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30號          
 ## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段130巷1~30號
 ```
+
+::: debug
+萬一遇到中文檔案會有讀檔編碼問題時，有可能該檔案是用big5來儲存的，可以在`read_csv()`中設定`locale`來指定讀取的編碼方法。如`read_csv(url, locale = locale(encoding = "Big5"))`
+:::
 
 #### 觀察變數 {#tptheft_var_overview}
 
@@ -102,7 +84,7 @@ head(df)
 -   `?substr`查詢其用法和意義。相當於`getting sub string since x to y`。
 
 
-```r
+``` r
 # Get substring of var "發生時段" and assign to a new time var
 df$time <- df$發生時段
 
@@ -111,16 +93,16 @@ df$region <- substr(df$發生地點, 4, 5)
 head(df)
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 7
 ##    編號 案類     發生日期 發生時段 發生地點                         time  region
 ##   <dbl> <chr>       <dbl> <chr>    <chr>                            <chr> <chr> 
 ## 1     1 住宅竊盜  1030623 08~10    臺北市中正區廈門街91~120號       08~10 中正  
 ## 2     2 住宅竊盜  1040101 00~02    臺北市文山區萬美里萬寧街1~30號   00~02 文山  
-## 3     3 住宅竊盜  1040101 00~02    臺北市信義區富台里忠孝東路5段29… 00~02 信義  
+## 3     3 住宅竊盜  1040101 00~02    臺北市信義區富台里忠孝東路5段295巷6弄1~30號…… 00~02 信義  
 ## 4     4 住宅竊盜  1040101 06~08    臺北市中山區新生北路1段91~120號  06~08 中山  
-## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30… 10~12 文山  
-## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段1… 00~02 士林
+## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30號…… 10~12 文山  
+## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段130巷1~30號…… 00~02 士林
 ```
 
 ### 使用`table()`計數 {#tptheft_counting}
@@ -132,37 +114,37 @@ head(df)
 提示：可以用`class(tb_1)` 觀察用`table()` 計數後所產生的資料型態（`table`）。
 
 
-```r
+``` r
 ## table
 # counting the frequency of region variable
 
 (table(df$region))
 ```
 
-```{.output}
+``` output
 ## 
 ## 中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華 
-##  438  263  214  303  318  181  373  172  311  204  220  350
+##  526  307  259  349  375  229  490  215  370  229  268  433
 ```
 
-```r
+``` r
 # counting the frequency of time variable
 (tb_1 <- table(df$time)) # %>% View
 ```
 
-```{.output}
+``` output
 ## 
 ## 00~02 02~04 03~05 04~06 05~07 06~08 08~10 09~11 10~12 11~03 11~13 12~14 12~15 
-##   272   214     8   156    23   191   305     6   338     1    26   338     2 
+##   272   287     8   156    77   191   410     6   338     1   154   338     2 
 ## 14~16 15~17 15~18 16~18 17~19 18~20 18~21 19~21 20~22 21~23 21~24 22~24 23~01 
-##   342     3     1   246    21   314     1     4   303     5     1   206    20
+##   441     3     1   246   120   314     1     4   378     5     1   206    90
 ```
 
-```r
+``` r
 class(tb_1)  
 ```
 
-```{.output}
+``` output
 ## [1] "table"
 ```
 
@@ -184,20 +166,20 @@ df$time %in% c("00~02", "02~04", "04~6",...)
 依照各組時間的案例個數統計後，篩除資料未足100的時間區間如下，最後再用`table(df$time)` 計算一次，發現每個時段都兩三、百個案例，且涵蓋整日的時間。清理後沒有重疊的時間區間，做類別資料分析會比較準確。
 
 
-```r
+``` r
 # filter out irrelevant timestamp
 df <- df[!df$time %in% c("03~05", "05~07", "09~11", "11~13", "11~03", "12~15", "15~17", "15~18", "17~19", "18~21", "19~21", "21~23", "21~24", "23~01"), ]
 
 table(df$time)
 ```
 
-```{.output}
+``` output
 ## 
 ## 00~02 02~04 04~06 06~08 08~10 10~12 12~14 14~16 16~18 18~20 20~22 22~24 
-##   272   214   156   191   305   338   338   342   246   314   303   206
+##   272   287   156   191   410   338   338   441   246   314   378   206
 ```
 
-```r
+``` r
 # filter out irrelevant region(area)
 # df <- df[!df$region %in% c("三重", "中和", "淡水", "板橋"), ]
 ```
@@ -209,38 +191,38 @@ table(df$time)
 用`table()`來交叉分析的結果如下，所得到的結果之變數型態仍是`table`型態。
 
 
-```r
+``` r
 # Tabulating time and region variables
 (res_table <- table(df$time, df$region))
 ```
 
-```{.output}
+``` output
 ##        
 ##         中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華
 ##   00~02   62   15   27   20   24   19   28   15   24   17    4   17
-##   02~04   26   22   12   15   17   12   29   10   15   14   13   29
+##   02~04   37   25   17   19   22   15   41   14   22   16   20   39
 ##   04~06   22    7   11   15   17    6   14   15   14    8    5   22
 ##   06~08   20   19   13   16   24   13   17    9   19    9   11   21
-##   08~10   45   27   20   27   22   16   24   17   31   18   24   34
+##   08~10   54   37   26   34   32   25   45   22   39   21   30   45
 ##   10~12   38   20   18   33   35   19   35   12   34   18   35   41
 ##   12~14   30   25   20   26   34   15   46   12   49   25   23   33
-##   14~16   43   19   18   39   32   20   40   26   32   19   22   32
+##   14~16   55   25   24   44   43   31   55   28   40   19   32   45
 ##   16~18   21   19    8   24   33   11   30   13   25   16   20   26
 ##   18~20   39   42   23   22   40   18   31   13   23   23   17   23
-##   20~22   40   13   22   34   17   20   41   13   26   15   25   37
+##   20~22   50   17   27   40   23   25   53   21   29   18   29   46
 ##   22~24   33   20   16   18   15    9   23    9   12   17   14   20
 ```
 
-```r
+``` r
 # Checking it class and its content
 class(res_table)
 ```
 
-```{.output}
+``` output
 ## [1] "table"
 ```
 
-```r
+``` r
 ## [1] "table"
 ```
 
@@ -249,19 +231,19 @@ class(res_table)
 通常這種類別資料交叉分析最常用的圖表型態之一便是Mosaic Plot（但事實上Mosaic Plot不見能夠被一眼就了解）。我們可以把交叉分析後的變項`res_table`直接用MosaicPlot來繪圖。
 
 
-```r
+``` r
 # mosaicplot() to plot 2-dim categorical vars.
 mosaicplot(res_table)
 ```
 
-<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
-```r
+``` r
 # Add argument main (figure title)
 mosaicplot(res_table, main="mosaic plot")
 ```
 
-<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-2.png" width="672" />
+<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-8-2.png" width="672" />
 
 #### 解決圖表無法顯示中文 {#tptheft_show_chi}
 
@@ -270,20 +252,20 @@ mosaicplot(res_table, main="mosaic plot")
 Mosaic Plot屬於base R的`plot()`，其中文指定方法要指定在繪圖前的`par()`函式中（`par`為parameter的意思），指定方法為`par(family=('Heiti TC Light'))`，Heiti TC Light為字體名稱，為OSX上在用的黑體細字，STKaiti則為標楷體。然後，`par()`和`mosaicplot()`兩個函式要「同時執行」，也就是請你直接用shift-cmd(ctrl)-Enter執行整個code-cell，或者將該兩個函式選起來一次執行。
 
 
-```r
+``` r
 par(family=('STKaiti'))
 # par(family=('Heiti TC Light'))
 mosaicplot(res_table, main="mosaic plot", color=T)
 ```
 
-<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 #### 自訂顏色 {#tptheft_define_color}
 
 目前顏色實在過醜，你可以自訂顏色指給`mosaicplot()`。例如我底下便產製了12種顏色後，將其作為`mosaicplot()`的參數
 
 
-```r
+``` r
 # Set up color by yourself.
 colors <- c('#D0104C', '#DB4D6D', '#E83015',  '#F75C2F',
             '#E79460', '#E98B2A', '#9B6E23', '#F7C242',
@@ -294,7 +276,7 @@ mosaicplot(res_table, color=colors, border=0, off = 3,
 		   main="Theft rate of Taipei city (region by hour)")
 ```
 
-<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ### Practices
 
@@ -345,27 +327,27 @@ mosaicplot(res_table, color=colors, border=0, off = 3,
 
 
 
-```r
+``` r
 res_tapply
 ```
 
-```{.output}
+``` output
 ##       中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華
 ## 00~02   62   15   27   20   24   19   28   15   24   17    4   17
-## 02~04   26   22   12   15   17   12   29   10   15   14   13   29
+## 02~04   37   25   17   19   22   15   41   14   22   16   20   39
 ## 04~06   22    7   11   15   17    6   14   15   14    8    5   22
 ## 06~08   20   19   13   16   24   13   17    9   19    9   11   21
-## 08~10   45   27   20   27   22   16   24   17   31   18   24   34
+## 08~10   54   37   26   34   32   25   45   22   39   21   30   45
 ## 10~12   38   20   18   33   35   19   35   12   34   18   35   41
 ## 12~14   30   25   20   26   34   15   46   12   49   25   23   33
-## 14~16   43   19   18   39   32   20   40   26   32   19   22   32
+## 14~16   55   25   24   44   43   31   55   28   40   19   32   45
 ## 16~18   21   19    8   24   33   11   30   13   25   16   20   26
 ## 18~20   39   42   23   22   40   18   31   13   23   23   17   23
-## 20~22   40   13   22   34   17   20   41   13   26   15   25   37
+## 20~22   50   17   27   40   23   25   53   21   29   18   29   46
 ## 22~24   33   20   16   18   15    9   23    9   12   17   14   20
 ```
 
-```r
+``` r
 # View(res)
 ```
 
@@ -388,7 +370,7 @@ res_tapply
 展開後的資料型態和前者計數後的資料型態一樣，都是`"tbl_df"     "tbl"        "data.frame"`。這是為什麼tidyverse系列的套件逐漸變成R的顯學的原因之一。
 
 
-```r
+``` r
 library(tidyr)
 # spreading the region into columns
 # (res_count_spread <- spread(res_count, region, n, fill = 0))
@@ -396,36 +378,36 @@ res_count_spread <- pivot_wider(res_count, names_from = region, values_from = n,
 class(res_count_spread)
 ```
 
-```{.output}
+``` output
 ## [1] "tbl_df"     "tbl"        "data.frame"
 ```
 
-```r
+``` r
 # spreading the time into columns
 # res_count_spread <- spread(res_count, time, n, fill = 0)
 
 res_count_spread # %>% View
 ```
 
-```{.output}
+``` output
 ## # A tibble: 12 × 13
 ##    time   中山  中正  信義  內湖  北投  南港  士林  大同  大安  文山  松山  萬華
 ##    <chr> <int> <int> <int> <int> <int> <int> <int> <int> <int> <int> <int> <int>
 ##  1 00~02    62    15    27    20    24    19    28    15    24    17     4    17
-##  2 02~04    26    22    12    15    17    12    29    10    15    14    13    29
+##  2 02~04    37    25    17    19    22    15    41    14    22    16    20    39
 ##  3 04~06    22     7    11    15    17     6    14    15    14     8     5    22
 ##  4 06~08    20    19    13    16    24    13    17     9    19     9    11    21
-##  5 08~10    45    27    20    27    22    16    24    17    31    18    24    34
+##  5 08~10    54    37    26    34    32    25    45    22    39    21    30    45
 ##  6 10~12    38    20    18    33    35    19    35    12    34    18    35    41
 ##  7 12~14    30    25    20    26    34    15    46    12    49    25    23    33
-##  8 14~16    43    19    18    39    32    20    40    26    32    19    22    32
+##  8 14~16    55    25    24    44    43    31    55    28    40    19    32    45
 ##  9 16~18    21    19     8    24    33    11    30    13    25    16    20    26
 ## 10 18~20    39    42    23    22    40    18    31    13    23    23    17    23
-## 11 20~22    40    13    22    34    17    20    41    13    26    15    25    37
+## 11 20~22    50    17    27    40    23    25    53    21    29    18    29    46
 ## 12 22~24    33    20    16    18    15     9    23     9    12    17    14    20
 ```
 
-```r
+``` r
 # ??dplyr::count
 ```
 
@@ -434,7 +416,7 @@ res_count_spread # %>% View
 寬表格亦可用tidyr的`gather()`函式轉回長表格型態。但`gather()`近期也已經被新的函式`pivot_longer()`取代。原先的`gather(res_count_spread, region, n, -time)`應取代為`pivot_longer(res_count_spread, -time, names_to = "region", values_to = "n")`。
 
 
-```r
+``` r
 # (long_table <- tidyr::gather(res_count_spread, region, n, -time))
 long_table <- pivot_longer(res_count_spread, -time, names_to = "region", values_to = "n")
 ```
@@ -447,11 +429,11 @@ long_table <- pivot_longer(res_count_spread, -time, names_to = "region", values_
 -   **shade**: a logical indicating whether to produce extended mosaic plots, or a numeric vector of at most 5 distinct positive numbers giving the absolute values of the cut points for the residuals. By default, shade is FALSE, and simple mosaics are created. Using shade = TRUE cuts absolute values at 2 and 4.
 
 
-```r
+``` r
 # par(family=('STKaiti'))
 par(family=('Heiti TC Light'))
 mosaicplot(res_table, color=T, shade = T, border=0, off = 3,
 		   main="Theft rate of Taipei city (region by hour)")
 ```
 
-<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="R12_tptheft_base_files/figure-html/unnamed-chunk-18-1.png" width="672" />

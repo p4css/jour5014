@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2025-03-03" />
+<meta name="date" content="2025-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,8 +296,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.1" data-path="base2dplyr.html"><a href="base2dplyr.html#reading-data"><i class="fa fa-check"></i><b>6.2.1</b> Reading data</a></li>
 <li class="chapter" data-level="6.2.2" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-i"><i class="fa fa-check"></i><b>6.2.2</b> Cleaning data I</a></li>
 <li class="chapter" data-level="6.2.3" data-path="base2dplyr.html"><a href="base2dplyr.html#cleaning-data-ii"><i class="fa fa-check"></i><b>6.2.3</b> Cleaning data II</a></li>
-<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-form"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide form</a></li>
-<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#setting-time-as-row.name-for-mosaicplot"><i class="fa fa-check"></i><b>6.2.5</b> Setting time as row.name for mosaicplot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="base2dplyr.html"><a href="base2dplyr.html#long-to-wide-table"><i class="fa fa-check"></i><b>6.2.4</b> Long to wide table</a></li>
+<li class="chapter" data-level="6.2.5" data-path="base2dplyr.html"><a href="base2dplyr.html#plot-with-long-table"><i class="fa fa-check"></i><b>6.2.5</b> Plot with long table</a></li>
 <li class="chapter" data-level="6.2.6" data-path="base2dplyr.html"><a href="base2dplyr.html#clean-version"><i class="fa fa-check"></i><b>6.2.6</b> Clean version</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="base2dplyr.html"><a href="base2dplyr.html#maternity_dplyr"><i class="fa fa-check"></i><b>6.3</b> Paid Maternity Leave</a>
@@ -318,17 +318,21 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.2" data-path="joindata.html"><a href="joindata.html#inner_join-and-full_join"><i class="fa fa-check"></i><b>7.1.2</b> <code>inner_join()</code> and <code>full_join()</code></a></li>
 <li class="chapter" data-level="7.1.3" data-path="joindata.html"><a href="joindata.html#join-by-different-keys"><i class="fa fa-check"></i><b>7.1.3</b> <code>join()</code> by different keys</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.2</b> 讀取內政部人口統計資料</a>
+<li class="chapter" data-level="7.2" data-path="joindata.html"><a href="joindata.html#案例說明"><i class="fa fa-check"></i><b>7.2</b> 案例說明</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#moi_plan"><i class="fa fa-check"></i><b>7.2.1</b> 分析規劃</a></li>
-<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.2.2</b> 清理資料</a></li>
-<li class="chapter" data-level="7.2.3" data-path="joindata.html"><a href="joindata.html#moi_rowwise"><i class="fa fa-check"></i><b>7.2.3</b> 進階：運用<code>rowwise()</code></a></li>
-<li class="chapter" data-level="7.2.4" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.2.4</b> 建立鄉鎮市區與村里指標</a></li>
-<li class="chapter" data-level="7.2.5" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.2.5</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+<li class="chapter" data-level="7.2.1" data-path="joindata.html"><a href="joindata.html#資料來源"><i class="fa fa-check"></i><b>7.2.1</b> 資料來源</a></li>
+<li class="chapter" data-level="7.2.2" data-path="joindata.html"><a href="joindata.html#處理策略"><i class="fa fa-check"></i><b>7.2.2</b> 處理策略</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.3</b> 讀取公投資料</a>
+<li class="chapter" data-level="7.3" data-path="joindata.html"><a href="joindata.html#moi"><i class="fa fa-check"></i><b>7.3</b> 內政部人口統計資料</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.3.1</b> 合併公投資料並視覺化</a></li>
+<li class="chapter" data-level="7.3.1" data-path="joindata.html"><a href="joindata.html#moi_clean"><i class="fa fa-check"></i><b>7.3.1</b> Step 1. 寬表轉長表</a></li>
+<li class="chapter" data-level="7.3.2" data-path="joindata.html"><a href="joindata.html#step-2.-切分變項"><i class="fa fa-check"></i><b>7.3.2</b> Step 2. 切分變項</a></li>
+<li class="chapter" data-level="7.3.3" data-path="joindata.html"><a href="joindata.html#moi_vil"><i class="fa fa-check"></i><b>7.3.3</b> Step 3. 建立鄉鎮市區與村里指標</a></li>
+<li class="chapter" data-level="7.3.4" data-path="joindata.html"><a href="joindata.html#moi_visual_popul"><i class="fa fa-check"></i><b>7.3.4</b> 視覺化測試（老年人口數 x 曾婚人口數）</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="joindata.html"><a href="joindata.html#referendum"><i class="fa fa-check"></i><b>7.4</b> 公投資料</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="joindata.html"><a href="joindata.html#moi_join_ref"><i class="fa fa-check"></i><b>7.4.1</b> 合併公投資料並視覺化</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>8</b> Categorical Data Analysis</a>
@@ -828,27 +832,13 @@ div.csl-indent {
 <li><code>readr::read_csv()</code> to read csv or read a csv by an url</li>
 </ul>
 <p>如果知道這個套件是<code>readr</code>的話，也可以到右下方的工作區塊找到「Packages」工作視窗，裡面有列出現在載入的所有的套件，也有套件中的所有函式。偶而看一看會發現一些自己平常忽略的好用工具。</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="crosstab.html#cb305-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb305-2"><a href="crosstab.html#cb305-2" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb305-3"><a href="crosstab.html#cb305-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb305-4"><a href="crosstab.html#cb305-4" tabindex="-1"></a></span>
-<span id="cb305-5"><a href="crosstab.html#cb305-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span>
-<span id="cb305-6"><a href="crosstab.html#cb305-6" tabindex="-1"></a><span class="fu">head</span>(df) </span></code></pre></div>
-<pre class="output"><code>##   編號     案類 發生日期 發生時段                                    發生地點
-## 1    1 住宅竊盜  1030623    08~10                  臺北市中正區廈門街91~120號
-## 2    2 住宅竊盜  1040101    00~02              臺北市文山區萬美里萬寧街1~30號
-## 3    3 住宅竊盜  1040101    00~02 臺北市信義區富台里忠孝東路5段295巷6弄1~30號
-## 4    4 住宅竊盜  1040101    06~08             臺北市中山區新生北路1段91~120號
-## 5    5 住宅竊盜  1040101    10~12           臺北市文山區明興里興隆路4段1~30號
-## 6    6 住宅竊盜  1040102    00~02   臺北市士林區天福里1鄰忠誠路2段130巷1~30號</code></pre>
 <p><strong>用read_csv()來讀取。</strong>除了 base套件的<code>read.csv()</code>外，也可使用<code>readr</code>套件的<code>read_csv()</code>函式來讀取，該套件屬於tidyverse套件系的其中一個套件，如果已經有用<code>install.packages("tidyverse")</code>安裝過，只要用<code>library(tidyverse)</code>就可以使用<code>read_csv()</code>函式。在此鼓勵各位使用tidyverse系列套件。普遍來說，<code>read_csv()</code> 的功能和效果都會比<code>read.csv()</code>好，該函式還會自動猜測每個變數的變數型態並直接進行轉換（尤其是有時間欄位的時候，會非常方便）。</p>
-<div class="debug">
-<p>萬一遇到中文檔案會有讀檔編碼問題時，有可能該檔案是用big5來儲存的，可以在<code>read_csv()</code>中設定<code>locale</code>來指定讀取的編碼方法。如<code>read_csv(url, locale = locale(encoding = "Big5"))</code></p>
-</div>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="crosstab.html#cb307-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb307-2"><a href="crosstab.html#cb307-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;</span>)</span>
-<span id="cb307-3"><a href="crosstab.html#cb307-3" tabindex="-1"></a><span class="co"># df &lt;- read_csv(&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM-1.csv&quot;, locale = locale(encoding = &quot;Big5&quot;))</span></span>
-<span id="cb307-4"><a href="crosstab.html#cb307-4" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="crosstab.html#cb305-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb305-2"><a href="crosstab.html#cb305-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb305-3"><a href="crosstab.html#cb305-3" tabindex="-1"></a></span>
+<span id="cb305-4"><a href="crosstab.html#cb305-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv&quot;</span>, <span class="at">fileEncoding =</span> <span class="st">&quot;Big5&quot;</span>)</span>
+<span id="cb305-5"><a href="crosstab.html#cb305-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/臺北市住宅竊盜點位資訊-UTF8-BOM.csv&quot;</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">&quot;Big5&quot;</span>))</span>
+<span id="cb305-6"><a href="crosstab.html#cb305-6" tabindex="-1"></a><span class="fu">head</span>(df) </span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 5
 ##    編號 案類     發生日期 發生時段 發生地點                                   
 ##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                                      
@@ -858,6 +848,9 @@ div.csl-indent {
 ## 4     4 住宅竊盜  1040101 06~08    臺北市中山區新生北路1段91~120號            
 ## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30號          
 ## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段130巷1~30號</code></pre>
+<div class="debug">
+<p>萬一遇到中文檔案會有讀檔編碼問題時，有可能該檔案是用big5來儲存的，可以在<code>read_csv()</code>中設定<code>locale</code>來指定讀取的編碼方法。如<code>read_csv(url, locale = locale(encoding = "Big5"))</code></p>
+</div>
 <div id="tptheft_var_overview" class="section level4 hasAnchor" number="5.1.1.1">
 <h4><span class="header-section-number">5.1.1.1</span> 觀察變數<a href="crosstab.html#tptheft_var_overview" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
@@ -878,42 +871,42 @@ div.csl-indent {
 <li>或用<code>stringr::str_sub()</code></li>
 <li><code>?substr</code>查詢其用法和意義。相當於<code>getting sub string since x to y</code>。</li>
 </ul>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="crosstab.html#cb309-1" tabindex="-1"></a><span class="co"># Get substring of var &quot;發生時段&quot; and assign to a new time var</span></span>
-<span id="cb309-2"><a href="crosstab.html#cb309-2" tabindex="-1"></a>df<span class="sc">$</span>time <span class="ot">&lt;-</span> df<span class="sc">$</span>發生時段</span>
-<span id="cb309-3"><a href="crosstab.html#cb309-3" tabindex="-1"></a></span>
-<span id="cb309-4"><a href="crosstab.html#cb309-4" tabindex="-1"></a><span class="co"># Get substring of var &quot;發生地點&quot; and assign to a new region var</span></span>
-<span id="cb309-5"><a href="crosstab.html#cb309-5" tabindex="-1"></a>df<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">substr</span>(df<span class="sc">$</span>發生地點, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb309-6"><a href="crosstab.html#cb309-6" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="crosstab.html#cb307-1" tabindex="-1"></a><span class="co"># Get substring of var &quot;發生時段&quot; and assign to a new time var</span></span>
+<span id="cb307-2"><a href="crosstab.html#cb307-2" tabindex="-1"></a>df<span class="sc">$</span>time <span class="ot">&lt;-</span> df<span class="sc">$</span>發生時段</span>
+<span id="cb307-3"><a href="crosstab.html#cb307-3" tabindex="-1"></a></span>
+<span id="cb307-4"><a href="crosstab.html#cb307-4" tabindex="-1"></a><span class="co"># Get substring of var &quot;發生地點&quot; and assign to a new region var</span></span>
+<span id="cb307-5"><a href="crosstab.html#cb307-5" tabindex="-1"></a>df<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">substr</span>(df<span class="sc">$</span>發生地點, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb307-6"><a href="crosstab.html#cb307-6" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre class="output"><code>## # A tibble: 6 × 7
 ##    編號 案類     發生日期 發生時段 發生地點                         time  region
 ##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                            &lt;chr&gt; &lt;chr&gt; 
 ## 1     1 住宅竊盜  1030623 08~10    臺北市中正區廈門街91~120號       08~10 中正  
 ## 2     2 住宅竊盜  1040101 00~02    臺北市文山區萬美里萬寧街1~30號   00~02 文山  
-## 3     3 住宅竊盜  1040101 00~02    臺北市信義區富台里忠孝東路5段29… 00~02 信義  
+## 3     3 住宅竊盜  1040101 00~02    臺北市信義區富台里忠孝東路5段295巷6弄1~30號…… 00~02 信義  
 ## 4     4 住宅竊盜  1040101 06~08    臺北市中山區新生北路1段91~120號  06~08 中山  
-## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30… 10~12 文山  
-## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段1… 00~02 士林</code></pre>
+## 5     5 住宅竊盜  1040101 10~12    臺北市文山區明興里興隆路4段1~30號…… 10~12 文山  
+## 6     6 住宅竊盜  1040102 00~02    臺北市士林區天福里1鄰忠誠路2段130巷1~30號…… 00~02 士林</code></pre>
 </div>
 <div id="tptheft_counting" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> 使用<code>table()</code>計數<a href="crosstab.html#tptheft_counting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>清理完資料後，我們要回答的第一個數據問題通常是「那XXX的案例有幾個？」例如：大安區有多少竊盜案？10~12這個時段有多少案例。</p>
 <p><code>table()</code>函式可以對Vector中的值進行計數（Counting）。<code>table(df$time)</code> 相當於去計數不同的時間區間出現多少起案例；<code>table(df$region)</code> 相當於去計數不同地區各出現多少起案例。</p>
 <p>提示：可以用<code>class(tb_1)</code> 觀察用<code>table()</code> 計數後所產生的資料型態（<code>table</code>）。</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="crosstab.html#cb311-1" tabindex="-1"></a><span class="do">## table</span></span>
-<span id="cb311-2"><a href="crosstab.html#cb311-2" tabindex="-1"></a><span class="co"># counting the frequency of region variable</span></span>
-<span id="cb311-3"><a href="crosstab.html#cb311-3" tabindex="-1"></a></span>
-<span id="cb311-4"><a href="crosstab.html#cb311-4" tabindex="-1"></a>(<span class="fu">table</span>(df<span class="sc">$</span>region))</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="crosstab.html#cb309-1" tabindex="-1"></a><span class="do">## table</span></span>
+<span id="cb309-2"><a href="crosstab.html#cb309-2" tabindex="-1"></a><span class="co"># counting the frequency of region variable</span></span>
+<span id="cb309-3"><a href="crosstab.html#cb309-3" tabindex="-1"></a></span>
+<span id="cb309-4"><a href="crosstab.html#cb309-4" tabindex="-1"></a>(<span class="fu">table</span>(df<span class="sc">$</span>region))</span></code></pre></div>
 <pre class="output"><code>## 
 ## 中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華 
-##  438  263  214  303  318  181  373  172  311  204  220  350</code></pre>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="crosstab.html#cb313-1" tabindex="-1"></a><span class="co"># counting the frequency of time variable</span></span>
-<span id="cb313-2"><a href="crosstab.html#cb313-2" tabindex="-1"></a>(tb_1 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>time)) <span class="co"># %&gt;% View</span></span></code></pre></div>
+##  526  307  259  349  375  229  490  215  370  229  268  433</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="crosstab.html#cb311-1" tabindex="-1"></a><span class="co"># counting the frequency of time variable</span></span>
+<span id="cb311-2"><a href="crosstab.html#cb311-2" tabindex="-1"></a>(tb_1 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>time)) <span class="co"># %&gt;% View</span></span></code></pre></div>
 <pre class="output"><code>## 
 ## 00~02 02~04 03~05 04~06 05~07 06~08 08~10 09~11 10~12 11~03 11~13 12~14 12~15 
-##   272   214     8   156    23   191   305     6   338     1    26   338     2 
+##   272   287     8   156    77   191   410     6   338     1   154   338     2 
 ## 14~16 15~17 15~18 16~18 17~19 18~20 18~21 19~21 20~22 21~23 21~24 22~24 23~01 
-##   342     3     1   246    21   314     1     4   303     5     1   206    20</code></pre>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="crosstab.html#cb315-1" tabindex="-1"></a><span class="fu">class</span>(tb_1)  </span></code></pre></div>
+##   441     3     1   246   120   314     1     4   378     5     1   206    90</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="crosstab.html#cb313-1" tabindex="-1"></a><span class="fu">class</span>(tb_1)  </span></code></pre></div>
 <pre class="output"><code>## [1] &quot;table&quot;</code></pre>
 </div>
 <div id="tptheft_filtering" class="section level3 hasAnchor" number="5.1.4">
@@ -927,71 +920,71 @@ div.csl-indent {
 <li><p>如果要表示不包含，就在<code>df%time</code>加一個NOT，也就是<code>!</code>。</p></li>
 </ul>
 <p>依照各組時間的案例個數統計後，篩除資料未足100的時間區間如下，最後再用<code>table(df$time)</code> 計算一次，發現每個時段都兩三、百個案例，且涵蓋整日的時間。清理後沒有重疊的時間區間，做類別資料分析會比較準確。</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="crosstab.html#cb318-1" tabindex="-1"></a><span class="co"># filter out irrelevant timestamp</span></span>
-<span id="cb318-2"><a href="crosstab.html#cb318-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>df<span class="sc">$</span>time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;03~05&quot;</span>, <span class="st">&quot;05~07&quot;</span>, <span class="st">&quot;09~11&quot;</span>, <span class="st">&quot;11~13&quot;</span>, <span class="st">&quot;11~03&quot;</span>, <span class="st">&quot;12~15&quot;</span>, <span class="st">&quot;15~17&quot;</span>, <span class="st">&quot;15~18&quot;</span>, <span class="st">&quot;17~19&quot;</span>, <span class="st">&quot;18~21&quot;</span>, <span class="st">&quot;19~21&quot;</span>, <span class="st">&quot;21~23&quot;</span>, <span class="st">&quot;21~24&quot;</span>, <span class="st">&quot;23~01&quot;</span>), ]</span>
-<span id="cb318-3"><a href="crosstab.html#cb318-3" tabindex="-1"></a></span>
-<span id="cb318-4"><a href="crosstab.html#cb318-4" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>time)</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="crosstab.html#cb316-1" tabindex="-1"></a><span class="co"># filter out irrelevant timestamp</span></span>
+<span id="cb316-2"><a href="crosstab.html#cb316-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>df<span class="sc">$</span>time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;03~05&quot;</span>, <span class="st">&quot;05~07&quot;</span>, <span class="st">&quot;09~11&quot;</span>, <span class="st">&quot;11~13&quot;</span>, <span class="st">&quot;11~03&quot;</span>, <span class="st">&quot;12~15&quot;</span>, <span class="st">&quot;15~17&quot;</span>, <span class="st">&quot;15~18&quot;</span>, <span class="st">&quot;17~19&quot;</span>, <span class="st">&quot;18~21&quot;</span>, <span class="st">&quot;19~21&quot;</span>, <span class="st">&quot;21~23&quot;</span>, <span class="st">&quot;21~24&quot;</span>, <span class="st">&quot;23~01&quot;</span>), ]</span>
+<span id="cb316-3"><a href="crosstab.html#cb316-3" tabindex="-1"></a></span>
+<span id="cb316-4"><a href="crosstab.html#cb316-4" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>time)</span></code></pre></div>
 <pre class="output"><code>## 
 ## 00~02 02~04 04~06 06~08 08~10 10~12 12~14 14~16 16~18 18~20 20~22 22~24 
-##   272   214   156   191   305   338   338   342   246   314   303   206</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="crosstab.html#cb320-1" tabindex="-1"></a><span class="co"># filter out irrelevant region(area)</span></span>
-<span id="cb320-2"><a href="crosstab.html#cb320-2" tabindex="-1"></a><span class="co"># df &lt;- df[!df$region %in% c(&quot;三重&quot;, &quot;中和&quot;, &quot;淡水&quot;, &quot;板橋&quot;), ]</span></span></code></pre></div>
+##   272   287   156   191   410   338   338   441   246   314   378   206</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="crosstab.html#cb318-1" tabindex="-1"></a><span class="co"># filter out irrelevant region(area)</span></span>
+<span id="cb318-2"><a href="crosstab.html#cb318-2" tabindex="-1"></a><span class="co"># df &lt;- df[!df$region %in% c(&quot;三重&quot;, &quot;中和&quot;, &quot;淡水&quot;, &quot;板橋&quot;), ]</span></span></code></pre></div>
 </div>
 <div id="tptheft_table" class="section level3 hasAnchor" number="5.1.5">
 <h3><span class="header-section-number">5.1.5</span> 做雙變數樞紐分析：<code>table()</code><a href="crosstab.html#tptheft_table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>類別變項分析通常是要考驗兩個變項間的關係，從上述的計數中，我可以看見不同行政區或者不同時間的竊盜案數量，但我進一步想知道，那不同行政區的竊盜案常發生時間是否不同？這時後就要做時間和行政區的交叉分析。我們同樣可以用<code>table()</code>和<code>tapply()</code>來做兩個變項的交叉分析，寫法如下。</p>
 <p>用<code>table()</code>來交叉分析的結果如下，所得到的結果之變數型態仍是<code>table</code>型態。</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="crosstab.html#cb321-1" tabindex="-1"></a><span class="co"># Tabulating time and region variables</span></span>
-<span id="cb321-2"><a href="crosstab.html#cb321-2" tabindex="-1"></a>(res_table <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>region))</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="crosstab.html#cb319-1" tabindex="-1"></a><span class="co"># Tabulating time and region variables</span></span>
+<span id="cb319-2"><a href="crosstab.html#cb319-2" tabindex="-1"></a>(res_table <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>region))</span></code></pre></div>
 <pre class="output"><code>##        
 ##         中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華
 ##   00~02   62   15   27   20   24   19   28   15   24   17    4   17
-##   02~04   26   22   12   15   17   12   29   10   15   14   13   29
+##   02~04   37   25   17   19   22   15   41   14   22   16   20   39
 ##   04~06   22    7   11   15   17    6   14   15   14    8    5   22
 ##   06~08   20   19   13   16   24   13   17    9   19    9   11   21
-##   08~10   45   27   20   27   22   16   24   17   31   18   24   34
+##   08~10   54   37   26   34   32   25   45   22   39   21   30   45
 ##   10~12   38   20   18   33   35   19   35   12   34   18   35   41
 ##   12~14   30   25   20   26   34   15   46   12   49   25   23   33
-##   14~16   43   19   18   39   32   20   40   26   32   19   22   32
+##   14~16   55   25   24   44   43   31   55   28   40   19   32   45
 ##   16~18   21   19    8   24   33   11   30   13   25   16   20   26
 ##   18~20   39   42   23   22   40   18   31   13   23   23   17   23
-##   20~22   40   13   22   34   17   20   41   13   26   15   25   37
+##   20~22   50   17   27   40   23   25   53   21   29   18   29   46
 ##   22~24   33   20   16   18   15    9   23    9   12   17   14   20</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="crosstab.html#cb323-1" tabindex="-1"></a><span class="co"># Checking it class and its content</span></span>
-<span id="cb323-2"><a href="crosstab.html#cb323-2" tabindex="-1"></a><span class="fu">class</span>(res_table)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="crosstab.html#cb321-1" tabindex="-1"></a><span class="co"># Checking it class and its content</span></span>
+<span id="cb321-2"><a href="crosstab.html#cb321-2" tabindex="-1"></a><span class="fu">class</span>(res_table)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;table&quot;</code></pre>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="crosstab.html#cb325-1" tabindex="-1"></a><span class="do">## [1] &quot;table&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="crosstab.html#cb323-1" tabindex="-1"></a><span class="do">## [1] &quot;table&quot;</span></span></code></pre></div>
 </div>
 <div id="tptheft_plot" class="section level3 hasAnchor" number="5.1.6">
 <h3><span class="header-section-number">5.1.6</span> 繪圖<a href="crosstab.html#tptheft_plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>通常這種類別資料交叉分析最常用的圖表型態之一便是Mosaic Plot（但事實上Mosaic Plot不見能夠被一眼就了解）。我們可以把交叉分析後的變項<code>res_table</code>直接用MosaicPlot來繪圖。</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="crosstab.html#cb326-1" tabindex="-1"></a><span class="co"># mosaicplot() to plot 2-dim categorical vars.</span></span>
-<span id="cb326-2"><a href="crosstab.html#cb326-2" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table)</span></code></pre></div>
-<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="crosstab.html#cb327-1" tabindex="-1"></a><span class="co"># Add argument main (figure title)</span></span>
-<span id="cb327-2"><a href="crosstab.html#cb327-2" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">main=</span><span class="st">&quot;mosaic plot&quot;</span>)</span></code></pre></div>
-<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="crosstab.html#cb324-1" tabindex="-1"></a><span class="co"># mosaicplot() to plot 2-dim categorical vars.</span></span>
+<span id="cb324-2"><a href="crosstab.html#cb324-2" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table)</span></code></pre></div>
+<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="crosstab.html#cb325-1" tabindex="-1"></a><span class="co"># Add argument main (figure title)</span></span>
+<span id="cb325-2"><a href="crosstab.html#cb325-2" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">main=</span><span class="st">&quot;mosaic plot&quot;</span>)</span></code></pre></div>
+<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <div id="tptheft_show_chi" class="section level4 hasAnchor" number="5.1.6.1">
 <h4><span class="header-section-number">5.1.6.1</span> 解決圖表無法顯示中文<a href="crosstab.html#tptheft_show_chi" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>大部分的視覺化套件都無法順利顯示中文，除非特別指定所要用的中文字型。這方面網路上可以找到很多的說明，但非常討厭的是，幾乎每換一套視覺化工具，換一套語言，就有不同的中文字體指定方式。例如用base的<code>plot()</code>來繪圖或用<code>ggplot()</code>的中文字型指定方法便不同，且軸上面有中文、圖標有中文、或者圖內有中文都要分開指定，非常討人厭。</p>
 <p>Mosaic Plot屬於base R的<code>plot()</code>，其中文指定方法要指定在繪圖前的<code>par()</code>函式中（<code>par</code>為parameter的意思），指定方法為<code>par(family=('Heiti TC Light'))</code>，Heiti TC Light為字體名稱，為OSX上在用的黑體細字，STKaiti則為標楷體。然後，<code>par()</code>和<code>mosaicplot()</code>兩個函式要「同時執行」，也就是請你直接用shift-cmd(ctrl)-Enter執行整個code-cell，或者將該兩個函式選起來一次執行。</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="crosstab.html#cb328-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;STKaiti&#39;</span>))</span>
-<span id="cb328-2"><a href="crosstab.html#cb328-2" tabindex="-1"></a><span class="co"># par(family=(&#39;Heiti TC Light&#39;))</span></span>
-<span id="cb328-3"><a href="crosstab.html#cb328-3" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">main=</span><span class="st">&quot;mosaic plot&quot;</span>, <span class="at">color=</span>T)</span></code></pre></div>
-<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="crosstab.html#cb326-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;STKaiti&#39;</span>))</span>
+<span id="cb326-2"><a href="crosstab.html#cb326-2" tabindex="-1"></a><span class="co"># par(family=(&#39;Heiti TC Light&#39;))</span></span>
+<span id="cb326-3"><a href="crosstab.html#cb326-3" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">main=</span><span class="st">&quot;mosaic plot&quot;</span>, <span class="at">color=</span>T)</span></code></pre></div>
+<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="tptheft_define_color" class="section level4 hasAnchor" number="5.1.6.2">
 <h4><span class="header-section-number">5.1.6.2</span> 自訂顏色<a href="crosstab.html#tptheft_define_color" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>目前顏色實在過醜，你可以自訂顏色指給<code>mosaicplot()</code>。例如我底下便產製了12種顏色後，將其作為<code>mosaicplot()</code>的參數</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="crosstab.html#cb329-1" tabindex="-1"></a><span class="co"># Set up color by yourself.</span></span>
-<span id="cb329-2"><a href="crosstab.html#cb329-2" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
-<span id="cb329-3"><a href="crosstab.html#cb329-3" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
-<span id="cb329-4"><a href="crosstab.html#cb329-4" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
-<span id="cb329-5"><a href="crosstab.html#cb329-5" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;))</span></span>
-<span id="cb329-6"><a href="crosstab.html#cb329-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>))</span>
-<span id="cb329-7"><a href="crosstab.html#cb329-7" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
-<span id="cb329-8"><a href="crosstab.html#cb329-8" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
-<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="crosstab.html#cb327-1" tabindex="-1"></a><span class="co"># Set up color by yourself.</span></span>
+<span id="cb327-2"><a href="crosstab.html#cb327-2" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;#D0104C&#39;</span>, <span class="st">&#39;#DB4D6D&#39;</span>, <span class="st">&#39;#E83015&#39;</span>,  <span class="st">&#39;#F75C2F&#39;</span>,</span>
+<span id="cb327-3"><a href="crosstab.html#cb327-3" tabindex="-1"></a>            <span class="st">&#39;#E79460&#39;</span>, <span class="st">&#39;#E98B2A&#39;</span>, <span class="st">&#39;#9B6E23&#39;</span>, <span class="st">&#39;#F7C242&#39;</span>,</span>
+<span id="cb327-4"><a href="crosstab.html#cb327-4" tabindex="-1"></a>            <span class="st">&#39;#BEC23F&#39;</span>, <span class="st">&#39;#90B44B&#39;</span>, <span class="st">&#39;#66BAB7&#39;</span>, <span class="st">&#39;#1E88A8&#39;</span>)</span>
+<span id="cb327-5"><a href="crosstab.html#cb327-5" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;))</span></span>
+<span id="cb327-6"><a href="crosstab.html#cb327-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>))</span>
+<span id="cb327-7"><a href="crosstab.html#cb327-7" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">color=</span>colors, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
+<span id="cb327-8"><a href="crosstab.html#cb327-8" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
+<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
 <div id="practices" class="section level3 hasAnchor" number="5.1.7">
@@ -1033,21 +1026,21 @@ div.csl-indent {
 <div id="tptheft_review_tapply" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> <code>tapply()</code> two variables<a href="crosstab.html#tptheft_review_tapply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>用<code>tapply()</code>來做兩個變數交叉分析的語法如下，必須要把兩個Vector包在一個<code>list()</code>中。其他不變。兩個變項用<code>tapply()</code>交叉分析後的結果，變數型態會變成<code>matrix</code>。前者用<code>table()</code>來交叉分析的仍是<code>table</code>型態。</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="crosstab.html#cb330-1" tabindex="-1"></a>res_tapply</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="crosstab.html#cb328-1" tabindex="-1"></a>res_tapply</span></code></pre></div>
 <pre class="output"><code>##       中山 中正 信義 內湖 北投 南港 士林 大同 大安 文山 松山 萬華
 ## 00~02   62   15   27   20   24   19   28   15   24   17    4   17
-## 02~04   26   22   12   15   17   12   29   10   15   14   13   29
+## 02~04   37   25   17   19   22   15   41   14   22   16   20   39
 ## 04~06   22    7   11   15   17    6   14   15   14    8    5   22
 ## 06~08   20   19   13   16   24   13   17    9   19    9   11   21
-## 08~10   45   27   20   27   22   16   24   17   31   18   24   34
+## 08~10   54   37   26   34   32   25   45   22   39   21   30   45
 ## 10~12   38   20   18   33   35   19   35   12   34   18   35   41
 ## 12~14   30   25   20   26   34   15   46   12   49   25   23   33
-## 14~16   43   19   18   39   32   20   40   26   32   19   22   32
+## 14~16   55   25   24   44   43   31   55   28   40   19   32   45
 ## 16~18   21   19    8   24   33   11   30   13   25   16   20   26
 ## 18~20   39   42   23   22   40   18   31   13   23   23   17   23
-## 20~22   40   13   22   34   17   20   41   13   26   15   25   37
+## 20~22   50   17   27   40   23   25   53   21   29   18   29   46
 ## 22~24   33   20   16   18   15    9   23    9   12   17   14   20</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="crosstab.html#cb332-1" tabindex="-1"></a><span class="co"># View(res)</span></span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="crosstab.html#cb330-1" tabindex="-1"></a><span class="co"># View(res)</span></span></code></pre></div>
 </div>
 <div id="tptheft_review_count" class="section level3 hasAnchor" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> <code>dplyr::count()</code> two variables<a href="crosstab.html#tptheft_review_count" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1062,38 +1055,38 @@ div.csl-indent {
 <p>那長表列可以轉為寬表嗎？可以，tidyverse系列套件中的tidyr套件有個函式<code>spread()</code>可以接著把某個變項展開為欄。例如原本上述的列是時間與行政區的交叉組合，但我可以把行政區展開為欄、或者把時間展開為欄 。如下例，<code>spread(res_count, region, n, fill = 0)</code> 有四個參數，遵循tidyverse系列套件的規則，第一個位置為data.frame，第二個參數則是要被展開至欄的變項這裡為<code>region</code>，第三個參數則是因應<code>region</code>被展開後，那中間交叉分析的數值就是n，最後一個參數是避免<code>spread</code>時有些交叉組是沒有資料的，因此<code>fill=0</code>可以指定，如果某個<code>time</code> x <code>region</code>的交叉組別是沒資料的，就填上<code>0</code>，也有可能是用<code>fill=NA</code>填上<code>NA</code>。以下的例子中也提供了將<code>time</code> 展開至欄的寫法供參考。</p>
 <p>現在<code>spread()</code>函式已經被新的函式取代，為<code>pivot_wider()</code>。<code>spread(res_count, region, n, fill = 0)</code> 在此需要改寫為<code>pivot_wider(res_count, names_from = region, values_from = n, values_fill = 0)</code>。大致上和<code>spread()</code>用法是一樣的，只是要寫清楚，哪個變數要給哪一個參數。</p>
 <p>展開後的資料型態和前者計數後的資料型態一樣，都是<code>"tbl_df"     "tbl"        "data.frame"</code>。這是為什麼tidyverse系列的套件逐漸變成R的顯學的原因之一。</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="crosstab.html#cb333-1" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb333-2"><a href="crosstab.html#cb333-2" tabindex="-1"></a><span class="co"># spreading the region into columns</span></span>
-<span id="cb333-3"><a href="crosstab.html#cb333-3" tabindex="-1"></a><span class="co"># (res_count_spread &lt;- spread(res_count, region, n, fill = 0))</span></span>
-<span id="cb333-4"><a href="crosstab.html#cb333-4" tabindex="-1"></a>res_count_spread <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(res_count, <span class="at">names_from =</span> region, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb333-5"><a href="crosstab.html#cb333-5" tabindex="-1"></a><span class="fu">class</span>(res_count_spread)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="crosstab.html#cb331-1" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb331-2"><a href="crosstab.html#cb331-2" tabindex="-1"></a><span class="co"># spreading the region into columns</span></span>
+<span id="cb331-3"><a href="crosstab.html#cb331-3" tabindex="-1"></a><span class="co"># (res_count_spread &lt;- spread(res_count, region, n, fill = 0))</span></span>
+<span id="cb331-4"><a href="crosstab.html#cb331-4" tabindex="-1"></a>res_count_spread <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(res_count, <span class="at">names_from =</span> region, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb331-5"><a href="crosstab.html#cb331-5" tabindex="-1"></a><span class="fu">class</span>(res_count_spread)</span></code></pre></div>
 <pre class="output"><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="crosstab.html#cb335-1" tabindex="-1"></a><span class="co"># spreading the time into columns</span></span>
-<span id="cb335-2"><a href="crosstab.html#cb335-2" tabindex="-1"></a><span class="co"># res_count_spread &lt;- spread(res_count, time, n, fill = 0)</span></span>
-<span id="cb335-3"><a href="crosstab.html#cb335-3" tabindex="-1"></a></span>
-<span id="cb335-4"><a href="crosstab.html#cb335-4" tabindex="-1"></a>res_count_spread <span class="co"># %&gt;% View</span></span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="crosstab.html#cb333-1" tabindex="-1"></a><span class="co"># spreading the time into columns</span></span>
+<span id="cb333-2"><a href="crosstab.html#cb333-2" tabindex="-1"></a><span class="co"># res_count_spread &lt;- spread(res_count, time, n, fill = 0)</span></span>
+<span id="cb333-3"><a href="crosstab.html#cb333-3" tabindex="-1"></a></span>
+<span id="cb333-4"><a href="crosstab.html#cb333-4" tabindex="-1"></a>res_count_spread <span class="co"># %&gt;% View</span></span></code></pre></div>
 <pre class="output"><code>## # A tibble: 12 × 13
 ##    time   中山  中正  信義  內湖  北投  南港  士林  大同  大安  文山  松山  萬華
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ##  1 00~02    62    15    27    20    24    19    28    15    24    17     4    17
-##  2 02~04    26    22    12    15    17    12    29    10    15    14    13    29
+##  2 02~04    37    25    17    19    22    15    41    14    22    16    20    39
 ##  3 04~06    22     7    11    15    17     6    14    15    14     8     5    22
 ##  4 06~08    20    19    13    16    24    13    17     9    19     9    11    21
-##  5 08~10    45    27    20    27    22    16    24    17    31    18    24    34
+##  5 08~10    54    37    26    34    32    25    45    22    39    21    30    45
 ##  6 10~12    38    20    18    33    35    19    35    12    34    18    35    41
 ##  7 12~14    30    25    20    26    34    15    46    12    49    25    23    33
-##  8 14~16    43    19    18    39    32    20    40    26    32    19    22    32
+##  8 14~16    55    25    24    44    43    31    55    28    40    19    32    45
 ##  9 16~18    21    19     8    24    33    11    30    13    25    16    20    26
 ## 10 18~20    39    42    23    22    40    18    31    13    23    23    17    23
-## 11 20~22    40    13    22    34    17    20    41    13    26    15    25    37
+## 11 20~22    50    17    27    40    23    25    53    21    29    18    29    46
 ## 12 22~24    33    20    16    18    15     9    23     9    12    17    14    20</code></pre>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="crosstab.html#cb337-1" tabindex="-1"></a><span class="co"># ??dplyr::count</span></span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="crosstab.html#cb335-1" tabindex="-1"></a><span class="co"># ??dplyr::count</span></span></code></pre></div>
 </div>
 <div id="tptheft_pivot_longer" class="section level3 hasAnchor" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Wide-to-long<a href="crosstab.html#tptheft_pivot_longer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>寬表格亦可用tidyr的<code>gather()</code>函式轉回長表格型態。但<code>gather()</code>近期也已經被新的函式<code>pivot_longer()</code>取代。原先的<code>gather(res_count_spread, region, n, -time)</code>應取代為<code>pivot_longer(res_count_spread, -time, names_to = "region", values_to = "n")</code>。</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="crosstab.html#cb338-1" tabindex="-1"></a><span class="co"># (long_table &lt;- tidyr::gather(res_count_spread, region, n, -time))</span></span>
-<span id="cb338-2"><a href="crosstab.html#cb338-2" tabindex="-1"></a>long_table <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(res_count_spread, <span class="sc">-</span>time, <span class="at">names_to =</span> <span class="st">&quot;region&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="crosstab.html#cb336-1" tabindex="-1"></a><span class="co"># (long_table &lt;- tidyr::gather(res_count_spread, region, n, -time))</span></span>
+<span id="cb336-2"><a href="crosstab.html#cb336-2" tabindex="-1"></a>long_table <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(res_count_spread, <span class="sc">-</span>time, <span class="at">names_to =</span> <span class="st">&quot;region&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="tptheft_residual" class="section level2 hasAnchor" number="5.5">
@@ -1103,11 +1096,11 @@ div.csl-indent {
 <li><strong>off</strong>: vector of offsets to determine percentage spacing at each level of the mosaic (appropriate values are between 0 and 20, and the default is 20 times the number of splits for 2-dimensional tables, and 10 otherwise). Rescaled to maximally 50, and recycled if necessary.</li>
 <li><strong>shade</strong>: a logical indicating whether to produce extended mosaic plots, or a numeric vector of at most 5 distinct positive numbers giving the absolute values of the cut points for the residuals. By default, shade is FALSE, and simple mosaics are created. Using shade = TRUE cuts absolute values at 2 and 4.</li>
 </ul>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="crosstab.html#cb339-1" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;))</span></span>
-<span id="cb339-2"><a href="crosstab.html#cb339-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>))</span>
-<span id="cb339-3"><a href="crosstab.html#cb339-3" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">color=</span>T, <span class="at">shade =</span> T, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
-<span id="cb339-4"><a href="crosstab.html#cb339-4" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
-<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="crosstab.html#cb337-1" tabindex="-1"></a><span class="co"># par(family=(&#39;STKaiti&#39;))</span></span>
+<span id="cb337-2"><a href="crosstab.html#cb337-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family=</span>(<span class="st">&#39;Heiti TC Light&#39;</span>))</span>
+<span id="cb337-3"><a href="crosstab.html#cb337-3" tabindex="-1"></a><span class="fu">mosaicplot</span>(res_table, <span class="at">color=</span>T, <span class="at">shade =</span> T, <span class="at">border=</span><span class="dv">0</span>, <span class="at">off =</span> <span class="dv">3</span>,</span>
+<span id="cb337-4"><a href="crosstab.html#cb337-4" tabindex="-1"></a>           <span class="at">main=</span><span class="st">&quot;Theft rate of Taipei city (region by hour)&quot;</span>)</span></code></pre></div>
+<p><img src="R12_tptheft_base_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 
 </div>
 </div>
