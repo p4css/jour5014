@@ -2,39 +2,46 @@
 
 # Data manipultaiton: Join data {#joindata}
 
-在資料處理與分析領域中，我們常常需要合併不同來源的資料，例如合併公投資料和內政部的人口統計資料、例如合併健保資料和長照資料、家戶資料、財稅局的所得資料等。這種合併資料的操作的語法源生於資料庫管理系統，而其中一種常見的操作就是使用不同類型的 join 來合併資料表。在資料庫中，當我們需要結合兩個或多個資料表時，我們通常會使用像是 left join、right join、inner join 和 full join 等不同類型的 join 操作。這些 join 操作可以根據指定的欄位值將兩個資料表中的資料按照不同的方式進行合併，以滿足具體的分析需求。
+在資料處理與分析領域中，我們常常需要合併不同來源的資料，例如合併公投資料和內政部的人口統計資料、例如合併健保資料和長照資料、家戶資料、財稅局的所得資料等。這種合併資料的操作的語法源生於資料庫管理系統，而其中一種常見的操作就是使用不同類型的 `join` 來合併資料表。在資料庫中，當我們需要結合兩個或多個資料表時，我們通常會使用像是 `left_join()`、`right_join()`、`inner_join()` 和 `full_join()` 等不同類型的 `join` 操作。這些 `join` 操作可以根據指定的欄位值將兩個資料表中的資料按照不同的方式進行合併，以滿足具體的分析需求。
 
 ## A Simple Example: Joining Two Data Frames {#simple}
 
 以下為用來解釋 join 的簡單範例。其中 **`posts`** 有 **`pid`**（貼文編號）和 **`pcontent`**（貼文內容）兩個欄位；而 **`comments`** 包含了留言的資訊，有 **`pid`**（所屬的貼文編號）和 **`ccontent`**（留言內容）兩個欄位。
 
 
-```r
-posts <- tibble(pid=c("p01", "p02", "p03"), pcontent=c("post01", "post02", "post03"))
-comments <- tibble(pid=c("p02", "p03", "p04"), ccontent=c("comment01", "comment02", "comment03"))
+``` r
+posts <- tibble(
+  pid = c("p01", "p02", "p03"),
+  pcontent = c("貼文p01內容", "貼文p02內容", "貼文p03內容")
+)
+comments <- tibble(
+  pid = c("p02", "p02", "p03", "p01"),
+  ccontent = c("留言01 to p02", "留言02 to p02", "留言03 to p03", "留言04 to p01")
+)
 posts
 ```
 
-```{.output}
+``` output
 ## # A tibble: 3 × 2
-##   pid   pcontent
-##   <chr> <chr>   
-## 1 p01   post01  
-## 2 p02   post02  
-## 3 p03   post03
+##   pid   pcontent   
+##   <chr> <chr>      
+## 1 p01   貼文p01內容
+## 2 p02   貼文p02內容
+## 3 p03   貼文p03內容
 ```
 
-```r
+``` r
 comments
 ```
 
-```{.output}
-## # A tibble: 3 × 2
-##   pid   ccontent 
-##   <chr> <chr>    
-## 1 p02   comment01
-## 2 p03   comment02
-## 3 p04   comment03
+``` output
+## # A tibble: 4 × 2
+##   pid   ccontent     
+##   <chr> <chr>        
+## 1 p02   留言01 to p02
+## 2 p02   留言02 to p02
+## 3 p03   留言03 to p03
+## 4 p01   留言04 to p01
 ```
 
 ### `left_join()` & `right_join()`
@@ -116,16 +123,18 @@ full_join(posts, comments)
 
 ### `join()` by different keys
 
+以下是一個新的例子，假設`posts`與`comments`兩張表，沒有共同的變項，但你知道`posts`表的變項`postid`和`comments`表的變項`pid`所指的是共同的概念，也就是貼文的id，只是在不同的表上他們所用的變項名稱不同。
+
 我們將 **`posts`** 作為左表，**`comments`** 作為右表，並使用 **`postid`** 和 **`pid`** 欄位進行連接。由於我們經由觀察知道左邊表格中的 **`postid`** 和右邊表格中的 **`pid`** 有對應關係，所以它們會根據這個關係進行連接，語法為`by=c("postid"="pid")`，指定左表的`postid`和右表的`pid`相對應。
 
 
-```r
-posts <- tibble(postid=c("p01", "p02", "p03"), pcontent=c("post01", "post02", "post03"))
-comments <- tibble(pid=c("p02", "p03", "p04"), ccontent=c("comment01", "comment02", "comment03"))
+``` r
+posts <- tibble(postid = c("p01", "p02", "p03"), pcontent = c("post01", "post02", "post03"))
+comments <- tibble(pid = c("p02", "p03", "p04"), ccontent = c("comment01", "comment02", "comment03"))
 result <- left_join(posts, comments, by = c("postid" = "pid"))
 ```
 
-## 案例說明
+## 案例說明-公投案與人口資料
 
 2018年中華民國全國性公民投票共有10個提案，其中6個提案獲得通過。通過的提案包括反空污、反燃煤發電、反日本核災地區食品進口、民法婚姻限定一男一女、國中小不實施同志教育、非民法保障同性共同生活，以及廢止電業法非核家園條文。未通過的提案有2020東京奧運台灣正名、以民法保障同性婚姻和國中小性別平等教育明定入法。此次公投與九合一地方選舉同時舉行，並創下中華民國歷史上公民投票案數最多的一次。（請見[中華民國全國性公民投票 - 維基百科，自由的百科全書](https://zh.wikipedia.org/zh-tw/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%85%A8%E5%9C%8B%E6%80%A7%E5%85%AC%E6%B0%91%E6%8A%95%E7%A5%A8)）。
 
@@ -157,25 +166,25 @@ result <- left_join(posts, comments, by = c("postid" = "pid"))
 在此過程中，我額外加入了一行程式碼，使得 `vname` 可以排在變項欄位的前面。這可以透過使用 `select()` 函數來達成此目的。由於我後續需要保留其他變項欄位，為了不改變它們的位置，可以使用 `everything()` 函數來將剩餘的變項欄位移到後面。因此，重排變項欄位的完整程式碼為 `select(vname, everything())`。
 
 
-```r
+``` r
 raw <- read_csv("data/opendata107Y030.csv") %>%
-    slice(-1) %>%
-    mutate(vname = str_c(site_id, village)) %>%
-    select(vname, everything())
+  slice(-1) %>%
+  mutate(vname = str_c(site_id, village)) %>%
+  select(vname, everything())
 
-raw %>% head
+raw %>% head()
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 157
-##   vname         statistic_yyy district_code site_id village single_age_15down_m
-##   <chr>         <chr>         <chr>         <chr>   <chr>   <chr>              
-## 1 新北市板橋區… 107           65000010001   新北市… 留侯里  118                
-## 2 新北市板橋區… 107           65000010002   新北市… 流芳里  119                
-## 3 新北市板橋區… 107           65000010003   新北市… 赤松里  60                 
-## 4 新北市板橋區… 107           65000010004   新北市… 黃石里  113                
-## 5 新北市板橋區… 107           65000010005   新北市… 挹秀里  123                
-## 6 新北市板橋區… 107           65000010006   新北市… 湳興里  351                
+##   vname          statistic_yyy district_code site_id village single_age_15down_m
+##   <chr>          <chr>         <chr>         <chr>   <chr>   <chr>              
+## 1 新北市板橋區留侯里…… 107           65000010001   新北市板橋區… 留侯里  118                
+## 2 新北市板橋區流芳里…… 107           65000010002   新北市板橋區… 流芳里  119                
+## 3 新北市板橋區赤松里…… 107           65000010003   新北市板橋區… 赤松里  60                 
+## 4 新北市板橋區黃石里…… 107           65000010004   新北市板橋區… 黃石里  113                
+## 5 新北市板橋區挹秀里…… 107           65000010005   新北市板橋區… 挹秀里  123                
+## 6 新北市板橋區湳興里…… 107           65000010006   新北市板橋區… 湳興里  351                
 ## # ℹ 151 more variables: single_age_15_19_m <chr>, single_age_20_24_m <chr>,
 ## #   single_age_25_29_m <chr>, single_age_30_34_m <chr>,
 ## #   single_age_35_39_m <chr>, single_age_40_44_m <chr>,
@@ -185,7 +194,7 @@ raw %>% head
 ## #   single_age_75_79_m <chr>, single_age_80_84_m <chr>, …
 ```
 
-```r
+``` r
 # raw %>% glimpse()
 ```
 
@@ -210,9 +219,9 @@ raw %>% head
 3.  `values_to`用來指出對應到的值要命名為什麼變項。
 
 
-```r
+``` r
 tidy_data <- raw %>%
-    pivot_longer(names_to = "key", values_to = "value", cols = 6:ncol(.))
+  pivot_longer(names_to = "key", values_to = "value", cols = 6:ncol(.))
 ```
 
 `pivot_longer()`後資料列從7760增加至1,179,520列。
@@ -239,35 +248,40 @@ tidy_data <- raw %>%
 最後就剩零星的操作，包含轉換資料為數值型態、或者你也可以在這裡建立新的指標（例如年齡平均）。最後加上一個`arrange(vname)`讓他按照村里的全名排序。
 
 
-```r
+``` r
 tidy_data <- raw %>%
-    pivot_longer(names_to = "key", values_to = "value", cols = 6:ncol(.)) %>% 
-    mutate(key = str_replace(key, "_age", "")) %>%
-    mutate(key = str_replace(key, "100up", "100_110")) %>%
-    mutate(key = str_replace(key, "15down", "0_15")) %>%
-    separate(key, c("married", "ageLower", "ageUpper", "gender")) %>%
-    mutate(ageLower = as.numeric(ageLower),
-           # age = str(ageLower, ageUpper), 
-           ageUpper = as.numeric(ageUpper),
-           value = as.numeric(value)) %>%
-    select(-statistic_yyy) %>%
-    arrange(vname)
+  pivot_longer(names_to = "key", values_to = "value", cols = 6:ncol(.)) %>%
+  mutate(key = str_replace(key, "_age", "")) %>%
+  mutate(key = str_replace(key, "100up", "100_110")) %>%
+  mutate(key = str_replace(key, "15down", "0_15")) %>%
+  separate(key, c("married", "ageLower", "ageUpper", "gender")) %>%
+  mutate(
+    ageLower = as.numeric(ageLower),
+    # age = str(ageLower, ageUpper),
+    ageUpper = as.numeric(ageUpper),
+    value = as.numeric(value)
+  ) %>%
+  select(-statistic_yyy) %>%
+  arrange(vname)
 ```
 
-#### 進階：運用`rowwise()` {#moi_rowwise}
+#### （Optional）運用`rowwise()` {#moi_rowwise}
+
+或者，可以用運用`rowwise()`這樣的函式。`rowwise()`函式讓你可以用`c_acorss()`這樣的函式把變項名稱符合條件的欄給選出來做加總、平均等等的動作。`rowwise()`概念上比前述方法直觀許多但比較沒那麼泛用，必須要謹慎理解並挑選使用時機。
 
 
-```r
-raw %>% 
-    mutate_at(vars(6:157), as.numeric) %>%
-    replace(is.na(.), 0) %>%
-    rowwise() %>% 
-    mutate(married = sum(c_across(matches("widowed|divorced|married")), na.rm = T)) %>%
-    mutate(lt65 = sum(c_across(matches("65|70|75|80|85|90|95|100")), na.rm = T)) %>%
-    select(vname, married, lt65) %>% head
+``` r
+raw %>%
+  mutate_at(vars(6:157), as.numeric) %>%
+  replace(is.na(.), 0) %>%
+  rowwise() %>%
+  mutate(married = sum(c_across(matches("widowed|divorced|married")), na.rm = T)) %>%
+  mutate(lt65 = sum(c_across(matches("65|70|75|80|85|90|95|100")), na.rm = T)) %>%
+  select(vname, married, lt65) %>%
+  head()
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 3
 ## # Rowwise: 
 ##   vname              married  lt65
@@ -297,16 +311,18 @@ raw %>%
 筆記：當`group_by()`、`summarize()`後不參與的變項會消失，但可以透過`left_join()`的方式將原有的變項併回來。
 
 
-```r
+``` r
 village_stat <- tidy_data %>%
-    filter(ageLower >= 20) %>%
-    group_by(vname) %>%
-    summarise(legalPopulation = sum(value),
-              elderSum = sum(value[ageLower >= 65]),
-              marriedSum = sum(value[married %in% c("married", "divorced", "widowed")]),
-              womenSum = sum(value[gender == "f"])) %>%
-    ungroup() %>%
-    left_join(raw %>% select(vname, site_id), by = "vname")
+  filter(ageLower >= 20) %>%
+  group_by(vname) %>%
+  summarise(
+    legalPopulation = sum(value),
+    elderSum = sum(value[ageLower >= 65]),
+    marriedSum = sum(value[married %in% c("married", "divorced", "widowed")]),
+    womenSum = sum(value[gender == "f"])
+  ) %>%
+  ungroup() %>%
+  left_join(raw %>% select(vname, site_id), by = "vname")
 ```
 
 測試
@@ -320,48 +336,51 @@ village_stat <- tidy_data %>%
 不過這邊我要多做一件事。因為三民區和鳳山區兩個區非常的大（我猜），所以內政資料中的鄉鎮市區資料有分「三民一」、「三民二」、「鳳山一」、「鳳山二」。我們只要在彙整資料前，將`site_id`的這四類值取代好，便可以在鄉鎮市區的指標中一併彙整。以下我一共彙整出四種資料，分別為該區人口數（`legalPopulation`）、老年人口數（`elderSum`）、曾婚人口數（`marriedSum`）、女性人口數（`womenSum`）。不難想像接下來可以計算出各鄉鎮市區的老年人口比例、曾婚比例、女性比例等。
 
 
-```r
+``` r
 town_stat <- village_stat %>%
-    # mutate(site_id = str_sub(vname, 1, 6)) %>%
-    mutate(site_id = str_replace(site_id, "三民一|三民二", "三民區")) %>%
-    mutate(site_id = str_replace(site_id, "鳳山一|鳳山二", "鳳山區")) %>%
-    group_by(site_id) %>%
-    summarize(legalPopulation =  sum(legalPopulation),
-              elderSum = sum(elderSum),
-              marriedSum = sum(marriedSum),
-              womenSum = sum(womenSum)
-              )%>%
-    ungroup()
+  # mutate(site_id = str_sub(vname, 1, 6)) %>%
+  mutate(site_id = str_replace(site_id, "三民一|三民二", "三民區")) %>%
+  mutate(site_id = str_replace(site_id, "鳳山一|鳳山二", "鳳山區")) %>%
+  group_by(site_id) %>%
+  summarize(
+    legalPopulation = sum(legalPopulation),
+    elderSum = sum(elderSum),
+    marriedSum = sum(marriedSum),
+    womenSum = sum(womenSum)
+  ) %>%
+  ungroup()
 ```
 
 ### 視覺化測試（老年人口數 x 曾婚人口數） {#moi_visual_popul}
 
 
 ``` r
-th <- 
-  theme(title = element_text(family="Heiti TC Light"),
-        text = element_text(family="Heiti TC Light"), 
-        axis.text.y = element_text(family="PingFang TC"),
-        axis.text.x = element_text(family="Heiti TC Light"),
-        legend.text = element_text(family="Heiti TC Light"),
-        plot.title = element_text(family="Heiti TC Light")
-        )
+th <-
+  theme(
+    title = element_text(family = "Heiti TC Light"),
+    text = element_text(family = "Heiti TC Light"),
+    axis.text.y = element_text(family = "PingFang TC"),
+    axis.text.x = element_text(family = "Heiti TC Light"),
+    legend.text = element_text(family = "Heiti TC Light"),
+    plot.title = element_text(family = "Heiti TC Light")
+  )
 
 town_stat %>%
-    mutate(marriedPerc = marriedSum / legalPopulation) %>%
-    mutate(womenPerc = womenSum / legalPopulation) %>%
-    mutate(elderPerc = elderSum / legalPopulation) %>% 
-    ggplot() +
-    aes(womenPerc, elderPerc) + 
-    geom_point(alpha = 0.3) +
-    geom_text(aes(label=site_id, vjust=1.3, size=2), family = "Heiti TC Light")  +
-    theme_light() + th
+  mutate(marriedPerc = marriedSum / legalPopulation) %>%
+  mutate(womenPerc = womenSum / legalPopulation) %>%
+  mutate(elderPerc = elderSum / legalPopulation) %>%
+  ggplot() +
+  aes(womenPerc, elderPerc) +
+  geom_point(alpha = 0.3) +
+  geom_text(aes(label = site_id, vjust = 1.3, size = 2), family = "Heiti TC Light") +
+  theme_light() +
+  th
 ```
 
 <img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ``` r
-    # geom_jitter(alpha = 0.3)
+# geom_jitter(alpha = 0.3)
 ```
 
 ## 公投資料 {#referendum}
@@ -369,19 +388,21 @@ town_stat %>%
 首先，先讀取資料並重新命名每個變項。由於我們要連結公投資料和前面的內政部人口統計資料，所以要注意兩筆資料間是否有共通的key（資料庫稱為鍵值）。`town_stat`的是以`site_id`鄉鎮市區名為主鍵，所以公投資料這邊也產生一個同名的鄉鎮市區變項`site_id`。
 
 
-```r
+``` r
 ref10 <- read_csv("data/ref10.csv") %>%
-    select(county = 縣市, town = 鄉鎮市區,
-           agree = 同意票數, disagree = 不同意票數,
-           legalVote = 有效票數, illegalVote = 無效票數, 
-           vote = 投票數, legalPopulation =  投票權人數)  %>%
-    mutate(site_id = str_c(county, town)) %>%
-    drop_na(site_id)
+  select(
+    county = 縣市, town = 鄉鎮市區,
+    agree = 同意票數, disagree = 不同意票數,
+    legalVote = 有效票數, illegalVote = 無效票數,
+    vote = 投票數, legalPopulation = 投票權人數
+  ) %>%
+  mutate(site_id = str_c(county, town)) %>%
+  drop_na(site_id)
 
 names(ref10)
 ```
 
-```{.output}
+``` output
 ## [1] "county"          "town"            "agree"           "disagree"       
 ## [5] "legalVote"       "illegalVote"     "vote"            "legalPopulation"
 ## [9] "site_id"
@@ -390,25 +411,22 @@ names(ref10)
 合併資料測試，注意，由於兩邊都有`legalPopulation`，所以`town_stat`中的`legalPopulation`增生為`legalPopulation.x`，而`ref10`中的`legalPopulation`則重新命名為`legalPopulation.y`。
 
 
-```r
-town_stat %>% left_join(ref10, by = "site_id")
+``` r
+town_stat %>%
+  left_join(ref10, by = "site_id") %>%
+  head()
 ```
 
-```{.output}
-## # A tibble: 368 × 13
-##    site_id     legalPopulation.x elderSum marriedSum womenSum county town  agree
-##    <chr>                   <dbl>    <dbl>      <dbl>    <dbl> <chr>  <chr> <dbl>
-##  1 南投縣中寮…             12791     3272       9553     5824 南投縣 中寮…  5748
-##  2 南投縣仁愛…             12172     1713       9078     5899 南投縣 仁愛…  5702
-##  3 南投縣信義…             12860     1847       9050     5938 南投縣 信義…  6891
-##  4 南投縣南投…             81874    15855      57042    41343 南投縣 南投… 37547
-##  5 南投縣名間…             32388     7106      23375    15304 南投縣 名間… 14533
-##  6 南投縣國姓…             16196     3744      11826     7434 南投縣 國姓…  7089
-##  7 南投縣埔里…             66699    13411      46316    33718 南投縣 埔里… 29571
-##  8 南投縣水里…             15023     3644      10850     7106 南投縣 水里…  6392
-##  9 南投縣竹山…             45629    10154      33201    22244 南投縣 竹山… 19254
-## 10 南投縣草屯…             80426    15141      56384    40008 南投縣 草屯… 35215
-## # ℹ 358 more rows
+``` output
+## # A tibble: 6 × 13
+##   site_id      legalPopulation.x elderSum marriedSum womenSum county town  agree
+##   <chr>                    <dbl>    <dbl>      <dbl>    <dbl> <chr>  <chr> <dbl>
+## 1 南投縣中寮鄉             12791     3272       9553     5824 南投縣 中寮鄉……  5748
+## 2 南投縣仁愛鄉             12172     1713       9078     5899 南投縣 仁愛鄉……  5702
+## 3 南投縣信義鄉             12860     1847       9050     5938 南投縣 信義鄉……  6891
+## 4 南投縣南投市             81874    15855      57042    41343 南投縣 南投市…… 37547
+## 5 南投縣名間鄉             32388     7106      23375    15304 南投縣 名間鄉…… 14533
+## 6 南投縣國姓鄉             16196     3744      11826     7434 南投縣 國姓鄉……  7089
 ## # ℹ 5 more variables: disagree <dbl>, legalVote <dbl>, illegalVote <dbl>,
 ## #   vote <dbl>, legalPopulation.y <dbl>
 ```
@@ -418,22 +436,24 @@ town_stat %>% left_join(ref10, by = "site_id")
 由於人口統計資料中的鄉鎮市區若只有兩個字如「東區」中間有一全形空白「東　區」，但公投資料中並沒有這樣的空白，所以為了兩者要能夠正確合併，需要先做好取代。可以逐一取代，或者，直接取代掉該全形空白為空字串即可。
 
 
-```r
+``` r
 town_stat %>%
-    mutate(site_id = str_replace(site_id, "　", "")) %>%
-    # mutate(site_id = str_replace(site_id, "東　區", "東區"),
-    #        site_id = str_replace(site_id, "西　區", "西區"),
-    #        site_id = str_replace(site_id, "南　區", "南區"),
-    #        site_id = str_replace(site_id, "北　區", "北區"),
-    #        site_id = str_replace(site_id, "中　區", "中區")) %>%
-    left_join(ref10, by = "site_id") %>%
-    mutate(agreeRate = agree / legalVote,
-           marriedPerc = marriedSum / legalPopulation.x) %>%
-    # select(site_id, agree, legalVote, marriedSum, legalPopulation.x) %>%
-    ggplot() + 
-    aes(agreeRate, marriedPerc) + 
-    geom_point(alpha = 0.5, color = "royalblue") + 
-    theme_light()
+  mutate(site_id = str_replace(site_id, "　", "")) %>%
+  # mutate(site_id = str_replace(site_id, "東　區", "東區"),
+  #        site_id = str_replace(site_id, "西　區", "西區"),
+  #        site_id = str_replace(site_id, "南　區", "南區"),
+  #        site_id = str_replace(site_id, "北　區", "北區"),
+  #        site_id = str_replace(site_id, "中　區", "中區")) %>%
+  left_join(ref10, by = "site_id") %>%
+  mutate(
+    agreeRate = agree / legalVote,
+    marriedPerc = marriedSum / legalPopulation.x
+  ) %>%
+  # select(site_id, agree, legalVote, marriedSum, legalPopulation.x) %>%
+  ggplot() +
+  aes(agreeRate, marriedPerc) +
+  geom_point(alpha = 0.5, color = "royalblue") +
+  theme_light()
 ```
 
 <img src="R23_join_twdemo_ref_files/figure-html/unnamed-chunk-15-1.png" width="672" />
