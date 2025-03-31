@@ -811,6 +811,7 @@ div.csl-indent {
 <div id="joindata" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Data manipultaiton: Join data<a href="joindata.html#joindata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>在資料處理與分析領域中，我們常常需要合併不同來源的資料，例如合併公投資料和內政部的人口統計資料、例如合併健保資料和長照資料、家戶資料、財稅局的所得資料等。這種合併資料的操作的語法源生於資料庫管理系統，而其中一種常見的操作就是使用不同類型的 <code>join</code> 來合併資料表。在資料庫中，當我們需要結合兩個或多個資料表時，我們通常會使用像是 <code>left_join()</code>、<code>right_join()</code>、<code>inner_join()</code> 和 <code>full_join()</code> 等不同類型的 <code>join</code> 操作。這些 <code>join</code> 操作可以根據指定的欄位值將兩個資料表中的資料按照不同的方式進行合併，以滿足具體的分析需求。</p>
+<p><img src="images/clipboard-2842503645.png" /></p>
 <div id="simple" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> An Example: Joining Two Data Frames<a href="joindata.html#simple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>以下為用來解釋 join 的簡單範例。其中 <strong><code>posts</code></strong> 有 <strong><code>pid</code></strong>（貼文編號）和 <strong><code>pcontent</code></strong>（貼文內容）兩個欄位；而 <strong><code>comments</code></strong> 包含了留言的資訊，有 <strong><code>pid</code></strong>（所屬的貼文編號）和 <strong><code>ccontent</code></strong>（留言內容）兩個欄位。</p>
