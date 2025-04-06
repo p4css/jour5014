@@ -17,7 +17,7 @@
 5.  要注意的欄位名稱包含sna（站台名稱）、tot（總車格數）、sbi（現有車數）與lat-lng的經緯度資料。
 
 
-```r
+``` r
 library(httr)
 library(jsonlite)
 url <- "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
@@ -25,14 +25,25 @@ ubike.df <- fromJSON(content(GET(url),"text", encoding = "utf-8"))
 head(ubike.df) %>% select(1:6)
 ```
 
-```{.output}
-##         sno                            sna tot sbi  sarea                mday
-## 1 500101001      YouBike2.0_捷運科技大樓站  28   1 大安區 2024-03-31 23:09:14
-## 2 500101002 YouBike2.0_復興南路二段273號前  21   1 大安區 2024-03-31 23:02:18
-## 3 500101003  YouBike2.0_國北教大實小東側門  16  14 大安區 2024-03-31 22:26:18
-## 4 500101004        YouBike2.0_和平公園東側  11  11 大安區 2024-03-31 23:01:14
-## 5 500101005  YouBike2.0_辛亥復興路口西北側  16  11 大安區 2024-03-31 22:50:25
-## 6 500101006 YouBike2.0_復興南路二段280號前  11   8 大安區 2024-03-31 22:46:18
+``` output
+##         sno                            sna  sarea                mday
+## 1 500101001      YouBike2.0_捷運科技大樓站 大安區 2025-04-06 14:02:27
+## 2 500101002 YouBike2.0_復興南路二段273號前 大安區 2025-04-06 13:50:29
+## 3 500101003  YouBike2.0_國北教大實小東側門 大安區 2025-04-06 13:54:31
+## 4 500101004        YouBike2.0_和平公園東側 大安區 2025-04-06 13:49:31
+## 5 500101005  YouBike2.0_辛亥復興路口西北側 大安區 2025-04-06 14:02:27
+## 6 500101006 YouBike2.0_復興南路二段280號前 大安區 2025-04-06 13:44:27
+##                      ar    sareaen
+## 1   復興南路二段235號前 Daan Dist.
+## 2 復興南路二段273號西側 Daan Dist.
+## 3   和平東路二段96巷7號 Daan Dist.
+## 4 和平東路二段118巷33號 Daan Dist.
+## 5     復興南路二段368號 Daan Dist.
+## 6     復興南路二段280號 Daan Dist.
+```
+
+``` r
+save(ubike.df, file="data/ubike.rda")
 ```
 
 ### Creating a new variable
@@ -53,10 +64,11 @@ if_else(condition, true_value, false_value)
 `if_else` 函數與 R 原生的 `ifelse` 函數相似，但有一些重要區別。`if_else` 函數在處理缺失值時更加嚴格，要求 `true_value` 和 `false_value` 具有相同的長度和類型，這有助於避免一些潛在的錯誤。
 
 
-```r
+``` r
 # ratio <- sbi/tot
+load("data/ubike.rda")
 ubike.df <- ubike.df %>%
-  mutate(ratio = sbi/tot) %>%
+  mutate(ratio = available_rent_bikes/total) %>%
   mutate(Fullness = if_else(ratio >= 0.9, "Full", if_else(ratio < 0.3, "Empty", "Available")))
 ```
 
@@ -101,18 +113,18 @@ sf_tpe %>% head()
 ```
 
 
-```r
+``` r
 library(sf)
 library(ggplot2)
 library(dplyr)
 
 # 你已經有ubike.sf，這是一個sf物件
-ubike.sf <- st_as_sf(ubike.df, coords = c("lng", "lat"), crs = 4326)
+ubike.sf <- st_as_sf(ubike.df, coords = c("longitude", "latitude"), crs = 4326)
 
 # 使用ggplot繪製地圖和位置點，並根據fullness的值上色
 ggplot() + 
   geom_sf(data = sf_tpe) +  # 繪製sf_tpe區域
-  geom_sf(data = ubike.sf, aes(color = Fullness, size=tot), alpha=0.3) +
+  geom_sf(data = ubike.sf, aes(color = Fullness, size=total), alpha=0.3) +
   scale_color_manual(values = c("Full" = "black", "Empty" = "red", "Available" = "blue")) + 
   theme_void()
 ```

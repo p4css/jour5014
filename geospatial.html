@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2025-03-31" />
+<meta name="date" content="2025-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1145,7 +1145,7 @@ div.csl-indent {
 <span id="cb810-5"><a href="geospatial.html#cb810-5" tabindex="-1"></a>  <span class="co"># rmapshaper::ms_simplify(keep=0.01) %&gt;%</span></span>
 <span id="cb810-6"><a href="geospatial.html#cb810-6" tabindex="-1"></a>  <span class="fu">right_join</span>(president_vote, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;COUNTYNAME&quot;</span><span class="ot">=</span><span class="st">&quot;county&quot;</span>))</span></code></pre></div>
 <pre class="output"><code>## Reading layer `COUNTY_MOI_1090820&#39; from data source 
-##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
+##   `/Users/jirlong/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 22 features and 4 fields
 ## Geometry type: MULTIPOLYGON
@@ -1153,9 +1153,14 @@ div.csl-indent {
 ## Bounding box:  xmin: 114.3593 ymin: 10.37135 xmax: 124.5611 ymax: 26.38528
 ## Geodetic CRS:  TWD97</code></pre>
 <div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="geospatial.html#cb812-1" tabindex="-1"></a>plot_chu <span class="sc">%&gt;%</span></span>
-<span id="cb812-2"><a href="geospatial.html#cb812-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> chu_ratio)) <span class="sc">+</span> </span>
-<span id="cb812-3"><a href="geospatial.html#cb812-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb812-4"><a href="geospatial.html#cb812-4" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#FFFFFF&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#0000FF&quot;</span>)</span></code></pre></div>
+<span id="cb812-2"><a href="geospatial.html#cb812-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> chu_ratio)) <span class="sc">+</span> </span>
+<span id="cb812-3"><a href="geospatial.html#cb812-3" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb812-4"><a href="geospatial.html#cb812-4" tabindex="-1"></a>    <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;#FFFFFF&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#FF00FF&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb812-5"><a href="geospatial.html#cb812-5" tabindex="-1"></a>    <span class="fu">coord_sf</span>(</span>
+<span id="cb812-6"><a href="geospatial.html#cb812-6" tabindex="-1"></a>        <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">119</span>, <span class="fl">122.5</span>),  <span class="co"># 限制經度</span></span>
+<span id="cb812-7"><a href="geospatial.html#cb812-7" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">21.5</span>, <span class="fl">25.5</span>),    <span class="co"># 限制緯度</span></span>
+<span id="cb812-8"><a href="geospatial.html#cb812-8" tabindex="-1"></a>        <span class="at">expand =</span> <span class="cn">FALSE</span>       <span class="co"># 取消自動留白</span></span>
+<span id="cb812-9"><a href="geospatial.html#cb812-9" tabindex="-1"></a>    )</span></code></pre></div>
 <p><img src="V22_twmap_sf_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="practice.-drawing-taiwan-county-scale-map-from-segis-data" class="section level3 hasAnchor practice" number="29.4.4">
@@ -1266,13 +1271,21 @@ div.csl-indent {
 <span id="cb822-3"><a href="geospatial.html#cb822-3" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json&quot;</span></span>
 <span id="cb822-4"><a href="geospatial.html#cb822-4" tabindex="-1"></a>ubike.df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="fu">content</span>(<span class="fu">GET</span>(url),<span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;utf-8&quot;</span>))</span>
 <span id="cb822-5"><a href="geospatial.html#cb822-5" tabindex="-1"></a><span class="fu">head</span>(ubike.df) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
-<pre class="output"><code>##         sno                            sna tot sbi  sarea                mday
-## 1 500101001      YouBike2.0_捷運科技大樓站  28   1 大安區 2024-03-31 23:09:14
-## 2 500101002 YouBike2.0_復興南路二段273號前  21   1 大安區 2024-03-31 23:02:18
-## 3 500101003  YouBike2.0_國北教大實小東側門  16  14 大安區 2024-03-31 22:26:18
-## 4 500101004        YouBike2.0_和平公園東側  11  11 大安區 2024-03-31 23:01:14
-## 5 500101005  YouBike2.0_辛亥復興路口西北側  16  11 大安區 2024-03-31 22:50:25
-## 6 500101006 YouBike2.0_復興南路二段280號前  11   8 大安區 2024-03-31 22:46:18</code></pre>
+<pre class="output"><code>##         sno                            sna  sarea                mday
+## 1 500101001      YouBike2.0_捷運科技大樓站 大安區 2025-04-06 14:02:27
+## 2 500101002 YouBike2.0_復興南路二段273號前 大安區 2025-04-06 13:50:29
+## 3 500101003  YouBike2.0_國北教大實小東側門 大安區 2025-04-06 13:54:31
+## 4 500101004        YouBike2.0_和平公園東側 大安區 2025-04-06 13:49:31
+## 5 500101005  YouBike2.0_辛亥復興路口西北側 大安區 2025-04-06 14:02:27
+## 6 500101006 YouBike2.0_復興南路二段280號前 大安區 2025-04-06 13:44:27
+##                      ar    sareaen
+## 1   復興南路二段235號前 Daan Dist.
+## 2 復興南路二段273號西側 Daan Dist.
+## 3   和平東路二段96巷7號 Daan Dist.
+## 4 和平東路二段118巷33號 Daan Dist.
+## 5     復興南路二段368號 Daan Dist.
+## 6     復興南路二段280號 Daan Dist.</code></pre>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="geospatial.html#cb824-1" tabindex="-1"></a><span class="fu">save</span>(ubike.df, <span class="at">file=</span><span class="st">&quot;data/ubike.rda&quot;</span>)</span></code></pre></div>
 <div id="creating-a-new-variable" class="section level3 hasAnchor" number="29.6.1">
 <h3><span class="header-section-number">29.6.1</span> Creating a new variable<a href="geospatial.html#creating-a-new-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -1280,32 +1293,33 @@ div.csl-indent {
 <li>這段程式碼是在前一步的基礎上進一步創建新的 <code>Fullness</code> 欄位。該欄位的值根據 <code>ratio</code> 欄位的數值判斷，若 <code>ratio</code> 大於等於 0.9，則將 <code>Fullness</code> 設置為 “Full”；若 <code>ratio</code> 小於 0.3，則設置為 “Empty”；否則設置為 “Available”。</li>
 </ul>
 <p><code>if_else</code> 函數的用法如下：</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="geospatial.html#cb824-1" tabindex="-1"></a><span class="fu">if_else</span>(condition, true_value, false_value)</span></code></pre></div>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="geospatial.html#cb825-1" tabindex="-1"></a><span class="fu">if_else</span>(condition, true_value, false_value)</span></code></pre></div>
 <ul>
 <li><code>condition</code>：一個邏輯向量，用於指定條件判斷。</li>
 <li><code>true_value</code>：當 <code>condition</code> 為真時，返回的值。</li>
 <li><code>false_value</code>：當 <code>condition</code> 為假時，返回的值。</li>
 </ul>
 <p><code>if_else</code> 函數與 R 原生的 <code>ifelse</code> 函數相似，但有一些重要區別。<code>if_else</code> 函數在處理缺失值時更加嚴格，要求 <code>true_value</code> 和 <code>false_value</code> 具有相同的長度和類型，這有助於避免一些潛在的錯誤。</p>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="geospatial.html#cb825-1" tabindex="-1"></a><span class="co"># ratio &lt;- sbi/tot</span></span>
-<span id="cb825-2"><a href="geospatial.html#cb825-2" tabindex="-1"></a>ubike.df <span class="ot">&lt;-</span> ubike.df <span class="sc">%&gt;%</span></span>
-<span id="cb825-3"><a href="geospatial.html#cb825-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> sbi<span class="sc">/</span>tot) <span class="sc">%&gt;%</span></span>
-<span id="cb825-4"><a href="geospatial.html#cb825-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fullness =</span> <span class="fu">if_else</span>(ratio <span class="sc">&gt;=</span> <span class="fl">0.9</span>, <span class="st">&quot;Full&quot;</span>, <span class="fu">if_else</span>(ratio <span class="sc">&lt;</span> <span class="fl">0.3</span>, <span class="st">&quot;Empty&quot;</span>, <span class="st">&quot;Available&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="geospatial.html#cb826-1" tabindex="-1"></a><span class="co"># ratio &lt;- sbi/tot</span></span>
+<span id="cb826-2"><a href="geospatial.html#cb826-2" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ubike.rda&quot;</span>)</span>
+<span id="cb826-3"><a href="geospatial.html#cb826-3" tabindex="-1"></a>ubike.df <span class="ot">&lt;-</span> ubike.df <span class="sc">%&gt;%</span></span>
+<span id="cb826-4"><a href="geospatial.html#cb826-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> available_rent_bikes<span class="sc">/</span>total) <span class="sc">%&gt;%</span></span>
+<span id="cb826-5"><a href="geospatial.html#cb826-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fullness =</span> <span class="fu">if_else</span>(ratio <span class="sc">&gt;=</span> <span class="fl">0.9</span>, <span class="st">&quot;Full&quot;</span>, <span class="fu">if_else</span>(ratio <span class="sc">&lt;</span> <span class="fl">0.3</span>, <span class="st">&quot;Empty&quot;</span>, <span class="st">&quot;Available&quot;</span>)))</span></code></pre></div>
 </div>
 <div id="mapping-with-sf" class="section level3 hasAnchor" number="29.6.2">
 <h3><span class="header-section-number">29.6.2</span> Mapping with sf<a href="geospatial.html#mapping-with-sf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="geospatial.html#cb826-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb826-2"><a href="geospatial.html#cb826-2" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb826-3"><a href="geospatial.html#cb826-3" tabindex="-1"></a></span>
-<span id="cb826-4"><a href="geospatial.html#cb826-4" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
-<span id="cb826-5"><a href="geospatial.html#cb826-5" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
-<span id="cb826-6"><a href="geospatial.html#cb826-6" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb826-7"><a href="geospatial.html#cb826-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb826-8"><a href="geospatial.html#cb826-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.double), <span class="sc">~</span><span class="fu">if_else</span>(<span class="fu">is.na</span>(.),<span class="fu">as.double</span>(<span class="dv">0</span>),.))) <span class="sc">%&gt;%</span></span>
-<span id="cb826-9"><a href="geospatial.html#cb826-9" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(<span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb826-10"><a href="geospatial.html#cb826-10" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>)</span>
-<span id="cb826-11"><a href="geospatial.html#cb826-11" tabindex="-1"></a></span>
-<span id="cb826-12"><a href="geospatial.html#cb826-12" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="geospatial.html#cb827-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb827-2"><a href="geospatial.html#cb827-2" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb827-3"><a href="geospatial.html#cb827-3" tabindex="-1"></a></span>
+<span id="cb827-4"><a href="geospatial.html#cb827-4" tabindex="-1"></a>sf_tpe <span class="ot">&lt;-</span></span>
+<span id="cb827-5"><a href="geospatial.html#cb827-5" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">&quot;data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/&quot;</span>, </span>
+<span id="cb827-6"><a href="geospatial.html#cb827-6" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">&quot;111年9月行政區人口統計_鄉鎮市區&quot;</span>, <span class="at">quiet =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb827-7"><a href="geospatial.html#cb827-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">iconv</span>(., <span class="at">from =</span> <span class="st">&quot;BIG5&quot;</span>, <span class="at">to =</span> <span class="st">&quot;UTF8&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb827-8"><a href="geospatial.html#cb827-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.double), <span class="sc">~</span><span class="fu">if_else</span>(<span class="fu">is.na</span>(.),<span class="fu">as.double</span>(<span class="dv">0</span>),.))) <span class="sc">%&gt;%</span></span>
+<span id="cb827-9"><a href="geospatial.html#cb827-9" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">3826</span>) <span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(<span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb827-10"><a href="geospatial.html#cb827-10" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTY <span class="sc">==</span> <span class="st">&quot;臺北市&quot;</span>)</span>
+<span id="cb827-11"><a href="geospatial.html#cb827-11" tabindex="-1"></a></span>
+<span id="cb827-12"><a href="geospatial.html#cb827-12" tabindex="-1"></a>sf_tpe <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre class="output"><code>## Simple feature collection with 6 features and 9 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -1325,19 +1339,19 @@ div.csl-indent {
 ## 4 MULTIPOLYGON (((121.5522 25...
 ## 5 MULTIPOLYGON (((121.5174 25...
 ## 6 MULTIPOLYGON (((121.5176 25...</code></pre>
-<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="geospatial.html#cb828-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb828-2"><a href="geospatial.html#cb828-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb828-3"><a href="geospatial.html#cb828-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb828-4"><a href="geospatial.html#cb828-4" tabindex="-1"></a></span>
-<span id="cb828-5"><a href="geospatial.html#cb828-5" tabindex="-1"></a><span class="co"># 你已經有ubike.sf，這是一個sf物件</span></span>
-<span id="cb828-6"><a href="geospatial.html#cb828-6" tabindex="-1"></a>ubike.sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(ubike.df, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;lng&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
-<span id="cb828-7"><a href="geospatial.html#cb828-7" tabindex="-1"></a></span>
-<span id="cb828-8"><a href="geospatial.html#cb828-8" tabindex="-1"></a><span class="co"># 使用ggplot繪製地圖和位置點，並根據fullness的值上色</span></span>
-<span id="cb828-9"><a href="geospatial.html#cb828-9" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb828-10"><a href="geospatial.html#cb828-10" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> sf_tpe) <span class="sc">+</span>  <span class="co"># 繪製sf_tpe區域</span></span>
-<span id="cb828-11"><a href="geospatial.html#cb828-11" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ubike.sf, <span class="fu">aes</span>(<span class="at">color =</span> Fullness, <span class="at">size=</span>tot), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb828-12"><a href="geospatial.html#cb828-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Full&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;Empty&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;Available&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb828-13"><a href="geospatial.html#cb828-13" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="geospatial.html#cb829-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb829-2"><a href="geospatial.html#cb829-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb829-3"><a href="geospatial.html#cb829-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb829-4"><a href="geospatial.html#cb829-4" tabindex="-1"></a></span>
+<span id="cb829-5"><a href="geospatial.html#cb829-5" tabindex="-1"></a><span class="co"># 你已經有ubike.sf，這是一個sf物件</span></span>
+<span id="cb829-6"><a href="geospatial.html#cb829-6" tabindex="-1"></a>ubike.sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(ubike.df, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb829-7"><a href="geospatial.html#cb829-7" tabindex="-1"></a></span>
+<span id="cb829-8"><a href="geospatial.html#cb829-8" tabindex="-1"></a><span class="co"># 使用ggplot繪製地圖和位置點，並根據fullness的值上色</span></span>
+<span id="cb829-9"><a href="geospatial.html#cb829-9" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb829-10"><a href="geospatial.html#cb829-10" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> sf_tpe) <span class="sc">+</span>  <span class="co"># 繪製sf_tpe區域</span></span>
+<span id="cb829-11"><a href="geospatial.html#cb829-11" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ubike.sf, <span class="fu">aes</span>(<span class="at">color =</span> Fullness, <span class="at">size=</span>total), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb829-12"><a href="geospatial.html#cb829-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Full&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;Empty&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;Available&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb829-13"><a href="geospatial.html#cb829-13" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="V24_PointMap_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="using-ggmap-deprecated" class="section level3 hasAnchor" number="29.6.3">

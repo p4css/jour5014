@@ -364,7 +364,7 @@ plot(county_ms_simp)
 <img src="V22_twmap_sf_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-```r
+``` r
 # install.packages("rmapshaper")
 plot_chu <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
   # st_transform(3825) %>% #3857
@@ -373,9 +373,9 @@ plot_chu <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
   right_join(president_vote, by=c("COUNTYNAME"="county"))
 ```
 
-```{.output}
+``` output
 ## Reading layer `COUNTY_MOI_1090820' from data source 
-##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
+##   `/Users/jirlong/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
 ##   using driver `ESRI Shapefile'
 ## Simple feature collection with 22 features and 4 fields
 ## Geometry type: MULTIPOLYGON
@@ -384,11 +384,16 @@ plot_chu <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
 ## Geodetic CRS:  TWD97
 ```
 
-```r
+``` r
 plot_chu %>%
-  ggplot(aes(fill = chu_ratio)) + 
-  geom_sf(color="white", size=0.2) + 
-  scale_fill_gradient(low = "#FFFFFF", high = "#0000FF")
+    ggplot(aes(fill = chu_ratio)) + 
+    geom_sf(color="white", size=0.2) + 
+    scale_fill_gradient(low = "#FFFFFF", high = "#FF00FF") + 
+    coord_sf(
+        xlim = c(119, 122.5),  # 限制經度
+        ylim = c(21.5, 25.5),    # 限制緯度
+        expand = FALSE       # 取消自動留白
+    )
 ```
 
 <img src="V22_twmap_sf_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
@@ -405,3 +410,4 @@ plot_chu %>%
 3.  用`st_bbox()`可以得知上下界為何，請試用這個函式看看？
 4.  如何運用`st_crop()`切出台灣本島（不包含澎湖、金門、馬祖）得地圖？
 :::
+
