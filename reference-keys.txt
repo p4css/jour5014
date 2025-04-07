@@ -150,6 +150,8 @@ excluding
 groupup
 order2factor
 crosstabing
+plot
+plot-by-ggplot
 timeline
 time-object
 example-processing-time-object-in-social-opinions

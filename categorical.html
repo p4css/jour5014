@@ -23,7 +23,7 @@
 <meta name="author" content="HSIEH, JI-LUNG" />
 
 
-<meta name="date" content="2025-04-06" />
+<meta name="date" content="2025-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -347,14 +347,18 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.1" data-path="categorical.html"><a href="categorical.html#survey-analysis"><i class="fa fa-check"></i><b>8.1</b> Survey Analysis</a></li>
 <li class="chapter" data-level="8.2" data-path="categorical.html"><a href="categorical.html#the-case-misinformation-perception"><i class="fa fa-check"></i><b>8.2</b> The Case: Misinformation Perception</a></li>
-<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Factorizing data</a>
+<li class="chapter" data-level="8.3" data-path="categorical.html"><a href="categorical.html#factorize"><i class="fa fa-check"></i><b>8.3</b> Ordered-factor</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> factor-to-order</a></li>
+<li class="chapter" data-level="8.3.1" data-path="categorical.html"><a href="categorical.html#factor2order"><i class="fa fa-check"></i><b>8.3.1</b> Covert to ordered-factor</a></li>
 <li class="chapter" data-level="8.3.2" data-path="categorical.html"><a href="categorical.html#excluding"><i class="fa fa-check"></i><b>8.3.2</b> Excluding</a></li>
 <li class="chapter" data-level="8.3.3" data-path="categorical.html"><a href="categorical.html#groupup"><i class="fa fa-check"></i><b>8.3.3</b> Grouping-up</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="categorical.html"><a href="categorical.html#order2factor"><i class="fa fa-check"></i><b>8.4</b> Order-to-factor</a></li>
 <li class="chapter" data-level="8.5" data-path="categorical.html"><a href="categorical.html#crosstabing"><i class="fa fa-check"></i><b>8.5</b> Cross-tabulating</a></li>
+<li class="chapter" data-level="8.6" data-path="categorical.html"><a href="categorical.html#plot"><i class="fa fa-check"></i><b>8.6</b> Plot</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="categorical.html"><a href="categorical.html#plot-by-ggplot"><i class="fa fa-check"></i><b>8.6.1</b> Plot by ggplot()</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="timeline.html"><a href="timeline.html"><i class="fa fa-check"></i><b>9</b> Processing Timeline</a>
 <ul>
@@ -833,10 +837,11 @@ div.csl-indent {
 ## 6 會    絕對會 沒有政黨偏好 非常接近泛藍 25-29 大專（專科與大學）</code></pre>
 </div>
 <div id="factorize" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Factorizing data<a href="categorical.html#factorize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">8.3</span> Ordered-factor<a href="categorical.html#factorize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>通常問卷會分為兩種類型的資料，一種是人口統計用的基本資料（如性別、年齡組、教育程度）、另一種是問卷本身要問的題項。以下是常見的問卷型態，包含把年齡從20歲開始每五年作為一組，70歲以上則歸類為一組，共會有十一組。而教育程度則常分為五至六組，但在問卷設計的時候，通常會需要增加「拒答」的選項。如果問卷中包含政黨意識形態，就必須要決定要以黨派作為類別變項，或者以意識形態做順序尺度。以下即為一個順序尺度的案例，從「非常接近泛綠」到「非常接近泛藍」共五個等第，但另增「拒答」選項。</p>
+<p>這些選項如果要進行視覺化的話，他原則上會按照字母順序。英文的話就是字母順序，中文則是按照其<strong>內部編碼的順序</strong>進行排列。這個內部編碼通常是基於<strong>Unicode</strong> 或與作業系統的語系設定（locale）相關的編碼方式。但我們往往對於哪些數值在前、哪些在後有一定的規劃，例如從青年、壯年、中年到老年分別代表了由年輕到年長的類別。因此，在視覺化的時候先把這些類別變項轉為Ordered-factor有助於後續處理。</p>
 <div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="categorical.html#cb403-1" tabindex="-1"></a>dt <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb403-2"><a href="categorical.html#cb403-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3 =</span> <span class="fu">ordered</span>(QA3, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb403-2"><a href="categorical.html#cb403-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">QA3 =</span><span class="fu">ordered</span>(QA3, <span class="at">levels =</span> <span class="fu">c</span>(</span>
 <span id="cb403-3"><a href="categorical.html#cb403-3" tabindex="-1"></a>    <span class="st">&quot;20-24&quot;</span>, <span class="st">&quot;25-29&quot;</span>, <span class="st">&quot;30-34&quot;</span>, <span class="st">&quot;35-39&quot;</span>,</span>
 <span id="cb403-4"><a href="categorical.html#cb403-4" tabindex="-1"></a>    <span class="st">&quot;40-44&quot;</span>, <span class="st">&quot;45-49&quot;</span>, <span class="st">&quot;50-54&quot;</span>, <span class="st">&quot;55-59&quot;</span>,</span>
 <span id="cb403-5"><a href="categorical.html#cb403-5" tabindex="-1"></a>    <span class="st">&quot;60-64&quot;</span>, <span class="st">&quot;65-69&quot;</span>, <span class="st">&quot;70及以上&quot;</span></span>
@@ -872,11 +877,15 @@ div.csl-indent {
 <span id="cb403-35"><a href="categorical.html#cb403-35" tabindex="-1"></a>    )</span>
 <span id="cb403-36"><a href="categorical.html#cb403-36" tabindex="-1"></a>  ))</span></code></pre></div>
 <div id="factor2order" class="section level3 hasAnchor" number="8.3.1">
-<h3><span class="header-section-number">8.3.1</span> factor-to-order<a href="categorical.html#factor2order" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>在一開始清理資料的時候，會建議先把類別變數（通常是文字型態）轉為<code>factor</code>型態。常用的函式是用<code>mutate()</code>搭配<code>ordered()</code>來改變變數型態。<code>ordered()</code>會照類別順序來標定該<code>factor</code>所對應到的數字。可以用<code>as.integer()</code>將<code>factor</code>轉為整數後就可以看到各類別的順序。</p>
-<pre><code>  mutate(QA3 = ordered(QA3, levels=c(&quot;20-24&quot;, &quot;25-29&quot;, &quot;30-34&quot;, &quot;35-39&quot;, 
-                                     &quot;40-44&quot;, &quot;45-49&quot;, &quot;50-54&quot;, &quot;55-59&quot;, 
-                                     &quot;60-64&quot;, &quot;65-69&quot;, &quot;70及以上&quot;))) %&gt;%</code></pre>
+<h3><span class="header-section-number">8.3.1</span> Covert to ordered-factor<a href="categorical.html#factor2order" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在一開始清理資料的時候，會建議先把類別變數（通常是文字型態）轉為<code>factor</code>型態，此時是用<code>factor()</code>來轉。但如果要轉為Ordered-factor的話，則要用<code>mutate()</code>搭配<code>ordered()</code>來改變變數型態。<code>ordered()</code>會照類別順序來標定該<code>factor</code>所對應到的數字。可以用<code>as.integer()</code>將<code>factor</code>轉為整數後就可以看到各類別的順序。</p>
+<pre><code>  mutate(dt, QA3 = factor(QA3, levels=c(&quot;20-24&quot;, &quot;25-29&quot;, &quot;30-34&quot;, &quot;35-39&quot;, 
+                                        &quot;40-44&quot;, &quot;45-49&quot;, &quot;50-54&quot;, &quot;55-59&quot;, 
+                                        &quot;60-64&quot;, &quot;65-69&quot;, &quot;70及以上&quot;)))
+                                     
+  mutate(dt, QA3 = ordered(QA3, levels=c(&quot;20-24&quot;, &quot;25-29&quot;, &quot;30-34&quot;, &quot;35-39&quot;, 
+                                          &quot;40-44&quot;, &quot;45-49&quot;, &quot;50-54&quot;, &quot;55-59&quot;, 
+                                          &quot;60-64&quot;, &quot;65-69&quot;, &quot;70及以上&quot;)))</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="categorical.html#cb405-1" tabindex="-1"></a>dt<span class="sc">$</span>QA3[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre class="output"><code>##  [1] 25-29 35-39 35-39 20-24 45-49 25-29 30-34 20-24 20-24 55-59
 ## 11 Levels: 20-24 &lt; 25-29 &lt; 30-34 &lt; 35-39 &lt; 40-44 &lt; 45-49 &lt; 50-54 &lt; ... &lt; 70及以上</code></pre>
@@ -885,7 +894,7 @@ div.csl-indent {
 </div>
 <div id="excluding" class="section level3 hasAnchor" number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> Excluding<a href="categorical.html#excluding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>如果有某些類別變數的值（如「拒答」）不想被編入<code>factor</code>，可以在<code>reorder()</code>中加入<code>exclude</code>的參數指定不想被編入類別值。</p>
+<p>如果有某些類別變數的值（如「拒答」）不想被編入<code>factor</code>，可以在<code>ordered()</code>中加入<code>exclude</code>的參數指定不想被編入類別值。</p>
 <pre><code>  mutate(QASide=ordered(QASide, 
                         exclude=&quot;拒答&quot;, 
                         levels=c(&quot;非常接近泛綠&quot;, &quot;接近泛綠&quot;, 
@@ -958,10 +967,22 @@ div.csl-indent {
 <li><p>這個結果顯示在這個交叉表中，<strong><code>QA3_lv</code></strong>（年齡層）<strong><code>Q7_3rd_lv</code></strong>（第三人效應）間的分類狀態並非完全獨立，而是存在某種統計上的關聯性。</p></li>
 <li><p>由於p值小於我們事先選定的顯著性水準（通常為0.05），我們可以拒絕虛無假設（兩個變數獨立），並認為這個關聯性是統計上顯著的。</p></li>
 </ul>
-<p>對於<strong><code>vcd::assocstats(xtb)</code></strong>的分析結果：</p>
+<p>對於<strong><code>vcd::assocstats(xtb)</code></strong>的分析結果，這些統計量用於評估<strong><code>QA3_lv</code></strong>和<strong><code>Q7_3rd_lv</code></strong>之間的關聯性程度。連續性係數和克拉瑪爾 V 的值都較低（接近 0），這表示 <code>QA3_lv</code> 和 <code>Q7_3rd_lv</code> 之間的關聯性<strong>較弱</strong>，但根據卡方檢定的結果，這種微弱的關聯性在統計上仍然是顯著的。</p>
 <ul>
-<li>這些統計量用於評估<strong><code>QA3_lv</code></strong>和<strong><code>Q7_3rd_lv</code></strong>之間的關聯性程度。</li>
-<li>連續性係數（Contingency Coeff.）和克拉瑪爾V（Cramer’s V）的值，表示兩個變數之間的關聯性較弱，但仍存在一定程度的相關性。</li>
+<li><strong>Likelihood Ratio X^2：</strong> 這是概似比卡方檢定（Likelihood Ratio Chi-squared test）的統計量，用於檢驗獨立性，在這個例子中與皮爾森卡方檢定的結果非常接近。</li>
+<li><strong>Pearson X^2：</strong> 這與 <code>chisq.test()</code> 輸出的卡方值相同。</li>
+<li><strong>df：</strong> 自由度，同樣為 3。</li>
+<li><strong>P(&gt; X^2)：</strong> 對應的 p 值，也與 <code>chisq.test()</code> 的結果一致。</li>
+<li><strong>Phi-Coefficient：</strong> 在這個 4x2 的表格中，Phi 係數不適用，因此顯示為 NA。Phi 係數通常用於 2x2 的表格。</li>
+<li><strong>Contingency Coeff. (連續性係數)：0.09</strong> 這個值介於 0 和接近 1 之間，數值越大表示關聯性越強。0.09 表明關聯性較弱。</li>
+<li><strong>Cramer’s V (克拉瑪爾V)：0.091</strong> Cramer’s V 是 Phi 係數在行列數大於 2 的表格中的推廣，用於衡量兩個名義變數之間的關聯強度。其值介於 0 和 1 之間，越接近 1 表示關聯性越強。0.091 也表明關聯性較弱。</li>
+</ul>
+<p>接下來是<code>chisq.test(xtb)</code>的結果</p>
+<ul>
+<li><p><code>print(round(chi2$observed, 2))</code> 的結果，顯示的是<strong>觀察到的頻次（observed frequencies）</strong>，與使用 <code>xtabs()</code> 得到的結果完全一致。</p></li>
+<li><p><code>print(round(chi2$expected, 2))</code> 的結果，顯示的是在虛無假設（<code>QA3_lv</code> 和 <code>Q7_3rd_lv</code> 獨立）成立的情況下，每個交叉組合的<strong>期望頻次（expected frequencies）</strong>。例如，如果年齡層和第三人效應之間是獨立的，我們期望在青年族群中觀察到約 176.68 個第三人效應為「低」的個案。卡方統計量就是基於觀察頻次和期望頻次之間的差異計算出來的。</p></li>
+<li><p><code>print(round(chi2$residuals, 2))</code> 的結果，顯示的是<strong>皮爾森殘差（Pearson residuals）</strong>。殘差是觀察頻次與期望頻次之間的差異，再除以期望頻次的平方根。它可以幫助我們了解哪些單元格對卡方統計量的貢獻較大。正的殘差表示觀察到的頻次高於期望的頻次，負的殘差表示觀察到的頻次低於期望的頻次。</p></li>
+<li><p>在這個例子中，「壯年」族群中第三人效應為「低」的比例略高於獨立性假設下的期望，「壯年」族群中第三人效應為「高」的比例略低於期望。「中年」族群則呈現相反的模式。</p></li>
 </ul>
 <div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="categorical.html#cb426-1" tabindex="-1"></a>(xtb <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> QA3_lv <span class="sc">+</span> Q7_3rd_lv, <span class="at">data =</span> dt2))</span></code></pre></div>
 <pre class="output"><code>##       Q7_3rd_lv
@@ -1005,6 +1026,15 @@ div.csl-indent {
 ##   壯年  1.12 -1.41
 ##   中年 -1.61  2.03
 ##   老年 -0.11  0.14</code></pre>
+</div>
+<div id="plot" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Plot<a href="categorical.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>gplots</code> 套件中的 <code>balloonplot()</code> 函數可用來<strong>視覺化交叉表（cross-tabulation）中各個類別組合的頻率或比例。</strong> 這種圖形化方法可以直觀地呈現兩個類別型變數之間的關係。也就是將之前使用 <code>xtabs()</code> 創建的、關於不同年齡組在不同第三人效果程度上的頻次交叉表 (<code>xtb</code>)，以氣泡圖（balloon plot）的形式視覺化呈現。</p>
+<p><code>corrplot</code> 套件會將卡方檢定產生的<strong>殘差矩陣視覺化</strong>。通常，<code>corrplot</code> 會使用顏色和形狀（例如圓圈的大小或方向）來表示矩陣中元素的大小和方向。</p>
+<ul>
+<li><p><strong>用顏色表示殘差的正負性：</strong> 一種顏色可能代表正殘差（觀察值高於期望值），另一種顏色代表負殘差（觀察值低於期望值）。</p></li>
+<li><p><strong>用顏色深淺或形狀大小表示殘差的絕對值大小：</strong> 顏色越深或形狀越大，表示殘差的絕對值越大，該單元格對卡方統計量的貢獻也越大。</p></li>
+</ul>
 <div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="categorical.html#cb438-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>)</span>
 <span id="cb438-2"><a href="categorical.html#cb438-2" tabindex="-1"></a>gplots<span class="sc">::</span><span class="fu">balloonplot</span>(<span class="fu">t</span>(xtb),</span>
 <span id="cb438-3"><a href="categorical.html#cb438-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;第三人效果&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;年齡組&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>,</span>
@@ -1016,6 +1046,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="categorical.html#cb439-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">family =</span> <span class="st">&quot;Heiti TC Light&quot;</span>)</span>
 <span id="cb439-2"><a href="categorical.html#cb439-2" tabindex="-1"></a>corrplot<span class="sc">::</span><span class="fu">corrplot</span>(chi2<span class="sc">$</span>residuals, <span class="at">is.corr =</span> F)</span></code></pre></div>
 <p><img src="R24_categorical_data_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div id="plot-by-ggplot" class="section level3 hasAnchor" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Plot by ggplot()<a href="categorical.html#plot-by-ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="categorical.html#cb440-1" tabindex="-1"></a>xtb <span class="sc">%&gt;%</span></span>
 <span id="cb440-2"><a href="categorical.html#cb440-2" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb440-3"><a href="categorical.html#cb440-3" tabindex="-1"></a>  <span class="fu">group_by</span>(QA3_lv) <span class="sc">%&gt;%</span></span>
@@ -1042,6 +1074,7 @@ div.csl-indent {
 <span id="cb440-24"><a href="categorical.html#cb440-24" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="R24_categorical_data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
             </section>

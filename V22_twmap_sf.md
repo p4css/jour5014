@@ -19,25 +19,27 @@ library(sf)
 
 ### The case: Population and Density of Taipei
 
-這個資料下載自[社會經濟資料服務平台 (moi.gov.tw)](https://segis.moi.gov.tw/STAT/Web/Portal/STAT_PortalHome.aspx)的![](https://segis.moi.gov.tw/STAT/Resources/Project/Images/Platform/subProduct.png "子產品")[111年9月行政區人口統計_鄉鎮市區_臺北市](https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1# "111年9月行政區人口統計_鄉鎮市區_臺北市")，實際上內部的資料包含368個鄉鎮的依性別分人口數、家戶數等。
+這個資料下載自[社會經濟資料服務平台 (moi.gov.tw)](https://segis.moi.gov.tw/STAT/Web/Portal/STAT_PortalHome.aspx)的[111年9月行政區人口統計_鄉鎮市區_臺北市](https://segis.moi.gov.tw/STAT/Web/Platform/QueryInterface/STAT_QueryInterface.aspx?Type=1# "111年9月行政區人口統計_鄉鎮市區_臺北市")，資料包含368個鄉鎮的依性別分人口數、家戶數等。
 
 資料變項包含每個區的家戶數（**`H_CNT`**）、總人口數（**`P_CNT`**）、男性人口數（**`M_CNT`**）、女性人口數（**`F_CNT`**）。等一下要計算每平方公里的家戶數或人口數時，你會疑惑為何沒有面積資料。
 
 
-```r
+``` r
 sf_tpe <-
-  st_read(dsn = "data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/", 
-          layer = "111年9月行政區人口統計_鄉鎮市區", quiet = T) %>%
-  mutate(across(where(is.character), ~iconv(., from = "BIG5", to = "UTF8"))) %>%
+  st_read(
+    dsn = "data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/",
+    layer = "111年9月行政區人口統計_鄉鎮市區", quiet = T
+  ) %>%
+  mutate(across(where(is.character), ~ iconv(., from = "BIG5", to = "UTF8"))) %>%
   # mutate(across(where(is.double), ~if_else(is.na(.),as.double(0),.))) %>%
-  # st_set_crs(3826) %>% st_transform(4326) %>% 
+  # st_set_crs(3826) %>% st_transform(4326) %>%
   # filter(COUNTY == "臺北市")
   filter(str_detect(COUNTY, "臺北市"))
 
 sf_tpe %>% head()
 ```
 
-```{.output}
+``` output
 ## Simple feature collection with 6 features and 9 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -62,9 +64,9 @@ sf_tpe %>% head()
 試著畫畫看。你會發現它的座標系是一個我們看不懂的數字，而不是想像中的經緯度。
 
 
-```r
-sf_tpe %>% 
-  ggplot() + 
+``` r
+sf_tpe %>%
+  ggplot() +
   geom_sf()
 ```
 
@@ -119,27 +121,29 @@ st_crs(sf_tpe)
 我們會希望在讀取資料的時候，設定他的投影座標。例如以下的例子是設定為TWD96（3826）然後轉換為全球座標WGS84（4326）。
 
 
-```r
+``` r
 sf_tpe <-
-  st_read(dsn = "data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/", 
-          layer = "111年9月行政區人口統計_鄉鎮市區", quiet = T) %>%
-  mutate(across(where(is.character), ~iconv(., from = "BIG5", to = "UTF8"))) %>%
-  st_set_crs(3826) %>% 
+  st_read(
+    dsn = "data/111年9月行政區人口統計_鄉鎮市區_臺北市_SHP/",
+    layer = "111年9月行政區人口統計_鄉鎮市區", quiet = T
+  ) %>%
+  mutate(across(where(is.character), ~ iconv(., from = "BIG5", to = "UTF8"))) %>%
+  st_set_crs(3826) %>%
   # st_transform(4326) %>%
   filter(str_detect(COUNTY, "臺北市"))
 
 st_crs(sf_tpe)$proj4string
 ```
 
-```{.output}
+``` output
 ## [1] "+proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 ```
 
-```r
+``` r
 st_crs(sf_tpe)
 ```
 
-```{.output}
+``` output
 ## Coordinate Reference System:
 ##   User input: EPSG:3826 
 ##   wkt:
@@ -184,18 +188,19 @@ st_crs(sf_tpe)
 ```
 
 
-```r
-sf_tpe %>% 
-  ggplot() + 
+``` r
+sf_tpe %>%
+  ggplot() +
   geom_sf()
 ```
 
 <img src="V22_twmap_sf_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-```r
-sf_tpe %>% 
-  ggplot() + aes(fill = P_CNT) + 
+``` r
+sf_tpe %>%
+  ggplot() +
+  aes(fill = P_CNT) +
   geom_sf(color = NA) +
   scale_fill_gradient(low = "white", high = "purple")
 ```
@@ -209,11 +214,12 @@ sf_tpe %>%
 需要注意的是，由於地球是一個球體，因此在計算面積時需要考慮到地球的曲率效應。**`st_area()`** 函數默認使用的是橢球面積計算公式（ellipsoidal area formula），可以更準確地計算地理多邊形的面積。如果需要更精確的面積計算結果，也可以使用球面面積計算公式（spherical area formula）或是進行局部的面積校正。
 
 
-```r
-sf_tpe %>% 
-  mutate(p_density = P_CNT/(as.double(st_area(.))/1000000)) %>%
-  ggplot() + aes(fill = p_density) + 
-  geom_sf(color = NA) + 
+``` r
+sf_tpe %>%
+  mutate(p_density = P_CNT / (as.double(st_area(.)) / 1000000)) %>%
+  ggplot() +
+  aes(fill = p_density) +
+  geom_sf(color = NA) +
   scale_fill_gradient(low = "white", high = "purple")
 ```
 
@@ -226,12 +232,12 @@ sf_tpe %>%
 ### Reading income data
 
 
-```r
-taipei_income <- readxl::read_xlsx('data/台北各區每人所得.xlsx') 
+``` r
+taipei_income <- readxl::read_xlsx("data/台北各區每人所得.xlsx")
 taipei_income %>% head()
 ```
 
-```{.output}
+``` output
 ## # A tibble: 6 × 2
 ##   district  income
 ##   <chr>      <dbl>
@@ -248,17 +254,17 @@ taipei_income %>% head()
 等一下我打算把每區的名稱打在各區上，但是我沒有各區的名稱應該打在哪裡的經緯度，恰好Zip Code這份資料裡面有台北市各區的經緯度中心，因此先把它讀進來合併用。
 
 
-```r
+``` r
 library(jsonlite)
 
 twzipcode_json <- fromJSON("data/twzipcode.json")[[1]]
-taipei_zipcode <- twzipcode_json %>% 
+taipei_zipcode <- twzipcode_json %>%
   filter(city == "台北市")
 
 taipei_zipcode %>% head()
 ```
 
-```{.output}
+``` output
 ##   zip_code district   city     lat     lng
 ## 1      100   中正區 台北市 25.0324 121.520
 ## 2      103   大同區 台北市 25.0634 121.513
@@ -269,24 +275,27 @@ taipei_zipcode %>% head()
 ```
 
 
-```r
+``` r
 # install.packages("rmapshaper")
 st_read("data/shapefiles/TOWN_MOI_1100415.shp") %>%
-    filter(COUNTYNAME == "臺北市") %>%
-    # st_transform(3825) %>% #3857
-    # rmapshaper::ms_simplify(keep=0.05) %>%
-    left_join(taipei_income, by = c("TOWNNAME" = "district")) %>% 
-    left_join(taipei_zipcode, by= c("TOWNNAME" = "district")) %>%
-    ggplot() + aes(fill = income) + 
-    geom_sf() + 
-    scale_fill_gradient2(low = "#FF8888", high = "#0000AA", 
-                         midpoint = median(taipei_income$income)) +
-    geom_text(aes(x = lng, y = lat, label = TOWNNAME), family = "Heiti TC Light", color = "black", size = 2.5)
+  filter(COUNTYNAME == "臺北市") %>%
+  # st_transform(3825) %>% #3857
+  # rmapshaper::ms_simplify(keep=0.05) %>%
+  left_join(taipei_income, by = c("TOWNNAME" = "district")) %>%
+  left_join(taipei_zipcode, by = c("TOWNNAME" = "district")) %>%
+  ggplot() +
+  aes(fill = income) +
+  geom_sf() +
+  scale_fill_gradient2(
+    low = "#FF8888", high = "#0000AA",
+    midpoint = median(taipei_income$income)
+  ) +
+  geom_text(aes(x = lng, y = lat, label = TOWNNAME), family = "Heiti TC Light", color = "black", size = 2.5)
 ```
 
-```{.output}
+``` output
 ## Reading layer `TOWN_MOI_1100415' from data source 
-##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/TOWN_MOI_1100415.shp' 
+##   `/Users/jirlong/Dropbox/Programming/JOUR5014/data/shapefiles/TOWN_MOI_1100415.shp' 
 ##   using driver `ESRI Shapefile'
 ## Simple feature collection with 368 features and 7 fields
 ## Geometry type: MULTIPOLYGON
@@ -304,13 +313,15 @@ st_read("data/shapefiles/TOWN_MOI_1100415.shp") %>%
 ### Loading county-level president voting rate
 
 
-```r
-president_vote <- readxl::read_xlsx('data/president.xlsx') %>% 
-  mutate(total = chu + tsai + song) %>% 
-  mutate(chu_ratio = chu / total,
-         tsai_ratio = tsai / total,
-         song_ratio = song / total,
-         tsai_chu_ratio = tsai / chu)
+``` r
+president_vote <- readxl::read_xlsx("data/president.xlsx") %>%
+  mutate(total = chu + tsai + song) %>%
+  mutate(
+    chu_ratio = chu / total,
+    tsai_ratio = tsai / total,
+    song_ratio = song / total,
+    tsai_chu_ratio = tsai / chu
+  )
 ```
 
 ### sf to load county level shp
@@ -318,13 +329,13 @@ president_vote <- readxl::read_xlsx('data/president.xlsx') %>%
 <https://fidanalytics.co.uk/blog/simplifying-polygons-r>
 
 
-```r
+``` r
 county_sf <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp")
 ```
 
-```{.output}
+``` output
 ## Reading layer `COUNTY_MOI_1090820' from data source 
-##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
+##   `/Users/jirlong/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
 ##   using driver `ESRI Shapefile'
 ## Simple feature collection with 22 features and 4 fields
 ## Geometry type: MULTIPOLYGON
@@ -333,22 +344,22 @@ county_sf <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp")
 ## Geodetic CRS:  TWD97
 ```
 
-```r
+``` r
 # plot(county_sf) # Taking very long time
 ```
 
 ### Simplfying map polygon
 
 
-```r
+``` r
 county_ms_simp <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
-  # rmapshaper::ms_simplify(county_sf,  keep=0.001) 
+  # rmapshaper::ms_simplify(county_sf,  keep=0.001)
   st_simplify(dTolerance = 100)
 ```
 
-```{.output}
+``` output
 ## Reading layer `COUNTY_MOI_1090820' from data source 
-##   `/Users/jirlong/Library/CloudStorage/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
+##   `/Users/jirlong/Dropbox/Programming/JOUR5014/data/shapefiles/COUNTY_MOI_1090820.shp' 
 ##   using driver `ESRI Shapefile'
 ## Simple feature collection with 22 features and 4 fields
 ## Geometry type: MULTIPOLYGON
@@ -357,7 +368,7 @@ county_ms_simp <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
 ## Geodetic CRS:  TWD97
 ```
 
-```r
+``` r
 plot(county_ms_simp)
 ```
 
@@ -370,7 +381,7 @@ plot_chu <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
   # st_transform(3825) %>% #3857
   st_simplify(dTolerance = 10) %>%
   # rmapshaper::ms_simplify(keep=0.01) %>%
-  right_join(president_vote, by=c("COUNTYNAME"="county"))
+  right_join(president_vote, by = c("COUNTYNAME" = "county"))
 ```
 
 ``` output
@@ -386,14 +397,14 @@ plot_chu <- st_read("data/shapefiles/COUNTY_MOI_1090820.shp") %>%
 
 ``` r
 plot_chu %>%
-    ggplot(aes(fill = chu_ratio)) + 
-    geom_sf(color="white", size=0.2) + 
-    scale_fill_gradient(low = "#FFFFFF", high = "#FF00FF") + 
-    coord_sf(
-        xlim = c(119, 122.5),  # 限制經度
-        ylim = c(21.5, 25.5),    # 限制緯度
-        expand = FALSE       # 取消自動留白
-    )
+  ggplot(aes(fill = chu_ratio)) +
+  geom_sf(color = "white", size = 0.2) +
+  scale_fill_gradient(low = "#FFFFFF", high = "#FF00FF") +
+  coord_sf(
+    xlim = c(119, 122.5), # 限制經度
+    ylim = c(21.5, 25.5), # 限制緯度
+    expand = FALSE # 取消自動留白
+  )
 ```
 
 <img src="V22_twmap_sf_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
@@ -410,4 +421,3 @@ plot_chu %>%
 3.  用`st_bbox()`可以得知上下界為何，請試用這個函式看看？
 4.  如何運用`st_crop()`切出台灣本島（不包含澎湖、金門、馬祖）得地圖？
 :::
-
