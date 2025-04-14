@@ -37,48 +37,48 @@ library(jsonlite)
     -   第二個元素的 JSON 物件中，鍵 **`a`** 對應的值為數字 1，鍵 **`b`** 對應的值為數字 3。
 
 
-```r
+``` r
 library(jsonlite)
 lst <- fromJSON('{"a":1, "b":2}')
-class(lst) #list
+class(lst) # list
 ```
 
-```{.output}
+``` output
 ## [1] "list"
 ```
 
-```r
+``` r
 lst$a
 ```
 
-```{.output}
+``` output
 ## [1] 1
 ```
 
-```r
+``` r
 fromJSON('[{"a":1, "b":2}, {"a":1, "b":3}]')
 ```
 
-```{.output}
+``` output
 ##   a b
 ## 1 1 2
 ## 2 1 3
 ```
 
-```r
+``` r
 tbl <- fromJSON('[{"a":1, "b":2}, {"a":1, "b":3}, {"a":5, "b":7}]')
 class(tbl) # a data.frame
 ```
 
-```{.output}
+``` output
 ## [1] "data.frame"
 ```
 
-```r
+``` r
 tbl$a[1]
 ```
 
-```{.output}
+``` output
 ## [1] 1
 ```
 
@@ -237,13 +237,13 @@ Web API 和 JSON 之間的關係在於，Web API 通常會將回應資料以 JSO
 3.  **`%>% fromJSON()`** ：一旦確認回傳的訊息以JSON格式書寫，那麼就可以用`jsonlite`套件的`fromJSON()`將該文字字串轉為R的物件。
 
 
-```r
+``` r
 library(httr)
 library(jsonlite)
 
 url <- "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
 
-ubike.df <- fromJSON(content(GET(url),"text", encoding = "utf-8"))
+ubike.df <- fromJSON(content(GET(url), "text", encoding = "utf-8"))
 head(ubike.df) %>% select(1:6)
 # write_json(ubike.df, "data/opendata_ubike_202304261243.json")
 ```
@@ -310,22 +310,26 @@ raw$retVal[["0001"]]
 
 ## Case 1: Air-Quality (well-formatted )
 
-前往 [https://data.gov.tw/dataset/40448](https://data.gov.tw/dataset/40448，點擊)對JSON 檔案按右鍵，然後複製連結，例如 "[https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"。](https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON%22。) (但是，連結地址，特別是 `api_key=9be7b239-557b-4c10-9775-78cadfc555e9`，每次都會更改。所以你必須要自己嘗試)。
+前往 <https://data.gov.tw/dataset/40448對JSON> 檔案按右鍵，然後複製連結，例如 "<https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=540e2ca4-41e1-4186-8497-fdd67024ac44&limit=1000&sort=ImportDate%20desc&format=JSON> (但是，連結地址中特別是 `api_key`每次都會更改。所以你必須要自己嘗試)。
 
 
-```r
-url <- "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
+``` r
+url <- "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=540e2ca4-41e1-4186-8497-fdd67024ac44&limit=1000&sort=ImportDate%20desc&format=JSON"
 
 df <- fromJSON(content(GET(url), "text", encoding = "utf-8"))
 df %>% glimpse()
-df$records %>% head() %>% knitr::kable(format = "html")
+df$records %>%
+  head() %>%
+  knitr::kable(format = "html")
 ```
 
 ### Using knitr::kable() for better printing
 
 
-```r
-df$records %>% head() %>% knitr::kable(format = "html")
+``` r
+df$records %>%
+  head() %>%
+  knitr::kable(format = "html")
 ```
 
 ### Step-by-step: Parse JSON format string to R objects
@@ -357,9 +361,9 @@ class(response)
 因此，對於這個抓回來的檔案，我需要用`httr::content()`幫忙把純文字給解出來。經查詢`help`可得知`content()`後面的參數有三類，其中可以要轉為純文字的就是`content(response, "text")`。因此偵測轉出來的變數會是長度為1的`character`。
 
 
-```r
+``` r
 # Parsing to textual data by content()
-text <- content(response, "text", encoding = "utf-8") 
+text <- content(response, "text", encoding = "utf-8")
 nchar(text)
 cat(text)
 class(text)
@@ -390,9 +394,9 @@ glimpse(df)
 #### Get from web api
 
 
-```r
+``` r
 # specify data url
-url <- "https://data.epa.gov.tw/api/v2/uv_s_01?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=publishtime%20desc&format=JSON"
+url <- "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=540e2ca4-41e1-4186-8497-fdd67024ac44&limit=1000&sort=ImportDate%20desc&format=JSON"
 
 # GET(), content(), then converting to R object by fromJSON()
 raw <- fromJSON(content(GET(url), "text", encoding = "utf-8"))
@@ -403,11 +407,13 @@ raw <- fromJSON(content(GET(url), "text", encoding = "utf-8"))
 你可以讀取本書預先爬取好的json檔來觀察前述程式所爬回的json檔轉成R物件後的結果。
 
 
-```r
+``` r
 # You can read the pre-crawled JSON file  to observe the R object.
 raw <- fromJSON("data/opendata_uvi_202304261215.json")
 
-raw$records %>% head %>% knitr::kable()
+raw$records %>%
+  head() %>%
+  knitr::kable()
 ```
 
 
@@ -441,15 +447,18 @@ sitename    uvi publishagency   county  wgs84lon    wgs84lat    publishtime
 如果你無法順利撈取，你可以運用本書所預備的`url_cnyes.json`來做觀察json結構的練習。
 
 
-```url_sc_flu
+``` r
 url_pchome <- "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=iphone&page=1&sort=rnk/dc"
-url_ubike <- "https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json"
+url_ubike <- "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json"
 url_cnyes <- "https://news.cnyes.com/api/v3/news/category/headline?startAt=1588262400&endAt=1589212799&limit=30"
 
 
-raw <- fromJSON(content(GET(url_cnyes), "text", encoding = "utf-8"))
-# raw <- fromJSON("data/url_cnyes.json")
-raw$items$data
+raw <- fromJSON(content(GET(url_ubike), "text", encoding = "utf-8"))
+class(raw)
+```
+
+``` output
+## [1] "data.frame"
 ```
 :::
 
@@ -458,7 +467,7 @@ raw$items$data
 第二類是最常會見到的例子，解出來的資料是個很多階層的`list`，通常一筆資料傳回來時多會附加一些metadata，比方說，一共幾筆資料、下一個資料區塊在哪裡，好讓使用者或者本地端的瀏覽器能夠繼續取得下一筆資料。因此，資料通常會在樹狀節點的某一個子節點。
 
 
-```r
+``` r
 url_cnyes <- "https://news.cnyes.com/api/v3/news/category/headline?startAt=1588262400&endAt=1589212799&limit=30"
 
 res <- fromJSON(content(GET(url_cnyes), "text", encoding = "utf-8"))
@@ -466,13 +475,13 @@ glimpse(res)
 ```
 
 
-```r
+``` r
 raw <- fromJSON("data/url_cnyes.json")
 df <- raw$items$data
 head(df)
 ```
 
-```{.output}
+``` output
 ##    newsId                                                      title
 ## 1 4475846                〈財報〉疫情衝擊 Under Armour Q1營收大減23%
 ## 2 4475874 若一年內疫情未控制 避險基金大佬：美國將面臨第2次經濟大蕭條
@@ -644,42 +653,42 @@ response <- GET(url_cnyes,
 食品闢謠的例子可能是個沒好好編過JSON的單位所編出來的案子，資料很簡單，但卻是一個list裡面有329個data.frame，且每個data.frame只有對腳現有資料，然後每一筆資料就一個data.frame。
 
 
-```r
-url <- 'http://data.fda.gov.tw/cacheData/159_3.json'
-safefood <- fromJSON(content(GET(url),'text'))
+``` r
+url <- "http://data.fda.gov.tw/cacheData/159_3.json"
+safefood <- fromJSON(content(GET(url), "text"))
 # write_json(safefood, "data/opendata_safefood_202304261256.json")
 ```
 
 為了避免產製本書時出錯，本程式採用預備好的資料來練習。但仍建議你用前述方式自網路上爬取資料下來練習。
 
 
-```r
+``` r
 safefood <- fromJSON("data/opendata_safefood_202304261256.json")
 # str(safefood)
 class(safefood)
 ```
 
-```{.output}
+``` output
 ## [1] "list"
 ```
 
-```r
+``` r
 class(safefood[[1]])
 ```
 
-```{.output}
+``` output
 ## [1] "data.frame"
 ```
 
-```r
+``` r
 dim(safefood[[1]])
 ```
 
-```{.output}
+``` output
 ## [1] 5 5
 ```
 
-```r
+``` r
 # View(safefood[[1]])
 # View(safefood)
 # print(content(GET(url), "text"))
@@ -698,36 +707,36 @@ dim(safefood[[1]])
     3.  `safefood.m <- matrix(safefood.v, byrow = T, ncol = 5)`照列來折，因為每五個就一筆資料，所以是照列折，然後用`ncol = 5`來指定五個一折。
 
 
-```r
+``` r
 # unlist data structure to a list
 safefood.v <- unlist(safefood)
 head(safefood.v)
 ```
 
-```{.output}
+``` output
 ## 分類1 分類2 分類3 分類4 分類5 標題1 
 ##    ""    NA    NA    NA    NA    NA
 ```
 
-```r
+``` r
 # anyNA() to check if NAs still exist
 anyNA(safefood.v)
 ```
 
-```{.output}
+``` output
 ## [1] TRUE
 ```
 
-```r
+``` r
 # (option) check if NAs exist
 sum(is.na(safefood.v))
 ```
 
-```{.output}
+``` output
 ## [1] 10720
 ```
 
-```r
+``` r
 # remove NAs
 safefood.v <- safefood.v[!is.na(safefood.v)]
 # length(safefood.v)
@@ -736,11 +745,11 @@ safefood.v <- safefood.v[!is.na(safefood.v)]
 anyNA(safefood.v)
 ```
 
-```{.output}
+``` output
 ## [1] FALSE
 ```
 
-```r
+``` r
 # head(safefood.v)
 
 
@@ -755,11 +764,11 @@ safefood.df <- as.data.frame(safefood.m)
 safefood.df <- safefood.df[-4]
 
 # naming the data.frame
-names(safefood.df) <- c('category', 'question', 'answer', 'timestamp')
+names(safefood.df) <- c("category", "question", "answer", "timestamp")
 head(safefood.df)
 ```
 
-```{.output}
+``` output
 ##   category                                         question
 ## 1           使用含有acetaminophen成分藥品會傷腎，是真的嗎？
 ## 2                          使用退燒藥會延誤治療，是真的嗎？
@@ -782,23 +791,3 @@ head(safefood.df)
 ## 5 06 25 2015 12:00AM
 ## 6 06 25 2015 12:00AM
 ```
-
-::: notes
-## Reviewing JSON
-
-### Type I: Well-formatted JSON: UVI, AQI, Hospital_revisits
-
-這類的資料以典型的[{}, {}, {}]形式儲存，以以下方式就可直接轉為data.frame `df <- fromJSON(content(GET(url), "text"))`
-
-### Type II: hierarchical JSON: rent591, facebook graph api, google map
-
-這類的json資料為well-formatted，但要的資料儲存在比較深的階層中，代表其並非簡單地二維表格，還有其他更多的詮釋資料被擺在同一個JSON檔案中。解決策略：通常`fromJSON()`轉完後為list，逐一就variable names查看資料在哪裡。`View(res$data$data)`
-
-### Type III: Ill-formatted JSON: food_rumors, ubike
-
-這類的資料並非以典型的`[{}, {}, {}]`形式儲存，但仍是有序的二維數據。可將資料`unlist()`攤開，然後去除不必要的NA後，按欄位數目重建Matrix再轉回data.frame
-
-解決策略：用`as.data.frame()`或`unlist()`硬轉成data.frame或vector來看資料的出現是否有所規律。
-:::
-
-## 

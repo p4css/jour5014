@@ -11,34 +11,37 @@
 2.  `jsonlite`：`jsonlite` 庫是 R 語言中用於解析和生成 JSON 數據的函式庫，它提供了 `fromJSON()` 函數，可以將 JSON 字符串轉換為 R 物件，並提供 `toJSON()` 函數，可以將 R 物件轉換為 JSON 字符串。這個函式庫通常用於處理 API 回應數據中的 JSON 格式數據。
 
 
-```r
+``` r
 library(tidyverse)
 library(httr)
 library(jsonlite)
-# options(stringsAsFactors = F)
 ```
 
 
-```r
+``` r
 all.df <- tibble()
 refer_url <- "https://www.104.com.tw"
 
-for(p in 1:10){
-    url <- str_c('https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&order=12&asc=0&page=', 
-                 p, 
-                 "&mode=s&jobsource=2018indexpoc")
-    print(p)
-    res <- GET(url, add_headers("referer"=refer_url)) %>%
-        content("text") %>%
-        fromJSON()
-    
-    res$data$list$tags <- NULL
-    res$data$list$link <- NULL
-    
-    all.df <- bind_rows(all.df, res$data$list)
+for (p in 1:10) {
+  url <- str_c(
+    "https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8&order=12&asc=0&page=",
+    p,
+    "&mode=s&jobsource=2018indexpoc"
+  )
+  print(p)
+  res <- GET(url, add_headers("referer" = refer_url)) %>%
+    content("text") %>%
+    fromJSON()
+
+  res$data$list$tags <- NULL
+  res$data$list$link <- NULL
+
+  all.df <- bind_rows(all.df, res$data$list)
 }
 
-all.df$jobNo %>% unique %>% length
+all.df$jobNo %>%
+  unique() %>%
+  length()
 ```
 
 ## Step-by-Step
@@ -52,7 +55,7 @@ all.df$jobNo %>% unique %>% length
 對的！人家網站不歡迎你爬它，所以我們應止於測試。
 
 
-```r
+``` r
 url1 <- "https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=1&mode=s&jobsource=2018indexpoc"
 
 # Assigning the 2nd page data url to url2
@@ -91,9 +94,9 @@ df1 <- result1$data$list
 ### Combine two data with the same variables
 
 
-```r
+``` r
 # all.df <- bind_rows(df1, df2) # will raise error
-# Error in bind_rows_(x, .id) : 
+# Error in bind_rows_(x, .id) :
 #   Argument 31 can't be a list containing data frames
 ```
 
@@ -116,7 +119,7 @@ all.df <- bind_rows(df1, df2)
 ### Dropping hierarchical variables by dplyr way
 
 
-```r
+``` r
 # Getting the 1st page data and dropping variable tags and link
 # Assigning to df1
 df1 <- result1$data$list %>% select(-tags, -link)
@@ -132,7 +135,7 @@ all.df <- bind_rows(df1, df2)
 ### Finding out the last page number
 
 
-```r
+``` r
 # Tracing the number of pages in result1
 last_page_num <- result1$data$totalPage
 # Checking the availability of the last page
@@ -147,19 +150,19 @@ result.last_page <- fromJSON(content(GET(url.last_page), "text"))
 ### Using for-loop to get all pages
 
 
-```r
-for(p in 1:last_page_num){
-    url <- paste0("https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=", p, "&mode=s&jobsource=2018indexpoc")
-    result <- fromJSON(content(GET(url), "text"))
-    temp.df <- select(result$data$list)
-    print(paste(p, nrow(temp.df)))
+``` r
+for (p in 1:last_page_num) {
+  url <- paste0("https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=", p, "&mode=s&jobsource=2018indexpoc")
+  result <- fromJSON(content(GET(url), "text"))
+  temp.df <- select(result$data$list)
+  print(paste(p, nrow(temp.df)))
 }
 ```
 
 ### combine all data.frame
 
 
-```r
+``` r
 #  The 1st url of the query
 url1 <- "https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=1&mode=s&jobsource=2018indexpoc"
 
@@ -173,11 +176,11 @@ last_page_num <- result1$data$totalPage
 all.df <- select(result1$data$list, -link, -tags)
 
 # for-loop to getting back data and joining them
-for(p in 1:last_page_num){
-    url <- paste0("https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=", p, "&mode=s&jobsource=2018indexpoc")
-    result <- fromJSON(content(GET(url), "text"))
-    temp.df <- select(result$data$list)
-    all.df <- bind_rows(all.df, temp.df)
-    print(paste(p, nrow(all.df)))
+for (p in 1:last_page_num) {
+  url <- paste0("https://www.104.com.tw/jobs/search/list?ro=0&kwop=7&keyword=%E7%88%AC%E8%9F%B2&order=1&asc=0&page=", p, "&mode=s&jobsource=2018indexpoc")
+  result <- fromJSON(content(GET(url), "text"))
+  temp.df <- select(result$data$list)
+  all.df <- bind_rows(all.df, temp.df)
+  print(paste(p, nrow(all.df)))
 }
 ```

@@ -216,10 +216,13 @@ term-frequency
 tf-idf-to-filter-significant-words
 practice.-understanding-tf-idf
 crawler-overview
-webapi
-craw_scraping
-status_code
 webpage-browsing
+scraper
+type-of-scraper
+type-1.-response-with-json
+craw_scraping
+supplementary-materials
+status_code
 using-chrome-devtools
 observing-web-request
 scraping-104.com
@@ -253,11 +256,6 @@ case-2-cnyes-news-well-formatted
 option-取回資料並寫在硬碟
 case-3-footrumor-ill-formatted
 處理非典型的json檔
-reviewing-json
-type-i-well-formatted-json-uvi-aqi-hospital_revisits
-type-ii-hierarchical-json-rent591-facebook-graph-api-google-map
-type-iii-ill-formatted-json-food_rumors-ubike
-section
 html-parser
 html
 detecting-element-path
@@ -335,7 +333,7 @@ parsing-table-from-pdf
 x-and-y-with-log-scale
 vilpopulation
 log-scale
-section-1
+section
 square-root-scale
 increasing-percentage-as-y
 networth

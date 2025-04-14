@@ -8,7 +8,7 @@
 
 -   其一稱為鏈結頁或索引頁，為文章的超鏈結，例如[https://www.ptt.cc/bbs/Boy-Girl/index.html](https://www.ptt.cc/bbs/Boy-Girl/index.html%EF%BC%89%E3%80%82)。
 
--   其二為每一篇文章的內容頁[https://www.ptt.cc/bbs/Boy-Girl/M.1523994970.A.71C.html。](https://www.ptt.cc/bbs/Boy-Girl/M.1523994970.A.71C.html。)
+-   其二為每一篇文章的內容頁<https://www.ptt.cc/bbs/Boy-Girl/M.1523994970.A.71C.html。>
 
 對於這種網頁，要設計兩階段的爬蟲，第一階段是把所有所需鏈結撈回來，第二階段是根據撈回來的鏈結去打撈文章，並把裡面的內文整理出來。對於第一階段而言，概念大概如下面的示意圖，其實爬取HTML的概念都差不多是這樣，但以下示意圖說明了用XPath或CSS Selector「分別」選取出整個頁面中的標題、超鏈結、時間、和作者，然後用`data.frame()`組合成一個`DataFrame`；Page 2也如此炮製，然後把Page 2的`DataFrame`用`bind_rows()`附加在Page 1的`DataFrame`後面。
 
@@ -42,11 +42,11 @@ library(httr)
 -   使用`browseURL(url)`可以用瀏覽器打開該網址並瀏覽。
 
 
-```r
+``` r
 url <- "https://www.ptt.cc/bbs/Boy-Girl/index.html"
-doc   <- read_html(url)
+doc <- read_html(url)
 class(doc)
-## [1] "xml_document" "xml_node"   
+## [1] "xml_document" "xml_node"
 browseURL(url)
 ```
 
@@ -131,9 +131,9 @@ length(texts)
 取出元素節點某個屬性的值，這邊是取出`href`這個屬性的值，也就是超鏈結。
 
 
-```r
+``` r
 links <- html_attr(node.a, "href")
-class(links) 
+class(links)
 # character
 links[1]
 # "/bbs/Boy-Girl/M.1555188846.A.D5F.html"
@@ -152,10 +152,10 @@ links[1]
 重組上列程式碼如下：
 
 
-```r
+``` r
 pre <- "https://www.ptt.cc"
 url <- "https://www.ptt.cc/bbs/Boy-Girl/index.html"
-doc   <- read_html(url)
+doc <- read_html(url)
 css <- "#main-container div.r-ent div.title a"
 node.a <- html_nodes(doc, css)
 ```
@@ -163,13 +163,14 @@ node.a <- html_nodes(doc, css)
 題外話，因為`rvest`與`httr`均支援tidyverse的程式寫作，因此可改為以下pipeline的形式。但我不見得會這麼寫，比如說`<a>`這個元素我可能不僅會取出其超鏈結，還打算取出標題文字，為了避免重複操作，我不見得會用tidyverse來寫。
 
 
-```r
+``` r
 pre <- "https://www.ptt.cc"
 url <- "https://www.ptt.cc/bbs/Boy-Girl/index.html"
-links <- url %>% read_html %>% 
-    html_nodes("#main-container div.r-ent div.title a") %>%
-    html_attr("href") %>%
-    paste0(pre, .)
+links <- url %>%
+  read_html() %>%
+  html_nodes("#main-container div.r-ent div.title a") %>%
+  html_attr("href") %>%
+  paste0(pre, .)
 ```
 
 ## Step 3. 用for迴圈打撈多頁的連結 {#ptt_for}
@@ -189,39 +190,39 @@ links <- url %>% read_html %>%
 因此，我打算寫一個for迴圈，讓他幫我（先）抓最後10頁，那就是3894到3903頁。並且，把頁數當成網址的參數，用`sprintf()`或`paste0()`組合出網址，以下分別提供兩種版本。你可以把它印出來且點選看看是否是你所要的網頁。
 
 
-```r
-for(p in 3894:3903){
-    url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
-    # url <- paste0("https://www.ptt.cc/bbs/Boy-Girl/index", p, ".html")
+``` r
+for (p in 3894:3903) {
+  url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
+  # url <- paste0("https://www.ptt.cc/bbs/Boy-Girl/index", p, ".html")
 }
 ```
 
 接下來，我要用一個`all_links`變數來存放所有的網址，並且把每一個頁面抓到的網址們都用`vector`的`concatenation`，也就是`c()`黏在一起 `all_links <- c(all_links, links)`。
 
 
-```r
+``` r
 all_links <- c()
-for(p in 3894:3903){
-    url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
-    all_links <- c(all_links, links)
+for (p in 3894:3903) {
+  url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
+  all_links <- c(all_links, links)
 }
 ```
 
 最後，我就將上述抓到網址的方法填入這個for迴圈中，並把抓到的網址存為links，就會隨著每回合的for迴圈逐漸把抓到的網址整理在一起。
 
 
-```r
+``` r
 pre <- "https://www.ptt.cc"
 all_links <- c()
-for(p in 3894:3903){
-	url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
-	print(url)
-	doc   <- read_html(url) # Get and parse the url
-	css <- "#main-container div.r-ent div.title a"
-	node.a <- html_nodes(doc, css)
-	links <- html_attr(node.a, "href")
-	links <- paste0(pre, links) # Recover links
-	all_links <- c(all_links, links)
+for (p in 3894:3903) {
+  url <- sprintf("https://www.ptt.cc/bbs/Boy-Girl/index%s.html", p)
+  print(url)
+  doc <- read_html(url) # Get and parse the url
+  css <- "#main-container div.r-ent div.title a"
+  node.a <- html_nodes(doc, css)
+  links <- html_attr(node.a, "href")
+  links <- paste0(pre, links) # Recover links
+  all_links <- c(all_links, links)
 }
 length(all_links)
 ```
@@ -260,7 +261,7 @@ post <- paste(post.paragraph, collapse = "")
 最後，我們知道metadata變數的第一個是作者、第二個是標題、第三個是時間、便依序指派給個別的變數後，組成DataFrame如下，這樣所組成的DataFrame是為只有一筆資料的DataFrame，但有五個變項。
 
 
-```r
+``` r
 link <- all_links[1]
 doc <- read_html(link)
 meta.css <- "#main-content div.article-metaline  span.article-meta-value"
@@ -268,33 +269,33 @@ metadata <- html_text(html_nodes(doc, meta.css))
 post.xpath <- '//*[@id="main-content"]/text()'
 post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
 post <- paste(post.paragraph, collapse = "")
-post.df <- data.frame(post, 
-                      uid = metadata[1],
-                      title = metadata[2],
-                      timestamp = metadata[3],
-                      url = link
-                     )
+post.df <- data.frame(post,
+  uid = metadata[1],
+  title = metadata[2],
+  timestamp = metadata[3],
+  url = link
+)
 ```
 
 這樣我們取得的第一篇文章存放在post.df中，之後，我稍微修改一下上述的程式，就可以用for迴圈抓取第2至n篇文章，每一篇都存在名為temp.df的DataFrame中，然後用`bind_rows()`依序和`post.df`銜接在一起，除了黃色的部分是新增的之外，都跟前面的程式幾乎一模一樣。
 
 
-```r
-for(link in all_links[2:10]){
-    doc <- read_html(link)
-    meta.css <- "#main-content .article-metaline .article-meta-value"
-    metadata <- html_text(html_nodes(doc, meta.css))
-    post.xpath <- '//*[@id="main-content"]/text()'
-    post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
-    post <- paste(post.paragraph, collapse = "")
-    
-    temp.df <- data.frame(post, 
-                          uid = metadata[1],
-                          title = metadata[2],
-                          timestamp = metadata[3],
-                          url = link
-                          )
-    post.df <- bind_rows(post.df, temp.df)
+``` r
+for (link in all_links[2:10]) {
+  doc <- read_html(link)
+  meta.css <- "#main-content .article-metaline .article-meta-value"
+  metadata <- html_text(html_nodes(doc, meta.css))
+  post.xpath <- '//*[@id="main-content"]/text()'
+  post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
+  post <- paste(post.paragraph, collapse = "")
+
+  temp.df <- data.frame(post,
+    uid = metadata[1],
+    title = metadata[2],
+    timestamp = metadata[3],
+    url = link
+  )
+  post.df <- bind_rows(post.df, temp.df)
 }
 ```
 
@@ -307,23 +308,23 @@ for(link in all_links[2:10]){
 但這樣的寫法仍會有一個缺點，也就是當文章數越來越多時會越跑越慢。原因是，假設現在你已經抓了9999篇文章，你這次的for迴圈要抓第10000篇，然後用`bind_rows()`合併第10000篇，此時，`post.df`已經有9999篇非常肥大，等號右邊的`bind_rows()`跑完後會變成10000篇，此時又要把原本很肥大的post.df覆蓋掉，所以會非常費時。
 
 
-```r
+``` r
 post.df <- data.frame()
-for(link in all_links[1:10]){
-    doc <- read_html(link)
-    meta.css <- "#main-content .article-metaline .article-meta-value"
-    metadata <- html_text(html_nodes(doc, meta.css))
-    post.xpath <- '//*[@id="main-content"]/text()'
-    post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
-    post <- paste(post.paragraph, collapse = "")
-    
-    temp.df <- data.frame(post, 
-                          uid = metadata[1],
-                          title = metadata[2],
-                          timestamp = metadata[3],
-                          url = link
-                          )
-    post.df <- bind_rows(post.df, temp.df)
+for (link in all_links[1:10]) {
+  doc <- read_html(link)
+  meta.css <- "#main-content .article-metaline .article-meta-value"
+  metadata <- html_text(html_nodes(doc, meta.css))
+  post.xpath <- '//*[@id="main-content"]/text()'
+  post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
+  post <- paste(post.paragraph, collapse = "")
+
+  temp.df <- data.frame(post,
+    uid = metadata[1],
+    title = metadata[2],
+    timestamp = metadata[3],
+    url = link
+  )
+  post.df <- bind_rows(post.df, temp.df)
 }
 ```
 
@@ -332,22 +333,22 @@ for(link in all_links[1:10]){
 採用`list`先將每一個`DataFrame`存放起來，然後跑完所有的for迴圈後才用`bind_rows()`將所有資料合併為`DataFrame`。此時，`p`指的是第幾個連結，而前例的`link`就相當於下方的`all_link[p]`。
 
 
-```r
+``` r
 post.list <- list()
-for(p in 1:length(all_links)){
-    doc <- read_html(all_links[p])
-    meta.css <- "#main-content .article-metaline .article-meta-value"
-    metadata <- html_text(html_nodes(doc, meta.css))
-    post.xpath <- '//*[@id="main-content"]/text()'
-    post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
-    post <- paste(post.paragraph, collapse = "")
-    
-    post.list[[p]] <- data.frame(post, 
-                          uid = metadata[1],
-                          title = metadata[2],
-                          timestamp = metadata[3],
-                          url = all_links[p]
-                          )
+for (p in 1:length(all_links)) {
+  doc <- read_html(all_links[p])
+  meta.css <- "#main-content .article-metaline .article-meta-value"
+  metadata <- html_text(html_nodes(doc, meta.css))
+  post.xpath <- '//*[@id="main-content"]/text()'
+  post.paragraph <- html_text(html_nodes(doc, xpath = post.xpath))
+  post <- paste(post.paragraph, collapse = "")
+
+  post.list[[p]] <- data.frame(post,
+    uid = metadata[1],
+    title = metadata[2],
+    timestamp = metadata[3],
+    url = all_links[p]
+  )
 }
 post.df <- bind_rows(post.list)
 ```
